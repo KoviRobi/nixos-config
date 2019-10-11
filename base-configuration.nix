@@ -9,13 +9,6 @@
 
   nixpkgs.overlays = map import [ ./overlays/emacs.nix ./overlays/vim.nix ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  #boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-
-  boot.extraModulePackages = with pkgs.linuxPackages; [ rtl8812au ];
-
   i18n =
   { consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";

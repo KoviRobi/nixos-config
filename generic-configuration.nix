@@ -15,4 +15,11 @@
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  #boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
+
+  boot.extraModulePackages = with pkgs.linuxPackages; [ rtl8812au ];
 }
