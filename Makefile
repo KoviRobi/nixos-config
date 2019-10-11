@@ -3,6 +3,9 @@ action ?= $(a)
 
 .PHONY: all cl generic
 
+vbox:
+	sudo nixos-rebuild -I nixos-config=/etc/nixos/virtualbox-configuration.nix $(a)
+
 all: generic cl
 
 cl:
