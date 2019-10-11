@@ -17,8 +17,6 @@
     networkmanagerapplet
   ] ++ (with pkgs.xorg; [ xf86videointel xf86videonouveau ]);
 
-  krb5.enable = true;
-  krb5.libdefaults = { default_realm = "DC.CL.CAM.AC.UK"; };
 
   services.nfs.extraConfig = "NEED_GSSD=yes";
   #fileSystems."/mnt" =

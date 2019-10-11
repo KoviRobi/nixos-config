@@ -25,8 +25,8 @@
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs;
-  [ wget tmux ispell git htop file direnv netcat socat
-    gnupg clamav
+  [ wget tmux ispell git htop file direnv netcat socat stow
+    gnupg clamav krb5
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
     xcape xclip clipster
@@ -66,6 +66,8 @@
       desktopManager.default = "none";
     };
   };
+
+  krb5.libdefaults = { default_realm = "DC.CL.CAM.AC.UK"; };
 
   programs =
   { gnupg.agent = { enable = true; enableSSHSupport = true; };
