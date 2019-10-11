@@ -11,7 +11,7 @@
   ];
 
   environment.etc."nixos/configuration.nix" =
-  { source = "/etc/nixos/cl.cam.ac.uk.nix"; };
+  { source = "/etc/nixos/generic-configuration.nix"; };
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
