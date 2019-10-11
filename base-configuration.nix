@@ -90,8 +90,9 @@
   users.users.rmk35 =
   { isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "rmk35" "wheel" "cdrom" "dialout" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "users" "wheel" "cdrom" "dialout" ];
     uid = 3749;
+    group = "rmk35";
   };
   users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
 
