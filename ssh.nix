@@ -6,8 +6,6 @@
   services.openssh =
   { enable = true;
     permitRootLogin = "no";
-    extraConfig = ''
-      AuthenticationMethods publickey,keyboard-interactive
-    '';
+    extraConfig = "AuthenticationMethods publickey,keyboard-interactive";
   };
 }
