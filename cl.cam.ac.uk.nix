@@ -7,6 +7,7 @@
     ./music.nix
     ./extra-grub.nix
     ./ssh.nix
+    (import ./avahi.nix { publish = false; })
   ];
 
   environment.etc."nixos/configuration.nix" =

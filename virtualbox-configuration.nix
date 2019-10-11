@@ -5,7 +5,7 @@
   [ ./base-configuration.nix
     ./hardware-configuration.nix.virtualbox
     ./ssh.nix
-    (import ./avahi.nix { publish = false; })
+    (import ./avahi.nix { publish = true; })
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -83,6 +83,7 @@
       ohMyZsh.enable = true;
       syntaxHighlighting.enable = true;
     };
+    thefuck = { enable = true; alias = "fck"; };
   };
 
   gtk.iconCache.enable = false; # Normally slow, and I don't use icons anyway
