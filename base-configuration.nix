@@ -19,7 +19,7 @@
 
   environment.systemPackages = with pkgs;
   [ wget tmux ispell git htop file direnv netcat socat stow
-    gnupg clamav krb5
+    lsof gnupg clamav krb5
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
     xcape xclip clipster
