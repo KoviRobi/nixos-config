@@ -16,7 +16,7 @@
   { source = "/etc/nixos/virtualbox-configuration.nix"; };
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
-  networking.hostName = "C930";
+  networking.hostName = "C930-vbox";
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
 
   system.stateVersion = "19.03"; # Did you read the comment?
