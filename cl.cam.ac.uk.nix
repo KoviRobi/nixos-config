@@ -4,10 +4,10 @@
 { imports =
   [ ./base-configuration.nix
     ./hardware-configuration-orfina.nix
-    ./music.nix
     ./extra-grub.nix
     ./ssh.nix
     (import ./avahi.nix { publish = false; })
+    (import ./music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
   ];
 
   environment.etc."nixos/configuration.nix" =
