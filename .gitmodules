@@ -1,0 +1,3 @@
+[submodule "pkgs/yogabook-c930-linux-eink-driver"]
+	path = pkgs/yogabook-c930-linux-eink-driver
+	url = git@github.com:KoviRobi/yogabook-c930-linux-eink-driver.git
