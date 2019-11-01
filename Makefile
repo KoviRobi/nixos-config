@@ -13,3 +13,6 @@ cl:
 
 generic: generic-configuration.nix
 	sudo nixos-rebuild -p generic -I nixos-config=/etc/nixos/generic-configuration.nix $(a)
+
+iso:
+	nix build -f '<nixpkgs/nixos>' config.system.build.isoImage -I nixos-config=iso.nix
