@@ -5,8 +5,6 @@
   [ gcc gnumake binutils
     rlwrap
     (python3.withPackages (p: with p; [matplotlib numpy pandas]))
-    guile
-    polyml
-    ocaml ocamlPackages.utop ocamlPackages.merlin
-    swiProlog mercury ];
+    guile ] ++
+    (with ocamlPackages_latest; [ ocaml utop merlin seq ocp-indent ]);
 }
