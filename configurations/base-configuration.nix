@@ -3,39 +3,54 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }@args:
+{ config, pkgs, ... }:
 
-{ nixpkgs.overlays = map import [ ../overlays/emacs.nix ../overlays/vim.nix ];
+let overlays = map (x: import (../overlays + ("/" + x)))
+            (builtins.attrNames (builtins.readDir ../overlays));
+in
+{ nixpkgs.overlays = overlays;
 
-  imports = [ "${fetchTarball {
-    url = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
-    sha256 = "16ibf367ay6dkwv6grrkpx8nf0nz3jlr3xxpjv4zjj0v3imwlq6b";
-  }}/nixos" ];
-
-  i18n =
-  { consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+  users.users.rmk35 =
+  { isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" ];
+    uid = 3749;
+    group = "rmk35";
   };
+  users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
+
+  home-manager.useUserPackages = true;
+  home-manager.users.rmk35 = { ... }: {
+    imports = [ ../home ];
+    nixpkgs.overlays = overlays;
+  };
+
+  imports = [ (import ../modules/linux-console.nix {})
+    "${fetchTarball {
+      url = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
+      sha256 = "16ibf367ay6dkwv6grrkpx8nf0nz3jlr3xxpjv4zjj0v3imwlq6b";
+    }}/nixos" ];
+
+  i18n.defaultLocale = "en_US.UTF-8";
 
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs;
-  [ wget tmux ispell git htop file direnv netcat socat stow
+  [ wget tmux ispell git htop file netcat socat
     lsof gnupg clamav krb5
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
-    xcape xclip clipster
+    xclip
     hicolor-icon-theme
-    dunst libnotify
+    libnotify
     chromium mpv ffmpeg compton zathura
     nfs-utils pciutils
     unzip
-#   From overlays, see nixpkgs.overlays
-    myEmacs myNeovim
     graphviz
     nix-prefetch-git nix-prefetch-github
     networkmanagerapplet
+#   From overlays, see nixpkgs.overlays
+    myEmacs myNeovim
   ];
 
   fonts.fonts = with pkgs; [ noto-fonts ];
@@ -107,19 +122,6 @@
 
   programs =
   { gnupg.agent = { enable = true; enableSSHSupport = true; };
-    sway =
-    { enable = true;
-      extraPackages = with pkgs; [ xwayland i3status i3status-rust termite rofi light ];
-      extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
-        # needs qt5.qtwayland in systemPackages
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-        # Fix for some Java AWT applications (e.g. Android Studio),
-        # use this if they aren't displayed properly:
-        export _JAVA_AWT_WM_NONREPARENTING=1
-      '';
-    };
     zsh =
     { enable = true;
       autosuggestions = { enable = true; highlightStyle = "fg=white"; };
@@ -130,18 +132,6 @@
   };
 
   gtk.iconCache.enable = false; # Normally slow, and I don't use icons anyway
-
-  users.users.rmk35 =
-  { isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "users" "wheel" "cdrom" "dialout" ];
-    uid = 3749;
-    group = "rmk35";
-  };
-  users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
-
-  home-manager.useUserPackages = true;
-  home-manager.users.rmk35 = import ../home args;
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
