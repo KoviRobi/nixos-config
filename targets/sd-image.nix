@@ -1,4 +1,4 @@
-# nix build -f <nixpkgs/nixos> config.system.build.sdImage -I nixos-config=sd-image.nix
+# nix build -f '<nixpkgs/nixos>' config.system.build.sdImage -I nixos-config=sd-image.nix
 { config, pkgs, lib, ... }:
 
 let mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };

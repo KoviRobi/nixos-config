@@ -1,11 +1,13 @@
+# vim: syntax=sh sw=2 ts=2 sts=2 et
+set -x
+artefact=os
 action=switch
 unset extraArgs profile NixOS_Configuration NixOS_Target
 
-select_name() {
+config_from_name() {
   case $1 in
     orfina)
       NixOS_Configuration=cl.cam.ac.uk.nix
-      NixOS_Target=orfina.nix
       ;;
     *)
       return 1;
@@ -13,7 +15,7 @@ select_name() {
 }
 
 while [ $# -gt 0 ]; do
-  if ! select_name $1; then
+  if ! config_from_name $1; then
     case $1 in
       boot|switch|dry-run)
         action=$1
@@ -21,9 +23,20 @@ while [ $# -gt 0 ]; do
       *-iso)
         NixOS_Configuration=${1%-iso}
         NixOS_Target=iso-image.nix
+        artefact=iso
         ;;
       iso)
         NixOS_Target=iso-image.nix
+        artefact=iso
+        ;;
+      *-sd-image)
+        NixOS_Configuration=${1%-sd-image}
+        NixOS_Target=sd-image.nix
+        artefact=sd
+        ;;
+      sd)
+        NixOS_Target=sd-image.nix
+        artefact=sd
         ;;
       -*)
         extraArgs="$extraArgs $1"
@@ -37,7 +50,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [ -z "$NixOS_Configuration" ]; then
-  select_name `hostname -s`
+  config_from_name `hostname -s`
 fi
 
 if [ -z "$NixOS_Target" ]; then
@@ -63,7 +76,15 @@ export NixOS_Configuration NixOS_Target
 
 echo $NixOS_Configuration-$NixOS_Target
 
-set -x
-sudo --preserve-env=NixOS_Configuration,NixOS_Target \
-  nixos-rebuild ${profile:+-p} ${profile} \
-  -I nixos-config=/etc/nixos/configuration.nix ${action} ${extraArgs}
+case $artefact in
+  os)
+    sudo --preserve-env=NixOS_Configuration,NixOS_Target \
+      nixos-rebuild ${profile:+-p} ${profile} ${action} ${extraArgs}
+    ;;
+  iso)
+    nix build -f '<nixpkgs/nixos>' config.system.build.isoImage ${extraArgs} -o iso
+    ;;
+  sd)
+    nix build -f '<nixpkgs/nixos>' config.system.build.sdImage ${extraArgs} -o sd
+    ;;
+esac

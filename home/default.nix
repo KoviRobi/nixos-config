@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, ... }@args:
 
 let xclip = "${pkgs.xclip}/bin/xclip";
     dircolors = "${pkgs.coreutils}/bin/dircolors";
@@ -10,6 +10,7 @@ let xclip = "${pkgs.xclip}/bin/xclip";
     guile = "${pkgs.guile}/bin/guile";
     zsh = "${pkgs.zsh}/bin/zsh";
     emacs = "${pkgs.myEmacs}/bin/emacs";
+    tmux_current_workspace = import ./tmux_current_workspace.nix args;
 in
 {
   home.packages = [
@@ -366,7 +367,7 @@ in
             "xterm -name '${n}' -title '${n}' -xrm '*.allowTitleOps: false' -e '${p}'";
         in lib.mkOptionDefault {
           "${mod}+Shift+c" = "kill";
-          "${mod}+Return" = "exec xterm -e $HOME/bin/tmux_current_workspace";
+          "${mod}+Return" = "exec xterm -e ${tmux_current_workspace}";
           "${mod}+Shift+Return" = "exec xterm";
           "${mod}+p" = "exec $HOME/shared-configs/i3/.config/i3/dmenu_run";
           "${mod}+a" = "exec $HOME/shared-configs/i3/.config/i3/dmenu_action";

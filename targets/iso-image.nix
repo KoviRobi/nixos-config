@@ -1,11 +1,101 @@
-# nix build -f <nixpkgs/nixos> config.system.build.isoImage -I nixos-config=iso.nix
-{ config, pkgs, ... }:
+# nix build -f '<nixpkgs/nixos>' config.system.build.isoImage -I nixos-config=iso-image.nix
+{ config, lib, pkgs, ... }:
 
 let mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };
+    inherit (lib) mkOverride mkDefault mkForce;
 in
 {
   imports =
   [ <nixpkgs/nixos/modules/installer/cd-dvd/iso-image.nix>
+    <nixpkgs/nixos/modules/profiles/all-hardware.nix>
     <nixpkgs/nixos/modules/profiles/base.nix>
   ];
+
+  environment.etc.nixos.source = "${builtins.fetchGit https://github.com/KoviRobi/nixos-config}";
+  # Because the above is in the nix store, so immutable
+  environment.etc."nixos/configurations/default.nix".enable = false;
+  environment.etc."nixos/targets/default.nix".enable = false;
+
+  # ISO naming.
+  isoImage.isoName = "${config.isoImage.isoBaseName}-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.iso";
+
+  isoImage.volumeID = "NIXOS_ISO";
+
+  # EFI booting
+  isoImage.makeEfiBootable = true;
+
+  # USB booting
+  isoImage.makeUsbBootable = true;
+
+  # Add Memtest86+ to the CD.
+  boot.loader.grub.memtest86.enable = true;
+
+  # Enable in installer, even if the minimal profile disables it.
+  documentation.enable = mkForce true;
+
+  # Show the manual.
+  documentation.nixos.enable = mkForce true;
+  services.nixosManual.showManual = true;
+
+  # Let the user play Rogue on TTY 8 during the installation.
+  services.rogue.enable = true;
+
+  # Use less privileged nixos user
+  users.users.rmk35.initialHashedPassword = "";
+
+  # Allow the user to log in as root without a password.
+  users.users.root.initialHashedPassword = "";
+
+  # Allow passwordless sudo from nixos user
+  security.sudo = {
+    enable = mkDefault true;
+    wheelNeedsPassword = mkForce false;
+  };
+
+  # Automatically log in at the virtual consoles.
+  services.mingetty.autologinUser = "rmk35";
+
+  # Some more help text.
+  services.mingetty.helpLine = ''
+    The "rmk35" and "root" accounts have empty passwords.
+
+    Type `sudo systemctl start sshd` to start the SSH daemon.
+    You then must set a password for either "root" or "nixos"
+    with `passwd` to be able to login.
+  '' + lib.optionalString config.services.xserver.enable ''
+    Type `sudo systemctl start display-manager' to
+    start the graphical user interface.
+  '';
+
+  # Allow sshd to be started manually through "systemctl start sshd".
+  services.openssh = {
+    enable = true;
+  };
+  systemd.services.sshd.wantedBy = mkOverride 50 [];
+
+  # Tell the Nix evaluator to garbage collect more aggressively.
+  # This is desirable in memory-constrained environments that don't
+  # (yet) have swap set up.
+  environment.variables.GC_INITIAL_HEAP_SIZE = "1M";
+
+  # Make the installer more likely to succeed in low memory
+  # environments.  The kernel's overcommit heustistics bite us
+  # fairly often, preventing processes such as nix-worker or
+  # download-using-manifests.pl from forking even if there is
+  # plenty of free memory.
+  boot.kernel.sysctl."vm.overcommit_memory" = "1";
+
+  # To speed up installation a little bit, include the complete
+  # stdenv in the Nix store on the CD.
+  system.extraDependencies = with pkgs;
+  [ stdenv
+    stdenvNoCC # for runCommand
+    busybox
+    jq # for closureInfo
+  ];
+
+  # Show all debug messages from the kernel but don't log refused packets
+  # because we have the firewall enabled. This makes installs from the
+  # console less cumbersome if the machine has a public IP.
+  networking.firewall.logRefusedConnections = mkDefault false;
 }
