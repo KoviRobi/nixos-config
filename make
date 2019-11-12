@@ -1,4 +1,5 @@
-unset profile NixOS_Configuration NixOS_Target
+action=switch
+unset extraArgs profile NixOS_Configuration NixOS_Target
 
 select_name() {
   case $1 in
@@ -12,14 +13,20 @@ select_name() {
 }
 
 while [ $# -gt 0 ]; do
-  if !select_name $1; then
+  if ! select_name $1; then
     case $1 in
+      boot|switch|dry-run)
+        action=$1
+        ;;
       *-iso)
         NixOS_Configuration=${1%-iso}
         NixOS_Target=iso-image.nix
         ;;
       iso)
         NixOS_Target=iso-image.nix
+        ;;
+      -*)
+        extraArgs="$extraArgs $1"
         ;;
       *)
         echo "Unknown option $1";
@@ -56,6 +63,7 @@ export NixOS_Configuration NixOS_Target
 
 echo $NixOS_Configuration-$NixOS_Target
 
+set -x
 sudo --preserve-env=NixOS_Configuration,NixOS_Target \
   nixos-rebuild ${profile:+-p} ${profile} \
-  -I nixos-config=/etc/nixos/configuration.nix boot
+  -I nixos-config=/etc/nixos/configuration.nix ${action} ${extraArgs}

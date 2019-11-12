@@ -3,9 +3,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@args:
 
 { nixpkgs.overlays = map import [ ../overlays/emacs.nix ../overlays/vim.nix ];
+
+  imports = [ "${fetchTarball {
+    url = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
+    sha256 = "16ibf367ay6dkwv6grrkpx8nf0nz3jlr3xxpjv4zjj0v3imwlq6b";
+  }}/nixos" ];
 
   i18n =
   { consoleFont = "Lat2-Terminus16";
@@ -56,6 +61,45 @@
       windowManager.i3.enable = true;
       windowManager.default = "i3";
       desktopManager.default = "none";
+      exportConfiguration = true;
+      inputClassSections = [ ''
+        Identifier "Kensington SlimBlade"
+        MatchProduct "Kensington Kensington Slimblade Trackball"
+        Option "ButtonMapping" "1 10 3 8 9 6 7 2 4 5 11 12"
+        Option "EmulateWheel" "1"
+        Option "EmulateWheelButton" "2"
+        Option "XAxisMapping" "6 7
+        Option "YAxisMapping" "9 10"
+        Option "EmulateWheelInertia" "5"
+        Option "Device Accel Profile" "-1"
+      ''
+      ''
+        Identifier "ELECOM HUGE TrackBall"
+        MatchProduct "ELECOM TrackBall Mouse HUGE TrackBall"
+        Option "ButtonMapping" "10 11 3 4 5 6 7 2 1 9 8 12"
+        Option "EmulateWheel" "1"
+        Option "EmulateWheelButton" "1"
+        Option "EmulateWheelInertia" "5"
+        Option "Device Accel Profile" "-1"
+      ''
+      ''
+        Identifier "Clearly Superior Trackball"
+        MatchProduct "Clearly Superior Technologies. CST Laser Trackball"
+        Option "EmulateWheel" "1"
+        Option "Device Accel Profile" "-1"
+        Option "XAxisMapping" "6 7
+        Option "YAxisMapping" "9 10"
+        Option "EmulateWheelInertia" "5"
+      ''
+      ''
+        Identifier "Logitech M570"
+        MatchProduct "Logitech M570"
+        Option "ButtonMapping" "1 9 3 4 5 6 7 2 8"
+        Option "EmulateWheel" "1"
+        Option "EmulateWheelButton" "8"
+        Option "XAxisMapping" "6 7"
+        Option "YAxisMapping" "4 5"
+      '' ];
     };
   };
 
@@ -95,6 +139,9 @@
     group = "rmk35";
   };
   users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
+
+  home-manager.useUserPackages = true;
+  home-manager.users.rmk35 = import ../home args;
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
