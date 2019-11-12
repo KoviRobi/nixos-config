@@ -5,9 +5,7 @@
 
 { config, pkgs, ... }:
 
-{ imports = [ ./programming.nix ];
-
-  nixpkgs.overlays = map import [ ./overlays/emacs.nix ./overlays/vim.nix ];
+{ nixpkgs.overlays = map import [ ../overlays/emacs.nix ../overlays/vim.nix ];
 
   i18n =
   { consoleFont = "Lat2-Terminus16";
@@ -32,6 +30,7 @@
     myEmacs myNeovim
     graphviz
     nix-prefetch-git nix-prefetch-github
+    networkmanagerapplet
   ];
 
   fonts.fonts = with pkgs; [ noto-fonts ];
@@ -99,4 +98,6 @@
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
+
+  networking.networkmanager = { enable = true; enableStrongSwan = true; };
 }

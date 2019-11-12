@@ -1,13 +1,14 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { icecast ? false,
-music-fs-uuid, music-fs-type ? "xfs"}:
+  music-fs-uuid, music-fs-type ? "xfs"
+}:
 { config, pkgs, lib, ... }:
 
 let
   # Generate with e.g. "tr -dc '[:alnum:]' < /dev/urandom|head -c32"
-  mpd_pass = builtins.readFile ./mpd-password.secret;
-  icecast_pass = builtins.readFile ./icecast-password.secret;
-  icecast_admin_pass = builtins.readFile ./icecast-admin-password.secret;
+  mpd_pass = builtins.readFile ../mpd-password.secret;
+  icecast_pass = builtins.readFile ../icecast-password.secret;
+  icecast_admin_pass = builtins.readFile ../icecast-admin-password.secret;
 in
 { environment.systemPackages = with pkgs;
   [ mpc_cli gmpc vimpc pavucontrol ];

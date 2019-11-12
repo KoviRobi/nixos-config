@@ -4,14 +4,13 @@
 
 { config, pkgs, ... }:
 
-let mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };
+let mypkgs = import ../pkgs/all-packages.nix { nixpkgs = pkgs; };
 in
 {
   imports =
   [ ./base-configuration.nix
-    ./hardware-configuration-sd.nix
-    ./ssh.nix
-    (import ./avahi.nix { publish = true; })
+    ../modules/ssh.nix
+    (import ../modules/avahi.nix { publish = true; })
   ];
 
   zramSwap.enable = true;
@@ -21,9 +20,6 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
-
-  environment.etc."nixos/configuration.nix" =
-  { source = "/etc/nixos/sd-configuration.nix"; };
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
   networking.hostName = "C930-sd";

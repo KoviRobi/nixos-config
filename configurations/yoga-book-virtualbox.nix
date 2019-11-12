@@ -3,24 +3,17 @@
 
 { imports =
   [ ./base-configuration.nix
-    ./hardware-configuration-orfina.nix
-    ./extra-grub.nix
-    <nixpkgs/nixos/modules/profiles/base.nix>
-    <nixpkgs/nixos/modules/profiles/all-hardware.nix>
-    (import ./music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
+    ../modules/ssh.nix
+    (import ../modules/avahi.nix { publish = true; })
   ];
 
-  environment.etc."nixos/configuration.nix" =
-  { source = "/etc/nixos/generic-configuration.nix"; };
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
+  networking.hostName = "C930-vbox";
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
-
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-
-  boot.extraModulePackages = with pkgs.linuxPackages; [ rtl8812au ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
