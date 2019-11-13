@@ -9,6 +9,9 @@ config_from_name() {
     orfina)
       NixOS_Configuration=cl.cam.ac.uk.nix
       ;;
+    as-nixos-b)
+      NixOS_Configuration=acer-as.nix
+      ;;
     *)
       return 1;
   esac
@@ -64,6 +67,9 @@ if [ -z "$NixOS_Target" ]; then
     d5551e12-5224-4913-a2d5-72d5e4f1337e)
       NixOS_Target=orfina.nix
       profile=cl
+      ;;
+    485094b5-0e17-43d7-835d-cb5d4647cbb4)
+      NixOS_Target=acer-as.nix
       ;;
     *)
       echo "Don't know which target you want";
