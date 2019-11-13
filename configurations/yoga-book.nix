@@ -21,6 +21,11 @@ in
 
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
 
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  services.acpid = { enable = true; handlers = {
+    lid-keyboard = { event = "button/lid.*"; action = "modprobe -r eink; modprobe eink"; }; };
+  };
+
   time.timeZone = "Europe/London";
 
   networking.firewall.allowedTCPPorts = [ ];

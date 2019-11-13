@@ -8,4 +8,7 @@ as an iso-image; and (4) 'home', which are the files managed by home-manager.
 I use the configuration.nix file as the entry, which uses the
 NixOS_Configuration and NixOS_Target environment variables.
 
-I use the `make` shell script to make something.
+I use the `make` shell script to make something. E.g. to create an ISO for the
+unstable nixpkgs, I could use `./make configurations/yoga-book.nix iso -I\
+nixpkgs=channel:nixos-unstable` (assuming I have a channel named
+nixos-unstable).
