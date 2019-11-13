@@ -6,7 +6,10 @@ points, system.stateVersion, host name) and it includes 'abstract' targets such
 as an iso-image; and (4) 'home', which are the files managed by home-manager.
 
 I use the configuration.nix file as the entry, which uses the
-NixOS_Configuration and NixOS_Target environment variables.
+NixOS_Configuration and NixOS_Target environment variables. The
+configuration.nix symlinks the configurations/default.nix and
+targets/default.nix to the one used to build the current configuration, so that
+those environment variables need not be set at all times.
 
 I use the `make` shell script to make something. E.g. to create an ISO for the
 unstable nixpkgs, I could use `./make configurations/yoga-book.nix iso -I\
