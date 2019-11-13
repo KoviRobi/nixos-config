@@ -22,10 +22,22 @@ in {
   services.parcellite.enable = true;
   services.pasystray.enable = true;
   services.dunst.enable = true;
+  home.file.backgrounds = { recursive = true; source = ./backgrounds; };
+  services.random-background = { enable = true; imageDirectory = ""; interval = "1h"; };
+  systemd.user.services.random-background.Service.ExecStart = lib.mkForce
+    "${pkgs.feh}/bin/feh --bg-max --randomize %h/backgrounds";
   services.screen-locker = {
     enable = true;
     lockCmd = ''${i3-helpers.actions.lock}'';
   };
+  services.compton = { enable = true; opacityRule =
+    [ "87:class_i ?= 'scratchpad'" "91:class_i ?= 'xterm'"
+      "0:_NET_WM_STATE@:32a = '_NET_WM_STATE_HIDDEN'"
+      "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'"
+      "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'"
+      "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
+      "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
+      "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'" ]; };
 
   xresources.extraConfig = builtins.readFile (
     pkgs.fetchFromGitHub {
@@ -52,6 +64,7 @@ in {
     };
 
   xsession.enable = true;
+  xsession.initExtra = "~/.fehbg || true &";
   xsession.windowManager.i3 = {
     enable = true;
     package = i3;
@@ -81,6 +94,7 @@ in {
         "${mod}+Shift+g" = scratch_xterm "scratch_guile" "${guile}";
         "${mod}+Shift+s" = scratch_xterm "scratch_shell" "${zsh}";
         "${mod}+Shift+e" = scratch "scratch_emacs" "${emacs} --name scratch_emacs";
+        "${mod}+e" =  "exec emacsclient -a '' -c";
         "${mod}+Control+h" = "split v";
         "${mod}+Control+v" = "split h";
         "${mod}+Control+s" = "layout stacking";

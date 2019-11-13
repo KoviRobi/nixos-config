@@ -3,7 +3,6 @@
   imports = [ ./direnv.nix ./tmux.nix ./x11 ./zsh.nix ];
 
   home.packages = [
-    pkgs.htop
     pkgs.fortune
   ];
 
@@ -39,6 +38,8 @@
         User rmk35
     '';
   };
+
+  programs.htop = { enable = true; colorScheme = 6; };
 
   programs.home-manager = {
     enable = true;

@@ -5,10 +5,8 @@
 
 { config, pkgs, ... }:
 
-let overlays = map (x: import (../overlays + ("/" + x)))
-            (builtins.attrNames (builtins.readDir ../overlays));
-in
-{ nixpkgs.overlays = overlays;
+{ nixpkgs.overlays = map (x: import (../overlays + ("/" + x)))
+            (with builtins; attrNames (readDir ../overlays));
 
   users.users.rmk35 =
   { isNormalUser = true;
@@ -22,7 +20,7 @@ in
   home-manager.useUserPackages = true;
   home-manager.users.rmk35 = { ... }: {
     imports = [ ../home ];
-    nixpkgs.overlays = overlays;
+    nixpkgs.overlays = config.nixpkgs.overlays;
   };
 
   imports = [ (import ../modules/linux-console.nix {})
@@ -36,7 +34,7 @@ in
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs;
-  [ wget tmux ispell git htop file netcat socat
+  [ wget tmux ispell file netcat socat
     lsof gnupg clamav krb5
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
@@ -48,7 +46,6 @@ in
     unzip
     graphviz
     nix-prefetch-git nix-prefetch-github
-    networkmanagerapplet
 #   From overlays, see nixpkgs.overlays
     myEmacs myNeovim
   ];
