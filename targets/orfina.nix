@@ -8,10 +8,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-
   # boot.extraModulePackages = with pkgs.linuxPackages; [ nvidia_x11_legacy304 ];
 
   boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/fb8206b0-f5cc-4016-9f74-0d2b05fa2ece";

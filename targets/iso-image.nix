@@ -14,6 +14,9 @@ in
     <nixpkgs/nixos/modules/profiles/base.nix>
   ];
 
+  # Since it is a brand-new build
+  system.stateVersion = lib.versions.majorMinor lib.version;
+
   environment.etc.nixos.source = "${builtins.fetchGit https://github.com/KoviRobi/nixos-config}";
   # Because the above is in the nix store, so immutable
   environment.etc."nixos/configurations/default.nix".enable = false;
