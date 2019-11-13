@@ -98,7 +98,7 @@ export NixOS_Configuration NixOS_Target
 
 echo "NIX_PATH is"
 echo $NIX_PATH | tr : '\n' | sed 's/^/  /'
-echo Make $NixOS_Configuration-$NixOS_Target? C-c to cancel.
+echo Make $NixOS_Configuration for $NixOS_Target? C-c to cancel.
 read
 
 case $artefact in
