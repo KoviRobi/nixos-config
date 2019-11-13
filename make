@@ -82,9 +82,9 @@ case $artefact in
       nixos-rebuild ${profile:+-p} ${profile} ${action} ${extraArgs}
     ;;
   iso)
-    nix build -f '<nixpkgs/nixos>' config.system.build.isoImage ${extraArgs} -o iso
+    nix build -f '<nixpkgs/nixos>' config.system.build.isoImage ${extraArgs} -o result-iso
     ;;
   sd)
-    nix build -f '<nixpkgs/nixos>' config.system.build.sdImage ${extraArgs} -o sd
+    nix build -f '<nixpkgs/nixos>' config.system.build.sdImage ${extraArgs} -o result-sd
     ;;
 esac

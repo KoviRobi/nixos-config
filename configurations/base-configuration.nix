@@ -53,7 +53,7 @@ in
     myEmacs myNeovim
   ];
 
-  fonts.fonts = with pkgs; [ noto-fonts ];
+  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts ];
 
   documentation.dev.enable = true;
 

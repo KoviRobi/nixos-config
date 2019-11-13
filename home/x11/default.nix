@@ -46,8 +46,8 @@ in {
       "XTerm.vt100.faceSize5"       = "24";
       "XTerm.vt100.faceSize6"       = "72";
       "XTerm.vt100.boldColors"      = "false";
-      "XTerm.vt100.faceName"        = "xft:DejaVu Sans Mono for Powerline";
-      "XTerm.vt100.boldFont"        = "xft:DejaVu Sans Mono for Powerline:bold";
+      "XTerm.vt100.faceName"        = "xft:DejaVu Sans Mono";
+      "XTerm.vt100.boldFont"        = "xft:DejaVu Sans Mono";
     };
 
   xsession.enable = true;
@@ -55,6 +55,8 @@ in {
     enable = true;
     package = i3;
     config = {
+      fonts = [ "DejaVu Sans 9" ];
+      bars = [ { fonts = [ "DejaVu Sans 9" ]; } ];
       modifier = mod;
       startup = [
         { command = "${i3-helpers.workspace-renumber}"; always = true; notification = false; }
