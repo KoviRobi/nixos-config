@@ -18,6 +18,7 @@ let i3 = "${pkgs.i3}";
 
     i3-helpers = import ./i3-helpers.nix pkgs;
 in {
+  services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
   services.pasystray.enable = true;
   services.dunst.enable = true;
@@ -56,7 +57,9 @@ in {
     package = i3;
     config = {
       fonts = [ "DejaVu Sans 9" ];
-      bars = [ { fonts = [ "DejaVu Sans 9" ]; } ];
+      bars = [ { fonts = [ "DejaVu Sans 9" ];
+        statusCommand = "${pkgs.i3status}/bin/i3status -c ${./i3status-config}";
+      } ];
       modifier = mod;
       startup = [
         { command = "${i3-helpers.workspace-renumber}"; always = true; notification = false; }

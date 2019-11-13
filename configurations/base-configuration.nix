@@ -53,7 +53,7 @@ in
     myEmacs myNeovim
   ];
 
-  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts ];
+  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern ];
 
   documentation.dev.enable = true;
 
@@ -63,6 +63,8 @@ in
   { enable = true;
     package = pkgs.bluezFull;
   };
+
+  boot.kernel.sysctl."kernel.sysrq" = 1;
 
   services =
   { earlyoom.enable = true;
