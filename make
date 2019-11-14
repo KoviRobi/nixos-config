@@ -29,11 +29,16 @@ while [ $# -gt 0 ]; do
         NixOS_Target=iso-image.nix
         artefact=iso
         ;;
-      *-sd)
-        NixOS_Configuration="${1%-sd-image}"
-        NixOS_Target=sd-image.nix
-        artefact=sd
+      *-disk)
+        NixOS_Configuration="${1%-disk}"
+        ;&
+      disk)
+        NixOS_Target=disk-image.nix
+        artefact=disk
         ;;
+      *-sd)
+        NixOS_Configuration="${1%-disk}"
+        ;&
       sd)
         NixOS_Target=sd-image.nix
         artefact=sd
@@ -108,6 +113,10 @@ case $artefact in
     ;;
   iso)
     nix build -f '<nixpkgs/nixos>' config.system.build.isoImage ${extraArgs} -o result-iso
+    ;;
+  disk)
+    #nix build -f '<nixpkgs/nixos>' config.system.build.diskImage ${extraArgs} -o result-disk
+    nix-build '<nixpkgs/nixos>' -A config.system.build.diskImage ${extraArgs} -o result-disk
     ;;
   sd)
     nix build -f '<nixpkgs/nixos>' config.system.build.sdImage ${extraArgs} -o result-sd
