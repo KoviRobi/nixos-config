@@ -15,15 +15,23 @@ in
 
   zramSwap.enable = true;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
 
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
-  services.acpid = { enable = true; handlers = {
-    lid-keyboard = { event = "button/lid.*"; action = "modprobe -r eink; modprobe eink"; }; };
+  services.logind.extraConfig = ''
+    HandleLidSwitch=ignore
+    HandlePowerKey=ignore
+  '';
+  services.acpid =
+  let restart-eink-kbd = ''
+      modprobe -r eink wacom
+      modprobe eink
+      modprobe wacom
+    '';
+  in { enable = true;
+       lidEventCommands = restart-eink-kbd;
+       powerEventCommands = restart-eink-kbd;
+       handlers = {
+         vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; }; };
   };
 
   time.timeZone = "Europe/London";
@@ -37,4 +45,6 @@ in
   };
 
   services.xserver.libinput.enable = true;
+
+  security.pam.services.login.fprintAuth = true;
 }
