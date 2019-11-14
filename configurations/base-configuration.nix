@@ -47,7 +47,7 @@
     graphviz
     nix-prefetch-git nix-prefetch-github
 #   From overlays, see nixpkgs.overlays
-    myEmacs myNeovim
+    emacs neovim
   ];
 
   fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern ];

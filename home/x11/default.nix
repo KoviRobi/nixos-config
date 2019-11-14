@@ -14,7 +14,7 @@ let i3 = "${pkgs.i3}";
     python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
     guile = "${pkgs.guile}/bin/guile";
     zsh = "${pkgs.zsh}/bin/zsh";
-    emacs = "${pkgs.myEmacs}/bin/emacs";
+    emacs = "${pkgs.emacs}/bin/emacs";
 
     i3-helpers = import ./i3-helpers.nix pkgs;
 in {

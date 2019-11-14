@@ -11,7 +11,7 @@ self: super:
     };
   };
 
-  myNeovim = super.neovim.override {
+  neovim = super.neovim.override {
     configure =
     { customRC = ''
         " goto-file creates new files
