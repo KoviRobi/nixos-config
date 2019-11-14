@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, ... }@args:
 let i3 = "${pkgs.i3}";
     i3lock = "${pkgs.i3lock}/bin/i3lock";
     mod = "Mod4"; # Win key
@@ -70,8 +70,8 @@ in {
     package = i3;
     config = {
       fonts = [ "DejaVu Sans 9" ];
-      bars = [ { fonts = [ "DejaVu Sans 9" ];
-        statusCommand = "${pkgs.i3status}/bin/i3status -c ${./i3status-config}";
+      bars = [ { fonts = [ "DejaVu Sans 9" ]; statusCommand =
+        "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix args}";
       } ];
       modifier = mod;
       startup = [

@@ -1,3 +1,10 @@
+{ pkgs, config, lib, ... }:
+let fileSystems = lib.mapAttrsToList (k: v: k)
+      (import <nixpkgs/nixos> {}).config.fileSystems;
+    inherit (builtins) concatStringsSep;
+    baseNameOf = s: if s=="/" then s else builtins.baseNameOf s;
+in
+pkgs.writeText "i3status-config" ''
 # i3status configuration file.
 # see "man i3status" for documentation.
 
@@ -16,7 +23,9 @@ order += "wireless _first_"
 order += "ethernet _first_"
 order += "cpu_temperature package"
 order += "battery all"
-order += "disk /"
+${concatStringsSep "\n" (map (fs:
+  ''order += "disk ${fs}"'')
+  fileSystems)}
 order += "load"
 order += "memory"
 order += "tztime local"
@@ -42,9 +51,13 @@ battery all {
         low_threshold = 10
 }
 
-disk "/" {
-        format = "%avail"
-}
+${concatStringsSep "\n" (map (fs: ''
+  disk "${fs}" {
+          format = "${baseNameOf fs}: %avail"
+  }
+
+'')
+  fileSystems)}
 
 load {
         format = "%1min"
@@ -64,3 +77,4 @@ cpu_temperature package {
   format = "%degrees°C"
   path = "/sys/devices/platform/coretemp.0/hwmon/hwmon?/temp1_input"
 }
+''
