@@ -46,13 +46,11 @@ in
   # Let the user play Rogue on TTY 8 during the installation.
   services.rogue.enable = true;
 
-  # Use less privileged nixos user
+  # Allow the user to log in without a password.
   users.users.rmk35.initialHashedPassword = "";
-
-  # Allow the user to log in as root without a password.
   users.users.root.initialHashedPassword = "";
 
-  # Allow passwordless sudo from nixos user
+  # Allow passwordless sudo from wheel users
   security.sudo = {
     enable = mkDefault true;
     wheelNeedsPassword = mkForce false;
@@ -66,7 +64,7 @@ in
     The "rmk35" and "root" accounts have empty passwords.
 
     Type `sudo systemctl start sshd` to start the SSH daemon.
-    You then must set a password for either "root" or "nixos"
+    You then must set a password for either "root" or "rmk35"
     with `passwd` to be able to login.
   '' + lib.optionalString config.services.xserver.enable ''
     Type `sudo systemctl start display-manager' to
