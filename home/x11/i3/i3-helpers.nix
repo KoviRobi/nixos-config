@@ -11,16 +11,12 @@ let sh = "${pkgs.bash}/bin/bash";
     socat = "${pkgs.socat}/bin/socat";
     mpc = "${pkgs.mpc_cli}/bin/mpc";
     tmux = "${pkgs.tmux}/bin/tmux";
-    mpd_pass = builtins.readFile ../../mpd-password.secret;
+    loginctl = "${pkgs.systemd}/bin/loginctl";
+    mpd_pass = builtins.readFile ../../../mpd-password.secret;
     dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
     actions = rec {
-      lock = pkgs.writeScript "i3-action-lock" ''
-        #!${sh}
-        ${killall} -SIGUSR1 dunst # pause
-        ( i3lock -n; ${killall} -SIGUSR2 dunst ) &
-      '';
-      music = pkgs.writeScript "i3-action-music" ''
-        #!${sh}
+      lock = pkgs.writeShellScript "i3-action-lock" "${loginctl} lock-session";
+      music = pkgs.writeShellScript "i3-action-music" ''
         export MPD_PORT=6612
         export MPD_HOST="${mpd_pass}@localhost"
         PROGFILE="$HOME/.cache/music_prog"
@@ -48,12 +44,8 @@ let sh = "${pkgs.bash}/bin/bash";
         fi
         fi
       '';
-      quit = pkgs.writeScript "i3-action-quit" ''
-        #!${sh}
-        ${i3-msg} exit
-      '';
-      rehash = pkgs.writeScript "i3-action-rehash" ''
-        #!${sh}
+      quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
+      rehash = pkgs.writeShellScript "i3-action-rehash" ''
         test -d $(${dirname} ${dmenu-run-cache}) || mkdir -p $(${dirname} ${dmenu-run-cache})
         IFS=:
         ${stest} -flx $PATH | ${sort} -u > ${dmenu-run-cache}
@@ -73,25 +65,22 @@ let sh = "${pkgs.bash}/bin/bash";
 in
 {
   inherit actions;
-  dmenu-action = pkgs.writeScript "i3-dmenu-action" ''
-    #!${sh}
+  dmenu-action = pkgs.writeShellScript "i3-dmenu-action" ''
     ${dmenu} <<EOF | sed "s|^|${actions-dir}/|" | ${sh} &
     ${builtins.concatStringsSep "\n" (builtins.attrNames actions)}
     EOF
   '';
-  dmenu-run = pkgs.writeScript "i3-dmenu-run" ''
-    #!${sh}
+  dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
     test -x ${dmenu-run-cache} || ${actions.rehash}
     < ${dmenu-run-cache} dmenu "$@" | ${sh} &
   '';
-  dmenu-workspace = pkgs.writeScript "i3-dmenu-workspace" ''
-    #!${sh}
+  dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
     RES=`${i3-msg} -t get_workspaces | \
         ${jq} --raw-output 'map(.name)|join("\n")' | \
         ${dmenu}`
     ${i3-msg} "$1 $RES"
   '';
-  tmux-current-workspace = pkgs.writeScript "i3-tmux-current-workspace" ''
+  tmux-current-workspace = pkgs.writeShellScript "i3-tmux-current-workspace" ''
     #!/bin/sh
     name=`${i3-msg} -t get_workspaces | \
           ${jq} --raw-output '.[] | select(.focused) | .name'`
@@ -181,8 +170,7 @@ in
             i3.on('workspace::empty', renumber_workspaces)
             i3.main()
   '';
-  workspace-action = pkgs.writeScript "i3-workspace-action" ''
-    #!/bin/sh
+  workspace-action = pkgs.writeShellScript "i3-workspace-action" ''
     if [ "$2" -eq 0 ]; then
       WSNAME=0
     elif ! WSNAME=`${i3-msg} -t get_workspaces | \
