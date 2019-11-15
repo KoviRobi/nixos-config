@@ -43,6 +43,12 @@ while [ $# -gt 0 ]; do
         NixOS_Target=sd-image.nix
         artefact=sd
         ;;
+      # To appease Zsh completion, which tries to figure out which make we are
+      # (gnu make, bsd make, etc), by calling "make -v"
+      -v)
+        echo "Not a make"
+        exit 1
+        ;;
       -*)
         extraArgs="$extraArgs $1"
         ;;
