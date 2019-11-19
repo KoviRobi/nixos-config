@@ -2,4 +2,5 @@
 self: super:
 { emacs = super.emacs.override
     { withGTK2 = false; withGTK3 = false; withX = true; };
+  emacs26Packages = self.dontRecurseIntoAttrs (self.emacsPackagesFor self.emacs);
 }
