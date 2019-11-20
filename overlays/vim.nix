@@ -11,6 +11,17 @@ self: super:
     };
   };
 
+  vim-blindsplit = self.vimUtils.buildVimPluginFrom2Nix {
+    pname = "vim-bindsplit";
+    version = "2016-01-05";
+    src = self.fetchFromGitHub {
+      owner = "jcorbin";
+      repo = "vim-bindsplit";
+      rev = "d0b642bdbfcabb7096b58249d3e1073456b54ef9";
+      sha256 = "1n5ajmw20628z4pfxf6l45qynjwl9i6y5an36qk84nsa4jwr3xa7";
+    };
+  };
+
   neovim = super.neovim.override {
     configure =
     { customRC = ''
@@ -39,7 +50,8 @@ self: super:
         nnoremap <F6> :UndotreeToggle<cr>
       '';
       packages.myVimPackage = with self.vimPlugins;
-      { start = [ undotree vim-easy-align solarized self.vim-fetch ];
+      { start = [ undotree vim-easy-align solarized self.vim-fetch
+                  self.vim-blindsplit ];
         opt = [];
       };
     };
