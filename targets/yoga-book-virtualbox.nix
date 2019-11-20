@@ -11,6 +11,16 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # This value determines the NixOS release with which your system is to be
+  # compatible, in order to avoid breaking some software such as database
+  # servers. You should change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "19.03"; # Did you read the comment?
+
   fileSystems."/" =
   { device = "/dev/disk/by-uuid/397a0f75-94e2-46ab-9993-6d6d02506420";
     fsType = "xfs";
@@ -31,6 +41,17 @@
           gid = builtins.toString groups.rmk35.gid;
       in ["uid=${uid}" "gid=${gid}"];
   };
+
+  fileSystems."/home/rmk35/Encrypted" =
+    { device = "/dev/disk/by-uuid/a0c888b8-c97c-418c-a49f-e03a8fc7c9fb";
+      encrypted =
+      { enable = true;
+        blkDev = "/dev/disk/by-uuid/87dab4c1-ad83-4ab7-b576-084251ce4af7";
+        keyFile = "/mnt-root/etc/enc.key";
+        label = "enc";
+      };
+      fsType = "xfs";
+    };
 
   swapDevices =
   [ { device = "/dev/disk/by-uuid/01591ee3-2df8-4a3d-a923-c4a9acd28663"; }

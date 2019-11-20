@@ -11,6 +11,9 @@ config_from_name() {
     as-nixos-b)
       NixOS_Configuration=acer-as.nix
       ;;
+    C930-vbox)
+      NixOS_Configuration=yoga-book-virtualbox.nix
+      ;;
     *)
       return 1;
   esac
@@ -94,11 +97,11 @@ fi
 
 if [ -z "$NixOS_Configuration" -o ! -e "configurations/$NixOS_Configuration" -o \
      -z "$NixOS_Target"        -o ! -e "targets/$NixOS_Target" ]; then
-  if [ -z "$NixOS_Configuration" -o ! -e "$NixOS_Configuration" ]; then
+  if [ -z "$NixOS_Configuration" -o ! -e configurations/"$NixOS_Configuration" ]; then
     echo "Don't know which configuration you want ($NixOS_Configuration):"
     ls -1 configurations/ | sed 's/^/  /'
   fi
-  if [ -z "$NixOS_Target" -o ! -e "$NixOS_Target" ]; then
+  if [ -z "$NixOS_Target" -o ! -e targets/"$NixOS_Target" ]; then
     echo "Don't know which target you want ($NixOS_Target):"
     ls -1 targets/ | sed 's/^/  /'
   fi
