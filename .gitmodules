@@ -1,3 +1,9 @@
 [submodule "pkgs/yogabook-c930-linux-eink-driver"]
 	path = pkgs/yogabook-c930-linux-eink-driver
 	url = git@github.com:KoviRobi/yogabook-c930-linux-eink-driver.git
+[submodule "home-manager"]
+	path = home-manager
+	url = https://github.com/rycee/home-manager
+[submodule "feh-random-background"]
+	path = feh-random-background
+	url = https://github.com/KoviRobi/feh-random-background

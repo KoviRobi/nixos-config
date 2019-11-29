@@ -1,16 +1,20 @@
 { pkgs, lib, ... }:
 let killall = "${pkgs.psmisc}/bin/killall";
 in {
-  imports = [ ./i3 ];
+  imports = [ ./i3 ../../feh-random-background/home-manager-service.nix ];
 
   services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
   services.pasystray.enable = true;
   services.dunst.enable = true;
   home.file.backgrounds = { recursive = true; source = ./backgrounds; };
-  services.random-background = { enable = true; imageDirectory = ""; interval = "1h"; };
-  systemd.user.services.random-background.Service.ExecStart = lib.mkForce
-    "${pkgs.feh}/bin/feh --bg-max --randomize %h/backgrounds";
+  services.feh-random-background = {
+    enable = true;
+    imageDirectory = "%h/backgrounds/";
+    stateFile = "%h/.feh-random-background";
+    interval = "1h";
+    display = "max";
+  };
   services.screen-locker = {
     enable = true;
     lockCmd = ''${pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
