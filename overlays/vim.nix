@@ -50,8 +50,8 @@ self: super:
         nnoremap <F6> :UndotreeToggle<cr>
       '';
       packages.myVimPackage = with self.vimPlugins;
-      { start = [ undotree vim-easy-align solarized self.vim-fetch
-                  self.vim-blindsplit ];
+      { start = [ undotree vim-easy-align solarized syntastic
+                  self.vim-fetch self.vim-blindsplit ];
         opt = [];
       };
     };
