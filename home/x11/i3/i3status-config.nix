@@ -30,6 +30,10 @@ order += "load"
 order += "memory"
 order += "tztime local"
 
+ipv6 {
+        format_down = ""
+}
+
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
         format_down = ""
