@@ -107,4 +107,6 @@
     # Redmi 4A
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666", OWNER="kr2"
   '';
+
+  nix.maxJobs = 8;
 }
