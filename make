@@ -14,6 +14,9 @@ config_from_name() {
     C930-vbox)
       NixOS_Configuration=yoga-book-virtualbox.nix
       ;;
+    C930-sd)
+      NixOS_Configuration=yoga-book.nix
+      ;;
     *)
       return 1;
   esac
@@ -38,13 +41,6 @@ while [ $# -gt 0 ]; do
       disk)
         NixOS_Target=disk-image.nix
         artefact=disk
-        ;;
-      *-sd)
-        NixOS_Configuration="${1%-disk}"
-        ;&
-      sd)
-        NixOS_Target=sd-image.nix
-        artefact=sd
         ;;
       # To appease Zsh completion, which tries to figure out which make we are
       # (gnu make, bsd make, etc), by calling "make -v"
@@ -79,7 +75,7 @@ fi
 
 if [ -z "$NixOS_Target" ]; then
   case `findmnt --noheadings --raw --output=UUID /` in
-    b50309e4-2660-4306-8c2f-73d50af1bbf8)
+    b6eb23a1-3c46-4074-99cd-d0b401a0fa54)
       NixOS_Target=yoga-book-sd.nix
       ;;
     397a0f75-94e2-46ab-9993-6d6d02506420)
@@ -126,8 +122,5 @@ case $artefact in
   disk)
     #nix build -f '<nixpkgs/nixos>' config.system.build.diskImage ${extraArgs} -o result-disk
     nix-build '<nixpkgs/nixos>' -A config.system.build.diskImage ${extraArgs} -o result-disk
-    ;;
-  sd)
-    nix build -f '<nixpkgs/nixos>' config.system.build.sdImage ${extraArgs} -o result-sd
     ;;
 esac

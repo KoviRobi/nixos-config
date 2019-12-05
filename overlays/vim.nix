@@ -51,6 +51,7 @@ self: super:
       '';
       packages.myVimPackage = with self.vimPlugins;
       { start = [ undotree vim-easy-align solarized syntastic
+                  vim-addon-nix vim-nix
                   self.vim-fetch self.vim-blindsplit ];
         opt = [];
       };

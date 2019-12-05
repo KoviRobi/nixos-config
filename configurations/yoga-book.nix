@@ -23,6 +23,7 @@ in
   '';
   services.acpid =
   let restart-eink-kbd = ''
+      PATH=${pkgs.kmod}/bin:$PATH
       modprobe -r eink wacom
       modprobe eink
       modprobe wacom
@@ -31,7 +32,8 @@ in
        lidEventCommands = restart-eink-kbd;
        powerEventCommands = restart-eink-kbd;
        handlers = {
-         vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; }; };
+         vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; };
+       };
   };
 
   time.timeZone = "Europe/London";
@@ -39,12 +41,14 @@ in
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 
-  services.printing =
-  { enable = true;
-    clientConf = "ServerName cups-serv.cl.cam.ac.uk";
-  };
+  # services.printing =
+  # { enable = true;
+  #   clientConf = "ServerName cups-serv.cl.cam.ac.uk";
+  # };
 
   services.xserver.libinput.enable = true;
+  services.xserver.dpi = 200;
 
   security.pam.services.login.fprintAuth = true;
+  services.fprintd.enable = true;
 }

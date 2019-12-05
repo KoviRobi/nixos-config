@@ -5,24 +5,32 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = false;
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "sdhci" "cqhci" "i915" "mmc_core" "mmc_block" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # Include lots of firmware.
+  # For iwlwifi for 01:00.0 Network controller:
+  #     Intel Corporation Wireless 8265 / 8275 (rev 78)  ?
+  hardware.enableRedistributableFirmware = true;
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b50309e4-2660-4306-8c2f-73d50af1bbf8";
+    { device = "/dev/disk/by-uuid/b6eb23a1-3c46-4074-99cd-d0b401a0fa54";
       fsType = "xfs";
     };
 
-  boot.initrd.luks.devices."new".device = "/dev/disk/by-uuid/f3f5109d-6da5-441b-b959-f94d8c066ce8";
-
+  # fileSystems."/boot" =
+  #   { device = "/dev/disk/by-uuid/FFBC-17D9";
+  #     fsType = "vfat";
+  #   };
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/49DD-94F6";
+    { device = "/dev/disk/by-uuid/1C4E-ADD9";
       fsType = "vfat";
     };
 
-  nix.maxJobs = lib.mkDefault 2;
+  nix.maxJobs = lib.mkDefault 4;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
