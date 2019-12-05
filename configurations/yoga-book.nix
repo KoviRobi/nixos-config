@@ -13,6 +13,9 @@ in
     (import ../modules/avahi.nix { publish = true; })
   ];
 
+  # For non-scrambled text
+  boot.initrd.availableKernelModules = [ "i915" ];
+
   zramSwap.enable = true;
 
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
