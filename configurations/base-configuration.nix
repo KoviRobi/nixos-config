@@ -79,6 +79,7 @@
       inputClassSections = [ ''
         Identifier "Kensington SlimBlade"
         MatchProduct "Kensington Kensington Slimblade Trackball"
+        Driver "evdev"
         Option "ButtonMapping" "1 10 3 8 9 6 7 2 4 5 11 12"
         Option "EmulateWheel" "1"
         Option "EmulateWheelButton" "2"
@@ -90,6 +91,7 @@
       ''
         Identifier "ELECOM HUGE TrackBall"
         MatchProduct "ELECOM TrackBall Mouse HUGE TrackBall"
+        Driver "evdev"
         Option "ButtonMapping" "10 11 3 4 5 6 7 2 1 9 8 12"
         Option "EmulateWheel" "1"
         Option "EmulateWheelButton" "1"
@@ -99,6 +101,7 @@
       ''
         Identifier "Clearly Superior Trackball"
         MatchProduct "Clearly Superior Technologies. CST Laser Trackball"
+        Driver "evdev"
         Option "EmulateWheel" "1"
         Option "Device Accel Profile" "-1"
         Option "XAxisMapping" "6 7
@@ -108,6 +111,7 @@
       ''
         Identifier "Logitech M570"
         MatchProduct "Logitech M570"
+        Driver "evdev"
         Option "ButtonMapping" "1 9 3 4 5 6 7 2 8"
         Option "EmulateWheel" "1"
         Option "EmulateWheelButton" "8"
