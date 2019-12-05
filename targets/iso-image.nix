@@ -48,6 +48,7 @@ in
 
   # Allow the user to log in without a password.
   users.users.rmk35.initialHashedPassword = "";
+  users.users.rmk35.openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_rsa.pub ];
   users.users.root.initialHashedPassword = "";
 
   # Allow passwordless sudo from wheel users
@@ -72,8 +73,11 @@ in
   '';
 
   # Allow sshd to be started manually through "systemctl start sshd".
-  services.openssh = {
-    enable = true;
+  security.pam.services.sshd.googleAuthenticator.enable = lib.mkForce false;
+  services.openssh =
+  { enable = true;
+    permitRootLogin = "no";
+    extraConfig = lib.mkForce "";
   };
   systemd.services.sshd.wantedBy = mkOverride 50 [];
 
