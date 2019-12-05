@@ -17,10 +17,6 @@ in
 
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
 
-  services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    HandlePowerKey=ignore
-  '';
   services.acpid =
   let restart-eink-kbd = ''
       PATH=${pkgs.kmod}/bin:$PATH
@@ -29,8 +25,6 @@ in
       modprobe wacom
     '';
   in { enable = true;
-       lidEventCommands = restart-eink-kbd;
-       powerEventCommands = restart-eink-kbd;
        handlers = {
          vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; };
        };
