@@ -36,6 +36,10 @@ in
   # Add Memtest86+ to the CD.
   boot.loader.grub.memtest86.enable = true;
 
+  boot.postBootCommands = ''
+    mkdir /mnt
+  '';
+
   # Enable in installer, even if the minimal profile disables it.
   documentation.enable = mkForce true;
 
