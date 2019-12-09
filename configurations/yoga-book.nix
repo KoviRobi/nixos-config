@@ -15,6 +15,8 @@ in
 
   # For non-scrambled text
   boot.initrd.availableKernelModules = [ "i915" ];
+  boot.initrd.kernelModules = [ "eink" "pinctrl_sunrisepoint" ];
+  boot.kernelParams = [ "video=efifb" "fbcon=rotate:1" ];
 
   zramSwap.enable = true;
 
