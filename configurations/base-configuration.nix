@@ -26,7 +26,7 @@
   imports = [ (import ../modules/linux-console.nix {})
     "${fetchTarball {
       url = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
-      sha256 = "16ibf367ay6dkwv6grrkpx8nf0nz3jlr3xxpjv4zjj0v3imwlq6b";
+      sha256 = "1pnswdidlh8kapqjqsl5jyr09mfwv14h9p1krqj743pfxkbp6i0y";
     }}/nixos" ];
 
   i18n.defaultLocale = "en_US.UTF-8";
