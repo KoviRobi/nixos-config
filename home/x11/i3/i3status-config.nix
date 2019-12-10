@@ -22,12 +22,12 @@ order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "cpu_temperature package"
-order += "battery all"
 ${concatStringsSep "\n" (map (fs:
   ''order += "disk ${fs}"'')
   fileSystems)}
 order += "load"
 order += "memory"
+order += "battery all"
 order += "tztime local"
 
 ipv6 {
