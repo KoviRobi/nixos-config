@@ -4,8 +4,6 @@
 
 { config, pkgs, ... }:
 
-let mypkgs = import ../pkgs/all-packages.nix { nixpkgs = pkgs; };
-in
 {
   imports =
   [ ./base-configuration.nix
@@ -20,7 +18,7 @@ in
 
   zramSwap.enable = true;
 
-  boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
   services.acpid =
   let restart-eink-kbd = ''
