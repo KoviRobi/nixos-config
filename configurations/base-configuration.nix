@@ -39,7 +39,7 @@
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
     xclip
-    hicolor-icon-theme
+    hicolor-icon-theme gnome3.adwaita-icon-theme
     libnotify
     chromium mpv ffmpeg compton zathura
     nfs-utils pciutils
@@ -70,8 +70,12 @@
 
     xserver =
     { enable = true; layout = "us";
-      displayManager.lightdm.enable = true;
-      displayManager.lightdm.autoLogin = { enable = true; user = "rmk35"; };
+      displayManager.lightdm = {
+        enable = true;
+        autoLogin = { enable = true; user = "rmk35"; };
+        greeters.gtk.cursorTheme.package = pkgs.gnome3.adwaita-icon-theme;
+        greeters.gtk.cursorTheme.name = "Adwaita";
+      };
       windowManager.i3.enable = true;
       windowManager.default = "i3";
       desktopManager.default = "none";
