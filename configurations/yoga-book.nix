@@ -45,9 +45,16 @@ in
   #   clientConf = "ServerName cups-serv.cl.cam.ac.uk";
   # };
 
+  services.logind.extraConfig = "HandlePowerKey=suspend";
+
+  hardware.sensor.iio.enable = true;
   services.xserver.libinput.enable = true;
-  services.xserver.dpi = 200;
+  services.xserver.dpi = 281;
+  services.xserver.wacom.enable = true;
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = ''Option      "TearFree" "true"'';
 
   security.pam.services.login.fprintAuth = true;
   services.fprintd.enable = true;
+  services.fprintd.package = pkgs.fprintd-thinkpad;
 }
