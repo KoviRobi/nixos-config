@@ -181,4 +181,5 @@ in
     CMD="$1 $WSNAME"
     ${i3-msg} "$CMD"
   '';
+  pen-pye-menu = pkgs.python3Packages.callPackage ./pen-pye-menu { };
 }

@@ -46,7 +46,7 @@ in {
         "${mod}+Shift+g" = scratch_xterm "scratch_guile" "${guile}";
         "${mod}+Shift+s" = scratch_xterm "scratch_shell" "${zsh}";
         "${mod}+Shift+e" = scratch "scratch_emacs" "${emacs} --name scratch_emacs";
-        "${mod}+e" =  "exec emacsclient -a '' -c";
+        "${mod}+e" =  ''exec emacsclient -a "" -c'';
         "${mod}+Control+h" = "split v";
         "${mod}+Control+v" = "split h";
         "${mod}+Control+s" = "layout stacking";
@@ -62,6 +62,8 @@ in {
         "${mod}+bracketright" = "workspace next";
         "${mod}+Shift+bracketleft"  = "move container to workspace prev";
         "${mod}+Shift+bracketright" = "move container to workspace next";
+        "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
+        "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/window_menu";
       } //
       (builtins.listToAttrs (
         (builtins.genList (n: let m = toString (n+1); in
@@ -73,5 +75,8 @@ in {
             value = "exec ${i3-helpers.workspace-action} 'move container to workspace' ${m}"; })
           9))));
     };
+    extraConfig = ''
+      popup_during_fullscreen leave_fullscreen
+    '';
   };
 }

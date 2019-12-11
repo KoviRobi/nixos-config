@@ -9,4 +9,11 @@ self: super:
         fetchSubmodules = false;
     }) {};
   });
+
+  pye-menu = self.callPackage (self.fetchgit {
+    url = "https://github.com/KoviRobi/Pye-Menu.git";
+    rev = "bbf1c268a7a3d9494c854e4d034b2af15aa0d1b2";
+    sha256 = "0qjssnb62dryqj87rrlqyznv2wx02as6bp9xahpipwpsknwma1mz";
+    fetchSubmodules = false;
+  }) {};
 }
