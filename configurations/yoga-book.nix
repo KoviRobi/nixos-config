@@ -23,9 +23,8 @@
   services.acpid =
   let restart-eink-kbd = ''
       PATH=${pkgs.kmod}/bin:$PATH
-      modprobe -r eink wacom
+      modprobe -r eink
       modprobe eink
-      modprobe wacom
     '';
   in { enable = true;
        handlers = {
