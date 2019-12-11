@@ -13,12 +13,13 @@
 
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
 
-  services.printing =
-  { enable = true;
-    clientConf = "ServerName cups-serv.cl.cam.ac.uk";
+  services =
+  { printing.enable = true;
+    printing.clientConf = "ServerName cups-serv.cl.cam.ac.uk";
+    wakeonlan.interfaces = [ { interface = "eno1"; method = "magicpacket"; } ];
+    logind.extraConfig = "HandlePowerKey=suspend";
+    xserver.dpi = 109;
   };
-
-  services.logind.extraConfig = "HandlePowerKey=suspend";
 
   # nix.binaryCaches = [ "http://caelum-vm-127.cl.cam.ac.uk:5000/" ];
   # nix.binaryCachePublicKeys =
