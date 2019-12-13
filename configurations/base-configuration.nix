@@ -3,7 +3,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 { nixpkgs.overlays = map (x: import (../overlays + ("/" + x)))
             (with builtins; attrNames (readDir ../overlays));
@@ -21,6 +21,7 @@
   home-manager.users.rmk35 = { ... }: {
     imports = [ ../home ];
     nixpkgs.overlays = config.nixpkgs.overlays;
+    dpi = config.services.xserver.dpi;
   };
 
   imports = [ (import ../modules/linux-console.nix {})

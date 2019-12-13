@@ -1,8 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let killall = "${pkgs.psmisc}/bin/killall";
     adwaita = { name = "Adwaita"; package = pkgs.gnome3.adwaita-icon-theme; };
 in {
-  imports = [ ./i3 ../../feh-random-background/home-manager-service.nix ];
+  imports = [ ./i3
+              ../../feh-random-background/home-manager-service.nix
+              ./import-dpi.nix
+            ];
 
   services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
@@ -65,7 +68,7 @@ in {
   xsession = {
     enable = true;
     initExtra = "~/.fehbg || true &";
-    pointerCursor = adwaita//{ size = 48; };
+    pointerCursor = adwaita // { size = builtins.div config.dpi 5; };
   };
   gtk.theme = adwaita;
 }
