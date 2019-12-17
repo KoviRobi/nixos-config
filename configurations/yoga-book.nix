@@ -32,6 +32,12 @@
        };
   };
 
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
+  environment.etc."systemd/sleep.conf".text = ''
+    HibernateDelaySec=30m
+  '';
+
   time.timeZone = "Europe/London";
 
   networking.firewall.allowedTCPPorts = [ ];
@@ -42,14 +48,21 @@
   #   clientConf = "ServerName cups-serv.cl.cam.ac.uk";
   # };
 
-  services.logind.extraConfig = "HandlePowerKey=suspend";
-
   hardware.sensor.iio.enable = true;
   services.xserver.libinput.enable = true;
   services.xserver.dpi = 281;
   services.xserver.wacom.enable = true;
   services.xserver.videoDrivers = [ "intel" ];
   services.xserver.deviceSection = ''Option      "TearFree" "true"'';
+  services.xserver.inputClassSections = [ ''
+    Identifier "touchpad"
+    Driver "libinput"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "TappingButtonMap" "lmr"
+  ''];
+  powerManagement.powertop.enable = true;
+  # services.tlp.enable = true;
 
   security.pam.services.login.fprintAuth = true;
   services.fprintd.enable = true;
