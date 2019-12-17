@@ -1,11 +1,11 @@
 { pkgs, lib, ... }:
-let dircolors = "${pkgs.coreutils}/bin/dircolors";
-    dircolors-file = builtins.fetchurl {
-      url = https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark;
-      sha256 = "051py3g56vyzy44j32hajcq02g8rn9v3k3amccpqjaacyibxqxzb";
+let nix-prefetch-url = "${pkgs.nix}/bin/nix-prefetch-url";
+    dircolors = "${pkgs.coreutils}/bin/dircolors";
+    dircolors-file = {
+      url = https://raw.githubusercontent.com/seebi/dircolors-solarized/e600c465505d23e9731cfdba1e0d9ccef9883fc1/dircolors.256dark;
+      sha256 = "13dajr7s6xckhv9z141cxgiavcp17687z9vyd6p7gkxrjqh8vp9i";
     };
-    dircolors-output = pkgs.runCommandNoCC ''dircolors-solarized'' {}
-      "${dircolors} ${dircolors-file} > $out";
+    dircolors-output = "$HOME/.cache/dircolors";
     python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
 in {
   programs.zsh = {
@@ -52,7 +52,18 @@ in {
       [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
       [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
 
-      ${builtins.readFile dircolors-output}
+      if [ -e "${dircolors-output}" ]; then
+        source "${dircolors-output}"
+      else
+        declare -a url_file=($(${nix-prefetch-url} ${dircolors-file.url}))
+        if [ "''${url_file[1]}" = "${dircolors-file.sha256}" ]; then
+          ${dircolors} ''${url_file[2]} > "${dircolors-output}"
+        else
+          echo "Mismatch for ${dircolors-file.url}, " \
+            "got ''${url_file[1]}, " \
+            "expected ${dircolors-file.sha256}"
+        fi
+      fi
     '';
   };
 }
