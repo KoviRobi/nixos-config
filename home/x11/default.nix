@@ -3,8 +3,10 @@ let killall = "${pkgs.psmisc}/bin/killall";
     adwaita = { name = "Adwaita"; package = pkgs.gnome3.adwaita-icon-theme; };
 in {
   imports = [ ./i3
-              ../../feh-random-background/home-manager-service.nix
               ./import-dpi.nix
+              "${fetchGit {
+                   url = https://github.com/KoviRobi/feh-random-background.git;
+               }}/home-manager-service.nix"
             ];
 
   services.network-manager-applet.enable = true;
