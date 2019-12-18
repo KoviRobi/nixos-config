@@ -13,13 +13,12 @@
 
   # For non-scrambled text
   boot.initrd.availableKernelModules = [ "i915" ];
-  boot.initrd.kernelModules = [ "eink" "pinctrl_sunrisepoint" ];
-  boot.kernelParams = [ "video=efifb" "fbcon=rotate:1" ];
-
-  zramSwap.enable = true;
-
+  boot.kernelParams = [ "video=efifb" "fbcon=rotate:1" ]; # Rotate console
+  boot.initrd.kernelModules = [ "pinctrl_sunrisepoint" # For booting off SD card
+                                "eink" ];
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
+  # To restart e-ink keyboard
   services.acpid =
   let restart-eink-kbd = ''
       PATH=${pkgs.kmod}/bin:$PATH
@@ -31,6 +30,8 @@
          vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; };
        };
   };
+
+  zramSwap.enable = true;
 
   services.logind.lidSwitch = "suspend-then-hibernate";
   services.logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
