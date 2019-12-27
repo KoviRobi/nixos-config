@@ -55,6 +55,7 @@
   services.xserver.wacom.enable = true;
   services.xserver.videoDrivers = [ "intel" ];
   services.xserver.deviceSection = ''Option      "TearFree" "true"'';
+  services.xserver.monitorSection = ''Option      "Rotate" "right"'';
   services.xserver.inputClassSections = [ ''
     Identifier "touchpad"
     Driver "libinput"
