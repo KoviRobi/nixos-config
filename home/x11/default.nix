@@ -4,15 +4,18 @@ let killall = "${pkgs.psmisc}/bin/killall";
 in {
   imports = [ ./i3
               ./import-dpi.nix
-              "${fetchGit {
-                   url = https://github.com/KoviRobi/feh-random-background.git;
-               }}/home-manager-service.nix"
+              "${fetchGit https://github.com/KoviRobi/feh-random-background.git
+               }/home-manager-service.nix"
             ];
 
   services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
   services.pasystray.enable = true;
   services.dunst.enable = true;
+  services.dunst.settings = {
+    global = { follow = "keyboard"; };
+    shortcuts = { close = "mod4+Prior"; history = "mod4+Next"; };
+  };
   home.file.backgrounds = { recursive = true; source = ./backgrounds; };
   services.feh-random-background = {
     enable = true;
