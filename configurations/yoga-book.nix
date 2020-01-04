@@ -64,7 +64,12 @@
     MatchIsTouchpad "on"
     Option "Tapping" "on"
     Option "TappingButtonMap" "lmr"
-  ''];
+  ''] ++ map (type: ''
+      Identifier "touchscreen"
+      Driver "wacom"
+      MatchIs${type} "on"
+      Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
+    '') [ "Touchscreen" "Tablet" ];
   powerManagement.powertop.enable = true;
   # services.tlp.enable = true;
 
