@@ -12,6 +12,9 @@ let sh = "${pkgs.bash}/bin/bash";
     mpc = "${pkgs.mpc_cli}/bin/mpc";
     tmux = "${pkgs.tmux}/bin/tmux";
     loginctl = "${pkgs.systemd}/bin/loginctl";
+    amixer = "${pkgs.alsaUtils}/bin/amixer";
+    xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+    rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
     mpd_pass = builtins.readFile ../../../mpd-password.secret;
     dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
     actions = rec {
@@ -58,6 +61,12 @@ let sh = "${pkgs.bash}/bin/bash";
       pause = music;
       play = music;
       prev = music;
+      airplane = pkgs.writeShellScript "rfkill" ''${rfkill} block all'';
+      mute = pkgs.writeShellScript "mute" ''${amixer} sset Master toggle'';
+      voldn = pkgs.writeShellScript "voldn" ''${amixer} sset Master 5%-'';
+      volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
+      bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -dec 20'';
+      blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -inc 20'';
     };
     actions-dir = pkgs.linkFarm "i3-actions-dir"
       (pkgs.lib.mapAttrsToList (k: v: { name = k; path = v; })

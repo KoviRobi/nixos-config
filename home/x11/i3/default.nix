@@ -64,6 +64,15 @@ in {
         "${mod}+Shift+bracketright" = "move container to workspace next";
         "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
         "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/window_menu";
+        "XF86AudioMute" = "exec ${i3-helpers.actions.mute}";
+        "XF86AudioLowerVolume" = "exec ${i3-helpers.actions.voldn}";
+        "XF86AudioRaiseVolume" = "exec ${i3-helpers.actions.volup}";
+        "XF86MonBrightnessDown" = "exec ${i3-helpers.actions.bldec}";
+        "XF86MonBrightnessUp" = "exec ${i3-helpers.actions.blinc}";
+        "XF86Search" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
+        "XF86AudioPrev" = "exec ${i3-helpers.actions.prev}";
+        "XF86AudioPlay" = "exec ${i3-helpers.actions.toggle}";
+        "XF86AudioNext" = "exec ${i3-helpers.actions.next}";
       } //
       (builtins.listToAttrs (
         (builtins.genList (n: let m = toString (n+1); in
