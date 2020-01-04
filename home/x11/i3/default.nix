@@ -21,8 +21,8 @@ in {
     enable = true;
     package = i3;
     config = {
-      fonts = [ "DejaVu Sans 9" ];
-      bars = [ { fonts = [ "DejaVu Sans 9" ]; statusCommand =
+      fonts = [ "Latin Modern Roman,Regular 9" ];
+      bars = [ { fonts = [ "Latin Modern Roman,Regular 9" ]; statusCommand =
         "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix pkgs}";
       } ];
       modifier = mod;
