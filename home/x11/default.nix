@@ -41,7 +41,7 @@ in {
       "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
-      "80:_NET_WM_STATE@:32a != '_NET_WM_STATE_FOCUSED'"
+      "80:focused != 1"
       "100:class_i ?= 'i3-frame'"
       "87:class_i ?= 'scratchpad'" "91:class_i ?= 'xterm'" ];
   };
