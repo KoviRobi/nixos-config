@@ -75,8 +75,8 @@ fi
 
 if [ -z "$NixOS_Target" ]; then
   case `findmnt --noheadings --raw --output=UUID /` in
-    b6eb23a1-3c46-4074-99cd-d0b401a0fa54)
-      NixOS_Target=yoga-book-sd.nix
+    4d2f1de5-fe34-49e6-9b87-8e6e78e59d01)
+      NixOS_Target=yoga-book-sd-enc.nix
       ;;
     397a0f75-94e2-46ab-9993-6d6d02506420)
       NixOS_Target=yoga-book-virtualbox.nix
