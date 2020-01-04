@@ -32,7 +32,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  time.timeZone = "Europe/London";
+  services.localtime.enable = true;
 
   environment.systemPackages = with pkgs;
   [ wget tmux ispell file netcat socat

@@ -39,8 +39,6 @@
     HibernateDelaySec=30m
   '';
 
-  time.timeZone = "Europe/London";
-
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 

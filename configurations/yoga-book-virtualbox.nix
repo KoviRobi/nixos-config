@@ -7,8 +7,6 @@
     (import ../modules/avahi.nix { publish = true; })
   ];
 
-  time.timeZone = "Europe/London";
-
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 

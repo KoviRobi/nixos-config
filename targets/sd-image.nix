@@ -32,8 +32,6 @@ in
 
   boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
 
-  time.timeZone = "Europe/London";
-
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 }
