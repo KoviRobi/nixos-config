@@ -18,6 +18,10 @@
                                 "eink" ];
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
+  services.blueman.enable = true;
+  home-manager.users.rmk35.services.blueman-applet.enable = true;
+  hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
+
   # To restart e-ink keyboard
   services.acpid =
   let restart-eink-kbd = ''
