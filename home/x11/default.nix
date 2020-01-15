@@ -42,9 +42,13 @@ in {
       "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
-      "80:focused != 1"
-      "100:class_i ?= 'i3-frame'"
-      "87:class_i ?= 'scratchpad'" "91:class_i ?= 'xterm'" ];
+      "80:!focused"
+      "100:wmwin"
+      "87:class_i ?= 'scratchpad'"
+      "91:class_i ?= 'xterm'"
+      "91:class_i ?= 'mpv'"
+      "100:focused"
+    ];
   };
 
   xresources.extraConfig = builtins.readFile (
