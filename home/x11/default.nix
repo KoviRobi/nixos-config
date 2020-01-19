@@ -30,6 +30,7 @@ in {
       ${killall} -SIGUSR1 dunst # pause
       ( i3lock -n; ${killall} -SIGUSR2 dunst ) &
     ''}'';
+    xautolockExtraOptions = [ "-corners" "----" ];
   };
   services.compton = { enable = true;
     menuOpacity = "1.0";
