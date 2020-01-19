@@ -21,6 +21,7 @@
   services.blueman.enable = true;
   home-manager.users.rmk35.services.blueman-applet.enable = true;
   hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
+  hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 
   # To restart e-ink keyboard
   services.acpid =
@@ -53,7 +54,7 @@
 
   hardware.sensor.iio.enable = true;
   services.xserver.libinput.enable = true;
-  services.xserver.dpi = 281;
+  services.xserver.dpi = 200;
   services.xserver.wacom.enable = true;
   services.xserver.videoDrivers = [ "intel" ];
   services.xserver.deviceSection = ''Option      "TearFree" "true"'';
