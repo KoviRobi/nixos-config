@@ -26,6 +26,7 @@
       #
       # To remove old environments, and allow the GC to collect their dependencies:
       # rm -f .direnv
+      # direnv reload
 
       use_nix() {
         # define all local variables
@@ -93,9 +94,9 @@
           fi
 
           log_status "use nix: updating cache"
-          ${pkgs.nix}/bin/nix-shell --pure "''${drv}" --run "$(join_args "$direnv" dump bash)" > "''${dump}"
+          ${pkgs.nix}/bin/nix-shell "''${drv}" "$@" --run "$(join_args "$direnv" dump bash)" > "''${dump}"
           if [[ "''${?}" -ne 0 ]] || [[ ! -f "''${dump}" ]] || ! ${pkgs.gnugrep}/bin/grep -q IN_NIX_SHELL "''${dump}"; then
-            rm -rf "''${wd}"
+            ${pkgs.coreutils}/bin/rm -rf "''${wd}"
             fail "use nix: was not able to update the cache of the environment. Please run 'direnv reload' to try again."
           fi
         fi

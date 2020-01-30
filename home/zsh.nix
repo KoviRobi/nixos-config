@@ -20,6 +20,8 @@ in {
       PROMPT2='%B%(!.%F{red}[.%F{blue}[[ %f%F{green})%17<...<%_%<<%(!.. %f%F{blue}>)>%(!.#.$) %f%b'
       RPROMPT='%(1j.%F{yellow}Jobs: %j %f.)%(?..%B%F{red}ERROR: %? `${python3} -c "import os; print(os.strerror($?))"`%b%f)'
 
+      export VERSION_CONTROL=numbered
+
       BROWSER="links -g"
       EDITOR="nvim"
       PAGER="less"
