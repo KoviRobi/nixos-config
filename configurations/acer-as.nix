@@ -22,4 +22,8 @@
     home = "/home/kr2";
     shell = pkgs.zsh;
   };
+
+  services.xserver.dpi = 109;
+
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 }
