@@ -27,20 +27,6 @@ in {
       PAGER="less"
       LESS="-iRq"
 
-      alias ls='ls --color'
-      alias ll='ls -l --color'
-      alias less='less -iRq'
-      alias mnt='udisksctl mount -b'
-      alias umnt='udisksctl unmount -b'
-      alias nixinstall='nix-env -f "<nixpkgs>" -i'
-      alias nixrepl='nix repl "<nixpkgs>" "<nixpkgs/nixos>"'
-      alias nixpath='nix eval --raw'
-      alias vi='nvim'
-      alias vim='nvim'
-      alias poly='rlwrap poly'
-      alias e=$EDITOR
-      alias termbin='nc termbin.com 9999'
-
       bindkey -e
       zle -N edit-command-line
       bindkey "^X^E" edit-command-line
@@ -56,5 +42,25 @@ in {
 
       source ${dircolors-output}
     '';
+
+    shellAliases = {
+      "ls" = "ls --color";
+      "ll" = "ls -l --color";
+      "less" = "less -iRq";
+      "mnt" = "udisksctl mount -b";
+      "umnt" = "udisksctl unmount -b";
+      "nixinstall" = "nix-env -f '<nixpkgs>' -i";
+      "nixrepl" = "nix repl '<nixpkgs>' '<nixpkgs/nixos>'";
+      "nixpath" = "nix eval --raw";
+      "vi" = "nvim";
+      "vim" = "nvim";
+      "poly" = "rlwrap poly";
+      "e" = "\${=EDITOR}";
+      "der" = "direnv reload";
+      "ded" = "direnv edit";
+      "dea" = "direnv allow";
+      "termbin" = "nc termbin.com 9999";
+      "gis" = "git status";
+    };
   };
 }
