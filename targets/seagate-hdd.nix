@@ -5,6 +5,10 @@
   [ (import ../modules/music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.editor = true;
+  boot.loader.systemd-boot.consoleMode = "max";
+  boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "nodev"; # or "nodev" for efi only
@@ -12,6 +16,11 @@
     menuentry "Guix" {
       search --set=drive1 --fs-uuid 8CF4-33C5
       configfile ($drive1)/grub/guix.cfg
+    }
+    menuentry "Lubuntu" {
+      search.fs_uuid 4bf39754-9ff4-4dd6-9816-74da4de46b1e root hd1,gpt12
+      set prefix=($root)'/boot/grub'
+      configfile $prefix/grub.cfg
     }
   '';
 
