@@ -11,6 +11,7 @@ in {
   programs.zsh = {
     enable = true;
     initExtra = ''
+      set -o PROMPT_SUBST
       PROMPT_TOP='%F{blue}%l %h %T%f'$'\n%{\r%}'
       PROMPT_NEST_ROOTP='%(4L.+.%(3L.|.%(2L.:.%(L,.,))))%(!.#.$)'
       PROMPT_BRACE_COLOUR=${"'"}''${''${''${IN_NIX_SHELL:-blue}/impure/default}/pure/white}'

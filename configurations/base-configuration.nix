@@ -22,6 +22,7 @@
     imports = [ ../home ];
     nixpkgs.overlays = config.nixpkgs.overlays;
     dpi = config.services.xserver.dpi;
+    fileSystems = pkgs.lib.mapAttrsToList (k: v: k) config.fileSystems;
   };
 
   imports = [ (import ../modules/linux-console.nix {})

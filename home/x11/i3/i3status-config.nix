@@ -1,6 +1,5 @@
-pkgs:
-let fileSystems = pkgs.lib.mapAttrsToList (k: v: k)
-      (import <nixpkgs/nixos> {}).config.fileSystems;
+{ config, pkgs, ... }:
+let inherit (config) fileSystems;
     inherit (builtins) concatStringsSep;
     baseNameOf = s: if s=="/" then s else builtins.baseNameOf s;
 in

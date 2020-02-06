@@ -81,7 +81,7 @@ in
   '';
   dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
     test -e ${dmenu-run-cache} || ${actions.rehash}
-    < ${dmenu-run-cache} dmenu "$@" | ${sh} &
+    < ${dmenu-run-cache} ${dmenu} "$@" | ${sh} &
   '';
   dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
     RES=`${i3-msg} -t get_workspaces | \

@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, ... }@args:
 let i3 = "${pkgs.i3}";
     i3-helpers = import ./i3-helpers.nix pkgs;
     mod = "Mod4"; # Win key
 
+    xterm = "${pkgs.xterm}/bin/xterm";
     maxima = "${pkgs.maxima}/bin/maxima";
     python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
     guile = "${pkgs.guile}/bin/guile";
@@ -15,7 +16,7 @@ let i3 = "${pkgs.i3}";
       [instance="^${n}$"] scratchpad show
     '';
     scratch_xterm = n: p: scratch n
-      "xterm -name '${n}' -title '${n}' -xrm '*.allowTitleOps: false' -e '${p}'";
+      "${xterm} -name '${n}' -title '${n}' -xrm '*.allowTitleOps: false' -e '${p}'";
 in {
   xsession.windowManager.i3 = {
     enable = true;
@@ -23,7 +24,7 @@ in {
     config = {
       fonts = [ "Latin Modern Roman,Regular 9" ];
       bars = [ { fonts = [ "Latin Modern Roman,Regular 9" ]; statusCommand =
-        "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix pkgs}";
+        "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix args}";
       } ];
       modifier = mod;
       startup = [
@@ -36,8 +37,8 @@ in {
       ];
       keybindings = lib.mkOptionDefault ({
         "${mod}+Shift+c" = "kill";
-        "${mod}+Return" = "exec xterm -e ${i3-helpers.tmux-current-workspace}";
-        "${mod}+Shift+Return" = "exec xterm";
+        "${mod}+Return" = "exec ${xterm} -e ${i3-helpers.tmux-current-workspace}";
+        "${mod}+Shift+Return" = "exec ${xterm}";
         "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
         "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
         "${mod}+Delete" = "exec ${i3-helpers.actions.lock}";
