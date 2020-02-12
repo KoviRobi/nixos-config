@@ -72,6 +72,7 @@
 
     xserver =
     { enable = true; layout = "us";
+      displayManager.defaultSession = "none+i3";
       displayManager.lightdm = {
         enable = true;
         autoLogin = { enable = true; user = "rmk35"; };
@@ -79,8 +80,6 @@
         greeters.gtk.cursorTheme.name = "Adwaita";
       };
       windowManager.i3.enable = true;
-      windowManager.default = "i3";
-      desktopManager.default = "none";
       exportConfiguration = true;
       inputClassSections = [ ''
         Identifier "Kensington SlimBlade"

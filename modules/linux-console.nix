@@ -5,9 +5,9 @@
 { fontsize ? 18, codepage ? 2, bold ? false }:
 { config, pkgs, ... }:
 {
-  i18n =
-  { consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-${toString codepage}${toString fontsize}${if bold then "b" else "n"}.psf.gz";
-    consoleKeyMap = pkgs.writeText "us-two-alts" ''
+  console =
+  { font = "${pkgs.terminus_font}/share/consolefonts/ter-${toString codepage}${toString fontsize}${if bold then "b" else "n"}.psf.gz";
+    keyMap = pkgs.writeText "us-two-alts" ''
       # us but with two alt keys
       keymaps 0-2,4-6,8-9,12
       alt_is_meta
