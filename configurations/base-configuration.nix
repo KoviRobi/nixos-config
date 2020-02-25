@@ -37,7 +37,7 @@
 
   environment.systemPackages = with pkgs;
   [ wget tmux ispell file netcat socat
-    lsof gnupg clamav
+    lsof gnupg clamav krb5
     jq killall # for i3 helpers
     ] ++ (with xorg; [ xkbprint xkbutils ]) ++ [
     xclip
@@ -126,13 +126,7 @@
     };
   };
 
-  krb5 = {
-    enable = true;
-    libdefaults = {
-      default_realm = "DC.CL.CAM.AC.UK";
-      forwardable = true;
-    };
-  };
+  krb5.libdefaults = { default_realm = "DC.CL.CAM.AC.UK"; forwardable = true; };
 
   programs =
   { gnupg.agent = { enable = true; enableSSHSupport = true; };
