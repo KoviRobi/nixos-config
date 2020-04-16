@@ -1,0 +1,187 @@
+diff --git a/nixos/modules/hardware/video/bumblebee.nix b/nixos/modules/hardware/video/bumblebee.nix
+index 2278c7b4061..d45fb74f349 100644
+--- a/nixos/modules/hardware/video/bumblebee.nix
++++ b/nixos/modules/hardware/video/bumblebee.nix
+@@ -11,12 +11,14 @@ let
+   bumblebee = pkgs.bumblebee.override {
+     inherit useNvidia;
+     useDisplayDevice = cfg.connectDisplay;
++    nvidia_x11 = config.hardware.nvidia.package;
+   };
+ 
+   useBbswitch = cfg.pmMethod == "bbswitch" || cfg.pmMethod == "auto" && useNvidia;
+ 
+-  primus = pkgs.primus.override {
++  primusPkg = pkgs.primus.override {
+     inherit useNvidia;
++    nvidia_x11 = config.hardware.nvidia.package;
+   };
+ 
+ in
+@@ -77,9 +79,9 @@ in
+   config = mkIf cfg.enable {
+     boot.blacklistedKernelModules = [ "nvidia-drm" "nvidia" "nouveau" ];
+     boot.kernelModules = optional useBbswitch "bbswitch";
+-    boot.extraModulePackages = optional useBbswitch kernel.bbswitch ++ optional useNvidia kernel.nvidia_x11.bin;
++    boot.extraModulePackages = optional useBbswitch kernel.bbswitch ++ optional useNvidia config.hardware.nvidia.package;
+ 
+-    environment.systemPackages = [ bumblebee primus ];
++    environment.systemPackages = [ bumblebee primusPkg ];
+ 
+     systemd.services.bumblebeed = {
+       description = "Bumblebee Hybrid Graphics Switcher";
+diff --git a/nixos/modules/hardware/video/nvidia.nix b/nixos/modules/hardware/video/nvidia.nix
+index 7461e231402..143f078d6a6 100644
+--- a/nixos/modules/hardware/video/nvidia.nix
++++ b/nixos/modules/hardware/video/nvidia.nix
+@@ -5,34 +5,17 @@
+ with lib;
+ 
+ let
+-
+-  drivers = config.services.xserver.videoDrivers;
+-
+-  # FIXME: should introduce an option like
+-  # ‘hardware.video.nvidia.package’ for overriding the default NVIDIA
+-  # driver.
+-  nvidiaForKernel = kernelPackages:
+-    if elem "nvidia" drivers then
+-        kernelPackages.nvidia_x11
+-    else if elem "nvidiaBeta" drivers then
+-        kernelPackages.nvidia_x11_beta
+-    else if elem "nvidiaLegacy304" drivers then
+-      kernelPackages.nvidia_x11_legacy304
+-    else if elem "nvidiaLegacy340" drivers then
+-      kernelPackages.nvidia_x11_legacy340
+-    else if elem "nvidiaLegacy390" drivers then
+-      kernelPackages.nvidia_x11_legacy390
+-    else null;
+-
+-  nvidia_x11 = nvidiaForKernel config.boot.kernelPackages;
+-  nvidia_libs32 =
+-    if versionOlder nvidia_x11.version "391" then
+-      ((nvidiaForKernel pkgs.pkgsi686Linux.linuxPackages).override { libsOnly = true; kernel = null; }).out
+-    else
+-      (nvidiaForKernel config.boot.kernelPackages).lib32;
++  nvidia_x11 = let
++    drivers = config.services.xserver.videoDrivers;
++    isDeprecated = str: (hasPrefix "nvidia" str) && (str != "nvidia");
++    hasDeprecated = drivers: any isDeprecated drivers;
++  in if (hasDeprecated drivers) then
++    throw ''
++      Selecting an nvidia driver has been modified for NixOS 19.03. The version is now set using `hardware.nvidia.package`.
++    ''
++  else if (elem "nvidia" drivers) then cfg.package else null;
+ 
+   enabled = nvidia_x11 != null;
+-
+   cfg = config.hardware.nvidia;
+   pCfg = cfg.prime;
+   syncCfg = pCfg.sync;
+@@ -129,6 +112,16 @@ in
+         <option>hardware.nvidia.prime.intelBusId</option>).
+       '';
+     };
++
++    hardware.nvidia.package = lib.mkOption {
++      type = lib.types.package;
++      default = config.boot.kernelPackages.nvidiaPackages.stable;
++      defaultText = "config.boot.kernelPackages.nvidiaPackages.stable";
++      description = ''
++        The NVIDIA X11 derivation to use.
++      '';
++      example = "config.boot.kernelPackages.nvidiaPackages.legacy340";
++    };
+   };
+ 
+   config = mkIf enabled {
+@@ -208,9 +201,9 @@ in
+     };
+ 
+     hardware.opengl.package = mkIf (!offloadCfg.enable) nvidia_x11.out;
+-    hardware.opengl.package32 = mkIf (!offloadCfg.enable) nvidia_libs32;
++    hardware.opengl.package32 = mkIf (!offloadCfg.enable) nvidia_x11.lib32;
+     hardware.opengl.extraPackages = optional offloadCfg.enable nvidia_x11.out;
+-    hardware.opengl.extraPackages32 = optional offloadCfg.enable nvidia_libs32;
++    hardware.opengl.extraPackages32 = optional offloadCfg.enable nvidia_x11.lib32;
+ 
+     environment.systemPackages = [ nvidia_x11.bin nvidia_x11.settings ]
+       ++ filter (p: p != null) [ nvidia_x11.persistenced ];
+diff --git a/pkgs/os-specific/linux/nvidia-x11/default.nix b/pkgs/os-specific/linux/nvidia-x11/default.nix
+index 9a9c48a7908..d5857755a03 100644
+--- a/pkgs/os-specific/linux/nvidia-x11/default.nix
++++ b/pkgs/os-specific/linux/nvidia-x11/default.nix
+@@ -1,11 +1,20 @@
+-{ lib, callPackage, fetchurl, stdenv }:
++{ lib, callPackage, fetchurl, stdenv, pkgsi686Linux }:
+ 
+ let
+ 
++## -  generic = args: callPackage (import ./generic.nix args) { };
++## +  generic = args: let
++## +    imported = import ./generic.nix args;
++## +  in callPackage imported { lib32 = (pkgsi686Linux.callPackage imported {
++## +    libsOnly = true; kernel = null; }).out; };
+ generic = args:
+-if ((!lib.versionOlder args.version "391")
++  if ((!lib.versionOlder args.version "391")
+     && stdenv.hostPlatform.system != "x86_64-linux") then null
+-  else callPackage (import ./generic.nix args) { };
++  else let imported = import ./generic.nix args;
++  in callPackage imported {
++      lib32 = (pkgsi686Linux.callPackage imported {
++        libsOnly = true; kernel = null; }).out;
++    };
+   kernel = callPackage # a hacky way of extracting parameters from callPackage
+     ({ kernel, libsOnly ? false }: if libsOnly then { } else kernel) { };
+ 
+diff --git a/pkgs/os-specific/linux/nvidia-x11/generic.nix b/pkgs/os-specific/linux/nvidia-x11/generic.nix
+index 9e2ee6e834c..d485e9d4cce 100644
+--- a/pkgs/os-specific/linux/nvidia-x11/generic.nix
++++ b/pkgs/os-specific/linux/nvidia-x11/generic.nix
+@@ -15,10 +15,11 @@
+ 
+ { stdenv, callPackage, pkgs, pkgsi686Linux, fetchurl
+ , kernel ? null, perl, nukeReferences
+-, # Whether to build the libraries only (i.e. not the kernel module or
++  # Whether to build the libraries only (i.e. not the kernel module or
+   # nvidia-settings).  Used to support 32-bit binaries on 64-bit
+   # Linux.
+-  libsOnly ? false
++, libsOnly ? false
++, lib32 ? null
+ }:
+ 
+ with stdenv.lib;
+@@ -86,6 +87,8 @@ let
+         withGtk3 = !preferGtk2;
+       };
+       persistenced = mapNullable (hash: callPackage (import ./persistenced.nix self hash) { }) persistencedSha256;
++    } // optionalAttrs (!i686bundled) {
++      inherit lib32;
+     };
+ 
+     meta = with stdenv.lib; {
+diff --git a/pkgs/tools/X11/primus/default.nix b/pkgs/tools/X11/primus/default.nix
+index eb8aa042e7b..98924d03e1a 100644
+--- a/pkgs/tools/X11/primus/default.nix
++++ b/pkgs/tools/X11/primus/default.nix
+@@ -11,15 +11,14 @@
+ , runtimeShell
+ , primusLib_i686 ? null
+ , useNvidia ? true
++, nvidia_x11 ? null
+ }:
+ 
+ let
+   # We override stdenv in case we need different ABI for libGL
+-  primusLib_ = primusLib.override { inherit stdenv; };
+-  primusLib_i686_ = primusLib_i686.override { stdenv = stdenv_i686; };
++  primus = primusLib.override { inherit stdenv; nvidia_x11 = if useNvidia then nvidia_x11 else  null; };
++  primus_i686 = primusLib_i686.override { stdenv = stdenv_i686; nvidia_x11 = if useNvidia then nvidia_x11 else null; };
+ 
+-  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
+-  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
+   ldPath = lib.makeLibraryPath (lib.filter (x: x != null) (
+     [ primus primus.glvnd ]
+     ++ lib.optionals (primusLib_i686 != null) [ primus_i686 primus_i686.glvnd ]
