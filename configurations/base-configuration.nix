@@ -102,6 +102,8 @@
         Option "EmulateWheelButton" "1"
         Option "EmulateWheelInertia" "5"
         Option "Device Accel Profile" "-1"
+        Option "XAxisMapping" "6 7"
+        Option "YAxisMapping" "4 5"
       ''
       ''
         Identifier "Clearly Superior Trackball"
