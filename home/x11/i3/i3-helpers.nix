@@ -95,100 +95,17 @@ in
           ${jq} --raw-output '.[] | select(.focused) | .name'`
     exec ${tmux} new-session -t "''${name#*:}"
   '';
-  workspace-renumber = pkgs.writeScript "workspace-renumber" ''
-    #!${pkgs.python3.withPackages (p: with p; [ i3ipc ])}/bin/python3
-    # vi: tabstop=4 softtabstop=4 expandtab
-    import sys, re
-    import i3ipc
-
-
-    def rename_ws(i3, name, new_name):
-        message = 'rename workspace "{!s}" to "{!s}"'.format(name, new_name)
-        [resp] = i3.command(message)
-        if not resp['success']:
-            print("Error in {}: {}".format(message, resp['error']))
-
-
-    class FreeNums:
-        """
-        A class for giving the first available free number in a finite list of
-        numbers, bounded by a maximum, allowing for ticking off numbers early (but
-        not late, obviously).
-
-        E.g.
-        self = FreeNums(4)
-        self.next() # = 0
-        self.skip(2)
-        self.next() # = 1
-        self.next() # = 3
-        self.next() # = None
-
-        NOTE: The numbers are from 0...max-1, not from 1...max
-        """
-        def __init__(self, max):
-            self.len = max
-            self.nums = [False for n in range(max)]
-            self.index = 0
-
-        def skip(self, i):
-            if 0 <= i and i < self.len:
-                self.nums[i] = True
-
-        def next(self):
-            # Find and use the first unused number
-            for i in range(self.index, self.len):
-                used = self.nums[i]
-                if not used:
-                    self.nums[i] = True
-                    self.index = i
-                    return i
-
-    class FreeNums1Based(FreeNums):
-        """"
-        A one-indexed variant of FreeNums, because in keyboards 0 is after 9 and
-        that annoys me
-        """
-        def skip(self, i):
-            super().skip(i-1)
-        def next(self):
-            return super().next()+1
-
-
-    def renumber_workspaces(i3, e=None):
-        workspaces = i3.get_workspaces()
-        nums = FreeNums1Based(len(workspaces))
-        for ws in workspaces:
-            name = ws['name']
-            if name.isnumeric():
-                nums.skip(int(name))
-        for ws in workspaces:
-            name = ws['name']
-            if not name.isnumeric():
-                new_name = "{:d}:{:s}".format(
-                        nums.next(),
-                        re.sub("^[^:]*:", "", name))
-                rename_ws(i3, name, new_name)
-
-
-    if __name__ == "__main__":
-        i3 = i3ipc.Connection()
-        if len(sys.argv) == 1 and sys.argv[0] == "renumber":
-            renumber_workspaces(i3)
-        else:
-            i3.on('workspace::init', renumber_workspaces)
-            i3.on('workspace::empty', renumber_workspaces)
-            i3.main()
-  '';
+  workspace-renumber =
+    let drv = pkgs.python3.pkgs.callPackage ./workspace-renumber { };
+    in "${drv}/bin/workspace_renumber";
   workspace-action = pkgs.writeShellScript "i3-workspace-action" ''
     if [ "$2" -eq 0 ]; then
       WSNAME=0
     elif ! WSNAME=`${i3-msg} -t get_workspaces | \
-          ${jq} --raw-output --exit-status ".[$2-1].name"`; then
+          ${jq} --raw-output --exit-status ".[]|select(.num==$2).name"`; then
       WSNAME=$2
     fi
-
-    CMD="$1 $WSNAME"
-    ${i3-msg} "$CMD"
+    ${i3-msg} "$1 $WSNAME"
   '';
-  pen-pye-menu = pkgs.python3Packages.callPackage ./pen-pye-menu { };
+  pen-pye-menu = pkgs.python3.pkgs.callPackage ./pen-pye-menu { };
 }

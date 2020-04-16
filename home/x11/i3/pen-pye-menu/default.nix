@@ -1,15 +1,17 @@
 { lib
-, python3
 , pye-menu
 , i3
 , mpc_cli
 , systemd
+, python3 # following are from python3.pkgs.*
+, pycairo
+, buildPythonApplication
 }:
-python3.pkgs.buildPythonApplication rec {
+buildPythonApplication rec {
   pname = "pen-pye-menu";
   version = "1.0";
   src = ./src;
-  propagatedBuildInputs = with python3.pkgs; [ pye-menu pycairo ];
+  propagatedBuildInputs = [ pye-menu pycairo ];
 
   i3msg = "${i3}/bin/i3-msg";
   mpc = "${mpc_cli}/bin/mpc";
