@@ -26,15 +26,16 @@
       #
       # To remove old environments, and allow the GC to collect their dependencies:
       # rm -f .direnv
-      # direnv reload
 
       use_nix() {
         # define all local variables
         local shell
         local files_to_watch=()
+        local PURE=""
+        local RESTARGS
 
         local opt OPTARG OPTIND # define vars used by getopts locally
-        while getopts ":n:s:w:" opt; do
+        while getopts ":n:s:w:p:-" opt; do
           case "''${opt}" in
             s)
               shell="''${OPTARG}"
@@ -45,6 +46,11 @@
               ;;
             :)
               fail "Invalid option: $OPTARG requires an argument"
+              ;;
+            p)
+              PURE=--pure
+              ;;
+            -)
               ;;
             \?)
               fail "Invalid option: $OPTARG"
@@ -86,7 +92,7 @@
           ${pkgs.coreutils}/bin/mkdir -p "''${wd}"
 
           log_status "use nix: deriving new environment"
-          IN_NIX_SHELL=1 ${pkgs.nix}/bin/nix-instantiate --add-root "''${drv}" --indirect "''${shell}" > /dev/null
+          IN_NIX_SHELL=1 ${pkgs.nix}/bin/nix-instantiate --add-root "''${drv}" --indirect "''${shell}" "$@" > /dev/null
           ${pkgs.nix}/bin/nix-store -r $(${pkgs.nix}/bin/nix-store --query --references "''${drv}") --add-root "''${wd}/dep" --indirect > /dev/null
           if [[ "''${?}" -ne 0 ]] || [[ ! -f "''${drv}" ]]; then
             ${pkgs.coreutils}/bin/rm -rf "''${wd}"
@@ -94,9 +100,9 @@
           fi
 
           log_status "use nix: updating cache"
-          ${pkgs.nix}/bin/nix-shell "''${drv}" "$@" --run "$(join_args "$direnv" dump bash)" > "''${dump}"
+          ${pkgs.nix}/bin/nix-shell $PURE "''${drv}" --run "$(join_args "$direnv" dump bash)" "$@" > "''${dump}"
           if [[ "''${?}" -ne 0 ]] || [[ ! -f "''${dump}" ]] || ! ${pkgs.gnugrep}/bin/grep -q IN_NIX_SHELL "''${dump}"; then
-            ${pkgs.coreutils}/bin/rm -rf "''${wd}"
+            rm -rf "''${wd}"
             fail "use nix: was not able to update the cache of the environment. Please run 'direnv reload' to try again."
           fi
         fi
