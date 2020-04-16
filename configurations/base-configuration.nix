@@ -7,6 +7,9 @@
 
 { nixpkgs.overlays = map (x: import (../overlays + ("/" + x)))
             (with builtins; attrNames (readDir ../overlays));
+  nix.nixPath = [ "nixpkgs=/home/rmk35/programming/nix/pkgs/unstable"
+                  "nixos-config=/home/rmk35/nixos/configuration.nix"
+                  "/home/rmk35/programming/nix/pkgs/unstable" ];
 
   users.users.rmk35 =
   { isNormalUser = true;
