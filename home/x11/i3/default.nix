@@ -9,6 +9,8 @@ let i3 = "${pkgs.i3}";
     guile = "${pkgs.guile}/bin/guile";
     zsh = "${pkgs.zsh}/bin/zsh";
     emacs = "${pkgs.emacs}/bin/emacs";
+    xclip = "${pkgs.xclip}/bin/xclip";
+    rofi = "${pkgs.rofi}/bin/rofi";
 
     scratch = n: p: '' \
       exec --no-startup-id xprop -name '${n}' > /dev/null || \
@@ -32,6 +34,7 @@ in {
       ];
       window.commands = [
         { command = "move scratchpad"; criteria = { instance = "^scratch_.*$"; }; }
+        { command = "floating enable"; criteria = { title = "Ediff"; }; }
         { command = "floating enable"; criteria = { window_type = "popup_menu"; }; }
         { command = "border none";     criteria = { window_type = "popup_menu"; }; }
       ];
@@ -58,6 +61,9 @@ in {
         "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
         "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
         "${mod}+Shift+r" = "reload";
+        "${mod}+u" = "exec ${i3-helpers.unipicker}/bin/unipicker " +
+                        "--copy-command '${xclip} -selection clipboard' " +
+                        "--command '${rofi} -dmenu'";
         "${mod}+Control+Shift+r" = "restart";
         "${mod}+bracketleft"  = "workspace prev";
         "${mod}+bracketright" = "workspace next";

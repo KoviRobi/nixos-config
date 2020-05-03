@@ -108,4 +108,5 @@ in
     ${i3-msg} "$1 $WSNAME"
   '';
   pen-pye-menu = pkgs.python3.pkgs.callPackage ./pen-pye-menu { };
+  unipicker = pkgs.callPackage ./unipicker { };
 }
