@@ -28,7 +28,7 @@ in {
     enable = true;
     lockCmd = ''${pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 dunst # pause
-      ( i3lock -n; ${killall} -SIGUSR2 dunst ) &
+      ( i3lock -c 111111 -n; ${killall} -SIGUSR2 dunst ) &
     ''}'';
     xautolockExtraOptions = [ "-corners" "----" ];
   };
