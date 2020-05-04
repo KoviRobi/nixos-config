@@ -53,8 +53,6 @@ in {
       "nixinstall" = "nix-env -f '<nixpkgs>' -i";
       "nixrepl" = "nix repl '<nixpkgs>' '<nixpkgs/nixos>'";
       "nixpath" = "nix eval --raw";
-      "vi" = "nvim";
-      "vim" = "nvim";
       "poly" = "rlwrap poly";
       "e" = "\${=EDITOR}";
       "der" = "direnv reload";

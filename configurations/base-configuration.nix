@@ -53,6 +53,10 @@
     nix-prefetch-git nix-prefetch-github
 #   From overlays, see nixpkgs.overlays
     emacs neovim
+    (linkFarm "nvim-vi-vim-alias" [
+      { name = "bin/vi"; path = "${neovim}/bin/nvim"; }
+      { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
+    ])
   ];
 
   fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern ];
