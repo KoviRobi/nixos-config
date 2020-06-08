@@ -65,7 +65,7 @@
   };
   hardware.opengl.driSupport32Bit = true;
 
-  services.printing.enable = true;
+  services.printing = { enable = true; drivers = [ pkgs.hplip ]; };
 
   services.udev.extraRules =
   ''
