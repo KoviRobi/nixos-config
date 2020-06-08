@@ -5,6 +5,9 @@ unset extraArgs profile
 
 config_from_name() {
   case $1 in
+    cc-nixos-a)
+      NixOS_Configuration=cc.nix
+      ;;
     pc-nixos-a)
       NixOS_Configuration=pc.nix
       ;;
@@ -80,6 +83,9 @@ if [ -z "$NixOS_Target" ]; then
   case `findmnt --noheadings --raw --output=UUID /` in
     db69523e-9985-4ea6-a7b0-c0b79ee40cf1)
       NixOS_Target=pc.nix
+      ;;
+    11f46fea-7151-49cd-947f-16693f52e094)
+      NixOS_Target=cc.nix
       ;;
     4d2f1de5-fe34-49e6-9b87-8e6e78e59d01)
       NixOS_Target=yoga-book-sd-enc.nix
