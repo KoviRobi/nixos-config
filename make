@@ -5,6 +5,9 @@ unset extraArgs profile
 
 config_from_name() {
   case $1 in
+    pc-nixos-a)
+      NixOS_Configuration=pc.nix
+      ;;
     orfina)
       NixOS_Configuration=cl.cam.ac.uk.nix
       ;;
@@ -75,6 +78,9 @@ fi
 
 if [ -z "$NixOS_Target" ]; then
   case `findmnt --noheadings --raw --output=UUID /` in
+    db69523e-9985-4ea6-a7b0-c0b79ee40cf1)
+      NixOS_Target=pc.nix
+      ;;
     4d2f1de5-fe34-49e6-9b87-8e6e78e59d01)
       NixOS_Target=yoga-book-sd-enc.nix
       ;;
@@ -107,8 +113,7 @@ export NixOS_Configuration NixOS_Target
 
 echo "NIX_PATH is"
 echo $NIX_PATH | tr : '\n' | sed 's/^/  /'
-ifprof="${profile:+ (profile }$profile${profile:+)}"
-echo "Make $NixOS_Configuration for $NixOS_Target$ifprof? C-c to cancel."
+echo Make $NixOS_Configuration for $NixOS_Target? C-c to cancel.
 read
 
 case $artefact in
