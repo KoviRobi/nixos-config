@@ -4,6 +4,7 @@
 { imports =
   [ ./base-configuration.nix
     ../modules/ssh.nix
+    ../modules/graphical.nix
     (import ../modules/avahi.nix { publish = true; })
     (import ../modules/music.nix { music-fs-uuid = "3a0b0492-af85-426c-8c1f-ee6a0df3bd48"; })
   ];

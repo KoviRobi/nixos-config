@@ -4,6 +4,7 @@
 { imports =
   [ ./base-configuration.nix
     ../modules/ssh.nix
+    ../modules/graphical.nix
     #(import ../modules/avahi.nix { publish = false; })
   ];
 

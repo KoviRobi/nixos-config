@@ -8,6 +8,8 @@
   imports =
   [ ./base-configuration.nix
     ../modules/ssh.nix
+    ../modules/bluetooth.nix
+    ../modules/graphical.nix
     (import ../modules/avahi.nix { publish = true; })
   ];
 
@@ -17,11 +19,6 @@
   boot.initrd.kernelModules = [ "pinctrl_sunrisepoint" # For booting off SD card
                                 "eink" ];
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
-
-  services.blueman.enable = true;
-  home-manager.users.rmk35.services.blueman-applet.enable = true;
-  hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
-  hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 
   # To restart e-ink keyboard
   services.acpid =
