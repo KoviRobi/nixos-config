@@ -32,7 +32,7 @@ in {
     ''}'';
     xautolockExtraOptions = [ "-corners" "----" ];
   };
-  services.compton = { enable = true;
+  services.picom = { enable = true;
     menuOpacity = "1.0";
     opacityRule = [
       "100:class_i ?= 'i3lock'"

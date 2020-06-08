@@ -31,8 +31,9 @@
   imports = [ (import ../modules/linux-console.nix {})
     "${fetchGit {
       url = https://github.com/rycee/home-manager;
-      ref = "release-19.09";
-    }}/nixos" ];
+      ref = "master";
+    }}/nixos"
+  ];
 
   i18n.defaultLocale = "en_US.UTF-8";
 
