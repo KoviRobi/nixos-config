@@ -66,10 +66,10 @@
   };
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
+  boot.kernelParams = [ "boot.shell_on_fail" ];
 
   services =
   { earlyoom.enable = true;
-
     clamav = { daemon.enable = true; updater.enable = true; };
   };
 
@@ -93,4 +93,5 @@
 
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.ModemManager.enable = false;
 }
