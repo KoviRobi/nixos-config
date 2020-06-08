@@ -43,7 +43,7 @@ in {
       "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
       "100:WM_CLASS@[1]:s ?= 'mpv'"
-      "80:!focused"
+      "95:!focused"
       "100:wmwin"
       "87:class_i ?= 'scratchpad'"
       "91:class_i ?= 'xterm'"
