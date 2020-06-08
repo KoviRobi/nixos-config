@@ -65,10 +65,14 @@ in {
                         "--copy-command '${xclip} -selection clipboard' " +
                         "--command '${rofi} -dmenu'";
         "${mod}+Control+Shift+r" = "restart";
-        "${mod}+bracketleft"  = "workspace prev";
-        "${mod}+bracketright" = "workspace next";
-        "${mod}+Shift+bracketleft"  = "move container to workspace prev";
-        "${mod}+Shift+bracketright" = "move container to workspace next";
+        "${mod}+bracketleft"  = "focus output left";
+        "${mod}+bracketright" = "focus output right";
+        "${mod}+parenleft"  = "workspace prev_on_output";
+        "${mod}+parenright" = "workspace next_on_output";
+        "${mod}+Shift+bracketleft"  = "move to output left";
+        "${mod}+Shift+bracketright" = "move to output right";
+        "${mod}+Shift+parenleft"  = "move to workspace prev_on_output";
+        "${mod}+Shift+parenright" = "move to workspace next_on_output";
         "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
         "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/window_menu";
         "XF86AudioMute" = "exec ${i3-helpers.actions.mute}";
