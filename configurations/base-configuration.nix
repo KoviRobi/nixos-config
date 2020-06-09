@@ -1,21 +1,14 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, pkgs, lib, ... }:
 
+let HOME = config.users.users.default-user.home;
+in
 { nixpkgs.overlays = map (x: import (../overlays + ("/" + x)))
             (with builtins; attrNames (readDir ../overlays));
-  nix.nixPath = [ "nixpkgs=/home/rmk35/programming/nix/pkgs/unstable"
-                  "nixos-config=/home/rmk35/nixos/configuration.nix"
-                  "home-manager=/home/rmk35/programming/nix/home-manager"
-                  "/home/rmk35/programming/nix/pkgs/unstable" ];
-
-  users.users.rmk35 =
-  { isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" ];
-    uid = 3749;
-    group = "rmk35";
-  };
-  users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
+  nix.nixPath = [ "nixpkgs=${HOME}/programming/nix/pkgs/unstable"
+                  "nixos-config=${HOME}/nixos/configuration.nix"
+                  "home-manager=${HOME}/programming/nix/home-manager"
+                  "${HOME}/programming/nix/pkgs/unstable" ];
 
   imports = [
     (import ../modules/linux-console.nix {})

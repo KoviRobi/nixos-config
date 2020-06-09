@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 
 { services.blueman.enable = true;
-  home-manager.users.rmk35.services.blueman-applet.enable = true;
+  home-manager.users.default-user.services.blueman-applet.enable = true;
   hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
   hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 }

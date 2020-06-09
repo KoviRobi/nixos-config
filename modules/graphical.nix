@@ -13,7 +13,7 @@
     displayManager.defaultSession = "none+i3";
     displayManager.lightdm = {
       enable = true;
-      autoLogin = { enable = true; user = "rmk35"; };
+      autoLogin = { enable = true; user = config.users.users.default-user.name; };
       greeters.gtk.cursorTheme.package = pkgs.gnome3.adwaita-icon-theme;
       greeters.gtk.cursorTheme.name = "Adwaita";
     };

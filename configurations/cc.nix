@@ -3,6 +3,7 @@
 
 { imports =
   [ ./base-configuration.nix
+    (import ../modules/default-user.nix { name = "rmk"; })
     ../modules/ssh.nix
     ../modules/graphical.nix
   ];

@@ -7,6 +7,7 @@
 {
   imports =
   [ ./base-configuration.nix
+    (import ../modules/default-user.nix { })
     ../modules/ssh.nix
     ../modules/bluetooth.nix
     ../modules/graphical.nix
