@@ -26,6 +26,7 @@
 
   services.localtime.enable = true;
 
+  environment.homeBinInPath = true;
   environment.systemPackages = with pkgs;
   [ wget tmux ispell file netcat socat
     lsof gnupg clamav krb5 pv git
