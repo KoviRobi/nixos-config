@@ -1,14 +1,11 @@
 # vim: set ts=2 sts=2 sw=2 et :
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, ... }:
 
 { nixpkgs.overlays = map (x: import (../overlays + ("/" + x)))
             (with builtins; attrNames (readDir ../overlays));
   nix.nixPath = [ "nixpkgs=/home/rmk35/programming/nix/pkgs/unstable"
                   "nixos-config=/home/rmk35/nixos/configuration.nix"
+                  "home-manager=/home/rmk35/programming/nix/home-manager"
                   "/home/rmk35/programming/nix/pkgs/unstable" ];
 
   users.users.rmk35 =
@@ -20,19 +17,9 @@
   };
   users.groups.rmk35 = { gid = 3749; members = [ "rmk35" ]; };
 
-  home-manager.useUserPackages = true;
-  home-manager.users.rmk35 = { ... }: {
-    imports = [ ../home ];
-    nixpkgs.overlays = config.nixpkgs.overlays;
-    dpi = config.services.xserver.dpi;
-    fileSystems = pkgs.lib.mapAttrsToList (k: v: k) config.fileSystems;
-  };
-
-  imports = [ (import ../modules/linux-console.nix {})
-    "${fetchGit {
-      url = https://github.com/rycee/home-manager;
-      ref = "master";
-    }}/nixos"
+  imports = [
+    (import ../modules/linux-console.nix {})
+    ../modules/home-manager.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
