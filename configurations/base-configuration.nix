@@ -62,8 +62,6 @@
     clamav = { daemon.enable = true; updater.enable = true; };
   };
 
-  krb5.libdefaults = { default_realm = "DC.CL.CAM.AC.UK"; forwardable = true; };
-
   programs =
   { gnupg.agent = { enable = true; enableSSHSupport = true; };
     zsh =

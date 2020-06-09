@@ -16,11 +16,12 @@
 
   virtualisation.vmware.guest.enable = true;
   virtualisation.docker.enable = true;
+  users.users.default-user.extraGroups = [ "docker" ];
 
   networking.hostName = "cc-nixos-a"; # Define your hostname.
 
   krb5 =
-  { enable = false;
+  { enable = true;
     libdefaults = {
       default_realm = "UK.CAMBRIDGECONSULTANTS.COM";
        dns_lookup_realm = true;

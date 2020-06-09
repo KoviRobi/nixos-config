@@ -15,7 +15,6 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ];
   boot.kernelModules = [ "kvm-amd" "vfio" ];
 
-  users.users.rmk35.extraGroups = [ "libvirtd" ];
   virtualisation.libvirtd = { enable = true; qemuRunAsRoot = false; };
 
   environment.systemPackages = with pkgs; [ virt-manager ];
