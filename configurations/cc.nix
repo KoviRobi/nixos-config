@@ -15,11 +15,12 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  virtualisation.vmware.guest.enable = true;
+  virtualisation.vmware.guest = { enable = true; headless = true; };
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [ docker-credential-helpers ];
   programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark-qt;
 
   home-manager.users.default-user.programs.git = {
     userName = lib.mkForce "Robert Kovacsics";
@@ -72,26 +73,24 @@
     '';
   };
 
-  # services.xserver.displayManager.desktopManagerHandlesLidAndPower = false;
-  services.xserver.synaptics =
-  { enable = true;
-    palmDetect = true;
-    twoFingerScroll = true;
-    additionalOptions =
-    ''
-      Option "CircularScrolling" "true"
+  services.xserver = {
+    inputClassSections = [ ''
+      Identifier "VMMouse"
+      MatchDevicePath "/dev/input/event*"
+      MatchProduct "ImPS/2 Generic Wheel Mouse"
+      Option "EmulateWheel" "1"
+      Option "EmulateWheelButton" "2"
+      Option "XAxisMapping" "6 7
+      Option "YAxisMapping" "4 5"
+    '' ];
+    xkbOptions = "caps:escape";
+
+    displayManager.sessionCommands = ''
+        ${pkgs.i3}/bin/i3-msg workspace 1
+        ${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper
+        sleep 5s && ~/.fehbg
     '';
   };
-  services.xserver.inputClassSections = [ ''
-    Identifier "touchpad catchall"
-    Driver "synaptics"
-    MatchIsTouchpad "on"
-    MatchDevicePath "/dev/input/event*"
-    Option "TapButton1" "1"
-    Option "TapButton2" "2"
-    Option "TapButton3" "3"
-  '' ];
-  services.xserver.xkbOptions = "caps:escape";
 
   nix.maxJobs = 4;
 }
