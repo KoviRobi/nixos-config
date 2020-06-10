@@ -21,8 +21,14 @@
 
   programs.git = {
     enable = true;
+    delta = { enable = true; options = [ "--theme='Solarized (dark)'" ]; };
     userName = "Kovacsics Robert";
     userEmail = "rmk35@cam.ac.uk";
+  };
+
+  programs.bat = {
+    enable = true;
+    config.theme = "Solarized (dark)";
   };
 
   programs.ssh = {

@@ -13,7 +13,7 @@ in {
     initExtra = ''
       set -o PROMPT_SUBST
       PROMPT_TOP='%F{blue}%l %h %T%f'$'\n%{\r%}'
-      PROMPT_NEST_ROOTP='%(4L.+.%(3L.|.%(2L.:.%(L,.,))))%(!.#.$)'
+      PROMPT_NEST_ROOTP='%(6L.#.%(5L.*.%(4L.+.%(3L.|.%(2L.:.%(L,.,))))))%(!.#.$)'
       PROMPT_BRACE_COLOUR=${"'"}''${''${''${IN_NIX_SHELL:-blue}/impure/default}/pure/white}'
       PROMPT_OPEN='%B%(!.%F{red}[ .%F{${"'"}''${PROMPT_BRACE_COLOUR}'}[[ %f%F{green})'
       PROMPT_CLOSE='%24<... <%(!. %4~%<<. : %f%F{${"'"}''${PROMPT_BRACE_COLOUR}'}%3~%<< ]])'
