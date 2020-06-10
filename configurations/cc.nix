@@ -17,7 +17,18 @@
 
   virtualisation.vmware.guest.enable = true;
   virtualisation.docker.enable = true;
-  users.users.default-user.extraGroups = [ "docker" ];
+  users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
+  environment.systemPackages = with pkgs; [ docker-credential-helpers ];
+  programs.wireshark.enable = true;
+
+  home-manager.users.default-user.programs.git = {
+    userName = lib.mkForce "Robert Kovacsics";
+    userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
+    extraConfig.http.emptyauth = 1;
+  };
+
+  users.users.build = { isNormalUser = false; group = "build"; shell = "${pkgs.coreutils}/bin/false"; };
+  users.groups.build = {};
 
   networking.hostName = "cc-nixos-a"; # Define your hostname.
 
@@ -29,15 +40,12 @@
        dns_lookup_kdc = true;
        forwardable = false;
        proxiable = false;
-       renew_lifetime = 604800;
-       ticket_lifetime = 86400;
-       allow_weak_crypto = true;
     };
     realms = {
       "UK.CAMBRIDGECONSULTANTS.COM" = {
-        master_kdc = "uk.cambridgeconsultants.com:88";
-        kdc = "uk.cambridgeconsultants.com:88";
         admin_server = "uk.cambridgeconsultants.com";
+        kdc = "uk.cambridgeconsultants.com:88";
+        master_kdc = "uk.cambridgeconsultants.com:88";
         default_domain = "uk.cambridgeconsultants.com";
       };
     };
@@ -49,12 +57,11 @@
     };
     appdefaults = {
       pam = {
-        debug = true;
-        ticket_lifetime = 50000;
-        renew_lifetime = 100000;
+        debug = false;
+        ticket_lifetime = 36000;
+        renew_lifetime = 36000;
         forwardable = true;
         krb4_convert = false;
-        minimum_uid = 100;
       };
     };
     extraConfig = ''
