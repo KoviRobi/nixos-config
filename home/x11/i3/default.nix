@@ -27,6 +27,7 @@ in {
       fonts = [ "Latin Modern Roman,Regular 9" ];
       bars = [ { fonts = [ "Latin Modern Roman,Regular 9" ]; statusCommand =
         "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix args}";
+        mode = "hide";
       } ];
       modifier = mod;
       startup = [
