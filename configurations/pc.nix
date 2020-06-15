@@ -10,9 +10,9 @@
     (import ../modules/avahi.nix { publish = true; })
   ];
 
-   nixpkgs.config.allowUnfree = true; # For amdgpu-pro, for OpenCL
+  # nixpkgs.config.allowUnfree = true; # For amdgpu-pro, for OpenCL
   boot.kernelPackages = pkgs.linuxPackages_latest;
-   boot.extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro ]; # for OpenCL
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro ]; # for OpenCL
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ];
   boot.kernelModules = [ "kvm-amd" "vfio" ];
 
