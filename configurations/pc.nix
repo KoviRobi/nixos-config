@@ -16,6 +16,8 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ];
   boot.kernelModules = [ "kvm-amd" "vfio" ];
 
+  boot.kernelParams = [ "video=card0-DP-1:1366x768M@60" ];
+
   virtualisation.libvirtd = { enable = true; qemuRunAsRoot = false; };
 
   environment.systemPackages = with pkgs; [ virt-manager ];
@@ -30,7 +32,12 @@
       videoDrivers = [ "amdgpu" "cirrus" "vesa" "vmware" "modesetting" ];
       deviceSection = ''Option     "Accel" "true"'';
       xrandrHeads =
-        [ { output = "DisplayPort-1"; monitorConfig = ''Option "PreferredMode" "1366x768"''; }
+        [ { output = "DisplayPort-1"; monitorConfig = ''
+              Option "UseEDID" "false"
+              Option "DefaultModes" "true"
+              Modeline "1366x768@60.0"   86.01  1366 1436 1579 1792  768 771 774 800 -hsync -vsync
+              Option "PreferredMode" "1366x768@60.0"
+            ''; }
           { output = "HDMI-A-0"; monitorConfig = ''Option "PreferredMode" "1920x1080"''; } ];
     };
   hardware.opengl.driSupport32Bit = true;
