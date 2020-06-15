@@ -47,9 +47,6 @@ in
   documentation.nixos.enable = mkForce true;
   services.nixosManual.showManual = true;
 
-  # Let the user play Rogue on TTY 8 during the installation.
-  services.rogue.enable = true;
-
   # Allow the user to log in without a password.
   users.users.rmk35.initialHashedPassword = "";
   users.users.rmk35.openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_rsa.pub ];
