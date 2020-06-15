@@ -23,7 +23,7 @@ in
   environment.systemPackages = with pkgs;
   [ wget tmux ispell file netcat socat
     lsof gnupg clamav krb5 pv git
-    jq killall # for i3 helpers
+    tree
     nfs-utils pciutils usbutils
     unzip
     graphviz
