@@ -6,11 +6,11 @@ in {
     enable = true;
     aggressiveResize = true;
     escapeTime = 0;
-    terminal = "screen-256color";
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [ copycat tmux-colors-solarized
       prefix-highlight sidebar urlview yank fpp ];
     extraConfig = ''
+      set -ga terminal-overrides ",xterm-256color:Tc"
       set -g renumber-windows on
       set -g mouse on
       set -g set-titles on
