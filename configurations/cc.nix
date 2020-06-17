@@ -15,7 +15,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  virtualisation.vmware.guest = { enable = true; headless = true; };
+  virtualisation.vmware.guest = { enable = true; };
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [ docker-credential-helpers ];
@@ -25,7 +25,7 @@
   home-manager.users.default-user.programs.git = {
     userName = lib.mkForce "Robert Kovacsics";
     userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
-    extraConfig.http.emptyauth = 1;
+    extraConfig.http.emptyauth = true;
   };
 
   users.users.build = { isNormalUser = false; group = "build"; shell = "${pkgs.coreutils}/bin/false"; };
@@ -91,6 +91,8 @@
         sleep 5s && ~/.fehbg
     '';
   };
+
+  services.udev.packages = [ pkgs.stlink ];
 
   nix.maxJobs = 4;
 }
