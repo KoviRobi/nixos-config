@@ -55,7 +55,7 @@ in {
       "nixpath" = "nix eval --raw";
       "poly" = "rlwrap poly";
       "e" = "\${=EDITOR}";
-      "der" = "direnv reload";
+      "der" = "cd /; cd -";
       "ded" = "direnv edit";
       "dea" = "direnv allow";
       "termbin" = "nc termbin.com 9999";
