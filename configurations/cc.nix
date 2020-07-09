@@ -24,10 +24,14 @@
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
 
-  home-manager.users.default-user.programs.git = {
-    userName = lib.mkForce "Robert Kovacsics";
-    userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
-    extraConfig.http.emptyauth = true;
+  home-manager.users.default-user = {
+    programs.git = {
+      userName = lib.mkForce "Robert Kovacsics";
+      userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
+      extraConfig.http.emptyauth = true;
+      lfs.enable = true;
+    };
+    services.screen-locker.enable = lib.mkForce false;
   };
 
   users.users.build = { isNormalUser = false; group = "build"; shell = "${pkgs.coreutils}/bin/false"; };
@@ -36,13 +40,13 @@
   networking.hostName = "cc-nixos-a"; # Define your hostname.
 
   krb5 =
-  { enable = true;
+    { enable = true;
     libdefaults = {
       default_realm = "UK.CAMBRIDGECONSULTANTS.COM";
-       dns_lookup_realm = true;
-       dns_lookup_kdc = true;
-       forwardable = false;
-       proxiable = false;
+      dns_lookup_realm = true;
+      dns_lookup_kdc = true;
+      forwardable = false;
+      proxiable = false;
     };
     realms = {
       "UK.CAMBRIDGECONSULTANTS.COM" = {
@@ -95,6 +99,14 @@
   };
 
   services.udev.packages = [ pkgs.stlink ];
+
+  fileSystems."/shared" =
+    { device = ".host:/shared";
+      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+      options = [ "uid=${toString config.users.users.default-user.uid}"
+                  "gid=${toString config.users.groups.default-user.gid}"
+                  "allow_other" ];
+    };
 
   nix.maxJobs = 4;
 }
