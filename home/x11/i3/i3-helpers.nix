@@ -26,25 +26,25 @@ let sh = "${pkgs.bash}/bin/bash";
 
         cmd=$(basename $0)
         if [ "$cmd" = "music" ]; then
-        cmd="$1"; shift # $@ doesn't contain cmd
+          cmd="$1"; shift # $@ doesn't contain cmd
         fi
 
         if [ "$cmd" = "mpd" -o "$cmd" = "mpv" ]; then
-        echo "$cmd">$PROGFILE
-        cmd="$1"; shift
+          echo "$cmd">$PROGFILE
+          cmd="$1"; shift
         fi
         PROG="$(${cat} $PROGFILE)"
 
         if [ "$PROG" = "mpv" ]; then
-        if [ "$cmd" = "pause" ]; then
-          echo '{ "command": ["set_property", "pause", true] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
-        elif [ "$cmd" = "play" ]; then
-          echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
-        fi
+          if [ "$cmd" = "pause" ]; then
+            echo '{ "command": ["set_property", "pause", true] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+          elif [ "$cmd" = "play" ]; then
+            echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+          fi
         elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
-        if [ -n "$cmd" ]; then
-          ${mpc} "$cmd" "$@"
-        fi
+          if [ -n "$cmd" ]; then
+            ${mpc} "$cmd" "$@"
+          fi
         fi
       '';
       quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
@@ -73,7 +73,7 @@ let sh = "${pkgs.bash}/bin/bash";
         actions);
 in
 {
-  inherit actions;
+  inherit actions-dir;
   dmenu-action = pkgs.writeShellScript "i3-dmenu-action" ''
     ${dmenu} <<EOF | sed "s|^|${actions-dir}/|" | ${sh} &
     ${builtins.concatStringsSep "\n" (builtins.attrNames actions)}

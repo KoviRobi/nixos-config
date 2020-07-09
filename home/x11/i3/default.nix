@@ -45,7 +45,7 @@ in {
         "${mod}+Shift+Return" = "exec ${xterm}";
         "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
         "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
-        "${mod}+Delete" = "exec ${i3-helpers.actions.lock}";
+        "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";
         "${mod}+Shift+m" = scratch_xterm "scratch_maxima" "${maxima}";
         "${mod}+Shift+p" = scratch_xterm "scratch_python" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}";
         "${mod}+Shift+g" = scratch_xterm "scratch_guile" "${guile}";
@@ -76,15 +76,15 @@ in {
         "${mod}+Shift+parenright" = "move to workspace next_on_output";
         "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
         "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/window_menu";
-        "XF86AudioMute" = "exec ${i3-helpers.actions.mute}";
-        "XF86AudioLowerVolume" = "exec ${i3-helpers.actions.voldn}";
-        "XF86AudioRaiseVolume" = "exec ${i3-helpers.actions.volup}";
-        "XF86MonBrightnessDown" = "exec ${i3-helpers.actions.bldec}";
-        "XF86MonBrightnessUp" = "exec ${i3-helpers.actions.blinc}";
+        "XF86AudioMute" = "exec ${i3-helpers.actions-dir}/mute";
+        "XF86AudioLowerVolume" = "exec ${i3-helpers.actions-dir}/voldn";
+        "XF86AudioRaiseVolume" = "exec ${i3-helpers.actions-dir}/volup";
+        "XF86MonBrightnessDown" = "exec ${i3-helpers.actions-dir}/bldec";
+        "XF86MonBrightnessUp" = "exec ${i3-helpers.actions-dir}/blinc";
         "XF86Search" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
-        "XF86AudioPrev" = "exec ${i3-helpers.actions.prev}";
-        "XF86AudioPlay" = "exec ${i3-helpers.actions.toggle}";
-        "XF86AudioNext" = "exec ${i3-helpers.actions.next}";
+        "XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/prev";
+        "XF86AudioPlay" = "exec ${i3-helpers.actions-dir}/toggle";
+        "XF86AudioNext" = "exec ${i3-helpers.actions-dir}/next";
       } //
       (builtins.listToAttrs (
         (builtins.genList (n: let m = toString (n+1); in
