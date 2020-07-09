@@ -59,12 +59,6 @@ in
         set notitle
 
         packadd neomake
-        " When writing a buffer (no delay).
-        call neomake#configure#automake('w')
-        " When writing a buffer (no delay), and on normal mode changes (after 750ms).
-        call neomake#configure#automake('nw', 750)
-        " When reading a buffer (after 1s), and when writing (no delay).
-        call neomake#configure#automake('rw', 1000)
         " Full config: when writing or reading a buffer, and on changes in insert and
         " normal mode (after 500ms; no delay when writing).
         call neomake#configure#automake('nrwi', 500)
@@ -83,6 +77,7 @@ in
       packages.myVimPackage = with self.vimPlugins;
       { start = [ undotree vim-easy-align solarized neomake
                   vim-addon-nix vim-nix vim-easytags tagbar vim-localvimrc
+                  ultisnips vim-snippets vim-elixir
                   self.vim-fetch self.vim-blindsplit self.vim-literate ];
         opt = [];
       };
