@@ -3,7 +3,9 @@
 
 { imports =
   [ ./base-configuration.nix
-    (import ../modules/default-user.nix { name = "rmk"; })
+    (import ../modules/default-user.nix { name = "rmk";
+        user-options = { uid = 1000; };
+        group-options = { gid = 1000; }; })
     ../modules/ssh.nix
     ../modules/graphical.nix
   ];
