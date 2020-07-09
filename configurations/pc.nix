@@ -31,14 +31,10 @@
     { dpi = 109;
       videoDrivers = [ "amdgpu" "cirrus" "vesa" "vmware" "modesetting" ];
       deviceSection = ''Option     "Accel" "true"'';
-      xrandrHeads =
-        [ { output = "DisplayPort-1"; monitorConfig = ''
-              Option "UseEDID" "false"
-              Option "DefaultModes" "true"
-              Modeline "1366x768@60.0"   86.01  1366 1436 1579 1792  768 771 774 800 -hsync -vsync
-              Option "PreferredMode" "1366x768@60.0"
-            ''; }
-          { output = "HDMI-A-0"; monitorConfig = ''Option "PreferredMode" "1920x1080"''; } ];
+      xrandrHeads = [
+        { output = "HDMI-A-0"; monitorConfig = ''Option "PreferredMode" "1366x768"''; }
+        { output = "DisplayPort-2"; monitorConfig = ''Option "PreferredMode" "1920x1080"''; }
+      ];
     };
   hardware.opengl.driSupport32Bit = true;
 
@@ -56,6 +52,7 @@
     # Redmi 4A
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666", OWNER="kr2"
   '';
+  services.udev.packages = [ pkgs.stlink ];
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
 
