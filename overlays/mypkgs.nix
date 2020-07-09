@@ -16,4 +16,8 @@ self: super:
     sha256 = "0qjssnb62dryqj87rrlqyznv2wx02as6bp9xahpipwpsknwma1mz";
     fetchSubmodules = false;
   }) {};
+
+  pavucontrol = super.pavucontrol.overrideAttrs (attrs:
+  { patches = (if attrs ? patches then attrs.patches else []) ++
+      [ ../pavucontrol-no-feedback.patch ]; });
 }

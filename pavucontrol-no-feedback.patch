@@ -1,0 +1,65 @@
+diff -W 118 -Naupr /tmp/src/pavucontrol.cc src/pavucontrol.cc
+--- a/src/pavucontrol.cc	2019-03-05 16:22:17.000000000 +0100
++++ b/src/pavucontrol.cc	2019-04-23 14:00:35.077129227 +0200
+@@ -26,8 +26,6 @@
+ #include <pulse/ext-stream-restore.h>
+ #include <pulse/ext-device-manager.h>
+ 
+-#include <canberra-gtk.h>
+-
+ #include "pavucontrol.h"
+ #include "i18n.h"
+ #include "minimalstreamwidget.h"
+@@ -632,8 +630,6 @@ MainWindow* pavucontrol_get_window(pa_gl
+     tab_number = _tab_number;
+     retry = _retry;
+ 
+-    ca_context_set_driver(ca_gtk_context_get(), "pulse");
+-
+     mainWindow = MainWindow::create(maximize);
+ 
+     api = pa_glib_mainloop_get_api(m);
+diff -W 118 -Naupr /tmp/src/sinkwidget.cc src/sinkwidget.cc
+--- a/src/sinkwidget.cc	2018-07-13 21:02:14.000000000 +0200
++++ b/src/sinkwidget.cc	2019-04-23 14:25:29.920459239 +0200
+@@ -24,7 +24,6 @@
+ 
+ #include "sinkwidget.h"
+ 
+-#include <canberra-gtk.h>
+ #if HAVE_EXT_DEVICE_RESTORE_API
+ #  include <pulse/format.h>
+ #  include <pulse/ext-device-restore.h>
+@@ -88,8 +87,6 @@ SinkWidget* SinkWidget::create(MainWindo
+ 
+ void SinkWidget::executeVolumeUpdate() {
+     pa_operation* o;
+-    char dev[64];
+-    int playing = 0;
+ 
+     if (!(o = pa_context_set_sink_volume_by_index(get_context(), index, &volume, NULL, NULL))) {
+         show_error(_("pa_context_set_sink_volume_by_index() failed"));
+@@ -97,23 +94,6 @@ void SinkWidget::executeVolumeUpdate() {
+     }
+ 
+     pa_operation_unref(o);
+-
+-    ca_context_playing(ca_gtk_context_get(), 2, &playing);
+-    if (playing)
+-        return;
+-
+-    snprintf(dev, sizeof(dev), "%lu", (unsigned long) index);
+-    ca_context_change_device(ca_gtk_context_get(), dev);
+-
+-    ca_gtk_play_for_widget(GTK_WIDGET(gobj()),
+-                           2,
+-                           CA_PROP_EVENT_DESCRIPTION, _("Volume Control Feedback Sound"),
+-                           CA_PROP_EVENT_ID, "audio-volume-change",
+-                           CA_PROP_CANBERRA_CACHE_CONTROL, "permanent",
+-                           CA_PROP_CANBERRA_ENABLE, "1",
+-                           NULL);
+-
+-    ca_context_change_device(ca_gtk_context_get(), NULL);
+ }
+ 
+ void SinkWidget::onMuteToggleButton() {
