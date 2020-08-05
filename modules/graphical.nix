@@ -10,12 +10,14 @@
 
   services.xserver =
   { enable = true; layout = "us";
-    displayManager.defaultSession = "none+i3";
-    displayManager.lightdm = {
-      enable = true;
+    displayManager = {
+      defaultSession = "none+i3";
       autoLogin = { enable = true; user = config.users.users.default-user.name; };
-      greeters.gtk.cursorTheme.package = pkgs.gnome3.adwaita-icon-theme;
-      greeters.gtk.cursorTheme.name = "Adwaita";
+      lightdm = {
+        enable = true;
+        greeters.gtk.cursorTheme.package = pkgs.gnome3.adwaita-icon-theme;
+        greeters.gtk.cursorTheme.name = "Adwaita";
+      };
     };
     windowManager.i3.enable = true;
     exportConfiguration = true;
