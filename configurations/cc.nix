@@ -101,7 +101,7 @@
   services.udev.packages = [ pkgs.stlink ];
 
   fileSystems."/shared" =
-    { device = ".host:/shared";
+    { device = ".host:/";
       fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
       options = [ "uid=${toString config.users.users.default-user.uid}"
                   "gid=${toString config.users.groups.default-user.gid}"
