@@ -24,6 +24,9 @@
     delta = { enable = true; options = [ "--theme='Solarized (dark)'" ]; };
     userName = "Kovacsics Robert";
     userEmail = "rmk35@cam.ac.uk";
+    aliases = {
+      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+    };
   };
 
   programs.bat = {
