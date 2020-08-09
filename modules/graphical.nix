@@ -21,15 +21,16 @@
     };
     windowManager.i3.enable = true;
     exportConfiguration = true;
-    inputClassSections = [ ''
+    inputClassSections = [
+    ''
       Identifier "Kensington SlimBlade"
       MatchProduct "Kensington Kensington Slimblade Trackball"
       Driver "evdev"
-      Option "ButtonMapping" "1 10 3 8 9 6 7 2 4 5 11 12"
+      Option "ButtonMapping" "1 8 3 4 5 6 7 2 9 10 11 12"
       Option "EmulateWheel" "1"
       Option "EmulateWheelButton" "2"
       Option "XAxisMapping" "6 7
-      Option "YAxisMapping" "9 10"
+      Option "YAxisMapping" "4 5"
       Option "EmulateWheelInertia" "5"
       Option "Device Accel Profile" "-1"
     ''
@@ -64,6 +65,12 @@
       Option "EmulateWheelButton" "8"
       Option "XAxisMapping" "6 7"
       Option "YAxisMapping" "4 5"
+    ''
+    ''
+      Identifier "3Dconnexion  SpacePilot PRO "
+      MatchProduct "3Dconnexion  SpacePilot PRO "
+      Driver "evdev"
+      Option "Ignore" "on"
     '' ];
   };
 }

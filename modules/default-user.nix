@@ -6,7 +6,7 @@
   { inherit name;
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" ];
+    extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" "input" ];
     uid = 3749;
     group = config.users.groups.default-user.name;
   } // user-options;
