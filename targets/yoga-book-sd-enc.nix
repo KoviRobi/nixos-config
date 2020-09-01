@@ -20,14 +20,16 @@
   boot.initrd.luks.devices."nixos-sd".device = "/dev/disk/by-uuid/f3619352-91f1-44da-b6fd-83af7bcf150d";
 
   fileSystems."/" =
-  { device = "/dev/disk/by-uuid/4d2f1de5-fe34-49e6-9b87-8e6e78e59d01";
-    fsType = "f2fs";
-  };
+    {
+      device = "/dev/disk/by-uuid/4d2f1de5-fe34-49e6-9b87-8e6e78e59d01";
+      fsType = "f2fs";
+    };
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/1C4E-ADD9";
-    fsType = "vfat";
-  };
+    {
+      device = "/dev/disk/by-uuid/1C4E-ADD9";
+      fsType = "vfat";
+    };
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

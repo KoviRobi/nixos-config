@@ -22,40 +22,46 @@
   system.stateVersion = "19.03"; # Did you read the comment?
 
   fileSystems."/" =
-  { device = "/dev/disk/by-uuid/397a0f75-94e2-46ab-9993-6d6d02506420";
-    fsType = "xfs";
-  };
+    {
+      device = "/dev/disk/by-uuid/397a0f75-94e2-46ab-9993-6d6d02506420";
+      fsType = "xfs";
+    };
 
   boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/e2b79e34-37f0-4008-8f34-0b2b71f0f9f4";
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/6681-B02F";
-    fsType = "vfat";
-  };
+    {
+      device = "/dev/disk/by-uuid/6681-B02F";
+      fsType = "vfat";
+    };
 
   fileSystems."/shared" =
-  { device = "Downloads";
-    fsType = "vboxsf";
-    options = with config.users;
-      let uid = builtins.toString users.rmk35.uid;
+    {
+      device = "Downloads";
+      fsType = "vboxsf";
+      options = with config.users;
+        let
+          uid = builtins.toString users.rmk35.uid;
           gid = builtins.toString groups.rmk35.gid;
-      in ["uid=${uid}" "gid=${gid}"];
-  };
+        in
+        [ "uid=${uid}" "gid=${gid}" ];
+    };
 
   fileSystems."/home/rmk35/Encrypted" =
-    { device = "/dev/disk/by-uuid/a0c888b8-c97c-418c-a49f-e03a8fc7c9fb";
+    {
+      device = "/dev/disk/by-uuid/a0c888b8-c97c-418c-a49f-e03a8fc7c9fb";
       encrypted =
-      { enable = true;
-        blkDev = "/dev/disk/by-uuid/87dab4c1-ad83-4ab7-b576-084251ce4af7";
-        keyFile = "/mnt-root/etc/enc.key";
-        label = "enc";
-      };
+        {
+          enable = true;
+          blkDev = "/dev/disk/by-uuid/87dab4c1-ad83-4ab7-b576-084251ce4af7";
+          keyFile = "/mnt-root/etc/enc.key";
+          label = "enc";
+        };
       fsType = "xfs";
     };
 
   swapDevices =
-  [ { device = "/dev/disk/by-uuid/01591ee3-2df8-4a3d-a923-c4a9acd28663"; }
-  ];
+    [{ device = "/dev/disk/by-uuid/01591ee3-2df8-4a3d-a923-c4a9acd28663"; }];
 
   nix.maxJobs = lib.mkDefault 2;
   virtualisation.virtualbox.guest.enable = true;

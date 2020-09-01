@@ -6,33 +6,38 @@
 
 {
   imports =
-  [ ./base-configuration.nix
-    (import ../modules/default-user.nix { })
-    ../modules/ssh.nix
-    ../modules/bluetooth.nix
-    ../modules/graphical.nix
-    (import ../modules/avahi.nix { publish = true; })
-  ];
+    [
+      ./base-configuration.nix
+      (import ../modules/default-user.nix { })
+      ../modules/ssh.nix
+      ../modules/bluetooth.nix
+      ../modules/graphical.nix
+      (import ../modules/avahi.nix { publish = true; })
+    ];
 
   # For non-scrambled text
   boot.initrd.availableKernelModules = [ "i915" ];
   boot.kernelParams = [ "video=efifb" "fbcon=rotate:1" ]; # Rotate console
-  boot.initrd.kernelModules = [ "pinctrl_sunrisepoint" # For booting off SD card
-                                "eink" ];
+  boot.initrd.kernelModules = [
+    "pinctrl_sunrisepoint" # For booting off SD card
+    "eink"
+  ];
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
   # To restart e-ink keyboard
   services.acpid =
-  let restart-eink-kbd = ''
+    let restart-eink-kbd = ''
       PATH=${pkgs.kmod}/bin:$PATH
       modprobe -r eink
       modprobe eink
     '';
-  in { enable = true;
-       handlers = {
-         vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; };
-       };
-  };
+    in
+    {
+      enable = true;
+      handlers = {
+        vol-keyboard = { event = "button/volumeup"; action = restart-eink-kbd; };
+      };
+    };
 
   zramSwap.enable = true;
 
@@ -57,18 +62,23 @@
   services.xserver.videoDrivers = [ "intel" ];
   services.xserver.deviceSection = ''Option      "TearFree" "true"'';
   services.xserver.monitorSection = ''Option      "Rotate" "right"'';
-  services.xserver.inputClassSections = [ ''
-    Identifier "touchpad"
-    Driver "libinput"
-    MatchIsTouchpad "on"
-    Option "Tapping" "on"
-    Option "TappingButtonMap" "lmr"
-  ''] ++ map (type: ''
+  services.xserver.inputClassSections = [
+    ''
+      Identifier "touchpad"
+      Driver "libinput"
+      MatchIsTouchpad "on"
+      Option "Tapping" "on"
+      Option "TappingButtonMap" "lmr"
+    ''
+  ] ++
+  map
+    (type: ''
       Identifier "touchscreen"
       Driver "wacom"
       MatchIs${type} "on"
       Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
-    '') [ "Touchscreen" "Tablet" ];
+    '')
+    [ "Touchscreen" "Tablet" ];
   powerManagement.powertop.enable = true;
   # services.tlp.enable = true;
 

@@ -2,11 +2,13 @@
 { publish ? true }:
 { config, pkgs, ... }:
 
-{ environment.systemPackages = [ pkgs.avahi ];
+{
+  environment.systemPackages = [ pkgs.avahi ];
   services.avahi =
-  { enable = true;
-    nssmdns = true;
-    publish.enable = publish;
-    publish.addresses = publish;
-  };
+    {
+      enable = true;
+      nssmdns = true;
+      publish.enable = publish;
+      publish.addresses = publish;
+    };
 }

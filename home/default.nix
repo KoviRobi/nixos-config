@@ -1,7 +1,12 @@
 { pkgs, lib, ... }:
 {
-  imports = [ ./direnv.nix ./tmux.nix ./x11 ./zsh.nix
-    ./modules/import-fileSystems.nix ];
+  imports = [
+    ./direnv.nix
+    ./tmux.nix
+    ./x11
+    ./zsh.nix
+    ./modules/import-fileSystems.nix
+  ];
 
   home.packages = [
     pkgs.fortune

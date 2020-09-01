@@ -2,7 +2,8 @@
 self: super:
 let vimplugin = self.vimUtils.buildVimPluginFrom2Nix;
 in
-{ vim-fetch = vimplugin {
+{
+  vim-fetch = vimplugin {
     pname = "vim-fetch";
     version = "2019-04-03";
     src = self.fetchFromGitHub {
@@ -37,50 +38,65 @@ in
 
   neovim = super.neovim.override {
     configure =
-    { customRC = ''
-        let mapleader = ","
+      {
+        customRC = ''
+          let mapleader = ","
 
-        " goto-file creates new files
-        map gf :e %:.:h/<cfile><CR>
+          " goto-file creates new files
+          map gf :e %:.:h/<cfile><CR>
 
-        set undofile undodir=$HOME/.vim/undo/
-        set expandtab tabstop=2 softtabstop=2 shiftwidth=0
-        set colorcolumn=80
-        set backspace=indent,start,eol
-        set completeopt=menuone,preview,longest
-        set number relativenumber
-        set spell spelllang=en_gb
-        set mouse=ar
-        set belloff=all
-        set wildmode=list:longest
-        set ignorecase smartcase
-        set autoindent
-        set laststatus=2
-        set notitle
+          set undofile undodir=$HOME/.vim/undo/
+          set expandtab tabstop=2 softtabstop=2 shiftwidth=0
+          set colorcolumn=80
+          set backspace=indent,start,eol
+          set completeopt=menuone,preview,longest
+          set number relativenumber
+          set spell spelllang=en_gb
+          set mouse=ar
+          set belloff=all
+          set wildmode=list:longest
+          set ignorecase smartcase
+          set autoindent
+          set laststatus=2
+          set notitle
 
-        packadd neomake
-        " Full config: when writing or reading a buffer, and on changes in insert and
-        " normal mode (after 500ms; no delay when writing).
-        call neomake#configure#automake('nrwi', 500)
+          packadd neomake
+          " Full config: when writing or reading a buffer, and on changes in insert and
+          " normal mode (after 500ms; no delay when writing).
+          call neomake#configure#automake('nrwi', 500)
 
-        set background=dark
-        colorscheme solarized
+          set background=dark
+          colorscheme solarized
 
-        nnoremap <F6> :UndotreeToggle<cr>
-        nnoremap <F7> :TagbarToggle<cr>
+          nnoremap <F6> :UndotreeToggle<cr>
+          nnoremap <F7> :TagbarToggle<cr>
 
-        let g:easytags_cmd = "${self.universal-ctags}/bin/ctags"
-        let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
+          let g:easytags_cmd = "${self.universal-ctags}/bin/ctags"
+          let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
 
-        source ~/.config/nvim/init.vim
-      '';
-      packages.myVimPackage = with self.vimPlugins;
-      { start = [ undotree vim-easy-align solarized neomake
-                  vim-addon-nix vim-nix vim-easytags tagbar vim-localvimrc
-                  ultisnips vim-snippets vim-elixir
-                  self.vim-fetch self.vim-blindsplit self.vim-literate ];
-        opt = [];
+          source ~/.config/nvim/init.vim
+        '';
+        packages.myVimPackage = with self.vimPlugins;
+          {
+            start = [
+              undotree
+              vim-easy-align
+              solarized
+              neomake
+              vim-addon-nix
+              vim-nix
+              vim-easytags
+              tagbar
+              vim-localvimrc
+              ultisnips
+              vim-snippets
+              vim-elixir
+              self.vim-fetch
+              self.vim-blindsplit
+              self.vim-literate
+            ];
+            opt = [ ];
+          };
       };
-    };
   };
 }

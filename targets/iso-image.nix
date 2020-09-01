@@ -1,18 +1,18 @@
 # nix build -f '<nixpkgs/nixos>' config.system.build.isoImage -I nixos-config=iso-image.nix
 { config, lib, pkgs, ... }:
-
 let mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };
-    inherit (lib) mkOverride mkDefault mkForce;
+  inherit (lib) mkOverride mkDefault mkForce;
 in
 {
   imports =
-  [ <nixpkgs/nixos/modules/installer/cd-dvd/iso-image.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    <nixpkgs/nixos/modules/installer/scan/detected.nix>
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    <nixpkgs/nixos/modules/profiles/all-hardware.nix>
-    <nixpkgs/nixos/modules/profiles/base.nix>
-  ];
+    [
+      <nixpkgs/nixos/modules/installer/cd-dvd/iso-image.nix>
+      <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+      <nixpkgs/nixos/modules/installer/scan/detected.nix>
+      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+      <nixpkgs/nixos/modules/profiles/all-hardware.nix>
+      <nixpkgs/nixos/modules/profiles/base.nix>
+    ];
 
   # Since it is a brand-new build
   system.stateVersion = lib.versions.majorMinor lib.version;
@@ -76,11 +76,12 @@ in
   # Allow sshd to be started manually through "systemctl start sshd".
   security.pam.services.sshd.googleAuthenticator.enable = lib.mkForce false;
   services.openssh =
-  { enable = true;
-    permitRootLogin = "no";
-    extraConfig = lib.mkForce "";
-  };
-  systemd.services.sshd.wantedBy = mkOverride 50 [];
+    {
+      enable = true;
+      permitRootLogin = "no";
+      extraConfig = lib.mkForce "";
+    };
+  systemd.services.sshd.wantedBy = mkOverride 50 [ ];
 
   # Tell the Nix evaluator to garbage collect more aggressively.
   # This is desirable in memory-constrained environments that don't
@@ -97,11 +98,12 @@ in
   # To speed up installation a little bit, include the complete
   # stdenv in the Nix store on the CD.
   system.extraDependencies = with pkgs;
-  [ stdenv
-    stdenvNoCC # for runCommand
-    busybox
-    jq # for closureInfo
-  ];
+    [
+      stdenv
+      stdenvNoCC # for runCommand
+      busybox
+      jq # for closureInfo
+    ];
 
   # Show all debug messages from the kernel but don't log refused packets
   # because we have the firewall enabled. This makes installs from the

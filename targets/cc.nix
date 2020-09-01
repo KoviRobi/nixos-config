@@ -11,14 +11,16 @@
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/11f46fea-7151-49cd-947f-16693f52e094";
+    {
+      device = "/dev/disk/by-uuid/11f46fea-7151-49cd-947f-16693f52e094";
       fsType = "xfs";
     };
 
   boot.initrd.luks.devices."cc-nixos-a".device = "/dev/disk/by-uuid/98512b43-21cc-4167-b117-7ca792debb2a";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3B18-E9E9";
+    {
+      device = "/dev/disk/by-uuid/3B18-E9E9";
       fsType = "vfat";
     };
 

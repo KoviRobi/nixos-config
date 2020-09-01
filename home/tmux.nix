@@ -1,14 +1,23 @@
 { pkgs, lib, ... }:
-let xclip = "${pkgs.xclip}/bin/xclip";
-    i3 = "${pkgs.i3}";
-in {
+let
+  xclip = "${pkgs.xclip}/bin/xclip";
+  i3 = "${pkgs.i3}";
+in
+{
   programs.tmux = {
     enable = true;
     aggressiveResize = true;
     escapeTime = 0;
     clock24 = true;
-    plugins = with pkgs.tmuxPlugins; [ copycat tmux-colors-solarized
-      prefix-highlight sidebar urlview yank fpp ];
+    plugins = with pkgs.tmuxPlugins; [
+      copycat
+      tmux-colors-solarized
+      prefix-highlight
+      sidebar
+      urlview
+      yank
+      fpp
+    ];
     extraConfig = ''
       set -ga terminal-overrides ",xterm-256color:Tc"
       set -g renumber-windows on

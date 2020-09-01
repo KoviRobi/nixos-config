@@ -1,9 +1,11 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, lib, pkgs, ... }:
 
-{ imports =
-  [ (import ../modules/music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
-  ];
+{
+  imports =
+    [
+      (import ../modules/music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
+    ];
 
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.systemd-boot.editor = true;
@@ -31,16 +33,18 @@
   boot.extraModulePackages = with pkgs.linuxPackages; [ rtl8812au ];
 
   fileSystems."/" =
-  { device = "/dev/disk/by-uuid/d5551e12-5224-4913-a2d5-72d5e4f1337e";
-    fsType = "xfs";
-  };
+    {
+      device = "/dev/disk/by-uuid/d5551e12-5224-4913-a2d5-72d5e4f1337e";
+      fsType = "xfs";
+    };
 
   boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/fb8206b0-f5cc-4016-9f74-0d2b05fa2ece";
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/8CF4-33C5";
-    fsType = "vfat";
-  };
+    {
+      device = "/dev/disk/by-uuid/8CF4-33C5";
+      fsType = "vfat";
+    };
 
   swapDevices = [ ];
 

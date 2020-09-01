@@ -1,76 +1,79 @@
 pkgs:
-let sh = "${pkgs.bash}/bin/bash";
-    dmenu = "${pkgs.dmenu}/bin/dmenu";
-    stest = "${pkgs.dmenu}/bin/stest";
-    cat = "${pkgs.coreutils}/bin/cat";
-    dirname = "${pkgs.coreutils}/bin/dirname";
-    sort = "${pkgs.coreutils}/bin/sort";
-    i3-msg = "${pkgs.i3}/bin/i3-msg";
-    jq = "${pkgs.jq}/bin/jq";
-    killall = "${pkgs.psmisc}/bin/killall";
-    socat = "${pkgs.socat}/bin/socat";
-    mpc = "${pkgs.mpc_cli}/bin/mpc";
-    tmux = "${pkgs.tmux}/bin/tmux";
-    loginctl = "${pkgs.systemd}/bin/loginctl";
-    amixer = "${pkgs.alsaUtils}/bin/amixer";
-    xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
-    rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
-    mpd_pass = builtins.readFile ../../../mpd-password.secret;
-    dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
-    actions = rec {
-      lock = pkgs.writeShellScript "i3-action-lock" "${loginctl} lock-session";
-      music = pkgs.writeShellScript "i3-action-music" ''
-        export MPD_PORT=6612
-        export MPD_HOST="${mpd_pass}@localhost"
-        PROGFILE="$HOME/.cache/music_prog"
+let
+  sh = "${pkgs.bash}/bin/bash";
+  dmenu = "${pkgs.dmenu}/bin/dmenu";
+  stest = "${pkgs.dmenu}/bin/stest";
+  cat = "${pkgs.coreutils}/bin/cat";
+  dirname = "${pkgs.coreutils}/bin/dirname";
+  sort = "${pkgs.coreutils}/bin/sort";
+  i3-msg = "${pkgs.i3}/bin/i3-msg";
+  jq = "${pkgs.jq}/bin/jq";
+  killall = "${pkgs.psmisc}/bin/killall";
+  socat = "${pkgs.socat}/bin/socat";
+  mpc = "${pkgs.mpc_cli}/bin/mpc";
+  tmux = "${pkgs.tmux}/bin/tmux";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
+  amixer = "${pkgs.alsaUtils}/bin/amixer";
+  xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+  rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
+  mpd_pass = builtins.readFile ../../../mpd-password.secret;
+  dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
+  actions = rec {
+    lock = pkgs.writeShellScript "i3-action-lock" "${loginctl} lock-session";
+    music = pkgs.writeShellScript "i3-action-music" ''
+      export MPD_PORT=6612
+      export MPD_HOST="${mpd_pass}@localhost"
+      PROGFILE="$HOME/.cache/music_prog"
 
-        cmd=$(basename $0)
-        if [ "$cmd" = "music" ]; then
-          cmd="$1"; shift # $@ doesn't contain cmd
-        fi
+      cmd=$(basename $0)
+      if [ "$cmd" = "music" ]; then
+        cmd="$1"; shift # $@ doesn't contain cmd
+      fi
 
-        if [ "$cmd" = "mpd" -o "$cmd" = "mpv" ]; then
-          echo "$cmd">$PROGFILE
-          cmd="$1"; shift
-        fi
-        PROG="$(${cat} $PROGFILE)"
+      if [ "$cmd" = "mpd" -o "$cmd" = "mpv" ]; then
+        echo "$cmd">$PROGFILE
+        cmd="$1"; shift
+      fi
+      PROG="$(${cat} $PROGFILE)"
 
-        if [ "$PROG" = "mpv" ]; then
-          if [ "$cmd" = "pause" ]; then
-            echo '{ "command": ["set_property", "pause", true] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
-          elif [ "$cmd" = "play" ]; then
-            echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
-          fi
-        elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
-          if [ -n "$cmd" ]; then
-            ${mpc} "$cmd" "$@"
-          fi
+      if [ "$PROG" = "mpv" ]; then
+        if [ "$cmd" = "pause" ]; then
+          echo '{ "command": ["set_property", "pause", true] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "play" ]; then
+          echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         fi
-      '';
-      quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
-      rehash = pkgs.writeShellScript "i3-action-rehash" ''
-        test -d $(${dirname} ${dmenu-run-cache}) || mkdir -p $(${dirname} ${dmenu-run-cache})
-        IFS=:
-        ${stest} -flx $PATH | ${sort} -u > ${dmenu-run-cache}
-      '';
-      single = music;
-      seek = music;
-      stop = music;
-      toggle = music;
-      next = music;
-      pause = music;
-      play = music;
-      prev = music;
-      airplane = pkgs.writeShellScript "rfkill" ''${rfkill} block all'';
-      mute = pkgs.writeShellScript "mute" ''${amixer} sset Master toggle'';
-      voldn = pkgs.writeShellScript "voldn" ''${amixer} sset Master 5%-'';
-      volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
-      bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -dec 20'';
-      blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -inc 20'';
-    };
-    actions-dir = pkgs.linkFarm "i3-actions-dir"
-      (pkgs.lib.mapAttrsToList (k: v: { name = k; path = v; })
-        actions);
+      elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
+        if [ -n "$cmd" ]; then
+          ${mpc} "$cmd" "$@"
+        fi
+      fi
+    '';
+    quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
+    rehash = pkgs.writeShellScript "i3-action-rehash" ''
+      test -d $(${dirname} ${dmenu-run-cache}) || mkdir -p $(${dirname} ${dmenu-run-cache})
+      IFS=:
+      ${stest} -flx $PATH | ${sort} -u > ${dmenu-run-cache}
+    '';
+    single = music;
+    seek = music;
+    stop = music;
+    toggle = music;
+    next = music;
+    pause = music;
+    play = music;
+    prev = music;
+    airplane = pkgs.writeShellScript "rfkill" ''${rfkill} block all'';
+    mute = pkgs.writeShellScript "mute" ''${amixer} sset Master toggle'';
+    voldn = pkgs.writeShellScript "voldn" ''${amixer} sset Master 5%-'';
+    volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
+    bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -dec 20'';
+    blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -inc 20'';
+  };
+  actions-dir = pkgs.linkFarm "i3-actions-dir"
+    (pkgs.lib.mapAttrsToList
+      (k: v: { name = k; path = v; })
+      actions
+    );
 in
 {
   inherit actions-dir;

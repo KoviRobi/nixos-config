@@ -4,13 +4,15 @@ let
   /* From <nixpkgs/lib/attrsets> */
   nameValuePair = name: value: { inherit name value; };
   filterAttrs = pred: set:
-    listToAttrs
-    (concatMap
-      (name: let v = set.${name};
-             in if pred name v
-                then [(nameValuePair name v)]
-                else [])
-      (attrNames set));
+    listToAttrs (concatMap
+      (name:
+        let v = set.${name};
+        in
+        if pred name v
+        then [ (nameValuePair name v) ]
+        else [ ])
+      (attrNames set)
+    );
   /* End <nixpkgs/lib/attrsets> */
 
   overlayDir = /etc/nixos/overlays;

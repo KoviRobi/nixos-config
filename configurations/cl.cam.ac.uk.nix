@@ -1,27 +1,31 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, lib, pkgs, ... }:
 
-{ imports =
-  [ ./base-configuration.nix
-    (import ../modules/default-user.nix { })
-    ../modules/ssh.nix
-    ../modules/graphical.nix
-    #(import ../modules/avahi.nix { publish = false; })
-  ];
+{
+  imports =
+    [
+      ./base-configuration.nix
+      (import ../modules/default-user.nix { })
+      ../modules/ssh.nix
+      ../modules/graphical.nix
+      #(import ../modules/avahi.nix { publish = false; })
+    ];
 
   environment.systemPackages = with pkgs;
-  [ networkmanagerapplet
-  ] ++ (with pkgs.xorg; [ xf86videointel xf86videonouveau ]);
+    [
+      networkmanagerapplet
+    ] ++ (with pkgs.xorg; [ xf86videointel xf86videonouveau ]);
 
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
 
   services =
-  { printing.enable = true;
-    printing.clientConf = "ServerName cups-serv.cl.cam.ac.uk";
-    wakeonlan.interfaces = [ { interface = "eno1"; method = "magicpacket"; } ];
-    logind.extraConfig = "HandlePowerKey=suspend";
-    xserver.dpi = 109;
-  };
+    {
+      printing.enable = true;
+      printing.clientConf = "ServerName cups-serv.cl.cam.ac.uk";
+      wakeonlan.interfaces = [{ interface = "eno1"; method = "magicpacket"; }];
+      logind.extraConfig = "HandlePowerKey=suspend";
+      xserver.dpi = 109;
+    };
 
   # nix.binaryCaches = [ "http://caelum-vm-127.cl.cam.ac.uk:5000/" ];
   # nix.binaryCachePublicKeys =

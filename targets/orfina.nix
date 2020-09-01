@@ -1,10 +1,12 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, lib, pkgs, ... }:
 
-{ imports =
-  [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ./seagate-hdd.nix
-  ];
+{
+  imports =
+    [
+      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+      ./seagate-hdd.nix
+    ];
 
   hardware.cpu.intel.updateMicrocode = true;
 
@@ -13,9 +15,10 @@
   boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/fb8206b0-f5cc-4016-9f74-0d2b05fa2ece";
 
   fileSystems."/local/scratch" =
-  { device = "/dev/disk/by-uuid/88efc89a-1372-408d-9a2f-32b859fc0d06";
-    fsType = "ext4";
-  };
+    {
+      device = "/dev/disk/by-uuid/88efc89a-1372-408d-9a2f-32b859fc0d06";
+      fsType = "ext4";
+    };
 
   nix.maxJobs = 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

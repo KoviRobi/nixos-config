@@ -1,12 +1,15 @@
 { pkgs, lib, config, ... }:
-let killall = "${pkgs.psmisc}/bin/killall";
-    adwaita = { name = "Adwaita"; package = pkgs.gnome3.adwaita-icon-theme; };
-in {
-  imports = [ ./i3
-              ../modules/import-dpi.nix
-              "${fetchGit https://github.com/KoviRobi/feh-random-background.git
-               }/home-manager-service.nix"
-            ];
+let
+  killall = "${pkgs.psmisc}/bin/killall";
+  adwaita = { name = "Adwaita"; package = pkgs.gnome3.adwaita-icon-theme; };
+in
+{
+  imports = [
+    ./i3
+    ../modules/import-dpi.nix
+    "${fetchGit https://github.com/KoviRobi/feh-random-background.git
+      }/home-manager-service.nix"
+  ];
 
   services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
@@ -27,12 +30,13 @@ in {
   services.screen-locker = {
     enable = true;
     lockCmd = ''${pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
-      ${killall} -SIGUSR1 .dunst-wrapped # pause
-      ( ${pkgs.i3lock}/bin/i3lock -c 111111 -n; ${killall} -SIGUSR2 .dunst-wrapped ) &
-    ''}'';
+        ${killall} -SIGUSR1 .dunst-wrapped # pause
+        ( ${pkgs.i3lock}/bin/i3lock -c 111111 -n; ${killall} -SIGUSR2 .dunst-wrapped ) &
+      ''}'';
     xautolockExtraOptions = [ "-corners" "----" ];
   };
-  services.picom = { enable = true;
+  services.picom = {
+    enable = true;
     menuOpacity = "1.0";
     opacityRule = [
       "100:class_i ?= 'i3lock'"
@@ -57,22 +61,23 @@ in {
       repo = "xresources";
       rev = "025ceddbddf55f2eb4ab40b05889148aab9699fc";
       sha256 = "0lxv37gmh38y9d3l8nbnsm1mskcv10g3i83j0kac0a2qmypv1k9f";
-    } + "/Xresources.dark");
+    } + "/Xresources.dark"
+  );
   xresources.properties = {
     "XTerm.termName" = "xterm-256color";
-    "XTerm.backarrowKeyIsErase"   = "true";
-    "XTerm.ptyInitialErase"       = "true";
+    "XTerm.backarrowKeyIsErase" = "true";
+    "XTerm.ptyInitialErase" = "true";
     "XTerm.vt100.metaSendsEscape" = "true";
-    "XTerm.vt100.faceSize"        = "9";
-    "XTerm.vt100.faceSize1"       = "2";
-    "XTerm.vt100.faceSize2"       = "6";
-    "XTerm.vt100.faceSize3"       = "8";
-    "XTerm.vt100.faceSize4"       = "12";
-    "XTerm.vt100.faceSize5"       = "24";
-    "XTerm.vt100.faceSize6"       = "72";
-    "XTerm.vt100.boldColors"      = "false";
-    "XTerm.vt100.faceName"        = "xft:DejaVu Sans Mono";
-    "XTerm.vt100.boldFont"        = "xft:DejaVu Sans Mono";
+    "XTerm.vt100.faceSize" = "9";
+    "XTerm.vt100.faceSize1" = "2";
+    "XTerm.vt100.faceSize2" = "6";
+    "XTerm.vt100.faceSize3" = "8";
+    "XTerm.vt100.faceSize4" = "12";
+    "XTerm.vt100.faceSize5" = "24";
+    "XTerm.vt100.faceSize6" = "72";
+    "XTerm.vt100.boldColors" = "false";
+    "XTerm.vt100.faceName" = "xft:DejaVu Sans Mono";
+    "XTerm.vt100.boldFont" = "xft:DejaVu Sans Mono";
   };
 
   xsession = {
