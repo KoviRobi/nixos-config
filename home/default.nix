@@ -24,6 +24,8 @@
     timeout = 250;
   };
 
+  services.lorri.enable = true;
+
   programs.git = {
     enable = true;
     delta = {
