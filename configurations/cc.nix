@@ -37,6 +37,10 @@
       lfs.enable = true;
     };
     services.screen-locker.enable = lib.mkForce false;
+    xsession.windowManager.i3.config.bars = lib.mkForce [{
+      fonts = [ "Latin Modern Roman,Regular 9" ];
+      mode = "hide";
+    }];
   };
 
   users.users.build = { isNormalUser = false; group = "build"; shell = "${pkgs.coreutils}/bin/false"; };
