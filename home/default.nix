@@ -26,13 +26,22 @@
 
   programs.git = {
     enable = true;
-    delta = { enable = true; options = { theme = "Solarized (dark)"; }; };
+    delta = {
+      enable = true;
+      options = {
+        theme = "Solarized (dark)";
+        side-by-side = true;
+      };
+    };
     userName = "Kovacsics Robert";
     userEmail = "rmk35@cam.ac.uk";
     aliases = {
       lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
     };
-    extraConfig.pull.ff = "only";
+    extraConfig = {
+      pull.ff = "only";
+      help.autoCorrect = 10;
+    };
   };
 
   programs.bat = {
