@@ -14,8 +14,16 @@ in
   programs.zsh = {
     enable = true;
     initExtra = ''
+      autoload -Uz vcs_info
+      zstyle ':vcs_info:*' enable git
+
+      zstyle ':vcs_info:*' actionformats '(%b|%a)'
+      zstyle ':vcs_info:*' formats       '(%b)'
+
+      precmd_functions+=(vcs_info)
+
       set -o PROMPT_SUBST
-      PROMPT_TOP='%F{blue}%l %h %T%f'$'\n%{\r%}'
+      PROMPT_TOP='%F{blue}%l %h %T ''${vcs_info_msg_0_}%f'$'\n%{\r%}'
       PROMPT_NEST_ROOTP='%(6L.#.%(5L.*.%(4L.+.%(3L.|.%(2L.:.%(L,.,))))))%(!.#.$)'
       PROMPT_BRACE_COLOUR=${"'"}''${''${''${IN_NIX_SHELL:-blue}/impure/default}/pure/white}'
       PROMPT_OPEN='%B%(!.%F{red}[ .%F{${"'"}''${PROMPT_BRACE_COLOUR}'}[[ %f%F{green})'
@@ -43,6 +51,10 @@ in
       [ -z "''${terminfo[kich1]}" ] || bindkey "''${terminfo[kich1]}" overwrite-mode
       [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
       [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
+
+      np() {
+        echo $NIX_PATH | tr : '\n' | sed -n "s|$1=||p"
+      }
 
       source ${dircolors-output}
     '';
