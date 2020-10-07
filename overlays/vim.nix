@@ -99,7 +99,7 @@ in
           " Elixir
           let g:neomake_elixir_enabled_makers = []
           let g:coc_node_path = "${self.nodejs}/bin/node"
-          let g:ale_linters = {}
+          let g:ale_linters = { 'elixir' : [] }
           let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
           let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.nix = ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace']
