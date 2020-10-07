@@ -24,7 +24,7 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [{ device = "/dev/disk/by-uuid/ad07168c-fde2-46c9-a8be-93138cfe18f0"; }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
