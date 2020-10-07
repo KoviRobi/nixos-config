@@ -50,7 +50,7 @@ in
       "95:!focused"
       "100:wmwin"
       "87:class_i ?= 'scratchpad'"
-      "91:class_i ?= 'xterm'"
+      "91:class_i ?= 'st-256color'"
       "100:focused"
     ];
   };

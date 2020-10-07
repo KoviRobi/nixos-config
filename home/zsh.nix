@@ -22,6 +22,8 @@ in
 
       precmd_functions+=(vcs_info)
 
+      unsetopt beep
+
       set -o PROMPT_SUBST
       PROMPT_TOP='%F{blue}%l %h %T ''${vcs_info_msg_0_}%f'$'\n%{\r%}'
       PROMPT_NEST_ROOTP='%(6L.#.%(5L.*.%(4L.+.%(3L.|.%(2L.:.%(L,.,))))))%(!.#.$)'

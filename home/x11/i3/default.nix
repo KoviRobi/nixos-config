@@ -4,7 +4,7 @@ let
   i3-helpers = import ./i3-helpers.nix pkgs;
   mod = "Mod4"; # Win key
 
-  xterm = "${pkgs.xterm}/bin/xterm";
+  term = "${pkgs.st}/bin/st";
   maxima = "${pkgs.maxima}/bin/maxima";
   python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
@@ -12,15 +12,16 @@ let
   emacs = "${pkgs.emacs}/bin/emacs";
   xclip = "${pkgs.xclip}/bin/xclip";
   rofi = "${pkgs.rofi}/bin/rofi";
+  pgrep = "${pkgs.procps}/bin/pgrep";
 
-  scratch = n: p: '' \
-      exec --no-startup-id xprop -name '${n}' > /dev/null || \
-      ${p} ; \
-      [instance="^${n}$"] scratchpad show
-    '';
-  scratch_xterm = n: p: scratch
-    n
-    "${xterm} -name '${n}' -title '${n}' -xrm '*.allowTitleOps: false' -e '${p}'";
+  mk-scratch = n: p: pkgs.writeShellScript "start-scratch-${n}" ''
+    ${pgrep} -f scratch_${n} > /dev/null || ${p}
+  '';
+  scratch = n: p: ''
+    exec --no-startup-id '${mk-scratch n p}' ; \
+    [instance="^scratch_${n}$"] scratchpad show
+  '';
+  scratch-term = n: p: scratch n "${term} -n 'scratch_${n}' -t 'scratch_${n}' -e '${p}'";
 in
 {
   xsession.windowManager.i3 = {
@@ -45,16 +46,16 @@ in
       ];
       keybindings = lib.mkOptionDefault ({
         "${mod}+Shift+c" = "kill";
-        "${mod}+Return" = "exec ${xterm} -e ${i3-helpers.tmux-current-workspace}";
-        "${mod}+Shift+Return" = "exec ${xterm}";
+        "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
+        "${mod}+Shift+Return" = "exec ${term}";
         "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
         "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
         "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";
-        "${mod}+Shift+m" = scratch_xterm "scratch_maxima" "${maxima}";
-        "${mod}+Shift+p" = scratch_xterm "scratch_python" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}";
-        "${mod}+Shift+g" = scratch_xterm "scratch_guile" "${guile}";
-        "${mod}+Shift+s" = scratch_xterm "scratch_shell" "${zsh}";
-        "${mod}+Shift+e" = scratch "scratch_emacs" "${emacs} --name scratch_emacs";
+        "${mod}+Shift+m" = scratch-term "maxima" maxima;
+        "${mod}+Shift+p" = scratch-term "python" (pkgs.writeShellScript "scratchpy" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}");
+        "${mod}+Shift+g" = scratch-term "guile" guile;
+        "${mod}+Shift+s" = scratch-term "shell" zsh;
+        "${mod}+Shift+e" = scratch "emacs" "${emacs} --name scratch_emacs";
         "${mod}+e" = ''exec emacsclient -a "" -c'';
         "${mod}+Control+h" = "split v";
         "${mod}+Control+v" = "split h";

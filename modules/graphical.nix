@@ -13,7 +13,8 @@
       ffmpeg
       compton
       zathura
-    ] ++ (with xorg; [ xkbprint xkbutils ]);
+      st
+    ] ++ (with xorg; [ xkbprint xkbutils xev ]);
 
   services.xserver =
     {

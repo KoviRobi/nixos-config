@@ -25,4 +25,11 @@ self: super:
         [ ../pavucontrol-no-feedback.patch ];
     }
   );
+
+  st = super.st.override {
+    patches = [
+      ../st-0.8.4-font-size.patch
+      ../st-0.8.4-solarized-swap.patch
+    ];
+  };
 }
