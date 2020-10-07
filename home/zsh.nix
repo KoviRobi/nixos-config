@@ -59,6 +59,9 @@ in
       }
 
       source ${dircolors-output}
+
+      # Often I do want to go back to underscores or hyphens
+      WORDCHARS=""
     '';
 
     shellAliases = {
