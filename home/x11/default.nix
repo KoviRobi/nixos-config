@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./i3
+    ./restart-on-failure.nix
     ../modules/import-dpi.nix
     "${fetchGit https://github.com/KoviRobi/feh-random-background.git
       }/home-manager-service.nix"
