@@ -46,6 +46,8 @@ in
       graphviz
       nix-prefetch-git
       nix-prefetch-github
+      plan9port
+      _9pfs
       #   From overlays, see nixpkgs.overlays
       emacs
       neovim
