@@ -55,10 +55,18 @@
       KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
       # Redmi 4A
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666", OWNER="kr2"
+      # PS3 eye
+      SUBSYSTEM="video4linux", ATTRS{manufacturer}=="OmniVision Technologies, Inc.", RUN="${pkgs.v4l-utils}/bin/v4l2-ctl -d $devnode --set-ctrl=auto_exposure=1 --set-ctrl=exposure=60"
     '';
   services.udev.packages = [ pkgs.stlink ];
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
+
+  home-manager.users.default-user = {
+    xsession.initExtra = ''
+      ${pkgs.antimicroX}/bin/antimicroX --profile ~/SpacePilot.joystick.amgp --tray --hidden &
+    '';
+  };
 
   nix.maxJobs = 24;
 }

@@ -36,7 +36,7 @@
           Identifier "Kensington SlimBlade"
           MatchProduct "Kensington Kensington Slimblade Trackball"
           Driver "evdev"
-          Option "ButtonMapping" "1 8 3 4 5 6 7 2 9 10 11 12"
+          Option "ButtonMapping" "1 10 3 4 5 6 7 2 9 10 11 12"
           Option "EmulateWheel" "1"
           Option "EmulateWheelButton" "2"
           Option "XAxisMapping" "6 7
