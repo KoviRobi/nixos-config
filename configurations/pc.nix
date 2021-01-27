@@ -38,6 +38,7 @@
       xrandrHeads = [
         { output = "HDMI-A-0"; monitorConfig = ''Option "PreferredMode" "1366x768"''; }
         { output = "DisplayPort-2"; monitorConfig = ''Option "PreferredMode" "1920x1080"''; }
+        { output = "DisplayPort-0"; monitorConfig = ''Option "PreferredMode" "1366x768"''; }
       ];
     };
   hardware.opengl.driSupport32Bit = true;
