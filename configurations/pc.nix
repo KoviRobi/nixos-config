@@ -42,7 +42,7 @@
     };
   hardware.opengl.driSupport32Bit = true;
 
-  services.printing = { enable = true; drivers = [ pkgs.hplip ]; };
+  services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplip ]; };
 
   services.udev.extraRules =
     ''
@@ -57,10 +57,19 @@
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666", OWNER="kr2"
       # PS3 eye
       SUBSYSTEM="video4linux", ATTRS{manufacturer}=="OmniVision Technologies, Inc.", RUN="${pkgs.v4l-utils}/bin/v4l2-ctl -d $devnode --set-ctrl=auto_exposure=1 --set-ctrl=exposure=60"
+
+      SUBSYSTEM=="tty", ATTRS{product}=="piprinter", SYMLINK+="ttyPiPrinter"
     '';
+
   services.udev.packages = [ pkgs.stlink ];
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
+
+  networking.nat = {
+    enable = true;
+    internalIPs = [ "192.168.42.1/32" ];
+    externalInterface = "enp34s0";
+  };
 
   home-manager.users.default-user = {
     xsession.initExtra = ''
