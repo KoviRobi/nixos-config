@@ -12,11 +12,8 @@
     pkgs.fortune
   ];
 
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
+  services.gnome-keyring.enable = true;
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
 
   services.xcape = {
     enable = true;
