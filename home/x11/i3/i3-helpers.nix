@@ -44,6 +44,8 @@ let
           echo '{ "command": ["set_property", "pause", true] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         elif [ "$cmd" = "play" ]; then
           echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "toggle" ]; then
+          echo '{ "command": ["cycle", "pause"] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         fi
       elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
         if [ -n "$cmd" ]; then
