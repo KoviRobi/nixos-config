@@ -39,7 +39,6 @@
     services.screen-locker.enable = lib.mkForce false;
     xsession.windowManager.i3.config.bars = lib.mkForce [{
       fonts = [ "Latin Modern Roman,Regular 9" ];
-      mode = "hide";
     }];
   };
 
