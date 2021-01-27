@@ -25,6 +25,7 @@
 
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     delta = {
       enable = true;
       options = {
@@ -40,6 +41,7 @@
     extraConfig = {
       pull.ff = "only";
       help.autoCorrect = 10;
+      credential.helper = "libsecret";
     };
   };
 
