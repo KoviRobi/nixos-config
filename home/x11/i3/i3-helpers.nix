@@ -19,10 +19,10 @@ let
   mpd_pass = builtins.readFile ../../../mpd-password.secret;
   dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
   actions = rec {
-      lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
-          ${killall} -SIGUSR1 .dunst-wrapped # pause
-          ( ${pkgs.i3lock}/bin/i3lock -c 111111 -n; ${killall} -SIGUSR2 .dunst-wrapped ) &
-        '';
+    lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
+      ${killall} -SIGUSR1 .dunst-wrapped # pause
+      ( ${pkgs.i3lock}/bin/i3lock -c 111111 -n; ${killall} -SIGUSR2 .dunst-wrapped ) &
+    '';
     music = pkgs.writeShellScript "i3-action-music" ''
       export MPD_PORT=6612
       export MPD_HOST="${mpd_pass}@localhost"
