@@ -5,7 +5,7 @@ let
   mod = "Mod4"; # Win key
 
   term = "${pkgs.st}/bin/st";
-  maxima = "${pkgs.maxima}/bin/maxima";
+  maxima = "${pkgs.maxima}/bin/rmaxima";
   python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
   zsh = "${pkgs.zsh}/bin/zsh";
