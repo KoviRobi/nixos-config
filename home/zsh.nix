@@ -34,6 +34,7 @@ in
       PROMPT2='%B%(!.%F{red}[.%F{blue}[[ %f%F{green})%17<...<%_%<<%(!.. %f%F{blue}>)>%(!.#.$) %f%b'
       RPROMPT='%(1j.%F{yellow}Jobs: %j %f.)%(?..%B%F{red}ERROR: %? `${python3} -c "import os; print(os.strerror($?))"`%b%f)'
 
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
       export VERSION_CONTROL=numbered
 
       BROWSER="links -g"
@@ -65,6 +66,11 @@ in
       # For plan9port
       unalias 9
     '';
+
+    enableCompletion = true;
+    enableVteIntegration = true;
+    enableAutosuggestions = true;
+    oh-my-zsh.enable = true;
 
     shellAliases = {
       "ls" = "ls --color";

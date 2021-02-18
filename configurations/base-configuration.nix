@@ -81,13 +81,6 @@ in
 
   programs =
     {
-      zsh =
-        {
-          enable = true;
-          autosuggestions = { enable = true; highlightStyle = "fg=white"; };
-          ohMyZsh.enable = true;
-          syntaxHighlighting.enable = true;
-        };
       thefuck = { enable = true; alias = "fck"; };
     };
 
