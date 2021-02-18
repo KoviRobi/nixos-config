@@ -42,6 +42,7 @@
       pull.ff = "only";
       help.autoCorrect = 10;
       credential.helper = "libsecret";
+      commit.verbose = true;
     };
   };
 
