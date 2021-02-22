@@ -79,11 +79,6 @@ in
       clamav = { daemon.enable = true; updater.enable = true; };
     };
 
-  programs =
-    {
-      thefuck = { enable = true; alias = "fck"; };
-    };
-
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 

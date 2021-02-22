@@ -65,6 +65,7 @@ in
       WORDCHARS=""
       # For plan9port
       unalias 9
+      eval $(${pkgs.thefuck}/bin/thefuck --alias fck)
     '';
 
     enableCompletion = true;
