@@ -11,6 +11,8 @@ let
   python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
 in
 {
+
+  home.packages = with pkgs; [ thefuck ];
   programs.zsh = {
     enable = true;
     initExtra = ''
