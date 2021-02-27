@@ -43,6 +43,7 @@
       help.autoCorrect = 10;
       credential.helper = "libsecret";
       commit.verbose = true;
+      merge.tool = "nvimdiff";
     };
   };
 
