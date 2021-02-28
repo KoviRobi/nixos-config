@@ -13,6 +13,7 @@ then
       nixos = {
         services.xserver.dpi = config.services.xserver.dpi;
         fileSystems = config.fileSystems;
+        users.users.default-user.uid = config.users.users.default-user.uid;
       };
     };
   }

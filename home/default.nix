@@ -13,7 +13,8 @@
   ];
 
   services.gnome-keyring.enable = true;
-  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+  home.sessionVariables.SSH_AUTH_SOCK =
+    "/run/user/${toString config.nixos.users.users.default-user.uid}/keyring/ssh";
 
   services.xcape = {
     enable = true;
