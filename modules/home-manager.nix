@@ -10,8 +10,10 @@ then
     home-manager.users.default-user = { ... }: {
       imports = [ ../home ];
       nixpkgs.overlays = config.nixpkgs.overlays;
-      dpi = config.services.xserver.dpi;
-      fileSystems = pkgs.lib.mapAttrsToList (k: v: k) config.fileSystems;
+      nixos = {
+        services.xserver.dpi = config.services.xserver.dpi;
+        fileSystems = config.fileSystems;
+      };
     };
   }
 else builtins.trace "Home manager not found in <home-manager>, ignoring" { }

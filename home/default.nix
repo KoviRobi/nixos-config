@@ -1,11 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
   imports = [
     ./direnv.nix
     ./tmux.nix
     ./x11
     ./zsh.nix
-    ./modules/import-fileSystems.nix
+    ./modules/import-nixos-config.nix
   ];
 
   home.packages = [

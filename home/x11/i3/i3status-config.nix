@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
-let inherit (config) fileSystems;
+let
+  fileSystems = builtins.attrNames config.nixos.fileSystems;
   inherit (builtins) concatStringsSep;
   baseNameOf = s: if s == "/" then s else builtins.baseNameOf s;
 in

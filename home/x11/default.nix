@@ -7,7 +7,6 @@ in
   imports = [
     ./i3
     ./restart-on-failure.nix
-    ../modules/import-dpi.nix
     "${fetchGit https://github.com/KoviRobi/feh-random-background.git
       }/home-manager-service.nix"
   ];
@@ -74,7 +73,7 @@ in
   xsession = {
     enable = true;
     initExtra = "~/.fehbg || true &";
-    pointerCursor = adwaita // { size = builtins.div config.dpi 5; };
+    pointerCursor = adwaita // { size = builtins.div config.nixos.services.xserver.dpi 5; };
   };
   gtk.theme = adwaita;
 }
