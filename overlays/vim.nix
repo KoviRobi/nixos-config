@@ -119,6 +119,8 @@ in
 
           nnoremap <silent> <leader>co  :<C-u>CocList outline<CR>
 
+          let g:slime_target = "tmux"
+
           source ~/.config/nvim/init.vim
         '';
         packages.myVimPackage = with self.vimPlugins;
@@ -149,6 +151,7 @@ in
               self.vim-fetch
               self.vim-blindsplit
               self.vim-literate
+              vim-slime
             ];
             opt = [ ];
           };
