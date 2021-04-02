@@ -6,3 +6,5 @@ result-*
 # These two are automatically symlinked
 configurations/default.nix
 targets/default.nix
+
+home/x11/backgrounds/
