@@ -15,6 +15,7 @@ let
   loginctl = "${pkgs.systemd}/bin/loginctl";
   amixer = "${pkgs.alsaUtils}/bin/amixer";
   xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+  dc = "${pkgs.bc}/bin/dc";
   rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
   mpd_pass = builtins.readFile ../../../mpd-password.secret;
   dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
@@ -71,8 +72,9 @@ let
     mute = pkgs.writeShellScript "mute" ''${amixer} sset Master toggle'';
     voldn = pkgs.writeShellScript "voldn" ''${amixer} sset Master 5%-'';
     volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
-    bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -dec 20'';
-    blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -inc 20'';
+    bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 / p")'';
+    blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 * p")'';
+
   };
   actions-dir = pkgs.linkFarm "i3-actions-dir"
     (pkgs.lib.mapAttrsToList
