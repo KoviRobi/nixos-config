@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -23,6 +23,14 @@
     "eink"
   ];
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
+
+  environment.systemPackages = with pkgs; [ ntfs3g ];
+
+  services.blueman.enable = true;
+  services.clamav.daemon.enable = lib.mkForce false;
+  home-manager.users.default-user.services.blueman-applet.enable = true;
+  hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
+  hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 
   # To restart e-ink keyboard
   services.acpid =
@@ -50,10 +58,7 @@
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 
-  # services.printing =
-  # { enable = true;
-  #   clientConf = "ServerName cups-serv.cl.cam.ac.uk";
-  # };
+  services.printing = { enable = true; drivers = with pkgs; [ hplip ]; };
 
   hardware.sensor.iio.enable = true;
   services.xserver.libinput.enable = true;
@@ -81,8 +86,4 @@
     [ "Touchscreen" "Tablet" ];
   powerManagement.powertop.enable = true;
   # services.tlp.enable = true;
-
-  security.pam.services.login.fprintAuth = true;
-  services.fprintd.enable = true;
-  services.fprintd.package = pkgs.fprintd-thinkpad;
 }
