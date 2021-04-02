@@ -48,6 +48,7 @@ in
       nix-prefetch-github
       plan9port
       _9pfs
+      xxd
       #   From overlays, see nixpkgs.overlays
       emacs
       neovim
