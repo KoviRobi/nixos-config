@@ -121,7 +121,9 @@ in
 
           let g:slime_target = "tmux"
 
-          source ~/.config/nvim/init.vim
+          if filereadable("~/.config/nvim/init.vim")
+            source ~/.config/nvim/init.vim
+          endif
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
