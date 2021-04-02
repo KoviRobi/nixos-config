@@ -17,11 +17,10 @@
   #     Intel Corporation Wireless 8265 / 8275 (rev 78)  ?
   hardware.enableRedistributableFirmware = true;
 
-  boot.initrd.luks.devices."nixos-sd".device = "/dev/disk/by-uuid/f3619352-91f1-44da-b6fd-83af7bcf150d";
+  boot.initrd.luks.devices."nixos-sd-128GiB".device = "/dev/disk/by-uuid/d5f8f372-a236-41be-9769-72196afdbba6";
 
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/4d2f1de5-fe34-49e6-9b87-8e6e78e59d01";
+    { device = "/dev/disk/by-uuid/9b9fe817-450c-45e2-90a4-be8fbb967aad";
       fsType = "f2fs";
     };
 
@@ -38,5 +37,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
 }

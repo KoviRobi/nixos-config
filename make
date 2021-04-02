@@ -20,7 +20,7 @@ config_from_name() {
     C930-vbox)
       NixOS_Configuration=yoga-book-virtualbox.nix
       ;;
-    C930-sd)
+    C930-sd|C930-flash)
       NixOS_Configuration=yoga-book.nix
       ;;
     *)
@@ -86,6 +86,12 @@ if [ -z "$NixOS_Target" ]; then
       ;;
     11f46fea-7151-49cd-947f-16693f52e094)
       NixOS_Target=cc.nix
+      ;;
+    860298a3-1049-45c2-82f9-00d29b067f00)
+      NixOS_Target=yoga-book-flash.nix
+      ;;
+    9b9fe817-450c-45e2-90a4-be8fbb967aad)
+      NixOS_Target=yoga-book-sd-enc.nix
       ;;
     4d2f1de5-fe34-49e6-9b87-8e6e78e59d01)
       NixOS_Target=yoga-book-sd-enc.nix
