@@ -18,7 +18,7 @@ in
     {
       device = "/dev/disk/by-uuid/${music-fs-uuid}";
       fsType = music-fs-type;
-      options = [ "ro,noatime" ];
+      options = [ "ro" "noatime" "nofail" ];
     };
 
   hardware.pulseaudio.extraConfig =
