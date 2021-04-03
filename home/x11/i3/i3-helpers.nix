@@ -47,6 +47,14 @@ let
           echo '{ "command": ["set_property", "pause", false] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         elif [ "$cmd" = "toggle" ]; then
           echo '{ "command": ["cycle", "pause"] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "prev" ]; then
+          echo '{ "command": ["add", "chapter", -1] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "next" ]; then
+          echo '{ "command": ["add", "chapter", 1] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "back" ]; then
+          echo '{ "command": ["seek", -20] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
+        elif [ "$cmd" = "forward" ]; then
+          echo '{ "command": ["seek", 20] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         fi
       elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
         if [ -n "$cmd" ]; then

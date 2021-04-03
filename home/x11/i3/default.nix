@@ -88,8 +88,10 @@ in
         "XF86MonBrightnessUp" = "exec ${i3-helpers.actions-dir}/blinc";
         "XF86Search" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
         "XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/prev";
-        "XF86AudioPlay" = "exec ${i3-helpers.actions-dir}/toggle";
         "XF86AudioNext" = "exec ${i3-helpers.actions-dir}/next";
+        "Shift+XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/back";
+        "Shift+XF86AudioNext" = "exec ${i3-helpers.actions-dir}/forward";
+        "XF86AudioPlay" = "exec ${i3-helpers.actions-dir}/toggle";
       } //
       (builtins.listToAttrs (
         (
