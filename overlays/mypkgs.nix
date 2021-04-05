@@ -22,14 +22,14 @@ self: super:
   pavucontrol = super.pavucontrol.overrideAttrs (attrs:
     {
       patches = (if attrs ? patches then attrs.patches else [ ]) ++
-        [ ../pavucontrol-no-feedback.patch ];
+        [ ../patches/pavucontrol-no-feedback.patch ];
     }
   );
 
   st = super.st.override {
     patches = [
-      ../st-0.8.4-font-size.patch
-      ../st-0.8.4-solarized-swap.patch
+      ../patches/st-0.8.4-font-size.patch
+      ../patches/st-0.8.4-solarized-swap.patch
     ];
   };
 }
