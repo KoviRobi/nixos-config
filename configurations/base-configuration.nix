@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }@args:
 let HOME = config.users.users.default-user.home;
 in
 {
@@ -22,42 +22,16 @@ in
 
   services.localtime.enable = true;
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableBashCompletion = true;
+  };
+
   environment.homeBinInPath = true;
-  environment.systemPackages = with pkgs;
-    [
-      wget
-      tmux
-      ispell
-      file
-      netcat
-      socat
-      lsof
-      gnupg
-      clamav
-      krb5
-      pv
-      git
-      jq
-      tree
-      nfs-utils
-      pciutils
-      usbutils
-      unzip
-      graphviz
-      nix-prefetch-git
-      nix-prefetch-github
-      plan9port
-      _9pfs
-      xxd
-      #   From overlays, see nixpkgs.overlays
-      emacs
-      neovim
-      (linkFarm "nvim-vi-vim-alias" [
-        { name = "bin/vi"; path = "${neovim}/bin/nvim"; }
-        { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
-      ]
-      )
-    ];
+  environment.systemPackages =
+    (import ../packages/base.nix args)
+    ++ (import ../packages/desktop-environment.nix args);
 
   fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern ];
 
