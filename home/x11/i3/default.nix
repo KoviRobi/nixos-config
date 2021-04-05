@@ -68,7 +68,7 @@ in
         "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
         "${mod}+Shift+r" = "reload";
         "${mod}+u" = "exec ${i3-helpers.unipicker}/bin/unipicker " +
-          "--copy-command '${xclip} -selection clipboard' " +
+          "--copy-command '${xclip} -selection primary' " +
           "--command '${rofi} -dmenu'";
         "${mod}+Control+Shift+r" = "restart";
         "${mod}+bracketleft" = "focus output left";
