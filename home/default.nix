@@ -15,6 +15,9 @@
   services.gnome-keyring.enable = true;
   home.sessionVariables.SSH_AUTH_SOCK =
     "/run/user/${toString config.nixos.users.users.default-user.uid}/keyring/ssh";
+  home.file.".gnupg/gpg-agent.conf".text = ''
+    pinentry-program ${pkgs.pinentry.gnome3}/bin/pinentry
+  '';
 
   services.xcape = {
     enable = true;

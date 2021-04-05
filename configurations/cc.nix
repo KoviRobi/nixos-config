@@ -111,10 +111,6 @@
 
   services.udev.packages = [ pkgs.stlink ];
 
-  services.gnome3.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.sudo.enableGnomeKeyring = true;
-
   fileSystems."/shared" =
     {
       device = ".host:/";

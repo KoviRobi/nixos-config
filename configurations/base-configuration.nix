@@ -88,4 +88,9 @@ in
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.ModemManager.enable = false;
+
+  services.dbus.packages = with pkgs; [ gcr ];
+  services.gnome3.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.sudo.enableGnomeKeyring = true;
 }
