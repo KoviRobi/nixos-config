@@ -10,6 +10,7 @@ with pkgs;
   gnome3.seahorse
   udiskie
   scrot
+  geeqie
 
   cura
   audacity

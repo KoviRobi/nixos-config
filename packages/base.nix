@@ -23,8 +23,9 @@ with pkgs;
   graphviz
   nix-prefetch-git
   nix-prefetch-github
+  nixpkgs-fmt
+  dconf
   plan9port
-  _9pfs
   xxd
   upterm
   youtube-dl
@@ -35,6 +36,11 @@ with pkgs;
   stm32flash
   stlink
   wally-cli # for flashing ergodox firmware
+
+  _9pfs
+  ntfs3g
+  xfsprogs
+
   #   From overlays, see nixpkgs.overlays
   emacs
   neovim
