@@ -20,10 +20,6 @@
 
   boot.kernelParams = [ "video=card0-DP-1:1366x768M@60" ];
 
-  virtualisation.libvirtd = { enable = true; qemuRunAsRoot = false; };
-
-  environment.systemPackages = with pkgs; [ virt-manager ];
-
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
