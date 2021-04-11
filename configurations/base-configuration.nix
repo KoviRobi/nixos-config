@@ -67,4 +67,9 @@ in
   services.gnome3.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.sudo.enableGnomeKeyring = true;
+
+  services.udev.extraRules =
+    ''
+      SUBSYSTEM=="tty", ATTRS{manufacturer}=="KoviRobi", ATTRS{product}=="Custom steno", SYMLINK="KoviRobi-Steno"
+    '';
 }
