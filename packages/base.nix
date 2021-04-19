@@ -13,7 +13,7 @@ with pkgs;
   krb5
   pv
   jq
-  git
+  gitFull
   tree
   nfs-utils
   pciutils
