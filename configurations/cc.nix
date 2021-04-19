@@ -42,7 +42,13 @@
     }];
   };
 
-  users.users.build = { isNormalUser = false; group = "build"; shell = "${pkgs.coreutils}/bin/false"; };
+  # Often docker images use a `build` user
+  users.users.build = {
+    isSystemUser = true;
+    isNormalUser = false;
+    group = "build";
+    shell = "${pkgs.coreutils}/bin/false";
+  };
   users.groups.build = { };
 
   networking.hostName = "cc-nixos-a"; # Define your hostname.
