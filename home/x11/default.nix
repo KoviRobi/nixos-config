@@ -7,8 +7,10 @@ in
   imports = [
     ./i3
     ./restart-on-failure.nix
-    "${fetchGit https://github.com/KoviRobi/feh-random-background.git
-      }/home-manager-service.nix"
+    "${fetchTarball {
+        url = https://github.com/KoviRobi/feh-random-background/archive/0154eb1d1fb2b5774a6908bee1f3b3ebd3317ac6.tar.gz;
+        sha256 = "1gwpk968h8js0ddi84hpqgh5mqijr9y5xgyiz8bfh9hm39wdjxm2";
+    } }/home-manager-service.nix"
   ];
 
   services.network-manager-applet.enable = true;
