@@ -18,12 +18,15 @@ in
       urlview
       yank
       fpp
+      logging
     ];
     extraConfig = ''
       set -g renumber-windows on
       set -g mouse on
       set -g set-titles on
       set -g alternate-screen off
+
+      set -g history-limit 10000
 
       bind-key C new-window -c "#{pane_current_path}"
 
