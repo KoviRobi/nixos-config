@@ -41,6 +41,8 @@
     userEmail = "rmk35@cam.ac.uk";
     aliases = {
       lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      pushmr = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
+
     };
     extraConfig = {
       pull.ff = "only";
