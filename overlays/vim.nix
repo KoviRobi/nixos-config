@@ -94,6 +94,7 @@ in
           nnoremap <F7> :TagbarToggle<cr>
 
           let g:easytags_cmd = "${self.universal-ctags}/bin/ctags"
+          let g:easytags_async = 1
           let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
 
           " Elixir
