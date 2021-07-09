@@ -69,7 +69,7 @@ in
         "${mod}+Shift+r" = "reload";
         "${mod}+u" = "exec ${i3-helpers.unipicker}/bin/unipicker " +
           "--copy-command '${xclip} -sel pri -f | ${xclip} -sel clip' " +
-          "--command '${rofi} -dmenu'";
+          "--command '${rofi} -dmenu -matching regex'";
         "${mod}+Control+Shift+r" = "restart";
         "${mod}+bracketleft" = "focus output left";
         "${mod}+bracketright" = "focus output right";
