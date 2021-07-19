@@ -65,7 +65,7 @@ in
   systemd.services.ModemManager.enable = false;
 
   services.dbus.packages = with pkgs; [ gcr ];
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.sudo.enableGnomeKeyring = true;
 
