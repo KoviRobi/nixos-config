@@ -16,6 +16,7 @@ in
   imports = [
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix
+    ../modules/solarized.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

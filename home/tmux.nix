@@ -12,7 +12,6 @@ in
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [
       copycat
-      tmux-colors-solarized
       prefix-highlight
       sidebar
       urlview

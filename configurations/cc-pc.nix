@@ -20,22 +20,9 @@
     { output = "DP-1"; }
     { output = "HDMI-2"; primary = true; monitorConfig = ''Option "BROADCAST_RGB" "1"''; }
   ];
-  home-manager.users.default-user = {
-    xresources.extraConfig = ''
-            #include "${
-      pkgs.fetchFromGitHub
-              {
-                owner = "solarized";
-                repo = "xresources";
-                rev = "025ceddbddf55f2eb4ab40b05889148aab9699fc";
-                sha256 = "0lxv37gmh38y9d3l8nbnsm1mskcv10g3i83j0kac0a2qmypv1k9f";
-              }
-            }/Xresources.light"
-    '';
-    xsession.initExtra = ''
-      xrandr --output DP-1 --set 'Broadcast RGB' Full
-    '';
-  };
+  home-manager.users.default-user.xsession.initExtra = ''
+    xrandr --output DP-1 --set 'Broadcast RGB' Full
+  '';
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

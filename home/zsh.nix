@@ -1,13 +1,5 @@
 { pkgs, lib, ... }:
 let
-  dircolors = "${pkgs.coreutils}/bin/dircolors";
-  dircolors-file = builtins.fetchurl {
-    url = https://raw.githubusercontent.com/seebi/dircolors-solarized/e600c465505d23e9731cfdba1e0d9ccef9883fc1/dircolors.256dark;
-    sha256 = "13dajr7s6xckhv9z141cxgiavcp17687z9vyd6p7gkxrjqh8vp9i";
-  };
-  dircolors-output = pkgs.runCommandNoCC ''dircolors-solarized''
-    { }
-    "${dircolors} ${dircolors-file} > $out";
   python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
 in
 {
@@ -62,8 +54,6 @@ in
       np() {
         echo $NIX_PATH | tr : '\n' | sed -n "s|$1=||p"
       }
-
-      source ${dircolors-output}
 
       # Often I do want to go back to underscores or hyphens
       WORDCHARS=""

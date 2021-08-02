@@ -33,7 +33,6 @@
     delta = {
       enable = true;
       options = {
-        theme = "Solarized (dark)";
         side-by-side = true;
       };
     };
@@ -56,7 +55,6 @@
 
   programs.bat = {
     enable = true;
-    config.theme = "Solarized (dark)";
   };
 
   programs.ssh = {
