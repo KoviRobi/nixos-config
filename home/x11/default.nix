@@ -46,7 +46,7 @@ in
     ];
   };
 
-  xresources.extraConfig = builtins.readFile (
+  xresources.extraConfig = lib.mkDefault (builtins.readFile (
     pkgs.fetchFromGitHub
       {
         owner = "solarized";
@@ -54,7 +54,7 @@ in
         rev = "025ceddbddf55f2eb4ab40b05889148aab9699fc";
         sha256 = "0lxv37gmh38y9d3l8nbnsm1mskcv10g3i83j0kac0a2qmypv1k9f";
       } + "/Xresources.dark"
-  );
+  ));
   xresources.properties = {
     "XTerm.termName" = "xterm-256color";
     "XTerm.backarrowKeyIsErase" = "true";
@@ -74,7 +74,9 @@ in
 
   xsession = {
     enable = true;
-    initExtra = "~/.fehbg || true &";
+    initExtra = ''
+      ~/.fehbg || true &
+    '';
     pointerCursor = adwaita // { size = builtins.div config.nixos.services.xserver.dpi 5; };
   };
   gtk.theme = adwaita;

@@ -8,6 +8,9 @@ config_from_name() {
     cc-nixos-a)
       NixOS_Configuration=cc.nix
       ;;
+    rmk-nixos-a)
+      NixOS_Configuration=cc-pc.nix
+      ;;
     pc-nixos-a)
       NixOS_Configuration=pc.nix
       ;;
@@ -83,6 +86,9 @@ if [ -z "$NixOS_Target" ]; then
   case `findmnt --noheadings --raw --output=UUID /` in
     db69523e-9985-4ea6-a7b0-c0b79ee40cf1)
       NixOS_Target=pc.nix
+      ;;
+    aa8c6b80-077c-4706-8722-d4b20a1f0da3)
+      NixOS_Target=cc-pc.nix
       ;;
     11f46fea-7151-49cd-947f-16693f52e094)
       NixOS_Target=cc.nix
