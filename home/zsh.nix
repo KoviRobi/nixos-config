@@ -50,6 +50,8 @@ in
       bindkey "^P" up-history
       bindkey "^N" down-history
       bindkey "^W" kill-region
+      bindkey "^[u" up-case-word
+      bindkey "^[l" down-case-word
 
       [ -z "''${terminfo[kcbt]}" ]  || bindkey "''${terminfo[kcbt]}"  reverse-menu-complete
       [ -z "''${terminfo[kdch1]}" ] || bindkey "''${terminfo[kdch1]}" delete-char
