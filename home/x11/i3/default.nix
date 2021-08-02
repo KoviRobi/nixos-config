@@ -56,12 +56,22 @@ in
         "${mod}+Shift+g" = scratch-term "guile" guile;
         "${mod}+Shift+s" = scratch-term "shell" zsh;
         "${mod}+Shift+e" = scratch "emacs" "${emacs} --name scratch_emacs";
-        "${mod}+e" = ''exec emacsclient -a "" -c'';
+
+        "${mod}+e" = "layout toggle split";
         "${mod}+Control+h" = "split v";
         "${mod}+Control+v" = "split h";
         "${mod}+Control+s" = "layout stacking";
         "${mod}+Control+t" = "layout tabbed";
-        "${mod}+Control+e" = "layout toggle split";
+
+        "${mod}+h" = "focus left";
+        "${mod}+j" = "focus down";
+        "${mod}+k" = "focus up";
+        "${mod}+l" = "focus right";
+        "${mod}+Shift+h" = "move left";
+        "${mod}+Shift+j" = "move down";
+        "${mod}+Shift+k" = "move up";
+        "${mod}+Shift+l" = "move right";
+
         "${mod}+w" = "focus parent";
         "${mod}+d" = "focus child";
         "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
