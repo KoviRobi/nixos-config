@@ -74,7 +74,7 @@
     '';
   };
 
-  programs.htop = { enable = true; colorScheme = 6; };
+  programs.htop = { enable = true; settings.color_scheme = 6; };
 
   programs.home-manager = {
     enable = true;
