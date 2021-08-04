@@ -20,6 +20,7 @@ in
       logging
     ];
     extraConfig = ''
+      set -g status-position top
       set -g renumber-windows on
       set -g mouse on
       set -g set-titles on
