@@ -123,7 +123,7 @@ in
 
           let g:slime_target = "tmux"
 
-          if filereadable("~/.config/nvim/init.vim")
+          if filereadable(expand("$HOME/.config/nvim/init.vim"))
             source ~/.config/nvim/init.vim
           endif
         '';
