@@ -22,6 +22,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  solarized.brightness = "light";
+
   virtualisation.vmware.guest = { enable = true; };
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
@@ -38,7 +40,7 @@
     };
     services.screen-locker.enable = lib.mkForce false;
     xsession.windowManager.i3.config.bars = lib.mkForce [{
-      fonts = [ "Latin Modern Roman,Regular 9" ];
+      fonts = { names = [ "Latin Modern Roman" ]; style = "Regular"; size = 9.0; };
     }];
   };
 

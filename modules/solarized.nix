@@ -27,14 +27,13 @@ in
       '';
 
       programs.bat.config.theme = "Solarized (${cfg.brightness})";
-      programs.git.delta.options.theme = "Solarized (${cfg.brightness})";
+      programs.git.delta.options.syntax-theme = "Solarized (${cfg.brightness})";
 
       programs.tmux.plugins = [
         {
           plugin = pkgs.tmuxPlugins.tmux-colors-solarized;
-          extraConfig = ''
-            set -g @colors-solarized '${cfg.brightness}'
-          '';
+          # Dark has a better statusline for both light/dark
+          extraConfig = "set -g @colors-solarized 'dark'";
         }
       ];
 
