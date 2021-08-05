@@ -15,16 +15,8 @@
       ../modules/graphical.nix
     ];
 
-  services.xserver.dpi = 120;
-
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-
   solarized.brightness = "light";
 
-  virtualisation.vmware.guest = { enable = true; };
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [ docker-credential-helpers ];
@@ -38,10 +30,6 @@
       extraConfig.http.emptyauth = true;
       lfs.enable = true;
     };
-    services.screen-locker.enable = lib.mkForce false;
-    xsession.windowManager.i3.config.bars = lib.mkForce [{
-      fonts = { names = [ "Latin Modern Roman" ]; style = "Regular"; size = 9.0; };
-    }];
   };
 
   # Often docker images use a `build` user
@@ -52,8 +40,6 @@
     shell = "${pkgs.coreutils}/bin/false";
   };
   users.groups.build = { };
-
-  networking.hostName = "cc-nixos-a"; # Define your hostname.
 
   krb5 =
     {
@@ -96,39 +82,5 @@
       '';
     };
 
-  services.xserver = {
-    inputClassSections = [
-      ''
-        Identifier "VMMouse"
-        MatchDevicePath "/dev/input/event*"
-        MatchProduct "ImPS/2 Generic Wheel Mouse"
-        Option "EmulateWheel" "1"
-        Option "EmulateWheelButton" "2"
-        Option "XAxisMapping" "6 7
-        Option "YAxisMapping" "4 5"
-      ''
-    ];
-    xkbOptions = "caps:escape";
-
-    displayManager.sessionCommands = ''
-      ${pkgs.i3}/bin/i3-msg workspace 1
-      ${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper
-      sleep 5s && ~/.fehbg
-    '';
-  };
-
   services.udev.packages = [ pkgs.stlink ];
-
-  fileSystems."/shared" =
-    {
-      device = ".host:/";
-      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-      options = [
-        "uid=${toString config.users.users.default-user.uid}"
-        "gid=${toString config.users.groups.default-user.gid}"
-        "allow_other"
-      ];
-    };
-
-  nix.maxJobs = 4;
 }

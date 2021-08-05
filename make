@@ -6,7 +6,7 @@ unset extraArgs profile
 config_from_name() {
   case $1 in
     cc-nixos-a)
-      NixOS_Configuration=cc.nix
+      NixOS_Configuration=cc-vm.nix
       ;;
     rmk-nixos-a)
       NixOS_Configuration=cc-pc.nix
@@ -91,7 +91,7 @@ if [ -z "$NixOS_Target" ]; then
       NixOS_Target=cc-pc.nix
       ;;
     11f46fea-7151-49cd-947f-16693f52e094)
-      NixOS_Target=cc.nix
+      NixOS_Target=cc-vm.nix
       ;;
     860298a3-1049-45c2-82f9-00d29b067f00)
       NixOS_Target=yoga-book-flash.nix

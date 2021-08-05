@@ -2,18 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [
-      ./base-configuration.nix
-      (import ../modules/default-user.nix {
-        name = "rmk";
-        user-options = { uid = 1000; };
-        group-options = { gid = 1000; };
-      }
-      )
-      ../modules/ssh.nix
-      ../modules/graphical.nix
-    ];
+  imports = [ ./cc.nix ];
 
   services.xserver.dpi = 120;
   services.xserver.xrandrHeads = [
@@ -37,55 +26,4 @@
   boot.supportedFilesystems = [ "cifs" ];
 
   networking.hostName = "rmk-nixos-a"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  home-manager.users.default-user = {
-    programs.git = {
-      userName = lib.mkForce "Robert Kovacsics";
-      userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
-      extraConfig.http.emptyauth = true;
-      lfs.enable = true;
-    };
-  };
-
-  krb5 =
-    {
-      enable = true;
-      libdefaults = {
-        default_realm = "UK.CAMBRIDGECONSULTANTS.COM";
-        dns_lookup_realm = true;
-        dns_lookup_kdc = true;
-        forwardable = false;
-        proxiable = false;
-      };
-      realms = {
-        "UK.CAMBRIDGECONSULTANTS.COM" = {
-          admin_server = "uk.cambridgeconsultants.com";
-          kdc = "uk.cambridgeconsultants.com:88";
-          master_kdc = "uk.cambridgeconsultants.com:88";
-          default_domain = "uk.cambridgeconsultants.com";
-        };
-      };
-      domain_realm = {
-        ".uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        ".cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        "cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        "uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-      };
-      appdefaults = {
-        pam = {
-          debug = false;
-          ticket_lifetime = 36000;
-          renew_lifetime = 36000;
-          forwardable = true;
-          krb4_convert = false;
-        };
-      };
-      extraConfig = ''
-        [logging]
-         default = FILE:/var/log/krb5libs.log
-         kdc = FILE:/var/log/krb5kdc.log
-         admin_server = FILE:/var/log/kadmind.log
-      '';
-    };
 }
