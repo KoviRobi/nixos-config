@@ -9,6 +9,8 @@ in
     aggressiveResize = true;
     terminal = "screen-256color";
     escapeTime = 0;
+    keyMode = "vi";
+    customPaneNavigationAndResize = true;
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [
       copycat
@@ -33,10 +35,10 @@ in
 
       # Tmux and I disagree on what is horizontal and what is vertical
       # I take the view that Vim does
-      bind-key v split-window -h
-      bind-key V split-window -h -c "#{pane_current_path}"
-      bind-key h split-window -v
-      bind-key H split-window -v -c "#{pane_current_path}"
+      bind-key \\ split-window -h
+      bind-key | split-window -h -c "#{pane_current_path}"
+      bind-key - split-window -v
+      bind-key _ split-window -v -c "#{pane_current_path}"
       bind-key -T root C-PageUp copy-mode -eu
 
       bind-key s capture-pane -e -b screenshot_raw\;\
