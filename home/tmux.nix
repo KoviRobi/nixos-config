@@ -41,6 +41,8 @@ in
       bind-key _ split-window -v -c "#{pane_current_path}"
       bind-key -T root C-PageUp copy-mode -eu
 
+      bind-key "'" last-window
+
       bind-key s capture-pane -e -b screenshot_raw\;\
           capture-pane -b screenshot_plain\;\
           save-buffer -b screenshot_raw 'tmux_screenshot_raw'\;\
