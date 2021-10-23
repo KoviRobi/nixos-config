@@ -65,6 +65,7 @@ in
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.ModemManager.enable = false;
+  systemd.coredump.enable = true;
 
   services.dbus.packages = with pkgs; [ gcr ];
   services.gnome.gnome-keyring.enable = true;
