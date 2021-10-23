@@ -13,7 +13,6 @@ with pkgs;
   krb5
   pv
   jq
-  gitFull
   tree
   nfs-utils
   pciutils
@@ -21,9 +20,16 @@ with pkgs;
   lm_sensors
   unzip
   graphviz
+
+  abcde
+
+  man-pages
+
   nix-prefetch-git
   nix-prefetch-github
   nixpkgs-fmt
+  nix-tree
+
   dconf
   plan9port
   xxd
@@ -41,7 +47,11 @@ with pkgs;
   ntfs3g
   xfsprogs
 
+  gdb
+
   #   From overlays, see nixpkgs.overlays
+] ++
+lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
   neovim
   (linkFarm "nvim-vi-vim-alias" [
@@ -49,4 +59,9 @@ with pkgs;
     { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
   ]
   )
+  gitFull
+] ++
+lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
+  vim
+  git
 ]

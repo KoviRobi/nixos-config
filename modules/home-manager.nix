@@ -17,4 +17,4 @@ then
       };
     };
   }
-else builtins.trace "Home manager not found in <home-manager>, ignoring" { }
+else builtins.trace "Home manager not found in <home-manager>, ignoring home-manager.nix" { }

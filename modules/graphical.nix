@@ -2,20 +2,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs;
-    [
-      xclip
-      hicolor-icon-theme
-      gnome3.adwaita-icon-theme
-      libnotify
-      chromium
-      mpv
-      ffmpeg
-      compton
-      zathura
-      st
-    ] ++ (with xorg; [ xkbprint xkbutils xev ]);
-
   services.xserver =
     {
       enable = true;

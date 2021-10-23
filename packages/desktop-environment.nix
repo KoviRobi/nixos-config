@@ -4,15 +4,11 @@ with pkgs;
   gnome3.adwaita-icon-theme
   hicolor-icon-theme
 
-  antimicroX
-
   gparted
   gnome3.seahorse
   udiskie
-  scrot
   geeqie
 
-  cura
   audacity
   easytag
   gmpc
@@ -20,19 +16,33 @@ with pkgs;
   inkscape
 
   firefox
-  signal-desktop
-  v4l-utils
 
   pamixer
   paprefs
   pavucontrol
 
+  zathura
+  st
+  ffmpeg
+
+  libnotify
   xdotool
+  xclip
   xorg.xev
+  xorg.xkbprint
+  xorg.xkbutils
   xorg.xmodmap
   xorg.xhost
 ] ++
 lib.optionals (lib.matchAttrs { allowUnfree = true; } config.nixpkgs.config) [
   google-chrome
   steam
+] ++
+lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+  cura
+  mpv
+  flameshot
+  antimicroX
+  signal-desktop
+  v4l-utils
 ]
