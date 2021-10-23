@@ -82,7 +82,6 @@ let
     volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
     bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 / p")'';
     blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 * p")'';
-
   };
   actions-dir = pkgs.linkFarm "i3-actions-dir"
     (pkgs.lib.mapAttrsToList

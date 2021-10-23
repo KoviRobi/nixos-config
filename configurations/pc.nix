@@ -77,6 +77,17 @@
 
   nix.maxJobs = 24;
 
+  security.sudo.extraRules = [{
+    groups = [ "wheel" ];
+    commands = [{
+      command = "/run/current-system/sw/bin/bootctl set-oneshot *";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
+  ];
+
   services.samba = {
     enable = true;
     securityType = "user";
