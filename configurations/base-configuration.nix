@@ -18,6 +18,7 @@ in
     ../modules/home-manager.nix
     ../modules/solarized.nix
     ../modules/nix-doc.nix
+    ../modules/starship.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -36,7 +37,7 @@ in
     (import ../packages/base.nix args)
     ++ (import ../packages/desktop-environment.nix args);
 
-  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern ];
+  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern terminus-nerdfont ];
 
   documentation.dev.enable = true;
 

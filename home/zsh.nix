@@ -18,16 +18,6 @@ in
 
       unsetopt beep
 
-      set -o PROMPT_SUBST
-      PROMPT_TOP='%F{blue}%l %h %T ''${vcs_info_msg_0_}%f'$'\n%{\r%}'
-      PROMPT_NEST_ROOTP='%(6L.#.%(5L.*.%(4L.+.%(3L.|.%(2L.:.%(L,.,))))))%(!.#.$)'
-      PROMPT_BRACE_COLOUR=${"'"}''${''${''${IN_NIX_SHELL:-blue}/impure/default}/pure/white}'
-      PROMPT_OPEN='%B%(!.%F{red}[ .%F{${"'"}''${PROMPT_BRACE_COLOUR}'}[[ %f%F{green})'
-      PROMPT_CLOSE='%24<... <%(!. %4~%<<. : %f%F{${"'"}''${PROMPT_BRACE_COLOUR}'}%3~%<< ]])'
-      PROMPT=''${PROMPT_TOP}''${PROMPT_OPEN}'%n@%m${"'"}''${PROMPT_CLOSE}''${PROMPT_NEST_ROOTP}' %f%b'
-      PROMPT2='%B%(!.%F{red}[.%F{blue}[[ %f%F{green})%17<...<%_%<<%(!.. %f%F{blue}>)>%(!.#.$) %f%b'
-      RPROMPT='%(1j.%F{yellow}Jobs: %j %f.)%(?..%B%F{red}ERROR: %? `${python3} -c "import os; print(os.strerror($?))"`%b%f)'
-
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
       export VERSION_CONTROL=numbered
 
@@ -50,10 +40,6 @@ in
       [ -z "''${terminfo[kich1]}" ] || bindkey "''${terminfo[kich1]}" overwrite-mode
       [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
       [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
-
-      np() {
-        echo $NIX_PATH | tr : '\n' | sed -n "s|$1=||p"
-      }
 
       # Often I do want to go back to underscores or hyphens
       WORDCHARS=""
