@@ -7,9 +7,7 @@
   hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 } //
 (
-  if (builtins.tryEval <home-manager>).success
-  then {
+  {
     home-manager.users.default-user.services.blueman-applet.enable = true;
   }
-  else { }
 )

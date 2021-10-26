@@ -26,7 +26,7 @@ let
     '';
     music = pkgs.writeShellScript "i3-action-music" ''
       export MPD_PORT=6612
-      export MPD_HOST="${mpd_pass}@localhost"
+      export MPD_HOST="$(cat /etc/secrets/mpd-password.secret)@localhost"
       PROGFILE="$HOME/.cache/music_prog"
 
       cmd=$(basename $0)
@@ -125,5 +125,4 @@ in
     ${i3-msg} "$1 $WSNAME"
   '';
   pen-pye-menu = pkgs.python3.pkgs.callPackage ./pen-pye-menu { };
-  unipicker = pkgs.callPackage ./unipicker { };
 }

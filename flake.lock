@@ -1,0 +1,47 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1636520380,
+        "narHash": "sha256-gBiQ8+AQG6Dia34rqJDuqs6VFe/J1SjIhOZBeTXCKQI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "1e5c8e9bff00d0844bc3d25d1a98eab5633e600b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1636566053,
+        "narHash": "sha256-zK7MPd5GbmtUpCmPJbKzmrNMEmNhCbXVS5TFALrsRnQ=",
+        "ref": "cura-update",
+        "rev": "52eb6984fdfec294a4dea0fead5eb7d9d6ec5213",
+        "revCount": 328988,
+        "type": "git",
+        "url": "file:///home/rmk35/programming/nix/pkgs/unstable"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/rmk35/programming/nix/pkgs/unstable"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

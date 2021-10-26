@@ -1,6 +1,5 @@
 { pkgs, lib, ... }@args:
 let
-  i3 = "${pkgs.i3}";
   i3-helpers = import ./i3-helpers.nix pkgs;
   mod = "Mod4"; # Win key
 
@@ -26,7 +25,7 @@ in
 {
   xsession.windowManager.i3 = {
     enable = true;
-    package = i3;
+    package = pkgs.i3;
     config = {
       fonts = { names = [ "Latin Modern Roman" ]; style = "Regular"; size = 9.0; };
       bars = [{
@@ -77,7 +76,7 @@ in
         "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
         "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
         "${mod}+Shift+r" = "reload";
-        "${mod}+u" = "exec ${i3-helpers.unipicker}/bin/unipicker " +
+        "${mod}+u" = "exec ${pkgs.unipicker}/bin/unipicker " +
           "--copy-command '${xclip} -sel pri -f | ${xclip} -sel clip' " +
           "--command '${rofi} -dmenu -matching regex'";
         "${mod}+Control+Shift+r" = "restart";
