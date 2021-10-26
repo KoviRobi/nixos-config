@@ -12,12 +12,16 @@ in
     "home-manager=${HOME}/programming/nix/home-manager"
     "${HOME}/programming/nix/pkgs/unstable"
   ];
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
   imports = [
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix
     ../modules/solarized.nix
-    ../modules/nix-doc.nix
+    # ../modules/nix-doc.nix
     ../modules/starship.nix
   ];
 
