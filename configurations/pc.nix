@@ -12,6 +12,8 @@
       (import ../modules/avahi.nix { publish = true; })
     ];
 
+  solarized.brightness = "light";
+
   nixpkgs.config.allowUnfree = true; # For google chrome (for DRM :( )
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro ]; # for OpenCL
