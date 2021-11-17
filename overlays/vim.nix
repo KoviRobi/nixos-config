@@ -91,6 +91,7 @@ in
           let g:ale_linters = { 'elixir' : ['elixir-ls'] }
           let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
           let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_elixir_elixir_ls_release = expand("~/elixir-ls/rel/")
           let g:ale_fixers.nix = ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.python = ['black', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fix_on_save = 1
