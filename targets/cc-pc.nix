@@ -10,23 +10,56 @@
     ];
 
   boot.initrd.luks.devices.sda1enc =
-    { device = "/dev/disk/by-uuid/0bd5501e-74f1-45f8-91af-6bc816d2a5fb";
+    {
+      device = "/dev/disk/by-uuid/0bd5501e-74f1-45f8-91af-6bc816d2a5fb";
       preLVM = true;
     };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/aa8c6b80-077c-4706-8722-d4b20a1f0da3";
-      fsType = "xfs";
-    };
+  fileSystems =
+    lib.recursiveUpdate
+      {
+        "/" =
+          {
+            device = "/dev/disk/by-uuid/aa8c6b80-077c-4706-8722-d4b20a1f0da3";
+            fsType = "xfs";
+          };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/41F8-24FB";
-      fsType = "vfat";
-    };
+        "/boot" =
+          {
+            device = "/dev/disk/by-uuid/41F8-24FB";
+            fsType = "vfat";
+          };
+      }
+      (
+        builtins.listToAttrs
+          (map
+            (remote-local: {
+              name = remote-local.local;
+              value = {
+                device = "//193.35.220.46/${remote-local.remote}";
+                fsType = "cifs";
+                options = [
+                  "username=rmk"
+                  "domain=CCL"
+                  "uid=${toString config.users.users.default-user.uid}"
+                  "gid=${toString config.users.groups.default-user.gid}"
+                  "noauto"
+                ];
+              };
+            })
+            [
+              { remote = "home3/rmk"; local = "/cc/user"; }
+              { remote = "projects"; local = "/cc/projects"; }
+              { remote = "transit"; local = "/cc/transit"; }
+              { remote = "closed"; local = "/cc/closed"; }
+              { remote = "install"; local = "/cc/install"; }
+            ])
+      );
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/b01405b4-00e4-4e77-bb6c-3902bc60e6a2"; }
-    ];
+    [{
+      device = "/dev/disk/by-uuid/b01405b4-00e4-4e77-bb6c-3902bc60e6a2";
+    }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
