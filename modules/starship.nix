@@ -4,6 +4,7 @@
 
     systemPackages = with pkgs; [
       starship
+      exa
       dnsutils
       git
       bottom
@@ -35,6 +36,12 @@
         "..." = "cd ../..";
         "...." = "cd ../../..";
         "....." = "cd ../../../..";
+
+        # ls
+        ls = "exa";
+        l = "ls -l";
+        ll = "ls -l";
+        la = "ls -la";
 
         # git
         g = "git";
