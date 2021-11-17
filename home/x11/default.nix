@@ -21,7 +21,6 @@ in
     global = { follow = "keyboard"; };
     shortcuts = { close = "mod4+Prior"; history = "mod4+Next"; };
   };
-  home.file.backgrounds = { recursive = true; source = ./backgrounds; };
   services.feh-random-background = {
     enable = true;
     imageDirectory = "%h/backgrounds/";
