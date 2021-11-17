@@ -21,7 +21,6 @@ in
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix
     ../modules/solarized.nix
-    # ../modules/nix-doc.nix
     ../modules/starship.nix
   ];
 
