@@ -8,14 +8,6 @@ in
   programs.zsh = {
     enable = true;
     initExtra = ''
-      autoload -Uz vcs_info
-      zstyle ':vcs_info:*' enable git
-
-      zstyle ':vcs_info:*' actionformats '(%b|%a)'
-      zstyle ':vcs_info:*' formats       '(%b)'
-
-      precmd_functions+=(vcs_info)
-
       unsetopt beep
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
@@ -43,19 +35,14 @@ in
 
       # Often I do want to go back to underscores or hyphens
       WORDCHARS=""
-      # For plan9port
-      unalias 9
       eval $(${pkgs.thefuck}/bin/thefuck --alias fck)
     '';
 
     enableCompletion = true;
     enableVteIntegration = true;
     enableAutosuggestions = true;
-    oh-my-zsh.enable = true;
 
     shellAliases = {
-      "ls" = "ls --color";
-      "ll" = "ls -l --color";
       "less" = "less -iRq";
       "mnt" = "udisksctl mount -b";
       "umnt" = "udisksctl unmount -b";

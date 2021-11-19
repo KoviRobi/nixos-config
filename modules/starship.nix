@@ -47,7 +47,6 @@
         g = "git";
 
         # grep
-        grep = "rg";
         gi = "grep -i";
 
         # internet ip
