@@ -36,6 +36,24 @@ in
       # Often I do want to go back to underscores or hyphens
       WORDCHARS=""
       eval $(${pkgs.thefuck}/bin/thefuck --alias fck)
+
+
+      # The following lines were added by compinstall
+      zstyle ':completion:*' completer _complete _ignored
+      zstyle ':completion:*' group-name ""
+      zstyle ':completion:*' insert-unambiguous true
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=** r:|=**'
+      zstyle ':completion:*' menu select=0 search
+      zstyle :compinstall filename '/home/rmk/.zsh.comp'
+
+      autoload -Uz compinit
+      compinit
+      # End of lines added by compinstall
+      unsetopt flow_control
+      bindkey "^Q" push-line
+      setopt AUTO_PUSHD
+      source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
     '';
 
     enableCompletion = true;
