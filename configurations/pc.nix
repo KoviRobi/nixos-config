@@ -28,6 +28,8 @@
   networking.firewall.allowedTCPPorts = [ 8123 139 445 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
 
+  networking.networkmanager.insertNameservers = [ "1.1.1.1" "1.1.0.0" ];
+
   services.xserver =
     {
       dpi = 109;
@@ -64,12 +66,6 @@
   services.udev.packages = [ pkgs.stlink ];
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
-
-  networking.nat = {
-    enable = true;
-    internalIPs = [ "192.168.42.1/32" ];
-    externalInterface = "enp34s0";
-  };
 
   home-manager.users.default-user = {
     xsession.initExtra = ''
