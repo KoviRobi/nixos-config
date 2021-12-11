@@ -12,6 +12,9 @@
       (import ../modules/avahi.nix { publish = true; })
     ];
 
+  virtualisation.docker.enable = true;
+  users.users.default-user.extraGroups = [ "docker" ];
+
   solarized.brightness = "light";
 
   nixpkgs.config.allowUnfree = true; # For google chrome (for DRM :( )
