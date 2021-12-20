@@ -11,6 +11,10 @@ let
   emacs = "${pkgs.emacs}/bin/emacs";
   xclip = "${pkgs.xclip}/bin/xclip";
   rofi = "${pkgs.rofi}/bin/rofi";
+  unipicker = "${pkgs.unipicker}/bin/unipicker";
+  xclip-both = pkgs.writeShellScript "xclip-both" ''
+    ${xclip} -sel pri -f | ${xclip} -sel clip
+  '';
   pgrep = "${pkgs.procps}/bin/pgrep";
 
   mk-scratch = n: p: pkgs.writeShellScript "start-scratch-${n}" ''
@@ -76,8 +80,7 @@ in
         "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
         "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
         "${mod}+Shift+r" = "reload";
-        "${mod}+u" = "exec ${pkgs.unipicker}/bin/unipicker " +
-          "--copy-command '${xclip} -sel pri -f | ${xclip} -sel clip' " +
+        "${mod}+u" = "exec ${unipicker} --copy-command '${xclip-both}' " +
           "--command '${rofi} -dmenu -matching regex'";
         "${mod}+Control+Shift+r" = "restart";
         "${mod}+bracketleft" = "focus output left";

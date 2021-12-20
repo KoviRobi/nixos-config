@@ -57,8 +57,7 @@ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   (linkFarm "nvim-vi-vim-alias" [
     { name = "bin/vi"; path = "${neovim}/bin/nvim"; }
     { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
-  ]
-  )
+  ])
   gitFull
 ] ++
 lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
