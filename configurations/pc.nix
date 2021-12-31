@@ -107,6 +107,17 @@
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
   ];
 
+
+  users.extraUsers.alex =
+    {
+      isNormalUser = true;
+      name = "alex";
+      group = "users";
+      createHome = true;
+      shell = pkgs.zsh;
+    };
+
+
   services.samba = {
     enable = true;
     securityType = "user";
