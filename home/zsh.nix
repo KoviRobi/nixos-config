@@ -17,6 +17,7 @@ in
       precmd_functions+=(vcs_info)
 
       unsetopt beep
+      setopt extendedglob
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
       export VERSION_CONTROL=numbered
