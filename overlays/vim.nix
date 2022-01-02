@@ -104,7 +104,10 @@ in
           let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
           let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.nix = ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace']
-          let g:ale_fixers.python = ['black', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_fixers.python = ['black', 'isort', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_fixers.html = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_fixers.css = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fix_on_save = 1
 
           nmap <silent> gd <Plug>(coc-definition)
