@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1640592198,
-        "narHash": "sha256-F5dWVGQMscmGyLTzNLocPB1v8Ijp8ONx8Nq9Dmi5PSw=",
+        "lastModified": 1641236600,
+        "narHash": "sha256-Xsy/vV1iEMjldygMYys9Y7w/h/suzQfdORVbBfih/PU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0b197562ab7bf114dd5f6716f41d4b5be6ccd357",
+        "rev": "65e5b835a94b3bca9a1e219e5c43c1bc5fc04598",
         "type": "github"
       },
       "original": {
@@ -22,17 +22,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1640652867,
-        "narHash": "sha256-vE5J8KUDQaJTexRghIF9/8pT5V3kBfDsyKyzns26IeI=",
+        "lastModified": 1640959792,
+        "narHash": "sha256-zYSR//06FU2TDOpKKj0Hkff6unsxk3NwwNFuB1loU6E=",
         "ref": "nixos-unstable",
-        "rev": "8d97cd0e899b165306ddd45f5bff5d4761d9f6ab",
-        "revCount": 341455,
+        "rev": "59bfda72480496f32787cec8c557182738b1bd3f",
+        "revCount": 342525,
         "type": "git",
-        "url": "file:///home/rmk35/programming/nix/pkgs/unstable"
+        "url": "file:///home/rmk/programming/nix/pkgs/unstable"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/rmk35/programming/nix/pkgs/unstable"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "root": {
