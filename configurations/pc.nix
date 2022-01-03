@@ -90,7 +90,7 @@
 
   home-manager.users.default-user = {
     xsession.initExtra = ''
-      ${pkgs.antimicroX}/bin/antimicroX --profile ~/SpacePilot.joystick.amgp --tray --hidden &
+      ${pkgs.antimicroX}/bin/antimicrox --profile ~/SpacePilot.joystick.amgp --tray --hidden &
     '';
   };
 
