@@ -18,29 +18,36 @@
         ];
       };
 
-    nixosConfigurations."pc-nixos-a" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =
-        [
-          (import ./configurations/pc.nix)
-          (import ./targets/pc.nix)
-
-          # Let 'nixos-version --json' know about the Git revision
-          # of this flake.
-          # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
+    nixosConfigurations = builtins.mapAttrs
+      (name: value:
+        nixpkgs.lib.nixosSystem
           {
-            system.configurationRevision =
-              if self ? rev
-              then self.rev
-              else throw "Refusing to build from a dirty Git tree!";
-          }
+            system = "x86_64-linux";
+            modules =
+              (map import value) ++ [
+                # Let 'nixos-version --json' know about the Git revision
+                # of this flake.
+                # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
+                {
+                  system.configurationRevision =
+                    if self ? rev
+                    then self.rev
+                    else throw "Refusing to build from a dirty Git tree!";
+                }
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                }
+              ];
           }
-        ];
-    };
+      )
+      {
+        "as-nixos-b" = [ ./configurations/acer-as.nix ./configurations/acer-as.nix ];
+        "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
+        "cc-nixos-a" = [ ./configurations/cc-vm.nix ./targets/cc-vm.nix ];
+        "rmk-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
+      };
   };
 }
