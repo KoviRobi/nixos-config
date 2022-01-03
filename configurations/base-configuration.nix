@@ -49,6 +49,8 @@ in
     enableBashCompletion = true;
   };
 
+  programs.xonsh.enable = true;
+
   environment.homeBinInPath = true;
   environment.systemPackages =
     (import ../packages/base.nix args)

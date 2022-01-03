@@ -92,4 +92,8 @@
       eval "$(${pkgs.starship}/bin/starship init zsh)"
     fi
   '';
+
+  programs.xonsh.config = ''
+    execx($(starship init xonsh))
+  '';
 }
