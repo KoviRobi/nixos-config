@@ -36,17 +36,6 @@ in
     };
   };
 
-  coc-elixir = vimplugin {
-    pname = "coc-elixir";
-    version = "2020-07-19";
-    src = self.fetchFromGitHub {
-      owner = "elixir-lsp";
-      repo = "coc-elixir";
-      rev = "ee2e2b24db4354f506b1cc55093f23d6f424eaaa";
-      sha256 = "1cicv6b0m63mriz7anh3bim852lb0vvrhmlf048h36mrqsaw2130";
-    };
-  };
-
   vim-textobj-elixir = vimplugin {
     pname = "vim-textobj-elixir";
     version = "2019-05-30";
@@ -99,30 +88,30 @@ in
 
           " Elixir
           let g:neomake_elixir_enabled_makers = []
-          let g:coc_node_path = "${self.nodejs}/bin/node"
-          let g:ale_linters = { 'elixir' : [] }
+          let g:ale_linters = { 'elixir' : ['elixir-ls'] }
           let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
           let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
+          let g:ale_elixir_elixir_ls_release = expand("~/elixir-ls/rel/")
           let g:ale_fixers.nix = ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.python = ['black', 'isort', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.html = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.css = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fix_on_save = 1
+          let g:ale_completion_enabled = 1
 
-          nmap <silent> gd <Plug>(coc-definition)
-          nmap <silent> gr <Plug>(coc-references)
+          nmap <silent> gd :ALEGotoDefinition<CR>
+          nmap <silent> gy :ALEGotoTypeDefinition<CR>
+          nmap <silent> gr :ALEFindReferences<CR>
           nnoremap <silent> K :call <SID>show_documentation()<CR>
 
           function! s:show_documentation()
             if (index(['vim','help'], &filetype) >= 0)
               execute 'h '.expand('<cword>')
             else
-              call CocAction('doHover')
+              ALEHover
             endif
           endfunction
-
-          nnoremap <silent> <leader>co  :<C-u>CocList outline<CR>
 
           let g:slime_target = "tmux"
 
@@ -147,8 +136,6 @@ in
               vim-snippets
               vim-elixir
               ale
-              coc-nvim
-              self.coc-elixir
               quickfix-reflector-vim
               vim-projectionist
               vim-test

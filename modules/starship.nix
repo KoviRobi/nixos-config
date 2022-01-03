@@ -4,6 +4,7 @@
 
     systemPackages = with pkgs; [
       starship
+      exa
       dnsutils
       git
       bottom
@@ -17,6 +18,15 @@
       export STARSHIP_CONFIG=${
         (pkgs.formats.toml {}).generate "starship.toml" {
           format = "$all$line_break$character";
+          docker_context.symbol = "  ";
+          erlang.symbol = "  ";
+          helm.symbol = "[ﴱ ](fg:blue) ";
+          kubernetes.symbol = "[ﴱ ](fg:white bg:blue) ";
+          memory_usage.symbol = "🐏 ";
+          nix_shell.symbol = "";
+          nix_shell.pure_msg = "[ ]()";
+          nix_shell.impure_msg = "[ ](blue)";
+          pulumi.symbol = "  ";
           aws.disabled = true;
           directory.truncation_symbol = "…/";
           shell.disabled = false;
@@ -36,11 +46,16 @@
         "...." = "cd ../../..";
         "....." = "cd ../../../..";
 
+        # ls
+        ls = "exa";
+        l = "ls -l";
+        ll = "ls -l";
+        la = "ls -la";
+
         # git
         g = "git";
 
         # grep
-        grep = "rg";
         gi = "grep -i";
 
         # internet ip
