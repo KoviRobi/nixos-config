@@ -104,6 +104,7 @@
     }];
   }];
   environment.systemPackages = [
+    pkgs.docker-credential-helpers
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
   ]
   ++ (import ../packages/unfree.nix args);
