@@ -31,6 +31,7 @@
           directory.truncation_symbol = "…/";
           shell.disabled = false;
           status.disabled = false;
+          status.symbol = "✖ ";
           time.disabled = false;
         }
       }
