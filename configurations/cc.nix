@@ -19,16 +19,29 @@
 
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
-  environment.systemPackages = with pkgs; [ docker-credential-helpers ];
+  environment.systemPackages = with pkgs; [
+    docker-credential-helpers
+    # For P3651
+    awscli2
+    amazon-ecr-credential-helper
+  ];
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
 
+  nixpkgs.config.allowUnfree = true; # For VSCode
   home-manager.users.default-user = {
     programs.git = {
       userName = lib.mkForce "Robert Kovacsics";
       userEmail = lib.mkForce "robert.kovacsics@cambridgeconsultants.com";
       extraConfig.http.emptyauth = true;
       lfs.enable = true;
+    };
+    programs.vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        editorconfig.editorconfig
+        ms-vsliveshare.vsliveshare
+      ];
     };
   };
 
