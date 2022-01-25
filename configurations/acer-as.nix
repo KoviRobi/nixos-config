@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@args:
 
 {
   imports =
@@ -72,6 +72,7 @@
   ];
 
   nixpkgs.config.allowUnfree = true; # For nvidia_x11_legacy390, from bumblebee
+  environment.systemPackages = (import ../packages/unfree.nix args); # Chromium, steam
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
   hardware.bumblebee =
     {
