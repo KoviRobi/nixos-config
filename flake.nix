@@ -34,6 +34,11 @@
                     else throw "Refusing to build from a dirty Git tree!";
                 }
 
+                {
+                  # https://www.tweag.io/blog/2020-07-31-nixos-flakes/
+                  nix.registry.nixpkgs.flake = nixpkgs;
+                }
+
                 home-manager.nixosModules.home-manager
                 {
                   home-manager.useGlobalPkgs = true;

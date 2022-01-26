@@ -13,18 +13,6 @@ in
     "${HOME}/programming/nix/pkgs/unstable"
   ];
 
-  # https://www.arcadianvisions.com/2021/nix-registry.html
-  nix.registry.nixpkgs = {
-    from = {
-      type = "indirect";
-      id = "nixpkgs";
-    };
-    to = {
-      type = "git";
-      url = "file:///home/rmk35/programming/nix/pkgs/unstable";
-    };
-  };
-
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
