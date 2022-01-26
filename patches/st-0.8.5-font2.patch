@@ -1,6 +1,6 @@
 diff -uNr a/config.def.h b/config.def.h
---- a/config.def.h	2020-06-19 10:29:45.000000000 +0100
-+++ b/config.def.h	2021-11-25 11:06:32.711030269 +0000
+--- a/config.def.h	2022-01-07 11:41:35.000000000 +0000
++++ b/config.def.h	2022-01-26 22:32:03.888429408 +0000
 @@ -5,7 +5,14 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -15,15 +15,15 @@ diff -uNr a/config.def.h b/config.def.h
 +};
 +
  static int borderpx = 2;
-
+ 
  /*
 diff -uNr a/x.c b/x.c
---- a/x.c	2020-06-19 10:29:45.000000000 +0100
-+++ b/x.c	2021-11-25 10:57:22.119406412 +0000
+--- a/x.c	2022-01-07 11:41:35.000000000 +0000
++++ b/x.c	2022-01-26 22:32:29.461687912 +0000
 @@ -157,6 +157,8 @@
  static int xloadcolor(int, const char *, Color *);
  static int xloadfont(Font *, FcPattern *);
- static void xloadfonts(char *, double);
+ static void xloadfonts(const char *, double);
 +static int xloadsparefont(FcPattern *, int);
 +static void xloadsparefonts(void);
  static void xunloadfont(Font *);
@@ -37,10 +37,10 @@ diff -uNr a/x.c b/x.c
  	cresize(0, 0);
  	redraw();
  	xhints();
-@@ -1019,6 +1022,101 @@
+@@ -1034,6 +1037,101 @@
  	FcPatternDestroy(pattern);
  }
-
+ 
 +int
 +xloadsparefont(FcPattern *pattern, int flags)
 +{
@@ -139,10 +139,10 @@ diff -uNr a/x.c b/x.c
  void
  xunloadfont(Font *f)
  {
-@@ -1116,6 +1214,9 @@
+@@ -1131,6 +1229,9 @@
  	usedfont = (opt_font == NULL)? font : opt_font;
  	xloadfonts(usedfont, 0);
-
+ 
 +	/* spare fonts */
 +	xloadsparefonts();
 +

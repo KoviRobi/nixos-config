@@ -1,7 +1,7 @@
-diff --color -uNr a/config.def.h b/config.def.h
---- a/config.def.h	2020-06-19 10:29:45.000000000 +0100
-+++ b/config.def.h	2020-10-07 13:40:16.640697670 +0100
-@@ -95,42 +95,54 @@
+diff -uNr a/config.def.h b/config.def.h
+--- a/config.def.h	2022-01-07 11:41:35.000000000 +0000
++++ b/config.def.h	2022-01-26 22:44:07.542945914 +0000
+@@ -95,44 +95,55 @@
  
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
@@ -30,6 +30,8 @@ diff --color -uNr a/config.def.h b/config.def.h
 -	/* more colors can be added after 255 to use with DefaultXX */
 -	"#cccccc",
 -	"#555555",
+-	"gray90", /* default foreground colour */
+-	"black", /* default background colour */
 +	/* solarized dark */
 +	"#073642",  /*  0: black    */
 +	"#dc322f",  /*  1: red      */
@@ -74,18 +76,19 @@ diff --color -uNr a/config.def.h b/config.def.h
   * Default colors (colorname index)
   * foreground, background, cursor, reverse cursor
   */
--unsigned int defaultfg = 7;
--unsigned int defaultbg = 0;
--static unsigned int defaultcs = 256;
+-unsigned int defaultfg = 258;
+-unsigned int defaultbg = 259;
+-unsigned int defaultcs = 256;
 -static unsigned int defaultrcs = 257;
++
 +unsigned int defaultfg = 12;
 +unsigned int defaultbg = 8;
-+static unsigned int defaultcs = 14;
++unsigned int defaultcs = 14;
 +static unsigned int defaultrcs = 15;
  
  /*
   * Default shape of cursor
-@@ -199,6 +211,7 @@
+@@ -201,6 +212,7 @@
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
@@ -93,10 +96,10 @@ diff --color -uNr a/config.def.h b/config.def.h
  };
  
  /*
-diff --color -uNr a/st.h b/st.h
---- a/st.h	2020-06-19 10:29:45.000000000 +0100
-+++ b/st.h	2020-10-07 11:58:56.692532829 +0100
-@@ -120,6 +120,7 @@
+diff -uNr a/st.h b/st.h
+--- a/st.h	2022-01-07 11:41:35.000000000 +0000
++++ b/st.h	2022-01-26 22:37:48.941702790 +0000
+@@ -122,6 +122,7 @@
  extern int allowaltscreen;
  extern int allowwindowops;
  extern char *termname;
@@ -104,9 +107,9 @@ diff --color -uNr a/st.h b/st.h
  extern unsigned int tabspaces;
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
-diff --color -uNr a/x.c b/x.c
---- a/x.c	2020-06-19 10:29:45.000000000 +0100
-+++ b/x.c	2020-10-07 13:38:09.969292966 +0100
+diff -uNr a/x.c b/x.c
+--- a/x.c	2022-01-07 11:41:35.000000000 +0000
++++ b/x.c	2022-01-26 22:37:48.941702790 +0000
 @@ -55,6 +55,7 @@
  static void clippaste(const Arg *);
  static void numlock(const Arg *);
@@ -139,7 +142,7 @@ diff --color -uNr a/x.c b/x.c
  zoom(const Arg *arg)
  {
  	Arg larg;
-@@ -748,6 +760,11 @@
+@@ -750,6 +761,11 @@
  	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
  }
  
@@ -151,7 +154,7 @@ diff --color -uNr a/x.c b/x.c
  int
  xloadcolor(int i, const char *name, Color *ncolor)
  {
-@@ -766,7 +783,7 @@
+@@ -768,7 +784,7 @@
  			return XftColorAllocValue(xw.dpy, xw.vis,
  			                          xw.cmap, &color, ncolor);
  		} else
@@ -160,7 +163,7 @@ diff --color -uNr a/x.c b/x.c
  	}
  
  	return XftColorAllocName(xw.dpy, xw.vis, xw.cmap, name, ncolor);
-@@ -789,8 +806,8 @@
+@@ -791,8 +807,8 @@
  
  	for (i = 0; i < dc.collen; i++)
  		if (!xloadcolor(i, NULL, &dc.col[i])) {
@@ -171,7 +174,7 @@ diff --color -uNr a/x.c b/x.c
  			else
  				die("could not allocate color %d\n", i);
  		}
-@@ -1169,13 +1186,13 @@
+@@ -1184,13 +1200,13 @@
  	cursor = XCreateFontCursor(xw.dpy, mouseshape);
  	XDefineCursor(xw.dpy, xw.win, cursor);
  
@@ -187,7 +190,7 @@ diff --color -uNr a/x.c b/x.c
  		xmousebg.red   = 0x0000;
  		xmousebg.green = 0x0000;
  		xmousebg.blue  = 0x0000;
-@@ -1382,7 +1399,7 @@
+@@ -1398,7 +1414,7 @@
  
  	/* Change basic system colors [0-7] to bright system colors [8-15] */
  	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
