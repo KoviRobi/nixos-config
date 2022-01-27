@@ -13,11 +13,6 @@ in
     "${HOME}/programming/nix/pkgs/unstable"
   ];
 
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   imports = [
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix

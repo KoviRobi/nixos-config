@@ -34,10 +34,24 @@
                     else throw "Refusing to build from a dirty Git tree!";
                 }
 
-                {
-                  # https://www.tweag.io/blog/2020-07-31-nixos-flakes/
-                  nix.registry.nixpkgs.flake = nixpkgs;
-                }
+                ({ config, pkgs, ... }: {
+                  # https://www.arcadianvisions.com/2021/nix-registry.html
+                  nix.registry.nixpkgs = {
+                    from = {
+                      type = "indirect";
+                      id = "nixpkgs";
+                    };
+                    to = {
+                      type = "git";
+                      url = "file://${config.users.users.default-user.home}/programming/nix/pkgs/unstable";
+                    };
+                  };
+
+                  nix.package = pkgs.nixFlakes;
+                  nix.extraOptions = ''
+                    experimental-features = nix-command flakes
+                  '';
+                })
 
                 home-manager.nixosModules.home-manager
                 {
