@@ -120,6 +120,22 @@
     };
 
 
+  users.extraUsers.rsync =
+    {
+      isNormalUser = true;
+      group = "users";
+      createHome = true;
+    };
+
+  services.openssh.ports = [ 22 5922 ];
+  services.openssh.extraConfig = ''
+    Match User rsync
+      AuthenticationMethods publickey
+      ForceCommand ${pkgs.rrsync}/bin/rrsync /home/rsync/
+    Match All
+  '';
+
+
   services.samba = {
     enable = true;
     securityType = "user";
