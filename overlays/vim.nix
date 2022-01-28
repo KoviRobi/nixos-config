@@ -5,12 +5,12 @@ in
 {
   vim-fetch = vimplugin {
     pname = "vim-fetch";
-    version = "2019-04-03";
+    version = "2021-02-12";
     src = self.fetchFromGitHub {
       owner = "wsdjeg";
       repo = "vim-fetch";
-      rev = "76c08586e15e42055c9c21321d9fca0677442ecc";
-      sha256 = "0avcqjcqvxgj00r477ps54rjrwvmk5ygqm3qrzghbj9m1gpyp2kz";
+      rev = "0a6ab17e84c7f4808bf05ec380121bce40b40d21";
+      sha256 = "BahDpyVaNTASquTVdInkYQqA3Wx7YPNh2hNH9cenWRM=";
     };
   };
 
@@ -44,6 +44,17 @@ in
       repo = "vim-textobj-elixir";
       rev = "b3d0fb1f19a918449eba856dc096c9f3231e871c";
       sha256 = "0nhcssbcdz1p5cjnd7v9fqa74288gm4y54v47fan9f6fx76sbd25";
+    };
+  };
+
+  vim-vebugger = vimplugin {
+    pname = "vim-vebugger";
+    version = "";
+    src = self.fetchFromGitHub {
+      owner = "idanarye";
+      repo = "vim-vebugger";
+      rev = "15ab930a6cfbcf8660ded98c3afd289bed7804b0";
+      sha256 = "YZfHZ8733IqTDlWwI0F+LPBdC3aKzKpcv5q2sqT+4Pk=";
     };
   };
 
@@ -118,6 +129,8 @@ in
           if filereadable(expand("$HOME/.config/nvim/init.vim"))
             source ~/.config/nvim/init.vim
           endif
+
+          let g:vebugger_leader = "<Leader>d"
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
@@ -145,6 +158,8 @@ in
               self.vim-fetch
               self.vim-blindsplit
               self.vim-literate
+              vimproc
+              self.vim-vebugger
               vim-slime
             ];
             opt = [ ];
