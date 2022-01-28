@@ -50,8 +50,8 @@ in
           let g:ale_fix_on_save = 1
           let g:ale_completion_enabled = 1
 
-          nmap <silent> gd :ALEGotoDefinition<CR>
-          nmap <silent> gy :ALEGotoTypeDefinition<CR>
+          nmap <silent> gd :ALEGoToDefinition<CR>
+          nmap <silent> gy :ALEGoToTypeDefinition<CR>
           nmap <silent> gr :ALEFindReferences<CR>
           nnoremap <silent> K :call <SID>show_documentation()<CR>
 
