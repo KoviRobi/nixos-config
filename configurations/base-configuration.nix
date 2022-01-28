@@ -73,6 +73,9 @@ in
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.sudo.enableGnomeKeyring = true;
+  environment.etc."sudo.conf".text = ''
+    Path askpass ${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass
+  '';
 
   services.udev.extraRules =
     ''
