@@ -95,5 +95,9 @@
       '';
     };
 
+  services.udev.extraRules =
+    ''
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="1366", ATTRS{manufacturer}=="SEGGER", ATTRS{idProduct}=="0101", ATTRS{product}=="J-Link", MODE="0666"
+    '';
   services.udev.packages = [ pkgs.stlink ];
 }
