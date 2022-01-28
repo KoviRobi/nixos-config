@@ -3,61 +3,6 @@ self: super:
 let vimplugin = self.vimUtils.buildVimPluginFrom2Nix;
 in
 {
-  vim-fetch = vimplugin {
-    pname = "vim-fetch";
-    version = "2021-02-12";
-    src = self.fetchFromGitHub {
-      owner = "wsdjeg";
-      repo = "vim-fetch";
-      rev = "0a6ab17e84c7f4808bf05ec380121bce40b40d21";
-      sha256 = "BahDpyVaNTASquTVdInkYQqA3Wx7YPNh2hNH9cenWRM=";
-    };
-  };
-
-  vim-blindsplit = vimplugin {
-    pname = "vim-bindsplit";
-    version = "2016-01-05";
-    src = self.fetchFromGitHub {
-      owner = "jcorbin";
-      repo = "vim-bindsplit";
-      rev = "d0b642bdbfcabb7096b58249d3e1073456b54ef9";
-      sha256 = "1n5ajmw20628z4pfxf6l45qynjwl9i6y5an36qk84nsa4jwr3xa7";
-    };
-  };
-
-  vim-literate = vimplugin {
-    pname = "literate.vim";
-    version = "2018-05-17";
-    src = self.fetchFromGitHub {
-      owner = "zyedidia";
-      repo = "literate.vim";
-      rev = "4ffd45cb1657b67f4ed0eb639478a69209ec1f94";
-      sha256 = "004zcb1p6qma8vlx08sfhp0q7vhc2mphqa6mwahl41lb6z58k62z";
-    };
-  };
-
-  vim-textobj-elixir = vimplugin {
-    pname = "vim-textobj-elixir";
-    version = "2019-05-30";
-    src = self.fetchFromGitHub {
-      owner = "andyl";
-      repo = "vim-textobj-elixir";
-      rev = "b3d0fb1f19a918449eba856dc096c9f3231e871c";
-      sha256 = "0nhcssbcdz1p5cjnd7v9fqa74288gm4y54v47fan9f6fx76sbd25";
-    };
-  };
-
-  vim-vebugger = vimplugin {
-    pname = "vim-vebugger";
-    version = "";
-    src = self.fetchFromGitHub {
-      owner = "idanarye";
-      repo = "vim-vebugger";
-      rev = "15ab930a6cfbcf8660ded98c3afd289bed7804b0";
-      sha256 = "YZfHZ8733IqTDlWwI0F+LPBdC3aKzKpcv5q2sqT+4Pk=";
-    };
-  };
-
   neovim = super.neovim.override {
     configure =
       {
@@ -154,13 +99,13 @@ in
               vim-test
               neoterm
               vim-textobj-user
-              self.vim-textobj-elixir
-              self.vim-fetch
-              self.vim-blindsplit
-              self.vim-literate
+              vim-textobj-elixir
+              vim-fetch
+              vim-bindsplit
               vimproc
-              self.vim-vebugger
+              vim-vebugger
               vim-slime
+              literate-vim
             ];
             opt = [ ];
           };
