@@ -27,11 +27,6 @@ in
           set laststatus=2
           set notitle
 
-          packadd neomake
-          " Full config: when writing or reading a buffer, and on changes in insert and
-          " normal mode (after 500ms; no delay when writing).
-          call neomake#configure#automake('nrwi', 500)
-
           set background=dark
           colorscheme solarized
 
@@ -43,7 +38,6 @@ in
           let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
 
           " Elixir
-          let g:neomake_elixir_enabled_makers = []
           let g:ale_linters = { 'elixir' : ['elixir-ls'] }
           let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
           let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
