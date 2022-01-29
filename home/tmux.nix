@@ -39,7 +39,9 @@ in
       bind-key | split-window -h -c "#{pane_current_path}"
       bind-key - split-window -v
       bind-key _ split-window -v -c "#{pane_current_path}"
-      bind-key -T root C-PageUp copy-mode -eu
+
+      bind-key @ choose-tree 'join-pane -hs %%'
+      bind-key \# choose-tree 'join-pane -s %%'
 
       bind-key "'" last-window
 
@@ -51,6 +53,8 @@ in
           capture-pane -S - -E - -b screenshot_plain\;\
           save-buffer -b screenshot_raw 'tmux_screenshot_raw'\;\
           save-buffer -b screenshot_plain 'tmux_screenshot_plain'
+
+      bind-key -T root C-PageUp copy-mode -eu
 
       bind-key -T copy-mode    WheelUpPane   send-keys -X scroll-up
       bind-key -T copy-mode    WheelDownPane send-keys -X scroll-down
