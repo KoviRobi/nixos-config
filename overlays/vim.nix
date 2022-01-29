@@ -70,6 +70,8 @@ in
           endif
 
           let g:vebugger_leader = "<Leader>d"
+
+          :packadd vim-localvimrc
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
