@@ -23,11 +23,13 @@ in
     ];
     extraConfig = ''
       set -g status-position top
-      set -g renumber-windows on
       set -g mouse on
       set -g set-titles on
       set -g alternate-screen off
       set -g pane-border-lines heavy
+
+      set -g renumber-windows on
+      bind-key . command-prompt "swap-window -t '%%'"
 
       set -g history-limit 10000
 
