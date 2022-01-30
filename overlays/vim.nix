@@ -99,6 +99,7 @@ in
               vim-fetch
               vim-bindsplit
               vimproc
+              vim-unstack
               vim-slime
               literate-vim
             ];

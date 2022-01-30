@@ -22,13 +22,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1643475364,
-        "narHash": "sha256-i6BEb3Jf011SeA07klRAVVFSWTG1flev7bZy3imys2w=",
-        "ref": "nixos-unstable",
-        "rev": "311790a15584c6a7e11ded1c7e1bcd4d0e3777fb",
-        "revCount": 348588,
+        "lastModified": 1643570103,
+        "narHash": "sha256-ShkE6bmllCh149uH7ahJ8UgJSzChg3HJPQhJMbE4o/I=",
         "type": "git",
-        "url": "file:///home/rmk35/programming/nix/pkgs/unstable"
+        "url": "file:///home/rmk/programming/nix/pkgs/unstable"
       },
       "original": {
         "id": "nixpkgs",
