@@ -48,7 +48,6 @@ in
           let g:ale_fixers.css = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fix_on_save = 1
-          let g:ale_completion_enabled = 1
 
           nmap <silent> gd :ALEGoToDefinition<CR>
           nmap <silent> gy :ALEGoToTypeDefinition<CR>
@@ -69,9 +68,10 @@ in
             source ~/.config/nvim/init.vim
           endif
 
-          let g:vebugger_leader = "<Leader>d"
-
           :packadd vim-localvimrc
+
+          :packadd termdebug
+          hi debugPC cterm=bold ctermfg=11 ctermbg=0 guifg=Cyan
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
@@ -99,7 +99,6 @@ in
               vim-fetch
               vim-bindsplit
               vimproc
-              vim-vebugger
               vim-slime
               literate-vim
             ];
