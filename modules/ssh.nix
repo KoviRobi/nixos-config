@@ -4,10 +4,15 @@
 {
   environment.systemPackages = [ pkgs.google-authenticator ];
   security.pam.services.sshd.googleAuthenticator.enable = true;
+  users.groups.no-google-authenticator = { };
   services.openssh =
     {
       enable = true;
       permitRootLogin = "no";
-      extraConfig = "AuthenticationMethods publickey,keyboard-interactive";
+      extraConfig = ''
+        Match Group !no-google-authenticator
+          AuthenticationMethods publickey,keyboard-interactive
+        Match All
+      '';
     };
 }
