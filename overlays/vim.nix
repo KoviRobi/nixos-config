@@ -72,6 +72,12 @@ in
 
           :packadd termdebug
           hi debugPC cterm=bold ctermfg=11 ctermbg=0 guifg=Cyan
+          nmap <leader>db :Break<Cr>
+          nmap <leader>dB :Clear<Cr>
+          nmap <leader>dc :Continue<Cr>
+          nmap <leader>di :Step<Cr>
+          nmap <leader>do :Over<Cr>
+          map  <leader>de :Evaluate<Cr>
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
