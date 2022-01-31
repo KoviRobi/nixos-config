@@ -56,4 +56,18 @@
     };
 
   nix.maxJobs = 4;
+  nix.buildMachines = [
+    {
+      hostName = "192.168.0.29";
+      maxJobs = 24;
+      speedFactor = 5;
+      sshKey = "/root/.ssh/pc-build";
+      sshUser = "nix-ssh";
+      system = "x86_64-linux";
+    }
+  ];
+  nix.distributedBuilds = true;
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
 }
