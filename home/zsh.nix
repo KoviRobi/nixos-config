@@ -60,6 +60,7 @@ in
     enableCompletion = true;
     enableVteIntegration = true;
     enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
 
     shellAliases = {
       "less" = "less -iRq";
