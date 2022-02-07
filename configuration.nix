@@ -7,6 +7,7 @@ in
   imports = [
     (./configurations + ("/" + config))
     (./targets + ("/" + target))
+    ./legacy.nix
   ];
 
   environment.etc."nixos/configurations/default.nix" =

@@ -43,7 +43,7 @@
                     };
                     to = {
                       type = "git";
-                      url = "file://${config.users.users.default-user.home}/programming/nix/pkgs/unstable";
+                      url = "file:///nixpkgs";
                     };
                   };
 
@@ -51,6 +51,12 @@
                   nix.extraOptions = ''
                     experimental-features = nix-command flakes
                   '';
+
+                  nix.nixPath = [
+                    "nixpkgs=/nixpkgs"
+                    "home-manager=${home-manager}"
+                    "/nixpkgs"
+                  ];
                 })
 
                 home-manager.nixosModules.home-manager

@@ -6,12 +6,6 @@ in
   nixpkgs.overlays = map
     (x: import (../overlays + ("/" + x)))
     (with builtins; attrNames (readDir ../overlays));
-  nix.nixPath = [
-    "nixpkgs=${HOME}/programming/nix/pkgs/unstable"
-    "nixos-config=${HOME}/nixos/configuration.nix"
-    "home-manager=${HOME}/programming/nix/home-manager"
-    "${HOME}/programming/nix/pkgs/unstable"
-  ];
 
   imports = [
     (import ../modules/linux-console.nix { })
