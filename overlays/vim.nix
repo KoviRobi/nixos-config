@@ -78,6 +78,9 @@ in
           nmap <leader>di :Step<Cr>
           nmap <leader>do :Over<Cr>
           map  <leader>de :Evaluate<Cr>
+
+          " Gitgutter and other gutter backgrounds
+          hi SignColumn ctermbg=8
         '';
         packages.myVimPackage = with self.vimPlugins;
           {
@@ -91,6 +94,7 @@ in
               vim-easytags
               tagbar
               vim-fugitive
+              vim-gitgutter
               vim-localvimrc
               ultisnips
               vim-snippets
