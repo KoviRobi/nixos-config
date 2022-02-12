@@ -6,6 +6,10 @@ in
   nixpkgs.overlays = map
     (x: import (../overlays + ("/" + x)))
     (with builtins; attrNames (readDir ../overlays));
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
 
   imports = [
     (import ../modules/linux-console.nix { })
