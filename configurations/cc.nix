@@ -98,6 +98,8 @@
   services.udev.extraRules =
     ''
       SUBSYSTEM=="usb", ATTRS{idVendor}=="1366", ATTRS{manufacturer}=="SEGGER", ATTRS{idProduct}=="0101", ATTRS{product}=="J-Link", MODE="0666"
+      ACTION=="add", ATTRS{serial}=="DK5XA9SZ", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyBLE"
+      ACTION=="add", ATTRS{serial}=="DK6N5V3E", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyASIC"
     '';
   services.udev.packages = [ pkgs.stlink ];
 }
