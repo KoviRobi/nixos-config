@@ -1,0 +1,45 @@
+From df08d4ac7a3c28c41bf8eeaf9ff31956f4656392 Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
+Date: Fri, 28 Jan 2022 21:17:52 +0000
+Subject: [PATCH 3/5] vimPlugins.literate-vim: init at 2018-05-17
+
+---
+ pkgs/misc/vim-plugins/generated.nix    | 12 ++++++++++++
+ pkgs/misc/vim-plugins/vim-plugin-names |  1 +
+ 2 files changed, 13 insertions(+)
+
+diff --git a/pkgs/misc/vim-plugins/generated.nix b/pkgs/misc/vim-plugins/generated.nix
+index 782ccf4b028..860deb3fc04 100644
+--- a/pkgs/misc/vim-plugins/generated.nix
++++ b/pkgs/misc/vim-plugins/generated.nix
+@@ -3298,6 +3298,18 @@ final: prev:
+     meta.homepage = "https://github.com/ldelossa/litee.nvim/";
+   };
+ 
++  literate-vim = buildVimPluginFrom2Nix {
++    pname = "literate.vim";
++    version = "2018-05-17";
++    src = fetchFromGitHub {
++      owner = "zyedidia";
++      repo = "literate.vim";
++      rev = "4ffd45cb1657b67f4ed0eb639478a69209ec1f94";
++      sha256 = "004zcb1p6qma8vlx08sfhp0q7vhc2mphqa6mwahl41lb6z58k62z";
++    };
++    meta.homepage = "https://github.com/zyedidia/literate.vim/";
++  };
++
+   lsp-colors-nvim = buildVimPluginFrom2Nix {
+     pname = "lsp-colors.nvim";
+     version = "2021-10-22";
+diff --git a/pkgs/misc/vim-plugins/vim-plugin-names b/pkgs/misc/vim-plugins/vim-plugin-names
+index 66d7f3e886b..c94ad58a9da 100644
+--- a/pkgs/misc/vim-plugins/vim-plugin-names
++++ b/pkgs/misc/vim-plugins/vim-plugin-names
+@@ -986,3 +986,4 @@ yunlingz/ci_dark
+ zah/nim.vim
+ zhou13/vim-easyescape
+ ziglang/zig.vim
++zyedidia/literate.vim
+-- 
+2.35.1
+

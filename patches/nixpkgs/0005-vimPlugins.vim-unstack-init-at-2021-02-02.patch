@@ -1,0 +1,48 @@
+From bf72f1cd10a4a7ff3e94c3640449c5bdd194700d Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
+Date: Sun, 30 Jan 2022 19:15:03 +0000
+Subject: [PATCH 5/5] vimPlugins.vim-unstack: init at 2021-02-02
+
+---
+ pkgs/misc/vim-plugins/generated.nix    | 12 ++++++++++++
+ pkgs/misc/vim-plugins/vim-plugin-names |  1 +
+ 2 files changed, 13 insertions(+)
+
+diff --git a/pkgs/misc/vim-plugins/generated.nix b/pkgs/misc/vim-plugins/generated.nix
+index 6df6a2838cf..42052765036 100644
+--- a/pkgs/misc/vim-plugins/generated.nix
++++ b/pkgs/misc/vim-plugins/generated.nix
+@@ -11133,6 +11133,18 @@ final: prev:
+     meta.homepage = "https://github.com/tpope/vim-unimpaired/";
+   };
+ 
++  vim-unstack = buildVimPluginFrom2Nix {
++    pname = "vim-unstack";
++    version = "2021-02-02";
++    src = fetchFromGitHub {
++      owner = "mattboehm";
++      repo = "vim-unstack";
++      rev = "9b191419b4d3f26225a5ae3df5e409c62b426941";
++      sha256 = "192q163j9fsbkm1ns25mkwqhjznn5jajvfjzvsp623kdqlxnpc1b";
++    };
++    meta.homepage = "https://github.com/mattboehm/vim-unstack/";
++  };
++
+   vim-vagrant = buildVimPluginFrom2Nix {
+     pname = "vim-vagrant";
+     version = "2018-11-11";
+diff --git a/pkgs/misc/vim-plugins/vim-plugin-names b/pkgs/misc/vim-plugins/vim-plugin-names
+index fdcaba59076..22200e0fd3c 100644
+--- a/pkgs/misc/vim-plugins/vim-plugin-names
++++ b/pkgs/misc/vim-plugins/vim-plugin-names
+@@ -465,6 +465,7 @@ MarcWeber/vim-addon-xdebug
+ marko-cerovac/material.nvim
+ markonm/traces.vim
+ martinda/Jenkinsfile-vim-syntax
++mattboehm/vim-unstack
+ MattesGroeger/vim-bookmarks
+ mattn/calendar-vim as mattn-calendar-vim
+ mattn/emmet-vim
+-- 
+2.35.1
+

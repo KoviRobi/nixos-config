@@ -1,0 +1,48 @@
+From a2fd108da0de9d2d35e0ed563dd505bd9b1a8f88 Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
+Date: Fri, 28 Jan 2022 21:01:12 +0000
+Subject: [PATCH 1/5] vimPlugins.vim-textobj-elixir: init at 2019-05-30
+
+---
+ pkgs/misc/vim-plugins/generated.nix    | 12 ++++++++++++
+ pkgs/misc/vim-plugins/vim-plugin-names |  1 +
+ 2 files changed, 13 insertions(+)
+
+diff --git a/pkgs/misc/vim-plugins/generated.nix b/pkgs/misc/vim-plugins/generated.nix
+index 210aa3e817c..a5543324140 100644
+--- a/pkgs/misc/vim-plugins/generated.nix
++++ b/pkgs/misc/vim-plugins/generated.nix
+@@ -10845,6 +10845,18 @@ final: prev:
+     meta.homepage = "https://github.com/glts/vim-textobj-comment/";
+   };
+ 
++  vim-textobj-elixir = buildVimPluginFrom2Nix {
++    pname = "vim-textobj-elixir";
++    version = "2019-05-30";
++    src = fetchFromGitHub {
++      owner = "andyl";
++      repo = "vim-textobj-elixir";
++      rev = "b3d0fb1f19a918449eba856dc096c9f3231e871c";
++      sha256 = "0nhcssbcdz1p5cjnd7v9fqa74288gm4y54v47fan9f6fx76sbd25";
++    };
++    meta.homepage = "https://github.com/andyl/vim-textobj-elixir/";
++  };
++
+   vim-textobj-entire = buildVimPluginFrom2Nix {
+     pname = "vim-textobj-entire";
+     version = "2018-01-19";
+diff --git a/pkgs/misc/vim-plugins/vim-plugin-names b/pkgs/misc/vim-plugins/vim-plugin-names
+index 159fcb56560..d0827a02cad 100644
+--- a/pkgs/misc/vim-plugins/vim-plugin-names
++++ b/pkgs/misc/vim-plugins/vim-plugin-names
+@@ -30,6 +30,7 @@ AndrewRadev/tagalong.vim
+ andsild/peskcolor.vim
+ andviro/flake8-vim
+ andweeb/presence.nvim
++andyl/vim-textobj-elixir
+ andymass/vim-matchup
+ andys8/vim-elm-syntax
+ antoinemadec/coc-fzf
+-- 
+2.35.1
+
