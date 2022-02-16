@@ -10,7 +10,7 @@
       enable = true;
       permitRootLogin = "no";
       extraConfig = ''
-        Match Group !no-google-authenticator
+        Match Group !no-google-authenticator,*
           AuthenticationMethods publickey,keyboard-interactive
         Match All
       '';
