@@ -36,13 +36,6 @@
       extraConfig.http.emptyauth = true;
       lfs.enable = true;
     };
-    programs.vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        editorconfig.editorconfig
-        ms-vsliveshare.vsliveshare
-      ];
-    };
   };
 
   # Often docker images use a `build` user
