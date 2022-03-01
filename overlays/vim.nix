@@ -16,7 +16,10 @@ in
           set expandtab tabstop=2 softtabstop=2 shiftwidth=0
           set colorcolumn=80
           set backspace=indent,start,eol
+
           set completeopt=menuone,preview,longest
+          set omnifunc=ale#completion#OmniFunc
+
           set number relativenumber
           set spell spelllang=en_gb
           set mouse=ar
