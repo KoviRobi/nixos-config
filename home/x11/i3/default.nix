@@ -104,6 +104,10 @@ in
         "Shift+XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/back";
         "Shift+XF86AudioNext" = "exec ${i3-helpers.actions-dir}/forward";
         "XF86AudioPlay" = "exec ${i3-helpers.actions-dir}/toggle";
+        # Dunst
+        "${mod}+Prior" = "exec ${pkgs.dunst}/bin/dunstctl close";
+        "${mod}+Next" = "exec ${pkgs.dunst}/bin/dunstctl history-pop";
+        "${mod}+period" = "exec ${pkgs.dunst}/bin/dunstctl context";
       } //
       (builtins.listToAttrs (
         (

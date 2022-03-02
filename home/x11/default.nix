@@ -18,8 +18,11 @@ in
   services.pasystray.enable = true;
   services.dunst.enable = true;
   services.dunst.settings = {
-    global = { follow = "keyboard"; };
-    shortcuts = { close = "mod4+Prior"; history = "mod4+Next"; };
+    global = {
+      follow = "keyboard";
+      mouse_middle_click = "context";
+      dmenu = "${pkgs.dmenu}/bin/dmenu";
+    };
   };
   services.feh-random-background = {
     enable = true;
