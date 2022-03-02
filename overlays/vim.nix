@@ -116,6 +116,7 @@ in
               vim-unstack
               vim-slime
               literate-vim
+              vim-test
             ];
             opt = [ ];
           };
