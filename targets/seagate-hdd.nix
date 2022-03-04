@@ -48,7 +48,7 @@
 
   swapDevices = [ ];
 
-  nix.maxJobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkDefault 8;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

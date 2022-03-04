@@ -63,6 +63,6 @@
   swapDevices =
     [{ device = "/dev/disk/by-uuid/01591ee3-2df8-4a3d-a923-c4a9acd28663"; }];
 
-  nix.maxJobs = lib.mkDefault 2;
+  nix.settings.max-jobs = lib.mkDefault 2;
   virtualisation.virtualbox.guest.enable = true;
 }

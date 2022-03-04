@@ -55,7 +55,7 @@
       ];
     };
 
-  nix.maxJobs = 4;
+  nix.settings.max-jobs = 4;
   nix.buildMachines = [
     {
       hostName = "192.168.0.29";

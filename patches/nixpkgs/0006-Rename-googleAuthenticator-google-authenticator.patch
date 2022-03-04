@@ -1,0 +1,45 @@
+From 7845a1fefe968985e7551b303e894fbad8fc531a Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
+Date: Fri, 4 Mar 2022 12:02:31 +0000
+Subject: [PATCH 6/6] Rename googleAuthenticator -> google-authenticator
+
+---
+ nixos/modules/security/pam.nix | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/nixos/modules/security/pam.nix b/nixos/modules/security/pam.nix
+index 9f295db84fd..eb04633423d 100644
+--- a/nixos/modules/security/pam.nix
++++ b/nixos/modules/security/pam.nix
+@@ -72,7 +72,7 @@ let
+         '';
+       };
+ 
+-      googleAuthenticator = {
++      google-authenticator = {
+         enable = mkOption {
+           default = false;
+           type = types.bool;
+@@ -495,7 +495,7 @@ let
+               || cfg.pamMount
+               || cfg.enableKwallet
+               || cfg.enableGnomeKeyring
+-              || cfg.googleAuthenticator.enable
++              || cfg.google-authenticator.enable
+               || cfg.gnupg.enable
+               || cfg.duoSecurity.enable))
+             (
+@@ -517,8 +517,8 @@ let
+               optionalString cfg.gnupg.enable ''
+                 auth optional ${pkgs.pam_gnupg}/lib/security/pam_gnupg.so ${optionalString cfg.gnupg.storeOnly " store-only"}
+               '' +
+-              optionalString cfg.googleAuthenticator.enable ''
+-                auth required ${pkgs.googleAuthenticator}/lib/security/pam_google_authenticator.so no_increment_hotp
++              optionalString cfg.google-authenticator.enable ''
++                auth required ${pkgs.google-authenticator}/lib/security/pam_google_authenticator.so no_increment_hotp
+               '' +
+               optionalString cfg.duoSecurity.enable ''
+                 auth required ${pkgs.duo-unix}/lib/security/pam_duo.so
+-- 
+2.35.1
+

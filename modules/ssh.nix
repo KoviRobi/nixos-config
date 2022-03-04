@@ -3,7 +3,7 @@
 
 {
   environment.systemPackages = [ pkgs.google-authenticator ];
-  security.pam.services.sshd.googleAuthenticator.enable = true;
+  security.pam.services.sshd.google-authenticator.enable = true;
   users.groups.no-google-authenticator = { };
   services.openssh =
     {

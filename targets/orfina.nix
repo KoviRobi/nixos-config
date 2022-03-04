@@ -20,7 +20,7 @@
       fsType = "ext4";
     };
 
-  nix.maxJobs = 8;
+  nix.settings.max-jobs = 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   networking.hostName = "orfina.sm.cl.cam.ac.uk";

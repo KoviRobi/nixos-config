@@ -1,18 +1,18 @@
-From a2fd108da0de9d2d35e0ed563dd505bd9b1a8f88 Mon Sep 17 00:00:00 2001
+From a26046aaf90e3e1a0395360f0e6ae4e139c3f943 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Fri, 28 Jan 2022 21:01:12 +0000
-Subject: [PATCH 1/5] vimPlugins.vim-textobj-elixir: init at 2019-05-30
+Subject: [PATCH 1/6] vimPlugins.vim-textobj-elixir: init at 2019-05-30
 
 ---
- pkgs/misc/vim-plugins/generated.nix    | 12 ++++++++++++
- pkgs/misc/vim-plugins/vim-plugin-names |  1 +
+ pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++
+ .../editors/vim/plugins/vim-plugin-names             |  1 +
  2 files changed, 13 insertions(+)
 
-diff --git a/pkgs/misc/vim-plugins/generated.nix b/pkgs/misc/vim-plugins/generated.nix
-index 210aa3e817c..a5543324140 100644
---- a/pkgs/misc/vim-plugins/generated.nix
-+++ b/pkgs/misc/vim-plugins/generated.nix
-@@ -10845,6 +10845,18 @@ final: prev:
+diff --git a/pkgs/applications/editors/vim/plugins/generated.nix b/pkgs/applications/editors/vim/plugins/generated.nix
+index 3ad7739d06d..03aff85f3f5 100644
+--- a/pkgs/applications/editors/vim/plugins/generated.nix
++++ b/pkgs/applications/editors/vim/plugins/generated.nix
+@@ -11013,6 +11013,18 @@ final: prev:
      meta.homepage = "https://github.com/glts/vim-textobj-comment/";
    };
  
@@ -31,11 +31,11 @@ index 210aa3e817c..a5543324140 100644
    vim-textobj-entire = buildVimPluginFrom2Nix {
      pname = "vim-textobj-entire";
      version = "2018-01-19";
-diff --git a/pkgs/misc/vim-plugins/vim-plugin-names b/pkgs/misc/vim-plugins/vim-plugin-names
-index 159fcb56560..d0827a02cad 100644
---- a/pkgs/misc/vim-plugins/vim-plugin-names
-+++ b/pkgs/misc/vim-plugins/vim-plugin-names
-@@ -30,6 +30,7 @@ AndrewRadev/tagalong.vim
+diff --git a/pkgs/applications/editors/vim/plugins/vim-plugin-names b/pkgs/applications/editors/vim/plugins/vim-plugin-names
+index ef4d5499004..be928173467 100644
+--- a/pkgs/applications/editors/vim/plugins/vim-plugin-names
++++ b/pkgs/applications/editors/vim/plugins/vim-plugin-names
+@@ -31,6 +31,7 @@ AndrewRadev/tagalong.vim
  andsild/peskcolor.vim
  andviro/flake8-vim
  andweeb/presence.nvim

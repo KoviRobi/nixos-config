@@ -1,18 +1,18 @@
-From d7ea2964fc9be3ede2cf43faa4be5f1de55dd0f2 Mon Sep 17 00:00:00 2001
+From f7976dbd6c3de11534b2247f648dc78cee2189fe Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Sat, 29 Jan 2022 16:56:04 +0000
-Subject: [PATCH 4/5] vimPlugins.vim-bindsplit: init at 2022-01-29
+Subject: [PATCH 4/6] vimPlugins.vim-bindsplit: init at 2022-01-29
 
 ---
- pkgs/misc/vim-plugins/generated.nix    | 12 ++++++++++++
- pkgs/misc/vim-plugins/vim-plugin-names |  1 +
+ pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++
+ .../editors/vim/plugins/vim-plugin-names             |  1 +
  2 files changed, 13 insertions(+)
 
-diff --git a/pkgs/misc/vim-plugins/generated.nix b/pkgs/misc/vim-plugins/generated.nix
-index 860deb3fc04..6df6a2838cf 100644
---- a/pkgs/misc/vim-plugins/generated.nix
-+++ b/pkgs/misc/vim-plugins/generated.nix
-@@ -7481,6 +7481,18 @@ final: prev:
+diff --git a/pkgs/applications/editors/vim/plugins/generated.nix b/pkgs/applications/editors/vim/plugins/generated.nix
+index 4b65c6496df..38145730124 100644
+--- a/pkgs/applications/editors/vim/plugins/generated.nix
++++ b/pkgs/applications/editors/vim/plugins/generated.nix
+@@ -7637,6 +7637,18 @@ final: prev:
      meta.homepage = "https://github.com/ntpeters/vim-better-whitespace/";
    };
  
@@ -31,12 +31,12 @@ index 860deb3fc04..6df6a2838cf 100644
    vim-bookmarks = buildVimPluginFrom2Nix {
      pname = "vim-bookmarks";
      version = "2021-08-22";
-diff --git a/pkgs/misc/vim-plugins/vim-plugin-names b/pkgs/misc/vim-plugins/vim-plugin-names
-index c94ad58a9da..fdcaba59076 100644
---- a/pkgs/misc/vim-plugins/vim-plugin-names
-+++ b/pkgs/misc/vim-plugins/vim-plugin-names
-@@ -379,6 +379,7 @@ konfekt/fastfold
- Konfekt/vim-alias
+diff --git a/pkgs/applications/editors/vim/plugins/vim-plugin-names b/pkgs/applications/editors/vim/plugins/vim-plugin-names
+index a33c53c1282..8edc5504f70 100644
+--- a/pkgs/applications/editors/vim/plugins/vim-plugin-names
++++ b/pkgs/applications/editors/vim/plugins/vim-plugin-names
+@@ -383,6 +383,7 @@ Konfekt/vim-alias
+ Konfekt/vim-CtrlXA
  konfekt/vim-DetectSpellLang
  kosayoda/nvim-lightbulb
 +KoviRobi/vim-bindsplit

@@ -94,7 +94,7 @@
     '';
   };
 
-  nix.maxJobs = 24;
+  nix.settings.max-jobs = 24;
   nix.sshServe.enable = true;
   nix.sshServe.write = true;
   nix.sshServe.keys = [
@@ -102,7 +102,7 @@
   ];
   # Set modules/ssh.nix to not require authenticator key for nix-ssh
   users.users.nix-ssh.extraGroups = [ "no-google-authenticator" ];
-  nix.trustedUsers = [ "nix-ssh" ];
+  nix.settings.trusted-users = [ "nix-ssh" ];
 
   security.sudo.extraRules = [{
     groups = [ "wheel" ];
