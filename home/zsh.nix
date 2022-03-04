@@ -54,6 +54,7 @@ in
       unsetopt flow_control
       bindkey "^Q" push-line
       setopt AUTO_PUSHD
+      export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
       source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
     '';
 
