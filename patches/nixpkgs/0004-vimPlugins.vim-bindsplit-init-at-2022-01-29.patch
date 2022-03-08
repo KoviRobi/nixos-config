@@ -1,7 +1,7 @@
-From f7976dbd6c3de11534b2247f648dc78cee2189fe Mon Sep 17 00:00:00 2001
+From cf87a931bfc7af05d1976b9a60cc1c4d666f7cb2 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Sat, 29 Jan 2022 16:56:04 +0000
-Subject: [PATCH 4/6] vimPlugins.vim-bindsplit: init at 2022-01-29
+Subject: [PATCH 4/5] vimPlugins.vim-bindsplit: init at 2022-01-29
 
 ---
  pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++

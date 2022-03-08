@@ -1,7 +1,7 @@
-From 80f2bdaee70e132c9f396dcf12910773b5bdda85 Mon Sep 17 00:00:00 2001
+From fedca670556e5fab492e91965df443fffe429e96 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Fri, 28 Jan 2022 21:17:52 +0000
-Subject: [PATCH 3/6] vimPlugins.literate-vim: init at 2018-05-17
+Subject: [PATCH 3/5] vimPlugins.literate-vim: init at 2018-05-17
 
 ---
  pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++

@@ -1,7 +1,7 @@
-From a26046aaf90e3e1a0395360f0e6ae4e139c3f943 Mon Sep 17 00:00:00 2001
+From 97180c9b71eaed79f1d1c733e1443f5a178b4fed Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Fri, 28 Jan 2022 21:01:12 +0000
-Subject: [PATCH 1/6] vimPlugins.vim-textobj-elixir: init at 2019-05-30
+Subject: [PATCH 1/5] vimPlugins.vim-textobj-elixir: init at 2019-05-30
 
 ---
  pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++

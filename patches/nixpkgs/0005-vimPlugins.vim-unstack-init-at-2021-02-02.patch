@@ -1,7 +1,7 @@
-From 7708a5c02d6c3dd6aa21158924ff808c6226ad7e Mon Sep 17 00:00:00 2001
+From 2184dd78b1996e17d1011a632a990fc932104e6a Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@cambridgeconsultants.com>
 Date: Sun, 30 Jan 2022 19:15:03 +0000
-Subject: [PATCH 5/6] vimPlugins.vim-unstack: init at 2021-02-02
+Subject: [PATCH 5/5] vimPlugins.vim-unstack: init at 2021-02-02
 
 ---
  pkgs/applications/editors/vim/plugins/generated.nix  | 12 ++++++++++++
