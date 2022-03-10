@@ -23,10 +23,10 @@
     "nixpkgs": {
       "locked": {
         "lastModified": 1643570103,
-        "narHash": "sha256-FRCEMnIW6pJfH09BDvWX5C2ZtRYTgfnki3m7LJlfbQE=",
+        "narHash": "sha256-ELMo7G7JKMFAFcIm1yL8ekjoS7KFdTJ/1SF7rp3OhI8=",
         "ref": "nixpkgs-unstable",
-        "rev": "2184dd78b1996e17d1011a632a990fc932104e6a",
-        "revCount": 358889,
+        "rev": "379f64d8590ef57d58afc08610dc6a5de5cadde5",
+        "revCount": 358998,
         "type": "git",
         "url": "file:///nixpkgs"
       },
