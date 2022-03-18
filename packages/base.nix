@@ -29,6 +29,7 @@ with pkgs;
   nix-prefetch-github
   nixpkgs-fmt
   nix-tree
+  nix-index
 
   dconf
   plan9port
