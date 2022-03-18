@@ -18,6 +18,7 @@
   solarized.brightness = "light";
 
   virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [
     docker-credential-helpers
