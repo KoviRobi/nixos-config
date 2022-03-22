@@ -40,6 +40,8 @@ in
           let g:easytags_async = 1
           let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
 
+          let g:netrw_keepj = ""
+
           " Elixir
           let g:ale_linters = { 'elixir' : ['elixir-ls'] }
           let g:ale_linters.python = ['jedils', 'mypy']
