@@ -27,6 +27,7 @@ in
       set -g set-titles on
       set -g alternate-screen off
       set -g pane-border-lines heavy
+      set -g display-panes-time 2000
 
       set -g renumber-windows on
       bind-key . command-prompt "swap-window -t '%%'"
@@ -44,6 +45,8 @@ in
 
       bind-key @ choose-tree 'join-pane -hs %%'
       bind-key \# choose-tree 'join-pane -s %%'
+
+      bind-key Q display-panes 'send-keys -t "#D" %%'
 
       bind-key "'" last-window
 
