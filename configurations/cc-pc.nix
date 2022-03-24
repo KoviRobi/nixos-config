@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ./cc.nix ];
+  imports = [ ./cc.nix ../modules/initrd-ssh.nix ];
 
   services.xserver.dpi = 100;
   services.xserver.xrandrHeads = [
