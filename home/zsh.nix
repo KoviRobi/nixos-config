@@ -20,6 +20,7 @@ in
       LESS="-iRq"
 
       bindkey -e
+      autoload edit-command-line
       zle -N edit-command-line
       bindkey "^X^E" edit-command-line
       bindkey "^P" up-history
