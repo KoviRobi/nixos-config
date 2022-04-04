@@ -9,11 +9,8 @@ with pkgs;
   udiskie
   geeqie
 
-  audacity
-  easytag
   gmpc
   libreoffice
-  inkscape
 
   firefox
 
@@ -35,10 +32,8 @@ with pkgs;
   xorg.xhost
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-  cura
   mpv
   flameshot
-  antimicroX
   signal-desktop
   v4l-utils
 ]
