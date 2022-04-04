@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }@args:
 
 {
   imports = [ ./cc.nix ../modules/initrd-ssh.nix ];
@@ -29,5 +29,6 @@
 
   networking.hostName = "rmk-nixos-a"; # Define your hostname.
 
-  environment.systemPackages = with pkgs; [ barrier ];
+  environment.systemPackages = with pkgs; [ barrier ]
+    ++ (import ../packages/cc.nix args);
 }
