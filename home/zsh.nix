@@ -17,7 +17,7 @@ in
       BROWSER="links -g"
       EDITOR="nvim"
       PAGER="less"
-      LESS="-iRq"
+      LESS="-iRq -j5"
 
       bindkey -e
       autoload edit-command-line

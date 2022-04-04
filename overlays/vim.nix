@@ -29,6 +29,7 @@ in
           set autoindent
           set laststatus=2
           set notitle
+          set scrolljump=5
 
           set background=dark
           colorscheme solarized
