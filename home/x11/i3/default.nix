@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }@args:
+{ pkgs, lib, pye-menu, ... }@args:
 let
-  i3-helpers = import ./i3-helpers.nix pkgs;
+  i3-helpers = import ./i3-helpers.nix { inherit pkgs pye-menu; };
   mod = "Mod4"; # Win key
 
   term = "${pkgs.st}/bin/st";
@@ -91,14 +91,14 @@ in
         "${mod}+Shift+bracketright" = "move to output right";
         "${mod}+Shift+parenleft" = "move to workspace prev_on_output";
         "${mod}+Shift+parenright" = "move to workspace next_on_output";
-        "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
-        "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/window_menu";
+        "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
+        "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
         "XF86AudioMute" = "exec ${i3-helpers.actions-dir}/mute";
         "XF86AudioLowerVolume" = "exec ${i3-helpers.actions-dir}/voldn";
         "XF86AudioRaiseVolume" = "exec ${i3-helpers.actions-dir}/volup";
         "XF86MonBrightnessDown" = "exec ${i3-helpers.actions-dir}/bldec";
         "XF86MonBrightnessUp" = "exec ${i3-helpers.actions-dir}/blinc";
-        "XF86Search" = "exec ${i3-helpers.pen-pye-menu}/bin/general_menu";
+        "XF86Search" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
         "XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/prev";
         "XF86AudioNext" = "exec ${i3-helpers.actions-dir}/next";
         "Shift+XF86AudioPrev" = "exec ${i3-helpers.actions-dir}/back";

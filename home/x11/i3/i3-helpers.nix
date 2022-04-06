@@ -1,4 +1,4 @@
-pkgs:
+{ pkgs, pye-menu }:
 let
   sh = "${pkgs.bash}/bin/bash";
   dmenu = "${pkgs.dmenu}/bin/dmenu";
@@ -124,5 +124,5 @@ in
     fi
     ${i3-msg} "$1 $WSNAME"
   '';
-  pen-pye-menu = pkgs.python3.pkgs.callPackage ./pen-pye-menu { };
+  pen-pye-menu = pye-menu.packages."${pkgs.system}".pen-menu;
 }

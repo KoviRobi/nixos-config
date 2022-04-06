@@ -4,7 +4,10 @@
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { self, nixpkgs, home-manager }: {
+  inputs.pye-menu.url = "github:KoviRobi/Pye-Menu";
+  inputs.pye-menu.inputs.nixpkgs.follows = "nixpkgs";
+
+  outputs = { self, nixpkgs, home-manager, pye-menu }: {
 
     devShell.x86_64-linux =
       let
@@ -59,10 +62,11 @@
                   ];
                 })
 
-                home-manager.nixosModules.home-manager
+                home-manager.nixosModule
                 {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
+                  home-manager.extraSpecialArgs = { inherit pye-menu; };
                 }
               ];
           }
