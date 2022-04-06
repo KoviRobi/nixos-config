@@ -1,8 +1,74 @@
 # vim: set ts=2 sts=2 sw=2 et :
 self: super:
-let vimplugin = self.vimUtils.buildVimPluginFrom2Nix;
+let
+  inherit (self.vimUtils) buildVimPluginFrom2Nix;
+  inherit (self) fetchFromGitHub;
 in
 {
+  literate-vim =
+    if super.vimPlugins ? literate-vim
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "literate.vim";
+        version = "2018-05-17";
+        src = fetchFromGitHub {
+          owner = "zyedidia";
+          repo = "literate.vim";
+          rev = "4ffd45cb1657b67f4ed0eb639478a69209ec1f94";
+          sha256 = "004zcb1p6qma8vlx08sfhp0q7vhc2mphqa6mwahl41lb6z58k62z";
+        };
+        meta.homepage = "https://github.com/zyedidia/literate.vim/";
+      };
+
+  vim-bindsplit =
+    if super.vimPlugins ? vim-bindsplit
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "vim-bindsplit";
+        version = "2022-01-29";
+        src = fetchFromGitHub {
+          owner = "KoviRobi";
+          repo = "vim-bindsplit";
+          rev = "c28cc3a402dd9adbaad97b6389979783a2fab555";
+          sha256 = "1dlj2dg4lns46m6dhdd13pbnwkjbm81ks35l6xnqm446sgzmh6qm";
+        };
+        meta.homepage = "https://github.com/KoviRobi/vim-bindsplit/";
+      };
+
+  vim-textobj-elixir =
+    if super.vimPlugins ? vim-textobj-elixir
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "vim-textobj-elixir";
+        version = "2019-05-30";
+        src = fetchFromGitHub {
+          owner = "andyl";
+          repo = "vim-textobj-elixir";
+          rev = "b3d0fb1f19a918449eba856dc096c9f3231e871c";
+          sha256 = "0nhcssbcdz1p5cjnd7v9fqa74288gm4y54v47fan9f6fx76sbd25";
+        };
+        meta.homepage = "https://github.com/andyl/vim-textobj-elixir/";
+      };
+
+  vim-unstack =
+    if super.vimPlugins ? vim-unstack
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "vim-unstack";
+        version = "2021-02-02";
+        src = fetchFromGitHub {
+          owner = "mattboehm";
+          repo = "vim-unstack";
+          rev = "9b191419b4d3f26225a5ae3df5e409c62b426941";
+          sha256 = "192q163j9fsbkm1ns25mkwqhjznn5jajvfjzvsp623kdqlxnpc1b";
+        };
+        meta.homepage = "https://github.com/mattboehm/vim-unstack/";
+      };
+
   neovim = super.neovim.override {
     configure =
       {
@@ -113,14 +179,15 @@ in
               vim-test
               neoterm
               vim-textobj-user
-              vim-textobj-elixir
               vim-fetch
-              vim-bindsplit
               vimproc
-              vim-unstack
               vim-slime
-              literate-vim
               vim-test
+
+              self.literate-vim
+              self.vim-bindsplit
+              self.vim-textobj-elixir
+              self.vim-unstack
             ];
             opt = [ ];
           };
