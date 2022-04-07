@@ -46,7 +46,7 @@ in
       bind-key @ choose-tree 'join-pane -hs %%'
       bind-key \# choose-tree 'join-pane -s %%'
 
-      bind-key Q display-panes 'send-keys -t "#D" %%'
+      bind-key Q display-panes 'send-keys %%'
 
       bind-key "'" last-window
 
