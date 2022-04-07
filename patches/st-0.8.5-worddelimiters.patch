@@ -1,0 +1,12 @@
+diff -uNr a/config.def.h b/config.def.h
+--- a/config.def.h	2022-04-07 16:00:15.499025634 +0100
++++ b/config.def.h	2022-04-07 16:07:54.325124891 +0100
+@@ -34,7 +34,7 @@
+  *
+  * More advanced example: L" `'\"()[]{}"
+  */
+-wchar_t *worddelimiters = L" ";
++wchar_t *worddelimiters = L" `'\"()[]{}<>┃";
+
+ /* selection timeouts (in milliseconds) */
+ static unsigned int doubleclicktimeout = 300;
