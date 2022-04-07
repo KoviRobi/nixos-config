@@ -7,7 +7,10 @@
   inputs.pye-menu.url = "github:KoviRobi/Pye-Menu";
   inputs.pye-menu.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { self, nixpkgs, home-manager, pye-menu }: {
+  inputs.flake-compat.url = "github:edolstra/flake-compat";
+  inputs.flake-compat.flake = false;
+
+  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat }: {
 
     devShell.x86_64-linux =
       let
