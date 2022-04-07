@@ -19,8 +19,6 @@
     }];
   };
 
-  networking.hostName = "cc-nixos-a"; # Define your hostname.
-
   virtualisation.vmware.guest = { enable = true; };
 
   services.xserver = {

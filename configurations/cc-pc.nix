@@ -27,8 +27,6 @@
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "cifs" ];
 
-  networking.hostName = "rmk-nixos-a"; # Define your hostname.
-
   environment.systemPackages = with pkgs; [ barrier ]
     ++ (import ../packages/cc.nix args);
 }

@@ -16,7 +16,7 @@
       fsType = "xfs";
     };
 
-  boot.initrd.luks.devices."cc-nixos-a".device = "/dev/disk/by-uuid/98512b43-21cc-4167-b117-7ca792debb2a";
+  boot.initrd.luks.devices."${config.networking.hostName}".device = "/dev/disk/by-uuid/98512b43-21cc-4167-b117-7ca792debb2a";
 
   fileSystems."/boot" =
     {

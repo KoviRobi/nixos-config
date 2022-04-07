@@ -27,6 +27,8 @@
             system = "x86_64-linux";
             modules =
               (map import value) ++ [
+                { networking.hostName = name; }
+
                 # Let 'nixos-version --json' know about the Git revision
                 # of this flake.
                 # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
@@ -74,8 +76,8 @@
       {
         "as-nixos-b" = [ ./configurations/acer-as.nix ./configurations/acer-as.nix ];
         "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
-        "cc-nixos-a" = [ ./configurations/cc-vm.nix ./targets/cc-vm.nix ];
-        "rmk-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
+        "cc-vm-nixos-a" = [ ./configurations/cc-vm.nix ./targets/cc-vm.nix ];
+        "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
       };
   };
 }
