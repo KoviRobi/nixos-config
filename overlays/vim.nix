@@ -123,6 +123,9 @@ in
           let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
           let g:ale_fix_on_save = 1
 
+          nmap <silent> <C-W>gd :ALEGoToDefinition -tab<CR>
+          nmap <silent> <C-W>gy :ALEGoToTypeDefinition -tab<CR>
+          nmap <silent> <C-W>gr :ALEFindReferences -tab<CR>
           nmap <silent> gd :ALEGoToDefinition<CR>
           nmap <silent> gy :ALEGoToTypeDefinition<CR>
           nmap <silent> gr :ALEFindReferences<CR>
