@@ -107,6 +107,7 @@
         "cc-vm-nixos-a" = [ ./configurations/cc-vm.nix ./targets/cc-vm.nix ];
         "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
         "cc-wsl" = [ ./configurations/cc.nix NixOS-WSL.nixosModules.wsl ./targets/wsl.nix ];
+        "wsl" = [ ./configurations/wsl.nix NixOS-WSL.nixosModules.wsl ./targets/wsl.nix ];
       };
   };
 }
