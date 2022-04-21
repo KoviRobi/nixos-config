@@ -2,7 +2,13 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./cc.nix ];
+  imports = [
+    ./cc.nix
+    ../modules/graphical.nix
+  ];
+
+  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
 
   services.xserver.dpi = 120;
 
