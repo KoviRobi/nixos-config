@@ -10,11 +10,7 @@
   inputs.flake-compat.url = "github:edolstra/flake-compat";
   inputs.flake-compat.flake = false;
 
-  inputs.NixOS-WSL.url = "github:nix-community/NixOS-WSL";
-  inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
-
-  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, NixOS-WSL }: {
+  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat }: {
 
     devShell.x86_64-linux =
       let
@@ -106,8 +102,8 @@
         "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
         "cc-vm-nixos-a" = [ ./configurations/cc-vm.nix ./targets/cc-vm.nix ];
         "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
-        "cc-wsl" = [ ./configurations/cc.nix NixOS-WSL.nixosModules.wsl ./targets/wsl.nix ];
-        "wsl" = [ ./configurations/wsl.nix NixOS-WSL.nixosModules.wsl ./targets/wsl.nix ];
+        "cc-wsl" = [ ./configurations/cc.nix ./wsl-modules ./targets/wsl.nix ];
+        "wsl" = [ ./configurations/wsl.nix ./wsl-modules ./targets/wsl.nix ];
       };
   };
 }
