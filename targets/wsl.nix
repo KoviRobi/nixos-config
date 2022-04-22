@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
   wsl = {
     enable = true;
@@ -10,6 +10,7 @@
     # docker.enable = true;
 
     wslConf.network.generateResolvConf = "false";
+    wslConf.network.hostname = config.networking.hostName;
   };
   environment.etc."resolv.conf".enable = lib.mkForce true;
   environment.etc."resolv.conf".text = ''
