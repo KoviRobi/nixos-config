@@ -23,58 +23,79 @@
         ];
       };
 
+    homeConfigurations = {
+      "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
+        configuration = {
+          imports = [ ./home ];
+          nixpkgs.overlays = map
+            (x: import (./overlays + ("/" + x)))
+            (with builtins; attrNames (readDir ./overlays));
+          nixos = {
+            services.xserver.dpi = 100;
+            fileSystems = { "/" = { }; };
+            users.users.default-user.uid = 1000;
+          };
+        };
+        system = "x86_64-linux";
+        homeDirectory = "/home/rmk";
+        username = "rmk";
+        stateVersion = "21.05";
+        extraSpecialArgs = { inherit pye-menu; };
+      };
+    };
+
     nixosConfigurations = builtins.mapAttrs
       (name: value:
-        nixpkgs.lib.nixosSystem
-          {
-            system = "x86_64-linux";
-            modules =
-              (map import value) ++ [
-                { networking.hostName = name; }
+        nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          modules =
+            value ++ [
+              { networking.hostName = name; }
 
-                # Let 'nixos-version --json' know about the Git revision
-                # of this flake.
-                # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
-                {
-                  system.configurationRevision =
-                    if self ? rev
-                    then self.rev
-                    else throw "Refusing to build from a dirty Git tree!";
-                }
+              # Let 'nixos-version --json' know about the Git revision
+              # of this flake.
+              # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
+              {
+                system.configurationRevision =
+                  if self ? rev
+                  then self.rev
+                  else throw "Refusing to build from a dirty Git tree!";
+              }
 
-                ({ config, pkgs, ... }: {
-                  # https://www.arcadianvisions.com/2021/nix-registry.html
-                  nix.registry.nixpkgs = {
-                    from = {
-                      type = "indirect";
-                      id = "nixpkgs";
-                    };
-                    to = {
-                      type = "git";
-                      url = "file:///nixpkgs";
-                    };
+              ({ config, pkgs, ... }: {
+                # https://www.arcadianvisions.com/2021/nix-registry.html
+                nix.registry.nixpkgs = {
+                  from = {
+                    type = "indirect";
+                    id = "nixpkgs";
                   };
+                  to = {
+                    type = "git";
+                    url = "file:///nixpkgs";
+                  };
+                };
 
-                  nix.package = pkgs.nixFlakes;
-                  nix.extraOptions = ''
-                    experimental-features = nix-command flakes
-                  '';
+                nix.package = pkgs.nixFlakes;
+                nix.extraOptions = ''
+                  experimental-features = nix-command flakes
+                '';
 
-                  nix.nixPath = [
-                    "nixpkgs=/nixpkgs"
-                    "home-manager=${home-manager}"
-                    "/nixpkgs"
-                  ];
-                })
+                nix.nixPath = [
+                  "nixpkgs=/nixpkgs"
+                  "home-manager=${home-manager}"
+                  "/nixpkgs"
+                ];
+              })
 
-                home-manager.nixosModule
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.extraSpecialArgs = { inherit pye-menu; };
-                }
-              ];
-          }
+              home-manager.nixosModule
+              {
+                environment.systemPackages = [ home-manager.defaultPackage.${system} ];
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = { inherit pye-menu; };
+              }
+            ];
+        }
       )
       {
         "as-nixos-b" = [ ./configurations/acer-as.nix ./configurations/acer-as.nix ];
