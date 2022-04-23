@@ -3,7 +3,7 @@
   wsl = {
     enable = true;
     automountPath = "/mnt";
-    defaultUser = "rmk";
+    defaultUser = "default-user";
     startMenuLaunchers = true;
 
     # Enable integration with Docker Desktop (needs to be installed)
