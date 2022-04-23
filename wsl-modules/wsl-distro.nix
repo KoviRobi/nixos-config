@@ -133,5 +133,8 @@ with builtins; with lib;
 
       # Don't allow emergency mode, because we don't have a console.
       systemd.enableEmergencyMode = false;
+
+      # Include NixOS manual
+      documentation.nixos.enable = true;
     };
 }
