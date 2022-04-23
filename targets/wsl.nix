@@ -36,6 +36,16 @@ in
       ${pkgs.gnused}/bin/sed 's/^/nameserver /' > /etc/resolv.conf
   '';
 
+  systemd.services.vcxsrv.serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
+  systemd.services.vcxsrv.wantedBy = [ "multi-user.target" ];
+  systemd.services.vcxsrv.script = ''
+    mcookie=$(${pkgs.util-linux}/bin/mcookie)
+    num=0
+    export DISPLAY=_gateway:$num
+    ${pkgs.xorg.xauth}/bin/xauth -f /mnt/c/Users/user/.Xauthority add $DISPLAY . $mcookie
+    "/mnt/c/Program Files/VcXsrv/vcxsrv.exe" :$num -multiwindow -clipboard -wgl -once -auth 'C:\Users\user\.Xauthority'
+  '';
+
   systemd.user.services.gnome-keyring.script = ''${pkgs.gnome.gnome-keyring}/bin/gnome-keyring-daemon --start'';
   systemd.user.services.gnome-keyring.wantedBy = [ "default.target" ];
 
