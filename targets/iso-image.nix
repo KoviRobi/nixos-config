@@ -1,3 +1,4 @@
+{ self, nixpkgs }:
 # nix build -f '<nixpkgs/nixos>' config.system.build.isoImage -I nixos-config=iso-image.nix
 { config, lib, pkgs, ... }:
 let mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };
@@ -6,18 +7,18 @@ in
 {
   imports =
     [
-      <nixpkgs/nixos/modules/installer/cd-dvd/iso-image.nix>
-      <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-      <nixpkgs/nixos/modules/installer/scan/detected.nix>
-      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-      <nixpkgs/nixos/modules/profiles/all-hardware.nix>
-      <nixpkgs/nixos/modules/profiles/base.nix>
+      "${nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
+      "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+      "${nixpkgs}/nixos/modules/installer/scan/detected.nix"
+      "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
+      "${nixpkgs}/nixos/modules/profiles/all-hardware.nix"
+      "${nixpkgs}/nixos/modules/profiles/base.nix"
     ];
 
   # Since it is a brand-new build
   system.stateVersion = lib.versions.majorMinor lib.version;
 
-  environment.etc.nixos.source = "${builtins.fetchGit https://github.com/KoviRobi/nixos-config}";
+  environment.etc.nixos.source = self;
   # Because the above is in the nix store, so immutable
   environment.etc."nixos/configurations/default.nix".enable = false;
   environment.etc."nixos/targets/default.nix".enable = false;
@@ -26,6 +27,8 @@ in
   isoImage.isoName = "${config.isoImage.isoBaseName}-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.iso";
 
   isoImage.volumeID = "NIXOS_ISO";
+
+  isoImage.squashfsCompression = "zstd -Xcompression-level 6";
 
   # EFI booting
   isoImage.makeEfiBootable = true;
@@ -45,43 +48,15 @@ in
 
   # Show the manual.
   documentation.nixos.enable = mkForce true;
-  services.nixosManual.showManual = true;
 
   # Allow the user to log in without a password.
-  users.users.rmk35.initialHashedPassword = "";
-  users.users.rmk35.openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_rsa.pub ];
-  users.users.root.initialHashedPassword = "";
-
-  # Allow passwordless sudo from wheel users
-  security.sudo = {
-    enable = mkDefault true;
-    wheelNeedsPassword = mkForce false;
-  };
+  users.users.default-user.initialPassword = "";
+  users.users.root.initialPassword = "";
 
   # Automatically log in at the virtual consoles.
-  services.mingetty.autologinUser = "rmk35";
+  services.mingetty.autologinUser = config.users.users.default-user.name;
 
-  # Some more help text.
-  services.mingetty.helpLine = ''
-    The "rmk35" and "root" accounts have empty passwords.
-
-    Type `sudo systemctl start sshd` to start the SSH daemon.
-    You then must set a password for either "root" or "rmk35"
-    with `passwd` to be able to login.
-  '' + lib.optionalString config.services.xserver.enable ''
-    Type `sudo systemctl start display-manager' to
-    start the graphical user interface.
-  '';
-
-  # Allow sshd to be started manually through "systemctl start sshd".
-  security.pam.services.sshd.googleAuthenticator.enable = lib.mkForce false;
-  services.openssh =
-    {
-      enable = true;
-      permitRootLogin = "no";
-      extraConfig = lib.mkForce "";
-    };
-  systemd.services.sshd.wantedBy = mkOverride 50 [ ];
+  services.xserver.dpi = 72;
 
   # Tell the Nix evaluator to garbage collect more aggressively.
   # This is desirable in memory-constrained environments that don't
