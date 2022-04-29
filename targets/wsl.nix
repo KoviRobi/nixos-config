@@ -24,6 +24,10 @@
       ${pkgs.dos2unix}/bin/dos2unix |
       ${pkgs.gnused}/bin/sed 's/^/nameserver /' > /etc/resolv.conf
   '';
+
+  systemd.user.services.gnome-keyring.script = ''${pkgs.gnome.gnome-keyring}/bin/gnome-keyring-daemon --start'';
+  systemd.user.services.gnome-keyring.wantedBy = [ "default.target" ];
+
   users.users.default-user.extraGroups = [ "no-google-authenticator" ];
   services.xserver.dpi = 100;
   environment.systemPackages = with pkgs; [ xorg.xauth ];
