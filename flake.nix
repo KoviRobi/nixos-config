@@ -63,28 +63,10 @@
               }
 
               ({ config, pkgs, ... }: {
-                # https://www.arcadianvisions.com/2021/nix-registry.html
-                nix.registry.nixpkgs = {
-                  from = {
-                    type = "indirect";
-                    id = "nixpkgs";
-                  };
-                  to = {
-                    type = "git";
-                    url = "file:///nixpkgs";
-                  };
-                };
-
                 nix.package = pkgs.nixFlakes;
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
-
-                nix.nixPath = [
-                  "nixpkgs=/nixpkgs"
-                  "home-manager=${home-manager}"
-                  "/nixpkgs"
-                ];
               })
 
               home-manager.nixosModule
