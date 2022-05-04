@@ -21,6 +21,7 @@ in
     # docker.enable = true;
 
     wslConf.network.generateResolvConf = "false";
+    wslConf.network.generateHosts = "false";
     wslConf.network.hostname = config.networking.hostName;
   };
 
