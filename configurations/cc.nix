@@ -14,6 +14,8 @@
       ../modules/ssh.nix
     ];
 
+  environment.etc.hosts.enable = false;
+
   solarized.brightness = "light";
 
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
