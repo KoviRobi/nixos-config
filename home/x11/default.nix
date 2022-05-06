@@ -70,7 +70,7 @@ in
     initExtra = ''
       ~/.fehbg || true &
     '';
-    pointerCursor = adwaita // { size = builtins.div config.nixos.services.xserver.dpi 5; };
   };
+  home.pointerCursor = adwaita // { size = builtins.div config.nixos.services.xserver.dpi 5; };
   gtk.theme = adwaita;
 }
