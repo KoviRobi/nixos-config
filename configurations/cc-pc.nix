@@ -2,7 +2,14 @@
 { config, pkgs, lib, ... }@args:
 
 {
-  imports = [ ./cc.nix ../modules/initrd-ssh.nix ];
+  imports = [
+    ./cc.nix
+    ../modules/initrd-ssh.nix
+    ../modules/graphical.nix
+  ];
+
+  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
 
   services.xserver.dpi = 100;
   services.xserver.xrandrHeads = [
