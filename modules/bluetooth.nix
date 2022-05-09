@@ -3,8 +3,6 @@
 
 {
   services.blueman.enable = true;
-  hardware.pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
-  hardware.pulseaudio.extraConfig = "load-module module-bluetooth-discover";
 } //
 (
   {
