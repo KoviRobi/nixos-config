@@ -28,10 +28,16 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
-  networking.firewall.allowedTCPPorts = [ 8123 139 445 ];
+  networking.firewall.allowedTCPPorts = [
+    8123
+    139
+    445
+    8200 # MiniDLNA
+  ];
   networking.firewall.allowedUDPPorts = [
     137
     138
+    1900 # MiniDLNA
   ];
 
   # WireGuard
@@ -157,5 +163,10 @@
         "force group" = "nogroup";
       };
     };
+  };
+
+  services.minidlna = {
+    enable = true;
+    mediaDirs = [ "${config.users.users.default-user.home}/Videos" "/music/" ];
   };
 }
