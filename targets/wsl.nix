@@ -32,4 +32,6 @@
   environment.systemPackages = with pkgs; [ xorg.xauth ];
   services.openssh.forwardX11 = true;
   solarized.brightness = "light";
+
+  system.stateVersion = "22.05";
 }
