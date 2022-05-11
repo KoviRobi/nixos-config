@@ -18,7 +18,6 @@
   systemd.services."resolv.conf".script = ''
     /mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
       -Command "(Get-DnsClientServerAddress \
-                      -InterfaceAlias Ethernet \
                       -AddressFamily IPv4 \
                 ).ServerAddresses" |
       ${pkgs.dos2unix}/bin/dos2unix |
