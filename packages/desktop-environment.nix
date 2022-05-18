@@ -13,6 +13,7 @@ with pkgs;
   libreoffice
 
   firefox
+  chromium
 
   pamixer
   paprefs
