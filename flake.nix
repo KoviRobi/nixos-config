@@ -67,6 +67,32 @@
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
+
+                # ~/.config/nix/registry.json, if you want to use a local
+                # checkout:
+                #
+                #     {
+                #       "flakes": [
+                #         {
+                #           "exact": true,
+                #           "from": {
+                #             "id": "nixpkgs",
+                #             "type": "indirect"
+                #           },
+                #           "to": {
+                #             "type": "git",
+                #             "url": "file:///nix/pkgs"
+                #           }
+                #         }
+                #       ],
+                #       "version": 2
+                #     }
+
+                nix.nixPath = [
+                  "nixpkgs=${nixpkgs}"
+                  "home-manager=${home-manager}"
+                  "${nixpkgs}"
+                ];
               })
 
               home-manager.nixosModule

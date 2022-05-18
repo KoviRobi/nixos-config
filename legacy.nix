@@ -5,9 +5,9 @@ let
 in
 {
   nix.nixPath = [
-    "nixpkgs=/nixpkgs"
+    "nixpkgs=/nix/pkgs"
     "nixos-config=${HOME}/nixos/configuration.nix"
     "home-manager=${HOME}/programming/nix/home-manager"
-    "/nixpkgs"
+    "/nix/pkgs"
   ];
 }
