@@ -31,8 +31,7 @@ in
 
   environment.homeBinInPath = true;
   environment.systemPackages =
-    (import ../packages/base.nix args)
-    ++ (import ../packages/desktop-environment.nix args);
+    (import ../packages/base.nix args);
 
   fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern terminus-nerdfont ];
 

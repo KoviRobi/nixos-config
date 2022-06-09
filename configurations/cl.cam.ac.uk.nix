@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@args:
 
 {
   imports =
@@ -14,7 +14,9 @@
   environment.systemPackages = with pkgs;
     [
       networkmanagerapplet
-    ] ++ (with pkgs.xorg; [ xf86videointel xf86videonouveau ]);
+    ]
+    ++ (with pkgs.xorg; [ xf86videointel xf86videonouveau ])
+    ++ (import ../packages/desktop-environment.nix args);
 
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
 

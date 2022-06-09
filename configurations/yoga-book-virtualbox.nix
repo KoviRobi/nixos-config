@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@args:
 
 {
   imports =
@@ -10,6 +10,8 @@
       ../modules/graphical.nix
       (import ../modules/avahi.nix { publish = true; })
     ];
+
+  environment.systemPackages = import ../packages/desktop-environment.nix args;
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];

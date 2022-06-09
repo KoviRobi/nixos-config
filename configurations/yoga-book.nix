@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@args:
 
 {
   imports =
@@ -34,7 +34,8 @@
   });
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
-  environment.systemPackages = with pkgs; [ ntfs3g ];
+  environment.systemPackages = with pkgs; [ ntfs3g ]
+    ++ (import ../packages/desktop-environment.nix args);
 
   services.blueman.enable = true;
   services.clamav.daemon.enable = lib.mkForce false;
