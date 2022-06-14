@@ -1,8 +1,4 @@
 { pkgs, lib, ... }:
-let
-  xclip = "${pkgs.xclip}/bin/xclip";
-  i3 = "${pkgs.i3}";
-in
 {
   programs.tmux = {
     enable = true;
@@ -71,8 +67,8 @@ in
       bind-key -T copy-mode    C-PageDown    send-keys -X page-down
       bind-key -T copy-mode-vi C-PageDown    send-keys -X page-down
 
-      bind-key -T copy-mode    MouseDragEnd1Pane  send-keys -X copy-pipe "${xclip} -i -selection primary"
-      bind-key -T copy-mode-vi MouseDragEnd1Pane  send-keys -X copy-pipe "${xclip} -i -selection primary"
+      bind-key -T copy-mode    MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
+      bind-key -T copy-mode-vi MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
     '';
   };
 }

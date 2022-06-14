@@ -17,6 +17,7 @@ in
     ../modules/solarized.nix
     ../modules/starship.nix
     ../modules/vim.nix
+    ../modules/clipboard.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

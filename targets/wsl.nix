@@ -1,4 +1,15 @@
 { pkgs, lib, config, ... }:
+let
+  win32yank = pkgs.fetchzip {
+    url = "https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip";
+    sha256 = "sha256-zjKW3zaHn4MdTBWxic447jgnlpT7n55LRGJs6+TEybM=";
+    stripRoot = false;
+    name = "win32yank-v0.0.4";
+    postFetch = ''
+      chmod +x $out/win32yank.exe
+    '';
+  };
+in
 {
   wsl = {
     enable = true;
@@ -34,4 +45,9 @@
   solarized.brightness = "light";
 
   system.stateVersion = "22.05";
+
+  clipboard.default-selection = [ ];
+  clipboard.alternate-selection = [ ];
+  clipboard.copy-command = [ "${win32yank}/win32yank.exe" "-i" ];
+  clipboard.paste-command = [ "${win32yank}/win32yank.exe" "-o" ];
 }
