@@ -16,6 +16,7 @@ in
     ../modules/home-manager.nix
     ../modules/solarized.nix
     ../modules/starship.nix
+    ../modules/vim.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

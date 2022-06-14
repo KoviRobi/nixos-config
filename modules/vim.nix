@@ -1,12 +1,12 @@
 # vim: set ts=2 sts=2 sw=2 et :
-self: super:
+{ config, lib, pkgs, ... }:
+
+with lib;
 let
-  inherit (self.vimUtils) buildVimPluginFrom2Nix;
-  inherit (self) fetchFromGitHub;
-in
-{
+  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  inherit (pkgs) fetchFromGitHub;
   literate-vim =
-    if super.vimPlugins ? literate-vim
+    if pkgs.vimPlugins ? literate-vim
     then throw "Plugin merged upstream, this can be removed"
     else
       buildVimPluginFrom2Nix {
@@ -22,7 +22,7 @@ in
       };
 
   vim-bindsplit =
-    if super.vimPlugins ? vim-bindsplit
+    if pkgs.vimPlugins ? vim-bindsplit
     then throw "Plugin merged upstream, this can be removed"
     else
       buildVimPluginFrom2Nix {
@@ -38,7 +38,7 @@ in
       };
 
   vim-textobj-elixir =
-    if super.vimPlugins ? vim-textobj-elixir
+    if pkgs.vimPlugins ? vim-textobj-elixir
     then throw "Plugin merged upstream, this can be removed"
     else
       buildVimPluginFrom2Nix {
@@ -54,7 +54,7 @@ in
       };
 
   vim-unstack =
-    if super.vimPlugins ? vim-unstack
+    if pkgs.vimPlugins ? vim-unstack
     then throw "Plugin merged upstream, this can be removed"
     else
       buildVimPluginFrom2Nix {
@@ -68,11 +68,13 @@ in
         };
         meta.homepage = "https://github.com/mattboehm/vim-unstack/";
       };
-
-  neovim = super.neovim.override {
-    configure =
-      {
-        customRC = ''
+in
+{
+  options = {
+    vim = {
+      rc = mkOption {
+        type = types.lines;
+        default = ''
           let mapleader = ","
 
           " goto-file creates new files
@@ -104,9 +106,9 @@ in
           nnoremap <F6> :UndotreeToggle<cr>
           nnoremap <F7> :TagbarToggle<cr>
 
-          let g:easytags_cmd = "${self.universal-ctags}/bin/ctags"
+          let g:easytags_cmd = "${pkgs.universal-ctags}/bin/ctags"
           let g:easytags_async = 1
-          let g:tagbar_ctags_bin = "${self.universal-ctags}/bin/ctags"
+          let g:tagbar_ctags_bin = "${pkgs.universal-ctags}/bin/ctags"
 
           let g:netrw_keepj = ""
 
@@ -159,9 +161,13 @@ in
           " Gitgutter and other gutter backgrounds
           hi SignColumn ctermbg=8
         '';
-        packages.myVimPackage = with self.vimPlugins;
-          {
-            start = [
+      };
+
+      plugins.start =
+        mkOption {
+          type = types.listOf types.package;
+          default = with pkgs.vimPlugins;
+            [
               undotree
               vim-easy-align
               solarized
@@ -187,13 +193,36 @@ in
               vim-slime
               vim-test
 
-              self.literate-vim
-              self.vim-bindsplit
-              self.vim-textobj-elixir
-              self.vim-unstack
+              literate-vim
+              vim-bindsplit
+              vim-textobj-elixir
+              vim-unstack
             ];
-            opt = [ ];
-          };
+          description = ''
+            Vim packages to load at start
+          '';
+        };
+
+      plugins.opt = mkOption {
+        type = types.listOf types.package;
+        default = [ ];
+        description = ''
+          Vim packages to load using `packadd`
+        '';
       };
+    };
+  };
+
+  config = {
+    nixpkgs.overlays = [
+      (self: super: {
+        neovim = super.neovim.override {
+          configure.customRC = config.vim.rc;
+          configure.packages.myVimPackage = {
+            inherit (config.vim.plugins) start opt;
+          };
+        };
+      })
+    ];
   };
 }
