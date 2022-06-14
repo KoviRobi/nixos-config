@@ -67,6 +67,8 @@
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
+                # Pin nixpkgs for e.g. nix search
+                nix.registry.nixpkgs.flake = nixpkgs;
 
                 # ~/.config/nix/registry.json, if you want to use a local
                 # checkout:
