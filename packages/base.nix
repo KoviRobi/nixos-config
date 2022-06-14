@@ -20,6 +20,7 @@ with pkgs;
   lm_sensors
   unzip
   graphviz
+  dos2unix
 
   abcde
 
