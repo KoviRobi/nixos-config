@@ -54,6 +54,10 @@ in
         ''
           source ${dircolors-output}
         '';
+
+      programs.newsboat.extraConfig = ''
+        include "${pkgs.newsboat}/share/doc/newsboat/contrib/colorschemes/solarized-dark"
+      '';
     };
 
     nixpkgs.overlays = [

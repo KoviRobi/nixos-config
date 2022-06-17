@@ -79,4 +79,10 @@
   };
 
   programs.nix-index.enable = true;
+
+  programs.newsboat.enable = true;
+  programs.newsboat.browser = "${pkgs.mpv}/bin/mpv";
+  programs.newsboat.urls = [
+    { url = "http://feeds.nightvalepresents.com/welcometonightvalepodcast"; }
+  ];
 }
