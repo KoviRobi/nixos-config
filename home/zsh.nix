@@ -46,7 +46,7 @@ in
       zstyle ':completion:*' insert-unambiguous true
       zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
       zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=** r:|=**'
-      zstyle ':completion:*' menu select=0 search
+      zstyle ':completion:*' menu select
       zstyle :compinstall filename '/home/rmk/.zsh.comp'
 
       autoload -Uz compinit
