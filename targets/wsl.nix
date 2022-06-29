@@ -45,6 +45,7 @@ in
   solarized.brightness = "light";
 
   system.stateVersion = "22.05";
+  home-manager.users.default-user.home.stateVersion = "18.09";
 
   clipboard.default-selection = [ ];
   clipboard.alternate-selection = [ ];

@@ -21,7 +21,7 @@ in
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = { LC_TIME = "en_DK"; };
+  i18n.extraLocaleSettings = { LC_TIME = "en_DK.UTF-8"; };
 
   programs.zsh = {
     enable = true;

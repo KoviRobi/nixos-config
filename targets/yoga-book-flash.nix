@@ -4,7 +4,8 @@
   networking.hostName = "C930-flash";
 
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -24,7 +25,8 @@
   boot.initrd.luks.devices."nixos-flash".device = "/dev/disk/by-uuid/c51fecec-e8e9-40ba-9062-2740b9d84d06";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/860298a3-1049-45c2-82f9-00d29b067f00";
+    {
+      device = "/dev/disk/by-uuid/860298a3-1049-45c2-82f9-00d29b067f00";
       fsType = "f2fs";
     };
 
@@ -47,4 +49,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
+  home-manager.users.default-user.home.stateVersion = "18.09";
 }
