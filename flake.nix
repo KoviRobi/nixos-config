@@ -24,20 +24,20 @@
       };
 
     homeConfigurations = {
-      "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
+      "rmk" = { uid, homeDirectory, dpi }: home-manager.lib.homeManagerConfiguration {
         configuration = {
-          imports = [ ./home ];
+          imports = [ ./home ./modules/vim ];
           nixpkgs.overlays = map
             (x: import (./overlays + ("/" + x)))
             (with builtins; attrNames (readDir ./overlays));
           nixos = {
             services.xserver.dpi = 100;
             fileSystems = { "/" = { }; };
-            users.users.default-user.uid = 1000;
+            users.users.default-user.uid = uid;
           };
         };
         system = "x86_64-linux";
-        homeDirectory = "/home/rmk";
+        homeDirectory = homeDirectory;
         username = "rmk";
         stateVersion = "21.05";
         extraSpecialArgs = { inherit pye-menu; };
