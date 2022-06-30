@@ -209,6 +209,7 @@ in
         vimproc
         vim-slime
         vim-test
+        editorconfig-nvim
 
         literate-vim
         vim-bindsplit
