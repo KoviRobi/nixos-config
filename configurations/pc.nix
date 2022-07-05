@@ -90,7 +90,7 @@
       SUBSYSTEM=="tty", ATTRS{product}=="piprinter", SYMLINK+="ttyPiPrinter"
     '';
 
-  services.udev.packages = [ pkgs.stlink ];
+  services.udev.packages = with pkgs; [ stlink openocd ];
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
 
