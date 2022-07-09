@@ -28,6 +28,7 @@ with pkgs;
 
   nix-prefetch-git
   nix-prefetch-github
+  nix-prefetch
   nixpkgs-fmt
   rnix-lsp
   nix-tree
