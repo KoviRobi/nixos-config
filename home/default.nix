@@ -85,4 +85,7 @@
   programs.newsboat.urls = [
     { url = "http://feeds.nightvalepresents.com/welcometonightvalepodcast"; }
   ];
+  programs.newsboat.extraConfig = ''
+    article-sort-order date
+  '';
 }
