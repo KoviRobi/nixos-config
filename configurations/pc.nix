@@ -170,6 +170,6 @@
 
   services.minidlna = {
     enable = true;
-    mediaDirs = [ "${config.users.users.default-user.home}/Videos" "/music/" ];
+    settings.media_dir = [ "/video/" "/music/" ];
   };
 }
