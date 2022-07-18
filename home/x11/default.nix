@@ -33,8 +33,8 @@ in
   };
   services.picom = {
     enable = true;
-    menuOpacity = "1.0";
-    opacityRule = [
+    menuOpacity = 1.0;
+    opacityRules = [
       "100:class_i ?= 'i3lock'"
       "0:_NET_WM_STATE@:32a = '_NET_WM_STATE_HIDDEN'"
       "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'"
