@@ -76,4 +76,6 @@ in
     ''
       SUBSYSTEM=="tty", ATTRS{manufacturer}=="KoviRobi", ATTRS{product}=="Custom steno", SYMLINK="KoviRobi-Steno"
     '';
+
+  services.tailscale.enable = true;
 }
