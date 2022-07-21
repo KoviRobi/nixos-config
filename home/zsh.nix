@@ -5,6 +5,16 @@ in
 {
 
   home.packages = with pkgs; [ thefuck ];
+
+  home.sessionVariables = {
+    BROWSER = "links -g";
+    EDITOR = "nvim";
+    PAGER = "less";
+    LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit";
+    LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
+    GS_OPTIONS = "-sPAPERSIZE=a4";
+  };
+
   programs.zsh = {
     enable = true;
     initExtra = ''
@@ -14,10 +24,6 @@ in
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
       export VERSION_CONTROL=numbered
 
-      BROWSER="links -g"
-      EDITOR="nvim"
-      PAGER="less"
-      LESS="-iRq -j5"
 
       bindkey -e
       autoload edit-command-line
@@ -65,7 +71,6 @@ in
     enableSyntaxHighlighting = true;
 
     shellAliases = {
-      "less" = "less -iRq";
       "mnt" = "udisksctl mount -b";
       "umnt" = "udisksctl unmount -b";
       "nixinstall" = "nix-env -f '<nixpkgs>' -i";

@@ -21,7 +21,6 @@
       set -g status-position top
       set -g mouse on
       set -g set-titles on
-      set -g alternate-screen off
       set -g pane-border-lines heavy
       set -g display-panes-time 2000
 
