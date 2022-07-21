@@ -35,7 +35,6 @@
   boot.supportedFilesystems = [ "cifs" ];
 
   environment.systemPackages = with pkgs; [ barrier ]
-    ++ (import ../packages/desktop-environment.nix args)
     ++ (import ../packages/cc.nix args);
 
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];

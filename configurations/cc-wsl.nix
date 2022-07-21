@@ -2,7 +2,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./cc.nix ];
+  imports = [
+    ./cc.nix
+    ../modules/graphical.nix
+  ];
   wsl.wslConf.network.generateHosts = "false";
 
   environment.systemPackages = with pkgs; [ wireguard-tools ];

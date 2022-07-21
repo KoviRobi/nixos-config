@@ -34,8 +34,7 @@
   });
   boot.extraModulePackages = [ pkgs.linuxPackages.yogabook-c930-eink-driver ];
 
-  environment.systemPackages = with pkgs; [ ntfs3g ]
-    ++ (import ../packages/desktop-environment.nix args);
+  environment.systemPackages = with pkgs; [ ntfs3g ];
 
   services.blueman.enable = true;
   services.clamav.daemon.enable = lib.mkForce false;
@@ -45,11 +44,12 @@
 
   # To restart e-ink keyboard
   services.acpid =
-    let restart-eink-kbd = ''
-      PATH=${pkgs.kmod}/bin:$PATH
-      modprobe -r eink
-      modprobe eink
-    '';
+    let
+      restart-eink-kbd = ''
+        PATH=${pkgs.kmod}/bin:$PATH
+        modprobe -r eink
+        modprobe eink
+      '';
     in
     {
       enable = true;

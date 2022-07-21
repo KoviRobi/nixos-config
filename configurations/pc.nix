@@ -122,7 +122,6 @@
     pkgs.docker-credential-helpers
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
   ]
-  ++ (import ../packages/desktop-environment.nix args)
   ++ (import ../packages/pc.nix args)
   ++ (import ../packages/pc-unfree.nix args);
 

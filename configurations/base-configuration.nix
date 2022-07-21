@@ -35,8 +35,6 @@ in
   environment.systemPackages =
     (import ../packages/base.nix args);
 
-  fonts.fonts = with pkgs; [ noto-fonts dejavu_fonts lmodern terminus-nerdfont ];
-
   documentation.dev.enable = true;
 
   #sound.enable = true;

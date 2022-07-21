@@ -1,7 +1,17 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }@args:
 
 {
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    dejavu_fonts
+    liberation_ttf
+    lmodern
+    terminus-nerdfont
+  ];
+
+  environment.systemPackages = import ../packages/desktop-environment.nix args;
+
   services.xserver =
     {
       enable = true;
