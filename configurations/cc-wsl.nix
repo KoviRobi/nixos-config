@@ -76,4 +76,9 @@
       -ArgumentList 'syncconf','WSL2-VPN.HOST','\\\\wsl\$\\NixOS\\etc\\WSL2-VPN.HOST.conf'
     }"
   '';
+
+  systemd.user.services.pulseaudio.enable = false;
+  hardware.pulseaudio.extraClientConf = ''
+    default-server = 10.0.0.1;
+  '';
 }
