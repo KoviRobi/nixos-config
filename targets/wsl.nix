@@ -47,6 +47,7 @@ in
     '';
   };
   systemd.services.display-manager.script = lib.mkForce ''
+    ${pkgs.xorg.xauth}/bin/xauth add _gateway:1 . $(${pkgs.util-linux}/bin/mcookie)
     "/mnt/c/Program Files/VcXsrv/vcxsrv.exe" :1 -multiwindow -clipboard -wgl -auth $(/bin/wslpath -w ~)/.Xauthority -logfile $(/bin/wslpath -w /tmp)/X.log
   '';
   services.xserver.dpi = 180;
