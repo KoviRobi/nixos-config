@@ -111,7 +111,7 @@
         "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
         "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
         "cc-wsl" = [ ./configurations/cc-wsl.nix ./wsl-modules ./targets/wsl.nix ];
-        "wsl" = [ ./configurations/wsl.nix ./wsl-modules ./targets/wsl.nix ];
+        "pc-wsl" = [ ./configurations/pc-wsl.nix ./wsl-modules ./targets/wsl.nix ];
         "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
       };
   };
