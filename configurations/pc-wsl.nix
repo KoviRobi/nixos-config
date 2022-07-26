@@ -13,4 +13,9 @@
       })
       ../modules/ssh.nix
     ];
+
+  systemd.user.services.pulseaudio.enable = false;
+  hardware.pulseaudio.extraClientConf = ''
+    default-server = _gateway;
+  '';
 }
