@@ -79,7 +79,7 @@ in
       "nixpath" = "nix eval --raw";
       "poly" = "rlwrap poly";
       "e" = "\${=EDITOR}";
-      "der" = "cd /; cd -";
+      "der" = "pushd /; popd";
       "ded" = "direnv edit";
       "dea" = "direnv allow";
       "termbin" = "nc termbin.com 9999";
