@@ -91,6 +91,9 @@
 
       # Raspberry Pi Picoprobe
       ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0004", MODE="660", GROUP="plugdev", TAG+="uaccess"
+
+      # fx2lafw logic analyser
+      ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="660", GROUP="plugdev", TAG+="uaccess"
     '';
 
   services.udev.packages = with pkgs; [ stlink openocd ];
