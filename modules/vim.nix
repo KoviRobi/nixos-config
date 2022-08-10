@@ -184,23 +184,25 @@ in
 
       " Emacs-style keys, see `:help emacs-keys`
       " start of line
-      :cnoremap <C-A>		<Home>
+      :cnoremap <C-A>  <Home>
       " back one character
-      :cnoremap <C-B>		<Left>
+      :cnoremap <C-B>  <Left>
       " delete character under cursor
-      :cnoremap <C-D>		<Del>
+      :cnoremap <C-D>  <Del>
       " end of line
-      :cnoremap <C-E>		<End>
+      :cnoremap <C-E>  <End>
       " forward one character
-      :cnoremap <C-F>		<Right>
+      :cnoremap <C-F>  <Right>
       " recall newer command-line
-      :cnoremap <C-N>		<Down>
+      :cnoremap <C-N>  <Down>
       " recall previous (older) command-line
-      :cnoremap <C-P>		<Up>
+      :cnoremap <C-P>  <Up>
       " back one word
-      :cnoremap <Esc>b	<S-Left>
+      :cnoremap <A-b>  <S-Left>
       " forward one word
-      :cnoremap <Esc>f	<S-Right>
+      :cnoremap <A-f>  <S-Right>
+      " delete one word
+      :cnoremap <A-BS> <C-w>
 
       lua <<
       require'nvim-treesitter.configs'.setup {
