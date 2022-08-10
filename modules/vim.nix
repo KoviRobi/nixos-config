@@ -201,6 +201,29 @@ in
       :cnoremap <Esc>b	<S-Left>
       " forward one word
       :cnoremap <Esc>f	<S-Right>
+
+      lua <<
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          -- `false` will disable the whole extension
+          enable = true,
+
+          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+          -- Using this option may slow down your editor, and you may see some duplicate highlights.
+          -- Instead of true it can also be a list of languages
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+        },
+      }
+      .
+
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+      set foldlevelstart=10
+      set foldcolumn=auto
     '';
 
     vim.plugins.start = with pkgs.vimPlugins;
@@ -235,6 +258,8 @@ in
         vim-bindsplit
         vim-textobj-elixir
         vim-unstack
+
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: builtins.attrValues plugins))
       ];
 
     nixpkgs.overlays = [
