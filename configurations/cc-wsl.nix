@@ -6,6 +6,9 @@
     ./cc.nix
     ../modules/graphical.nix
   ];
+
+  nix.settings.substituters = [ "ssh://nix-ssh@rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com?trusted=1&ssh-key=/root/.ssh/nix-store-ed25519" ];
+
   wsl.wslConf.network.generateHosts = "false";
 
   environment.systemPackages = with pkgs; [ wireguard-tools ];

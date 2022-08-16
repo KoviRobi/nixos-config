@@ -40,4 +40,11 @@
     ++ (import ../packages/cc.nix args);
 
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];
+
+  nix.sshServe.enable = true;
+  nix.sshServe.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
+  ];
+  # Set modules/ssh.nix to not require authenticator key for nix-ssh
+  users.users.nix-ssh.extraGroups = [ "no-google-authenticator" ];
 }
