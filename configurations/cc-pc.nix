@@ -9,7 +9,6 @@
   ];
 
   virtualisation.docker.enable = true;
-  virtualisation.podman.enable = true;
 
   services.xserver.dpi = 100;
   services.xserver.xrandrHeads = [
