@@ -43,6 +43,7 @@
   nix.sshServe.enable = true;
   nix.sshServe.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlxBXBCN14zoA3qmd31d/Nonaef5Cag4RKlsDlddFjJ mconway"
   ];
   # Set modules/ssh.nix to not require authenticator key for nix-ssh
   users.users.nix-ssh.extraGroups = [ "no-google-authenticator" ];
