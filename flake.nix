@@ -95,6 +95,9 @@
                   "home-manager=${home-manager}"
                   "${nixpkgs}"
                 ];
+
+                environment.shellAliases.nixrepl =
+                  "nix repl --expr 'builtins.getFlake \"${self}\"'";
               })
 
               home-manager.nixosModule

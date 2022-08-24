@@ -75,7 +75,6 @@ in
       "umnt" = "udisksctl unmount -b";
       "nixinstall" = "nix-env -f '<nixpkgs>' -i";
       "nixeval" = "nix eval -f '<nixpkgs>' --raw";
-      "nixrepl" = "nix repl '<nixpkgs>' '<nixpkgs/nixos>'";
       "nixpath" = "nix eval --raw";
       "poly" = "rlwrap poly";
       "e" = "\${=EDITOR}";
