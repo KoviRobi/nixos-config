@@ -50,6 +50,7 @@
       commit.verbose = true;
       merge.tool = "nvimdiff";
       init.defaultBranch = "main";
+      am.threeWay = true;
     };
   };
 
