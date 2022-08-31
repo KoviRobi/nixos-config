@@ -12,6 +12,8 @@
 
   environment.systemPackages = import ../packages/desktop-environment.nix args;
 
+  services.udisks2.enable = true;
+
   services.xserver =
     {
       enable = true;
