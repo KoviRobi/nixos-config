@@ -21,6 +21,9 @@
     status.disabled = false;
     status.symbol = "✖ ";
     time.disabled = false;
+    shlvl.disabled = false;
+    shlvl.symbol = "↕️";
+    shlvl.threshold = lib.mkDefault 3;
   };
 
   programs.xonsh.config = ''

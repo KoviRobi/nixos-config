@@ -11,6 +11,8 @@
 
   wsl.wslConf.network.generateHosts = "false";
 
+  programs.starship.settings.shlvl.threshold = 2;
+
   environment.systemPackages = with pkgs; [ wireguard-tools ];
   systemd.services."WSL2-VPN".serviceConfig = {
     Type = "oneshot";
