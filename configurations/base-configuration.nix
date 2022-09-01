@@ -20,6 +20,7 @@ in
     ../modules/home-manager.nix
     ../modules/solarized.nix
     ../modules/starship.nix
+    ../modules/shell.nix
     ../modules/nethogs.nix
     ../modules/vim.nix
     ../modules/clipboard.nix
