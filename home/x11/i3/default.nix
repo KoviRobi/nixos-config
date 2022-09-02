@@ -18,7 +18,7 @@ let
   pgrep = "${pkgs.procps}/bin/pgrep";
 
   mk-scratch = n: p: pkgs.writeShellScript "start-scratch-${n}" ''
-    ${pgrep} -f scratch_${n} > /dev/null || ${p}
+    ${pgrep} -f scratch_${n} > /dev/null || exec ${p}
   '';
   scratch = n: p: ''
     exec --no-startup-id '${mk-scratch n p}' , \
