@@ -7,7 +7,16 @@
     ../modules/graphical.nix
   ];
 
-  nix.settings.substituters = [ "ssh://nix-ssh@rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com?trusted=1&ssh-key=/root/.ssh/nix-store-ed25519" ];
+  nix.settings.substituters = [
+    ("ssh://nix-ssh@rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com"
+      + "?trusted=1"
+      + "&compress=1"
+      + "&ssh-key=/root/.ssh/nix-store-ed25519"
+      + "&base64-ssh-public-host-key="
+      + "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5JdW1pb2NMZEE5NExHa"
+      + "E95WFM1Vko0d1hrQWh2S2JzK1NrTWtkQUh5Z3EK"
+    )
+  ];
 
   wsl.wslConf.network.generateHosts = "false";
 
