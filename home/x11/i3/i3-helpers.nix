@@ -1,7 +1,8 @@
 { pkgs, pye-menu }:
 let
   sh = "${pkgs.bash}/bin/bash";
-  dmenu = "${pkgs.dmenu}/bin/dmenu";
+  rofi = "${pkgs.rofi}/bin/rofi";
+  dmenu = "${rofi} -dmenu";
   stest = "${pkgs.dmenu}/bin/stest";
   cat = "${pkgs.coreutils}/bin/cat";
   dirname = "${pkgs.coreutils}/bin/dirname";
@@ -18,7 +19,6 @@ let
   dc = "${pkgs.bc}/bin/dc";
   rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
   mpd_pass = builtins.readFile ../../../mpd-password.secret;
-  dmenu-run-cache = "$HOME/.cache/dmenu_run.cache";
   actions = rec {
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 .dunst-wrapped # pause
@@ -63,11 +63,6 @@ let
       fi
     '';
     quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
-    rehash = pkgs.writeShellScript "i3-action-rehash" ''
-      test -d $(${dirname} ${dmenu-run-cache}) || mkdir -p $(${dirname} ${dmenu-run-cache})
-      IFS=:
-      ${stest} -flx $PATH | ${sort} -u > ${dmenu-run-cache}
-    '';
     single = music;
     seek = music;
     stop = music;
@@ -97,8 +92,7 @@ in
     EOF
   '';
   dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
-    test -e ${dmenu-run-cache} || ${actions.rehash}
-    < ${dmenu-run-cache} ${dmenu} "$@" | ${sh} &
+    ${rofi} -show run
   '';
   dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
     RES=`${i3-msg} -t get_workspaces | \
