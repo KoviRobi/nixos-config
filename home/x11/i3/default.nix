@@ -21,7 +21,7 @@ let
     ${pgrep} -f scratch_${n} > /dev/null || ${p}
   '';
   scratch = n: p: ''
-    exec --no-startup-id '${mk-scratch n p}' ; \
+    exec --no-startup-id '${mk-scratch n p}' , \
     [instance="^scratch_${n}$"] scratchpad show
   '';
   scratch-term = n: p: scratch n "${term} -n 'scratch_${n}' -t 'scratch_${n}' -e '${p}'";
@@ -43,6 +43,7 @@ in
       ];
       window.commands = [
         { command = "move scratchpad"; criteria = { instance = "^scratch_.*$"; }; }
+        { command = "scratchpad show"; criteria = { instance = "^scratch_.*$"; }; }
         { command = "floating enable"; criteria = { title = "Ediff"; }; }
         { command = "floating enable"; criteria = { window_type = "popup_menu"; }; }
         { command = "border none"; criteria = { window_type = "popup_menu"; }; }
