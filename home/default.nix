@@ -49,6 +49,8 @@
       credential.helper = "libsecret";
       commit.verbose = true;
       merge.tool = "nvimdiff";
+      diff.colorMoved = true;
+      diff.colorMovedWS = "ignore-all-space";
       init.defaultBranch = "main";
       am.threeWay = true;
     };
