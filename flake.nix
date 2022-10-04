@@ -12,17 +12,6 @@
 
   outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat }: {
 
-    devShell.x86_64-linux =
-      let
-        system = "x86_64-linux";
-        pkgs = import nixpkgs { inherit system; };
-      in
-      pkgs.mkShell {
-        buildInputs = [
-          pkgs.nixFlakes
-        ];
-      };
-
     homeConfigurations = {
       "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
         configuration = {
@@ -63,7 +52,6 @@
               }
 
               ({ config, pkgs, ... }: {
-                nix.package = pkgs.nixFlakes;
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';

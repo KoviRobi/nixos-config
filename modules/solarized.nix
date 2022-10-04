@@ -48,7 +48,7 @@ in
               then "1m1ba6xnm7hhzmlhmrcg99cp4w7pwfg8kqr6lwirjd8yjbaj0a0n"
               else "0a7411dni1ih54z252jcpsxiyx84aabidjfi8lz28s0878acglhw";
           };
-          dircolors-output = pkgs.runCommandNoCC ''dircolors-solarized'' { }
+          dircolors-output = pkgs.runCommand ''dircolors-solarized'' { }
             "${dircolors} ${dircolors-file} > $out";
         in
         ''

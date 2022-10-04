@@ -45,11 +45,7 @@ in
 
   #sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.bluetooth =
-    {
-      enable = true;
-      package = pkgs.bluezFull;
-    };
+  hardware.bluetooth.enable = true;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
   boot.kernelParams = [ "boot.shell_on_fail" ];

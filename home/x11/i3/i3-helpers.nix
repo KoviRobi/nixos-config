@@ -14,10 +14,10 @@ let
   mpc = "${pkgs.mpc_cli}/bin/mpc";
   tmux = "${pkgs.tmux}/bin/tmux";
   loginctl = "${pkgs.systemd}/bin/loginctl";
-  amixer = "${pkgs.alsaUtils}/bin/amixer";
+  amixer = "${pkgs.alsa-utils}/bin/amixer";
   xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
   dc = "${pkgs.bc}/bin/dc";
-  rfkill = "${pkgs.utillinux}/bin/rfkill"; # Updated from pkgs.rfkill
+  rfkill = "${pkgs.util-linux}/bin/rfkill"; # Updated from pkgs.rfkill
   mpd_pass = builtins.readFile ../../../mpd-password.secret;
   actions = rec {
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''

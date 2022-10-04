@@ -23,7 +23,7 @@
         autoLogin = { enable = true; user = config.users.users.default-user.name; };
         lightdm = {
           enable = true;
-          greeters.gtk.cursorTheme.package = pkgs.gnome3.adwaita-icon-theme;
+          greeters.gtk.cursorTheme.package = pkgs.gnome.adwaita-icon-theme;
           greeters.gtk.cursorTheme.name = "Adwaita";
         };
       };
