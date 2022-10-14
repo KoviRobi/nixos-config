@@ -46,6 +46,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlxBXBCN14zoA3qmd31d/Nonaef5Cag4RKlsDlddFjJ mconway"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBUSeOyKZcJ3KwQZ25dTdcAA0eJ75CbfXd2ToXiqrJB root@gitlab-runner.p3651"
   ];
+  nix.settings.secret-key-files = "/etc/secrets/nix/secret-key";
   # Set modules/ssh.nix to not require authenticator key for nix-ssh
   users.users.nix-ssh.extraGroups = [ "no-google-authenticator" ];
 }
