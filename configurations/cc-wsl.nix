@@ -18,6 +18,8 @@
     )
   ];
 
+  wsl.docker-desktop.enable = true;
+
   wsl.wslConf.network.generateHosts = false;
 
   programs.starship.settings.shlvl.threshold = 2;
