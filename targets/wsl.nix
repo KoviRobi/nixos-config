@@ -9,10 +9,16 @@
     # Enable integration with Docker Desktop (needs to be installed)
     # docker.enable = true;
 
-    wslConf.network.generateResolvConf = "false";
+    interop = {
+      register = true;
+      preserveArgvZero = false;
+    };
+
+    wslConf.network.generateResolvConf = false;
     wslConf.network.hostname = config.networking.hostName;
   };
 
+  environment.etc."resolv.conf".enable = lib.mkForce false;
   systemd.services."resolv.conf".serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
   systemd.services."resolv.conf".wantedBy = [ "default.target" ];
   systemd.services."resolv.conf".script = ''

@@ -14,7 +14,7 @@
       ../modules/ssh.nix
     ];
 
-  environment.etc.hosts.enable = false;
+  environment.etc.hosts.enable = lib.mkForce false;
 
   solarized.brightness = "light";
 

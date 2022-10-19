@@ -18,7 +18,7 @@
     )
   ];
 
-  wsl.wslConf.network.generateHosts = "false";
+  wsl.wslConf.network.generateHosts = false;
 
   programs.starship.settings.shlvl.threshold = 2;
 

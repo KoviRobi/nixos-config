@@ -10,7 +10,11 @@
   inputs.flake-compat.url = "github:edolstra/flake-compat";
   inputs.flake-compat.flake = false;
 
-  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat }: {
+  inputs.NixOS-WSL.url = "github:nix-community/NixOS-WSL";
+  inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
+
+  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, NixOS-WSL }: {
 
     homeConfigurations = {
       "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
@@ -161,8 +165,8 @@
         ];
         "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
         "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
-        "cc-wsl" = [ ./configurations/cc-wsl.nix ./wsl-modules ./targets/wsl.nix ];
-        "pc-wsl" = [ ./configurations/pc-wsl.nix ./wsl-modules ./targets/wsl.nix ];
+        "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
+        "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
         "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
       };
   };
