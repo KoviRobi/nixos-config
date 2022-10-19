@@ -19,6 +19,7 @@ with pkgs;
   usbutils
   lm_sensors
   unzip
+  zip
   graphviz
   dos2unix
 
