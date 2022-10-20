@@ -100,9 +100,7 @@
               }
 
               ({ config, pkgs, ... }: {
-                nix.extraOptions = ''
-                  experimental-features = nix-command flakes
-                '';
+                nix.settings.experimental-features = [ "nix-command" "flakes" ];
                 # Pin nixpkgs for e.g. nix search
                 nix.registry.nixpkgs.flake = nixpkgs;
 
