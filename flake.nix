@@ -174,6 +174,8 @@
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKG9Dg3j/KJgDbtsUSyOJBF7+bQzfDQpLo4gqDX195rJ rmk@rmk-cc-pc-nixos-a"
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxS1hIoi4jj4h00KoIfBJJX6aMF5TtdZZxBOqLRRKCH rmk35@pc-nixos-a"
             ];
+            # To allow using custom substituters (e.g. netboot host)
+            nix.settings.trusted-users = [ "nixos" ];
             nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
             environment.systemPackages = with pkgs; [ gitMinimal ];
           })
