@@ -41,7 +41,11 @@ in
   environment.systemPackages =
     (import ../packages/base.nix args);
 
+  documentation.enable = true;
+  documentation.man.enable = true;
+  documentation.info.enable = true;
   documentation.dev.enable = true;
+  documentation.nixos.enable = true;
 
   #sound.enable = true;
   hardware.pulseaudio.enable = true;
