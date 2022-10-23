@@ -18,6 +18,8 @@
     wslConf.network.hostname = config.networking.hostName;
   };
 
+  systemd.oomd.enable = false;
+
   environment.etc."resolv.conf".enable = lib.mkForce false;
   systemd.services."resolv.conf".serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
   systemd.services."resolv.conf".wantedBy = [ "default.target" ];
