@@ -160,4 +160,6 @@
     enable = true;
     settings.media_dir = [ "/video/" "/music/" ];
   };
+
+  nix.settings.secret-key-files = "/etc/secrets/nix/secret-key";
 }
