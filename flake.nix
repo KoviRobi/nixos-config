@@ -149,9 +149,24 @@
         }
       )
       {
-        "netboot" = [
-          "${nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix"
-          ({ pkgs, ... }: {
+        "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
+        "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
+        "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
+        "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
+        "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
+      } // {
+      "netboot" = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/netboot/netboot.nix"
+
+          # Profiles of this basic netboot media
+          "${nixpkgs}/nixos/modules/profiles/all-hardware.nix"
+          "${nixpkgs}/nixos/modules/profiles/installation-device.nix"
+          ({ pkgs, lib, ... }: {
+            system.extraDependencies = lib.mkForce [ ];
+            documentation.enable = lib.mkForce false;
+
             users.users.nixos.openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKG9Dg3j/KJgDbtsUSyOJBF7+bQzfDQpLo4gqDX195rJ rmk@rmk-cc-pc-nixos-a"
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxS1hIoi4jj4h00KoIfBJJX6aMF5TtdZZxBOqLRRKCH rmk35@pc-nixos-a"
@@ -160,14 +175,10 @@
               url = "https://github.com/NixOS/flake-registry";
               rev = "8634fb4e1db6c76ce037bc00ef80f9ebd2616476";
             }}/flake-registry.json";
-            environment.systemPackages = with pkgs; [ git ];
+            environment.systemPackages = with pkgs; [ gitMinimal ];
           })
         ];
-        "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
-        "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
-        "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
-        "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
-        "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
       };
+    };
   };
 }
