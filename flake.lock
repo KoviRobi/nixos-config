@@ -40,6 +40,22 @@
         "type": "github"
       }
     },
+    "flake-registry": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1661161594,
+        "narHash": "sha256-tu1KKNLw+v7ZOIUPGDE66tn9vEyhIAWiiJYZRGGev8E=",
+        "owner": "NixOS",
+        "repo": "flake-registry",
+        "rev": "8634fb4e1db6c76ce037bc00ef80f9ebd2616476",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-registry",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1659877975,
@@ -115,6 +131,7 @@
       "inputs": {
         "NixOS-WSL": "NixOS-WSL",
         "flake-compat": "flake-compat",
+        "flake-registry": "flake-registry",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "pye-menu": "pye-menu"

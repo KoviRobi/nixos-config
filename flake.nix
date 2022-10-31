@@ -10,11 +10,14 @@
   inputs.flake-compat.url = "github:edolstra/flake-compat";
   inputs.flake-compat.flake = false;
 
+  inputs.flake-registry.url = "github:NixOS/flake-registry";
+  inputs.flake-registry.flake = false;
+
   inputs.NixOS-WSL.url = "github:nix-community/NixOS-WSL";
   inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
   inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
 
-  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, NixOS-WSL }: {
+  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL }: {
 
     homeConfigurations = {
       "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
@@ -171,10 +174,7 @@
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKG9Dg3j/KJgDbtsUSyOJBF7+bQzfDQpLo4gqDX195rJ rmk@rmk-cc-pc-nixos-a"
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxS1hIoi4jj4h00KoIfBJJX6aMF5TtdZZxBOqLRRKCH rmk35@pc-nixos-a"
             ];
-            nix.settings.flake-registry = "${builtins.fetchGit {
-              url = "https://github.com/NixOS/flake-registry";
-              rev = "8634fb4e1db6c76ce037bc00ef80f9ebd2616476";
-            }}/flake-registry.json";
+            nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
             environment.systemPackages = with pkgs; [ gitMinimal ];
           })
         ];
