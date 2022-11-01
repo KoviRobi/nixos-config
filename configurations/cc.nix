@@ -88,6 +88,30 @@
       '';
     };
 
+  fileSystems = builtins.listToAttrs
+    (map
+      (remote-local: {
+        name = remote-local.local;
+        value = {
+          device = "//csp05na.uk.cambridgeconsultants.com/${remote-local.remote}";
+          fsType = "cifs";
+          options = [
+            "username=rmk"
+            "domain=CCL"
+            "uid=${toString config.users.users.default-user.uid}"
+            "gid=${toString config.users.groups.default-user.gid}"
+            "noauto"
+          ];
+        };
+      })
+      [
+        { remote = "home3/rmk"; local = "/cc/user"; }
+        { remote = "projects"; local = "/cc/projects"; }
+        { remote = "transit"; local = "/cc/transit"; }
+        { remote = "closed"; local = "/cc/closed"; }
+        { remote = "install"; local = "/cc/install"; }
+      ]);
+
   services.udev.extraRules =
     ''
       SUBSYSTEM=="usb", ATTRS{idVendor}=="1366", ATTRS{manufacturer}=="SEGGER", ATTRS{idProduct}=="0101", ATTRS{product}=="J-Link", MODE="0666"

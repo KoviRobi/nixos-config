@@ -15,46 +15,19 @@
       preLVM = true;
     };
 
-  fileSystems =
-    lib.recursiveUpdate
+  fileSystems = {
+    "/" =
       {
-        "/" =
-          {
-            device = "/dev/disk/by-uuid/aa8c6b80-077c-4706-8722-d4b20a1f0da3";
-            fsType = "xfs";
-          };
+        device = "/dev/disk/by-uuid/aa8c6b80-077c-4706-8722-d4b20a1f0da3";
+        fsType = "xfs";
+      };
 
-        "/boot" =
-          {
-            device = "/dev/disk/by-uuid/41F8-24FB";
-            fsType = "vfat";
-          };
-      }
-      (
-        builtins.listToAttrs
-          (map
-            (remote-local: {
-              name = remote-local.local;
-              value = {
-                device = "//193.35.220.46/${remote-local.remote}";
-                fsType = "cifs";
-                options = [
-                  "username=rmk"
-                  "domain=CCL"
-                  "uid=${toString config.users.users.default-user.uid}"
-                  "gid=${toString config.users.groups.default-user.gid}"
-                  "noauto"
-                ];
-              };
-            })
-            [
-              { remote = "home3/rmk"; local = "/cc/user"; }
-              { remote = "projects"; local = "/cc/projects"; }
-              { remote = "transit"; local = "/cc/transit"; }
-              { remote = "closed"; local = "/cc/closed"; }
-              { remote = "install"; local = "/cc/install"; }
-            ])
-      );
+    "/boot" =
+      {
+        device = "/dev/disk/by-uuid/41F8-24FB";
+        fsType = "vfat";
+      };
+  };
 
   swapDevices =
     [{
