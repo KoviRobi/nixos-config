@@ -286,7 +286,22 @@ in
         vim-textobj-elixir
         vim-unstack
 
-        (nvim-treesitter.withPlugins (plugins: builtins.attrValues plugins))
+        (nvim-treesitter.withPlugins
+          (plugins: builtins.attrValues
+            (builtins.removeAttrs plugins [
+              "tree-sitter-agda"
+              "tree-sitter-bash"
+              "tree-sitter-cuda"
+              "tree-sitter-fluent"
+              "tree-sitter-kotlin"
+              "tree-sitter-python"
+              "tree-sitter-ql_dbscheme"
+              "tree-sitter-sql"
+              "tree-sitter-tsx"
+              "tree-sitter-typescript"
+              "tree-sitter-verilog"
+              "tree-sitter-yaml"
+            ])))
         nvim-ts-rainbow
         nvim-treesitter-context
         nvim-treesitter-textobjects
