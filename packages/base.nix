@@ -34,6 +34,7 @@ with pkgs;
   rnix-lsp
   nix-tree
   nix-index
+  nix-output-monitor
 
   dconf
   plan9port
