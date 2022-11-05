@@ -23,6 +23,9 @@ with pkgs;
   st
   ffmpeg
 
+  x11vnc
+  tigervnc
+
   libnotify
   xdotool
   xclip
