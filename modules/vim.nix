@@ -68,6 +68,22 @@ let
         };
         meta.homepage = "https://github.com/mattboehm/vim-unstack/";
       };
+
+  gitmoji-vim =
+    if pkgs.vimPlugins ? gitmoji-vim
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "gitmoji-vim";
+        version = "2022-10-30";
+        src = fetchFromGitHub {
+          owner = "bruxisma";
+          repo = "gitmoji.vim";
+          rev = "dba6f328a9a2d8de5c0b2f4e2791ff86ed725dc8";
+          sha256 = "sha256-/D5uadQlKeckMhwE8MhXr48j8b+6zXmTW0JAP4GEK4s=";
+        };
+        meta.homepage = "https://github.com/bruxisma/gitmoji.vim/";
+      };
 in
 {
   options.vim = {
@@ -255,6 +271,7 @@ in
         vim-bindsplit
         vim-textobj-elixir
         vim-unstack
+        gitmoji-vim
       ];
 
     nixpkgs.overlays = [
