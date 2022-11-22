@@ -40,6 +40,20 @@
 
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];
 
+  services.udev.extraRules =
+    let
+      unbind-script = pkgs.writeShellScript "ftd2xx-unbind.sh" ''
+        echo "$1" > /sys/bus/usb/drivers/ftdi_sio/unbind
+      '';
+    in
+    ''
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", RUN+="${unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666", RUN+="${unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666", RUN+="${unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0666", RUN+="${unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE="0666", RUN+="${unbind-script} '%k'"
+    '';
+
   nix.sshServe.enable = true;
   nix.sshServe.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
