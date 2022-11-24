@@ -13,7 +13,7 @@
     ];
 
   virtualisation.docker.enable = true;
-  users.users.default-user.extraGroups = [ "docker" ];
+  users.users.default-user.extraGroups = [ "scanner" "lp" "docker" ];
 
   solarized.brightness = "light";
 
@@ -56,7 +56,8 @@
     };
   hardware.opengl.driSupport32Bit = true;
 
-  services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplip ]; };
+  services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplipWithPlugin ]; };
+  hardware.sane = { enable = true; extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ]; };
 
   services.udev.extraRules =
     ''
