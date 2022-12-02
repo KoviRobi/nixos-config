@@ -267,6 +267,7 @@ in
         vim-slime
         vim-test
         editorconfig-nvim
+        zig-vim
 
         literate-vim
         vim-bindsplit
