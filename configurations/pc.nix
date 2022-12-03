@@ -13,7 +13,9 @@
     ];
 
   virtualisation.docker.enable = true;
-  users.users.default-user.extraGroups = [ "scanner" "lp" "docker" ];
+  users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
+
+  virtualisation.libvirtd.enable = true;
 
   solarized.brightness = "light";
 
@@ -80,6 +82,8 @@
 
       # fx2lafw logic analyser
       ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="660", GROUP="plugdev", TAG+="uaccess"
+
+      KERNEL=="nvme0n1p6", SUBSYSTEM=="block", group="${config.users.users.default-user.group}"
     '';
 
   services.udev.packages = with pkgs; [ stlink openocd ];
@@ -112,6 +116,7 @@
   }];
   environment.systemPackages = [
     pkgs.docker-credential-helpers
+    pkgs.virt-manager
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
   ]
   ++ (import ../packages/pc.nix args)
