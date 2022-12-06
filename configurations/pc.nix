@@ -62,6 +62,11 @@
   hardware.sane = { enable = true; extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ]; };
 
   services.udev.extraRules =
+    let
+      ftdi-unbind-script = pkgs.writeShellScript "ftd2xx-unbind.sh" ''
+        echo "$1" > /sys/bus/usb/drivers/ftdi_sio/unbind
+      '';
+    in
     ''
       # IceStick
       ACTION=="add", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE:="666", SYMLINK="latticeFTDI"
@@ -84,6 +89,12 @@
       ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="660", GROUP="plugdev", TAG+="uaccess"
 
       KERNEL=="nvme0n1p6", SUBSYSTEM=="block", group="${config.users.users.default-user.group}"
+
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
     '';
 
   services.udev.packages = with pkgs; [ stlink openocd ];
