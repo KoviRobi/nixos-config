@@ -2,7 +2,6 @@
 {
   wsl = {
     enable = true;
-    automountPath = "/mnt";
     defaultUser = "default-user";
     startMenuLaunchers = true;
 
@@ -14,6 +13,7 @@
       preserveArgvZero = false;
     };
 
+    wslConf.automount.root = "/mnt";
     wslConf.network.generateResolvConf = false;
     wslConf.network.hostname = config.networking.hostName;
   };
