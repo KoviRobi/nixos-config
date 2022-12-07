@@ -8,7 +8,7 @@
   ];
 
   nix.settings.substituters = [
-    ("ssh://nix-ssh@rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com"
+    ("ssh://nix-ssh@100.99.255.67"
       + "?trusted=1"
       + "&compress=1"
       + "&ssh-key=/root/.ssh/nix-store-ed25519"
