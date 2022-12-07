@@ -110,6 +110,7 @@
                 nix.settings.experimental-features = [ "nix-command" "flakes" ];
                 # Pin nixpkgs for e.g. nix search
                 nix.registry.nixpkgs.flake = nixpkgs;
+                nix.registry.nixos-config.flake = self;
 
                 # ~/.config/nix/registry.json, if you want to use a local
                 # checkout:
