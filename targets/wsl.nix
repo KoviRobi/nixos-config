@@ -24,12 +24,13 @@
   systemd.services."resolv.conf".serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
   systemd.services."resolv.conf".wantedBy = [ "default.target" ];
   systemd.services."resolv.conf".script = ''
+    echo 'search badger-toad.ts.net kovirobi.github.beta.tailscale.net uk.cambridgeconsultants.com' > /etc/resolv.conf
     /mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
       -Command "(Get-DnsClientServerAddress \
                       -AddressFamily IPv4 \
                 ).ServerAddresses" |
       ${pkgs.dos2unix}/bin/dos2unix |
-      ${pkgs.gnused}/bin/sed 's/^/nameserver /' > /etc/resolv.conf
+      ${pkgs.gnused}/bin/sed 's/^/nameserver /' >> /etc/resolv.conf
   '';
 
   systemd.services.display-manager.serviceConfig = {
