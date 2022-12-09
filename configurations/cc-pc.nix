@@ -9,6 +9,8 @@
   ];
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  users.users.default-user.extraGroups = [ "docker" "libvirtd" ];
 
   services.xserver.dpi = 100;
   services.xserver.xrandrHeads = [
@@ -35,7 +37,7 @@
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "cifs" ];
 
-  environment.systemPackages = with pkgs; [ barrier ]
+  environment.systemPackages = with pkgs; [ barrier virt-manager ]
     ++ (import ../packages/cc.nix args);
 
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];
