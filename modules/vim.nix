@@ -169,6 +169,7 @@ in
       nmap <silent> gy :ALEGoToTypeDefinition<CR>
       nmap <silent> gr :ALEFindReferences<CR>
       nnoremap <silent> K :call <SID>show_documentation()<CR>
+      nnoremap <silent> <C-Space> :ALECodeAction<CR>
 
       function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
