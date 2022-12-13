@@ -42,7 +42,7 @@
     1900 # MiniDLNA
   ];
 
-  networking.networkmanager.insertNameservers = [ "1.1.1.1" "1.1.0.0" ];
+  networking.networkmanager.appendNameservers = [ "1.1.1.1" "1.1.0.0" ];
 
   services.xserver =
     {
