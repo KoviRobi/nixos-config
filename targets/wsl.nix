@@ -25,6 +25,7 @@
   systemd.services."resolv.conf".wantedBy = [ "default.target" ];
   systemd.services."resolv.conf".script = ''
     echo 'search badger-toad.ts.net kovirobi.github.beta.tailscale.net uk.cambridgeconsultants.com' > /etc/resolv.conf
+    echo 'nameserver 100.100.100.100' >> /etc/resolv.conf
     /mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
       -Command "(Get-DnsClientServerAddress \
                       -AddressFamily IPv4 \
