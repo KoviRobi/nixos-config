@@ -42,7 +42,6 @@
     {
       device = "/dev/disk/by-uuid/5937-E30E";
       fsType = "vfat";
-      neededForBoot = true;
     };
 
   swapDevices = [ ];

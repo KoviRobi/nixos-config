@@ -6,7 +6,6 @@
     [
       ./base-configuration.nix
       (import ../modules/default-user.nix { })
-      ../modules/initrd-ssh.nix
       ../modules/ssh.nix
       ../modules/bluetooth.nix
       ../modules/graphical.nix
@@ -25,16 +24,6 @@
   # boot.extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro ]; # for OpenCL
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ];
   boot.kernelModules = [ "kvm-amd" "vfio" ];
-
-  boot.initrd.kernelModules = [ "tun" "nfnetlink" ];
-  boot.initrd.network.postCommands = ''
-    mkdir /boot
-    mount /dev/nvme0n1p1 /boot
-    ${pkgs.tailscale}/bin/tailscaled --statedir /boot/tailscale/ &
-  '';
-  boot.initrd.postMountCommands = ''
-    pkill -x tailscaled
-  '';
 
   boot.kernelParams = [ "video=card0-DP-1:1366x768M@60" ];
 
