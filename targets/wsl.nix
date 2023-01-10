@@ -2,6 +2,7 @@
 {
   wsl = {
     enable = true;
+    nativeSystemd = true;
     defaultUser = "default-user";
     startMenuLaunchers = true;
 
