@@ -34,21 +34,6 @@
       ${pkgs.gnused}/bin/sed 's/^/nameserver /' >> /etc/resolv.conf
   '';
 
-  systemd.services.display-manager.serviceConfig = {
-    PassEnvironment = "WSL_INTEROP";
-    Type = "exec";
-    User = "${config.users.users.default-user.name}";
-    ExecStop = lib.mkForce ''
-      "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" -Command '& { Stop-Process -Name vcxsrv ; Wait-Process -Name vcxsrv }'
-    '';
-    ExecStartPre = lib.mkForce ''
-      -"/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" -Command '& { Stop-Process -Name vcxsrv ; Wait-Process -Name vcxsrv }'
-    '';
-  };
-  systemd.services.display-manager.script = lib.mkForce ''
-    ${pkgs.xorg.xauth}/bin/xauth add _gateway:1 . $(${pkgs.util-linux}/bin/mcookie)
-    "/mnt/c/Program Files/VcXsrv/vcxsrv.exe" :1 -multiwindow -clipboard -wgl -auth $(/bin/wslpath -w ~)/.Xauthority -logfile $(/bin/wslpath -w /tmp)/X.log
-  '';
   services.xserver.dpi = 180;
   environment.systemPackages = with pkgs; [ xorg.xauth ];
 
