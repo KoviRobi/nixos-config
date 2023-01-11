@@ -19,18 +19,18 @@
     wslConf.network.hostname = config.networking.hostName;
   };
 
-  environment.etc."resolv.conf".enable = lib.mkForce false;
-  systemd.services."resolv.conf".serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
-  systemd.services."resolv.conf".wantedBy = [ "default.target" ];
-  systemd.services."resolv.conf".script = ''
-    echo 'search badger-toad.ts.net kovirobi.github.beta.tailscale.net uk.cambridgeconsultants.com' > /etc/resolv.conf
-    echo 'nameserver 100.100.100.100' >> /etc/resolv.conf
-    /mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
+  # environment.etc."resolv.conf".enable = lib.mkForce false;
+  services.resolved.enable = true;
+  systemd.services."wsl_resolv".serviceConfig = { PassEnvironment = "WSL_INTEROP"; };
+  systemd.services."wsl_resolv".wantedBy = [ "default.target" ];
+  systemd.services."wsl_resolv".script = ''
+    nameservers=($(/mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
       -Command "(Get-DnsClientServerAddress \
                       -AddressFamily IPv4 \
-                ).ServerAddresses" |
-      ${pkgs.dos2unix}/bin/dos2unix |
-      ${pkgs.gnused}/bin/sed 's/^/nameserver /' >> /etc/resolv.conf
+                ).ServerAddresses"))
+    ${pkgs.systemd}/bin/resolvectl dns    eth0 $namesevers
+    ${pkgs.systemd}/bin/resolvectl domain eth0 uk.cambridgeconsultants.com
+    ${pkgs.systemd}/bin/resolvectl dnssec eth0 no
   '';
 
   services.xserver.dpi = 180;
