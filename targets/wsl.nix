@@ -11,7 +11,7 @@
 
     interop = {
       register = true;
-      preserveArgvZero = false;
+      preserveArgvZero = true;
     };
 
     wslConf.automount.root = "/mnt";
