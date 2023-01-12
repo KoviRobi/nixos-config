@@ -19,6 +19,8 @@
     wslConf.network.hostname = config.networking.hostName;
   };
 
+  boot.extraModulePackages = [ config.boot.kernelPackages.usbip ];
+
   services.resolved.enable = true;
   systemd.services."wsl_resolv".serviceConfig = {
     PassEnvironment = "WSL_INTEROP";
@@ -39,7 +41,10 @@
   '';
 
   services.xserver.dpi = 180;
-  environment.systemPackages = with pkgs; [ xorg.xauth ];
+  environment.systemPackages = with pkgs; [
+    xorg.xauth
+    config.boot.kernelPackages.usbip
+  ];
 
   systemd.user.services.gnome-keyring.script = ''${pkgs.gnome.gnome-keyring}/bin/gnome-keyring-daemon --start'';
   systemd.user.services.gnome-keyring.wantedBy = [ "default.target" ];
