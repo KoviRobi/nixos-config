@@ -46,8 +46,20 @@
     config.boot.kernelPackages.usbip
   ];
 
-  systemd.user.services.gnome-keyring.script = ''${pkgs.gnome.gnome-keyring}/bin/gnome-keyring-daemon --start'';
-  systemd.user.services.gnome-keyring.wantedBy = [ "default.target" ];
+  systemd.user.sockets.ssh-agent.wantedBy = [ "default.target" ];
+  systemd.user.sockets.ssh-agent.socketConfig = {
+    ListenStream = [ "%t/keyring/ssh" ];
+    Accept = true;
+  };
+  systemd.user.services."ssh-agent@".serviceConfig = {
+    # Workaround https://github.com/microsoft/WSL/issues/7591
+    ExecStartPre = [
+      "${pkgs.coreutils}/bin/mkdir -p /mnt/c/wsl/"
+      "${pkgs.coreutils}/bin/install ${pkgs.pkgsCross.mingwW64.npiperelay}/bin/npiperelay.exe /mnt/c/wsl/npiperelay.exe"
+    ];
+    ExecStart = "/mnt/c/wsl/npiperelay.exe -ei -s '//./pipe/openssh-ssh-agent'";
+    StandardInput = "socket";
+  };
 
   users.users.default-user.extraGroups = [ "no-google-authenticator" ];
   services.openssh.forwardX11 = true;
