@@ -1,19 +1,10 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, lib, pkgs, ... }@args:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ./cc.nix
   ];
-
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    dejavu_fonts
-    liberation_ttf
-    lmodern
-    terminus-nerdfont
-  ];
-
 
   services.udisks2.enable = true;
 
@@ -34,15 +25,7 @@
 
   programs.starship.settings.shlvl.threshold = 2;
 
-  systemd.user.targets.graphical-session.wantedBy = [ "default.target" ];
-  systemd.user.services.wslg.wantedBy = [ "graphical-session-pre.target" ];
-  systemd.user.services.wslg.before = [ "graphical-session.target" ];
-  systemd.user.services.wslg.script = ''
-    /run/current-system/systemd/bin/systemctl --user set-environment DISPLAY=:0
-  '';
-
-  environment.systemPackages = with pkgs; [ wireguard-tools ] ++
-    (import ../packages/desktop-environment.nix args);
+  environment.systemPackages = with pkgs; [ wireguard-tools ];
   systemd.services."WSL2-VPN".serviceConfig = {
     Type = "oneshot";
     RemainAfterExit = true;

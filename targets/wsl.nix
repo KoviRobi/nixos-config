@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ config, lib, pkgs, ... }@args:
 {
   wsl = {
     enable = true;
@@ -40,11 +40,27 @@
     ${pkgs.systemd}/bin/resolvectl dnssec eth0 no
   '';
 
+  fonts.enableDefaultFonts = true;
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    dejavu_fonts
+    liberation_ttf
+    lmodern
+    terminus-nerdfont
+  ];
+
+  systemd.user.targets.graphical-session.wantedBy = [ "default.target" ];
+  systemd.user.services.wslg.wantedBy = [ "graphical-session-pre.target" ];
+  systemd.user.services.wslg.before = [ "graphical-session.target" ];
+  systemd.user.services.wslg.script = ''
+    /run/current-system/systemd/bin/systemctl --user set-environment DISPLAY=:0
+  '';
+
   services.xserver.dpi = 180;
   environment.systemPackages = with pkgs; [
     xorg.xauth
     config.boot.kernelPackages.usbip
-  ];
+  ] ++ (import ../packages/desktop-environment.nix args);
 
   systemd.user.sockets.ssh-agent.wantedBy = [ "default.target" ];
   systemd.user.sockets.ssh-agent.socketConfig = {
