@@ -8,7 +8,7 @@
   services.openssh =
     {
       enable = true;
-      permitRootLogin = "no";
+      settings.PermitRootLogin = "no";
       extraConfig = ''
         Match Group !no-google-authenticator,*
           AuthenticationMethods publickey,keyboard-interactive
