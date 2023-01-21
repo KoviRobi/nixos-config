@@ -259,7 +259,6 @@ in
         ale
         quickfix-reflector-vim
         vim-projectionist
-        vim-test
         neoterm
         vim-textobj-user
         vim-fetch

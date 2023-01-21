@@ -67,6 +67,7 @@ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
     { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
   ])
   gitFull
+  git-absorb
 ] ++
 lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
   vim
