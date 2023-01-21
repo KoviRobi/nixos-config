@@ -55,6 +55,8 @@ with pkgs;
 
   gdb
 
+  python312
+
   #   From overlays, see nixpkgs.overlays
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
