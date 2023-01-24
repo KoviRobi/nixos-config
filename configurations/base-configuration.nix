@@ -36,10 +36,12 @@ in
   };
 
   programs.xonsh.enable = true;
+  programs.bandwhich.enable = true;
 
   environment.homeBinInPath = true;
   environment.systemPackages =
-    (import ../packages/base.nix args);
+    (import ../packages/base.nix args) ++
+    (import ../packages/better-cli-tools.nix args);
 
   documentation.enable = true;
   documentation.man.enable = true;

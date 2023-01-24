@@ -51,6 +51,8 @@
     enable = true;
   };
 
+  programs.zoxide.enable = true;
+
   programs.nix-index.enable = true;
 
   programs.newsboat.enable = true;
