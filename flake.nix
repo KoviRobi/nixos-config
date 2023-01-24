@@ -13,7 +13,7 @@
   inputs.flake-registry.url = "github:NixOS/flake-registry";
   inputs.flake-registry.flake = false;
 
-  inputs.NixOS-WSL.url = "github:nix-community/NixOS-WSL";
+  inputs.NixOS-WSL.url = "github:KoviRobi/NixOS-WSL/rob";
   inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
   inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
 
