@@ -9,6 +9,7 @@ with pkgs;
   doggo
   dua
   duf
+  gping
   hyperfine
   neofetch
   ngrok
