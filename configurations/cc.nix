@@ -24,6 +24,8 @@
     # For P3651
     awscli2
     amazon-ecr-credential-helper
+    sigrok-cli
+    pulseview
   ];
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
@@ -118,5 +120,5 @@
       ACTION=="add", ATTRS{serial}=="DK5XA9SZ", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyBLE"
       ACTION=="add", ATTRS{serial}=="DK6N5V3E", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyASIC"
     '';
-  services.udev.packages = [ pkgs.stlink ];
+  services.udev.packages = [ pkgs.stlink pkgs.libsigrok ];
 }
