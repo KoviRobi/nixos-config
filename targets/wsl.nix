@@ -19,8 +19,6 @@
     wslConf.network.hostname = config.networking.hostName;
   };
 
-  boot.extraModulePackages = [ config.boot.kernelPackages.usbip ];
-
   services.resolved.enable = true;
   systemd.services."wsl_resolv".serviceConfig = {
     PassEnvironment = "WSL_INTEROP";
