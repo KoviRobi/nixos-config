@@ -17,7 +17,11 @@
   inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
   inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
 
-  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL }: {
+  inputs.deploy-rs.url = "github:serokell/deploy-rs";
+  inputs.deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.deploy-rs.inputs.flake-compat.follows = "flake-compat";
+
+  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL, deploy-rs }: {
 
     homeConfigurations = {
       "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
@@ -149,6 +153,8 @@
                 home-manager.useUserPackages = true;
                 home-manager.extraSpecialArgs = { inherit pye-menu; };
               }
+
+              { environment.systemPackages = [ deploy-rs.defaultPackage.${system} ]; }
             ];
         }
       )
