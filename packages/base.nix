@@ -56,6 +56,8 @@ with pkgs;
   gdb
 
   python312
+  evcxr
+  rustc
 
   #   From overlays, see nixpkgs.overlays
 ] ++
