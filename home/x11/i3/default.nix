@@ -51,7 +51,7 @@ in
       keybindings = lib.mkOptionDefault ({
         "${mod}+Shift+c" = "kill";
         "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
-        "${mod}+Shift+Return" = "exec ${term}";
+        "${mod}+Shift+Return" = "exec ${term} -e nu";
         "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
         "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
         "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";

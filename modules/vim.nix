@@ -136,6 +136,7 @@ in
       set notitle
       set scrolljump=5
       set grepprg=rg\ -nH\ $*
+      set shell=nu
 
       set background=dark
       colorscheme solarized

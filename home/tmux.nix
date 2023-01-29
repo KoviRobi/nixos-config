@@ -23,6 +23,7 @@
       set -g set-titles on
       set -g pane-border-lines heavy
       set -g display-panes-time 2000
+      set -g default-command nu
 
       set -g renumber-windows on
       bind-key . command-prompt "swap-window -t '%%'"
