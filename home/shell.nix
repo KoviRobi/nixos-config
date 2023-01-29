@@ -5,7 +5,7 @@ in
 {
   imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [ thefuck ];
+  home.packages = with pkgs; [ thefuck carapace ];
 
   home.sessionVariables = {
     BROWSER = "links -g";
@@ -42,9 +42,9 @@ in
         use ${nu_scripts}/themes/themes/solarized-light.nu *
         use ${nu_scripts}/themes/themes/solarized-dark.nu *
 
-        # let carapace_completer = {|spans|
-        #     carapace $spans.0 nushell $spans | from json
-        # }
+        let carapace_completer = {|spans|
+            ${pkgs.carapace}/bin/carapace $spans.0 nushell $spans | from json
+        }
 
         let-env config = {
           ls: {
@@ -138,7 +138,7 @@ in
             external: {
               enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up my be very slow
               max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-              completer: null # check 'carapace_completer' above as an example
+              completer: $carapace_completer # check 'carapace_completer' above as an example
             }
           }
           filesize: {
@@ -436,6 +436,8 @@ in
       zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=** r:|=**'
       zstyle ':completion:*' menu select
       zstyle :compinstall filename '/home/rmk/.zsh.comp'
+
+      source <(${pkgs.carapace}/bin/carapace _carapace zsh)
 
       autoload -Uz compinit
       compinit
