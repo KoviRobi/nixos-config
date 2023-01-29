@@ -1,5 +1,22 @@
-{ pkgs, lib, ... }:
+{ pkgs, config, lib, ... }:
 {
+  systemd.user.services.tmux-server = {
+    Unit = {
+      Description = "Tmux server";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Type = "forking";
+      ExecStart = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf start-server";
+      ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+      Environment = [ "TMUX_TMPDIR=/run/user/1000" ];
+    };
+
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
+
   programs.tmux = {
     enable = true;
     aggressiveResize = true;
@@ -17,6 +34,7 @@
       fpp
       logging
     ];
+
     extraConfig = ''
       set -g status-position top
       set -g mouse on
@@ -24,6 +42,7 @@
       set -g pane-border-lines heavy
       set -g display-panes-time 2000
       set -g default-command nu
+      set -g exit-empty off
 
       set -g renumber-windows on
       bind-key . command-prompt "swap-window -t '%%'"

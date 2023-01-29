@@ -29,13 +29,10 @@ in
       programs.bat.config.theme = "Solarized (${cfg.brightness})";
       programs.git.delta.options.syntax-theme = "Solarized (${cfg.brightness})";
 
-      programs.tmux.plugins = [
-        {
-          plugin = pkgs.tmuxPlugins.tmux-colors-solarized;
-          # Dark has a better statusline for both light/dark
-          extraConfig = "set -g @colors-solarized 'dark'";
-        }
-      ];
+      # Dark has a better statusline for both light/dark
+      programs.tmux.extraConfig = ''
+        source-file ${pkgs.tmuxPlugins.tmux-colors-solarized}/share/tmux-plugins/tmuxcolors/tmuxcolors-dark.conf
+      '';
 
       programs.zsh.initExtra =
         let
