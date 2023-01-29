@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674770024,
-        "narHash": "sha256-t4QASY7owsPKYgMTj5Jik1y0R9h271i77MugnydP788=",
+        "lastModified": 1675010835,
+        "narHash": "sha256-qtfg5KkVaZNt81UKxrDqQcUR0wAndMVmNm1o5ZI4fAM=",
         "owner": "KoviRobi",
         "repo": "NixOS-WSL",
-        "rev": "9c0955ffd9501688bf9a5ca94e8405e5de59608f",
+        "rev": "250d8626b142ada7497b4a7293a92c17202d0512",
         "type": "github"
       },
       "original": {
