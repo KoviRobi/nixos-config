@@ -136,7 +136,6 @@ in
       set notitle
       set scrolljump=5
       set grepprg=rg\ -nH\ $*
-      set shell=nu
 
       set background=dark
       colorscheme solarized
@@ -238,6 +237,9 @@ in
       :nnoremap <A-j> <C-w>j
       :nnoremap <A-k> <C-w>k
       :nnoremap <A-l> <C-w>l
+
+      let g:neoterm_autoinsert = 1
+      autocmd BufEnter term://* startinsert
 
       set foldmethod=expr
       set foldlevelstart=10
