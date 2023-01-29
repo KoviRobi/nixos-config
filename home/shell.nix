@@ -1,7 +1,4 @@
 { pkgs, lib, config, ... }:
-let
-  python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
-in
 {
   imports = [ ./starship.nix ];
 
@@ -17,30 +14,38 @@ in
   };
 
   programs.nushell =
-    let
-      nu_scripts = pkgs.fetchFromGitHub {
-        owner = "nushell";
-        repo = "nu_scripts";
-        rev = "3334cad9aaad4da6d902645e936e5fbbd8c4cbcf";
-        sha256 = "sha256-HuvHMREsyjgMELOWsgWogXs5WI6Ea84rA+W699XbAa8=";
-      };
-    in
     {
       enable = true;
       extraEnv = ''
         ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
+
+        let user_config = ("${config.xdg.configHome}/nushell/user-config.nu" | path expand)
+        if not ($user_config | path exists) {
+          touch $user_config
+        }
       '';
       extraConfig = ''
         source ${config.xdg.configHome}/nushell/zoxide.nu
 
-        use ${nu_scripts}/git/git.nu *
-        use ${nu_scripts}/custom-completions/git/git-completions.nu *
-        use ${nu_scripts}/custom-completions/nix/nix-completions.nu *
-        use ${nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
-        use ${nu_scripts}/ssh/ssh.nu *
-        use ${nu_scripts}/cool-oneliners/cargo_search.nu *
-        use ${nu_scripts}/themes/themes/solarized-light.nu *
-        use ${nu_scripts}/themes/themes/solarized-dark.nu *
+        use ${pkgs.nu_scripts}/git/git.nu *
+
+        use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
+        use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
+        use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
+
+        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-fish.nu
+        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-help.nu
+
+        use ${pkgs.nu_scripts}/ssh/ssh.nu *
+
+        use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
+
+        use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
+        use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
+
+        alias shell = (hide g; g)
+        alias g = git
+        alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
 
         let carapace_completer = {|spans|
             ${pkgs.carapace}/bin/carapace $spans.0 nushell $spans | from json
@@ -55,13 +60,13 @@ in
             always_trash: false # always act as if -t was given. Can be overridden with -p
           }
           cd: {
-            abbreviations: false # allows `cd s/o/f` to expand to `cd some/other/folder`
+            abbreviations: true # allows `cd s/o/f` to expand to `cd some/other/folder`
           }
           table: {
             mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
             index_mode: always # "always" show indexes, "never" show indexes, "auto" = show indexes when a table has "index" column
             trim: {
-              methodology: wrapping # wrapping or truncating
+              methodology: truncating # wrapping or truncating
               wrapping_try_keep_words: true # A strategy used by the 'wrapping' methodology
               truncating_suffix: "..." # A suffix used by the 'truncating' methodology
             }
@@ -394,6 +399,8 @@ in
           #   }
           # ]
         }
+
+        source "${config.xdg.configHome}/nushell/user-config.nu"
       '';
     };
 

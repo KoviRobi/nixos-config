@@ -18,4 +18,11 @@ self: super:
   }).overrideDerivation (oldDrv: {
     ICONSRC = "${self.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
   });
+
+  nu_scripts = super.fetchFromGitHub {
+    owner = "nushell";
+    repo = "nu_scripts";
+    rev = "3334cad9aaad4da6d902645e936e5fbbd8c4cbcf";
+    sha256 = "sha256-HuvHMREsyjgMELOWsgWogXs5WI6Ea84rA+W699XbAa8=";
+  };
 }
