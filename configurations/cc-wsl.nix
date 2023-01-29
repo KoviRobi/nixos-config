@@ -23,7 +23,7 @@
 
   wsl.wslConf.network.generateHosts = false;
 
-  programs.starship.settings.shlvl.threshold = 2;
+  home-manager.users.default-user.programs.starship.settings.shlvl.threshold = 2;
 
   environment.systemPackages = with pkgs; [ wireguard-tools ];
   systemd.services."WSL2-VPN".serviceConfig = {

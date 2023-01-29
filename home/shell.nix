@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
   python3 = "${pkgs.python3.withPackages (p: with p; [ matplotlib numpy ])}/bin/python3";
 in
 {
+  imports = [ ./starship.nix ];
 
   home.packages = with pkgs; [ thefuck ];
 
@@ -14,6 +15,36 @@ in
     LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     GS_OPTIONS = "-sPAPERSIZE=a4";
   };
+
+  programs.nushell =
+    let
+      nu_scripts = pkgs.fetchFromGitHub {
+        owner = "nushell";
+        repo = "nu_scripts";
+        rev = "3334cad9aaad4da6d902645e936e5fbbd8c4cbcf";
+        sha256 = "sha256-HuvHMREsyjgMELOWsgWogXs5WI6Ea84rA+W699XbAa8=";
+      };
+    in
+    {
+      enable = true;
+      extraEnv = ''
+        ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
+      '';
+      extraConfig = ''
+        source ${config.xdg.configHome}/nushell/zoxide.nu
+
+        use ${nu_scripts}/git/git.nu *
+        use ${nu_scripts}/custom-completions/git/git-completions.nu *
+        use ${nu_scripts}/custom-completions/nix/nix-completions.nu *
+        use ${nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
+        use ${nu_scripts}/ssh/ssh.nu *
+        use ${nu_scripts}/cool-oneliners/cargo_search.nu *
+        use ${nu_scripts}/themes/themes/solarized-light.nu *
+
+        let-env config = ($env.config | merge {show_banner: false})
+        let-env config = ($env.config | merge {color_config: (solarized_light)})
+      '';
+    };
 
   programs.zsh = {
     enable = true;

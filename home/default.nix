@@ -5,7 +5,7 @@
     ./git.nix
     ./tmux.nix
     ./x11
-    ./zsh.nix
+    ./shell.nix
     ./modules/import-nixos-config.nix
   ];
 

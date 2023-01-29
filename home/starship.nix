@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 {
 
-  environment.systemPackages = with pkgs; [ starship ];
+  home.packages = with pkgs; [ starship ];
 
   programs.starship.enable = true;
   programs.starship.settings = {
@@ -25,8 +25,4 @@
     shlvl.symbol = "↕️";
     shlvl.threshold = lib.mkDefault 3;
   };
-
-  programs.xonsh.config = ''
-    execx($(starship init xonsh))
-  '';
 }

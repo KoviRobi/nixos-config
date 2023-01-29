@@ -19,7 +19,6 @@ in
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix
     ../modules/solarized.nix
-    ../modules/starship.nix
     ../modules/shell.nix
     ../modules/nethogs.nix
     ../modules/vim.nix
