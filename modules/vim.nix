@@ -291,6 +291,7 @@ in
         zig-vim
         zoxide-vim
         fzf-vim
+        vim-plugin-AnsiEsc
 
         literate-vim
         vim-bindsplit
