@@ -58,6 +58,8 @@ with pkgs;
   python312
   evcxr
   rustc
+  sccache
+  mold
 
   #   From overlays, see nixpkgs.overlays
 ] ++
