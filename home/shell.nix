@@ -18,34 +18,10 @@
       enable = true;
       extraEnv = ''
         ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
-
-        let user_config = ("${config.xdg.configHome}/nushell/user-config.nu" | path expand)
-        if not ($user_config | path exists) {
-          touch $user_config
-        }
       '';
       extraConfig = ''
-        source ${config.xdg.configHome}/nushell/zoxide.nu
-
-        use ${pkgs.nu_scripts}/git/git.nu *
-
-        use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
-        use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
-        use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
-
-        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-fish.nu
-        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-help.nu
-
-        use ${pkgs.nu_scripts}/ssh/ssh.nu *
-
-        use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
-
         use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
-
-        alias shell = (hide g; g)
-        alias g = git
-        alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
 
         let carapace_completer = {|spans|
             ${pkgs.carapace}/bin/carapace $spans.0 nushell $spans | from json
@@ -166,15 +142,16 @@
               null  # replace with source code to run before the prompt is shown
             }]
             pre_execution: [{
-              null  # replace with source code to run before the repl input is run
+              # 2 lines for border, 1 line for newline after table, 2 lines for prompt
+              let-env config = ($env.config | update footer_mode ((term size).rows - 5))
             }]
             env_change: {
               PWD: [{|before, after|
-                null  # replace with source code to run if the PWD environment is different since the last repl input
+                [$before $after] | debug
               }]
             }
             display_output: {
-              if (term size).columns >= 100 { table -e } else { table }
+              maybe_explore
             }
           }
           menus: [
@@ -296,109 +273,185 @@
                 }
               }
           ]
-          # keybindings: [
-          #   {
-          #     name: completion_menu
-          #     modifier: none
-          #     keycode: tab
-          #     mode: [emacs vi_normal vi_insert]
-          #     event: {
-          #       until: [
-          #         { send: menu name: completion_menu }
-          #         { send: menunext }
-          #       ]
-          #     }
-          #   }
-          #   {
-          #     name: completion_previous
-          #     modifier: shift
-          #     keycode: backtab
-          #     mode: [emacs, vi_normal, vi_insert] # Note: You can add the same keybinding to all modes by using a list
-          #     event: { send: menuprevious }
-          #   }
-          #   {
-          #     name: history_menu
-          #     modifier: control
-          #     keycode: char_r
-          #     mode: emacs
-          #     event: { send: menu name: history_menu }
-          #   }
-          #   {
-          #     name: next_page
-          #     modifier: control
-          #     keycode: char_x
-          #     mode: emacs
-          #     event: { send: menupagenext }
-          #   }
-          #   {
-          #     name: undo_or_previous_page
-          #     modifier: control
-          #     keycode: char_z
-          #     mode: emacs
-          #     event: {
-          #       until: [
-          #         { send: menupageprevious }
-          #         { edit: undo }
-          #       ]
-          #      }
-          #   }
-          #   {
-          #     name: yank
-          #     modifier: control
-          #     keycode: char_y
-          #     mode: emacs
-          #     event: {
-          #       until: [
-          #         {edit: pastecutbufferafter}
-          #       ]
-          #     }
-          #   }
-          #   {
-          #     name: unix-line-discard
-          #     modifier: control
-          #     keycode: char_u
-          #     mode: [emacs, vi_normal, vi_insert]
-          #     event: {
-          #       until: [
-          #         {edit: cutfromlinestart}
-          #       ]
-          #     }
-          #   }
-          #   {
-          #     name: kill-line
-          #     modifier: control
-          #     keycode: char_k
-          #     mode: [emacs, vi_normal, vi_insert]
-          #     event: {
-          #       until: [
-          #         {edit: cuttolineend}
-          #       ]
-          #     }
-          #   }
-          #   # Keybindings used to trigger the user defined menus
-          #   {
-          #     name: commands_menu
-          #     modifier: control
-          #     keycode: char_t
-          #     mode: [emacs, vi_normal, vi_insert]
-          #     event: { send: menu name: commands_menu }
-          #   }
-          #   {
-          #     name: vars_menu
-          #     modifier: alt
-          #     keycode: char_o
-          #     mode: [emacs, vi_normal, vi_insert]
-          #     event: { send: menu name: vars_menu }
-          #   }
-          #   {
-          #     name: commands_with_description
-          #     modifier: control
-          #     keycode: char_s
-          #     mode: [emacs, vi_normal, vi_insert]
-          #     event: { send: menu name: commands_with_description }
-          #   }
-          # ]
+          keybindings: [
+            {
+              name: completion_menu
+              modifier: none
+              keycode: tab
+              mode: [emacs vi_normal vi_insert]
+              event: {
+                until: [
+                  { send: menu name: completion_menu }
+                  { send: menunext }
+                ]
+              }
+            }
+            {
+              name: completion_previous
+              modifier: shift
+              keycode: backtab
+              mode: [emacs, vi_normal, vi_insert] # Note: You can add the same keybinding to all modes by using a list
+              event: { send: menuprevious }
+            }
+            {
+              name: history_menu
+              modifier: control
+              keycode: char_r
+              mode: emacs
+              event: { send: menu name: history_menu }
+            }
+            {
+              name: next_page
+              modifier: control
+              keycode: char_x
+              mode: emacs
+              event: { send: menupagenext }
+            }
+            {
+              name: undo_or_previous_page
+              modifier: control
+              keycode: char_z
+              mode: emacs
+              event: {
+                until: [
+                  { send: menupageprevious }
+                  { edit: undo }
+                ]
+               }
+            }
+            {
+              name: yank
+              modifier: control
+              keycode: char_y
+              mode: emacs
+              event: {
+                until: [
+                  {edit: pastecutbufferafter}
+                ]
+              }
+            }
+            {
+              name: unix-line-discard
+              modifier: control
+              keycode: char_u
+              mode: [emacs, vi_normal, vi_insert]
+              event: {
+                until: [
+                  {edit: cutfromlinestart}
+                ]
+              }
+            }
+            {
+              name: kill-line
+              modifier: control
+              keycode: char_k
+              mode: [emacs, vi_normal, vi_insert]
+              event: {
+                until: [
+                  {edit: cuttolineend}
+                ]
+              }
+            }
+            # Keybindings used to trigger the user defined menus
+            {
+              name: commands_menu
+              modifier: control
+              keycode: char_t
+              mode: [emacs, vi_normal, vi_insert]
+              event: { send: menu name: commands_menu }
+            }
+            {
+              name: vars_menu
+              modifier: alt
+              keycode: char_o
+              mode: [emacs, vi_normal, vi_insert]
+              event: { send: menu name: vars_menu }
+            }
+            {
+              name: commands_with_description
+              modifier: control
+              keycode: char_s
+              mode: [emacs, vi_normal, vi_insert]
+              event: { send: menu name: commands_with_description }
+            }
+          ]
         }
+
+        use ${pkgs.nu_scripts}/git/git.nu *
+
+        use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
+        use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
+        use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
+
+        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-fish.nu
+
+        use ${pkgs.nu_scripts}/ssh/ssh.nu *
+
+        use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
+
+        alias shell = (hide g; g)
+        alias g = git
+        alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
+        alias ll = ls -l
+        alias n = nix
+        alias nf = nix flake
+        alias nb = nix build
+        alias der = (cd /; cd -)
+        alias termbin = nc termbin.com 9999
+
+        # parses a input string in --help format and returns a table of parsed flags
+        def parse-help [] {
+            # help format  '        -s,                      --long                   <format>                 description   '
+            $in | parse -r '\s\s+(?:-(?P<short>\w)[,\s]+)?(?:--(?P<long>[\w-]+))\s*(?:<(?P<format>.*)>)?\s*(?P<description>.*)?'
+        }
+
+        # takes a table of parsed help commands in format [short? long format? description]
+        def make-completion [command_name: string] {
+          "extern \"" + $command_name + "\" [\n" + ($in | each { |it|
+              "\t--" + $it.long + (if ($it.short | is-empty) == false {
+                  "(-" + $it.short + ")"
+                } else {
+                  ""
+                }) + (if ($it.description | is-empty) == false {
+                  "\t\t# " + $it.description
+                } else {
+                  ""
+                })
+              } | str join "\n") + "\n\t...args\n]"
+        }
+
+        let-env v = []
+        def v [index:int=0] { $env.v | get -i $index }
+        def maybe_explore [] {
+          let data = $in
+          if ($data | describe) not-in [closure nothing] {
+            let expanded = ($data | table -e | debug)
+            if (term size).rows < ($expanded | size).lines {
+              $data | explore
+            }
+            let-env v = ([$data] ++ $env.v | take 10)
+          }
+          $data | if (term size).columns >= 100 { table -e } else { table }
+        }
+
+        let-env ENV_CONVERSIONS = {
+          NIX_PATH : ({
+            from_string: {|str|
+              $str | split row : | parse -r '((?<name>[[:alnum:]-_]*)=)?(?<path>.*)' | select name path
+            }
+            to_string: {|table|
+              $table | each {|cols|
+                if "name" in $cols and $cols.name != "" {
+                  $"($cols.name)=($cols.path)"
+                } else if "path" in $cols {
+                  $cols.path
+                }
+              } | str join :
+            }
+          })
+        }
+
+        source ${config.xdg.configHome}/nushell/zoxide.nu
 
         source "${config.xdg.configHome}/nushell/user-config.nu"
       '';

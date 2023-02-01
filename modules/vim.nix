@@ -84,6 +84,22 @@ let
         };
         meta.homepage = "https://github.com/bruxisma/gitmoji.vim/";
       };
+
+  vim-nushell =
+    if pkgs.vimPlugins ? vim-nushell
+    then throw "Plugin merged upstream, this can be removed"
+    else
+      buildVimPluginFrom2Nix {
+        pname = "vim-nushell";
+        version = "2022-10-30";
+        src = fetchFromGitHub {
+          owner = "ErichDonGubler";
+          repo = "vim-nushell";
+          rev = "8e523ac5eec3336ec332fcb07d7a1bf3d1960fcb";
+          sha256 = "sha256-17TDTqH6sMBI76S2FwZeixuYL/BIZ3hEnop2lYPnS3Q=";
+        };
+        meta.homepage = "https://github.com/bruxisma/gitmoji.vim/";
+      };
 in
 {
   options.vim = {
@@ -281,6 +297,7 @@ in
         vim-textobj-elixir
         vim-unstack
         gitmoji-vim
+        vim-nushell
       ];
 
     nixpkgs.overlays = [
