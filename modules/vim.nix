@@ -177,7 +177,6 @@ in
       let g:ale_fixers.css = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
       let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
       let g:ale_fix_on_save = 1
-      let g:ale_set_quickfix = 1
 
       nmap <silent> <C-W>gd :ALEGoToDefinition -tab<CR>
       nmap <silent> <C-W>gy :ALEGoToTypeDefinition -tab<CR>
