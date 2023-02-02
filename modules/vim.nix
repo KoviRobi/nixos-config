@@ -136,6 +136,7 @@ in
       set undofile undodir=$HOME/.vim/undo/
       set expandtab tabstop=2 softtabstop=2 shiftwidth=0
       set colorcolumn=80
+      set cursorline cursorcolumn
       set backspace=indent,start,eol
 
       set completeopt=menuone,preview,longest
