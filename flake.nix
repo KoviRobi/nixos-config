@@ -29,7 +29,7 @@
           imports = [ ./home ];
           nixpkgs.overlays = map
             (x: import (./overlays + ("/" + x)))
-            (with builtins; attrNames (readDir ./overlays));
+            (with builtins; filter (str: match ".*\.nix" str != null) (attrNames (readDir ./overlays)));
           nixos = {
             services.xserver.dpi = 100;
             fileSystems = { "/" = { }; };

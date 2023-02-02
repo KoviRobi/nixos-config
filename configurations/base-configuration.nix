@@ -5,7 +5,7 @@ in
 {
   nixpkgs.overlays = map
     (x: import (../overlays + ("/" + x)))
-    (with builtins; attrNames (readDir ../overlays));
+    (with builtins; filter (file: match ".*\.nix" file != null) (attrNames (readDir ../overlays)));
   nix.gc = {
     automatic = true;
     dates = "weekly";

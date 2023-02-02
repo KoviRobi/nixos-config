@@ -385,8 +385,6 @@
 
         source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-fish.nu
 
-        use ${pkgs.nu_scripts}/ssh/ssh.nu *
-
         use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
 
         alias shell = (hide g; g)
@@ -423,7 +421,7 @@
         let-env v = []
         def v [index:int=0] { $env.v | get -i $index }
         def maybe_explore [] {
-          let data = $in
+          let-with-metadata data metadata = $in
           if ($data | describe) not-in [closure nothing] {
             let expanded = ($data | table -e | debug)
             if (term size).rows < ($expanded | size).lines {
@@ -431,7 +429,9 @@
             }
             let-env v = ([$data] ++ $env.v | take 10)
           }
-          $data | if (term size).columns >= 100 { table -e } else { table }
+          $data |
+          set-metadata $metadata |
+          if (term size).columns >= 100 { table -e } else { table }
         }
 
         let-env ENV_CONVERSIONS = {
