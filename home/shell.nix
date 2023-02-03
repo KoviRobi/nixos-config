@@ -27,6 +27,49 @@
             ${pkgs.carapace}/bin/carapace $spans.0 nushell $spans | from json
         }
 
+        let-env prev = (0..4 | each --keep-empty {null})
+        def v [index:int=0] {
+          $env.prev | get -i $index
+        }
+        def-env maybe_explore [] {
+          let-with-metadata data metadata = $in
+          $env.peek_output = (
+            if ($data | describe) not-in [closure nothing] {
+              let expanded = ($data | table -e)
+              if (term size).rows < ($expanded | size).lines {
+                $data | set-metadata $metadata | explore -p
+              } else if ($data | describe) == closure {
+                view-source $data
+              }
+            }
+          )
+          $env.prev.4 = $env.prev.3
+          $env.prev.3 = $env.prev.2
+          $env.prev.2 = $env.prev.1
+          $env.prev.1 = $env.prev.0
+          $env.prev.0 = $data
+          $data |
+            set-metadata $metadata |
+            if (term size).columns >= 100 { table -e } else { table }
+        }
+
+        let-env ENV_CONVERSIONS = {
+          NIX_PATH : ({
+            from_string: {|str|
+              $str | split row : | parse -r '((?<name>[[:alnum:]-_]*)=)?(?<path>.*)' | select name path
+            }
+            to_string: {|table|
+              $table | each {|cols|
+                if "name" in $cols and $cols.name != "" {
+                  $"($cols.name)=($cols.path)"
+                } else if "path" in $cols {
+                  $cols.path
+                }
+              } | str join :
+            }
+          })
+        }
+
         let-env config = {
           ls: {
             use_ls_colors: true # use the LS_COLORS environment variable to colorize output
@@ -416,39 +459,6 @@
                   ""
                 })
               } | str join "\n") + "\n\t...args\n]"
-        }
-
-        let-env v = []
-        def v [index:int=0] { $env.v | get -i $index }
-        def maybe_explore [] {
-          let-with-metadata data metadata = $in
-          if ($data | describe) not-in [closure nothing] {
-            let expanded = ($data | table -e | debug)
-            if (term size).rows < ($expanded | size).lines {
-              $data | explore
-            }
-            let-env v = ([$data] ++ $env.v | take 10)
-          }
-          $data |
-          set-metadata $metadata |
-          if (term size).columns >= 100 { table -e } else { table }
-        }
-
-        let-env ENV_CONVERSIONS = {
-          NIX_PATH : ({
-            from_string: {|str|
-              $str | split row : | parse -r '((?<name>[[:alnum:]-_]*)=)?(?<path>.*)' | select name path
-            }
-            to_string: {|table|
-              $table | each {|cols|
-                if "name" in $cols and $cols.name != "" {
-                  $"($cols.name)=($cols.path)"
-                } else if "path" in $cols {
-                  $cols.path
-                }
-              } | str join :
-            }
-          })
         }
 
         source ${config.xdg.configHome}/nushell/zoxide.nu

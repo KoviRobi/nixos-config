@@ -37,11 +37,16 @@ final: prev:
       src = final.fetchFromGitHub {
         owner = "KoviRobi";
         repo = pname;
-        rev = "add-storing-and-setting-metadata";
-        sha256 = "sha256-alMsAI+/VL61Zw/5VEUm8NB1zRgKiDs/QtLji9CNkig=";
+        rev = "a90e5967ec611956dd7d093b5cd659c45e52147d";
+        sha256 = "sha256-l+0oEkp4iXrRRTR+v3sNDdF78k2zTeHoHwnBUa1s5gM=";
       };
 
-      cargoLock.lockFile = ./nushell-Cargo.lock;
+      cargoLock = {
+        lockFile = ./nushell-Cargo.lock;
+        outputHashes = {
+          "reedline-0.15.0" = "sha256-Ju9dg4ZmzwkUux574tXtxIxLrY3J5e7Vx8Dv/uPX/8A=";
+        };
+      };
 
       inherit (prev.nushell) cargoPatches nativeBuildInputs buildInputs
         buildFeatures doCheck checkPhase meta passthru;
