@@ -34,8 +34,8 @@
         def-env maybe_explore [] {
           let-with-metadata data metadata = $in
           $env.peek_output = (
-            if ($data | describe) not-in [closure nothing] {
-              let expanded = ($data | table -e)
+            try {
+              let expanded = ($data | table -e | into  string)
               if (term size).rows < ($expanded | size).lines {
                 $data | set-metadata $metadata | explore -p
               } else if ($data | describe) == closure {
@@ -43,11 +43,9 @@
               }
             }
           )
-          $env.prev.4 = $env.prev.3
-          $env.prev.3 = $env.prev.2
-          $env.prev.2 = $env.prev.1
-          $env.prev.1 = $env.prev.0
-          $env.prev.0 = $data
+          mut prev = $data;
+          mut prevs = $env.prev;
+          $env.prev = ([$data] ++ $env.prev | take 5)
           $data |
             set-metadata $metadata |
             if (term size).columns >= 100 { table -e } else { table }
