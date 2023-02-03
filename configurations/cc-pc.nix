@@ -13,10 +13,6 @@
   users.users.default-user.extraGroups = [ "docker" "libvirtd" ];
 
   services.xserver.dpi = 100;
-  services.xserver.xrandrHeads = [
-    { output = "DP-1"; }
-    { output = "HDMI-2"; primary = true; monitorConfig = ''Option "BROADCAST_RGB" "1"''; }
-  ];
   home-manager.users.default-user.xsession.initExtra = ''
     xrandr --output DP-1 --set 'Broadcast RGB' Full
   '';
