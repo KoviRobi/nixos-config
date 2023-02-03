@@ -48,7 +48,9 @@ final: prev:
         };
       };
 
+      buildFeatures = prev.nushell.buildFeatures ++ [ "dataframe" ];
+
       inherit (prev.nushell) cargoPatches nativeBuildInputs buildInputs
-        buildFeatures doCheck checkPhase meta passthru;
+        doCheck checkPhase meta passthru;
     };
 }
