@@ -23,13 +23,31 @@
 
   outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL, deploy-rs }: {
 
+    overlays =
+      let
+        inherit (builtins) attrValues elemAt filter listToAttrs map mapAttrs match readDir;
+        get_nix_name = name:
+          let m = match "^(.*)\.nix$" name; in
+          if m == null then null else elemAt m 0;
+        contents = attrValues
+          (mapAttrs
+            (name: type: { inherit name type; base = get_nix_name name; })
+            (readDir ./overlays));
+        nix_or_dirs = filter (attrs: attrs.base != null || attrs.type == "directory") contents;
+        imported = map
+          (attrs: {
+            name = if attrs.type == "directory" then attrs.name else attrs.base;
+            value = import (./overlays + ("/" + attrs.name));
+          })
+          nix_or_dirs;
+      in
+      listToAttrs imported;
+
     homeConfigurations = {
       "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
         configuration = {
           imports = [ ./home ];
-          nixpkgs.overlays = map
-            (x: import (./overlays + ("/" + x)))
-            (with builtins; filter (str: match ".*\.nix" str != null) (attrNames (readDir ./overlays)));
+          nixpkgs.overlays = builtins.attrValues self.overlays;
           nixos = {
             services.xserver.dpi = 100;
             fileSystems = { "/" = { }; };
@@ -92,6 +110,8 @@
         '';
       };
 
+    nixpkgs = import nixpkgs { overlays = builtins.attrValues self.overlays; };
+
     nixosConfigurations = builtins.mapAttrs
       (name: value:
         nixpkgs.lib.nixosSystem rec {
@@ -109,6 +129,8 @@
                   then self.rev
                   else throw "Refusing to build from a dirty Git tree!";
               }
+
+              { nixpkgs.overlays = builtins.attrValues self.overlays; }
 
               ({ config, pkgs, ... }: {
                 nix.settings.experimental-features = [ "nix-command" "flakes" ];

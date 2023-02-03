@@ -434,6 +434,7 @@
         alias g = git
         alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
         alias ll = ls -l
+        alias la = ls -la
         alias n = nix
         alias nf = nix flake
         alias nb = nix build

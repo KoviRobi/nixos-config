@@ -3,9 +3,6 @@
 let HOME = config.users.users.default-user.home;
 in
 {
-  nixpkgs.overlays = map
-    (x: import (../overlays + ("/" + x)))
-    (with builtins; filter (file: match ".*\.nix" file != null) (attrNames (readDir ../overlays)));
   nix.gc = {
     automatic = true;
     dates = "weekly";
