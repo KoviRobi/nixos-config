@@ -25,74 +25,71 @@
 
   home-manager.users.default-user.programs.starship.settings.shlvl.threshold = 2;
 
+  # To setup:
+  # 1. Install WireGuard on Windows
+  # 2. Add an empty tunnel, call it WSL2-VPN
+  # 3. Start/activate it
+  # 4. Edit WSL2-VPN, copy public key
+  # 5. Put public key to "/etc/secrets/wireguard/WSL2-VPN.HOST.pub"
+  # 6. Start WSL service WSL2-VPN (the service defined below)
+  # 7. Use `sudo wg` to get the WSL2 side public key
+  # 8. Edit the tunnel in Windows, add the following
+  #
+  #    ```
+  #    ListenPort = 65126
+  #    Address = 10.0.0.1/24
+  #
+  #    [Peer]
+  #    PublicKey = <key from previous step>
+  #    AllowedIPs = 10.0.0.0/24
+  #    ```
+  #
+  # 9. Run in Windows `Set-NetConnectionProfile -InterfaceAlias WSL2-VPN -NetworkCategory Private`
   environment.systemPackages = with pkgs; [ wireguard-tools ];
-  systemd.services."WSL2-VPN".serviceConfig = {
-    Type = "oneshot";
-    RemainAfterExit = true;
-    PassEnvironment = "WSL_INTEROP";
+  systemd.services."WSL2-VPN" = {
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      PassEnvironment = "WSL_INTEROP";
+    };
+    unitConfig = {
+      ConditionPathExists = [ "/etc/secrets/wireguard/WSL2-VPN.HOST.pub" ];
+    };
+    wantedBy = [ "default.target" ];
+    path = with pkgs; [ coreutils iproute2 jq wireguard-tools ];
+    script = ''
+      set -eux
+
+      # The following files contain private keys
+      umask 0077
+
+      # Don't regenerate keys if not necessary, this helps keep the connection
+      # when the unit is restarted
+      WSLKEY=/etc/secrets/wireguard/WSL2-VPN.WSL.key
+      test -f $WSLKEY || wg genkey > $WSLKEY
+
+      HOSTPUB=/etc/secrets/wireguard/WSL2-VPN.HOST.pub
+
+      if ! ip link show dev WSL2-VPN; then
+        ip link add dev WSL2-VPN type wireguard
+        ip addr add 10.0.0.2/24 dev WSL2-VPN
+        ip link set dev WSL2-VPN up
+      fi
+
+      WSLPORT=55204
+      WSLPUB=$(wg pubkey < $WSLKEY)
+
+      HOST=$(ip -j route show default | jq -r '.[].gateway')
+      HOSTPORT=65126
+
+      wg set WSL2-VPN              \
+        listen-port $WSLPORT       \
+        private-key $WSLKEY        \
+        peer $(cat $HOSTPUB)       \
+          endpoint $HOST:$HOSTPORT \
+          allowed-ips 10.0.0.0/24
+    '';
   };
-  systemd.services."WSL2-VPN".wantedBy = [ "default.target" ];
-  systemd.services."WSL2-VPN".path = with pkgs; [ coreutils iproute2 jq wireguard-tools ];
-  systemd.services."WSL2-VPN".script = ''
-    set -eux
-
-    # The following files contain private keys
-    umask 0077
-
-    # Don't regenerate keys if not necessary, this helps keep the connection
-    # when the unit is restarted
-    WSLKEY=/etc/WSL2-VPN.WSL.key
-    test -f $WSLKEY || wg genkey > $WSLKEY
-    HOSTKEY=/etc/WSL2-VPN.HOST.key
-    test -f $HOSTKEY || wg genkey > $HOSTKEY
-
-    if ip link show dev WSL2-VPN; then
-      ip link del dev WSL2-VPN
-    fi
-    ip link add dev WSL2-VPN type wireguard
-    ip addr add 10.0.0.2/24 dev WSL2-VPN
-    ip link set dev WSL2-VPN up
-
-    WSL=$(ip -j addr | jq -r '.[] | select(.ifname == "eth0") | .addr_info[] | select(.family == "inet") | .local')
-    WSLPORT=55204
-    WSLPUB=$(wg pubkey < $WSLKEY)
-
-    HOST=$(ip -j route show default | jq -r '.[].gateway')
-    HOSTPORT=65126
-    HOSTPUB=$(wg pubkey < $HOSTKEY)
-
-    cat >/etc/WSL2-VPN.WSL.conf <<EOF
-    [Interface]
-    ListenPort = $WSLPORT
-    PrivateKey = $(cat $WSLKEY)
-
-    [Peer]
-    PublicKey  = $HOSTPUB
-    AllowedIPs = 10.0.0.0/24
-    Endpoint   = $HOST:$HOSTPORT
-    EOF
-
-    cat >/etc/WSL2-VPN.HOST.conf <<EOF
-    [Interface]
-    ListenPort = $HOSTPORT
-    PrivateKey = $(cat $HOSTKEY)
-    # Address    = 10.0.0.1/24
-
-    [Peer]
-    PublicKey  = $WSLPUB
-    AllowedIPs = 10.0.0.0/24
-    Endpoint   = $WSL:$WSLPORT
-    EOF
-
-    wg setconf WSL2-VPN /etc/WSL2-VPN.WSL.conf
-
-    /mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "& { \
-      Start-Process \
-      -FilePath 'C:\Program Files\WireGuard\wg.exe' \
-      -Verb RunAs \
-      -ArgumentList 'syncconf','WSL2-VPN.HOST','\\\\wsl\$\\NixOS\\etc\\WSL2-VPN.HOST.conf'
-    }"
-  '';
 
   systemd.user.services.pulseaudio.enable = false;
   hardware.pulseaudio.extraClientConf = ''
