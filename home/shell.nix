@@ -52,6 +52,14 @@
         }
 
         let-env ENV_CONVERSIONS = {
+          prev: ({
+            from_string: {}
+            to_string: {}
+          })
+          peek_output: ({
+            from_string: {}
+            to_string: {}
+          })
           NIX_PATH : ({
             from_string: {|str|
               $str | split row : | parse -r '((?<name>[[:alnum:]-_]*)=)?(?<path>.*)' | select name path
