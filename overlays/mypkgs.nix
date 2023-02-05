@@ -37,8 +37,8 @@ final: prev:
       src = final.fetchFromGitHub {
         owner = "KoviRobi";
         repo = pname;
-        rev = "a90e5967ec611956dd7d093b5cd659c45e52147d";
-        sha256 = "sha256-l+0oEkp4iXrRRTR+v3sNDdF78k2zTeHoHwnBUa1s5gM=";
+        rev = "rob";
+        sha256 = "sha256-NhXKRox8spyI9nyHifgYnO2LctfTDBYwEAQP4Sl+k0g=";
       };
 
       cargoLock = {
