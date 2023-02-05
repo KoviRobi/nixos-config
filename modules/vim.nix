@@ -130,8 +130,8 @@ in
     vim.rc = ''
       let mapleader = ","
 
-      " goto-file creates new files
-      map gf :e %:.:h/<cfile><CR>
+      " goto-file which creates new files
+      map gf :e <cfile><CR>
 
       set undofile undodir=$HOME/.vim/undo/
       set expandtab tabstop=2 softtabstop=2 shiftwidth=0
