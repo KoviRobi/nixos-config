@@ -1,6 +1,8 @@
 {
   inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
 
+  inputs.utils.url = "github:numtide/flake-utils";
+
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -21,7 +23,7 @@
   inputs.deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   inputs.deploy-rs.inputs.flake-compat.follows = "flake-compat";
 
-  outputs = { self, nixpkgs, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL, deploy-rs }: {
+  outputs = { self, nixpkgs, utils, home-manager, pye-menu, flake-compat, flake-registry, NixOS-WSL, deploy-rs }: {
 
     overlays =
       let
@@ -43,72 +45,82 @@
       in
       listToAttrs imported;
 
-    homeConfigurations = {
-      "rmk@cc-wsl" = home-manager.lib.homeManagerConfiguration {
-        configuration = {
-          imports = [ ./home ];
-          nixpkgs.overlays = builtins.attrValues self.overlays;
-          nixos = {
-            services.xserver.dpi = 100;
-            fileSystems = { "/" = { }; };
-            users.users.default-user.uid = 1000;
+    homeModules.simple = [
+      ./home/shell.nix
+      ./home/direnv.nix
+      ./home/git.nix
+      ./home/shell.nix
+      ./home/tmux.nix
+    ];
+
+    packages = utils.lib.eachDefaultSystemMap (system:
+      {
+        homeConfigurations.simple = home-manager.lib.homeManagerConfiguration
+          {
+            modules = self.homeModules.simple ++ [
+
+              {
+                home.username = "rmk";
+                home.homeDirectory = "/hom/rmk";
+                home.stateVersion = "22.11";
+              }
+            ];
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = builtins.attrValues self.overlays;
+            };
           };
-        };
-        system = "x86_64-linux";
-        homeDirectory = "/home/rmk";
-        username = "rmk";
-        stateVersion = "21.05";
-        extraSpecialArgs = { inherit pye-menu; };
-      };
-    };
 
-    packages.x86_64-linux.netboot =
-      let
-        system = "x86_64-linux";
-        pkgs = import nixpkgs { inherit system; };
-        netboot-system = self.nixosConfigurations.netboot;
-        kernel-cmdline = [ "init=${toplevel}/init" ] ++ netboot-system.config.boot.kernelParams;
-        inherit (netboot-system.config.system.build) kernel netbootRamdisk toplevel;
-      in
-      pkgs.writeShellApplication {
-        name = "netboot";
-        text = ''
-          cat <<EOF
-          Don't forget to open the following ports in the firewall:
-          UDP: 67 69 4011
-          TCP: 64172
+        netboot =
+          let
+            system = "x86_64-linux";
+            pkgs = import nixpkgs { inherit system; };
+            netboot-system = self.nixosConfigurations.netboot;
+            kernel-cmdline = [ "init=${toplevel}/init" ] ++ netboot-system.config.boot.kernelParams;
+            inherit (netboot-system.config.system.build) kernel netbootRamdisk toplevel;
+          in
+          pkgs.writeShellApplication
+            {
+              name = "netboot";
+              text = ''
+                cat <<EOF
+                Don't forget to open the following ports in the firewall:
+                UDP: 67 69 4011
+                TCP: 64172
 
-          This can be done via
+                This can be done via
 
-              sudo iptables -I nixos-fw 1 -i enp4s0 -p udp -m udp --dport 67    -j nixos-fw-accept
-              sudo iptables -I nixos-fw 2 -i enp4s0 -p udp -m udp --dport 69    -j nixos-fw-accept
-              sudo iptables -I nixos-fw 3 -i enp4s0 -p udp -m udp --dport 4011  -j nixos-fw-accept
-              sudo iptables -I nixos-fw 4 -i enp4s0 -p tcp -m tcp --dport 64172 -j nixos-fw-accept
+                    sudo iptables -I nixos-fw 1 -i enp4s0 -p udp -m udp --dport 67    -j nixos-fw-accept
+                    sudo iptables -I nixos-fw 2 -i enp4s0 -p udp -m udp --dport 69    -j nixos-fw-accept
+                    sudo iptables -I nixos-fw 3 -i enp4s0 -p udp -m udp --dport 4011  -j nixos-fw-accept
+                    sudo iptables -I nixos-fw 4 -i enp4s0 -p tcp -m tcp --dport 64172 -j nixos-fw-accept
 
-          (change enp4s0 to the interface you are using).
+                (change enp4s0 to the interface you are using).
 
-          And once you are done, closed via
+                And once you are done, closed via
 
-              sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 67    -j nixos-fw-accept
-              sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 69    -j nixos-fw-accept
-              sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 4011  -j nixos-fw-accept
-              sudo iptables -D nixos-fw -i enp4s0 -p tcp -m tcp --dport 64172 -j nixos-fw-accept
+                    sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 67    -j nixos-fw-accept
+                    sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 69    -j nixos-fw-accept
+                    sudo iptables -D nixos-fw -i enp4s0 -p udp -m udp --dport 4011  -j nixos-fw-accept
+                    sudo iptables -D nixos-fw -i enp4s0 -p tcp -m tcp --dport 64172 -j nixos-fw-accept
 
-          If you need to do DHCP also, consider
+                If you need to do DHCP also, consider
 
-              sudo nix run nixpkgs\#dnsmasq -- \\
-                --interface enp4s0 \\
-                --dhcp-range 192.168.10.10,192.168.10.254 \\
-                --dhcp-leasefile=dnsmasq.leases \\
-                --no-daemon
-          EOF
-          nix run nixpkgs\#pixiecore -- \
-            boot ${kernel}/bzImage ${netbootRamdisk}/initrd \
-            --cmdline "${builtins.concatStringsSep " " kernel-cmdline}" \
-            --debug --dhcp-no-bind --port 64172 --status-port 64172 \
-            "$@"
-        '';
-      };
+                    sudo nix run nixpkgs\#dnsmasq -- \\
+                      --interface enp4s0 \\
+                      --dhcp-range 192.168.10.10,192.168.10.254 \\
+                      --dhcp-leasefile=dnsmasq.leases \\
+                      --no-daemon
+                EOF
+                nix run nixpkgs\#pixiecore -- \
+                  boot ${kernel}/bzImage ${netbootRamdisk}/initrd \
+                  --cmdline "${builtins.concatStringsSep " " kernel-cmdline}" \
+                  --debug --dhcp-no-bind --port 64172 --status-port 64172 \
+                  "$@"
+              '';
+            };
+
+      });
 
     nixpkgs = import nixpkgs { overlays = builtins.attrValues self.overlays; };
 

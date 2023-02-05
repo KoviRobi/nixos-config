@@ -161,7 +161,8 @@
         "flake-registry": "flake-registry",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "pye-menu": "pye-menu"
+        "pye-menu": "pye-menu",
+        "utils": "utils_4"
       }
     },
     "utils": {
@@ -201,6 +202,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "0f8662f1319ad6abf89b3380dd2722369fc51ade",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_4": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
