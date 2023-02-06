@@ -2,7 +2,7 @@
 {
   imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [ thefuck carapace ];
+  home.packages = with pkgs; [ thefuck ];
 
   home.sessionVariables = {
     BROWSER = "links -g";
@@ -118,8 +118,6 @@
       zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=** r:|=**'
       zstyle ':completion:*' menu select
       zstyle :compinstall filename '/home/rmk/.zsh.comp'
-
-      source <(${pkgs.carapace}/bin/carapace _carapace zsh)
 
       autoload -Uz compinit
       compinit
