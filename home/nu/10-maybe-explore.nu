@@ -12,7 +12,7 @@ def-env maybe_explore [] {
       if (term size).rows < ($expanded | size).lines {
         $metadata.data | set-metadata $metadata | explore -p
       } else if ($metadata.data | describe) == closure {
-        view-source $metadata.data
+        view-source $metadata.data | nu-highlight
       }
     }
   )
