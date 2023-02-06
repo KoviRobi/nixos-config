@@ -6,11 +6,16 @@
     [
       ./base-configuration.nix
       (import ../modules/default-user.nix { })
+      ../modules/initrd-ssh.nix
       ../modules/ssh.nix
       ../modules/bluetooth.nix
       ../modules/graphical.nix
       (import ../modules/avahi.nix { publish = true; })
     ];
+
+  initrd-ssh.interface = "enp34s0";
+  initrd-ssh.udhcpcExtraArgs = [ "-b" ];
+  networking.interfaces.enp34s0.wakeOnLan.enable = true;
 
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
