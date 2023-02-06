@@ -2,7 +2,6 @@
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitFull;
     delta = {
       enable = true;
       options = {
