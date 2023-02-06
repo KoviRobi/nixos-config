@@ -6,6 +6,7 @@
     ./tmux.nix
     ./x11
     ./shell.nix
+    ./solarized.nix
     ./modules/import-nixos-config.nix
   ];
 

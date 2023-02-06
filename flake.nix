@@ -46,10 +46,10 @@
       listToAttrs imported;
 
     homeModules.simple = [
-      ./home/shell.nix
       ./home/direnv.nix
       ./home/git.nix
       ./home/shell.nix
+      ./home/solarized.nix
       ./home/tmux.nix
     ];
 
