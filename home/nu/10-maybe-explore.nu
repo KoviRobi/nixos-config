@@ -22,6 +22,8 @@ def-env maybe_explore [] {
     if (term size).columns >= 100 { table -e } else { table }
 }
 
+let-env config = ($env.config | update hooks.display_output {{maybe_explore}})
+
 let-env ENV_CONVERSIONS = ($env | get -i ENV_CONVERSIONS | default {} | merge {
   prev: ({
     from_string: {}
