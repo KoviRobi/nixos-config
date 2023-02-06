@@ -2,7 +2,7 @@
 {
   imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [ thefuck ];
+  home.packages = with pkgs; [ thefuck zoxide ];
 
   home.sessionVariables = {
     BROWSER = "links -g";
