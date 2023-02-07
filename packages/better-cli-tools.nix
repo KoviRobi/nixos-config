@@ -12,7 +12,6 @@ with pkgs;
   gping
   hyperfine
   neofetch
-  ngrok
   rm-improved
   taskwarrior
   zoxide
