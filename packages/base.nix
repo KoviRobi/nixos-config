@@ -14,16 +14,11 @@ with pkgs;
   pv
   jq
   tree
-  nfs-utils
   pciutils
-  usbutils
-  lm_sensors
   unzip
   zip
   graphviz
   dos2unix
-
-  abcde
 
   man-pages
 
@@ -43,7 +38,6 @@ with pkgs;
   youtube-dl
   rclone
   pass
-  linuxConsoleTools
   picocom
   stm32flash
   stlink
@@ -51,7 +45,6 @@ with pkgs;
 
   _9pfs
   ntfs3g
-  xfsprogs
 
   gdb
 
@@ -78,4 +71,12 @@ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
 lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
   vim
   git
+] ++
+lib.optionals (pkgs.hostPlatform.isLinux) [
+  abcde
+  linuxConsoleTools
+  lm_sensors
+  nfs-utils
+  usbutils
+  xfsprogs
 ]

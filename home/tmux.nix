@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 {
-  systemd.user.services.tmux-server = {
+  systemd.user.services.tmux-server = lib.mkIf pkgs.hostPlatform.isLinux {
     Unit = {
       Description = "Tmux server";
       After = [ "graphical-session-pre.target" ];

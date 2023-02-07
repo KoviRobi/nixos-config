@@ -29,6 +29,10 @@ final: prev:
   nushell =
     let
       inherit (final) lib stdenv rustPlatform;
+      self = prev.nushell.override {
+        sdk = prev.darwin.apple_sdk_11_0.MacOSX-SDK;
+        inherit (prev.darwin.apple_sdk_11_0.frameworks) AppKit Foundation Security;
+      };
     in
     rustPlatform.buildRustPackage rec {
       pname = "nushell";
