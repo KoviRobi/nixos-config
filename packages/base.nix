@@ -61,6 +61,8 @@ with pkgs;
   sccache
   mold
 
+  atop
+
   #   From overlays, see nixpkgs.overlays
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
