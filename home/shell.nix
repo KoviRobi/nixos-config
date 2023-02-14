@@ -2,7 +2,12 @@
 {
   imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [ thefuck zoxide ];
+  home.packages = with pkgs; [
+    thefuck
+    zoxide
+  ] ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+    carapace
+  ];
 
   home.sessionVariables = {
     BROWSER = "links -g";
