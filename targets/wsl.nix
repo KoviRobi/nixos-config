@@ -65,6 +65,10 @@
     ListenStream = [ "%t/keyring/ssh" ];
     Accept = true;
   };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.sudo.enableGnomeKeyring = true;
+  home-manager.users.default-user.services.gnome-keyring.enable = true;
   systemd.user.services."ssh-agent@".serviceConfig = {
     # Workaround https://github.com/microsoft/WSL/issues/7591
     ExecStartPre = [
