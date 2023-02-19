@@ -12,6 +12,7 @@
       ExecStart = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf start-server";
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
       Environment = [ "TMUX_TMPDIR=/run/user/1000" ];
+      PassEnvironment = [ "PATH" "WSL_INTEROP" ];
     };
 
     Install = { WantedBy = [ "graphical-session.target" ]; };
