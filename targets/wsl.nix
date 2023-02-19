@@ -83,6 +83,10 @@
   services.openssh.settings.X11Forwarding = true;
   solarized.brightness = "light";
 
+  home-manager.users.default-user.services.feh-random-background.enable = lib.mkForce false;
+  home-manager.users.default-user.systemd.user.services.setxkbmap.Install.WantedBy = lib.mkForce [ ];
+  home-manager.users.default-user.systemd.user.services.xplugd.Install.WantedBy = lib.mkForce [ ];
+
   system.stateVersion = "22.05";
   home-manager.users.default-user.home.stateVersion = "18.09";
   home-manager.users.default-user.programs.git.extraConfig.credential.helper = lib.mkForce "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe";
