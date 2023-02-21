@@ -33,6 +33,13 @@ in
 
   programs.xonsh.enable = true;
   programs.bandwhich.enable = true;
+  programs.atop = {
+    enable = true;
+    atopService.enable = true;
+    atopgpu.enable = true;
+    netatop.enable = true;
+    setuidWrapper.enable = true;
+  };
 
   environment.homeBinInPath = true;
   environment.systemPackages =
