@@ -194,6 +194,7 @@
       )
       {
         "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
+        "hp-nixos-a" = [ ./configurations/hp.nix ./targets/hp.nix ];
         "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
         "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
         "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
