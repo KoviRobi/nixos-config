@@ -76,7 +76,7 @@
   };
 
   users.users.default-user.extraGroups = [ "no-google-authenticator" ];
-  services.openssh.forwardX11 = true;
+  services.openssh.settings.X11Forwarding = true;
   solarized.brightness = "light";
 
   system.stateVersion = "22.05";

@@ -25,7 +25,7 @@
 
   services.xserver.videoDrivers = [ "i915" "modesetting" "nouveau" "fbdev" ];
 
-  services.openssh.forwardX11 = true;
+  services.openssh.settings.X11Forwarding = true;
 
   initrd-ssh.interface = "eno1";
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
