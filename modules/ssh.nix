@@ -11,7 +11,7 @@
       settings.PermitRootLogin = "no";
       extraConfig = ''
         Match Group !no-google-authenticator,*
-          AuthenticationMethods publickey,keyboard-interactive
+          AuthenticationMethods publickey keyboard-interactive
         Match All
       '';
     };
