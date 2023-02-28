@@ -36,7 +36,7 @@
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "cifs" ];
 
-  environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ]
+  environment.systemPackages = with pkgs; [ nvtop-amd virt-manager saleae-logic-2 ]
     ++ (import ../packages/cc.nix args);
 
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];

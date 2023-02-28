@@ -36,7 +36,6 @@ in
   programs.atop = {
     enable = true;
     atopService.enable = true;
-    atopgpu.enable = true;
     netatop.enable = true;
     setuidWrapper.enable = true;
   };
