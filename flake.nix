@@ -25,6 +25,8 @@
 
   inputs.dwarffs.url = "github:edolstra/dwarffs";
 
+  inputs.input-leap.url = "github:KoviRobi/nixpkgs/add/input-leap";
+
   outputs =
     { self
     , nixpkgs
@@ -36,6 +38,7 @@
     , NixOS-WSL
     , deploy-rs
     , dwarffs
+    , input-leap
     }: {
 
       overlays =
@@ -56,7 +59,14 @@
             })
             nix_or_dirs;
         in
-        listToAttrs imported;
+        listToAttrs imported // {
+          input-leap = final: prev: {
+            input-leap =
+              final.libsForQt5.callPackage
+                "${input-leap}/pkgs/applications/misc/input-leap/default.nix"
+                { };
+          };
+        };
 
       homeModules.simple = [
         ./home/direnv.nix

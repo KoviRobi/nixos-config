@@ -34,6 +34,8 @@ with pkgs;
   xorg.xkbutils
   xorg.xmodmap
   xorg.xhost
+
+  input-leap
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   mpv

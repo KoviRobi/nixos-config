@@ -140,6 +140,22 @@
         "type": "github"
       }
     },
+    "input-leap": {
+      "locked": {
+        "lastModified": 1677553863,
+        "narHash": "sha256-xxqBpOXh48SxQ4TM+fMSNnAvdt5NsG6eA7MQarbSa+0=",
+        "owner": "KoviRobi",
+        "repo": "nixpkgs",
+        "rev": "6d3bbcaa94ef2601d27572b73ee11429104b3453",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KoviRobi",
+        "ref": "add/input-leap",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -251,6 +267,7 @@
         "flake-compat": "flake-compat",
         "flake-registry": "flake-registry",
         "home-manager": "home-manager",
+        "input-leap": "input-leap",
         "nixpkgs": "nixpkgs_2",
         "pye-menu": "pye-menu",
         "utils": "utils_4"
