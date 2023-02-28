@@ -38,6 +38,7 @@
 
     extraConfig = ''
       set -g status-position top
+      set -g status-right "#{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}\"#{client_user}@#h:#{=21:pane_current_path}\" %H:%M %d-%b-%y"
       set -g mouse on
       set -g set-titles on
       set -g pane-border-lines heavy
