@@ -59,7 +59,7 @@
         alias n = nix
         alias nf = nix flake
         alias nb = nix build
-        alias der = (cd /; cd -)
+        alias der = direnv reload
         alias termbin = nc termbin.com 9999
 
         # parses a input string in --help format and returns a table of parsed flags
