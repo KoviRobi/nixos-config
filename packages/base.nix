@@ -56,6 +56,8 @@ with pkgs;
 
   atop
 
+  qrencode
+
   #   From overlays, see nixpkgs.overlays
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
