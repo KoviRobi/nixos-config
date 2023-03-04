@@ -132,6 +132,7 @@
     }];
   }];
   environment.systemPackages = [
+    pkgs.nvtop-amd
     pkgs.docker-credential-helpers
     pkgs.virt-manager
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
