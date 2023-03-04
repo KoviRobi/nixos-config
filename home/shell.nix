@@ -56,9 +56,9 @@
         alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
         alias ll = ls -l
         alias la = ls -la
-        alias n = nix
-        alias nf = nix flake
-        alias nb = nix build
+        alias n = ${pkgs.nix}/bin/nix
+        alias nf = ${pkgs.nix}/bin/nix flake
+        alias nb = ${pkgs.nix-output-monitor}/bin/nom build
         alias der = direnv reload
         alias termbin = nc termbin.com 9999
 
