@@ -53,6 +53,9 @@
         alias shell = (hide g; g)
         alias g = git
         alias gpf = git push --force-with-lease
+        alias grp = git reset -p
+        alias gprev = git reset HEAD^
+        alias gpprev = git reset -p HEAD^
         alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
         alias ll = ls -l
         alias la = ls -la
