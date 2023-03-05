@@ -35,6 +35,8 @@ with pkgs;
   xorg.xmodmap
   xorg.xhost
 
+  imagemagick
+
   input-leap
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
