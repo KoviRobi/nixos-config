@@ -138,6 +138,8 @@ in
       set colorcolumn=80
       set cursorline cursorcolumn
       set backspace=indent,start,eol
+      " Allows completing/gf on `VAR=/etc/path` style lines
+      set isfname-==
 
       set completeopt=menuone,preview,longest
       set omnifunc=ale#completion#OmniFunc
