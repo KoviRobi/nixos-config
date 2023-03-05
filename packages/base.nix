@@ -35,7 +35,7 @@ with pkgs;
   plan9port
   xxd
   upterm
-  youtube-dl
+  yt-dlp
   rclone
   pass
   picocom
