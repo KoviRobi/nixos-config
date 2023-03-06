@@ -63,6 +63,7 @@
         alias nf = ${pkgs.nix}/bin/nix flake
         alias nb = ${pkgs.nix-output-monitor}/bin/nom build
         alias der = direnv reload
+        alias ded = direnv edit
         alias termbin = nc termbin.com 9999
 
         # parses a input string in --help format and returns a table of parsed flags
