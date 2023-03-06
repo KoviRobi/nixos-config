@@ -2,7 +2,7 @@
 {
   imports =
     [
-      (import ../modules/music.nix { music-fs-uuid = "b5cb1ef0-7603-4d71-b107-c5ab11c76e17"; })
+      (import ../modules/music.nix { music-fs-uuid = "7ccc6d89-f028-4ca5-85c8-1e4b3cf69517"; })
     ];
 
   boot.loader.systemd-boot.enable = true;
