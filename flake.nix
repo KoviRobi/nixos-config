@@ -78,6 +78,11 @@
 
       packages = utils.lib.eachDefaultSystemMap (system:
         {
+          nixpkgs = import nixpkgs {
+            inherit system;
+            overlays = builtins.attrValues self.overlays;
+          };
+
           homeConfigurations.simple = home-manager.lib.homeManagerConfiguration
             {
               modules = self.homeModules.simple ++ [
@@ -88,16 +93,13 @@
                   home.stateVersion = "22.11";
                 }
               ];
-              pkgs = import nixpkgs {
-                inherit system;
-                overlays = builtins.attrValues self.overlays;
-              };
+              pkgs = self.packages.${system}.nixpkgs;
             };
 
           netboot =
             let
-              system = "x86_64-linux";
-              pkgs = import nixpkgs { inherit system; };
+              inherit system;
+              pkgs = self.packages.${system}.nixpkgs;
               netboot-system = self.nixosConfigurations.netboot;
               kernel-cmdline = [ "init=${toplevel}/init" ] ++ netboot-system.config.boot.kernelParams;
               inherit (netboot-system.config.system.build) kernel netbootRamdisk toplevel;
@@ -144,8 +146,6 @@
               };
 
         });
-
-      nixpkgs = import nixpkgs { overlays = builtins.attrValues self.overlays; };
 
       nixosConfigurations = builtins.mapAttrs
         (name: value:
