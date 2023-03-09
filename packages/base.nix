@@ -58,7 +58,8 @@ with pkgs;
 
   qrencode
 
-  #   From overlays, see nixpkgs.overlays
+  unipicker
+  fzf
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
