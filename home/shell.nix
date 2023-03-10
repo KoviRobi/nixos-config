@@ -50,7 +50,6 @@
         source ${config.xdg.configHome}/nushell/zoxide.nu
         source "${config.xdg.configHome}/nushell/user-config.nu"
 
-        alias shell = (hide g; g)
         alias g = git
         alias gpf = git push --force-with-lease
         alias grp = git reset -p

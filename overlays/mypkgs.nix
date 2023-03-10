@@ -27,36 +27,27 @@ final: prev:
   };
 
   nushell =
-    let
-      inherit (final) lib stdenv rustPlatform;
-      self = prev.nushell.override {
-        sdk = prev.darwin.apple_sdk_11_0.MacOSX-SDK;
-        inherit (prev.darwin.apple_sdk_11_0.frameworks) AppKit Foundation Security;
-      };
-    in
-    rustPlatform.buildRustPackage rec {
+    prev.nushell.overrideAttrs (oldAttrs: rec {
       pname = "nushell";
-      version = "unstable-2023-02-02";
+      version = "unstable-2023-03-10";
 
       src = final.fetchFromGitHub {
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-NhXKRox8spyI9nyHifgYnO2LctfTDBYwEAQP4Sl+k0g=";
+        sha256 = "sha256-ldc4bel1cHqYLderqHPMESD5cGLAJ0wVrmcEHPoUVFE=";
       };
 
-      cargoLock = {
-        lockFile = ./nushell-Cargo.lock;
+      cargoDeps = prev.rustPlatform.importCargoLock {
+        lockFile = "${src}/Cargo.lock";
         outputHashes = {
-          "reedline-0.15.0" = "sha256-Ju9dg4ZmzwkUux574tXtxIxLrY3J5e7Vx8Dv/uPX/8A=";
+          "nu-ansi-term-0.46.0" = "sha256-gx6DxsQYpxMee0bXKqD7VbRPQw1nunxoNxxzvfmm5gM=";
+          "reedline-0.16.0" = "sha256-MmRxWUD0ZrED24uMp/h5JFmvKZciR/a2uF+xWngLyRM=";
         };
       };
 
-      buildFeatures = prev.nushell.buildFeatures ++ [ "dataframe" ];
-
-      inherit (prev.nushell) cargoPatches nativeBuildInputs buildInputs
-        doCheck checkPhase meta passthru;
-    };
+      buildFeatures = oldAttrs.buildFeatures or [ ] ++ [ "dataframe" ];
+    });
 
   dhcp-helper = final.stdenv.mkDerivation rec {
     pname = "dhcp-helper";

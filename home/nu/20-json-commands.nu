@@ -9,4 +9,4 @@ def "nev" [
 ] {
   nix eval --json $"($flake)#($pkg).drvAttrs" | from json
 }
-alias nixos-version = (nixos-version --json | from json)
+def nixos-version [] { ^nixos-version --json | from json }
