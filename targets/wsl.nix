@@ -48,6 +48,7 @@
   ];
 
   systemd.user.targets.graphical-session.wantedBy = [ "default.target" ];
+  systemd.user.services.wslg.serviceConfig.Type = "oneshot";
   systemd.user.services.wslg.wantedBy = [ "graphical-session-pre.target" ];
   systemd.user.services.wslg.before = [ "graphical-session.target" ];
   systemd.user.services.wslg.script = ''
