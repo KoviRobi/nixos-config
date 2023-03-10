@@ -131,7 +131,8 @@
 
                   If you need to do DHCP also, consider
 
-                      sudo nix run nixpkgs\#dnsmasq -- \\
+                      sudo ip addr add 192.168.10.1/24 dev enp4s0
+                      sudo nix run 'nixpkgs#dnsmasq' -- \\
                         --interface enp4s0 \\
                         --dhcp-range 192.168.10.10,192.168.10.254 \\
                         --dhcp-leasefile=dnsmasq.leases \\
