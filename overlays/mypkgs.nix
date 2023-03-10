@@ -57,4 +57,14 @@ final: prev:
       inherit (prev.nushell) cargoPatches nativeBuildInputs buildInputs
         doCheck checkPhase meta passthru;
     };
+
+  dhcp-helper = final.stdenv.mkDerivation rec {
+    pname = "dhcp-helper";
+    version = "1.2";
+    src = final.fetchurl {
+      url = "https://thekelleys.org.uk/dhcp-helper/${pname}-${version}.tar.gz";
+      sha256 = "sha256-rp5YnsUPG1vjAufruBEa1zShHiQiqc9h0I94WOojZq0=";
+    };
+    makeFlags = [ "PREFIX=${placeholder "out"}" ];
+  };
 }
