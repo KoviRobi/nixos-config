@@ -281,6 +281,7 @@ in
         vim-snippets
         vim-elixir
         ale
+        vimspector
         quickfix-reflector-vim
         vim-projectionist
         neoterm
