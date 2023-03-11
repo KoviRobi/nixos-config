@@ -215,6 +215,8 @@
                 { environment.systemPackages = [ deploy-rs.defaultPackage.${system} ]; }
 
                 dwarffs.nixosModules.dwarffs
+
+                ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
               ];
           }
         )

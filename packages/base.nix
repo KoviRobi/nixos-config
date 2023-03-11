@@ -30,6 +30,7 @@ with pkgs;
   nix-tree
   nix-index
   nix-output-monitor
+  nom-rebuild
 
   dconf
   plan9port
