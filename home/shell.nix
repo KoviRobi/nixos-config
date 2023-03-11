@@ -25,17 +25,15 @@
         ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
       '';
       extraConfig = ''
-        ${let
-            inherit (builtins) readDir readFile mapAttrs attrValues filter
-                    match sort lessThan concatStringsSep;
-            dir = ./nu;
-            dir_files = readDir dir;
-            name_type = attrValues (mapAttrs (name: type: { inherit name type; }) dir_files);
-            nu_name_type = filter (nt: nt.type == "regular" && match ".*\.nu" nt.name != null) name_type;
-            files = map (nt: nt.name) nu_name_type;
-            sorted_files = sort lessThan files;
-            contents = map (name: readFile (dir + "/${name}")) sorted_files;
-          in concatStringsSep "\n" contents}
+        use ${./nu}/01-default-completions.nu *
+        use ${./nu}/01-default.nu             *
+        use ${./nu}/02-rob-default.nu         *
+        use ${./nu}/03-aliases.nu             *
+        use ${./nu}/05-nix-support.nu         *
+        use ${./nu}/10-maybe-explore.nu       *
+        use ${./nu}/20-json-commands.nu       *
+        use ${./nu}/30-dir-stack.nu           *
+        use ${./nu}/40-carapace.nu            *
 
         use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
@@ -45,46 +43,9 @@
         use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
-        source ${pkgs.nu_scripts}/custom-completions/auto-generate/parse-fish.nu
         use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
         source ${config.xdg.configHome}/nushell/zoxide.nu
         source "${config.xdg.configHome}/nushell/user-config.nu"
-
-        alias g = git
-        alias gpf = git push --force-with-lease
-        alias grp = git reset -p
-        alias gprev = git reset HEAD^
-        alias gpprev = git reset -p HEAD^
-        alias nixrepl = nix repl --expr 'builtins.getFlake "nixos-config"';
-        alias ll = ls -l
-        alias la = ls -la
-        alias n = ${pkgs.nix}/bin/nix
-        alias nf = ${pkgs.nix}/bin/nix flake
-        alias nb = ${pkgs.nix-output-monitor}/bin/nom build
-        alias der = direnv reload
-        alias ded = direnv edit
-        alias termbin = nc termbin.com 9999
-
-        # parses a input string in --help format and returns a table of parsed flags
-        def parse-help [] {
-            # help format  '        -s,                      --long                   <format>                 description   '
-            $in | parse -r '\s\s+(?:-(?P<short>\w)[,\s]+)?(?:--(?P<long>[\w-]+))\s*(?:<(?P<format>.*)>)?\s*(?P<description>.*)?'
-        }
-
-        # takes a table of parsed help commands in format [short? long format? description]
-        def make-completion [command_name: string] {
-          "extern \"" + $command_name + "\" [\n" + ($in | each { |it|
-              "\t--" + $it.long + (if ($it.short | is-empty) == false {
-                  "(-" + $it.short + ")"
-                } else {
-                  ""
-                }) + (if ($it.description | is-empty) == false {
-                  "\t\t# " + $it.description
-                } else {
-                  ""
-                })
-              } | str join "\n") + "\n\t...args\n]"
-        }
       '';
     };
 
