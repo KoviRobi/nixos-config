@@ -60,6 +60,10 @@ with pkgs;
 
   unipicker
   fzf
+
+  tcpdump
+  libpcap
+  binwalk
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
