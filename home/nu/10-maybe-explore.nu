@@ -1,11 +1,11 @@
 export-env {
   let-env prev = (0..4 | each --keep-empty {null})
 
-  def v [index:int=0] {
+  export def v [index:int=0] {
     $env.prev | get -i $index
   }
 
-  def-env maybe_explore [] {
+  export def-env maybe_explore [] {
     let metadata = metadata --data
     $env.peek_output = (
       try {
