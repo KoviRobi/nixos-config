@@ -252,5 +252,16 @@
           ];
         };
       };
+
+      deploy.nodes.rmk-cc-pc-nixos-a = {
+        sshUser = "rmk";
+        sshOpts = [ "-tt" ];
+        user = "root";
+        hostname = "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com";
+        profiles.system = {
+          user = "rmk";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.rmk-cc-pc-nixos-a;
+        };
+      };
     };
 }

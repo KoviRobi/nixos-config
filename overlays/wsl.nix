@@ -1,10 +1,10 @@
-self: super:
+final: prev:
 {
-  npiperelay = super.buildGoModule rec {
+  npiperelay = prev.buildGoModule rec {
     pname = "npiperelay";
     version = "0.1.0";
 
-    src = super.fetchFromGitHub {
+    src = prev.fetchFromGitHub {
       owner = "jstarks";
       repo = pname;
       rev = "v${version}";
@@ -16,7 +16,7 @@ self: super:
     # For some reason, stripping produces a bad executable
     dontStrip = true;
 
-    meta = with super.lib; {
+    meta = with prev.lib; {
       description = "npiperelay allows you to access Windows named pipes from WSL";
       homepage = "https://github.com/jstarks/npiperelay";
       license = licenses.mit;
