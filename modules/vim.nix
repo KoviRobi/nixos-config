@@ -200,7 +200,7 @@ in
         endif
       endfunction
 
-      let g:slime_target = "tmux"
+      let g:slime_target = "neovim"
 
       if filereadable(expand("$HOME/.config/nvim/init.vim"))
         source ~/.config/nvim/init.vim
