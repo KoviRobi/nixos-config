@@ -38,7 +38,7 @@ with pkgs;
   upterm
   yt-dlp
   rclone
-  pass
+  (pass.withExtensions (exts: with exts; [ pass-otp ]))
   picocom
   stm32flash
   stlink

@@ -1,47 +1,55 @@
 { pkgs, lib, config, ... }:
-with pkgs;
-[
-  gnome.adwaita-icon-theme
-  hicolor-icon-theme
+{
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark-qt;
 
-  gparted
-  gnome.seahorse
-  udiskie
-  geeqie
+  programs.firefox.enable = true;
+  programs.firefox.nativeMessagingHosts.ff2mpv = true;
+  programs.firefox.nativeMessagingHosts.passff = true;
 
-  gmpc
-  libreoffice
+  environment.systemPackages = with pkgs; [
+    gnome.adwaita-icon-theme
+    hicolor-icon-theme
 
-  firefox
-  chromium
+    gparted
+    gnome.seahorse
+    udiskie
+    geeqie
 
-  pamixer
-  paprefs
-  pavucontrol
+    gmpc
+    libreoffice
 
-  zathura
-  st
-  ffmpeg
+    firefox
+    chromium
 
-  x11vnc
-  tigervnc
+    pamixer
+    paprefs
+    pavucontrol
 
-  libnotify
-  xdotool
-  xclip
-  xorg.xev
-  xorg.xkbprint
-  xorg.xkbutils
-  xorg.xmodmap
-  xorg.xhost
+    zathura
+    st
+    ffmpeg
 
-  imagemagick
+    x11vnc
+    tigervnc
 
-  input-leap
-] ++
-lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-  mpv
-  flameshot
-  signal-desktop
-  v4l-utils
-]
+    libnotify
+    xdotool
+    xclip
+    xorg.xev
+    xorg.xkbprint
+    xorg.xkbutils
+    xorg.xmodmap
+    xorg.xhost
+
+    imagemagick
+
+    input-leap
+  ] ++
+  lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+    mpv
+    flameshot
+    signal-desktop
+    v4l-utils
+  ];
+}

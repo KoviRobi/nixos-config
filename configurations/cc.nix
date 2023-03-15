@@ -27,8 +27,6 @@
     sigrok-cli
     pulseview
   ];
-  programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark-qt;
 
   nixpkgs.config.allowUnfree = true; # For VSCode
   home-manager.users.default-user = {

@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, lib, ... }@args:
+{ config, pkgs, lib, ... }:
 
 {
   fonts.fonts = with pkgs; [
@@ -10,7 +10,7 @@
     terminus-nerdfont
   ];
 
-  environment.systemPackages = import ../packages/desktop-environment.nix args;
+  imports = [ ../packages/desktop-environment.nix ];
 
   services.udisks2.enable = true;
 

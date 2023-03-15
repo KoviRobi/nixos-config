@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }@args:
+{ config, lib, pkgs, ... }:
 {
   wsl = {
     enable = true;
@@ -18,6 +18,8 @@
     wslConf.network.generateResolvConf = false;
     wslConf.network.hostname = config.networking.hostName;
   };
+
+  imports = [ ../packages/desktop-environment.nix ];
 
   services.resolved.enable = true;
   systemd.services."wsl_resolv".serviceConfig = {
@@ -59,7 +61,7 @@
   environment.systemPackages = with pkgs; [
     xorg.xauth
     config.boot.kernelPackages.usbip
-  ] ++ (import ../packages/desktop-environment.nix args);
+  ];
 
   systemd.user.sockets.ssh-agent.wantedBy = [ "default.target" ];
   systemd.user.sockets.ssh-agent.socketConfig = {
