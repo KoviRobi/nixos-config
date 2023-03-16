@@ -95,15 +95,4 @@
   hardware.pulseaudio.extraClientConf = ''
     default-server = 10.0.0.1;
   '';
-
-  services.udev.extraRules =
-    let
-      unbind-script = pkgs.writeShellScript "ftd2xx-unbind.sh" ''
-        echo "$1" > /sys/bus/usb/drivers/ftdi_sio/unbind
-      '';
-    in
-    ''
-      ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666"
-      DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", RUN+="${unbind-script} '%k'"
-    '';
 }

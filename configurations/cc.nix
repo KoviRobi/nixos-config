@@ -117,6 +117,9 @@
       SUBSYSTEM=="usb", ATTRS{idVendor}=="1366", ATTRS{manufacturer}=="SEGGER", ATTRS{idProduct}=="0101", ATTRS{product}=="J-Link", MODE="0666"
       ACTION=="add", ATTRS{serial}=="DK5XA9SZ", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyBLE"
       ACTION=="add", ATTRS{serial}=="DK6N5V3E", ATTRS{manufacturer}=="FTDI", SYMLINK+="ttyASIC"
+
+      ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666"
+      DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", RUN+="${pkgs.bash}/bin/sh -c 'echo %k > /sys/bus/usb/drivers/ftdi_sio/unbind'"
     '';
-  services.udev.packages = [ pkgs.stlink pkgs.libsigrok ];
+  services.udev.packages = with pkgs; [ openocd saleae-logic-2 stlink libsigrok ];
 }

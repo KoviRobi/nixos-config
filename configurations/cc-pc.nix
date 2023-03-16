@@ -42,14 +42,6 @@
   environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ]
     ++ (import ../packages/cc.nix args);
 
-  services.udev.packages = with pkgs; [ openocd saleae-logic-2 ];
-
-  services.udev.extraRules =
-    ''
-      ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666"
-      DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", RUN+="${pkgs.bash}/bin/sh -c 'echo %k > /sys/bus/usb/drivers/ftdi_sio/unbind'"
-    '';
-
   nix.sshServe.enable = true;
   nix.sshServe.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
