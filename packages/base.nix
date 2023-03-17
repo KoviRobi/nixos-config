@@ -2,11 +2,9 @@
 with pkgs;
 [
   bashInteractive
-  wget
   tmux
   ispell
   file
-  netcat
   socat
   lsof
   gnupg
@@ -36,8 +34,6 @@ with pkgs;
   dconf
   plan9port
   xxd
-  upterm
-  yt-dlp
   rclone
   (pass.withExtensions (exts: with exts; [ pass-otp ]))
   picocom
@@ -63,8 +59,6 @@ with pkgs;
   unipicker
   fzf
 
-  tcpdump
-  libpcap
   binwalk
   ethtool
 ] ++

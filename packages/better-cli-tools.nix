@@ -2,14 +2,8 @@
 { pkgs, ... }:
 with pkgs;
 [
-  aria2
-  bandwhich
-  browsh
-  ddgr
-  doggo
   dua
   duf
-  gping
   hyperfine
   neofetch
   rm-improved

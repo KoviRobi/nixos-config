@@ -20,6 +20,8 @@ in
     ../modules/nethogs.nix
     ../modules/vim.nix
     ../modules/clipboard.nix
+
+    ../packages/network.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
