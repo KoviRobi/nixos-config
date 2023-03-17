@@ -1,6 +1,17 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, pkgs, ... }:
 {
+  services.xserver.synaptics.enable = true;
+  services.xserver.synaptics.tapButtons = false;
+  services.xserver.synaptics.vertTwoFingerScroll = true;
+  services.xserver.synaptics.horizTwoFingerScroll = true;
+  services.xserver.synaptics.palmDetect = true;
+  services.xserver.synaptics.palmMinWidth = 7;
+  services.xserver.synaptics.palmMinZ = 25;
+
+  boot.kernelModules = [ "wl" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -15,19 +26,20 @@
   home-manager.users.root.home.stateVersion = "23.05";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
+    {
+      device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
       fsType = "xfs";
     };
 
   boot.initrd.luks.devices."hp-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/30C3-618E";
+    {
+      device = "/dev/disk/by-uuid/30C3-618E";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/3fb4611d-ac00-4bfa-b6d1-d51b98a9d67f"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/3fb4611d-ac00-4bfa-b6d1-d51b98a9d67f"; }];
 
 }
