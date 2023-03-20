@@ -1,8 +1,10 @@
 # Nushell Config File
 
 export-env {
-  # For more information on themes, see
+  # For more information on defining custom themes, see
   # https://www.nushell.sh/book/coloring_and_theming.html
+  # And here is the theme collection
+  # https://github.com/nushell/nu_scripts/tree/main/themes
   let dark_theme = {
       # color for nushell primitives
       separator: white
@@ -11,7 +13,7 @@ export-env {
       empty: blue
       # Closures can be used to choose colors for specific values.
       # The value (in this case, a bool) is piped into the closure.
-      bool: { if $in { 'light_cyan' } else { 'light_gray' } }
+      bool: {|| if $in { 'light_cyan' } else { 'light_gray' } }
       int: white
       filesize: {|e|
         if $e == 0b {
@@ -21,22 +23,22 @@ export-env {
         } else { 'blue' }
       }
       duration: white
-      date: { (date now) - $in |
+      date: {|| (date now) - $in |
         if $in < 1hr {
-          '#e61919'
+          'red3b'
         } else if $in < 6hr {
-          '#e68019'
+          'orange3'
         } else if $in < 1day {
-          '#e5e619'
+          'yellow3b'
         } else if $in < 3day {
-          '#80e619'
+          'chartreuse2b'
         } else if $in < 1wk {
-          '#19e619'
+          'green3b'
         } else if $in < 6wk {
-          '#19e5e6'
+          'darkturquoise'
         } else if $in < 52wk {
-          '#197fe6'
-        } else { 'light_gray' }
+          'deepskyblue3b'
+        } else { 'dark_gray' }
       }
       range: white
       float: white
@@ -92,7 +94,7 @@ export-env {
       empty: blue
       # Closures can be used to choose colors for specific values.
       # The value (in this case, a bool) is piped into the closure.
-      bool: { if $in { 'dark_cyan' } else { 'dark_gray' } }
+      bool: {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
       int: dark_gray
       filesize: {|e|
         if $e == 0b {
@@ -102,7 +104,7 @@ export-env {
         } else { 'blue_bold' }
       }
       duration: dark_gray
-    date: { (date now) - $in |
+    date: {|| (date now) - $in |
       if $in < 1hr {
         'red3b'
       } else if $in < 6hr {
@@ -186,6 +188,7 @@ export-env {
     table: {
       mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
       index_mode: always # "always" show indexes, "never" show indexes, "auto" = show indexes when a table has "index" column
+      show_empty: true # show 'empty list' and 'empty record' placeholders for command output
       trim: {
         methodology: wrapping # wrapping or truncating
         wrapping_try_keep_words: true # A strategy used by the 'wrapping' methodology
@@ -278,19 +281,20 @@ export-env {
     color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
     use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
-    float_precision: 2
+    float_precision: 2 # the precision for displaying floats in tables
     # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
     edit_mode: emacs # emacs, vi
     shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
-    show_banner: true # true or false to enable or disable the banner
+    # true or false to enable or disable the welcome banner at startup
+    show_banner: true
     render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 
     hooks: {
-      pre_prompt: [{
+      pre_prompt: [{||
         null  # replace with source code to run before the prompt is shown
       }]
-      pre_execution: [{
+      pre_execution: [{||
         null  # replace with source code to run before the repl input is run
       }]
       env_change: {
@@ -298,8 +302,11 @@ export-env {
           null  # replace with source code to run if the PWD environment is different since the last repl input
         }]
       }
-      display_output: {
+      display_output: {||
         if (term size).columns >= 100 { table -e } else { table }
+      }
+      command_not_found: {||
+        null  # replace with source code to return an error message when a command is not found
       }
     }
     menus: [

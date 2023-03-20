@@ -4,7 +4,7 @@ final: prev:
     owner = "KoviRobi";
     repo = "nu_scripts";
     rev = "git-alias-caret-prefix";
-    sha256 = "sha256-ZIQ1TZQG8bmauxemrlov/VjiWPZWKoD8iyXNTEO4cfI=";
+    sha256 = "sha256-n2/NCV+hN+J3asVAz/TRwXer6uCYaqlCDTh7XcspUD0=";
   };
 
   nushell =
@@ -16,27 +16,13 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-ldc4bel1cHqYLderqHPMESD5cGLAJ0wVrmcEHPoUVFE=";
+        sha256 = "sha256-2L+XeAujia+deiG19VtNWWC7oNKmjsl2egdYU3sqaJk=";
       };
 
       cargoDeps = prev.rustPlatform.importCargoLock {
         lockFile = "${src}/Cargo.lock";
-        outputHashes = {
-          "nu-ansi-term-0.46.0" = "sha256-gx6DxsQYpxMee0bXKqD7VbRPQw1nunxoNxxzvfmm5gM=";
-          "reedline-0.16.0" = "sha256-MmRxWUD0ZrED24uMp/h5JFmvKZciR/a2uF+xWngLyRM=";
-        };
       };
 
       buildFeatures = oldAttrs.buildFeatures or [ ] ++ [ "dataframe" ];
     });
-
-  dhcp-helper = final.stdenv.mkDerivation rec {
-    pname = "dhcp-helper";
-    version = "1.2";
-    src = final.fetchurl {
-      url = "https://thekelleys.org.uk/dhcp-helper/${pname}-${version}.tar.gz";
-      sha256 = "sha256-rp5YnsUPG1vjAufruBEa1zShHiQiqc9h0I94WOojZq0=";
-    };
-    makeFlags = [ "PREFIX=${placeholder "out"}" ];
-  };
 }

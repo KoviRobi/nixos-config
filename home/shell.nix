@@ -23,6 +23,9 @@
       enable = true;
       extraEnv = ''
         ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
+        ${pkgs.starship}/bin/starship init nu |
+          str replace --all $'= {(char newline)' $'= {||(char newline)' |
+          save --force ${config.xdg.configHome}/nushell/starship.nu
       '';
       extraConfig = ''
         use ${./nu}/01-default-completions.nu *
@@ -37,7 +40,7 @@
 
         use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
-        let-env config = ($env.config | update color_config (solarized_light))
+        let-env config = ($env.config | update color_config (solarized-light))
 
         use ${pkgs.nu_scripts}/git/git.nu *
         use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
@@ -45,6 +48,7 @@
         use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
         use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
         source ${config.xdg.configHome}/nushell/zoxide.nu
+        source ${config.xdg.configHome}/nushell/starship.nu
         source "${config.xdg.configHome}/nushell/user-config.nu"
       '';
     };

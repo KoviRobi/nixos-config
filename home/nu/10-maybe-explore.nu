@@ -1,6 +1,6 @@
 export-env {
-  let-env prev = (0..4 | each --keep-empty {null})
-  let-env config = ($env.config | update hooks.display_output {{maybe_explore}})
+  let-env prev = (0..4 | each --keep-empty {|| null})
+  let-env config = ($env.config | update hooks.display_output {|| {|| maybe_explore}})
 
   let-env ENV_CONVERSIONS = ($env | get -i ENV_CONVERSIONS | default {} | merge {
     prev: ({

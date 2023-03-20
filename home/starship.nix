@@ -4,6 +4,8 @@
   home.packages = with pkgs; [ starship ];
 
   programs.starship.enable = true;
+  # Handled manually to replace `= {` with `= {||`
+  programs.starship.enableNushellIntegration = false;
   programs.starship.settings = {
     format = "$all$line_break$character";
     docker_context.symbol = "  ";

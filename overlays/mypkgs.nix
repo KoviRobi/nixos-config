@@ -18,4 +18,14 @@ final: prev:
   }).overrideAttrs (attrs: {
     ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
   });
+
+  dhcp-helper = final.stdenv.mkDerivation rec {
+    pname = "dhcp-helper";
+    version = "1.2";
+    src = final.fetchurl {
+      url = "https://thekelleys.org.uk/dhcp-helper/${pname}-${version}.tar.gz";
+      sha256 = "sha256-rp5YnsUPG1vjAufruBEa1zShHiQiqc9h0I94WOojZq0=";
+    };
+    makeFlags = [ "PREFIX=${placeholder "out"}" ];
+  };
 }
