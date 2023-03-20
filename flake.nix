@@ -240,7 +240,7 @@
               system.extraDependencies = lib.mkForce [ ];
               documentation.enable = lib.mkForce false;
 
-              users.users.nixos.openssh.authorizedKeys.keys = import ../pubkeys.nix;
+              users.users.nixos.openssh.authorizedKeys.keys = import ./pubkeys.nix;
               # To allow using custom substituters (e.g. netboot host)
               nix.settings.trusted-users = [ "nixos" ];
               nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
