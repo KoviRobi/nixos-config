@@ -57,6 +57,7 @@
   nix.sshServe.enable = true;
   nix.sshServe.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOJmB7G9x+o9JKKtUXzzI7cuyoN2yY1h6PQjXpGtZJ+8 root@rmk-cc-b"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlxBXBCN14zoA3qmd31d/Nonaef5Cag4RKlsDlddFjJ mconway"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBUSeOyKZcJ3KwQZ25dTdcAA0eJ75CbfXd2ToXiqrJB root@gitlab-runner.p3651"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDCkYPC+gZP1YuLReyD05ZJaGbo4BMcI/D8RyiQd4BNh wwykeham@wpwlx1"
