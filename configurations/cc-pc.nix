@@ -32,10 +32,6 @@
 
   initrd-ssh.interface = "eno1";
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
-  # Deny it for actual system, as we are bridging
-  networking.bridges.br0.interfaces = [ "eno1" "enp4s0" ];
-  networking.dhcpcd.denyInterfaces = [ "eno1" ];
-  networking.interfaces.br0.useDHCP = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];

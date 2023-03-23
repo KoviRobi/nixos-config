@@ -224,6 +224,7 @@
           "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
           "hp-nixos-a" = [ ./configurations/hp.nix ./targets/hp.nix ];
           "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
+          "rmk-cc-b" = [ ./configurations/cc-pc.nix ./targets/rmk-cc-b.nix ];
           "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
           "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
           "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
