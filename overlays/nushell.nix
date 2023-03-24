@@ -4,7 +4,7 @@ final: prev:
     owner = "KoviRobi";
     repo = "nu_scripts";
     rev = "git-alias-caret-prefix";
-    sha256 = "sha256-n2/NCV+hN+J3asVAz/TRwXer6uCYaqlCDTh7XcspUD0=";
+    sha256 = "sha256-J4oQp3s+NcFexi3WuShvCS2SSNqFFFw54GtTpUf7cf8=";
   };
 
   nushell =
