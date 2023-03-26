@@ -18,6 +18,8 @@
       absorb = "!git-absorb";
     };
     extraConfig = {
+      rebase.autoSquash = true;
+      rebase.autoStash = true;
       pull.ff = "only";
       help.autoCorrect = 10;
       credential.helper = "libsecret";
