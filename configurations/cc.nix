@@ -120,6 +120,8 @@
 
       ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", MODE="0666"
       DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", RUN+="${pkgs.bash}/bin/sh -c 'echo %k > /sys/bus/usb/drivers/ftdi_sio/unbind'"
+
+      DRIVER=="usb", ATTRS{product}=="p11-Bjongle BLE adapter", OWNER="${config.users.users.default-user.name}", SYMLINK+="bjongle-$attr{serial}"
     '';
   services.udev.packages = with pkgs; [ openocd saleae-logic-2 stlink libsigrok ];
 }
