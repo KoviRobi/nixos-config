@@ -16,6 +16,13 @@
   initrd-ssh.interface = "enp34s0";
   initrd-ssh.udhcpcExtraArgs = [ "-b" ];
   networking.interfaces.enp34s0.wakeOnLan.enable = true;
+  networking.interfaces.enp38s0f0.useDHCP = true;
+  networking.interfaces.enp38s0f1.useDHCP = true;
+  networking.interfaces.enp38s0f0.wakeOnLan.enable = true;
+  networking.interfaces.enp38s0f1.wakeOnLan.enable = true;
+
+  services.resolved.enable = true;
+  networking.networkmanager.enable = lib.mkForce false;
 
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
@@ -27,7 +34,10 @@
   nixpkgs.config.allowUnfree = true; # For google chrome (for DRM :( )
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro ]; # for OpenCL
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ]
+    ++ [ "r8169" "igb" ]; # NIC for initrd SSH
+
   boot.kernelModules = [ "kvm-amd" "vfio" ];
 
   boot.kernelParams = [ "video=card0-DP-1:1366x768M@60" ];
