@@ -1,8 +1,9 @@
 final: prev: {
   libsigrok = prev.libsigrok.overrideAttrs (oldAttrs: {
     src = final.fetchgit {
-      sha256 = "sha256-mdKhcHJYPAbXe/7zCrrZyej1gERdy97UMH2Fm/SJVE4=";
       url = "git://sigrok.org/libsigrok";
+      rev = "fd2a8a5056aabd4231a1b0f3c72c70dab8207f26";
+      sha256 = "sha256-kVrDeDaCJA2C/gNiMNkcoDl8PNA/27ymUfG7XAbNVyk=";
     };
     nativeBuildInputs = oldAttrs.nativeBuildInputs or [ ] ++ [ final.autoreconfHook ];
   });

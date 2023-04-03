@@ -4,7 +4,7 @@ final: prev:
     owner = "KoviRobi";
     repo = "nu_scripts";
     rev = "git-alias-caret-prefix";
-    sha256 = "sha256-J4oQp3s+NcFexi3WuShvCS2SSNqFFFw54GtTpUf7cf8=";
+    sha256 = "sha256-HOUsyiFe4qeuGgXzj4UkKNDTsdRYyHeTjUJdNrYYnGU=";
   };
 
   nushell =
@@ -16,10 +16,14 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-2L+XeAujia+deiG19VtNWWC7oNKmjsl2egdYU3sqaJk=";
+        sha256 = "sha256-ooYNtbTneoSzTG5nyDMkZPxoumDBgcSPJizPS9wO79Q=";
       };
 
       cargoDeps = prev.rustPlatform.importCargoLock {
+        outputHashes = {
+          "reedline-0.17.0" = "sha256-kLg+1FvOlQlZWVoYsVQk0tXMyEdFCRFCguYsEPNgr+4=";
+        };
+
         lockFile = "${src}/Cargo.lock";
       };
 

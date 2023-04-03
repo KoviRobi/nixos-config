@@ -19,7 +19,7 @@ export def v [index:int=0] {
 }
 
 export def-env maybe_explore [] {
-  let metadata = metadata --data
+  let metadata = (metadata --data)
   $env.peek_output = (
     try {
       let expanded = ($metadata.data | table -e | into string)
