@@ -2,12 +2,7 @@
 {
   programs.git = {
     enable = true;
-    delta = {
-      enable = true;
-      options = {
-        side-by-side = true;
-      };
-    };
+    difftastic.enable = true;
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {
