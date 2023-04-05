@@ -13,7 +13,7 @@
     BROWSER = "links -g";
     EDITOR = "nvim";
     PAGER = "less";
-    LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit";
+    LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
     LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     GS_OPTIONS = "-sPAPERSIZE=a4";
   };
