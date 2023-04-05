@@ -92,7 +92,7 @@
 
   system.stateVersion = "22.05";
   home-manager.users.default-user.home.stateVersion = "18.09";
-  home-manager.users.default-user.programs.git.extraConfig.credential.helper = lib.mkForce "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe";
+  home-manager.users.default-user.programs.git.extraConfig.credential.helper = lib.mkForce "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe";
 
   services.udev.enable = true;
 }
