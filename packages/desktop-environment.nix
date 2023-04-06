@@ -19,7 +19,6 @@
     gmpc
     libreoffice
 
-    firefox
     chromium
 
     pamixer
