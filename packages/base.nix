@@ -66,6 +66,7 @@ with pkgs;
   tcpdump
   libpcap
   binwalk
+  ethtool
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
