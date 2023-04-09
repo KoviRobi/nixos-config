@@ -46,7 +46,9 @@
     input-leap
   ] ++
   lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-    mpv
+    (mpv.override {
+      scripts = with mpvScripts; [ uosc ];
+    })
     flameshot
     signal-desktop
     v4l-utils
