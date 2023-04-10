@@ -43,11 +43,13 @@
 
     imagemagick
 
+    alass # subtitle sync
+
     input-leap
   ] ++
   lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
     (mpv.override {
-      scripts = with mpvScripts; [ uosc ];
+      scripts = with mpvScripts; [ autosubsync-mpv uosc ];
     })
     flameshot
     signal-desktop
