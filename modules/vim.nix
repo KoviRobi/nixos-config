@@ -287,6 +287,10 @@ in
           -- termcolors = {}
         },
       }
+
+      require'copilot'.setup {
+        copilot_node_command = '${pkgs.nodejs}/bin/node', -- Node.js version must be > 16.x
+      }
       .
 
       set foldmethod=expr
@@ -326,6 +330,7 @@ in
         zoxide-vim
         fzf-vim
         vim-plugin-AnsiEsc
+        copilot-lua
 
         literate-vim
         vim-bindsplit
