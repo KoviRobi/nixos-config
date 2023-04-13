@@ -13,13 +13,12 @@
       (import ../modules/avahi.nix { publish = true; })
     ];
 
+  networking.useDHCP = false;
+  networking.interfaces.br0.useDHCP = true;
   initrd-ssh.interface = "enp34s0";
   initrd-ssh.udhcpcExtraArgs = [ "-b" ];
   networking.interfaces.enp34s0.wakeOnLan.enable = true;
-  networking.interfaces.enp38s0f0.useDHCP = true;
-  networking.interfaces.enp38s0f1.useDHCP = true;
-  networking.interfaces.enp38s0f0.wakeOnLan.enable = true;
-  networking.interfaces.enp38s0f1.wakeOnLan.enable = true;
+  networking.bridges.br0.interfaces = [ "enp34s0" "enp38s0f0" "enp38s0f1" ];
 
   services.resolved.enable = true;
   networking.networkmanager.enable = lib.mkForce false;

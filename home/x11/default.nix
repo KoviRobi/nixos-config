@@ -13,7 +13,6 @@ in
     } }/home-manager-service.nix"
   ];
 
-  services.network-manager-applet.enable = true;
   services.parcellite.enable = true;
   services.pasystray.enable = true;
   services.dunst.enable = true;
