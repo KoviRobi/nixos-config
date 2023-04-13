@@ -18,6 +18,45 @@
     GS_OPTIONS = "-sPAPERSIZE=a4";
   };
 
+  home.shellAliases = {
+    g = "git";
+    ga = "git add";
+    gap = "git add -p";
+    gc = "git commit";
+    gcs = "git commit --amend";
+    gd = "git diff";
+    gds = "git diff --staged";
+    gig = "git update-index --assume-unchanged";
+    gp = "git push";
+    gpf = "git push --force-with-lease";
+    gr = "git remote";
+    gre = "git reset";
+    greh = "git reset --hard";
+    grp = "git reset -p";
+    grv = "git remote -v";
+    gs = "git status";
+    gsh = "git show";
+    gunig = "git update-index --no-assume-unchanged";
+
+    n = "nix";
+    nb = "nom build";
+    nepl = "nix repl --expr 'builtins.getFlake \"nixos-config\"'";
+    nf = "nix flake";
+
+    dea = "direnv allow";
+    ded = "direnv edit";
+    der = "direnv reload";
+
+    termbin = "nc termbin.com 9999";
+
+    ls = "exa";
+    ll = "exa -l";
+    la = "exa -la";
+
+    mnt = "udisksctl mount -b";
+    unmnt = "udisksctl unmount -b";
+  };
+
   programs.nushell =
     {
       enable = true;
@@ -28,10 +67,20 @@
           save --force ${config.xdg.configHome}/nushell/starship.nu
       '';
       extraConfig = ''
+        module aliases {
+          ${lib.concatStringsSep "\n  " (lib.mapAttrsToList
+            (name: value: ''export alias ${name} = ^${value};'')
+            (lib.filterAttrs
+              (n: v: !(lib.any (m: n == m) ["ls" "la" "ll"]))
+              config.home.shellAliases))}
+          export alias ll = ls -l
+          export alias la = ls -la
+        }
+        use aliases *
+
         use ${./nu}/01-default-completions.nu *
         use ${./nu}/01-default.nu             *
         use ${./nu}/02-rob-default.nu         *
-        use ${./nu}/03-aliases.nu             *
         use ${./nu}/05-nix-support.nu         *
         use ${./nu}/10-maybe-explore.nu       *
         use ${./nu}/20-json-commands.nu       *
@@ -42,7 +91,6 @@
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
         let-env config = ($env.config | update color_config (solarized-light))
 
-        use ${pkgs.nu_scripts}/git/git.nu *
         use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
@@ -107,20 +155,5 @@
     enableVteIntegration = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
-
-    shellAliases = {
-      "mnt" = "udisksctl mount -b";
-      "umnt" = "udisksctl unmount -b";
-      "nixinstall" = "nix-env -f '<nixpkgs>' -i";
-      "nixeval" = "nix eval -f '<nixpkgs>' --raw";
-      "nixpath" = "nix eval --raw";
-      "poly" = "rlwrap poly";
-      "e" = "\${=EDITOR}";
-      "der" = "pushd /; popd";
-      "ded" = "direnv edit";
-      "dea" = "direnv allow";
-      "termbin" = "nc termbin.com 9999";
-      "gis" = "git status";
-    };
   };
 }
