@@ -24,6 +24,7 @@
     gap = "git add -p";
     gc = "git commit";
     "gc!" = "git commit --amend";
+    gco = "git checkout";
     gd = "git diff";
     gds = "git diff --staged";
     gig = "git update-index --assume-unchanged";
