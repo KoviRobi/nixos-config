@@ -23,7 +23,7 @@
     ga = "git add";
     gap = "git add -p";
     gc = "git commit";
-    gcs = "git commit --amend";
+    "gc!" = "git commit --amend";
     gd = "git diff";
     gds = "git diff --staged";
     gig = "git update-index --assume-unchanged";
