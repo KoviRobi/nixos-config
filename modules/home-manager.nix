@@ -12,4 +12,7 @@
       users.users.default-user.uid = config.users.users.default-user.uid;
     };
   };
+  home-manager.users.root = { ... }: {
+    imports = [ ../home/shell.nix ];
+  };
 }

@@ -12,6 +12,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
   home-manager.users.default-user.home.stateVersion = "23.05";
+  home-manager.users.root.home.stateVersion = "23.05";
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
