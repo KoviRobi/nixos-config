@@ -7,6 +7,13 @@ final: prev: {
     };
     nativeBuildInputs = oldAttrs.nativeBuildInputs or [ ] ++ [ final.autoreconfHook ];
   });
+  libsigrokdecode = prev.libsigrokdecode.overrideAttrs (oldAttrs: {
+    src = final.fetchgit {
+      rev = "d7da8b9ea27ba271857d265b8ee66b40ae7079fc";
+      sha256 = "sha256-YiruojyaX3loJiNzp4y5lPulYIBRxgZn8VMZQhkcuRw=";
+      url = "git://sigrok.org/libsigrokdecode";
+    };
+  });
 
   libsigrok-pico = prev.libsigrok.overrideAttrs (oldAttrs: {
     src = final.fetchFromGitHub {
