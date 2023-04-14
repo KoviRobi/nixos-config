@@ -44,6 +44,9 @@
 
   services.openssh.settings.X11Forwarding = true;
 
+  networking.interfaces.eno1.useDHCP = true;
+  services.resolved.enable = true;
+
   initrd-ssh.interface = "eno1";
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
 
