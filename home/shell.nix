@@ -35,6 +35,7 @@
     greh = "git reset --hard";
     grp = "git reset -p";
     grv = "git remote -v";
+    grb = "git rebase";
     gs = "git status";
     gsh = "git show";
     gunig = "git update-index --no-assume-unchanged";
