@@ -45,6 +45,11 @@
   services.openssh.settings.X11Forwarding = true;
 
   networking.interfaces.eno1.useDHCP = true;
+  networking.useNetworkd = true;
+  systemd.network.networks."40-eno1".matchConfig.Name = "eno1";
+  systemd.network.networks."40-eno1".networkConfig.DNSSECNegativeTrustAnchors = ''
+    uk.cambridgeconsultants.com
+  '';
   services.resolved.enable = true;
 
   initrd-ssh.interface = "eno1";
