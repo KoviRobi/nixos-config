@@ -123,15 +123,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": "utils_2"
+        ]
       },
       "locked": {
-        "lastModified": 1681250798,
-        "narHash": "sha256-fQMROyKzPFBPqJy9J4ffywm02ZuqAI0GW1O1QibVpdQ=",
+        "lastModified": 1681690464,
+        "narHash": "sha256-x8pw8KAb9TJsszbCHUBK2bWvgYPlCjwHMV1dF95eZPs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "28698126bd825aff21cae9ffd15cf83e169051b0",
+        "rev": "53bd74f786934997e7f6a5ed9741b226e511e508",
         "type": "github"
       },
       "original": {
@@ -225,11 +224,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1681255061,
-        "narHash": "sha256-1+EDliH+gUQuS+twbRKhrmTXn2SyUXVGYMN+ib7KhGo=",
+        "lastModified": 1681727546,
+        "narHash": "sha256-zIlQyMpr0FG+CsLcbxcFAGUmzzb+NcNazWnsO8Dyxbk=",
         "owner": "KoviRobi",
         "repo": "nixpkgs",
-        "rev": "980f87f3557172b4b838722138ec2288aaf8a909",
+        "rev": "5bd2009d0efce46c7ac794585e306e595dad01d6",
         "type": "github"
       },
       "original": {
@@ -243,7 +242,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_3"
+        "utils": "utils_2"
       },
       "locked": {
         "lastModified": 1649329238,
@@ -270,7 +269,7 @@
         "input-leap": "input-leap",
         "nixpkgs": "nixpkgs_2",
         "pye-menu": "pye-menu",
-        "utils": "utils_4"
+        "utils": "utils_3"
       }
     },
     "systems": {
@@ -305,21 +304,6 @@
     },
     "utils_2": {
       "locked": {
-        "lastModified": 1678901627,
-        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_3": {
-      "locked": {
         "lastModified": 1648297722,
         "narHash": "sha256-W+qlPsiZd8F3XkzXOzAoR+mpFqzm3ekQkJNa+PIh1BQ=",
         "owner": "numtide",
@@ -333,7 +317,7 @@
         "type": "github"
       }
     },
-    "utils_4": {
+    "utils_3": {
       "inputs": {
         "systems": "systems"
       },
