@@ -126,6 +126,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaXof9mjOhih0JV+nlD8FThOFQqsnloT+nTv4ayEjlH root@cc-vm-nixos-a"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICD3Cj4mJJJX98KxJkGjlPk8PkYu3dWosnWqOcQ9Qwlo root@C930-flash"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+PcJ5ujl3/I+DjPW+WxRBJ4GLStWb30RPj8HyM1Ey8 root@hp-nixos-a"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8kc9byAsBL3Jt1zynOKBrDjp/Uwm774ymj3DoPNVSi root@cc-wsl"
   ];
   # Set modules/ssh.nix to not require authenticator key for nix-ssh
   users.users.nix-ssh.extraGroups = [ "no-google-authenticator" ];
