@@ -16,7 +16,7 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-UN0MPhmAlKCQl0Fhn+foTY9AOTJXqeRjkh/k0ADQJzo=";
+        sha256 = "sha256-9Zljs+cUWViU11ZL5j+DRo8mhYOmM4BwIL1Xdziwziw=";
       };
 
       cargoDeps = prev.rustPlatform.importCargoLock {
