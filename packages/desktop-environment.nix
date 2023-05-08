@@ -7,6 +7,8 @@
   programs.firefox.nativeMessagingHosts.ff2mpv = true;
   programs.firefox.nativeMessagingHosts.passff = true;
 
+  programs.noisetorch.enable = true;
+
   environment.systemPackages = with pkgs; [
     gnome.adwaita-icon-theme
     hicolor-icon-theme
