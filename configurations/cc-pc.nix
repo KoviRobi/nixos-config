@@ -23,6 +23,7 @@
     [ "rmk-cc-pc-nixos-a.badger-toad.ts.net" "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com" ];
 
   virtualisation.docker.enable = true;
+  virtualisation.containers.enable = true;
   virtualisation.libvirtd.enable = true;
   users.users.default-user.extraGroups = [ "docker" "libvirtd" ];
 
