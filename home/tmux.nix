@@ -10,6 +10,7 @@
     Service = {
       Type = "forking";
       ExecStart = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf start-server";
+      ExecStartPost = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf new-session -d -s float atop";
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
       Environment = [ "TMUX_TMPDIR=/run/user/1000" ];
       PassEnvironment = [ "PATH" "WSL_INTEROP" ];

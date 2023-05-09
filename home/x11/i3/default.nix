@@ -1,4 +1,4 @@
-{ pkgs, lib, pye-menu, ... }@args:
+{ pkgs, config, lib, pye-menu, ... }@args:
 let
   i3-helpers = import ./i3-helpers.nix { inherit pkgs pye-menu; };
   mod = "Mod4"; # Win key
@@ -24,7 +24,7 @@ let
     exec --no-startup-id '${mk-scratch n p}' , \
     [instance="^scratch_${n}$"] scratchpad show
   '';
-  scratch-term = n: p: scratch n "${term} -n 'scratch_${n}' -t 'scratch_${n}' -e '${p}'";
+  scratch-term = n: p: scratch n "${term} -n 'scratch_${n}' -t 'scratch_${n}' -e ${p}";
 in
 {
   xsession.windowManager.i3 = {
@@ -58,7 +58,7 @@ in
         "${mod}+Shift+m" = scratch-term "maxima" maxima;
         "${mod}+Shift+p" = scratch-term "python" (pkgs.writeShellScript "scratchpy" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}");
         "${mod}+Shift+g" = scratch-term "guile" guile;
-        "${mod}+Shift+s" = scratch-term "shell" zsh;
+        "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf attach-session -d -t float";
         "${mod}+Shift+e" = scratch "emacs" "${emacs} --name scratch_emacs";
 
         "${mod}+e" = "layout toggle split";
