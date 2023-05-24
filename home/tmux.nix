@@ -43,6 +43,7 @@
       set -g mouse on
       set -g set-titles on
       set -g pane-border-lines heavy
+      set -g pane-border-indicators arrows
       set -g display-panes-time 2000
       set -g default-command nu
       set -g exit-empty off
