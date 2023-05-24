@@ -47,6 +47,7 @@
 
   networking.interfaces.eno1.useDHCP = true;
   networking.useNetworkd = true;
+  networking.networkmanager.enable = true;
   systemd.network.networks."40-eno1".matchConfig.Name = "eno1";
   systemd.network.networks."40-eno1".networkConfig.DNSSECNegativeTrustAnchors = ''
     uk.cambridgeconsultants.com
