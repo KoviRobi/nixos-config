@@ -1,6 +1,7 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, pkgs, ... }:
 {
+  services.xserver.libinput.enable = false;
   services.xserver.synaptics.enable = true;
   services.xserver.synaptics.tapButtons = false;
   services.xserver.synaptics.vertTwoFingerScroll = true;
