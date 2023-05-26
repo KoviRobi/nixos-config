@@ -41,7 +41,7 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
-  networking.networkmanager.appendNameservers = [ "1.1.1.1" "1.1.0.0" ];
+  networking.networkmanager.appendNameservers = [ "127.0.0.53" "1.1.1.1" "1.1.0.0" ];
 
   services.xserver.dpi = 109;
   hardware.opengl.driSupport32Bit = true;
