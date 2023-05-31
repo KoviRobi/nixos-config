@@ -14,14 +14,11 @@
     ];
 
   networking.useDHCP = false;
-  networking.interfaces.br0.useDHCP = true;
   initrd-ssh.interface = "enp34s0";
   initrd-ssh.udhcpcExtraArgs = [ "-b" ];
   networking.interfaces.enp34s0.wakeOnLan.enable = true;
-  networking.bridges.br0.interfaces = [ "enp34s0" "enp38s0f0" "enp38s0f1" ];
 
   services.resolved.enable = true;
-  networking.networkmanager.enable = lib.mkForce false;
 
   virtualisation.docker.enable = true;
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
