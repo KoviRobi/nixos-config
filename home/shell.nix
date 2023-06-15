@@ -87,7 +87,6 @@
         use ${./nu}/10-maybe-explore.nu       *
         use ${./nu}/20-json-commands.nu       *
         use ${./nu}/30-dir-stack.nu           *
-        use ${./nu}/40-carapace.nu            *
 
         use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
