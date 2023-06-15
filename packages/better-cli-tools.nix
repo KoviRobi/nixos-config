@@ -15,4 +15,5 @@ with pkgs;
   rm-improved
   taskwarrior
   zoxide
+  delta
 ]
