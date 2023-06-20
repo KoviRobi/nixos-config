@@ -261,41 +261,12 @@ in
       autocmd BufEnter term://* startinsert
 
       lua <<
-      require'nvim-treesitter.configs'.setup {
-        highlight = {
-          -- `false` will disable the whole extension
-          enable = true,
-          disable = { "gitcommit", "man" },
-
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = true,
-        },
-        rainbow = {
-          enable = true,
-          -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-          extended_mode = true,
-          -- Do not enable for files with more than n lines, int
-          max_file_lines = nil,
-          -- table of hex strings
-          -- colors = {},
-          -- table of colour name strings
-          -- termcolors = {}
-        },
-      }
-
       require'copilot'.setup {
         copilot_node_command = '${pkgs.nodejs}/bin/node', -- Node.js version must be > 16.x
       }
       .
 
       set foldmethod=expr
-      set foldexpr=nvim_treesitter#foldexpr()
       set foldlevelstart=10
       set foldcolumn=auto
     '';
@@ -339,11 +310,6 @@ in
         vim-unstack
         gitmoji-vim
         vim-nushell
-
-        nvim-treesitter.withAllGrammars
-        nvim-ts-rainbow
-        nvim-treesitter-context
-        nvim-treesitter-textobjects
       ];
 
     nixpkgs.overlays = [
