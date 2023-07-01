@@ -155,6 +155,6 @@
     enableCompletion = true;
     enableVteIntegration = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
   };
 }
