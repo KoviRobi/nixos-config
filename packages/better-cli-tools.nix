@@ -16,4 +16,6 @@ with pkgs;
   taskwarrior
   zoxide
   delta
+  direnv
+  starship
 ]
