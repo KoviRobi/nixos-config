@@ -59,15 +59,12 @@
     unmnt = "udisksctl unmount -b";
   };
 
+  programs.starship.enableNushellIntegration = false;
+  programs.zoxide.enableNushellIntegration = false;
+  programs.direnv.enableNushellIntegration = false;
   programs.nushell =
     {
       enable = true;
-      extraEnv = ''
-        ${pkgs.zoxide}/bin/zoxide init nushell | save --force ${config.xdg.configHome}/nushell/zoxide.nu
-        ${pkgs.starship}/bin/starship init nu |
-          str replace --all $'= {(char newline)' $'= {||(char newline)' |
-          save --force ${config.xdg.configHome}/nushell/starship.nu
-      '';
       extraConfig = ''
         module aliases {
           ${lib.concatStringsSep "\n  " (lib.mapAttrsToList
@@ -90,14 +87,15 @@
 
         use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
         use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
-        let-env config = ($env.config | update color_config (solarized-light))
+        $env.config = ($env.config | update color_config (solarized-light))
 
         use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
         use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
         use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
-        source ${config.xdg.configHome}/nushell/zoxide.nu
-        source ${config.xdg.configHome}/nushell/starship.nu
+        source ${./nu}/zoxide.nu
+        source ${./nu}/starship.nu
+        source ${./nu}/direnv.nu
         source "${config.xdg.configHome}/nushell/user-config.nu"
       '';
     };

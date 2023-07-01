@@ -16,12 +16,12 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-28UUgHWDch/ak5CeZ9MioOsrpWphDw8EEz17fEC3zVQ=";
+        sha256 = "sha256-FBapIUCKzAzc1vtYl+G/DkJBrnaPra7kUXKuxIf4SAU=";
       };
 
       cargoDeps = prev.rustPlatform.importCargoLock {
         outputHashes = {
-          "reedline-0.20.0" = "sha256-bgOH6MtPIsG6B5HIPP44Z7VeZkazrCVGGetHPtmUplA=";
+          # "reedline-0.20.0" = "sha256-bgOH6MtPIsG6B5HIPP44Z7VeZkazrCVGGetHPtmUplA=";
         };
 
         lockFile = "${src}/Cargo.lock";

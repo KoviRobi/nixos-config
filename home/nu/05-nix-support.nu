@@ -1,5 +1,5 @@
 export-env {
-  let-env ENV_CONVERSIONS = ($env | get -i ENV_CONVERSIONS | default {} | merge {
+  $env.ENV_CONVERSIONS = ($env | get -i ENV_CONVERSIONS | default {} | merge {
     NIX_PATH : ({
       from_string: {|str|
         $str | split row : | parse -r '(?:(?<name>[[:alnum:]-_]*)=)?(?<path>.*)'
