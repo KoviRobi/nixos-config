@@ -141,7 +141,7 @@ in
       " Allows completing/gf on `VAR=/etc/path` style lines
       set isfname-==
 
-      set completeopt=menuone,preview,longest
+      set completeopt=menuone,longest
       set omnifunc=ale#completion#OmniFunc
 
       set number relativenumber
