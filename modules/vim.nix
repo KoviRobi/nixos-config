@@ -141,6 +141,7 @@ in
       " Allows completing/gf on `VAR=/etc/path` style lines
       set isfname-==
 
+      set  showfulltag
       set completeopt=menuone,longest
       set omnifunc=ale#completion#OmniFunc
 
