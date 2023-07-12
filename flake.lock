@@ -126,32 +126,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1688168945,
-        "narHash": "sha256-AfBdMc2JU54YKaOAvCR0t3dWQIA1bLKb9vGnaZJUh0E=",
+        "lastModified": 1689134369,
+        "narHash": "sha256-0G9dutIvhS/WUr3Awcnqw71g8EVVvvkOhVDnDDbY4Fw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "44d1a8542ac92f0ce75d970090216245043a2709",
+        "rev": "e42fb59768f0305085abde0dd27ab5e0cc15420c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "input-leap": {
-      "locked": {
-        "lastModified": 1679855430,
-        "narHash": "sha256-ZewqBij4ZifTIs/4BHT/zOKNrh48WLcFTQHhwPc5zJw=",
-        "owner": "KoviRobi",
-        "repo": "nixpkgs",
-        "rev": "1003a179fa042e558a336932e6c3bbde7abf4718",
-        "type": "github"
-      },
-      "original": {
-        "owner": "KoviRobi",
-        "ref": "add/input-leap",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -224,11 +208,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1688214847,
-        "narHash": "sha256-096J3isIDrBpuDsOXFQrFcgmgYj7yZ6YueLjOpXGFXg=",
+        "lastModified": 1689163410,
+        "narHash": "sha256-ay/UF4NkyEAcPuQdeKnzTd1HJ7uyjSTO4DCe8km/5Fs=",
         "owner": "KoviRobi",
         "repo": "nixpkgs",
-        "rev": "dc380ca7bbbd2c6dc3a57128b8c7e95d30bbd50a",
+        "rev": "2a87b64b699dc1884c6954548afb8d464ad4fdbb",
         "type": "github"
       },
       "original": {
@@ -266,7 +250,6 @@
         "flake-compat": "flake-compat",
         "flake-registry": "flake-registry",
         "home-manager": "home-manager",
-        "input-leap": "input-leap",
         "nixpkgs": "nixpkgs_2",
         "pye-menu": "pye-menu",
         "utils": "utils_3"
@@ -322,11 +305,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1687709756,
-        "narHash": "sha256-Y5wKlQSkgEK2weWdOu4J3riRd+kV/VCgHsqLNTTWQ/0=",
+        "lastModified": 1689068808,
+        "narHash": "sha256-6ixXo3wt24N/melDWjq70UuHQLxGV8jZvooRanIHXw0=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "dbabf0ca0c0c4bce6ea5eaf65af5cb694d2082c7",
+        "rev": "919d646de7be200f3bf08cb76ae1f09402b6f9b4",
         "type": "github"
       },
       "original": {
