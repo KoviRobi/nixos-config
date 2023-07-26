@@ -261,12 +261,6 @@ in
       let g:neoterm_autoinsert = 1
       autocmd BufEnter term://* startinsert
 
-      lua <<
-      require'copilot'.setup {
-        copilot_node_command = '${pkgs.nodejs}/bin/node', -- Node.js version must be > 16.x
-      }
-      .
-
       set foldmethod=expr
       set foldlevelstart=10
       set foldcolumn=auto
@@ -303,7 +297,6 @@ in
         zoxide-vim
         fzf-vim
         vim-plugin-AnsiEsc
-        copilot-lua
 
         literate-vim
         vim-bindsplit
