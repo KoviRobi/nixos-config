@@ -43,6 +43,10 @@
 
   networking.networkmanager.appendNameservers = [ "127.0.0.53" "1.1.1.1" "1.1.0.0" ];
 
+  systemd.services.NetworkManager = {
+    wantedBy = [ "network-online.target" ];
+  };
+
   services.xserver.dpi = 109;
   hardware.opengl.driSupport32Bit = true;
 
