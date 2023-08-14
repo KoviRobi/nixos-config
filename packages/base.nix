@@ -50,7 +50,7 @@ with pkgs;
 
   gdb
 
-  python311
+  (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
   evcxr
   rustc
   sccache
