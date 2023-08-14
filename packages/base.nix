@@ -50,7 +50,7 @@ with pkgs;
 
   gdb
 
-  python312
+  python311
   evcxr
   rustc
   sccache
