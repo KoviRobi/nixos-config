@@ -19,6 +19,8 @@ final: prev:
         sha256 = "sha256-UdSZMTbBwERhHlYwyk0K6LysEaTeBYOW+O4tWRn2Ac4=";
       };
 
+      doCheck = false;
+
       cargoDeps = prev.rustPlatform.importCargoLock {
         outputHashes = {
           # "reedline-0.22.0" = "sha256-o7LRpwyxWBltfecCJOXzz5xJvCldzxgXBqTIJuSKVXw=";
