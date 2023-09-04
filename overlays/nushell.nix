@@ -10,20 +10,20 @@ final: prev:
   nushell =
     prev.nushell.overrideAttrs (oldAttrs: rec {
       pname = "nushell";
-      version = "unstable-2023-03-10";
+      version = "unstable-2023-09-04";
 
       src = final.fetchFromGitHub {
-        owner = "KoviRobi";
+        owner = "nushell";
         repo = pname;
-        rev = "rob";
-        sha256 = "sha256-UdSZMTbBwERhHlYwyk0K6LysEaTeBYOW+O4tWRn2Ac4=";
+        rev = "5ad3bfa31bc731e467c66e5e55ffb6bcb89b49db"; # main
+        sha256 = "sha256-K7dXJ87uMOa/6ces6/3o2vlFPGuhFj1NB2Zsy8QctNs=";
       };
 
       doCheck = false;
 
       cargoDeps = prev.rustPlatform.importCargoLock {
         outputHashes = {
-          # "reedline-0.22.0" = "sha256-o7LRpwyxWBltfecCJOXzz5xJvCldzxgXBqTIJuSKVXw=";
+          "reedline-0.23.0" = "sha256-wfJd6RyomkMjv2y0/rdwiP6dvw1WoY6En03/oN104o4=";
         };
 
         lockFile = "${src}/Cargo.lock";
