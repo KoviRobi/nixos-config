@@ -15,8 +15,8 @@ final: prev:
       src = final.fetchFromGitHub {
         owner = "nushell";
         repo = pname;
-        rev = "5ad3bfa31bc731e467c66e5e55ffb6bcb89b49db"; # main
-        sha256 = "sha256-K7dXJ87uMOa/6ces6/3o2vlFPGuhFj1NB2Zsy8QctNs=";
+        rev = "ce378a68a68eb9961ab2430bb8a0f32b4e15811c"; # main
+        sha256 = "sha256-JwgtTkdZa/yenAE5V9WLefkdGgYCB7fxGIoB66i0UTY=";
       };
 
       doCheck = false;
