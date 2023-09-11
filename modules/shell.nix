@@ -3,7 +3,7 @@
   environment = {
 
     systemPackages = with pkgs; [
-      exa
+      eza
       dnsutils
       git
       bottom
@@ -24,7 +24,7 @@
         "....." = "cd ../../../..";
 
         # ls
-        ls = "exa";
+        ls = "eza";
         l = "ls -l";
         ll = "ls -l";
         la = "ls -la";

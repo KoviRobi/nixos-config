@@ -51,9 +51,9 @@
 
     termbin = "nc termbin.com 9999";
 
-    ls = "exa";
-    ll = "exa -l";
-    la = "exa -la";
+    ls = "eza";
+    ll = "eza -l";
+    la = "eza -la";
 
     mnt = "udisksctl mount -b";
     unmnt = "udisksctl unmount -b";
