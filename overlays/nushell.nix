@@ -10,13 +10,13 @@ final: prev:
   nushell =
     prev.nushell.overrideAttrs (oldAttrs: rec {
       pname = "nushell";
-      version = "unstable-2023-09-04";
+      version = "unstable-2023-09-15";
 
       src = final.fetchFromGitHub {
-        owner = "nushell";
+        owner = "KoviRobi";
         repo = pname;
-        rev = "ce378a68a68eb9961ab2430bb8a0f32b4e15811c"; # main
-        sha256 = "sha256-JwgtTkdZa/yenAE5V9WLefkdGgYCB7fxGIoB66i0UTY=";
+        rev = "rob";
+        sha256 = "sha256-+liX0AzwPyubW8VYOlVk5vG9RZzziH5EZ8JGiUfAQlo=";
       };
 
       doCheck = false;

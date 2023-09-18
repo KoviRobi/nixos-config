@@ -19,18 +19,19 @@ export def v [index:int=0] {
 }
 
 export def-env maybe_explore [] {
-  let data = ($in)
+  let metadata = (metadata --data)
   $env.peek_output = (
     try {
-      let expanded = ($data | table -e | into string)
+      let expanded = ($metadata.data | table -e | into string)
       if (term size).rows < ($expanded | size).lines {
-        $data | explore -p
-      } else if ($data | describe) == closure {
-        view source $data | nu-highlight
+        $metadata.data | set-metadata $metadata | explore -p
+      } else if ($metadata.data | describe) == closure {
+        view source $metadata.data | nu-highlight
       }
     }
   )
-  $env.prev = ([$data] ++ $env.prev | take 5)
-  $data |
+  $env.prev = ([$metadata.data] ++ $env.prev | take 5)
+  $metadata.data |
+    set-metadata $metadata |
     if (term size).columns >= 100 { table -e } else { table }
 }
