@@ -3,7 +3,10 @@ with pkgs;
 [
   bashInteractive
   tmux
-  ispell
+  hunspell
+  hunspellDicts.en-gb-ise
+  hyphen
+  mythes
   file
   socat
   lsof
