@@ -75,11 +75,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "lastModified": 1696250921,
+        "narHash": "sha256-IRn6OkznMIUF4sjXQR9xKGC4ejEx3AUa+uqFn9RDTp4=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "rev": "6256b599c81a9ae3f9fc18f88ad4ab3d7cf2534f",
         "type": "github"
       },
       "original": {
@@ -126,11 +126,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695738267,
-        "narHash": "sha256-LTNAbTQ96xSj17xBfsFrFS9i56U2BMLpD0BduhrsVkU=",
+        "lastModified": 1696145345,
+        "narHash": "sha256-3dM7I/d4751SLPJah0to1WBlWiyzIiuCEUwJqwBdmr4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0f4e5b4999fd6a42ece5da8a3a2439a50e48e486",
+        "rev": "6f9b5b83ad1f470b3d11b8a9fe1d5ef68c7d0e30",
         "type": "github"
       },
       "original": {
@@ -208,11 +208,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1695917443,
-        "narHash": "sha256-jrNEjN85T4UeqPu/gQowC8yWKFbsURrXGCAM8+Wx/24=",
+        "lastModified": 1696251723,
+        "narHash": "sha256-FlCHhGA/sOLqJ7HpFO1ybXCVrkek5yP+y7mjEbwZSss=",
         "owner": "KoviRobi",
         "repo": "nixpkgs",
-        "rev": "4bd0460e5353d68a0ec61867b1990c964132e282",
+        "rev": "4aec15703a445f359fa71c9777d1e5b68363fa31",
         "type": "github"
       },
       "original": {
