@@ -260,6 +260,7 @@ in
 
       let g:neoterm_autoinsert = 1
       autocmd BufEnter term://* startinsert
+      autocmd TermOpen * set nonumber norelativenumber
 
       set foldmethod=expr
       set foldlevelstart=10
