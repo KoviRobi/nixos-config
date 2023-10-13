@@ -1,5 +1,4 @@
 export-env {
-  $env.config = ($env.config | update cd.abbreviations true)
   $env.config = ($env.config | update table.trim {methodology: "truncating", truncating_suffix: "…"})
   $env.config = ($env.config | update history.file_format "sqlite")
   $env.config = ($env.config | update show_banner false)
