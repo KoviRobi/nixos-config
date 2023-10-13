@@ -21,6 +21,16 @@
     pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry
   '';
 
+  home.sessionVariables.PYTHONSTARTUP = pkgs.writeText "pythonrc" ''
+    try:
+        import readline
+        import rlcompleter
+        readline.parse_and_bind("tab: complete")
+        readline.parse_and_bind("set colored-stats off")
+    except ImportError:
+        print("Module readline not available.")
+  '';
+
   services.xcape = {
     enable = true;
     mapExpression = { Shift_L = "parenleft"; Shift_R = "parenright"; };
