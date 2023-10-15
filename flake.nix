@@ -236,7 +236,11 @@
               nix.settings.trusted-users = [ "nixos" ];
               nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
               nix.settings.experimental-features = [ "nix-command" "flakes" ];
-              environment.systemPackages = with pkgs; [ gitMinimal ];
+              environment.systemPackages = with pkgs; [
+                cryptsetup
+                gptfdisk
+                gitMinimal
+              ];
             })
           ];
         };
