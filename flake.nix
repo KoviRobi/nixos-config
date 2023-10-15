@@ -235,6 +235,7 @@
               # To allow using custom substituters (e.g. netboot host)
               nix.settings.trusted-users = [ "nixos" ];
               nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
+              nix.settings.experimental-features = [ "nix-command" "flakes" ];
               environment.systemPackages = with pkgs; [ gitMinimal ];
             })
           ];
