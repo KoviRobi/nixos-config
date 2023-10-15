@@ -213,6 +213,7 @@
         {
           "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
           "hp-nixos-a" = [ ./configurations/hp.nix ./targets/hp.nix ];
+          "acer-nixos-a" = [ ./configurations/hp.nix ./targets/acer.nix ];
           "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
           "rmk-cc-b" = [ ./configurations/cc-pc.nix ./targets/rmk-cc-b.nix ];
           "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];

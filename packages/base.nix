@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 with pkgs;
 [
   bashInteractive
@@ -80,6 +80,7 @@ lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
   git
 ] ++
 lib.optionals (pkgs.hostPlatform.isLinux) [
+  config.boot.kernelPackages.cpupower
   abcde
   linuxConsoleTools
   lm_sensors
