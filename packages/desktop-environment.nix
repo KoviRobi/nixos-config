@@ -21,8 +21,6 @@
     gmpc
     libreoffice
 
-    chromium
-
     pamixer
     paprefs
     pavucontrol
