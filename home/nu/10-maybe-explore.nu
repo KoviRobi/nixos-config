@@ -18,12 +18,12 @@ export def v [index:int=0] {
   $env.prev | get -i $index
 }
 
-export def-env maybe_explore [] {
+export def --env maybe_explore [] {
   let metadata = (metadata --data)
   $env.peek_output = (
     try {
       let expanded = ($metadata.data | table -e | into string)
-      if (term size).rows < ($expanded | size).lines {
+      if (term size).rows < ($expanded | str stats).lines {
         $metadata.data | set-metadata $metadata | explore -p
       } else if ($metadata.data | describe) == closure {
         view source $metadata.data | nu-highlight

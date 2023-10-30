@@ -6,7 +6,7 @@ export-env {
   ]})
 }
 
-export def-env dirs [
+export def --env dirs [
   --clear (-c) # Clear the directory stack
 ] {
   if $clear {
@@ -16,7 +16,7 @@ export def-env dirs [
   }
 }
 
-export def-env popd [
+export def --env popd [
   number: int = 1 # Entry to go to, see the indices in `dirs`
 ] {
   let dest = ($env.dirs | get $number)
