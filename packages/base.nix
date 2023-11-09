@@ -47,6 +47,8 @@ with pkgs;
   _9pfs
   ntfs3g
 
+  gcc
+  binutils
   gdb
 
   (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
