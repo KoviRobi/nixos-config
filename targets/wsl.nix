@@ -9,10 +9,7 @@
     # Enable integration with Docker Desktop (needs to be installed)
     # docker.enable = true;
 
-    interop = {
-      register = true;
-      preserveArgvZero = true;
-    };
+    interop.register = true;
 
     wslConf.automount.root = "/mnt";
     wslConf.network.generateResolvConf = false;
@@ -22,6 +19,7 @@
   imports = [ ../packages/desktop-environment.nix ];
 
   services.resolved.enable = true;
+  systemd.services.systemd-resolved.enable = true;
   systemd.services."wsl_resolv".serviceConfig = {
     PassEnvironment = "WSL_INTEROP";
     Type = "oneshot";
