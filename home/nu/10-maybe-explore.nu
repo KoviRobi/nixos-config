@@ -4,12 +4,12 @@ export-env {
 
   $env.ENV_CONVERSIONS = ($env | get -i ENV_CONVERSIONS | default {} | merge {
     prev: ({
-      from_string: {}
-      to_string: {}
+      from_string: {|s| null}
+      to_string: {|s| ""}
     })
     peek_output: ({
-      from_string: {}
-      to_string: {}
+      from_string: {|s| null}
+      to_string: {|s| ""}
     })
   })
 }
