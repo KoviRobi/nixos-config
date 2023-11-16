@@ -16,14 +16,15 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-17oWamt7dHbdB1dY4AlHwD2mqYdNm+sBugUzmGoNmcw=";
+        sha256 = "sha256-L8tpAocpaHNlxZ7sGE5tebCPUmZ2m4sH77PuZUkz2eg=";
       };
 
       doCheck = false;
 
       cargoDeps = prev.rustPlatform.importCargoLock {
         outputHashes = {
-          "reedline-0.25.0" = "sha256-J6AtZXoV8sRGQ75xq3ReRt3Hjz09bWLFzUnFDYCKg7s=";
+          "lsp-server-0.7.4" = "sha256-TEYr3dOEXBt714uKx1uEsI4pB1TkUjXazfN1Z8icyEU=";
+          # "reedline-0.25.0" = "sha256-J6AtZXoV8sRGQ75xq3ReRt3Hjz09bWLFzUnFDYCKg7s=";
           # "uu_cp-0.0.21" = "sha256-tM8+M+6TrAL839HnvSPTe9is4fMoi4S/D0Kg/C0juK4=";
           # "uucore-0.0.21" = "sha256-tM8+M+6TrAL839HnvSPTe9is4fMoi4S/D0Kg/C0juK4=";
           # "uucore_procs-0.0.21" = "sha256-tM8+M+6TrAL839HnvSPTe9is4fMoi4S/D0Kg/C0juK4=";
