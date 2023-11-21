@@ -21,8 +21,6 @@
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [
     docker-credential-helpers
-    # For P3651
-    awscli2
     amazon-ecr-credential-helper
     sigrok-cli
     pulseview
