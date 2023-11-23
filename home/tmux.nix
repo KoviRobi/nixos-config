@@ -67,6 +67,8 @@
 
       bind-key Q choose-tree 'send-keys %%'
 
+      bind-key \] choose-session { switch-client -t "%1" }
+
       bind-key "'" last-window
 
       bind-key s capture-pane -e -b screenshot_raw\;\
