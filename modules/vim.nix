@@ -261,6 +261,7 @@ in
       let g:neoterm_autoinsert = 1
       autocmd BufEnter term://* startinsert
       autocmd TermOpen * set nonumber norelativenumber
+      autocmd BufReadCmd *.whl call zip#Browse(expand("<amatch>"))
 
       set foldmethod=expr
       set foldlevelstart=10
