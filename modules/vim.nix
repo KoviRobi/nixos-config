@@ -262,6 +262,8 @@ in
       autocmd BufEnter term://* startinsert
       autocmd TermOpen * set nonumber norelativenumber
       autocmd BufReadCmd *.whl call zip#Browse(expand("<amatch>"))
+      autocmd FileType git set foldmethod=syntax
+      autocmd FileType gitcommit set foldmethod=syntax
 
       set foldmethod=expr
       set foldlevelstart=10
