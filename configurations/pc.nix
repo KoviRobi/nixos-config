@@ -106,8 +106,6 @@
       ACTION=="add", SUBSYSTEM=="usb", DRIVER=="ftdi_sio", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE="0666", RUN+="${ftdi-unbind-script} '%k'"
     '';
 
-  services.udev.packages = with pkgs; [ stlink openocd ];
-
   services.logind.extraConfig = "HandlePowerKey=suspend";
 
   home-manager.users.default-user = {
