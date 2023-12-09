@@ -12,7 +12,18 @@
 
   home.packages = [
     pkgs.fortune
+    pkgs.mimi
   ];
+
+  home.file.".config/mimi/mime.conf".text = ''
+    text/html: firefox
+    text/: st -e tmux new vim
+    application/pdf: zathura
+    video/: mpv
+    image/: geeqie
+    audio/: mpv
+    inode/directory: st -e tmux new -c
+  '';
 
   services.gnome-keyring.enable = true;
   home.sessionVariables.SSH_AUTH_SOCK =

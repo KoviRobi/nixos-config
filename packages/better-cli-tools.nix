@@ -12,4 +12,5 @@ with pkgs;
   delta
   direnv
   starship
+  mimi
 ]
