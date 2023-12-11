@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701652754,
-        "narHash": "sha256-okzg5yM2kupehkdCWSFiLo2iQ24IWwkoK9XeliSatYQ=",
+        "lastModified": 1702287306,
+        "narHash": "sha256-vEb2DAao89M92LjufnRkIRxUsm8KHb94l786r923a7E=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "cc6479b21e010b7196b824504303e47940b9fe59",
+        "rev": "83c419a8c5db581e83cba3726760608e55d11e58",
         "type": "github"
       },
       "original": {
@@ -124,11 +124,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "lastModified": 1701680307,
+        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
         "type": "github"
       },
       "original": {
@@ -144,11 +144,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701676655,
-        "narHash": "sha256-wP8i7hO2aLNJhYoTK3kqoymaCLgt4QcwWcO8d/A1CjQ=",
+        "lastModified": 1702203126,
+        "narHash": "sha256-4BhN2Vji19MzRC7SUfPZGmtZ2WZydQeUk/ogfRBIZMs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "948703f3e71f1332a0cb535ebaf5cb14946e3724",
+        "rev": "defbb9c5857e157703e8fc7cf3c2ceb01cb95883",
         "type": "github"
       },
       "original": {
@@ -226,12 +226,13 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1701709913,
-        "narHash": "sha256-KbFmD9lS41jJCltWCxLPKtOZg2hzIUJqD+G4XPokWD0=",
-        "owner": "KoviRobi",
-        "repo": "nixpkgs",
-        "rev": "92634b6818259c5e3f2ca9c5f665d6958f6024d3",
-        "type": "github"
+        "lastModified": 1702290419,
+        "narHash": "sha256-9bOjbbxq7NDEJtKFqGqu0WgqabI1UYjW3RNPwd5d460=",
+        "ref": "refs/heads/rob",
+        "rev": "250f567fbf7f0b29a66ae0f0c169ef0118d4eef3",
+        "revCount": 558057,
+        "type": "git",
+        "url": "file:///nix/nixpkgs"
       },
       "original": {
         "id": "nixpkgs",
