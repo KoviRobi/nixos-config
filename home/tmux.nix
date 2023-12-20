@@ -57,8 +57,8 @@
 
       # Tmux and I disagree on what is horizontal and what is vertical
       # I take the view that Vim does
-      bind-key \\ split-window -h
-      bind-key | split-window -h -c "#{pane_current_path}"
+      bind-key = split-window -h
+      bind-key + split-window -h -c "#{pane_current_path}"
       bind-key - split-window -v
       bind-key _ split-window -v -c "#{pane_current_path}"
 
@@ -67,7 +67,7 @@
 
       bind-key Q choose-tree 'send-keys %%'
 
-      bind-key \] choose-session { switch-client -t "%1" }
+      bind-key \\ choose-session { switch-client -t "%1" }
 
       bind-key "'" last-window
 
