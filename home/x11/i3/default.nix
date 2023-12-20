@@ -115,24 +115,25 @@ in
         (
           builtins.genList
             (n:
-              let m = toString (n + 1); in
+              let m = if n == 0 then "10" else toString n; in
               {
                 name = "${mod}+${m}";
-                value = "exec ${i3-helpers.workspace-action} 'workspace' ${m}";
+                value = "workspace ${toString n}";
               })
-            9
+            10
         ) ++
         (
           builtins.genList
             (n:
-              let m = toString (n + 1); in
+              let m = if n == 0 then "10" else toString n; in
               {
                 name = "${mod}+Shift+${m}";
-                value = "exec ${i3-helpers.workspace-action} 'move container to workspace' ${m}";
+                value = "move container to workspace ${toString n}";
               })
-            9
+            10
         )
       )));
+      defaultWorkspace = "move container to workspace 1";
     };
     extraConfig = ''
       popup_during_fullscreen leave_fullscreen
