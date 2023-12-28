@@ -117,8 +117,8 @@ in
             (n:
               let m = if n == 0 then "10" else toString n; in
               {
-                name = "${mod}+${m}";
-                value = "workspace ${toString n}";
+                name = "${mod}+${toString n}";
+                value = "workspace ${m}";
               })
             10
         ) ++
@@ -127,13 +127,13 @@ in
             (n:
               let m = if n == 0 then "10" else toString n; in
               {
-                name = "${mod}+Shift+${m}";
-                value = "move container to workspace ${toString n}";
+                name = "${mod}+Shift+${toString n}";
+                value = "move container to workspace ${m}";
               })
             10
         )
       )));
-      defaultWorkspace = "move container to workspace 1";
+      defaultWorkspace = "workspace 1";
     };
     extraConfig = ''
       popup_during_fullscreen leave_fullscreen
