@@ -16,7 +16,7 @@ final: prev:
         owner = "KoviRobi";
         repo = pname;
         rev = "rob";
-        sha256 = "sha256-d2sPjx1VFp5zDU2o+VWOrEml3TEfhbkwez8yjwarsBw=";
+        sha256 = "sha256-mkzM8iyz7+vJczHd3rUd3dBtun/6PH2X9x+6k66svp0=";
       };
 
       doCheck = false;
