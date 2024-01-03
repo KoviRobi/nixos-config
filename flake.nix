@@ -203,8 +203,6 @@
                   home-manager.extraSpecialArgs = { inherit pye-menu; };
                 }
 
-                { environment.systemPackages = [ deploy-rs.defaultPackage.${system} ]; }
-
                 ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
                 nix-index-database.nixosModules.nix-index
               ];
