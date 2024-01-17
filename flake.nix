@@ -23,8 +23,6 @@
   inputs.deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   inputs.deploy-rs.inputs.flake-compat.follows = "flake-compat";
 
-  inputs.dwarffs.url = "github:edolstra/dwarffs";
-
   outputs =
     { self
     , nixpkgs
@@ -35,7 +33,6 @@
     , flake-registry
     , NixOS-WSL
     , deploy-rs
-    , dwarffs
     }: {
 
       overlays =
@@ -203,8 +200,6 @@
                 }
 
                 { environment.systemPackages = [ deploy-rs.defaultPackage.${system} ]; }
-
-                dwarffs.nixosModules.dwarffs
 
                 ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
               ];

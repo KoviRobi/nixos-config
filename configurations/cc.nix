@@ -45,45 +45,46 @@
   };
   users.groups.build = { };
 
-  krb5 =
+  security.krb5 =
     {
       enable = true;
-      libdefaults = {
-        default_realm = "UK.CAMBRIDGECONSULTANTS.COM";
-        dns_lookup_realm = true;
-        dns_lookup_kdc = true;
-        forwardable = false;
-        proxiable = false;
-      };
-      realms = {
-        "UK.CAMBRIDGECONSULTANTS.COM" = {
-          admin_server = "uk.cambridgeconsultants.com";
-          kdc = "uk.cambridgeconsultants.com:88";
-          master_kdc = "uk.cambridgeconsultants.com:88";
-          default_domain = "uk.cambridgeconsultants.com";
+      settings = {
+        libdefaults = {
+          default_realm = "UK.CAMBRIDGECONSULTANTS.COM";
+          dns_lookup_realm = true;
+          dns_lookup_kdc = true;
+          forwardable = false;
+          proxiable = false;
+        };
+        realms = {
+          "UK.CAMBRIDGECONSULTANTS.COM" = {
+            admin_server = "uk.cambridgeconsultants.com";
+            kdc = "uk.cambridgeconsultants.com:88";
+            master_kdc = "uk.cambridgeconsultants.com:88";
+            default_domain = "uk.cambridgeconsultants.com";
+          };
+        };
+        domain_realm = {
+          ".uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
+          ".cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
+          "cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
+          "uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
+        };
+        appdefaults = {
+          pam = {
+            debug = false;
+            ticket_lifetime = 36000;
+            renew_lifetime = 36000;
+            forwardable = true;
+            krb4_convert = false;
+          };
+        };
+        logging = {
+          default = FILE:/var/log/krb5libs.log;
+          kdc = FILE:/var/log/krb5kdc.log;
+          admin_server = FILE:/var/log/kadmind.log;
         };
       };
-      domain_realm = {
-        ".uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        ".cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        "cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-        "uk.cambridgeconsultants.com" = "UK.CAMBRIDGECONSULTANTS.COM";
-      };
-      appdefaults = {
-        pam = {
-          debug = false;
-          ticket_lifetime = 36000;
-          renew_lifetime = 36000;
-          forwardable = true;
-          krb4_convert = false;
-        };
-      };
-      extraConfig = ''
-        [logging]
-         default = FILE:/var/log/krb5libs.log
-         kdc = FILE:/var/log/krb5kdc.log
-         admin_server = FILE:/var/log/kadmind.log
-      '';
     };
 
   fileSystems = builtins.listToAttrs
