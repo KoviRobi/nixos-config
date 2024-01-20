@@ -6,6 +6,5 @@ with pkgs;
   inkscape
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-  cura
   antimicroX
 ]
