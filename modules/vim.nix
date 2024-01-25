@@ -265,6 +265,9 @@ in
       autocmd FileType git set foldmethod=syntax
       autocmd FileType gitcommit set foldmethod=syntax
 
+      command -nargs=* Glg Git log --graph --oneline <args>
+      command -nargs=* Gpf Git push --force-with-lease <args>
+
       set foldmethod=expr
       set foldlevelstart=10
       set foldcolumn=auto
