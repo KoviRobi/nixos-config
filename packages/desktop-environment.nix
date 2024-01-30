@@ -44,8 +44,6 @@
 
     alass # subtitle sync
 
-    input-leap
-
     xscopes-qt
   ] ++
   lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
