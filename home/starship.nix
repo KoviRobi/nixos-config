@@ -26,5 +26,7 @@
     shlvl.disabled = false;
     shlvl.symbol = "↕️";
     shlvl.threshold = lib.mkDefault 3;
+    git_commit.only_detached = false;
+    git_commit.tag_disabled = false;
   };
 }
