@@ -41,7 +41,6 @@ with pkgs;
   (pass.withExtensions (exts: with exts; [ pass-otp ]))
   picocom
   stm32flash
-  stlink
   wally-cli # for flashing ergodox firmware
 
   _9pfs

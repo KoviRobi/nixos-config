@@ -90,7 +90,7 @@ in
       SUBSYSTEM=="tty", ATTRS{manufacturer}=="KoviRobi", ATTRS{product}=="Custom steno", SYMLINK="KoviRobi-Steno"
       ACTION=="add", SUBSYSTEM=="usb", ATTR{manufacturer}=="Gabotronics", GROUP="plugdev", MODE="0664", SYMLINK+="XScope%n"
     '';
-  services.udev.packages = with pkgs; [ openocd stlink picotool ];
+  services.udev.packages = with pkgs; [ openocd picotool ];
 
   services.tailscale.enable = true;
   services.resolved.enable = true;
