@@ -8,7 +8,7 @@
       inherit name;
       isNormalUser = true;
       shell = pkgs.zsh;
-      extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" "input" "video" ];
+      extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" "input" "video" "plugdev" ];
       uid = 3749;
       group = config.users.groups.default-user.name;
       openssh.authorizedKeys.keys = import ../pubkeys.nix;
