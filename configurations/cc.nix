@@ -122,5 +122,5 @@
 
       DRIVER=="usb", ATTRS{product}=="p11-Bjongle BLE adapter", OWNER="${config.users.users.default-user.name}", SYMLINK+="bjongle-$attr{serial}"
     '';
-  services.udev.packages = with pkgs; [ saleae-logic-2 libsigrok ];
+  services.udev.packages = with pkgs; [ saleae-logic-2 ];
 }
