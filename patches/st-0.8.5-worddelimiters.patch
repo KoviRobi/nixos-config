@@ -6,7 +6,7 @@ diff -uNr a/config.def.h b/config.def.h
   * More advanced example: L" `'\"()[]{}"
   */
 -wchar_t *worddelimiters = L" ";
-+wchar_t *worddelimiters = L" `'\"()[]{}<>┃";
++wchar_t *worddelimiters = L" `'\"()[]{}<>┃│";
 
  /* selection timeouts (in milliseconds) */
  static unsigned int doubleclicktimeout = 300;
