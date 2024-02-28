@@ -286,7 +286,6 @@ in
         vim-fugitive
         vim-gitgutter
         vim-localvimrc
-        ultisnips
         vim-snippets
         vim-elixir
         ale
