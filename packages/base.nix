@@ -75,6 +75,7 @@ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   ])
   gitFull
   git-absorb
+  git-filter-repo
 ] ++
 lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
   vim
