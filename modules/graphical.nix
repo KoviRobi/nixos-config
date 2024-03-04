@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     dejavu_fonts
     liberation_ttf
@@ -17,7 +17,7 @@
   services.xserver =
     {
       enable = true;
-      layout = "us";
+      xkb.layout = "us";
       displayManager = {
         defaultSession = "none+i3";
         autoLogin = { enable = true; user = config.users.users.default-user.name; };

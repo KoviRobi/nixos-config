@@ -4,8 +4,7 @@
   programs.wireshark.package = pkgs.wireshark-qt;
 
   programs.firefox.enable = true;
-  programs.firefox.nativeMessagingHosts.ff2mpv = true;
-  programs.firefox.nativeMessagingHosts.passff = true;
+  programs.firefox.nativeMessagingHosts.packages = [ pkgs.ff2mpv pkgs.passff-host ];
 
   programs.noisetorch.enable = true;
 

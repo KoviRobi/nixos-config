@@ -38,8 +38,8 @@
     ${pkgs.systemd}/bin/resolvectl dnssec eth0 no
   '';
 
-  fonts.enableDefaultFonts = true;
-  fonts.fonts = with pkgs; [
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [
     noto-fonts
     dejavu_fonts
     liberation_ttf

@@ -3,13 +3,13 @@
 
 with lib;
 let
-  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  inherit (pkgs.vimUtils) buildVimPlugin;
   inherit (pkgs) fetchFromGitHub;
   literate-vim =
     if pkgs.vimPlugins ? literate-vim
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "literate.vim";
         version = "2018-05-17";
         src = fetchFromGitHub {
@@ -25,7 +25,7 @@ let
     if pkgs.vimPlugins ? vim-bindsplit
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "vim-bindsplit";
         version = "2022-01-29";
         src = fetchFromGitHub {
@@ -41,7 +41,7 @@ let
     if pkgs.vimPlugins ? vim-textobj-elixir
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "vim-textobj-elixir";
         version = "2019-05-30";
         src = fetchFromGitHub {
@@ -57,7 +57,7 @@ let
     if pkgs.vimPlugins ? vim-unstack
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "vim-unstack";
         version = "2021-02-02";
         src = fetchFromGitHub {
@@ -73,7 +73,7 @@ let
     if pkgs.vimPlugins ? gitmoji-vim
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "gitmoji-vim";
         version = "2022-10-30";
         src = fetchFromGitHub {
@@ -89,7 +89,7 @@ let
     if pkgs.vimPlugins ? vim-nushell
     then throw "Plugin merged upstream, this can be removed"
     else
-      buildVimPluginFrom2Nix {
+      buildVimPlugin {
         pname = "vim-nushell";
         version = "2022-10-30";
         src = fetchFromGitHub {
