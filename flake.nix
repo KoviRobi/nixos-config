@@ -213,6 +213,7 @@
           "rmk-cc-b" = [ ./configurations/cc-pc.nix ./targets/rmk-cc-b.nix ];
           "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
           "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
+          "carallon-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/carallon-wsl.nix ./targets/wsl.nix ];
           "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
         } // {
         "netboot" = nixpkgs.lib.nixosSystem rec {
