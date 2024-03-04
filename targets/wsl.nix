@@ -12,31 +12,10 @@
     interop.register = true;
 
     wslConf.automount.root = "/mnt";
-    wslConf.network.generateResolvConf = false;
     wslConf.network.hostname = config.networking.hostName;
   };
 
   imports = [ ../packages/desktop-environment.nix ];
-
-  services.resolved.enable = true;
-  systemd.services.systemd-resolved.enable = true;
-  systemd.services."wsl_resolv".serviceConfig = {
-    PassEnvironment = "WSL_INTEROP";
-    Type = "oneshot";
-    RemainAfterExit = true;
-    ExecStop = "${pkgs.systemd}/bin/resolvectl revert eth0";
-  };
-  systemd.services."wsl_resolv".wantedBy = [ "default.target" ];
-  systemd.services."wsl_resolv".script = ''
-    IFS=$'\n\r '
-    nameservers=($(/mnt/c/windows/System32/WindowsPowerShell/v1.0/powershell.exe \
-      -Command "(Get-DnsClientServerAddress \
-                      -AddressFamily IPv4 \
-                ).ServerAddresses"))
-    ${pkgs.systemd}/bin/resolvectl dns    eth0 "''${nameservers[@]}"
-    ${pkgs.systemd}/bin/resolvectl domain eth0 uk.cambridgeconsultants.com
-    ${pkgs.systemd}/bin/resolvectl dnssec eth0 no
-  '';
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
