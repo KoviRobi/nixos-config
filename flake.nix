@@ -23,6 +23,9 @@
   inputs.deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   inputs.deploy-rs.inputs.flake-compat.follows = "flake-compat";
 
+  inputs.nix-index-database.url = "github:nix-community/nix-index-database";
+  inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs =
     { self
     , nixpkgs
@@ -33,6 +36,7 @@
     , flake-registry
     , NixOS-WSL
     , deploy-rs
+    , nix-index-database
     }: {
 
       overlays =
@@ -202,6 +206,7 @@
                 { environment.systemPackages = [ deploy-rs.defaultPackage.${system} ]; }
 
                 ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
+                nix-index-database.nixosModules.nix-index
               ];
           }
         )

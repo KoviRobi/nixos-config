@@ -30,7 +30,6 @@ with pkgs;
   nixpkgs-fmt
   rnix-lsp
   nix-tree
-  nix-index
   nix-output-monitor
   nom-rebuild
 

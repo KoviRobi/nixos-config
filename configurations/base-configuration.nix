@@ -94,4 +94,6 @@ in
 
   services.tailscale.enable = true;
   services.resolved.enable = true;
+
+  programs.command-not-found.enable = false; # Using nix-index
 }
