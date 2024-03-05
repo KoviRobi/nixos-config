@@ -73,8 +73,6 @@
     enable = true;
   };
 
-  programs.zoxide.enable = true;
-
   programs.newsboat.enable = true;
   programs.newsboat.browser = "${pkgs.mpv}/bin/mpv";
   programs.newsboat.urls = [

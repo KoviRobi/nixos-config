@@ -9,6 +9,10 @@
     carapace
   ];
 
+  programs.bash.initExtra = ''
+    eval "$(${pkgs.zoxide}/bin/zoxide init bash | ${pkgs.gnused}/bin/sed 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g')"
+  '';
+
   home.sessionVariables = {
     EDITOR = "nvim";
     PAGER = "less";
@@ -149,6 +153,8 @@
       setopt AUTO_PUSHD
       source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
       export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+      eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g')"
     '';
 
     enableCompletion = true;
