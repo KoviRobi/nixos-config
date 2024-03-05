@@ -50,9 +50,9 @@
 
     termbin = "nc termbin.com 9999";
 
-    ls = "eza";
-    ll = "eza -l";
-    la = "eza -la";
+    ls = "${pkgs.eza}/bin/eza";
+    ll = "${pkgs.eza}/bin/eza -l";
+    la = "${pkgs.eza}/bin/eza -la";
 
     mnt = "udisksctl mount -b";
     unmnt = "udisksctl unmount -b";
