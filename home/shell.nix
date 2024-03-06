@@ -124,12 +124,15 @@
       bindkey "^W" kill-region
       bindkey "^[u" up-case-word
       bindkey "^[l" down-case-word
+      bindkey "^Q" push-line
 
       [ -z "''${terminfo[kcbt]}" ]  || bindkey "''${terminfo[kcbt]}"  reverse-menu-complete
       [ -z "''${terminfo[kdch1]}" ] || bindkey "''${terminfo[kdch1]}" delete-char
       [ -z "''${terminfo[kich1]}" ] || bindkey "''${terminfo[kich1]}" overwrite-mode
       [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
       [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;5D" backward-word
 
       # Often I do want to go back to underscores or hyphens
       WORDCHARS=""
@@ -149,7 +152,6 @@
       compinit
       # End of lines added by compinstall
       unsetopt flow_control
-      bindkey "^Q" push-line
       setopt AUTO_PUSHD
       source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
       export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
