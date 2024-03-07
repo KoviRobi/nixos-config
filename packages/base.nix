@@ -48,6 +48,7 @@ with pkgs;
   gcc
   binutils
   gdb
+  gnumake
 
   (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
   evcxr
