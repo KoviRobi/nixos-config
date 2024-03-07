@@ -42,6 +42,13 @@
         print("Module readline not available.")
   '';
 
+  programs.readline.enable = true;
+  programs.readline.extraConfig = ''
+    $if python
+      set colored-stats off
+    $endif
+  '';
+
   services.xcape = {
     enable = true;
     mapExpression = { Shift_L = "parenleft"; Shift_R = "parenright"; };
