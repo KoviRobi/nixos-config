@@ -156,6 +156,7 @@ in
       set notitle
       set scrolljump=5
       set grepprg=rg\ -nH\ $*
+      set virtualedit=block
 
       set background=dark
       colorscheme solarized
