@@ -34,7 +34,7 @@ let
         cmd="$1"; shift # $@ doesn't contain cmd
       fi
 
-      if [ "$cmd" = "mpd" -o "$cmd" = "mpv" ]; then
+      if [ "$cmd" = "mpd" -o "$cmd" = "mpv" -o "$cmd" = "playerctl" ]; then
         echo "$cmd">$PROGFILE
         cmd="$1"; shift
       fi
@@ -56,9 +56,23 @@ let
         elif [ "$cmd" = "forward" ]; then
           echo '{ "command": ["seek", 20] }' | ${socat} - UNIX-CONNECT:/tmp/mpv-socket
         fi
-      elif [ "$PROG" = "mpd" -o -z "$PROG" ]; then
+      elif [ "$PROG" = "mpd" ]; then
         if [ -n "$cmd" ]; then
           ${mpc} "$cmd" "$@"
+        fi
+      elif [ "$PROG" = "playerctl" -o -z "$PROG" ]; then
+        if [ "$cmd" = "single" ]; then
+          ${pkgs.playerctl}/bin/playerctl play-pause
+        elif [ "$cmd" = "toggle" ]; then
+          ${pkgs.playerctl}/bin/playerctl play-pause
+        elif [ "$cmd" = "prev" ]; then
+          ${pkgs.playerctl}/bin/playerctl previous
+        elif [ "$cmd" = "back" ]; then
+          ${pkgs.playerctl}/bin/playerctl position 20-
+        elif [ "$cmd" = "forward" ]; then
+          ${pkgs.playerctl}/bin/playerctl position 20+
+        else
+          ${pkgs.playerctl}/bin/playerctl $cmd
         fi
       fi
     '';

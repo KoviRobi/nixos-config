@@ -24,6 +24,8 @@
     paprefs
     pavucontrol
 
+    playerctl
+
     zathura
     st
     ffmpeg
@@ -48,7 +50,7 @@
   ] ++
   lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
     (mpv.override {
-      scripts = with mpvScripts; [ autosubsync-mpv uosc ];
+      scripts = with mpvScripts; [ autosubsync-mpv uosc mpris ];
     })
     flameshot
     signal-desktop
