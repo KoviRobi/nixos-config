@@ -14,6 +14,8 @@
       ../modules/ssh.nix
     ];
 
+  services.openssh.ports = [ 22 2233 ];
+
   systemd.user.services.pulseaudio.enable = false;
   hardware.pulseaudio.extraClientConf = ''
     default-server = _gateway;
