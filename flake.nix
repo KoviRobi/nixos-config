@@ -159,6 +159,8 @@
 
                 { nixpkgs.overlays = builtins.attrValues self.overlays; }
 
+                ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
+
                 ({ config, pkgs, ... }: {
                   nix.settings.experimental-features = [ "nix-command" "flakes" ];
                   # Pin nixpkgs for e.g. nix search
@@ -203,7 +205,6 @@
                   home-manager.extraSpecialArgs = { inherit pye-menu; };
                 }
 
-                ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
                 nix-index-database.nixosModules.nix-index
               ];
           }
