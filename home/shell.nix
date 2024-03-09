@@ -62,54 +62,12 @@
     unmnt = "udisksctl unmount -b";
   };
 
-  programs.starship.enableNushellIntegration = false;
-  programs.zoxide.enableNushellIntegration = false;
-  programs.direnv.enableNushellIntegration = false;
-  programs.nushell =
-    {
-      enable = true;
-      extraConfig = ''
-        module aliases {
-          ${lib.concatStringsSep "\n  " (lib.mapAttrsToList
-            (name: value: ''export alias ${name} = ^${value};'')
-            (lib.filterAttrs
-              (n: v: !(lib.any (m: n == m) ["ls" "la" "ll"]))
-              config.home.shellAliases))}
-          export alias ll = ls -l
-          export alias la = ls -la
-        }
-        use aliases *
-
-        use ${./nu}/01-default-completions.nu *
-        use ${./nu}/01-default.nu             *
-        use ${./nu}/02-rob-default.nu         *
-        use ${./nu}/05-nix-support.nu         *
-        use ${./nu}/10-maybe-explore.nu       *
-        use ${./nu}/20-json-commands.nu       *
-        use ${./nu}/30-dir-stack.nu           *
-
-        use ${pkgs.nu_scripts}/themes/themes/solarized-light.nu *
-        use ${pkgs.nu_scripts}/themes/themes/solarized-dark.nu *
-        $env.config = ($env.config | update color_config (solarized-light))
-
-        use ${pkgs.nu_scripts}/custom-completions/git/git-completions.nu *
-        use ${pkgs.nu_scripts}/custom-completions/nix/nix-completions.nu *
-        use ${pkgs.nu_scripts}/custom-completions/tealdeer/tldr-completions.nu *
-        use ${pkgs.nu_scripts}/cool-oneliners/cargo_search.nu *
-        source ${./nu}/zoxide.nu
-        source ${./nu}/starship.nu
-        source ${./nu}/direnv.nu
-        source "${config.xdg.configHome}/nushell/user-config.nu"
-      '';
-    };
-
   programs.bash.enable = true;
 
   programs.zsh = {
     enable = true;
     initExtra = ''
       unsetopt beep
-      setopt extendedglob
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
       export VERSION_CONTROL=numbered
