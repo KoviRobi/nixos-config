@@ -4,6 +4,7 @@
     ./direnv.nix
     ./git.nix
     ./tmux.nix
+    ./zellij.nix
     ./x11
     ./shell.nix
     ./solarized.nix
