@@ -5,12 +5,7 @@
   imports =
     [
       ./base-configuration.nix
-      (import ../modules/default-user.nix {
-        name = "rmk";
-        user-options = { uid = 1000; };
-        group-options = { gid = 1000; };
-      }
-      )
+      (import ../modules/default-user.nix { })
       ../modules/ssh.nix
     ];
 

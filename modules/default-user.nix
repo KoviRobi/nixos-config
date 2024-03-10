@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ name ? "rmk35", user-options ? { }, group-options ? { } }:
+{ name ? "rmk", user-options ? { }, group-options ? { } }:
 { config, pkgs, ... }:
 
 {
@@ -9,14 +9,14 @@
       isNormalUser = true;
       shell = pkgs.zsh;
       extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" "input" "video" "plugdev" ];
-      uid = 3749;
+      uid = 1000;
       group = config.users.groups.default-user.name;
       openssh.authorizedKeys.keys = import ../pubkeys.nix;
     } // user-options;
   users.groups.default-user =
     {
       inherit name;
-      gid = 3749;
+      gid = 1000;
       members = [ name ];
     } // group-options;
 }
