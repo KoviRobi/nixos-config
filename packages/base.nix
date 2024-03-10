@@ -65,6 +65,9 @@ with pkgs;
 
   binwalk
   ethtool
+
+  kakoune
+  helix
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
