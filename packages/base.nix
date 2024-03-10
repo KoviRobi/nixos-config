@@ -29,7 +29,6 @@ with pkgs;
   nix-prefetch-github
   nix-prefetch
   nixpkgs-fmt
-  rnix-lsp
   nix-tree
   nix-output-monitor
   nom-rebuild
