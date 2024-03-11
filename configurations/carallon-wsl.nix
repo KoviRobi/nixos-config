@@ -103,4 +103,7 @@
     "mount.cifs" = { setuid = true; owner = "root"; group = "root"; source = "${pkgs.cifs-utils}/bin/mount.cifs"; };
   };
   services.samba.enable = true;
+
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerCompat = true;
 }
