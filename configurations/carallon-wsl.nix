@@ -22,7 +22,7 @@
   home-manager.users.default-user = {
     programs.git = {
       userName = lib.mkForce "Robert Kovacsics";
-      userEmail = lib.mkForce "robertkovacsics@carallon.com";
+      userEmail = lib.mkForce "robert.kovacsics@carallon.com";
       lfs.enable = true;
     };
   };
