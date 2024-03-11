@@ -5,6 +5,8 @@
     settings = {
       pane_frames = false;
 
+      session_serialization = false;
+
       theme = "solarized_light";
 
       themes.solarized_dark.fg = "#FDF6E3";
