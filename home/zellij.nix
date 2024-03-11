@@ -3,6 +3,8 @@
   programs.zellij = {
     enable = true;
     settings = {
+      pane_frames = false;
+
       theme = "solarized-light";
 
       themes.solarized-dark.fg = "#FDF6E3";
