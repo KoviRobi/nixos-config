@@ -67,13 +67,16 @@
         ./home/tmux.nix
       ];
 
-      packages = utils.lib.eachDefaultSystemMap (system:
+      legacyPackages = utils.lib.eachDefaultSystemMap (system:
         {
           nixpkgs = import nixpkgs {
             inherit system;
             overlays = builtins.attrValues self.overlays;
           };
+        });
 
+      packages = utils.lib.eachDefaultSystemMap (system:
+        {
           homeConfigurations.simple = home-manager.lib.homeManagerConfiguration
             {
               modules = self.homeModules.simple ++ [
