@@ -28,6 +28,7 @@
 
     zathura
     st
+    st.terminfo
     ffmpeg
 
     x11vnc

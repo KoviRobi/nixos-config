@@ -96,4 +96,6 @@ in
   services.resolved.enable = true;
 
   programs.command-not-found.enable = false; # Using nix-index
+
+  environment.extraOutputsToInstall = [ "terminfo" ];
 }

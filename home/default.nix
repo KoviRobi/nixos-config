@@ -16,6 +16,8 @@
     pkgs.mimi
   ];
 
+  home.file.".terminfo" = { source = "${pkgs.st.terminfo}/share/terminfo"; recursive = true; };
+
   home.file.".config/mimi/mime.conf".text = ''
     text/html: firefox
     text/: st -e tmux new vim
