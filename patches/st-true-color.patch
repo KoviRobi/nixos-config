@@ -1,0 +1,22 @@
+diff -u a/st.c b/st.c
+--- a/st.c	2022-10-04 17:41:26.000000000 +0000
++++ b/st.c	2024-03-12 17:55:23.058508859 +0000
+@@ -697,6 +697,7 @@
+ 	setenv("SHELL", sh, 1);
+ 	setenv("HOME", pw->pw_dir, 1);
+ 	setenv("TERM", termname, 1);
++	setenv("COLORTERM", "truecolor", 1);
+ 
+ 	signal(SIGCHLD, SIG_DFL);
+ 	signal(SIGHUP, SIG_DFL);
+diff -u a/st.info b/st.info
+--- a/st.info	2022-10-04 17:41:26.000000000 +0000
++++ b/st.info	2024-03-12 17:38:05.867505286 +0000
+@@ -187,6 +187,7 @@
+ # disabled rep for now: causes some issues with older ncurses versions.
+ #	rep=%p1%c\E[%p2%{1}%-%db,
+ # tmux extensions, see TERMINFO EXTENSIONS in tmux(1)
++	RGB,
+ 	Tc,
+ 	Ms=\E]52;%p1%s;%p2%s\007,
+ 	Se=\E[2 q,

@@ -14,9 +14,11 @@ final: prev:
       ../patches/st-0.8.5-worddelimiters.patch
       ../patches/st-0.8.5-netwmicon-v2.patch
       ../patches/st-0.8.5-desktopentry.patch
+      ../patches/st-true-color.patch
     ];
   }).overrideAttrs (attrs: {
     ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
+    meta.priority = -10;
   });
 
   dhcp-helper = final.stdenv.mkDerivation rec {
