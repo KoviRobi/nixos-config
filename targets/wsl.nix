@@ -13,6 +13,8 @@
 
     wslConf.automount.root = "/mnt";
     wslConf.network.hostname = config.networking.hostName;
+
+    useWindowsDriver = true;
   };
 
   imports = [ ../packages/desktop-environment.nix ];
