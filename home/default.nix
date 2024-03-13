@@ -9,6 +9,7 @@
     ./shell.nix
     ./solarized.nix
     ./modules/import-nixos-config.nix
+    ./helix.nix
   ];
 
   home.packages = [
