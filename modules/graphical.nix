@@ -8,6 +8,7 @@
     liberation_ttf
     lmodern
     terminus-nerdfont
+    inconsolata
   ];
 
   imports = [ ../packages/desktop-environment.nix ];
