@@ -46,6 +46,7 @@
       set -g pane-border-indicators arrows
       set -g display-panes-time 2000
       set -g exit-empty off
+      set -sa terminal-overrides ",st-256color:Tc"
 
       set -g renumber-windows on
       bind-key . command-prompt "swap-window -t '%%'"
