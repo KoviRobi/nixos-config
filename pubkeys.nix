@@ -6,4 +6,5 @@
   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKG9Dg3j/KJgDbtsUSyOJBF7+bQzfDQpLo4gqDX195rJ rmk@rmk-cc-pc-nixos-a"
   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICf3X2PMIpVFKstmrMhvnfHRrGKIzH8F4/I4xgHg2zB1 rmk@hp-nixos-a"
   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPImoMvc91xFJv9h4Ypoq0vIE1zLueNGgagO1UqnZn41 rmk@rmk-cc-b"
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPZ0IUFFBr4jQtm91e2YiAnQwZSTfpKFukeRN2oZH2J rmk@promethium-nixos-a"
 ]
