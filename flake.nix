@@ -236,6 +236,8 @@
               system.extraDependencies = lib.mkForce [ ];
               documentation.enable = lib.mkForce false;
 
+              netboot.squashfsCompression = "zstd -Xcompression-level 6";
+
               users.users.nixos.openssh.authorizedKeys.keys = import ./pubkeys.nix;
               # To allow using custom substituters (e.g. netboot host)
               nix.settings.trusted-users = [ "nixos" ];
