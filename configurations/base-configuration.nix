@@ -73,7 +73,6 @@ in
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
 
   systemd.services.systemd-udev-settle.enable = false;
-  systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.ModemManager.enable = false;
   systemd.coredump.enable = true;
 
