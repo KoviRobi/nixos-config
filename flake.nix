@@ -87,13 +87,13 @@
                   home.stateVersion = "22.11";
                 }
               ];
-              pkgs = self.packages.${system}.nixpkgs;
+              pkgs = self.legacyPackages.${system}.nixpkgs;
             };
 
           netboot =
             let
               inherit system;
-              pkgs = self.packages.${system}.nixpkgs;
+              pkgs = self.legacyPackages.${system}.nixpkgs;
               netboot-system = self.nixosConfigurations.netboot;
               kernel-cmdline = [ "init=${toplevel}/init" ] ++ netboot-system.config.boot.kernelParams;
               inherit (netboot-system.config.system.build) kernel netbootRamdisk toplevel;
