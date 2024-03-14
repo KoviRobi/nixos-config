@@ -83,7 +83,7 @@
 
                 {
                   home.username = "rmk";
-                  home.homeDirectory = "/hom/rmk";
+                  home.homeDirectory = "/home/rmk";
                   home.stateVersion = "22.11";
                 }
               ];
