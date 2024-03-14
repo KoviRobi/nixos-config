@@ -58,7 +58,7 @@ in
         "${mod}+Shift+m" = scratch-term "maxima" maxima;
         "${mod}+Shift+p" = scratch-term "python" (pkgs.writeShellScript "scratchpy" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}");
         "${mod}+Shift+g" = scratch-term "guile" guile;
-        "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf attach-session -d -t float";
+        "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux";
         "${mod}+Shift+e" = scratch "emacs" "${emacs} --name scratch_emacs";
 
         "${mod}+e" = "layout toggle split";

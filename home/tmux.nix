@@ -1,24 +1,5 @@
 { pkgs, config, lib, ... }:
 {
-  systemd.user.services.tmux-server = lib.mkIf pkgs.hostPlatform.isLinux {
-    Unit = {
-      Description = "Tmux server";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      Type = "forking";
-      ExecStart = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf start-server";
-      ExecStartPost = "${pkgs.tmux}/bin/tmux -f ${config.xdg.configHome}/tmux/tmux.conf new-session -d -s float atop";
-      ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
-      Environment = [ "TMUX_TMPDIR=/run/user/${toString config.nixos.users.users.default-user.uid}" ];
-      PassEnvironment = [ "PATH" "WSL_INTEROP" ];
-    };
-
-    Install = { WantedBy = [ "graphical-session.target" ]; };
-  };
-
   programs.tmux = {
     enable = true;
     aggressiveResize = true;
