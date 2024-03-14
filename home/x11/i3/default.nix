@@ -84,12 +84,12 @@ in
         "${mod}+u" = "exec ${unipicker} --copy-command '${xclip-both}' " +
           "--command '${rofi} -dmenu -matching regex'";
         "${mod}+Control+Shift+r" = "restart";
-        "${mod}+bracketleft" = "focus output prev";
-        "${mod}+bracketright" = "focus output next";
+        "${mod}+bracketleft" = "focus output left";
+        "${mod}+bracketright" = "focus output right";
         "${mod}+parenleft" = "workspace prev_on_output";
         "${mod}+parenright" = "workspace next_on_output";
-        "${mod}+Shift+bracketleft" = "move to output prev";
-        "${mod}+Shift+bracketright" = "move to output next";
+        "${mod}+Shift+bracketleft" = "move to output left";
+        "${mod}+Shift+bracketright" = "move to output right";
         "${mod}+Shift+parenleft" = "move to workspace prev_on_output";
         "${mod}+Shift+parenright" = "move to workspace next_on_output";
         "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
