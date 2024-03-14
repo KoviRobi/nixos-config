@@ -67,6 +67,7 @@
           # //kermit.office.carallon.com/net_share   /kermit/net_share   cifs   defaults,nofail,uid=ali,gid=ali,user=alil,vers=2.1
           fsType = "cifs";
           options = [
+            "user"
             "username=robertkovacsics"
             "uid=${toString config.users.users.default-user.uid}"
             "gid=${toString config.users.groups.default-user.gid}"
