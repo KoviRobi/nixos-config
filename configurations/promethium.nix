@@ -25,6 +25,7 @@
   virtualisation.podman.enable = true;
   virtualisation.podman.dockerCompat = true;
   virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
   environment.systemPackages = with pkgs; [ virt-manager ];
