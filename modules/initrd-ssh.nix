@@ -45,8 +45,6 @@ in
   config = {
     boot.initrd.kernelModules = [ "af_packet" ];
     boot.initrd.availableKernelModules = [ "e1000e" "r8169" ];
-    boot.initrd.network.udhcpc.extraArgs =
-      [ "-x hostname:${config.networking.hostName}" ] ++ cfg.udhcpcExtraArgs;
 
     boot.initrd.network.enable = true;
     boot.initrd.network.ssh.enable = true;
@@ -74,7 +72,7 @@ in
 
       # Acquire DHCP leases.
       echo "acquiring IP address via DHCP on ${cfg.interface}..."
-      udhcpc --quit --now -i ${cfg.interface} -O staticroutes --script ${udhcpcScript} ${udhcpcArgs}
+      udhcpc --background -i ${cfg.interface} -O staticroutes --script ${udhcpcScript} ${udhcpcArgs} &
     '';
 
     boot.initrd.postMountCommands = ''

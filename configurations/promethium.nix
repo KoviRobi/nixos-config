@@ -10,7 +10,13 @@
       (import ../modules/default-user.nix { })
       ../modules/ssh.nix
       ../modules/graphical.nix
+      ../modules/initrd-ssh.nix
     ];
+
+  boot.initrd.network.flushBeforeStage2 = false;
+  initrd-ssh.interface = "enp0s31f6";
+  initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
+  systemd.targets.emergency.wants = [ "sshd.service" ];
 
   solarized.brightness = "light";
 
