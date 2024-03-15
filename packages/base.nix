@@ -35,6 +35,7 @@ with pkgs;
 
   dconf
   plan9port
+  acme-lsp
   xxd
   rclone
   (pass.withExtensions (exts: with exts; [ pass-otp ]))
