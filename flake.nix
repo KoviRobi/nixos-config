@@ -162,7 +162,13 @@
 
                 { nixpkgs.overlays = builtins.attrValues self.overlays; }
 
-                ({ pkgs, ... }: { system.build.nom-rebuild = pkgs.nom-rebuild; })
+                ({ pkgs, ... }: {
+                  system.build.nom-rebuild = pkgs.nom-rebuild;
+                  programs.zsh.interactiveShellInit = ''
+                    _nom-rebuild() { _nixos-rebuild }
+                    compdef _nom-rebuild nom-rebuild
+                  '';
+                })
 
                 ({ config, pkgs, ... }: {
                   nix.settings.experimental-features = [ "nix-command" "flakes" ];
