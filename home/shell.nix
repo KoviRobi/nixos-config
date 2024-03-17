@@ -83,6 +83,7 @@
       bindkey "^[u" up-case-word
       bindkey "^[l" down-case-word
       bindkey "^Q" push-line
+      bindkey "^Z" undo
 
       [ -z "''${terminfo[kcbt]}" ]  || bindkey "''${terminfo[kcbt]}"  reverse-menu-complete
       [ -z "''${terminfo[kdch1]}" ] || bindkey "''${terminfo[kdch1]}" delete-char
