@@ -51,6 +51,7 @@ with pkgs;
   gcc
   binutils
   gdb
+  radare2
   gnumake
 
   (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
