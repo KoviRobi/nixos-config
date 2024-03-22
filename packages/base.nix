@@ -34,14 +34,16 @@ with pkgs;
   nom-rebuild
 
   dconf
-  plan9port
-  acme-lsp
   xxd
   rclone
   (pass.withExtensions (exts: with exts; [ pass-otp ]))
   picocom
   stm32flash
   wally-cli # for flashing ergodox firmware
+
+  plan9port
+  acme-lsp
+  acre
 
   _9pfs
   ntfs3g

@@ -11,7 +11,7 @@ final: prev:
     };
 
     meta = with final.lib; {
-      description = "Acme language-server protocol";
+      description = "Acme language-server protocol client";
       homepage = "https://github.com/fhs/acme-lsp";
       license = licenses.mit;
       maintainers = with maintainers; [ kovirobi ];
@@ -31,5 +31,26 @@ final: prev:
         echo exec $out/bin/L comp $sub '$*'      >> $out/bin/L$cmd
       done
     '';
+  };
+
+  acre = final.rustPlatform.buildRustPackage rec {
+    pname = "acre";
+    version = "0.5.5";
+
+    src = final.fetchFromGitHub {
+      owner = "mjibson";
+      repo = pname;
+      rev = "v${version}";
+      hash = "sha256-/RzNkprdMFSvSkMJ9hEH631F4/CT5CNeP6+EQyOv6/I=";
+    };
+
+    cargoHash = "sha256-0qNS/BIgoHnVNXz3fpxnoHuKS62S765ZwhzuWKxxNBY=";
+
+    meta = {
+      description = "Acme language server client written in rust";
+      homepage = "https://github.com/mjibson/acre";
+      license = final.lib.licenses.asl20;
+      maintainers = [ final.lib.maintainers.kovirobi ];
+    };
   };
 }
