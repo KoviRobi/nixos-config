@@ -54,6 +54,8 @@ with pkgs;
   radare2
   gnumake
 
+  devenv
+
   (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
   evcxr
   rustc
