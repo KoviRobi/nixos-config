@@ -33,7 +33,7 @@
   home.sessionVariables.SSH_AUTH_SOCK =
     "/run/user/${toString config.nixos.users.users.default-user.uid}/keyring/ssh";
   home.file.".gnupg/gpg-agent.conf".text = ''
-    pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry
+    pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
   '';
 
   home.sessionVariables.PYTHONSTARTUP = pkgs.writeText "pythonrc" ''
