@@ -48,6 +48,8 @@
 
   programs.readline.enable = true;
   programs.readline.extraConfig = ''
+    set revert-all-at-newline on
+
     $if python
       set colored-stats off
     $endif
