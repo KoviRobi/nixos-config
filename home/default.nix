@@ -78,7 +78,12 @@
     '';
   };
 
-  programs.htop = { enable = true; settings.color_scheme = 6; };
+  programs.htop = {
+    enable = true;
+    settings.color_scheme = 6;
+  };
+  # htop overwrites symlink
+  xdg.configFile."htop/htoprc".force = true;
 
   programs.home-manager = {
     enable = true;
