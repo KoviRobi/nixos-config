@@ -110,6 +110,7 @@
       autoload -Uz compinit
       compinit
       # End of lines added by compinstall
+      compdef _nixos-rebuild nom-rebuild
       unsetopt flow_control
       setopt AUTO_PUSHD
       source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
