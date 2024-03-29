@@ -74,6 +74,8 @@ with pkgs;
 
   kakoune
   helix
+
+  zsh-manydots-magic
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
