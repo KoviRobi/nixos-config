@@ -30,6 +30,7 @@ with pkgs;
   nix-prefetch
   nixpkgs-fmt
   nix-tree
+  nix-du
   nix-output-monitor
   nom-rebuild
 
