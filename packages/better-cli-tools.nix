@@ -3,6 +3,7 @@
 with pkgs;
 [
   dua
+  dust
   duf
   hyperfine
   neofetch
