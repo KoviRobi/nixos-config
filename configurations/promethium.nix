@@ -29,4 +29,7 @@
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
   environment.systemPackages = with pkgs; [ virt-manager ];
+
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
 }
