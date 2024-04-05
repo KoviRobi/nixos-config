@@ -117,6 +117,8 @@
       export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
       eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
+
+      ${pkgs.fortune}/bin/fortune ${pkgs.apf-cookie}/share/games/fortunes/apf-cookie
     '';
 
     enableCompletion = true;

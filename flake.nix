@@ -26,6 +26,9 @@
   inputs.nix-index-database.url = "github:nix-community/nix-index-database";
   inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+  inputs.poetry2nix.url = "github:nix-community/poetry2nix";
+  inputs.poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs =
     { self
     , nixpkgs
@@ -37,6 +40,7 @@
     , NixOS-WSL
     , deploy-rs
     , nix-index-database
+    , poetry2nix
     }: {
 
       overlays =
@@ -57,7 +61,7 @@
             })
             nix_or_dirs;
         in
-        listToAttrs imported;
+        listToAttrs imported // { poetry2nix = poetry2nix.overlays.default; };
 
       homeModules.simple = [
         ./home/direnv.nix
@@ -71,7 +75,7 @@
         {
           nixpkgs = import nixpkgs {
             inherit system;
-            overlays = builtins.attrValues self.overlays;
+            overlays = (builtins.attrValues self.overlays);
           };
         });
 

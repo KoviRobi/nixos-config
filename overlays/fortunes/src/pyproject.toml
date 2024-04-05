@@ -1,0 +1,20 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "apf2cookie"
+version = "0.1.0"
+description = "Converts the Annotated Pratchett File to a fortune cookie file"
+authors = ["Robert Kovacsics <kovirobi@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.scripts]
+apf2cookie = "apf2cookie:main_cli"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+titlecase = "^2.4.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
