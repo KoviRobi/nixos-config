@@ -13,6 +13,8 @@
       absorb = "!git-absorb";
     };
     extraConfig = {
+      gpg.format = "ssh";
+      user.signingKey = "~/.ssh/id_ed25519.pub";
       rebase.autoSquash = true;
       rebase.autoStash = true;
       pull.ff = "only";
