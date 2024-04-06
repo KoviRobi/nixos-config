@@ -71,6 +71,8 @@ in
   networking.firewall.allowedUDPPorts = [ ];
 
   networking.networkmanager = { enable = true; enableStrongSwan = true; };
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart =
+    [ "" "${pkgs.networkmanager}/bin/nm-online -q" ];
 
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.ModemManager.enable = false;
