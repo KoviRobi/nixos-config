@@ -48,6 +48,11 @@ in
       "100:focused"
     ];
   };
+  services.xcape = {
+    enable = true;
+    mapExpression = { Shift_L = "parenleft"; Shift_R = "parenright"; };
+    timeout = 250;
+  };
 
   xresources.properties = {
     "XTerm.termName" = "xterm-256color";

@@ -54,12 +54,6 @@
     $endif
   '';
 
-  services.xcape = {
-    enable = true;
-    mapExpression = { Shift_L = "parenleft"; Shift_R = "parenright"; };
-    timeout = 250;
-  };
-
   programs.bat = {
     enable = true;
   };
