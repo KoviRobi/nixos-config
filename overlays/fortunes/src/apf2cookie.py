@@ -105,11 +105,11 @@ def xref(comp_ann: CompiledAnnotation, xrefs: XrefDict):
             book = re.sub(r"\.$", "", book)
             for page in pages:
                 if page in xrefs[book]:
-                    print("\n  " + book, "\n  ".join(xrefs[book][page]))
+                    print("\n  " + book, "\n\n  ".join(xrefs[book][page]))
         elif comp_ann.book is not None:
             for page in pages:
                 if page in xrefs[comp_ann.book]:
-                    print("\n  " + comp_ann.book, "\n  ".join(xrefs[comp_ann.book][page]))
+                    print("\n  " + comp_ann.book, "\n\n  ".join(xrefs[comp_ann.book][page]))
         else:
             LOGGER.info("Bad xref %s", ref.groupdict())
 
