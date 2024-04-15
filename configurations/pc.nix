@@ -93,6 +93,20 @@
       ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="660", GROUP="plugdev", TAG+="uaccess"
 
       KERNEL=="nvme0n1p6", SUBSYSTEM=="block", group="${config.users.users.default-user.group}"
+
+      # ICELINK
+      ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="602b", MODE="660", TAG+="uaccess"
+
+      # iCESugar compatible adapters
+      ATTRS{product}=="*iCESugar*", MODE="660", TAG+="uaccess"
+
+      # iCELink compatible adapters
+      ATTRS{product}=="*iCELink*", MODE="660", TAG+="uaccess"
+
+      # iCELink compatible adapters (NXP ARM mbed)
+      ATTRS{product}=="*DAPLink*", MODE="660", TAG+="uaccess"
+      ATTRS{product}=="*FPGALink*", MODE="660", TAG+="uaccess"
+      ATTRS{product}=="*NXP ARM mbed*", MODE="660", TAG+="uaccess"
     '';
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
