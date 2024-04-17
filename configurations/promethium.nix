@@ -13,6 +13,10 @@
       ../modules/initrd-ssh.nix
     ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "saleae-logic-2"
+  ];
+
   boot.initrd.network.flushBeforeStage2 = false;
   initrd-ssh.interface = "enp0s31f6";
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
@@ -28,7 +32,8 @@
   virtualisation.libvirtd.qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
-  environment.systemPackages = with pkgs; [ virt-manager ];
+  environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ];
+  services.udev.packages = with pkgs; [ saleae-logic-2 ];
 
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
