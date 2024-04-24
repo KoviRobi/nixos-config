@@ -67,7 +67,7 @@
     };
   hardware.opengl.driSupport32Bit = true;
 
-  services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplipWithPlugin ]; };
+  services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplipWithPlugin pkgs.cups-brother-hll2340dw ]; };
   hardware.sane = { enable = true; extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ]; };
 
   services.udev.extraRules =
