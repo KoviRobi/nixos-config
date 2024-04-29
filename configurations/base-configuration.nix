@@ -29,6 +29,10 @@ in
     enableBashCompletion = true;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.package = pkgs.nix-ld-rs;
+  programs.nix-ld.libraries = [ pkgs.gtk3 pkgs.cairo pkgs.glib ];
+
   programs.xonsh.enable = true;
   programs.bandwhich.enable = true;
   programs.atop = {
