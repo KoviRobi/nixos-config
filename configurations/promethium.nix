@@ -15,6 +15,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "saleae-logic-2"
+    "saleae-logic"
   ];
 
   boot.initrd.network.flushBeforeStage2 = false;
