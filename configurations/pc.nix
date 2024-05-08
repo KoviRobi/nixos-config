@@ -36,6 +36,8 @@
 
   boot.kernelParams = [ "video=card0-DP-1:1366x768M@60" ];
 
+  boot.blacklistedKernelModules = [ "iwlwifi" "btintel" ];
+
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
