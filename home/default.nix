@@ -49,7 +49,8 @@
   programs.readline.extraConfig = ''
     set revert-all-at-newline on
 
-    $if python
+    $if bash
+    $else
       set colored-stats off
     $endif
   '';
