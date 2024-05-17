@@ -26,6 +26,7 @@
 
     playerctl
 
+    mupdf
     zathura
     st
     st.terminfo
