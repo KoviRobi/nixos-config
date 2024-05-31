@@ -158,8 +158,15 @@ in
       set grepprg=rg\ -nH\ $*
       set virtualedit=block
 
-      set background=dark
+      set background=light
       colorscheme solarized
+      hi clear SpellBad
+      hi clear SpellRare
+      hi clear SpellLocal
+      hi clear SpellCap
+      hi SpellBad  cterm=undercurl
+      hi SpellRare cterm=undercurl
+      hi SpellCap  cterm=undercurl
 
       nnoremap <F6> :UndotreeToggle<cr>
       nnoremap <F7> :TagbarToggle<cr>
@@ -278,7 +285,7 @@ in
       [
         undotree
         vim-easy-align
-        solarized
+        nvim-solarized-lua
         neomake
         vim-addon-nix
         vim-nix
