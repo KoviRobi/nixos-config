@@ -16,13 +16,15 @@
 
   services.udisks2.enable = true;
 
+  services.displayManager = {
+    defaultSession = "none+i3";
+    autoLogin = { enable = true; user = config.users.users.default-user.name; };
+  };
   services.xserver =
     {
       enable = true;
       xkb.layout = "us";
       displayManager = {
-        defaultSession = "none+i3";
-        autoLogin = { enable = true; user = config.users.users.default-user.name; };
         lightdm = {
           enable = true;
           greeters.gtk.cursorTheme.package = pkgs.gnome.adwaita-icon-theme;

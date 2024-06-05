@@ -42,7 +42,7 @@
   services.printing = { enable = true; drivers = with pkgs; [ hplip ]; };
 
   hardware.sensor.iio.enable = true;
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   services.xserver.dpi = 200;
   services.xserver.wacom.enable = true;
   services.xserver.videoDrivers = [ "intel" ];
