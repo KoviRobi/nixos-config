@@ -1,8 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  networking.hostName = "C930-flash";
-
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -21,12 +19,13 @@
   # For iwlwifi for 01:00.0 Network controller:
   #     Intel Corporation Wireless 8265 / 8275 (rev 78)  ?
   hardware.enableRedistributableFirmware = true;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  boot.initrd.luks.devices."nixos-flash".device = "/dev/disk/by-uuid/c51fecec-e8e9-40ba-9062-2740b9d84d06";
+  boot.initrd.luks.devices."nixos-flash".device = "/dev/disk/by-uuid/4430fbb2-085c-4470-bd88-648a21d75415";
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/860298a3-1049-45c2-82f9-00d29b067f00";
+      device = "/dev/disk/by-uuid/90e4f594-2747-4198-b915-1a212e997762";
       fsType = "f2fs";
     };
 

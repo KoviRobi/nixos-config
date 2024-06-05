@@ -222,6 +222,7 @@
           "pc-nixos-a" = [ ./configurations/pc.nix ./targets/pc.nix ];
           "hp-nixos-a" = [ ./configurations/hp.nix ./targets/hp.nix ];
           "acer-nixos-a" = [ ./configurations/hp.nix ./targets/acer.nix ];
+          "c930" = [ ./configurations/yoga-book.nix ./targets/yoga-book-flash.nix ];
           "rmk-cc-pc-nixos-a" = [ ./configurations/cc-pc.nix ./targets/cc-pc.nix ];
           "rmk-cc-b" = [ ./configurations/cc-pc.nix ./targets/rmk-cc-b.nix ];
           "cc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/cc-wsl.nix ./targets/wsl.nix ];
@@ -259,14 +260,27 @@
         };
       };
 
-      deploy.nodes.rmk-cc-pc-nixos-a = {
-        sshUser = "rmk";
-        sshOpts = [ "-tt" ];
-        user = "root";
-        hostname = "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com";
-        profiles.system = {
-          user = "rmk";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.rmk-cc-pc-nixos-a;
+      deploy.nodes = {
+        rmk-cc-pc-nixos-a = {
+          sshUser = "rmk";
+          sshOpts = [ "-tt" ];
+          user = "root";
+          hostname = "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com";
+          profiles.system = {
+            user = "rmk";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.rmk-cc-pc-nixos-a;
+          };
+        };
+
+        c930 = {
+          sshUser = "rmk";
+          sshOpts = [ "-tt" ];
+          user = "root";
+          hostname = "10.42.0.229";
+          profiles.system = {
+            user = "rmk";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.c930;
+          };
         };
       };
     };
