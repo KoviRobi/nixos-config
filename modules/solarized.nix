@@ -7,7 +7,7 @@ in
   options.solarized = with lib; {
     brightness = mkOption {
       type = types.enum [ "dark" "light" ];
-      default = "dark";
+      default = "light";
       description = ''
         Whether to use solarized dark or light by default.
       '';
