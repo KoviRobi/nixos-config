@@ -155,6 +155,7 @@ in
       set laststatus=2
       set notitle
       set scrolljump=5
+      set grepprg=rg\ --vimgrep\ $*
       set virtualedit=block
 
       set background=light
