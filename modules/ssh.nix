@@ -3,6 +3,8 @@
 
 {
   environment.systemPackages = [ pkgs.google-authenticator ];
+  security.pam.makeHomeDir.skelDirectory = "/etc/skel";
+  security.pam.services.sshd.makeHomeDir = true;
   security.pam.services.sshd.googleAuthenticator.enable = true;
   users.groups.no-google-authenticator = { };
   services.openssh =
