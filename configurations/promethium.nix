@@ -31,6 +31,7 @@
   virtualisation.podman.dockerCompat = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
+  virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
   environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ];
