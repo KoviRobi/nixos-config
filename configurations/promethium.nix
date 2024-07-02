@@ -39,4 +39,6 @@
 
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
+
+  programs.systemtap.enable = true;
 }
