@@ -34,7 +34,12 @@
   virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
-  environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ];
+  environment.systemPackages = with pkgs; [
+    virt-manager
+    sigrok-cli
+    pulseview
+    saleae-logic-2
+  ];
   services.udev.packages = with pkgs; [ saleae-logic-2 ];
 
   services.printing.enable = true;
