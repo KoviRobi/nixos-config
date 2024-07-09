@@ -2,16 +2,16 @@ final: prev: {
   libsigrok = prev.libsigrok.overrideAttrs (oldAttrs: {
     src = final.fetchgit {
       url = "git://sigrok.org/libsigrok";
-      rev = "fd2a8a5056aabd4231a1b0f3c72c70dab8207f26";
-      sha256 = "sha256-kVrDeDaCJA2C/gNiMNkcoDl8PNA/27ymUfG7XAbNVyk=";
+      rev = "b503d24cdf56abf8c0d66d438ccac28969f01670";
+      hash = "sha256-9EW0UCzU6MqBX6rkT5CrBsDkAi6/CLyS9MZHsDV+1IQ=";
     };
     nativeBuildInputs = oldAttrs.nativeBuildInputs or [ ] ++ [ final.autoreconfHook ];
   });
   libsigrokdecode = prev.libsigrokdecode.overrideAttrs (oldAttrs: {
     src = final.fetchgit {
-      rev = "d7da8b9ea27ba271857d265b8ee66b40ae7079fc";
-      sha256 = "sha256-YiruojyaX3loJiNzp4y5lPulYIBRxgZn8VMZQhkcuRw=";
       url = "git://sigrok.org/libsigrokdecode";
+      rev = "0235970293590f673a253950e6c61017cefa97df";
+      hash = "sha256-NyETufyThvKMKujhbgZZw08CGIIrGLIIE8qPqNL5thQ=";
     };
   });
 
