@@ -69,7 +69,6 @@ with pkgs;
   unipicker
   fzf
 
-  binwalk
   ethtool
 
   kakoune
