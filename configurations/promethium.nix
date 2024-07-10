@@ -32,11 +32,13 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
   virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
+  virtualisation.libvirtd.qemu.swtpm = { enable = true; };
   users.users.default-user.extraGroups = [ "scanner" "lp" "docker" "libvirtd" ];
 
   environment.systemPackages = with pkgs; [
     virt-manager
     virtiofsd
+    swtpm
     sigrok-cli
     pulseview
     saleae-logic-2
