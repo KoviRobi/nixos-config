@@ -56,7 +56,7 @@ with pkgs;
 
   devenv
 
-  (python311.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
+  (python3.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
   evcxr
   rustc
   sccache
