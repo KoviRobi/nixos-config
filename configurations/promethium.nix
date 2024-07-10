@@ -36,6 +36,7 @@
 
   environment.systemPackages = with pkgs; [
     virt-manager
+    virtiofsd
     sigrok-cli
     pulseview
     saleae-logic-2
