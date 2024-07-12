@@ -2,14 +2,6 @@
 let
   cfg = config.programs.nix-ld32;
 
-  patchedPackage = cfg.package.overrideAttrs (old: {
-    postPatch = old.postPatch or "" + ''
-      find -type f | xargs sed -i 's/"NIX_LD/"NIX_LD32/g'
-      find -type f | xargs sed -i 's|/run/current-system/sw/share/nix-ld|/run/current-system/sw/share/nix-ld32|g'
-    '';
-    doCheck = false;
-  });
-
   nix-ld32-libraries = pkgs.pkgsi686Linux.buildEnv {
     name = "ld-library-path";
     pathsToLink = [ "/lib" ];
@@ -36,15 +28,15 @@ in
   };
 
   config = lib.mkIf config.programs.nix-ld32.enable {
-    environment.ldso32 = "${patchedPackage}/libexec/nix-ld";
+    environment.ldso32 = "${cfg.package}/libexec/nix-ld";
 
     environment.systemPackages = [ nix-ld32-libraries ];
 
     environment.pathsToLink = [ "/share/nix-ld32" ];
 
     environment.variables = {
-      NIX_LD32 = "/run/current-system/sw/share/nix-ld32/lib/ld.so";
-      NIX_LD32_LIBRARY_PATH = "/run/current-system/sw/share/nix-ld32/lib";
+      NIX_LD_i686_linux = "/run/current-system/sw/share/nix-ld32/lib/ld.so";
+      NIX_LD_LIBRARY_PATH_i686_linux = "/run/current-system/sw/share/nix-ld32/lib";
     };
 
     # We currently take all libraries from systemd and nix as the default.
