@@ -47,6 +47,13 @@
 
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
+  services.printing.bindirCmds = ''
+    mkdir -p $out/lib/cups/backend
+    ln -sf ${pkgs.writeShellScript "smb-krb5" ''
+      export DEVICE_URI=smb://''${DEVICE_URI#smb_krb5://}
+      ${pkgs.sambaFull}/libexec/samba/smbspool_krb5_wrapper "$@"
+    ''} $out/lib/cups/backend/smb_krb5
+  '';
 
   programs.systemtap.enable = true;
 }
