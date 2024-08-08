@@ -1,12 +1,5 @@
 final: prev:
 {
-  pavucontrol = prev.pavucontrol.overrideAttrs (attrs:
-    {
-      patches = (if attrs ? patches then attrs.patches else [ ]) ++
-        [ ../patches/pavucontrol-no-feedback.patch ];
-    }
-  );
-
   st = (prev.st.override {
     extraLibs = [ final.gd ];
     patches = prev.st.patches ++ [
