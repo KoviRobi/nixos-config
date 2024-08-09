@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 let
   killall = "${pkgs.psmisc}/bin/killall";
-  adwaita = { name = "Adwaita"; package = pkgs.gnome.adwaita-icon-theme; };
+  adwaita = { name = "Adwaita"; package = pkgs.adwaita-icon-theme; };
 in
 {
   imports = [

@@ -27,7 +27,7 @@
       displayManager = {
         lightdm = {
           enable = true;
-          greeters.gtk.cursorTheme.package = pkgs.gnome.adwaita-icon-theme;
+          greeters.gtk.cursorTheme.package = pkgs.adwaita-icon-theme;
           greeters.gtk.cursorTheme.name = "Adwaita";
         };
       };

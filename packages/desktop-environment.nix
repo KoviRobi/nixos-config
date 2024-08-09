@@ -9,11 +9,11 @@
   programs.noisetorch.enable = true;
 
   environment.systemPackages = with pkgs; [
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     hicolor-icon-theme
 
     gparted
-    gnome.seahorse
+    seahorse
     udiskie
     geeqie
 
