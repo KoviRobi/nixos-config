@@ -67,7 +67,7 @@
         { output = "HDMI-A-0"; monitorConfig = ''Option "PreferredMode" "1366x768"''; }
       ];
     };
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
 
   services.printing = { enable = true; drivers = [ pkgs.cups-zj-58 pkgs.hplipWithPlugin pkgs.cups-brother-hll2340dw ]; };
   hardware.sane = { enable = true; extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ]; };
