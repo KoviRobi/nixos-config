@@ -8,7 +8,7 @@ with pkgs;
   hyperfine
   neofetch
   rm-improved
-  taskwarrior
+  taskwarrior3
   zoxide
   delta
   direnv
