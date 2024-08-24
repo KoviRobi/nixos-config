@@ -9,12 +9,6 @@
     customPaneNavigationAndResize = true;
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [
-      copycat
-      prefix-highlight
-      sidebar
-      urlview
-      yank
-      fpp
       logging
     ];
 
