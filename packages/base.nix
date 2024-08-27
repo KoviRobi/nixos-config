@@ -74,6 +74,8 @@ with pkgs;
   kakoune
   helix
 
+  inotify-tools
+
   zsh-manydots-magic
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
