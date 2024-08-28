@@ -100,6 +100,9 @@ in
   services.tailscale.enable = true;
   services.resolved.enable = true;
 
+  # To make tailscale work
+  networking.firewall.checkReversePath = "loose";
+
   programs.command-not-found.enable = false; # Using nix-index
 
   environment.extraOutputsToInstall = [ "terminfo" ];
