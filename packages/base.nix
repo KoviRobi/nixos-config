@@ -72,6 +72,7 @@ with pkgs;
   fzf
 
   ethtool
+  wireguard-tools
 
   kakoune
   helix
