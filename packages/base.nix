@@ -15,6 +15,8 @@ with pkgs;
   krb5
   pv
   jq
+  yq-go
+  xq-xml
   tree
   pciutils
   unzip
