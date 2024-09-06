@@ -63,6 +63,7 @@ in
   hardware.bluetooth.enable = true;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
+  boot.kernel.sysctl."kernel.dmesg_restrict" = 0;
   boot.kernelParams = [ "boot.shell_on_fail" ];
 
   services =
