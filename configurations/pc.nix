@@ -11,6 +11,7 @@
       ../modules/bluetooth.nix
       ../modules/graphical.nix
       (import ../modules/avahi.nix { publish = true; })
+      (import ../modules/git-appraise-rob.nix { auth = false; })
     ];
 
   networking.useDHCP = false;

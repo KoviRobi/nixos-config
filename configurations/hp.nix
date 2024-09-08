@@ -9,6 +9,7 @@
       ../modules/ssh.nix
       ../modules/graphical.nix
       (import ../modules/avahi.nix { publish = true; })
+      (import ../modules/git-appraise-rob.nix { auth = false; })
     ];
 
   nix.settings.trusted-substituters = map
