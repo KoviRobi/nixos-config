@@ -3,7 +3,6 @@ let cfg = config.programs.git; in
 {
   programs.git = {
     enable = true;
-    difftastic.enable = true;
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {
