@@ -14,4 +14,5 @@ with pkgs;
   direnv
   starship
   mimi
+  fd
 ]
