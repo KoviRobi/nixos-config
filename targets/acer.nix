@@ -6,7 +6,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  services.xserver.libinput.enable = false;
+  services.libinput.enable = false;
   services.xserver.synaptics.enable = true;
   services.xserver.synaptics.tapButtons = false;
   services.xserver.synaptics.vertTwoFingerScroll = true;

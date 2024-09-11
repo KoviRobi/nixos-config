@@ -40,7 +40,7 @@
   networking.networkmanager.appendNameservers = [ "127.0.0.53" "1.1.1.1" "1.1.0.0" ];
 
   services.xserver.dpi = 109;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
 
   environment.systemPackages = [
     pkgs.docker-credential-helpers
