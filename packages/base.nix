@@ -61,6 +61,8 @@ with pkgs;
   (python3.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
   evcxr
   rustc
+  go
+  gopls
   sccache
   mold
 
