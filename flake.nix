@@ -245,7 +245,7 @@
 
               netboot.squashfsCompression = "zstd -Xcompression-level 6";
 
-              users.users.nixos.openssh.authorizedKeys.keys = import ./pubkeys.nix;
+              users.users.nixos.openssh.authorizedKeys.keys = builtins.attrValues (import ./pubkeys.nix);
               # To allow using custom substituters (e.g. netboot host)
               nix.settings.trusted-users = [ "nixos" ];
               nix.settings.flake-registry = "${flake-registry}/flake-registry.json";

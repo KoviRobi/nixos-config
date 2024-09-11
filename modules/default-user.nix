@@ -11,7 +11,7 @@
       extraGroups = [ "users" "wheel" "cdrom" "dialout" "networkmanager" "input" "video" "plugdev" ];
       uid = 1000;
       group = config.users.groups.default-user.name;
-      openssh.authorizedKeys.keys = import ../pubkeys.nix;
+      openssh.authorizedKeys.keys = builtins.attrValues (import ../pubkeys.nix);
     } // user-options;
   users.groups.default-user =
     {

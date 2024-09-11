@@ -48,7 +48,7 @@ in
 
     boot.initrd.network.enable = true;
     boot.initrd.network.ssh.enable = true;
-    boot.initrd.network.ssh.authorizedKeys = import ../pubkeys.nix;
+    boot.initrd.network.ssh.authorizedKeys = builtins.attrValues (import ../pubkeys.nix);
     boot.initrd.network.ssh.hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
     # Make sure ordinary users can't access initrd SSH host key
     fileSystems."/boot".options =
