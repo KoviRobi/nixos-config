@@ -82,6 +82,8 @@ with pkgs;
   inotify-tools
 
   zsh-manydots-magic
+
+  entr
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
