@@ -58,8 +58,7 @@ in
   documentation.dev.enable = true;
   documentation.nixos.enable = true;
 
-  #sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  services.pipewire.enable = true;
   hardware.bluetooth.enable = true;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
