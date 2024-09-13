@@ -35,17 +35,18 @@ in
 
     programs.zsh.initExtra =
       let
-        github-prefix = "https://raw.githubusercontent.com/seebi/dircolors-solarized/fa094443d22aded73c96522b729411d921b1845e";
+        github-prefix = "https://raw.githubusercontent.com/seebi/dircolors-solarized/8c361017afb3cadc7cf36d6b94d01b90ae3bc59f";
         dircolors-file = builtins.fetchurl {
-          url = "${github-prefix}/dircolors.ansi-${cfg.brightness}";
-          sha256 =
-            if cfg.brightness == "dark"
-            then "1m1ba6xnm7hhzmlhmrcg99cp4w7pwfg8kqr6lwirjd8yjbaj0a0n"
-            else "0a7411dni1ih54z252jcpsxiyx84aabidjfi8lz28s0878acglhw";
+          url = "${github-prefix}/dircolors.ansi-universal";
+          sha256 = "149j2vgrmmgcjsx20cbdflbpwv4p3lfb0wswjzv2pw0ry5i4rprf";
         };
         dircolors-output = pkgs.runCommand "dircolors-solarized"
           { nativeBuildInputs = [ pkgs.coreutils ]; }
-          "dircolors ${dircolors-file} > $out";
+          ''
+            < ${dircolors-file} \
+            sed 's/^BLK\s\+33;44/BLK 30;44/' \
+            | dircolors /dev/stdin > $out
+          '';
       in
       ''
         source ${dircolors-output}
