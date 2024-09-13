@@ -39,6 +39,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     virtiofsd
+    spice-gtk # For USB redirection
     swtpm
     sigrok-cli
     pulseview
