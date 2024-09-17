@@ -59,4 +59,17 @@
   '';
 
   programs.systemtap.enable = true;
+
+  services.samba = {
+    settings = {
+      public = {
+        browseable = "yes";
+        comment = "Public samba share.";
+        "guest ok" = "yes";
+        path = "/srv/share";
+        "read only" = "yes";
+        "hosts allow" = "10.0.0.1/24 localhost";
+      };
+    };
+  };
 }
