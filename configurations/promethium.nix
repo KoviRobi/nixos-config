@@ -20,6 +20,7 @@
   ];
 
   boot.initrd.network.flushBeforeStage2 = false;
+  boot.kernelParams = [ "intel_iommu=on" ]; # For PCIe passhtrough
   initrd-ssh.interface = "enp0s31f6";
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" "-x" "61:0130d042ec62ef" ];
   systemd.targets.emergency.wants = [ "sshd.service" ];
