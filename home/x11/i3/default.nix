@@ -9,11 +9,11 @@ let
   guile = "${pkgs.guile}/bin/guile";
   zsh = "${pkgs.zsh}/bin/zsh";
   emacs = "${pkgs.emacs}/bin/emacs";
-  xclip = "${pkgs.xclip}/bin/xclip";
+  xsel = lib.getExe pkgs.xsel;
   rofi = "${pkgs.rofi}/bin/rofi";
   unipicker = "${pkgs.unipicker}/bin/unipicker";
   xclip-both = pkgs.writeShellScript "xclip-both" ''
-    ${xclip} -sel pri -f | ${xclip} -sel clip
+    ${xsel} -i -p | ${xsel} -i -b
   '';
   pgrep = "${pkgs.procps}/bin/pgrep";
 

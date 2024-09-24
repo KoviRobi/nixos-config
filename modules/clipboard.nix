@@ -7,7 +7,7 @@ in
   options.clipboard = {
     default-selection = mkOption {
       type = types.listOf types.str;
-      default = [ "-selection" "clipboard" ];
+      default = [ "--clipboard" ];
       description = ''
         Argument to the copy/paste program for the default selection (e.g.
         CTRL-C/CTRL-V).
@@ -15,7 +15,7 @@ in
     };
     alternate-selection = mkOption {
       type = types.listOf types.str;
-      default = [ "-selection" "primary" ];
+      default = [ "--primary" ];
       description = ''
         Argument to the copy/paste program for the default selection (e.g.
         CTRL-C/CTRL-V).
@@ -23,7 +23,7 @@ in
     };
     copy-command = mkOption {
       type = types.listOf types.str;
-      default = [ "${pkgs.xclip}/bin/xclip" "-i" ];
+      default = [ (lib.getExe pkgs.xsel) "-i" ];
       description = ''
         Can be used to override the copy command for programs (e.g. tmux, vim).
         For example use win32yank https://github.com/equalsraf/win32yank/ under
@@ -32,7 +32,7 @@ in
     };
     paste-command = mkOption {
       type = types.listOf types.str;
-      default = [ "${pkgs.xclip}/bin/xclip" "-o" ];
+      default = [ (lib.getExe pkgs.xsel) "-o" ];
       description = ''
         Can be used to override the paste command for programs (e.g. vim). For
         example use win32yank https://github.com/equalsraf/win32yank/ under

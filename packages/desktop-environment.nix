@@ -37,7 +37,7 @@
 
     libnotify
     xdotool
-    xclip
+    xsel
     xorg.xev
     xorg.xkbprint
     xorg.xkbutils
