@@ -42,6 +42,7 @@
     gs = "git status";
     gsh = "git show";
     gunig = "git update-index --no-assume-unchanged";
+    gsui = "git submodule update --init";
 
     n = "nix";
     nb = "nom build";
