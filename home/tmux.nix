@@ -9,6 +9,7 @@
     customPaneNavigationAndResize = true;
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [
+      yank
       logging
     ];
 
