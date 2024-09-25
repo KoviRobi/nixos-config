@@ -15,4 +15,5 @@ with pkgs;
   starship
   mimi
   fd
+  rlwrap
 ]
