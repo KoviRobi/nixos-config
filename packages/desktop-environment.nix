@@ -17,7 +17,6 @@
     udiskie
     geeqie
 
-    gmpc
     libreoffice
 
     pamixer

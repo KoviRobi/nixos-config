@@ -18,7 +18,7 @@ in
   };
 
   environment.systemPackages = with pkgs;
-    [ mpc_cli gmpc vimpc pavucontrol ];
+    [ mpc_cli vimpc pavucontrol ];
 
   fileSystems."/music" =
     {
