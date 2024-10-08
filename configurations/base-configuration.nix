@@ -96,6 +96,7 @@ in
       ACTION=="add", SUBSYSTEM=="usb", ATTR{manufacturer}=="Gabotronics", GROUP="plugdev", MODE="0664", SYMLINK+="XScope%n"
     '';
   services.udev.packages = with pkgs; [ openocd picotool libsigrok ];
+  users.groups.plugdev = { };
 
   services.tailscale.enable = true;
   services.resolved.enable = true;
