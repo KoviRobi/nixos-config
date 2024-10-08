@@ -107,4 +107,26 @@ in
   programs.command-not-found.enable = false; # Using nix-index
 
   environment.extraOutputsToInstall = [ "terminfo" ];
+
+  nix.settings.secret-key-files = "/etc/secrets/nix/secret-key";
+  systemd.services.generate-nix-secret-key = {
+    script = ''
+      mkdir -p $(${pkgs.coreutils}/bin/dirname ${config.nix.settings.secret-key-files})
+
+      ${pkgs.nix}/bin/nix-store --generate-binary-cache-key ${
+        config.networking.hostName
+      } ${
+        config.nix.settings.secret-key-files
+      } ${
+        config.nix.settings.secret-key-files
+      }.pub
+
+      chmod 0600 ${config.nix.settings.secret-key-files}
+    '';
+    wantedBy = [ "nix-daemon.service" "nix-daemon.socket" "multi-user.target" ];
+    unitConfig = {
+      ConditionPathExists = "!${config.nix.settings.secret-key-files}";
+      Before = [ "nix-daemon.service" "nix-daemon.socket" ];
+    };
+  };
 }
