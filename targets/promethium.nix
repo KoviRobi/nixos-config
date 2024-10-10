@@ -6,22 +6,28 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/71e4ac16-e84d-46c8-a54a-a71ea985cedf";
+    { device = "/dev/disk/by-uuid/8c161921-0d90-404b-b86f-66e6584adc30";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."promethium-nixos-a".device = "/dev/disk/by-uuid/016f7bcf-f269-4e4a-90b9-43c246f7827d";
+  boot.initrd.luks.devices."promethium-nix1".device = "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
+  boot.initrd.luks.devices."promethium-nix1".preLVM = false;
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/E266-D07D";
       fsType = "vfat";
-      options = [ "umask=0077" ];
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/old" =
+    { device = "/dev/disk/by-uuid/0036ada6-a91b-4f6a-bc13-5eb84838a83f";
+      fsType = "ext4";
     };
 
   swapDevices =
