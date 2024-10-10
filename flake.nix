@@ -229,6 +229,7 @@
           "pc-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/pc-wsl.nix ./targets/wsl.nix ];
           "promethium-wsl" = [ NixOS-WSL.nixosModules.wsl ./configurations/carallon-wsl.nix ./targets/wsl.nix ];
           "promethium-nix1" = [ ./configurations/promethium.nix ./targets/promethium.nix ];
+          "promethium-nix2" = [ ./configurations/promethium.nix ./targets/promethium-temp.nix ];
           "iso" = [ ./configurations/cc.nix (import ./targets/iso-image.nix { inherit self nixpkgs; }) ];
         } // {
         "netboot" = nixpkgs.lib.nixosSystem rec {
