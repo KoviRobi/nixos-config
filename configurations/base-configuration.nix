@@ -123,10 +123,11 @@ in
 
       chmod 0600 ${config.nix.settings.secret-key-files}
     '';
-    wantedBy = [ "nix-daemon.service" "nix-daemon.socket" "multi-user.target" ];
+    wantedBy = [ "nix-daemon.service" ];
     unitConfig = {
+      Type = "oneshot";
       ConditionPathExists = "!${config.nix.settings.secret-key-files}";
-      Before = [ "nix-daemon.service" "nix-daemon.socket" ];
+      Before = [ "nix-daemon.service" ];
     };
   };
 }
