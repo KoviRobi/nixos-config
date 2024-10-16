@@ -14,7 +14,6 @@ in
     ../modules/solarized.nix
     ../modules/shell.nix
     ../modules/nethogs.nix
-    ../modules/vim.nix
     ../modules/clipboard.nix
 
     ../packages/network.nix

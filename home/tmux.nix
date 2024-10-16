@@ -11,6 +11,7 @@
     plugins = with pkgs.tmuxPlugins; [
       yank
       logging
+      vim-tmux-navigator
     ];
 
     extraConfig = ''

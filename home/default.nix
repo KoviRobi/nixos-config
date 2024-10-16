@@ -9,7 +9,10 @@
     ./solarized.nix
     ./modules/import-nixos-config.nix
     ./helix.nix
+    ./neovim
   ];
+
+  kovirobi.neovim.enable = true;
 
   home.packages = [
     pkgs.fortune
