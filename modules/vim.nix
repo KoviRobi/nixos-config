@@ -307,7 +307,6 @@ in
         vim-easytags
         tagbar
         vim-fugitive
-        vim-gitgutter
         vim-localvimrc
         vim-snippets
         vim-elixir
@@ -327,6 +326,13 @@ in
         fzf-vim
         vim-plugin-AnsiEsc
         typst-vim
+
+        bufferline-nvim
+        gitsigns-nvim
+        indent-blankline-nvim
+        mini-icons
+        noice-nvim
+        render-markdown-nvim
 
         literate-vim
         vim-bindsplit
