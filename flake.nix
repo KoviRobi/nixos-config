@@ -81,11 +81,23 @@
 
       packages = utils.lib.eachDefaultSystemMap (system:
         {
+          neovim =
+            let
+              inherit (self.packages.${system}.homeConfigurations) simple;
+            in
+            simple.pkgs.writeShellScriptBin "neovim" ''
+              XDG_CONFIG_HOME=${simple.config.home-files}/.config ${
+                simple.pkgs.lib.getExe simple.config.programs.neovim.finalPackage
+              } "$@"
+            '';
+
           homeConfigurations.simple = home-manager.lib.homeManagerConfiguration
             {
               modules = self.homeModules.simple ++ [
+                ./home/neovim
 
                 {
+                  kovirobi.neovim.enable = true;
                   home.username = "rmk";
                   home.homeDirectory = "/home/rmk";
                   home.stateVersion = "22.11";

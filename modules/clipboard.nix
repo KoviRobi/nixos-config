@@ -44,22 +44,5 @@ in
     programs.tmux.extraConfig = ''
       set -g copy-command "${toString cfg.copy-command}"
     '';
-    vim.rc = ''
-      let g:clipboard = {
-            \   'name': 'myClipboard',
-            \   'copy': {
-            \      '+': [${lib.concatMapStringsSep ", " (s: "'${s}'")
-                            (cfg.copy-command ++ cfg.default-selection)}],
-            \      '*': [${lib.concatMapStringsSep ", " (s: "'${s}'")
-                            (cfg.copy-command ++ cfg.alternate-selection)}],
-            \    },
-            \   'paste': {
-            \      '+': [${lib.concatMapStringsSep ", " (s: "'${s}'")
-                            (cfg.paste-command ++ cfg.default-selection)}],
-            \      '*': [${lib.concatMapStringsSep ", " (s: "'${s}'")
-                            (cfg.paste-command ++ cfg.alternate-selection)}],
-            \   }
-            \ }
-    '';
   };
 }

@@ -92,11 +92,6 @@ with pkgs;
 ] ++
 lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
-  neovim
-  (linkFarm "nvim-vi-vim-alias" [
-    { name = "bin/vi"; path = "${neovim}/bin/nvim"; }
-    { name = "bin/vim"; path = "${neovim}/bin/nvim"; }
-  ])
   gitFull
   git-absorb
   git-review
