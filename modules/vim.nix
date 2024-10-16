@@ -247,6 +247,8 @@ in
       set foldmethod=expr
       set foldlevelstart=10
       set foldcolumn=auto
+
+      let g:typst_cmd = "typst"
     '';
 
     vim.plugins.start = with pkgs.vimPlugins;
@@ -279,6 +281,7 @@ in
         zoxide-vim
         fzf-vim
         vim-plugin-AnsiEsc
+        typst-vim
 
         literate-vim
         vim-bindsplit

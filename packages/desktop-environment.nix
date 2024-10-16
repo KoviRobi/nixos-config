@@ -48,6 +48,13 @@
     alass # subtitle sync
 
     xscopes-qt
+
+    typst
+    typst-live
+    typst-lsp
+    typstyle
+    typst-fmt
+    prettypst
   ] ++
   lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
     (mpv.override {
