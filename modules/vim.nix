@@ -111,7 +111,6 @@ in
 
       set  showfulltag
       set completeopt=menuone,longest
-      set omnifunc=ale#completion#OmniFunc
 
       set number relativenumber
       set spell spelllang=en_gb
@@ -144,39 +143,6 @@ in
       let g:tagbar_ctags_bin = "${pkgs.universal-ctags}/bin/ctags"
 
       let g:netrw_keepj = ""
-
-      " Elixir
-      let g:ale_linters = { 'elixir' : ['elixir-ls'] }
-      let g:ale_linters.python = ['pylsp', 'jedils', 'mypy', 'pyright', 'ruff']
-      let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
-      let g:ale_fixers.diff = [] " Avoid messing up the diff with whitespace clearing
-      let g:ale_fixers.elixir = ['mix_format', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_elixir_elixir_ls_release = expand("~/elixir-ls/rel/")
-      let g:ale_fixers.nix = ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_fixers.python = ['black', 'isort', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_fixers.html = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_fixers.css = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_fixers.javascript = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
-      let g:ale_fix_on_save = 1
-
-      nmap <silent> <C-W>gd :ALEGoToDefinition -tab<CR>
-      nmap <silent> <C-W>gy :ALEGoToTypeDefinition -tab<CR>
-      nmap <silent> <C-W>gr :ALEFindReferences -tab<CR>
-      nmap <silent> gd :ALEGoToDefinition<CR>
-      nmap <silent> gy :ALEGoToTypeDefinition<CR>
-      nmap <silent> gr :ALEFindReferences<CR>
-      nnoremap <silent> K :call <SID>show_documentation()<CR>
-      nnoremap <silent> <C-Space> :ALECodeAction<CR>
-      nmap <silent> [a <Plug>(ale_previous_wrap)
-      nmap <silent> ]a <Plug>(ale_next_wrap)
-
-      function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-          execute 'h '.expand('<cword>')
-        else
-          ALEHover
-        endif
-      endfunction
 
       let g:slime_target = "neovim"
 
@@ -249,6 +215,85 @@ in
       set foldcolumn=auto
 
       let g:typst_cmd = "typst"
+
+      lua <<EOF
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'ocaml',
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'ocamllsp',
+            cmd = {'ocamllsp'},
+            root_dir = vim.fs.root(ev.buf, {'dune', '.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'c', 'cpp'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'ccls',
+            cmd = {'ccls'},
+            root_dir = vim.fs.root(ev.buf, {'.ccls', '.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'rust'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'rust-analyzer',
+            cmd = {'rust-analyzer'},
+            root_dir = vim.fs.root(ev.buf, {'Cargo.toml', '.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'cmake'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'neocmakelsp',
+            cmd = {'neocmakelsp'},
+            root_dir = vim.fs.root(ev.buf, {'CMakeLists.txt', '.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'go'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'gopls',
+            cmd = {'gopls'},
+            root_dir = vim.fs.root(ev.buf, {'go.mod', '.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'typst'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'typst-lsp',
+            cmd = {'typst-lsp'},
+            root_dir = vim.fs.root(ev.buf, {'.git'}),
+          })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {'nix'},
+        callback = function(ev)
+          vim.lsp.start({
+            name = 'nil',
+            cmd = {'nil'},
+            root_dir = vim.fs.root(ev.buf, {'flake.nix', '.git'}),
+          })
+        end,
+      })
+      EOF
     '';
 
     vim.plugins.start = with pkgs.vimPlugins;

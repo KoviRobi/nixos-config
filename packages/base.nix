@@ -33,6 +33,7 @@ with pkgs;
   nix-tree
   nix-du
   nix-output-monitor
+  nil
   nom-rebuild
 
   dconf
@@ -55,10 +56,14 @@ with pkgs;
   gdb
   radare2
   gnumake
+  cmake
+  neocmakelsp
+  ninja
 
   devenv
 
   (python3.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
+  pyright
   evcxr
   rustc
   go
