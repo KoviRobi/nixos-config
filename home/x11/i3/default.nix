@@ -31,9 +31,9 @@ in
     enable = true;
     package = pkgs.i3;
     config = {
-      fonts = { names = [ "Latin Modern Roman" ]; style = "Regular"; size = 9.0; };
+      fonts = { names = [ "CaskaydiaMono NF" ]; style = "Regular"; size = 9.0; };
       bars = [{
-        fonts = { names = [ "Latin Modern Roman" ]; style = "Regular"; size = 9.0; };
+        fonts = { names = [ "CaskaydiaMono NF" ]; style = "Regular"; size = 9.0; };
         statusCommand =
           "${pkgs.i3status}/bin/i3status -c ${import ./i3status-config.nix args}";
       }];
