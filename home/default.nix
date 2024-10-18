@@ -90,9 +90,6 @@
 
   programs.newsboat.enable = true;
   programs.newsboat.browser = "${pkgs.mpv}/bin/mpv";
-  programs.newsboat.urls = [
-    { url = "http://feeds.nightvalepresents.com/welcometonightvalepodcast"; }
-  ];
   programs.newsboat.extraConfig = ''
     article-sort-order date
   '';
