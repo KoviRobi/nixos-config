@@ -26,8 +26,6 @@
 
   virtualisation.libvirtd.enable = true;
 
-  solarized.brightness = "light";
-
   nixpkgs.config.allowUnfree = true; # For google chrome (for DRM :( )
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "sr_mod" ]

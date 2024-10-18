@@ -8,6 +8,8 @@ final: prev:
       ../patches/st-0.8.5-netwmicon-v2.patch
       ../patches/st-0.8.5-desktopentry.patch
       ../patches/st-true-color.patch
+      ../patches/st-0.8.5-solarized-swap.patch
+      ../patches/st-0.8.5-solarized-swap-default-light.patch
     ];
   }).overrideAttrs (attrs: {
     ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";

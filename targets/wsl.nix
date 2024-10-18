@@ -63,7 +63,6 @@
 
   users.users.default-user.extraGroups = [ "no-google-authenticator" ];
   services.openssh.settings.X11Forwarding = true;
-  solarized.brightness = "light";
 
   home-manager.users.default-user.services.feh-random-background.enable = lib.mkForce false;
   home-manager.users.default-user.systemd.user.services.setxkbmap.Install.WantedBy = lib.mkForce [ ];

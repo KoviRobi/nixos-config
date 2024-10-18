@@ -11,8 +11,6 @@
 
   environment.etc.hosts.enable = lib.mkForce false;
 
-  solarized.brightness = "light";
-
   users.users.default-user.extraGroups = [ "docker" "build" "wireshark" ];
   environment.systemPackages = with pkgs; [
     docker-credential-helpers

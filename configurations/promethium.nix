@@ -25,8 +25,6 @@
   initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" "-x" "61:0130d042ec62ef" ];
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
-  solarized.brightness = "light";
-
   services.xserver.dpi = 93;
 
   virtualisation.podman.enable = true;
