@@ -91,6 +91,8 @@
               } "$@"
             '';
 
+          inherit (self.legacyPackages.${system}.nixpkgs) st;
+
           homeConfigurations.simple = home-manager.lib.homeManagerConfiguration
             {
               modules = self.homeModules.simple ++ [

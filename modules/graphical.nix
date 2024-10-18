@@ -8,7 +8,11 @@
     dejavu_fonts
     liberation_ttf
     lmodern
-    terminus-nerdfont
+    (nerdfonts.override { fonts = [
+      "DejaVuSansMono"
+      "CascadiaCode"
+      "CascadiaMono"
+    ]; })
     inconsolata
   ];
 
