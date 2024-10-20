@@ -127,6 +127,7 @@ in
         coq_nvim
         coq-artifacts
         coq-thirdparty
+        vim-easy-align
 
         lazy-nvim
         vim-startuptime
