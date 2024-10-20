@@ -12,8 +12,9 @@ let
   xsel = lib.getExe pkgs.xsel;
   rofi = "${pkgs.rofi}/bin/rofi";
   unipicker = "${pkgs.unipicker}/bin/unipicker";
-  xclip-both = pkgs.writeShellScript "xclip-both" ''
-    ${xsel} -i -p | ${xsel} -i -b
+  xsel-both = pkgs.writeShellScript "xsel-both" ''
+    ${xsel} -i
+    ${xsel} | ${xsel} -i -b
   '';
   pgrep = "${pkgs.procps}/bin/pgrep";
 
@@ -81,7 +82,7 @@ in
         "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
         "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
         "${mod}+Shift+r" = "reload";
-        "${mod}+u" = "exec ${unipicker} --copy-command '${xclip-both}' " +
+        "${mod}+u" = "exec ${unipicker} --copy-command '${xsel-both}' " +
           "--command '${rofi} -dmenu -matching regex'";
         "${mod}+Control+Shift+r" = "restart";
         "${mod}+bracketleft" = "focus output left";
