@@ -70,7 +70,7 @@
     initExtra = ''
       unsetopt beep
 
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=white
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=yellow
       export VERSION_CONTROL=numbered
 
 
