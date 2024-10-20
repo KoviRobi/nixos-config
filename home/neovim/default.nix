@@ -130,6 +130,7 @@ in
         vim-localvimrc
         vim-slime
         vim-tmux-navigator
+        neorepl-nvim
 
         lazy-nvim
         vim-startuptime

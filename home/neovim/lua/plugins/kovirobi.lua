@@ -50,4 +50,6 @@ return {
       { "<A-;>", "<cmd>TmuxNavigatePrevious<cr>", {"n", "i", "t"}, { desc = "Go to previous window" }},
     },
   },
+
+  { "ii14/neorepl.nvim" },
 }
