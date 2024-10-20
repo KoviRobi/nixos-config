@@ -80,13 +80,6 @@ in
         neodev-nvim
         SchemaStore-nvim # load known formats for json and yaml
 
-        # cmp plugins
-        nvim-cmp # completion plugin
-        cmp-buffer # buffer completions
-        cmp-path # path completions
-        cmp_luasnip # snipper completions
-        cmp-nvim-lsp # LSP completions
-
         # snippets
         luasnip # snippet engine
         friendly-snippets # a bunch of snippets to use
@@ -131,6 +124,9 @@ in
         vim-slime
         vim-tmux-navigator
         neorepl-nvim
+        coq_nvim
+        coq-artifacts
+        coq-thirdparty
 
         lazy-nvim
         vim-startuptime
