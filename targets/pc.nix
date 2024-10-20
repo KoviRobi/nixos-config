@@ -15,7 +15,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
-  home-manager.users.default-user.home.stateVersion = "18.09";
+  home-manager.users.default-user.home.stateVersion = "23.05";
   home-manager.users.root.home.stateVersion = "23.05";
 
   fileSystems."/" =
