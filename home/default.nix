@@ -89,7 +89,7 @@
   };
 
   programs.newsboat.enable = true;
-  programs.newsboat.browser = "${pkgs.mpv}/bin/mpv";
+  programs.newsboat.browser = "mpv";
   programs.newsboat.extraConfig = ''
     article-sort-order date
   '';
