@@ -36,4 +36,22 @@ final: prev:
       hash = "sha256-lv7e7+KBR/nxC43H0uvphLcI7fALPvxPSGEmBn0g8HQ=";
     }}/manydots-magic $outdir/manydots-magic.zsh
   '';
+
+  pystack =
+    let
+      ppkgs = final.python3.pkgs;
+    in
+      ppkgs.buildPythonApplication rec {
+        pname = "pystack";
+        version = "1.4.1";
+        src = final.fetchFromGitHub {
+          owner = "bloomberg";
+          repo = "pystack";
+          rev = "v${version}";
+          hash = "sha256-j+M7GgPUqVtHKkekr5MZXWsseAJtoHTzyCx+yRJk0V8=";
+        };
+        buildInputs = [ final.libdwarf final.elfutils ];
+        nativeBuildInputs = [ final.pkg-config ];
+        propagatedBuildInputs = [ ppkgs.pkgconfig ppkgs.cython ];
+      };
 }
