@@ -5,7 +5,24 @@ return {
       colorscheme = "solarized",
     }
   },
-  { "tpope/vim-fugitive" },
+  {
+    "tpope/vim-fugitive",
+    cmd = {
+      "G", "Git",
+      "Ggrep", "Glgrep",
+      "Gclog", "Gllog",
+      "Gcd", "Glcd",
+      "Ge", "Gedit",
+      "Gsplit", "Gvsplit", "Gtabedit", "Gpedit",
+      "Gdrop",
+      "Gread",
+      "Gwrite", "Gwq",
+      "Gdiffsplit", "Gvdiffsplit", "Ghdiffsplit",
+      "GMove", "GRename",
+      "GDelete", "GRemove", "GUnlink",
+      "GBrowse",
+    },
+  },
   {
     "embear/vim-localvimrc",
     init = function()
@@ -27,7 +44,19 @@ return {
     "jpalardy/vim-slime",
     init = function()
       vim.g.slime_target = "neovim"
+      vim.g.slime_no_mappings = 1
     end,
+    cmd = {
+      "SlimeRegionSend",
+      "SlimeParagraphSend",
+      "SlimeLineSend",
+      "SlimeMotionSend",
+      "SlimeConfig",
+    },
+    keys = {
+      { "<C-c><C-c>", "<cmd>SlimeRegionSend<cr>", "x", { desc = "Send region to terminal" }},
+      { "<C-c>v", "<cmd>SlimeConfig<cr>", "n", { desc = "Send region to terminal" }},
+    },
   },
 
   {
@@ -51,7 +80,10 @@ return {
     },
   },
 
-  { "ii14/neorepl.nvim" },
+  {
+    "ii14/neorepl.nvim",
+    cmd = { "Repl", },
+  },
 
   {
     "ms-jpq/coq_nvim",

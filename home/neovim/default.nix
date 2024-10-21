@@ -43,7 +43,6 @@ in
         # UI
         bufferline-nvim
         gitsigns-nvim
-        edgy-nvim
         dashboard-nvim
         toggleterm-nvim
         trouble-nvim
@@ -175,7 +174,6 @@ in
             -- import any extras modules here
             { import = "lazyvim.plugins.extras.dap.core" },
             { import = "lazyvim.plugins.extras.dap.nlua" },
-            { import = "lazyvim.plugins.extras.ui.edgy" },
             { import = "lazyvim.plugins.extras.editor.aerial" },
             { import = "lazyvim.plugins.extras.editor.leap" },
             { import = "lazyvim.plugins.extras.editor.navic" },
