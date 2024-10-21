@@ -201,20 +201,20 @@ in
             -- Used for NixOS
             reset_packpath = false,
             rtp = {
-                reset = false,
-                -- disable some rtp plugins
-                disabled_plugins = {
-                  "gzip",
-                  -- "matchit",
-                  -- "matchparen",
-                  -- "netrwPlugin",
-                  "tarPlugin",
-                  -- "tohtml",
-                  "tutor",
-                  -- "zipPlugin",
-                },
-              }
-            },
+              reset = false,
+              -- disable some rtp plugins
+              disabled_plugins = {
+                "gzip",
+                -- "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "tarPlugin",
+                -- "tohtml",
+                "tutor",
+                -- "zipPlugin",
+              },
+            }
+          },
           dev = {
             path = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start",
             patterns = {""},
