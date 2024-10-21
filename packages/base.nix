@@ -30,6 +30,7 @@ with pkgs;
   nix-prefetch-github
   nix-prefetch
   nixpkgs-fmt
+  nixfmt-rfc-style
   nix-tree
   nix-du
   nix-output-monitor

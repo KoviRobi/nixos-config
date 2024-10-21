@@ -115,6 +115,7 @@ in
         # neotest
         neotest
         neotest-rust
+        neotest-golang
 
         # kovirobi
         undotree
