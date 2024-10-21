@@ -123,9 +123,6 @@ in
         vim-slime
         vim-tmux-navigator
         neorepl-nvim
-        coq_nvim
-        coq-artifacts
-        coq-thirdparty
         vim-easy-align
 
         lazy-nvim
