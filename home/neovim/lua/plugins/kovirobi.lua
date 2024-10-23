@@ -72,11 +72,11 @@ return {
       "TmuxNavigatePrevious",
     },
     keys = {
-      { "<A-h>", "<cmd>TmuxNavigateLeft<cr>", {"n", "i", "t"}, { desc = "Go to left window" }},
-      { "<A-j>", "<cmd>TmuxNavigateDown<cr>", {"n", "i", "t"}, { desc = "Go to lower window" }},
-      { "<A-k>", "<cmd>TmuxNavigateUp<cr>", {"n", "i", "t"}, { desc = "Go to upper window" }},
-      { "<A-l>", "<cmd>TmuxNavigateRight<cr>", {"n", "i", "t"}, { desc = "Go to right window" }},
-      { "<A-;>", "<cmd>TmuxNavigatePrevious<cr>", {"n", "i", "t"}, { desc = "Go to previous window" }},
+      { "<M-h>", "<cmd>TmuxNavigateLeft<cr>",     mode = {"n", "i", "t"}, { desc = "Go to left window" }},
+      { "<M-j>", "<cmd>TmuxNavigateDown<cr>",     mode = {"n", "i", "t"}, { desc = "Go to lower window" }},
+      { "<M-k>", "<cmd>TmuxNavigateUp<cr>",       mode = {"n", "i", "t"}, { desc = "Go to upper window" }},
+      { "<M-l>", "<cmd>TmuxNavigateRight<cr>",    mode = {"n", "i", "t"}, { desc = "Go to right window" }},
+      { "<M-;>", "<cmd>TmuxNavigatePrevious<cr>", mode = {"n", "i", "t"}, { desc = "Go to previous window" }},
     },
   },
 

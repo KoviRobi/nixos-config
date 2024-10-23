@@ -31,7 +31,7 @@
       bind-key -n 'M-j' if-shell "$is_vim" 'send-keys M-j'  'select-pane -D'
       bind-key -n 'M-k' if-shell "$is_vim" 'send-keys M-k'  'select-pane -U'
       bind-key -n 'M-l' if-shell "$is_vim" 'send-keys M-l'  'select-pane -R'
-      bind-key -n 'M-;' if-shell "$is_vim" 'send-keys M-;'  'last-pane'
+      bind-key -n 'M-;' if-shell "$is_vim" 'send-keys "M-;"'  'last-pane'
 
       bind-key -T copy-mode-vi 'M-h' select-pane -L
       bind-key -T copy-mode-vi 'M-j' select-pane -D
