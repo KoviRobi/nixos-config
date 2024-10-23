@@ -54,4 +54,15 @@ final: prev:
         nativeBuildInputs = [ final.pkg-config ];
         propagatedBuildInputs = [ ppkgs.pkgconfig ppkgs.cython ];
       };
+
+  vimPlugins = prev.vimPlugins.extend (final': prev': {
+    vim-localvimrc = prev'.vim-localvimrc.overrideAttrs {
+      src = final.fetchFromGitHub {
+        owner = "KoviRobi";
+        repo = "vim-localvimrc";
+        rev = "ea843ed6eb001dab0174f65753a3c66941ee715b";
+        hash = "sha256-wJXE9M3+hxms1WPkCMaUjNwQBk0QZMMJ6LqRmZWgF+4=";
+      };
+    };
+  });
 }
