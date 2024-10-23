@@ -61,6 +61,9 @@
 
   services.samba = {
     settings = {
+      global = {
+        "map to guest" = "Bad User";
+      };
       public = {
         browseable = "yes";
         comment = "Public samba share.";
