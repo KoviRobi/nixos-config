@@ -44,6 +44,7 @@
     pulseview
     saleae-logic-2
     google-chrome
+    mcuxpresso
   ];
   services.udev.packages = with pkgs; [ saleae-logic-2 ];
 
