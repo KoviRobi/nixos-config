@@ -12,6 +12,20 @@ let cfg = config.programs.git; in
       pgl = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
       absorb = "!git-absorb";
     };
+    includes = [
+      {
+        path = ./git-personal.gitconfig;
+        condition = "hasconfig:remote.*.url:git@github.com:KoviRobi/**";
+      }
+      {
+        path = ./git-personal.gitconfig;
+        condition = "hasconfig:remote.*.url:https://github.com/KoviRobi/**";
+      }
+      {
+        path = ./git-carallon.gitconfig;
+        condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com/**";
+      }
+    ];
     extraConfig = {
       gpg.format = "ssh";
       user.signingKey = "~/.ssh/id_ed25519.pub";
