@@ -10,8 +10,10 @@ in
     ./legacy.nix
   ];
 
-  environment.etc."nixos/configurations/default.nix" =
-    { source = "/etc/nixos/configurations/${config}"; };
-  environment.etc."nixos/targets/default.nix" =
-    { source = "/etc/nixos/targets/${target}"; };
+  environment.etc."nixos/configurations/default.nix" = {
+    source = "/etc/nixos/configurations/${config}";
+  };
+  environment.etc."nixos/targets/default.nix" = {
+    source = "/etc/nixos/targets/${target}";
+  };
 }

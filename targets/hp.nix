@@ -26,21 +26,18 @@
   home-manager.users.default-user.home.stateVersion = "23.05";
   home-manager.users.root.home.stateVersion = "23.05";
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
+    fsType = "xfs";
+  };
 
   boot.initrd.luks.devices."hp-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/30C3-618E";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/30C3-618E";
+    fsType = "vfat";
+  };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/3fb4611d-ac00-4bfa-b6d1-d51b98a9d67f"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/3fb4611d-ac00-4bfa-b6d1-d51b98a9d67f"; } ];
 
 }

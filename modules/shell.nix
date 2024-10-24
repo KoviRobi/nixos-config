@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   environment = {
 
@@ -14,7 +19,8 @@
     ];
 
     shellAliases =
-      let ifSudo = lib.mkIf config.security.sudo.enable;
+      let
+        ifSudo = lib.mkIf config.security.sudo.enable;
       in
       {
         # quick cd

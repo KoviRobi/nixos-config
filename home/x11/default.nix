@@ -1,16 +1,26 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   killall = "${pkgs.psmisc}/bin/killall";
-  adwaita = { name = "Adwaita"; package = pkgs.adwaita-icon-theme; };
+  adwaita = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+  };
 in
 {
   imports = [
     ./i3
     ./restart-on-failure.nix
-    "${fetchTarball {
-        url = https://github.com/KoviRobi/feh-random-background/archive/0154eb1d1fb2b5774a6908bee1f3b3ebd3317ac6.tar.gz;
+    "${
+      fetchTarball {
+        url = "https://github.com/KoviRobi/feh-random-background/archive/0154eb1d1fb2b5774a6908bee1f3b3ebd3317ac6.tar.gz";
         sha256 = "1gwpk968h8js0ddi84hpqgh5mqijr9y5xgyiz8bfh9hm39wdjxm2";
-    } }/home-manager-service.nix"
+      }
+    }/home-manager-service.nix"
   ];
 
   services.network-manager-applet.enable = true;
@@ -50,7 +60,10 @@ in
   };
   services.xcape = {
     enable = true;
-    mapExpression = { Shift_L = "parenleft"; Shift_R = "parenright"; };
+    mapExpression = {
+      Shift_L = "parenleft";
+      Shift_R = "parenright";
+    };
     timeout = 250;
   };
 
@@ -77,6 +90,8 @@ in
       ~/.fehbg || true &
     '';
   };
-  home.pointerCursor = adwaita // { size = builtins.div config.nixos.services.xserver.dpi 5; };
+  home.pointerCursor = adwaita // {
+    size = builtins.div config.nixos.services.xserver.dpi 5;
+  };
   gtk.theme = adwaita;
 }

@@ -1,10 +1,10 @@
 return {
-  {
-    "mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
-        ["*"] = { "editorconfig-checker" },
-      },
-    }
-  },
+	{
+		"mfussenegger/nvim-lint",
+		opts = {
+			linters_by_ft = {
+				["*"] = { "editorconfig-checker" },
+			},
+		},
+	},
 }

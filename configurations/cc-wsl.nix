@@ -1,5 +1,10 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -8,30 +13,48 @@
 
   services.udisks2.enable = true;
 
-  nix.settings.trusted-substituters = map
-    ({ address, hostKey }:
-      "ssh://nix-ssh@${address}"
-      + "?trusted=1"
-      + "&compress=1"
-      + "&ssh-key=/root/.ssh/nix-store-ed25519"
-      + "&base64-ssh-public-host-key=${hostKey}")
-    (builtins.concatMap
-      ({ addresses, hostKey }:
-        lib.flip map addresses (address: { inherit address hostKey; }))
-      [
-        {
-          addresses = [ "100.99.255.67" "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com" ];
-          hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5JdW1pb2NMZEE5NExHaE95WFM1Vko0d1hrQWh2S2JzK1NrTWtkQUh5Z3EK";
-        }
-        {
-          addresses = [ "rmk-cc-b.badger-toad.ts.net" "rmk-cc-b.uk.cambridgeconsultants.com" ];
-          hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUZsY0FoNEdLN080cm55S251TE81Nmt1UWZ6VkVyc1lDaVlPRVBKeEN0QUUgcm9vdEBybWstY2MtYgo=";
-        }
-        {
-          addresses = [ "pc-nixos-a.badger-toad.ts.net" "192.168.0.29" ];
-          hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUUxQkVQUkFHOEdidDQyYmZRWEpGei9sNFdsdEU1Y0JBSVBQZzhOeTZ6VXMgcm9vdEBwYy1uaXhvcy1hCg==";
-        }
-      ]);
+  nix.settings.trusted-substituters =
+    map
+      (
+        { address, hostKey }:
+        "ssh://nix-ssh@${address}"
+        + "?trusted=1"
+        + "&compress=1"
+        + "&ssh-key=/root/.ssh/nix-store-ed25519"
+        + "&base64-ssh-public-host-key=${hostKey}"
+      )
+      (
+        builtins.concatMap
+          (
+            { addresses, hostKey }:
+            lib.flip map addresses (address: {
+              inherit address hostKey;
+            })
+          )
+          [
+            {
+              addresses = [
+                "100.99.255.67"
+                "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com"
+              ];
+              hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5JdW1pb2NMZEE5NExHaE95WFM1Vko0d1hrQWh2S2JzK1NrTWtkQUh5Z3EK";
+            }
+            {
+              addresses = [
+                "rmk-cc-b.badger-toad.ts.net"
+                "rmk-cc-b.uk.cambridgeconsultants.com"
+              ];
+              hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUZsY0FoNEdLN080cm55S251TE81Nmt1UWZ6VkVyc1lDaVlPRVBKeEN0QUUgcm9vdEBybWstY2MtYgo=";
+            }
+            {
+              addresses = [
+                "pc-nixos-a.badger-toad.ts.net"
+                "192.168.0.29"
+              ];
+              hostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUUxQkVQUkFHOEdidDQyYmZRWEpGei9sNFdsdEU1Y0JBSVBQZzhOeTZ6VXMgcm9vdEBwYy1uaXhvcy1hCg==";
+            }
+          ]
+      );
 
   wsl.docker-desktop.enable = true;
 
@@ -70,7 +93,12 @@
       ConditionPathExists = [ "/etc/secrets/wireguard/WSL2-VPN.HOST.pub" ];
     };
     wantedBy = [ "default.target" ];
-    path = with pkgs; [ coreutils iproute2 jq wireguard-tools ];
+    path = with pkgs; [
+      coreutils
+      iproute2
+      jq
+      wireguard-tools
+    ];
     script = ''
       set -eux
 

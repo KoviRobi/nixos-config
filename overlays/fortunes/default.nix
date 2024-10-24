@@ -1,6 +1,5 @@
 final: prev: {
-  jargon-cookie = final.runCommand "jargon-cookie" { } ''
-  '';
+  jargon-cookie = final.runCommand "jargon-cookie" { } '''';
 
   apf2cookie = final.poetry2nix.mkPoetryApplication { projectDir = ./src; };
 
@@ -13,7 +12,10 @@ final: prev: {
     let
       pname = "apf-cookie";
       version = "9.0.6";
-      nativeBuildInputs = [ final.buildPackages.apf2cookie final.buildPackages.fortune ];
+      nativeBuildInputs = [
+        final.buildPackages.apf2cookie
+        final.buildPackages.fortune
+      ];
     in
     final.runCommand "${pname}-${version}" { inherit nativeBuildInputs; } ''
       apf2cookie ${final.apf} > apf-cookie

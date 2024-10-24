@@ -1,5 +1,12 @@
-{ pkgs, lib, config, ... }:
-let cfg = config.programs.git; in
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.programs.git;
+in
 {
   programs.git = {
     enable = true;
@@ -51,7 +58,12 @@ let cfg = config.programs.git; in
             text = ''
               #!${pkgs.runtimeShell}
 
-              export PATH="${lib.makeBinPath [ cfg.package pkgs.coreutils ]}"
+              export PATH="${
+                lib.makeBinPath [
+                  cfg.package
+                  pkgs.coreutils
+                ]
+              }"
 
               # This hook is called with the following parameters:
               #

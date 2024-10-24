@@ -2,14 +2,15 @@ final: prev: {
   xscopes-qt =
     let
       pkg =
-        { stdenv
-        , fetchFromGitHub
-        , cmake
-        , pkg-config
-        , wrapQtAppsHook
-        , qtbase
-        , qtserialport
-        , libusb1
+        {
+          stdenv,
+          fetchFromGitHub,
+          cmake,
+          pkg-config,
+          wrapQtAppsHook,
+          qtbase,
+          qtserialport,
+          libusb1,
         }:
         stdenv.mkDerivation {
           pname = "xscopes-qt";
@@ -31,8 +32,16 @@ final: prev: {
 
           cmakeFlags = [ "-DDESTDIR=${placeholder "out"}" ];
 
-          nativeBuildInputs = [ cmake pkg-config wrapQtAppsHook ];
-          buildInputs = [ qtbase qtserialport libusb1 ];
+          nativeBuildInputs = [
+            cmake
+            pkg-config
+            wrapQtAppsHook
+          ];
+          buildInputs = [
+            qtbase
+            qtserialport
+            libusb1
+          ];
         };
       drv = final.qt5.callPackage pkg { };
     in

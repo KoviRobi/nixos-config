@@ -1,5 +1,10 @@
 # nix build -f '<nixpkgs/nixos>' config.system.build.diskImage -I nixos-config=disk-image.nix
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 {

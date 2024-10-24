@@ -1,67 +1,81 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
 
   programs.firefox.enable = true;
-  programs.firefox.nativeMessagingHosts.packages = [ pkgs.ff2mpv pkgs.passff-host ];
+  programs.firefox.nativeMessagingHosts.packages = [
+    pkgs.ff2mpv
+    pkgs.passff-host
+  ];
 
   programs.noisetorch.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
-    hicolor-icon-theme
+  environment.systemPackages =
+    with pkgs;
+    [
+      adwaita-icon-theme
+      hicolor-icon-theme
 
-    gparted
-    seahorse
-    udiskie
-    geeqie
+      gparted
+      seahorse
+      udiskie
+      geeqie
 
-    libreoffice
+      libreoffice
 
-    pamixer
-    paprefs
-    pavucontrol
+      pamixer
+      paprefs
+      pavucontrol
 
-    playerctl
+      playerctl
 
-    mupdf
-    zathura
-    st
-    st.terminfo
-    ffmpeg
+      mupdf
+      zathura
+      st
+      st.terminfo
+      ffmpeg
 
-    x11vnc
-    tigervnc
+      x11vnc
+      tigervnc
 
-    libnotify
-    xdotool
-    xsel
-    xorg.xev
-    xorg.xkbprint
-    xorg.xkbutils
-    xorg.xmodmap
-    xorg.xhost
+      libnotify
+      xdotool
+      xsel
+      xorg.xev
+      xorg.xkbprint
+      xorg.xkbutils
+      xorg.xmodmap
+      xorg.xhost
 
-    imagemagick
+      imagemagick
 
-    alass # subtitle sync
+      alass # subtitle sync
 
-    xscopes-qt
+      xscopes-qt
 
-    typst
-    typst-live
-    typst-lsp
-    typstyle
-    typst-fmt
-    prettypst
-  ] ++
-  lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-    (mpv.override {
-      scripts = with mpvScripts; [ autosubsync-mpv uosc mpris ];
-    })
-    flameshot
-    signal-desktop
-    v4l-utils
-  ];
+      typst
+      typst-live
+      typst-lsp
+      typstyle
+      typst-fmt
+      prettypst
+    ]
+    ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+      (mpv.override {
+        scripts = with mpvScripts; [
+          autosubsync-mpv
+          uosc
+          mpris
+        ];
+      })
+      flameshot
+      signal-desktop
+      v4l-utils
+    ];
 }

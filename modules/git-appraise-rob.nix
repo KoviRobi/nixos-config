@@ -1,35 +1,45 @@
-{ auth, publish ? false }:
-{ config, lib, pkgs, ... }:
+{
+  auth,
+  publish ? false,
+}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   nginx-port = 8080;
   git-appraise-rob-port = 8078;
   git-appraise-rob-listen = "${config.networking.hostName}:${toString git-appraise-rob-port}";
 
-  git-appraise-rob =
-    pkgs.buildGoModule rec {
-      pname = "git-appraise-rob";
-      version = "unstable-2024-09-08";
+  git-appraise-rob = pkgs.buildGoModule rec {
+    pname = "git-appraise-rob";
+    version = "unstable-2024-09-08";
 
-      src = pkgs.fetchFromGitHub {
-        owner = "KoviRobi";
-        repo = "git-appraise";
-        rev = "845ef3274c9a6bcd2304e0d9175943075c6383e6";
-        hash = "sha256-l2svLwmGXdBwWZ97zspCQUkZmiZEfO583VPUyaDjGjs=";
-      };
-
-      vendorHash = "sha256-zkfmILpUvkJMUSXqHOJ6ZKhPUNjoQ3E8NMe5Tn4/teY=";
-
-      ldflags = [ "-s" "-w" ];
-
-      meta = with lib; {
-        description = "Distributed code review system for Git repos";
-        homepage = "https://github.com/KoviRobi/git-appraise";
-        license = licenses.asl20;
-        maintainers = with maintainers; [ kovirobi ];
-        mainProgram = "git-appraise";
-      };
+    src = pkgs.fetchFromGitHub {
+      owner = "KoviRobi";
+      repo = "git-appraise";
+      rev = "845ef3274c9a6bcd2304e0d9175943075c6383e6";
+      hash = "sha256-l2svLwmGXdBwWZ97zspCQUkZmiZEfO583VPUyaDjGjs=";
     };
+
+    vendorHash = "sha256-zkfmILpUvkJMUSXqHOJ6ZKhPUNjoQ3E8NMe5Tn4/teY=";
+
+    ldflags = [
+      "-s"
+      "-w"
+    ];
+
+    meta = with lib; {
+      description = "Distributed code review system for Git repos";
+      homepage = "https://github.com/KoviRobi/git-appraise";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ kovirobi ];
+      mainProgram = "git-appraise";
+    };
+  };
 in
 {
   services.nginx = {
@@ -44,7 +54,12 @@ in
 
     virtualHosts."_" = {
       default = true;
-      listen = [{ addr = config.networking.hostName; port = nginx-port; }];
+      listen = [
+        {
+          addr = config.networking.hostName;
+          port = nginx-port;
+        }
+      ];
       locations =
         let
           authConf = lib.optionalString auth ''
@@ -62,14 +77,16 @@ in
             root = "/srv";
 
             # Setup FastCGI for Git HTTP Backend
-            extraConfig = authConf + ''
-              fastcgi_pass        '' +
-              config.services.fcgiwrap.instances.git-http-backend.socket.type +
-              ":" +
-              config.services.fcgiwrap.instances.git-http-backend.socket.address +
+            extraConfig =
+              authConf
+              + ''fastcgi_pass        ''
+              + config.services.fcgiwrap.instances.git-http-backend.socket.type
+              + ":"
+              + config.services.fcgiwrap.instances.git-http-backend.socket.address
+              + ''
+                ;
+                            include             ${config.services.nginx.package}/conf/fastcgi_params;
               '';
-            include             ${config.services.nginx.package}/conf/fastcgi_params;
-            '';
 
             fastcgiParams = {
               # All parameters below will be forwarded to fcgiwrap which then starts

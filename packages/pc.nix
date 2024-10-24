@@ -1,10 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with pkgs;
 [
   audacity
   easytag
   inkscape
-] ++
-lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+]
+++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   antimicroX
 ]

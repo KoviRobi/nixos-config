@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.solarized;
@@ -6,7 +11,10 @@ in
 {
   options.solarized = with lib; {
     brightness = mkOption {
-      type = types.enum [ "dark" "light" ];
+      type = types.enum [
+        "dark"
+        "light"
+      ];
       default = "dark";
       description = ''
         Whether to use solarized dark or light by default.
@@ -22,7 +30,8 @@ in
           repo = "xresources";
           rev = "025ceddbddf55f2eb4ab40b05889148aab9699fc";
           sha256 = "0lxv37gmh38y9d3l8nbnsm1mskcv10g3i83j0kac0a2qmypv1k9f";
-        }}/Xresources.${cfg.brightness}"
+        }
+      }/Xresources.${cfg.brightness}"
     '';
 
     programs.bat.config.theme = "Solarized (${cfg.brightness})";
@@ -40,13 +49,13 @@ in
           url = "${github-prefix}/dircolors.ansi-universal";
           sha256 = "149j2vgrmmgcjsx20cbdflbpwv4p3lfb0wswjzv2pw0ry5i4rprf";
         };
-        dircolors-output = pkgs.runCommand "dircolors-solarized"
-          { nativeBuildInputs = [ pkgs.coreutils ]; }
-          ''
-            < ${dircolors-file} \
-            sed 's/^BLK\s\+33;44/BLK 30;44/' \
-            | dircolors /dev/stdin > $out
-          '';
+        dircolors-output =
+          pkgs.runCommand "dircolors-solarized" { nativeBuildInputs = [ pkgs.coreutils ]; }
+            ''
+              < ${dircolors-file} \
+              sed 's/^BLK\s\+33;44/BLK 30;44/' \
+              | dircolors /dev/stdin > $out
+            '';
       in
       ''
         source ${dircolors-output}

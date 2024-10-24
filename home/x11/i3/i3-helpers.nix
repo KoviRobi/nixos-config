@@ -92,11 +92,12 @@ let
     bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 / p")'';
     blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 * p")'';
   };
-  actions-dir = pkgs.linkFarm "i3-actions-dir"
-    (pkgs.lib.mapAttrsToList
-      (k: v: { name = k; path = v; })
-      actions
-    );
+  actions-dir = pkgs.linkFarm "i3-actions-dir" (
+    pkgs.lib.mapAttrsToList (k: v: {
+      name = k;
+      path = v;
+    }) actions
+  );
 in
 {
   inherit actions-dir;
@@ -121,7 +122,9 @@ in
     exec ${tmux} new-session -t "''${name#*:}"
   '';
   workspace-renumber =
-    let drv = pkgs.python3.pkgs.callPackage ./workspace-renumber { };
-    in "${drv}/bin/workspace_renumber";
+    let
+      drv = pkgs.python3.pkgs.callPackage ./workspace-renumber { };
+    in
+    "${drv}/bin/workspace_renumber";
   pen-pye-menu = pye-menu.packages."${pkgs.system}".pen-menu;
 }

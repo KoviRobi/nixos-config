@@ -1,19 +1,25 @@
 let
-  inherit (builtins) listToAttrs concatMap attrNames readDir;
+  inherit (builtins)
+    listToAttrs
+    concatMap
+    attrNames
+    readDir
+    ;
 
-  /* From <nixpkgs/lib/attrsets> */
+  # From <nixpkgs/lib/attrsets>
   nameValuePair = name: value: { inherit name value; };
-  filterAttrs = pred: set:
-    listToAttrs (concatMap
-      (name:
-        let v = set.${name};
+  filterAttrs =
+    pred: set:
+    listToAttrs (
+      concatMap (
+        name:
+        let
+          v = set.${name};
         in
-        if pred name v
-        then [ (nameValuePair name v) ]
-        else [ ])
-      (attrNames set)
+        if pred name v then [ (nameValuePair name v) ] else [ ]
+      ) (attrNames set)
     );
-  /* End <nixpkgs/lib/attrsets> */
+  # End <nixpkgs/lib/attrsets>
 
   overlayDir = /etc/nixos/overlays;
   overlayDirContents = readDir overlayDir;

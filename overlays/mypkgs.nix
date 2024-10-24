@@ -1,21 +1,25 @@
-final: prev:
-{
-  st = (prev.st.override {
-    extraLibs = [ final.gd final.harfbuzz ];
-    patches = prev.st.patches ++ [
-      ../patches/st-0.8.5-font2.patch
-      ../patches/st-0.8.5-worddelimiters.patch
-      ../patches/st-0.8.5-netwmicon-v2.patch
-      ../patches/st-0.8.5-desktopentry.patch
-      ../patches/st-true-color.patch
-      ../patches/st-0.8.5-solarized-swap.patch
-      ../patches/st-0.8.5-solarized-swap-default-light.patch
-      ../patches/st-ligatures-20240427-0.9.2.diff
-    ];
-  }).overrideAttrs (attrs: {
-    ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
-    meta.priority = -10;
-  });
+final: prev: {
+  st =
+    (prev.st.override {
+      extraLibs = [
+        final.gd
+        final.harfbuzz
+      ];
+      patches = prev.st.patches ++ [
+        ../patches/st-0.8.5-font2.patch
+        ../patches/st-0.8.5-worddelimiters.patch
+        ../patches/st-0.8.5-netwmicon-v2.patch
+        ../patches/st-0.8.5-desktopentry.patch
+        ../patches/st-true-color.patch
+        ../patches/st-0.8.5-solarized-swap.patch
+        ../patches/st-0.8.5-solarized-swap-default-light.patch
+        ../patches/st-ligatures-20240427-0.9.2.diff
+      ];
+    }).overrideAttrs
+      (attrs: {
+        ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
+        meta.priority = -10;
+      });
 
   dhcp-helper = final.stdenv.mkDerivation rec {
     pname = "dhcp-helper";
@@ -30,40 +34,50 @@ final: prev:
   zsh-manydots-magic = final.runCommand "zsh-manydots-magic" { } ''
     outdir=$out/share/zsh/site-functions/zsh-manydots-magic
     mkdir -p $outdir
-    install ${final.fetchFromGitHub {
-      owner = "knu";
-      repo = "zsh-manydots-magic";
-      rev = "4372de0718714046f0c7ef87b43fc0a598896af6";
-      hash = "sha256-lv7e7+KBR/nxC43H0uvphLcI7fALPvxPSGEmBn0g8HQ=";
-    }}/manydots-magic $outdir/manydots-magic.zsh
+    install ${
+      final.fetchFromGitHub {
+        owner = "knu";
+        repo = "zsh-manydots-magic";
+        rev = "4372de0718714046f0c7ef87b43fc0a598896af6";
+        hash = "sha256-lv7e7+KBR/nxC43H0uvphLcI7fALPvxPSGEmBn0g8HQ=";
+      }
+    }/manydots-magic $outdir/manydots-magic.zsh
   '';
 
   pystack =
     let
       ppkgs = final.python3.pkgs;
     in
-      ppkgs.buildPythonApplication rec {
-        pname = "pystack";
-        version = "1.4.1";
-        src = final.fetchFromGitHub {
-          owner = "bloomberg";
-          repo = "pystack";
-          rev = "v${version}";
-          hash = "sha256-j+M7GgPUqVtHKkekr5MZXWsseAJtoHTzyCx+yRJk0V8=";
-        };
-        buildInputs = [ final.libdwarf final.elfutils ];
-        nativeBuildInputs = [ final.pkg-config ];
-        propagatedBuildInputs = [ ppkgs.pkgconfig ppkgs.cython ];
-      };
-
-  vimPlugins = prev.vimPlugins.extend (final': prev': {
-    vim-localvimrc = prev'.vim-localvimrc.overrideAttrs {
+    ppkgs.buildPythonApplication rec {
+      pname = "pystack";
+      version = "1.4.1";
       src = final.fetchFromGitHub {
-        owner = "KoviRobi";
-        repo = "vim-localvimrc";
-        rev = "ea843ed6eb001dab0174f65753a3c66941ee715b";
-        hash = "sha256-wJXE9M3+hxms1WPkCMaUjNwQBk0QZMMJ6LqRmZWgF+4=";
+        owner = "bloomberg";
+        repo = "pystack";
+        rev = "v${version}";
+        hash = "sha256-j+M7GgPUqVtHKkekr5MZXWsseAJtoHTzyCx+yRJk0V8=";
       };
+      buildInputs = [
+        final.libdwarf
+        final.elfutils
+      ];
+      nativeBuildInputs = [ final.pkg-config ];
+      propagatedBuildInputs = [
+        ppkgs.pkgconfig
+        ppkgs.cython
+      ];
     };
-  });
+
+  vimPlugins = prev.vimPlugins.extend (
+    final': prev': {
+      vim-localvimrc = prev'.vim-localvimrc.overrideAttrs {
+        src = final.fetchFromGitHub {
+          owner = "KoviRobi";
+          repo = "vim-localvimrc";
+          rev = "ea843ed6eb001dab0174f65753a3c66941ee715b";
+          hash = "sha256-wJXE9M3+hxms1WPkCMaUjNwQBk0QZMMJ6LqRmZWgF+4=";
+        };
+      };
+    }
+  );
 }

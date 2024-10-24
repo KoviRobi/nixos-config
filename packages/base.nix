@@ -63,7 +63,14 @@ with pkgs;
 
   devenv
 
-  (python3.withPackages (p: with p; [ matplotlib numpy pandas ply ]))
+  (python3.withPackages (
+    p: with p; [
+      matplotlib
+      numpy
+      pandas
+      ply
+    ]
+  ))
   pyright
   evcxr
   rustc
@@ -90,19 +97,19 @@ with pkgs;
   zsh-manydots-magic
 
   entr
-] ++
-lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+]
+++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
   gitFull
   git-absorb
   git-review
   git-filter-repo
-] ++
-lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
+]
+++ lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
   vim
   git
-] ++
-lib.optionals (pkgs.hostPlatform.isLinux) [
+]
+++ lib.optionals (pkgs.hostPlatform.isLinux) [
   config.boot.kernelPackages.cpupower
   abcde
   linuxConsoleTools

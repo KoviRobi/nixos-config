@@ -1,13 +1,21 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [
-    thefuck
-    zoxide
-  ] ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-    carapace
-  ];
+  home.packages =
+    with pkgs;
+    [
+      thefuck
+      zoxide
+    ]
+    ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+      carapace
+    ];
 
   programs.bash.initExtra = ''
     eval "$(${pkgs.zoxide}/bin/zoxide init bash | ${pkgs.gnused}/bin/sed 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g')"

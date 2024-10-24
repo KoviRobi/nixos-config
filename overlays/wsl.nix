@@ -1,5 +1,4 @@
-final: prev:
-{
+final: prev: {
   npiperelay = prev.buildGoModule rec {
     pname = "npiperelay";
     version = "0.1.0";

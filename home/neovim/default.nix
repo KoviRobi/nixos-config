@@ -1,14 +1,15 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.kovirobi.neovim;
-  myplugins = lib.callPackagesWith
-    (pkgs // { inherit (pkgs.vimUtils) buildVimPlugin; })
-    ./myplugins.nix
-    { };
+  myplugins = lib.callPackagesWith (
+    pkgs // { inherit (pkgs.vimUtils) buildVimPlugin; }
+  ) ./myplugins.nix { };
 in
 {
   options.kovirobi.neovim = {
@@ -28,111 +29,113 @@ in
       vimdiffAlias = true;
       withNodeJs = true;
 
-      plugins = (with pkgs.vimPlugins; [
-        # base distro
-        LazyVim
-        lazydev-nvim
-        conform-nvim
-        nvim-lint
-        render-markdown-nvim
-        headlines-nvim
+      plugins =
+        (with pkgs.vimPlugins; [
+          # base distro
+          LazyVim
+          lazydev-nvim
+          conform-nvim
+          nvim-lint
+          render-markdown-nvim
+          headlines-nvim
 
-        # theme
-        dracula-nvim
+          # theme
+          dracula-nvim
 
-        # UI
-        bufferline-nvim
-        gitsigns-nvim
-        dashboard-nvim
-        toggleterm-nvim
-        trouble-nvim
-        lualine-nvim
-        which-key-nvim
-        nvim-web-devicons
-        mini-nvim
-        noice-nvim
-        nui-nvim
-        nvim-notify
-        nvim-lsp-notify
-        neo-tree-nvim
-        nvim-navic
-        dressing-nvim
-        aerial-nvim
+          # UI
+          bufferline-nvim
+          gitsigns-nvim
+          dashboard-nvim
+          toggleterm-nvim
+          trouble-nvim
+          lualine-nvim
+          which-key-nvim
+          nvim-web-devicons
+          mini-nvim
+          noice-nvim
+          nui-nvim
+          nvim-notify
+          nvim-lsp-notify
+          neo-tree-nvim
+          nvim-navic
+          dressing-nvim
+          aerial-nvim
 
-        # project management
-        project-nvim
-        neoconf-nvim
-        persistence-nvim
+          # project management
+          project-nvim
+          neoconf-nvim
+          persistence-nvim
 
-        # smart typing
-        indent-blankline-nvim
-        guess-indent-nvim
-        vim-illuminate
+          # smart typing
+          indent-blankline-nvim
+          guess-indent-nvim
+          vim-illuminate
 
-        # LSP
-        nvim-lspconfig
-        rust-tools-nvim
-        crates-nvim
-        null-ls-nvim
-        nvim-lightbulb # lightbulb for quick actions
-        # nvim-code-action-menu # code action menu
-        neodev-nvim
-        SchemaStore-nvim # load known formats for json and yaml
+          # LSP
+          nvim-lspconfig
+          rust-tools-nvim
+          crates-nvim
+          null-ls-nvim
+          nvim-lightbulb # lightbulb for quick actions
+          # nvim-code-action-menu # code action menu
+          neodev-nvim
+          SchemaStore-nvim # load known formats for json and yaml
 
-        # snippets
-        luasnip # snippet engine
-        friendly-snippets # a bunch of snippets to use
-        nvim-snippets
+          # snippets
+          luasnip # snippet engine
+          friendly-snippets # a bunch of snippets to use
+          nvim-snippets
 
-        # search functionality
-        plenary-nvim
-        telescope-nvim
-        telescope-fzf-native-nvim
-        nvim-spectre
-        flash-nvim
+          # search functionality
+          plenary-nvim
+          telescope-nvim
+          telescope-fzf-native-nvim
+          nvim-spectre
+          flash-nvim
 
-        # treesitter
-        ts-comments-nvim
-        nvim-treesitter-context
-        nvim-ts-autotag
-        nvim-treesitter-textobjects
-        nvim-treesitter.withAllGrammars
+          # treesitter
+          ts-comments-nvim
+          nvim-treesitter-context
+          nvim-ts-autotag
+          nvim-treesitter-textobjects
+          nvim-treesitter.withAllGrammars
 
-        # comments
-        nvim-ts-context-commentstring
-        todo-comments-nvim
+          # comments
+          nvim-ts-context-commentstring
+          todo-comments-nvim
 
-        # leap
-        vim-repeat
-        leap-nvim
-        flit-nvim
+          # leap
+          vim-repeat
+          leap-nvim
+          flit-nvim
 
-        # DAP
-        nvim-dap
-        nvim-dap-ui
-        nvim-dap-virtual-text
+          # DAP
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-virtual-text
 
-        # neotest
-        neotest
-        neotest-rust
-        neotest-golang
+          # neotest
+          neotest
+          neotest-rust
+          neotest-golang
 
-        # kovirobi
-        undotree
-        vim-fugitive
-        vim-localvimrc
-        vim-slime
-        vim-tmux-navigator
-        neorepl-nvim
-        vim-easy-align
+          # kovirobi
+          undotree
+          vim-fugitive
+          vim-localvimrc
+          vim-slime
+          vim-tmux-navigator
+          neorepl-nvim
+          vim-easy-align
 
-        lazy-nvim
-        vim-startuptime
-      ]) ++ (with myplugins; [
-        # kovirobi
-        vim-bindsplit
-        maxmx03-solarized-nvim
-      ]);
+          lazy-nvim
+          vim-startuptime
+        ])
+        ++ (with myplugins; [
+          # kovirobi
+          vim-bindsplit
+          maxmx03-solarized-nvim
+        ]);
 
       extraPackages = with pkgs; [
         gcc # needed for nvim-treesitter

@@ -1,6 +1,6 @@
 return {
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    enabled = true,
-  }
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		enabled = true,
+	},
 }

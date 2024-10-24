@@ -1,5 +1,4 @@
-final: prev:
-{
+final: prev: {
   acme-lsp = final.buildGoModule {
     pname = "acme-lsp";
     version = "0.11.0-unstable-2023-07";
@@ -18,7 +17,10 @@ final: prev:
       platforms = platforms.unix;
     };
     vendorHash = "sha256-TraHSOkSFHv5spIZyo2aqWEq98idoxS4vY4YU1jUZIU=";
-    subPackages = [ "cmd/L" "cmd/acme-lsp" ];
+    subPackages = [
+      "cmd/L"
+      "cmd/acme-lsp"
+    ];
     postInstall = ''
       mkdir -p $out/bin
       for cmd in comp def fmt hov impls refs rn sig syms type assist ws ws+ ws-; do

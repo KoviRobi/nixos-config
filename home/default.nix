@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     ./direnv.nix
@@ -19,7 +24,10 @@
     pkgs.mimi
   ];
 
-  home.file.".terminfo" = { source = "${pkgs.st.terminfo}/share/terminfo"; recursive = true; };
+  home.file.".terminfo" = {
+    source = "${pkgs.st.terminfo}/share/terminfo";
+    recursive = true;
+  };
 
   home.file.".config/mimi/mime.conf".text = ''
     text/html: firefox
@@ -32,8 +40,7 @@
   '';
 
   services.gnome-keyring.enable = true;
-  home.sessionVariables.SSH_AUTH_SOCK =
-    "/run/user/${toString config.nixos.users.users.default-user.uid}/keyring/ssh";
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/${toString config.nixos.users.users.default-user.uid}/keyring/ssh";
   home.file.".gnupg/gpg-agent.conf".text = ''
     pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
   '';

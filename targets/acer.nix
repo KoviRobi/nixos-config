@@ -1,10 +1,15 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   services.libinput.enable = false;
   services.xserver.synaptics.enable = true;
@@ -21,9 +26,19 @@
 
   environment.systemPackages = [ pkgs.powertop ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ata_piix" "xhci_pci" "sd_mod" "sr_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [
+    "ehci_pci"
+    "ata_piix"
+    "xhci_pci"
+    "sd_mod"
+    "sr_mod"
+    "sdhci_pci"
+  ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "wl" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "wl"
+  ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   boot.loader.grub.enable = true;
@@ -39,19 +54,17 @@
   home-manager.users.default-user.home.stateVersion = "23.05";
   home-manager.users.root.home.stateVersion = "23.05";
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
+    fsType = "xfs";
+  };
 
   boot.initrd.luks.devices."acer-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/30C3-618E";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/30C3-618E";
+    fsType = "vfat";
+  };
 
   swapDevices = [ ];
 

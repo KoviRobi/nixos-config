@@ -1,5 +1,10 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, lib, ... }@args:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}@args:
 
 {
   imports = [
@@ -11,25 +16,38 @@
     })
   ];
 
-  nix.settings.trusted-substituters = map
-    (address:
-      "ssh://nix-ssh@${address}"
-      + "?trusted=1"
-      + "&compress=1"
-      + "&ssh-key=/root/.ssh/nix-store-ed25519"
-      + "&base64-ssh-public-host-key="
-      + "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5JdW1pb2NMZEE5NExHa"
-      + "E95WFM1Vko0d1hrQWh2S2JzK1NrTWtkQUh5Z3EK")
-    [ "rmk-cc-pc-nixos-a.badger-toad.ts.net" "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com" ];
+  nix.settings.trusted-substituters =
+    map
+      (
+        address:
+        "ssh://nix-ssh@${address}"
+        + "?trusted=1"
+        + "&compress=1"
+        + "&ssh-key=/root/.ssh/nix-store-ed25519"
+        + "&base64-ssh-public-host-key="
+        + "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5JdW1pb2NMZEE5NExHa"
+        + "E95WFM1Vko0d1hrQWh2S2JzK1NrTWtkQUh5Z3EK"
+      )
+      [
+        "rmk-cc-pc-nixos-a.badger-toad.ts.net"
+        "rmk-cc-pc-nixos-a.uk.cambridgeconsultants.com"
+      ];
 
   virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;
   virtualisation.libvirtd.enable = true;
-  users.users.default-user.extraGroups = [ "docker" "libvirtd" ];
+  users.users.default-user.extraGroups = [
+    "docker"
+    "libvirtd"
+  ];
 
   services.xserver.dpi = 100;
   services.xserver.xrandrHeads = [
-    { output = "HDMI-1"; primary = true; monitorConfig = ''Option "BROADCAST_RGB" "1"''; }
+    {
+      output = "HDMI-1";
+      primary = true;
+      monitorConfig = ''Option "BROADCAST_RGB" "1"'';
+    }
   ];
   home-manager.users.default-user.xsession.initExtra = ''
     xrandr --output DP-1 --set 'Broadcast RGB' Full
@@ -39,7 +57,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.videoDrivers = [ "i915" "modesetting" "nouveau" "fbdev" ];
+  services.xserver.videoDrivers = [
+    "i915"
+    "modesetting"
+    "nouveau"
+    "fbdev"
+  ];
 
   services.openssh.settings.X11Forwarding = true;
 
@@ -52,15 +75,31 @@
   services.resolved.enable = true;
 
   initrd-ssh.interface = "eno1";
-  initrd-ssh.udhcpcExtraArgs = [ "-t 10" "-b" ];
+  initrd-ssh.udhcpcExtraArgs = [
+    "-t 10"
+    "-b"
+  ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ehci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "cifs" ];
 
-  environment.systemPackages = with pkgs; [ virt-manager saleae-logic-2 ]
+  environment.systemPackages =
+    with pkgs;
+    [
+      virt-manager
+      saleae-logic-2
+    ]
     ++ (import ../packages/cc.nix args);
 
   nix.sshServe.enable = true;

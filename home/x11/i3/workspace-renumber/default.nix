@@ -1,7 +1,8 @@
-{ lib
-, python3
-, i3ipc # python3.pkgs.
-, buildPythonApplication # python3.pkgs.
+{
+  lib,
+  python3,
+  i3ipc, # python3.pkgs.
+  buildPythonApplication, # python3.pkgs.
 }:
 buildPythonApplication rec {
   pname = "workspace-renumber";

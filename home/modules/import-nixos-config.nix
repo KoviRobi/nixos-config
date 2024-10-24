@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 {
@@ -7,12 +12,17 @@ with lib;
       type = with types; attrs;
       default = {
         services.xserver.dpi = 72;
-        fileSystems = { "/" = { }; };
+        fileSystems = {
+          "/" = { };
+        };
         users.users.default-user.uid = 1000;
       };
       example = {
         services.xserver.dpi = 72;
-        fileSystems = { "/" = { }; "/home" = { }; };
+        fileSystems = {
+          "/" = { };
+          "/home" = { };
+        };
         users.users.default-user.uid = 3749;
       };
       description = ''
