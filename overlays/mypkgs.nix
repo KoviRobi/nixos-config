@@ -1,7 +1,7 @@
 final: prev:
 {
   st = (prev.st.override {
-    extraLibs = [ final.gd ];
+    extraLibs = [ final.gd final.harfbuzz ];
     patches = prev.st.patches ++ [
       ../patches/st-0.8.5-font2.patch
       ../patches/st-0.8.5-worddelimiters.patch
@@ -10,6 +10,7 @@ final: prev:
       ../patches/st-true-color.patch
       ../patches/st-0.8.5-solarized-swap.patch
       ../patches/st-0.8.5-solarized-swap-default-light.patch
+      ../patches/st-ligatures-20240427-0.9.2.diff
     ];
   }).overrideAttrs (attrs: {
     ICONSRC = "${final.paper-icon-theme}/share/icons/Paper/32x32/apps/utilities-terminal-alt.png";
