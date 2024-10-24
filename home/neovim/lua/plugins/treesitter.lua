@@ -8,6 +8,9 @@ return {
 			auto_install = false,
 			ensure_installed = {},
 			parser_install_dir = parser_install_dir,
+			highlight = {
+				disable = { "gitcommit" },
+			},
 		},
 	},
 }
