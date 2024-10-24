@@ -39,6 +39,7 @@
     grp = "git reset -p";
     grv = "git remote -v";
     grb = "git rebase";
+    gcp = "git cherry-pick";
     gs = "git status";
     gsh = "git show";
     gunig = "git update-index --no-assume-unchanged";
