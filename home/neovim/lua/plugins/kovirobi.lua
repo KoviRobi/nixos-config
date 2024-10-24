@@ -47,15 +47,13 @@ return {
       vim.g.slime_no_mappings = 1
     end,
     cmd = {
-      "SlimeRegionSend",
-      "SlimeParagraphSend",
-      "SlimeLineSend",
-      "SlimeMotionSend",
+      "SlimeSend",
       "SlimeConfig",
     },
     keys = {
-      { "<C-c><C-c>", "<cmd>SlimeRegionSend<cr>", "x", { desc = "Send region to terminal" }},
-      { "<C-c>v", "<cmd>SlimeConfig<cr>", "n", { desc = "Send region to terminal" }},
+      { "<C-c><C-c>", "<Plug>SlimeRegionSend<cr>", mode = "x", { desc = "Send region to terminal" } },
+      { "<C-c><C-c>", "<Cmd>normal! vip<CR><Plug>SlimeRegionSend<CR>", { desc = "Send region to terminal" } },
+      { "<C-c>v", "<Cmd>SlimeConfig<CR>", { desc = "Send region to terminal" } },
     },
   },
 
