@@ -45,6 +45,7 @@ return {
     init = function()
       vim.g.slime_target = "neovim"
       vim.g.slime_no_mappings = 1
+      vim.g.slime_config_defaults = vim.empty_dict()
     end,
     cmd = {
       "SlimeSend",
@@ -61,6 +62,7 @@ return {
     "christoomey/vim-tmux-navigator",
     init = function()
       vim.g.tmux_navigator_no_mappings = 1
+      vim.g.tmux_navigator_disable_when_zoomed = 1
     end,
     cmd = {
       "TmuxNavigateLeft",
