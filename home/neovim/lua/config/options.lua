@@ -8,5 +8,6 @@ opt.conceallevel = 0 -- So that `` is visible in markdown
 opt.wrap = true -- Enable line wrap
 
 opt.cursorcolumn = true -- Highlight cursor column
+opt.colorcolumn = "+0,+1,+2"
 
 opt.virtualedit = { "block" }
