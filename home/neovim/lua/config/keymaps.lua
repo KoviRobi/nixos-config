@@ -51,3 +51,6 @@ key.del("t", "<C-l>")
 -- Remove j/k mapped to gj/gk (though leave it for arrow keys)
 key.del({ "n", "x" }, "j")
 key.del({ "n", "x" }, "k")
+
+-- Noice dismiss
+key.set("n", "<leader>un", "<Cmd>NoiceDismiss<CR>", { desc = "Dismiss All Notifications" })

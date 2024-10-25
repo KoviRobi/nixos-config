@@ -38,7 +38,7 @@ return {
 		},
 	},
 	{
-		"KoviRobi/vim-localvimrc",
+		"embear/vim-localvimrc",
 		init = function()
 			vim.g.localvimrc_persistent = 1
 			vim.g.localvimrc_persistence_file = vim.fs.joinpath(vim.fn.stdpath("data"), "localvimrc_persistent")
@@ -103,4 +103,8 @@ return {
 		"junegunn/vim-easy-align",
 		cmd = { "EasyAlign", "LiveEasyAlign" },
 	},
+
+	{ "wsdjeg/vim-fetch" },
+
+	{ "powerman/vim-plugin-AnsiEsc", cmd = { "AnsiEsc" } },
 }

@@ -127,6 +127,8 @@ in
           vim-tmux-navigator
           neorepl-nvim
           vim-easy-align
+          vim-fetch
+          vim-plugin-AnsiEsc
 
           lazy-nvim
           vim-startuptime
