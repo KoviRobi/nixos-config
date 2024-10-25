@@ -9,5 +9,6 @@ opt.wrap = true -- Enable line wrap
 
 opt.cursorcolumn = true -- Highlight cursor column
 opt.colorcolumn = "+0,+1,+2"
+opt.listchars = "tab:→ ,trail:·,nbsp:+,eol:⤸"
 
 opt.virtualedit = { "block" }
