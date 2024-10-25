@@ -72,10 +72,10 @@ final: prev: {
     final': prev': {
       vim-localvimrc = prev'.vim-localvimrc.overrideAttrs {
         src = final.fetchFromGitHub {
-          owner = "KoviRobi";
+          owner = "embear";
           repo = "vim-localvimrc";
-          rev = "ea843ed6eb001dab0174f65753a3c66941ee715b";
-          hash = "sha256-wJXE9M3+hxms1WPkCMaUjNwQBk0QZMMJ6LqRmZWgF+4=";
+          rev = "77657ae78007758832f0e5350ab640a50d6acd23";
+          hash = "sha256-YpyPmpfhh+MgpqJQOXnt3IFCXf0VXG/HucTdx1omR0U=";
         };
       };
     }
