@@ -6,15 +6,15 @@ final: prev: {
         final.harfbuzz
       ];
       patches = prev.st.patches ++ [
-        ../patches/st-0.8.5-font2.patch
-        ../patches/st-0.8.5-worddelimiters.patch
-        ../patches/st-0.8.5-netwmicon-v2.patch
-        ../patches/st-0.8.5-desktopentry.patch
-        ../patches/st-true-color.patch
-        ../patches/st-0.8.5-solarized-swap.patch
-        ../patches/st-0.8.5-solarized-swap-default-light.patch
-        ../patches/st-ligatures-20240427-0.9.2.diff
-        ../patches/st-shift-backspace.patch
+        ../patches/st/0001-Patch-st-0.8.5-font2.patch.patch
+        ../patches/st/0002-Patch-st-0.8.5-worddelimiters.patch.patch
+        ../patches/st/0003-Set-_NET_WM_ICON-with-a-png-image.patch
+        ../patches/st/0004-Create-a-desktop-entry-for-st.patch
+        ../patches/st/0005-Patch-st-true-color.patch.patch
+        ../patches/st/0006-Patch-st-0.8.5-solarized-swap.patch.patch
+        ../patches/st/0007-Patch-st-0.8.5-solarized-swap-default-light.patch.patch
+        ../patches/st/0008-Patch-st-ligatures-20240427-0.9.2.diff.patch
+        ../patches/st/0009-Patch-st-shift-backspace.patch.patch
       ];
     }).overrideAttrs
       (attrs: {

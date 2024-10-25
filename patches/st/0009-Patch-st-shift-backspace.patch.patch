@@ -1,12 +1,17 @@
-Convert shift-backspace to DEL ^? to avoid it entering <C-h> in vim.
+From 7059794326d8f170a2f57d09713dde8b1c433d66 Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@carallon.com>
+Date: Fri, 25 Oct 2024 12:28:25 +0100
+Subject: [PATCH 9/9] Patch st-shift-backspace.patch
+
 ---
  config.def.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/config.def.h b/config.def.h
-index 82b1b09..1a0dfbf 100644
+index 3c5b408..e843778 100644
 --- a/config.def.h
 +++ b/config.def.h
-_AT_@ -336,8 +336,8 @@ static Key key[] = {
+@@ -367,8 +367,8 @@ static Key key[] = {
  	{ XK_Delete,        ShiftMask,      "\033[3;2~",    +1,    0},
  	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
  	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
@@ -17,4 +22,4 @@ _AT_@ -336,8 +336,8 @@ static Key key[] = {
  	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},
  	{ XK_Home,          XK_ANY_MOD,     "\033[H",        0,   -1},
 --
-2.15.1
+2.46.0

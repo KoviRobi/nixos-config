@@ -1,20 +1,19 @@
-From 8b0128e8b295fc97bfa3bc5fb4b5e64856d4e3cb Mon Sep 17 00:00:00 2001
+From cc06ee6e1f7f244c01a7efdae906404a4b8d559a Mon Sep 17 00:00:00 2001
 From: Aleksandrs Stier <aleks.stier@icloud.com>
 Date: Sat, 4 Jun 2022 01:24:07 +0200
-Subject: [PATCH] Set _NET_WM_ICON with a png-image
+Subject: [PATCH 3/9] Set _NET_WM_ICON with a png-image
 
 ---
- Makefile  |  3 +++
- config.mk |  6 ++++--
+ config.mk |  4 ++--
  st.h      |  2 ++
  x.c       | 37 ++++++++++++++++++++++++++++++++++++-
- 4 files changed, 45 insertions(+), 3 deletions(-)
+ 3 files changed, 40 insertions(+), 3 deletions(-)
 
 diff --git a/config.mk b/config.mk
-index 4c4c5d5..f8fc780 100644
+index fdc29a7..a3cbae6 100644
 --- a/config.mk
 +++ b/config.mk
-@@ -16,12 +18,12 @@ PKG_CONFIG = pkg-config
+@@ -16,12 +16,12 @@ PKG_CONFIG = pkg-config
  INCS = -I$(X11INC) \
         `$(PKG_CONFIG) --cflags fontconfig` \
         `$(PKG_CONFIG) --cflags freetype2`
@@ -30,7 +29,7 @@ index 4c4c5d5..f8fc780 100644
  STLDFLAGS = $(LIBS) $(LDFLAGS)
  
 diff --git a/st.h b/st.h
-index 519b9bd..c10af86 100644
+index fd3b0d8..ba1d86e 100644
 --- a/st.h
 +++ b/st.h
 @@ -3,6 +3,8 @@
@@ -43,7 +42,7 @@ index 519b9bd..c10af86 100644
  #define MIN(a, b)		((a) < (b) ? (a) : (b))
  #define MAX(a, b)		((a) < (b) ? (b) : (a))
 diff --git a/x.c b/x.c
-index 8a16faa..169e833 100644
+index b251400..f1ce158 100644
 --- a/x.c
 +++ b/x.c
 @@ -93,7 +93,7 @@ typedef struct {
@@ -55,7 +54,7 @@ index 8a16faa..169e833 100644
  	struct {
  		XIM xim;
  		XIC xic;
-@@ -1204,6 +1204,41 @@ xinit(int cols, int rows)
+@@ -1321,6 +1321,41 @@ xinit(int cols, int rows)
  	xw.netwmiconname = XInternAtom(xw.dpy, "_NET_WM_ICON_NAME", False);
  	XSetWMProtocols(xw.dpy, xw.win, &xw.wmdeletewin, 1);
  
@@ -98,5 +97,5 @@ index 8a16faa..169e833 100644
  	XChangeProperty(xw.dpy, xw.win, xw.netwmpid, XA_CARDINAL, 32,
  			PropModeReplace, (uchar *)&thispid, 1);
 -- 
-2.36.1
+2.46.0
 

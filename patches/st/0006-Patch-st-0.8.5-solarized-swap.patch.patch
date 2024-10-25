@@ -1,7 +1,19 @@
-diff -uNr a/config.def.h b/config.def.h
---- a/config.def.h	2022-01-07 11:41:35.000000000 +0000
-+++ b/config.def.h	2022-01-26 22:44:07.542945914 +0000
-@@ -95,44 +95,55 @@
+From 99e4847fb3f8fc53d7634a9f0d97603bdab3f0c3 Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@carallon.com>
+Date: Fri, 25 Oct 2024 12:25:52 +0100
+Subject: [PATCH 6/9] Patch st-0.8.5-solarized-swap.patch
+
+---
+ config.def.h | 74 ++++++++++++++++++++++++++++++----------------------
+ st.h         |  1 +
+ x.c          | 28 +++++++++++++++-----
+ 3 files changed, 66 insertions(+), 37 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index b152762..3c5b408 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -102,44 +102,55 @@ unsigned int tabspaces = 8;
  
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
@@ -88,7 +100,7 @@ diff -uNr a/config.def.h b/config.def.h
  
  /*
   * Default shape of cursor
-@@ -201,6 +212,7 @@
+@@ -208,6 +219,7 @@ static Shortcut shortcuts[] = {
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
@@ -96,10 +108,11 @@ diff -uNr a/config.def.h b/config.def.h
  };
  
  /*
-diff -uNr a/st.h b/st.h
---- a/st.h	2022-01-07 11:41:35.000000000 +0000
-+++ b/st.h	2022-01-26 22:37:48.941702790 +0000
-@@ -122,6 +122,7 @@
+diff --git a/st.h b/st.h
+index ba1d86e..2cd75fb 100644
+--- a/st.h
++++ b/st.h
+@@ -122,6 +122,7 @@ extern wchar_t *worddelimiters;
  extern int allowaltscreen;
  extern int allowwindowops;
  extern char *termname;
@@ -107,10 +120,11 @@ diff -uNr a/st.h b/st.h
  extern unsigned int tabspaces;
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
-diff -uNr a/x.c b/x.c
---- a/x.c	2022-01-07 11:41:35.000000000 +0000
-+++ b/x.c	2022-01-26 22:37:48.941702790 +0000
-@@ -55,6 +55,7 @@
+diff --git a/x.c b/x.c
+index f1ce158..e7c84ff 100644
+--- a/x.c
++++ b/x.c
+@@ -55,6 +55,7 @@ static void clipcopy(const Arg *);
  static void clippaste(const Arg *);
  static void numlock(const Arg *);
  static void selpaste(const Arg *);
@@ -118,19 +132,20 @@ diff -uNr a/x.c b/x.c
  static void zoom(const Arg *);
  static void zoomabs(const Arg *);
  static void zoomreset(const Arg *);
-@@ -254,6 +255,8 @@
+@@ -256,6 +257,8 @@ static char *opt_title = NULL;
  
- static int oldbutton = 3; /* button event on startup: 3 = release */
+ static uint buttons; /* bit field of pressed buttons */
  
 +int usealtcolors = 0; /* 1 to use alternate palette */
 +
  void
  clipcopy(const Arg *dummy)
  {
-@@ -293,6 +296,14 @@
+@@ -294,6 +297,14 @@ numlock(const Arg *dummy)
+ 	win.mode ^= MODE_NUMLOCK;
  }
  
- void
++void
 +swapcolors(const Arg *dummy)
 +{
 + usealtcolors = !usealtcolors;
@@ -138,11 +153,10 @@ diff -uNr a/x.c b/x.c
 + redraw();
 +}
 +
-+void
+ void
  zoom(const Arg *arg)
  {
- 	Arg larg;
-@@ -750,6 +761,11 @@
+@@ -769,6 +780,11 @@ sixd_to_16bit(int x)
  	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
  }
  
@@ -154,7 +168,7 @@ diff -uNr a/x.c b/x.c
  int
  xloadcolor(int i, const char *name, Color *ncolor)
  {
-@@ -768,7 +784,7 @@
+@@ -787,7 +803,7 @@ xloadcolor(int i, const char *name, Color *ncolor)
  			return XftColorAllocValue(xw.dpy, xw.vis,
  			                          xw.cmap, &color, ncolor);
  		} else
@@ -163,7 +177,7 @@ diff -uNr a/x.c b/x.c
  	}
  
  	return XftColorAllocName(xw.dpy, xw.vis, xw.cmap, name, ncolor);
-@@ -791,8 +807,8 @@
+@@ -810,8 +826,8 @@ xloadcols(void)
  
  	for (i = 0; i < dc.collen; i++)
  		if (!xloadcolor(i, NULL, &dc.col[i])) {
@@ -174,7 +188,7 @@ diff -uNr a/x.c b/x.c
  			else
  				die("could not allocate color %d\n", i);
  		}
-@@ -1184,13 +1200,13 @@
+@@ -1301,13 +1317,13 @@ xinit(int cols, int rows)
  	cursor = XCreateFontCursor(xw.dpy, mouseshape);
  	XDefineCursor(xw.dpy, xw.win, cursor);
  
@@ -190,7 +204,7 @@ diff -uNr a/x.c b/x.c
  		xmousebg.red   = 0x0000;
  		xmousebg.green = 0x0000;
  		xmousebg.blue  = 0x0000;
-@@ -1398,7 +1414,7 @@
+@@ -1550,7 +1566,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  
  	/* Change basic system colors [0-7] to bright system colors [8-15] */
  	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
@@ -199,3 +213,6 @@ diff -uNr a/x.c b/x.c
  
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
+-- 
+2.46.0
+

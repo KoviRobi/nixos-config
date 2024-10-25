@@ -1,6 +1,17 @@
-diff -uNr a/config.def.h b/config.def.h
---- a/config.def.h	2022-01-07 11:41:35.000000000 +0000
-+++ b/config.def.h	2022-01-26 22:32:03.888429408 +0000
+From 21bb8949f5be32c0f10aec76426174193183f0f3 Mon Sep 17 00:00:00 2001
+From: Robert Kovacsics <robert.kovacsics@carallon.com>
+Date: Fri, 25 Oct 2024 12:22:07 +0100
+Subject: [PATCH 1/9] Patch st-0.8.5-font2.patch
+
+---
+ config.def.h |   9 ++++-
+ x.c          | 101 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 109 insertions(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 2cd740a..046aa98 100644
+--- a/config.def.h
++++ b/config.def.h
 @@ -5,7 +5,14 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -17,10 +28,11 @@ diff -uNr a/config.def.h b/config.def.h
  static int borderpx = 2;
  
  /*
-diff -uNr a/x.c b/x.c
---- a/x.c	2022-01-07 11:41:35.000000000 +0000
-+++ b/x.c	2022-01-26 22:32:29.461687912 +0000
-@@ -157,6 +157,8 @@
+diff --git a/x.c b/x.c
+index bd23686..b251400 100644
+--- a/x.c
++++ b/x.c
+@@ -157,6 +157,8 @@ static void xhints(void);
  static int xloadcolor(int, const char *, Color *);
  static int xloadfont(Font *, FcPattern *);
  static void xloadfonts(const char *, double);
@@ -29,7 +41,7 @@ diff -uNr a/x.c b/x.c
  static void xunloadfont(Font *);
  static void xunloadfonts(void);
  static void xsetenv(void);
-@@ -306,6 +308,7 @@
+@@ -306,6 +308,7 @@ zoomabs(const Arg *arg)
  {
  	xunloadfonts();
  	xloadfonts(usedfont, arg->f);
@@ -37,7 +49,7 @@ diff -uNr a/x.c b/x.c
  	cresize(0, 0);
  	redraw();
  	xhints();
-@@ -1034,6 +1037,101 @@
+@@ -1050,6 +1053,101 @@ xloadfonts(const char *fontstr, double fontsize)
  	FcPatternDestroy(pattern);
  }
  
@@ -139,7 +151,7 @@ diff -uNr a/x.c b/x.c
  void
  xunloadfont(Font *f)
  {
-@@ -1131,6 +1229,9 @@
+@@ -1147,6 +1245,9 @@ xinit(int cols, int rows)
  	usedfont = (opt_font == NULL)? font : opt_font;
  	xloadfonts(usedfont, 0);
  
@@ -149,3 +161,6 @@ diff -uNr a/x.c b/x.c
  	/* colors */
  	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
  	xloadcols();
+-- 
+2.46.0
+
