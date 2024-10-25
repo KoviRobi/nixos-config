@@ -14,6 +14,7 @@ final: prev: {
         ../patches/st-0.8.5-solarized-swap.patch
         ../patches/st-0.8.5-solarized-swap-default-light.patch
         ../patches/st-ligatures-20240427-0.9.2.diff
+        ../patches/st-shift-backspace.patch
       ];
     }).overrideAttrs
       (attrs: {
