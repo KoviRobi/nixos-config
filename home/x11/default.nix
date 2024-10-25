@@ -17,8 +17,9 @@ in
     ./restart-on-failure.nix
     "${
       fetchTarball {
-        url = "https://github.com/KoviRobi/feh-random-background/archive/0154eb1d1fb2b5774a6908bee1f3b3ebd3317ac6.tar.gz";
-        sha256 = "1gwpk968h8js0ddi84hpqgh5mqijr9y5xgyiz8bfh9hm39wdjxm2";
+        url = "https://github.com/KoviRobi/feh-random-background/archive/80bc3616bb8fc87225d1447431555230a4bf3b12.tar.gz";
+        name = "feh-random-background";
+        sha256 = "1hnwv33wmiaabkv7yqg6khc1aqrp01g2yv5l76bc47d80cj0amad";
       }
     }/home-manager-service.nix"
   ];

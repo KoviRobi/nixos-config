@@ -15,6 +15,7 @@
     ./modules/import-nixos-config.nix
     ./helix.nix
     ./neovim
+    ./antidot.nix
   ];
 
   kovirobi.neovim.enable = true;
