@@ -60,6 +60,7 @@ with pkgs;
   cmake
   neocmakelsp
   ninja
+  ccls
 
   devenv
 
