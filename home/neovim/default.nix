@@ -129,6 +129,7 @@ in
           vim-easy-align
           vim-fetch
           vim-plugin-AnsiEsc
+          typst-vim
 
           lazy-nvim
           vim-startuptime
