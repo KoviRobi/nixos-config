@@ -10,11 +10,12 @@
 }:
 
 let
+  rob = false;
   nginx-port = 8080;
   git-appraise-rob-port = 8078;
   git-appraise-rob-listen = "${config.networking.hostName}:${toString git-appraise-rob-port}";
 
-  git-appraise-rob = pkgs.buildGoModule rec {
+  git-appraise-web-rob = pkgs.buildGoModule rec {
     pname = "git-appraise-rob";
     version = "unstable-2024-09-08";
 
@@ -40,6 +41,34 @@ let
       mainProgram = "git-appraise";
     };
   };
+
+  git-appraise-web-upstream = pkgs.buildGoModule rec {
+    pname = "git-appraise-web";
+    version = "unstable-2024-09-08";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "google";
+      repo = pname;
+      rev = "5cf242be17d4ea89bb17ea5b3e6a20e4d34d8435";
+      sha256 = "sha256-qtOSTuvW0lBOQlwl/v6v8w8+Ia3w7pdMR+yHHWabDZk=";
+    };
+
+    vendorHash = "sha256-7JhHFaBaessek2XA6/6beFCtQ5LexhGeVLax7xS5DFE=";
+
+    ldflags = [
+      "-s"
+      "-w"
+    ];
+
+    meta = with lib; {
+      description = " Web UI for git-appraise";
+      homepage = "https://github.com/google/git-appraise-web";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ kovirobi ];
+      mainProgram = "git-appraise-web";
+    };
+  };
+  git-appraise-web = if rob then git-appraise-web-rob else git-appraise-web-upstream;
 in
 {
   services.nginx = {
@@ -123,14 +152,14 @@ in
   users.groups.git-appraise-rob = { };
 
   systemd.services.git-appraise-rob = {
-    description = "Git Appraise Web";
+    description = "Git Appraise Rob Web";
 
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
 
     path = [
       pkgs.git
-      git-appraise-rob
+      git-appraise-web
     ];
 
     environment = {
@@ -142,7 +171,7 @@ in
       CacheDirectory = "git-appraise-rob";
       User = "git-appraise-rob";
       Group = "git-appraise-rob";
-      ExecStart = "${git-appraise-rob}/bin/git-appraise-web --port ${toString git-appraise-rob-port}";
+      ExecStart = "${git-appraise-web}/bin/git-appraise-web --port ${toString git-appraise-rob-port}";
       LimitNOFILE = 4096;
       StandardOutput = "journal";
       StateDirectory = "git-appraise-rob";
