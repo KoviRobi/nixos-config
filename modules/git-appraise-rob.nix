@@ -14,6 +14,8 @@ let
   nginx-port = 8080;
   git-appraise-rob-port = 8078;
   git-appraise-rob-listen = "${config.networking.hostName}:${toString git-appraise-rob-port}";
+  user = "git-appraise-rob";
+  group = "git-appraise-rob";
 
   git-appraise-web-rob = pkgs.buildGoModule rec {
     pname = "git-appraise-rob";
@@ -79,7 +81,7 @@ in
     recommendedProxySettings = true;
 
     gitweb.enable = true;
-    gitweb.group = "git-appraise-rob";
+    gitweb.group = group;
 
     virtualHosts."_" = {
       default = true;
@@ -141,15 +143,17 @@ in
   services.gitweb.projectroot = "/srv/git";
 
   services.fcgiwrap.instances.git-http-backend = {
-    process.user = "git-appraise-rob";
-    process.group = "git-appraise-rob";
+    process.user = user;
+    process.group = group;
     socket.user = "nginx";
     socket.group = "nginx";
   };
 
-  users.users.git-appraise-rob.isSystemUser = true;
-  users.users.git-appraise-rob.group = "git-appraise-rob";
-  users.groups.git-appraise-rob = { };
+  users.users.${user} = {
+    isSystemUser = true;
+    inherit group;
+  };
+  users.groups.${group} = { };
 
   systemd.services.git-appraise-rob = {
     description = "Git Appraise Rob Web";
@@ -169,14 +173,63 @@ in
 
     serviceConfig = {
       CacheDirectory = "git-appraise-rob";
-      User = "git-appraise-rob";
-      Group = "git-appraise-rob";
+      User = user;
+      Group = group;
       ExecStart = "${git-appraise-web}/bin/git-appraise-web --port ${toString git-appraise-rob-port}";
       LimitNOFILE = 4096;
       StandardOutput = "journal";
       StateDirectory = "git-appraise-rob";
       WorkingDirectory = "/srv/git";
     };
+  };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "ALL" ];
+      groups = [ "ALL" ];
+      commands = [
+        {
+          command = "${pkgs.git}/bin/git-shell";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+      runAs = "${user}:${group}";
+    }
+  ];
+  systemd.services.git-sshd = {
+    description = "Git SSH endpoint";
+    serviceConfig =
+      let
+        cmd = pkgs.writeShellScript "git-sshd" ''
+          sudo -n -u "${user}" -g "${group}" ${pkgs.git}/bin/git-shell -c "$SSH_ORIGINAL_COMMAND"
+        '';
+        conf = pkgs.writeText "git-sshd_config" ''
+          AuthorizedPrincipalsFile none
+          Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+          PasswordAuthentication yes
+          PermitRootLogin no
+          PrintMotd no
+          StrictModes yes
+          UseDns no
+          UsePAM yes
+          X11Forwarding no
+          Banner none
+
+          AddressFamily any
+          Port 29418
+          HostKey /etc/ssh/ssh_host_ed25519_key_git
+          ForceCommand ${cmd}
+        '';
+      in
+      {
+        ExecStart = "${pkgs.openssh}/bin/sshd -D -f ${conf} -p 29418 -o PidFile=%S/sshd.pid";
+        CacheDirectory = "git-appraise-rob";
+        StateDirectory = "git-appraise-rob";
+        WorkingDirectory = "/srv/git";
+      };
+
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
   };
 
   networking.firewall.allowedTCPPorts = lib.optional publish nginx-port;
