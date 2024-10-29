@@ -29,8 +29,16 @@ in
         condition = "hasconfig:remote.*.url:https://github.com/KoviRobi/**";
       }
       {
+        condition = "gitdir:~/pdev/";
+        path = ./git-personal.gitconfig;
+      }
+      {
         path = ./git-carallon.gitconfig;
         condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com/**";
+      }
+      {
+        condition = "gitdir:~/dev/";
+        path = ./git-carallon.gitconfig;
       }
     ];
     extraConfig = {
