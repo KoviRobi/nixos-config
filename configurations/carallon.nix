@@ -211,4 +211,7 @@
     ldap_uri = ldap://pdc.office.carallon.com,ldap://bdc.office.carallon.com
     ldap_use_tokengroups = true
   '';
+
+  security.pam.services.sshd.makeHomeDir = true;
+  security.pam.makeHomeDir.skelDirectory = "/etc/skel";
 }
