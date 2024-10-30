@@ -107,4 +107,6 @@ return {
 	{ "wsdjeg/vim-fetch" },
 
 	{ "powerman/vim-plugin-AnsiEsc", cmd = { "AnsiEsc" } },
+
+	{ "KoviRobi/vim-bindsplit", cmd = { "Bindsplit" } },
 }
