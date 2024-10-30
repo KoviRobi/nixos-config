@@ -109,4 +109,10 @@ return {
 	{ "powerman/vim-plugin-AnsiEsc", cmd = { "AnsiEsc" } },
 
 	{ "KoviRobi/vim-bindsplit", cmd = { "Bindsplit" } },
+
+	-- Disable noice as both not real-time and just annoying for `make` commands
+	{
+		"folke/noice.nvim",
+		enabled = false,
+	},
 }
