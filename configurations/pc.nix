@@ -165,12 +165,6 @@
 
   services.logind.extraConfig = "HandlePowerKey=suspend";
 
-  home-manager.users.default-user = {
-    xsession.initExtra = ''
-      ${pkgs.antimicroX}/bin/antimicrox --profile ~/SpacePilot.joystick.amgp --tray --hidden &
-    '';
-  };
-
   nix.settings.max-jobs = 24;
   nix.sshServe.enable = true;
   nix.sshServe.write = true;

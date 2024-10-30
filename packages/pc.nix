@@ -10,6 +10,3 @@ with pkgs;
   easytag
   inkscape
 ]
-++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-  antimicroX
-]
