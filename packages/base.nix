@@ -73,6 +73,8 @@ with pkgs;
     ]
   ))
   pyright
+  black
+  isort
   evcxr
   rustc
   go
