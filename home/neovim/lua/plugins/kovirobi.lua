@@ -36,6 +36,15 @@ return {
 			"GUnlink",
 			"GBrowse",
 		},
+		key = {
+			{
+				"<C-R><C-G>",
+				"<Cmd>fnameescape(fugitive#Object(@%))<CR>",
+				mode = "c",
+				{ desc = "Current fugitive object" },
+			},
+			{ "y<C-G>", "<Cmd>call setreg(v:register, fugitive#Object(@%))<CR>", { silent = true } },
+		},
 	},
 	{
 		"embear/vim-localvimrc",
