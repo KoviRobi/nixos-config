@@ -34,6 +34,7 @@ key.set("c", "<Right>", function()
 	end
 end, { expr = true })
 key.set("c", "<A-BS>", "<C-w>", { desc = "Delete word" })
+key.set("!", "<C-o>", "<Down>", { desc = "Omnicomplete next" })
 
 key.set({ "n", "i" }, "<C-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
 key.set({ "n", "i" }, "<C-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
