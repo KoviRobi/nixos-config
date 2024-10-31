@@ -66,6 +66,7 @@ with pkgs;
 
   (python3.withPackages (
     p: with p; [
+      pyelftools
       matplotlib
       numpy
       pandas
