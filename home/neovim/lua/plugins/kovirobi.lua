@@ -41,7 +41,7 @@ return {
 				"<C-R><C-G>",
 				"<Cmd>fnameescape(fugitive#Object(@%))<CR>",
 				mode = "c",
-				{ desc = "Current fugitive object" },
+				desc = "Current fugitive object",
 			},
 			{ "y<C-G>", "<Cmd>call setreg(v:register, fugitive#Object(@%))<CR>", { silent = true } },
 		},
@@ -75,9 +75,9 @@ return {
 			"SlimeConfig",
 		},
 		keys = {
-			{ "<C-c><C-c>", "<Plug>SlimeRegionSend<cr>", mode = "x", { desc = "Send region to terminal" } },
-			{ "<C-c><C-c>", "<Cmd>normal! vip<CR><Plug>SlimeRegionSend<CR>", { desc = "Send region to terminal" } },
-			{ "<C-c>v", "<Cmd>SlimeConfig<CR>", { desc = "Send region to terminal" } },
+			{ "<C-c><C-c>", "<Plug>SlimeRegionSend<cr>", mode = "x", desc = "Send region to terminal" },
+			{ "<C-c><C-c>", "<Cmd>normal! vip<CR><Plug>SlimeRegionSend<CR>", desc = "Send region to terminal" },
+			{ "<C-c>v", "<Cmd>SlimeConfig<CR>", desc = "Configure vim-slime" },
 		},
 	},
 
@@ -95,11 +95,11 @@ return {
 			"TmuxNavigatePrevious",
 		},
 		keys = {
-			{ "<M-h>", "<cmd>TmuxNavigateLeft<cr>", mode = { "n", "i", "t" }, { desc = "Go to left window" } },
-			{ "<M-j>", "<cmd>TmuxNavigateDown<cr>", mode = { "n", "i", "t" }, { desc = "Go to lower window" } },
-			{ "<M-k>", "<cmd>TmuxNavigateUp<cr>", mode = { "n", "i", "t" }, { desc = "Go to upper window" } },
-			{ "<M-l>", "<cmd>TmuxNavigateRight<cr>", mode = { "n", "i", "t" }, { desc = "Go to right window" } },
-			{ "<M-;>", "<cmd>TmuxNavigatePrevious<cr>", mode = { "n", "i", "t" }, { desc = "Go to previous window" } },
+			{ "<M-h>", "<cmd>TmuxNavigateLeft<cr>", mode = { "n", "i", "t" }, desc = "Go to left window" },
+			{ "<M-j>", "<cmd>TmuxNavigateDown<cr>", mode = { "n", "i", "t" }, desc = "Go to lower window" },
+			{ "<M-k>", "<cmd>TmuxNavigateUp<cr>", mode = { "n", "i", "t" }, desc = "Go to upper window" },
+			{ "<M-l>", "<cmd>TmuxNavigateRight<cr>", mode = { "n", "i", "t" }, desc = "Go to right window" },
+			{ "<M-;>", "<cmd>TmuxNavigatePrevious<cr>", mode = { "n", "i", "t" }, desc = "Go to previous window" },
 		},
 	},
 
