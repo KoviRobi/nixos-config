@@ -172,7 +172,6 @@ in
 
       extraLuaConfig = ''
         vim.g.mapleader = " "
-        vim.o.background = "light" -- to prevent flashing on startup
         vim.cmd.packadd("termdebug")
         require("lazy").setup({
           spec = {
