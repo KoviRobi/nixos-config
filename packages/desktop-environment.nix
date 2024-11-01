@@ -65,6 +65,7 @@
       typstyle
       typst-fmt
       prettypst
+      pandoc
     ]
     ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
       (mpv.override {
