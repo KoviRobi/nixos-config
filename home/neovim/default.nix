@@ -37,6 +37,7 @@ in
           conform-nvim
           nvim-lint
           render-markdown-nvim
+          markdown-preview-nvim
           headlines-nvim
 
           # theme
