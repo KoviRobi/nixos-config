@@ -35,11 +35,11 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
 		},
-		opts = {
-			adapters = {
+		opts = function()
+			require("neotest").setup({
 				require("neotest-golang"), -- Registration
-			},
-		},
+			})
+		end,
 	},
 
 	{
