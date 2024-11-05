@@ -44,7 +44,7 @@ return {
 
 	{
 		"mfussenegger/nvim-dap",
-		opts = function()
+		setup = function()
 			local dap = require("dap")
 			dap.adapters.gdb = {
 				type = "executable",
