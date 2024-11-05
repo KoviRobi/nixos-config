@@ -99,6 +99,16 @@ return {
 			{ "<C-c><C-c>", "<Plug>SlimeRegionSend<cr>", mode = "x", desc = "Send region to terminal" },
 			{ "<C-c><C-c>", "<Cmd>normal! vip<CR><Plug>SlimeRegionSend<CR>", desc = "Send region to terminal" },
 			{ "<C-c>v", "<Cmd>SlimeConfig<CR>", desc = "Configure vim-slime" },
+			{
+				"<C-c>r",
+				"<Cmd>call slime#targets#neovim#SlimeAddChannel(string(bufnr()))<CR>",
+				desc = "Add this buffer as a slime channel",
+			},
+			{
+				"<C-c>R",
+				"<Cmd>call slime#targets#neovim#SlimeClearChannel(string(bufnr()))<CR>",
+				desc = "Remove this buffer as a slime channel",
+			},
 		},
 	},
 
