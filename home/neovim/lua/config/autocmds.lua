@@ -33,3 +33,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+
+-- Take account of mini.misc gutter for :Man
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("man_mini_misc_width"),
+	pattern = {
+		"man",
+	},
+	callback = function(_)
+		vim.o.signcolumn = "no"
+	end,
+})
