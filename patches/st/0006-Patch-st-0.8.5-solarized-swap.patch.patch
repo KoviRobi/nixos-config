@@ -1,4 +1,4 @@
-From 99e4847fb3f8fc53d7634a9f0d97603bdab3f0c3 Mon Sep 17 00:00:00 2001
+From 982b0bd2e07ad604d348219527bbc0f188d65947 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:52 +0100
 Subject: [PATCH 6/9] Patch st-0.8.5-solarized-swap.patch
@@ -10,7 +10,7 @@ Subject: [PATCH 6/9] Patch st-0.8.5-solarized-swap.patch
  3 files changed, 66 insertions(+), 37 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index b152762..3c5b408 100644
+index b152762..45ae0ba 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -102,44 +102,55 @@ unsigned int tabspaces = 8;
@@ -104,7 +104,7 @@ index b152762..3c5b408 100644
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-+	{ TERMMOD,           XK_F6,          swapcolors,     {.i =  0} },
++	{ TERMMOD,              XK_F6,          swapcolors,     {.i =  0} },
  };
  
  /*
@@ -121,7 +121,7 @@ index ba1d86e..2cd75fb 100644
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
 diff --git a/x.c b/x.c
-index f1ce158..e7c84ff 100644
+index f1ce158..37d2859 100644
 --- a/x.c
 +++ b/x.c
 @@ -55,6 +55,7 @@ static void clipcopy(const Arg *);
@@ -148,9 +148,9 @@ index f1ce158..e7c84ff 100644
 +void
 +swapcolors(const Arg *dummy)
 +{
-+ usealtcolors = !usealtcolors;
-+ xloadcols();
-+ redraw();
++	usealtcolors = !usealtcolors;
++	xloadcols();
++	redraw();
 +}
 +
  void
@@ -162,7 +162,7 @@ index f1ce158..e7c84ff 100644
  
 +const char* getcolorname(int i)
 +{
-+    return (usealtcolors) ?  altcolorname[i] : colorname[i];
++	return (usealtcolors) ?  altcolorname[i] : colorname[i];
 +}
 +
  int
@@ -214,5 +214,5 @@ index f1ce158..e7c84ff 100644
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
 -- 
-2.46.0
+2.46.1
 

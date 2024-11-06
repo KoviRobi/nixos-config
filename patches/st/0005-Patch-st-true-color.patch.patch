@@ -1,4 +1,4 @@
-From fb3f2bb706ce4a20ed488487e98f5fd90463baf1 Mon Sep 17 00:00:00 2001
+From 3b45615486175c6c10d2b600c6594429e6887985 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:20 +0100
 Subject: [PATCH 5/9] Patch st-true-color.patch
@@ -33,5 +33,5 @@ index efab2cf..7c81d67 100644
  	Ms=\E]52;%p1%s;%p2%s\007,
  	Se=\E[2 q,
 -- 
-2.46.0
+2.46.1
 

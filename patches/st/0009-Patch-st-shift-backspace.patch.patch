@@ -1,4 +1,4 @@
-From 7059794326d8f170a2f57d09713dde8b1c433d66 Mon Sep 17 00:00:00 2001
+From 59a9d126afd671bab8776faa7558a824ff7a66ff Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:28:25 +0100
 Subject: [PATCH 9/9] Patch st-shift-backspace.patch
@@ -8,7 +8,7 @@ Subject: [PATCH 9/9] Patch st-shift-backspace.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/config.def.h b/config.def.h
-index 3c5b408..e843778 100644
+index 45ae0ba..c83a88d 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -367,8 +367,8 @@ static Key key[] = {
@@ -21,5 +21,6 @@ index 3c5b408..e843778 100644
  	{ XK_Home,          ShiftMask,      "\033[2J",       0,   -1},
  	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},
  	{ XK_Home,          XK_ANY_MOD,     "\033[H",        0,   -1},
---
-2.46.0
+-- 
+2.46.1
+

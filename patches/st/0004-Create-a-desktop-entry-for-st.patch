@@ -1,4 +1,4 @@
-From 03d971076021c2afa23a1d38da01b6f75e3c2bc7 Mon Sep 17 00:00:00 2001
+From 043ebb5031d0f95503eab1e71ea6a4a20be17211 Mon Sep 17 00:00:00 2001
 From: aleks <aleks.stier@icloud.com>
 Date: Tue, 31 May 2022 00:33:38 +0200
 Subject: [PATCH 4/9] Create a desktop-entry for st
@@ -64,5 +64,5 @@ index 0000000..2d2b76f
 +Comment=st is a simple terminal implementation for X
 +StartupWMClass=st-256color
 -- 
-2.46.0
+2.46.1
 

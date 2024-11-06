@@ -1,4 +1,4 @@
-From 21bb8949f5be32c0f10aec76426174193183f0f3 Mon Sep 17 00:00:00 2001
+From 1c4340539a9d612e002cdaf6dae206c18f738f2d Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:22:07 +0100
 Subject: [PATCH 1/9] Patch st-0.8.5-font2.patch
@@ -162,5 +162,5 @@ index bd23686..b251400 100644
  	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
  	xloadcols();
 -- 
-2.46.0
+2.46.1
 

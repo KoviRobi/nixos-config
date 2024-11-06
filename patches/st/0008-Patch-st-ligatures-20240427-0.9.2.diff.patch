@@ -1,4 +1,4 @@
-From 3e13081e9391e35a7b70f8b9a1e220c82eeb0ad4 Mon Sep 17 00:00:00 2001
+From abf20f67cf2645800be52cae43a964f9a04808c2 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:26:31 +0100
 Subject: [PATCH 8/9] Patch st-ligatures-20240427-0.9.2.diff
@@ -251,7 +251,7 @@ index 6de960d..94679e4 100644
  void xfinishdraw(void);
  void xloadcols(void);
 diff --git a/x.c b/x.c
-index a470b83..3903107 100644
+index f057aab..d7603fd 100644
 --- a/x.c
 +++ b/x.c
 @@ -19,6 +19,7 @@ char *argv0;
@@ -650,5 +650,5 @@ index a470b83..3903107 100644
  
  void
 -- 
-2.46.0
+2.46.1
 
