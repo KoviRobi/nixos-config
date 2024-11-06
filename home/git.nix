@@ -51,6 +51,7 @@ in
       credential.helper = "libsecret";
       commit.verbose = true;
       merge.tool = "nvimdiff";
+      mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       diff.colorMoved = true;
       diff.colorMovedWS = "ignore-all-space";
       init.defaultBranch = "main";
