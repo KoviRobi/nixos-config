@@ -293,10 +293,6 @@
               ./configurations/promethium.nix
               ./targets/promethium.nix
             ];
-            "promethium-nix2" = [
-              ./configurations/promethium.nix
-              ./targets/promethium-temp.nix
-            ];
             "iso" = [
               ./configurations/cc.nix
               (import ./targets/iso-image.nix { inherit self nixpkgs; })
