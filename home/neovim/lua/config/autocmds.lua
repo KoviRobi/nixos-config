@@ -41,6 +41,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"man",
 	},
 	callback = function(_)
-		vim.o.signcolumn = "no"
+		vim.wo.foldmethod = "manual"
+		vim.bo.signcolumn = "no"
+		vim.bo.statuscolumn = ""
 	end,
 })

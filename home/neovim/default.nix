@@ -24,6 +24,15 @@ in
     home.shellAliases.man = "viman";
 
     home.packages = [
+      (lib.hiPrio (
+        pkgs.writeShellApplication {
+          name = "viman";
+          text = ''
+            nvim "+set foldmethod=manual signcolumn=no statuscolumn= | hide Man $1"
+          '';
+        }
+      ))
+
       pkgs.gcc # needed for nvim-treesitter
 
       # LazyVim defaults
