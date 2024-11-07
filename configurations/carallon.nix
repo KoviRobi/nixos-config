@@ -214,4 +214,9 @@
 
   security.pam.services.sshd.makeHomeDir = true;
   security.pam.makeHomeDir.skelDirectory = "/etc/skel";
+
+  services.udev.extraRules = ''
+    # FocalTechSystemsLtd programmer
+    ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="81b9", MODE="660", OWNER="${config.users.users.default-user.name}", GROUP="plugdev", TAG+="uaccess"
+  '';
 }
