@@ -21,6 +21,39 @@ in
       EDITOR = "nvim";
     };
 
+    home.shellAliases.man = "viman";
+
+    home.packages = [
+      pkgs.gcc # needed for nvim-treesitter
+
+      # LazyVim defaults
+      pkgs.stylua
+      pkgs.shfmt
+
+      # Markdown extra
+      pkgs.markdownlint-cli2
+      pkgs.marksman
+
+      # Docker extra
+      pkgs.nodePackages.dockerfile-language-server-nodejs
+      pkgs.hadolint
+      pkgs.docker-compose-language-service
+
+      # JSON and YAML extras
+      pkgs.nodePackages.vscode-json-languageserver
+      pkgs.nodePackages.yaml-language-server
+
+      # Custom
+      pkgs.editorconfig-checker
+      pkgs.shellcheck
+
+      pkgs.lua-language-server
+
+      pkgs.statix
+
+      pkgs.taplo
+    ];
+
     programs.neovim = {
       enable = true;
       defaultEditor = true;
@@ -140,35 +173,6 @@ in
           vim-bindsplit
           maxmx03-solarized-nvim
         ]);
-
-      extraPackages = with pkgs; [
-        gcc # needed for nvim-treesitter
-
-        # LazyVim defaults
-        stylua
-        shfmt
-
-        # Markdown extra
-        markdownlint-cli2
-        marksman
-
-        # Docker extra
-        nodePackages.dockerfile-language-server-nodejs
-        hadolint
-        docker-compose-language-service
-
-        # JSON and YAML extras
-        nodePackages.vscode-json-languageserver
-        nodePackages.yaml-language-server
-
-        # Custom
-        editorconfig-checker
-        shellcheck
-
-        lua-language-server
-
-        statix
-      ];
 
       extraLuaConfig = ''
         vim.g.mapleader = " "
