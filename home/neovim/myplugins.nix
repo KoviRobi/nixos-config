@@ -34,4 +34,16 @@ in
       hash = "sha256-1k5uK1Ge9zfNHeHxlg6rWdxlnvk45m5zwvWIYEyN1rg=";
     };
   };
+
+  profile-nvim = mkPlugin {
+    pname = "profile.nvim";
+    version = "unstable-2024-11-09";
+    src = fetchFromGitHub {
+      owner = "stevearc";
+      repo = "profile.nvim";
+      rev = "d57df512bdade4c7a04a1bb6c89c8b54c5dce52a";
+      sha256 = "sha256-dRHidtV/M+i/5CkeaJBQ2BMuISmnrAIqm34x7YBkSNU=";
+    };
+    meta.homepage = "https://github.com/stevearc/profile.nvim";
+  };
 }
