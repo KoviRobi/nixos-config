@@ -57,6 +57,7 @@ in
       pkgs.shellcheck
 
       pkgs.lua-language-server
+      pkgs.cmake-language-server
 
       pkgs.statix
 

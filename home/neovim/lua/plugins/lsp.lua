@@ -10,6 +10,7 @@ return {
 				gopls = {},
 				rust_analyzer = {},
 				pyright = {},
+				cmake = {},
 			},
 		},
 	},
