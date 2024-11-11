@@ -90,14 +90,17 @@ return {
 			vim.g.slime_target = "neovim"
 			vim.g.slime_no_mappings = 1
 			vim.g.slime_config_defaults = vim.empty_dict()
+			vim.g.slime_cell_delimiter = "```"
 		end,
 		cmd = {
 			"SlimeSend",
+			"SlimeSendCell",
 			"SlimeConfig",
 		},
 		keys = {
 			{ "<C-c><C-c>", "<Plug>SlimeRegionSend<cr>", mode = "x", desc = "Send region to terminal" },
 			{ "<C-c><C-c>", "<Cmd>normal! vip<CR><Plug>SlimeRegionSend<CR>", desc = "Send region to terminal" },
+			{ "<C-c>c", "<Plug>SlimeSendCell<cr>", desc = "Send cell to terminal" },
 			{ "<C-c>v", "<Cmd>SlimeConfig<CR>", desc = "Configure vim-slime" },
 			{
 				"<C-c>r",
