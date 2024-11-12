@@ -42,20 +42,14 @@ in
       }
     ];
     extraConfig = {
-      gpg.format = "ssh";
-      user.signingKey = "~/.ssh/id_ed25519.pub";
-      rebase.autoSquash = true;
-      rebase.autoStash = true;
-      pull.ff = "only";
-      help.autoCorrect = 10;
-      credential.helper = "libsecret";
+      am.threeWay = true;
       commit.verbose = true;
-      merge.tool = "nvimdiff";
-      mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
+      credential.helper = "libsecret";
       diff.colorMoved = true;
       diff.colorMovedWS = "ignore-all-space";
+      gpg.format = "ssh";
+      help.autoCorrect = 10;
       init.defaultBranch = "main";
-      am.threeWay = true;
       init.templateDir = "${pkgs.symlinkJoin {
         name = "git-template";
         paths = [
@@ -130,6 +124,12 @@ in
           })
         ];
       }}";
+      merge.tool = "nvimdiff";
+      mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
+      pull.ff = "only";
+      rebase.autoSquash = true;
+      rebase.autoStash = true;
+      user.signingKey = "~/.ssh/id_ed25519.pub";
     };
   };
 }
