@@ -1,4 +1,3 @@
-local util = require("lspconfig.util")
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -6,15 +5,7 @@ return {
 			servers = {
 				nil_ls = { mason = false },
 				lua_ls = { mason = false },
-				ccls = {
-					init_options = {
-						compilationDatabaseDirectory = "build",
-					},
-					root_dir = function(fname)
-						return util.root_pattern("compile_commands.json", ".ccls", "CMakeLists.txt")(fname)
-							or util.find_git_ancestor(fname)
-					end,
-				},
+				ccls = {},
 				ocamllsp = { mason = false },
 				gopls = {},
 				rust_analyzer = {},
