@@ -26,6 +26,7 @@
       seahorse
       udiskie
       geeqie
+      pinentry-gnome3
 
       libreoffice
 
