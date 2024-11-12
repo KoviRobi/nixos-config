@@ -3,14 +3,15 @@
 {
   home = {
     shellAliases = {
-      wget = "wget --hsts-file=${config.xdg.cacheHome}/wget-hsts";
+      wget = "wget --hsts-file=${config.xdg.stateHome}/wget-hsts";
     };
     sessionVariables = {
-      XCOMPOSECACHE = "${config.xdg.cacheHome}/x11/xcompose";
-      GNUPGHOME = "${config.xdg.cacheHome}/gnupg";
-      INPUTRC = "${config.xdg.cacheHome}/readline/inputrc";
+      XCOMPOSECACHE = "${config.xdg.configHome}/x11/xcompose";
+      GNUPGHOME = "${config.xdg.configHome}/gnupg";
+      INPUTRC = "${config.xdg.configHome}/readline/inputrc";
+      PASSWORD_STORE_DIR = "${config.xdg.configHome}/password-store";
     };
-    file.".inputrc".target = "${config.xdg.cacheHome}/readline/inputrc";
+    file.".inputrc".target = "${config.xdg.configHome}/readline/inputrc";
   };
-  programs.bash.historyFile = "${config.xdg.cacheHome}/bash/history";
+  programs.bash.historyFile = "${config.xdg.configHome}/bash/history";
 }
