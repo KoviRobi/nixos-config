@@ -44,9 +44,14 @@ in
     extraConfig = {
       am.threeWay = true;
       commit.verbose = true;
+      core.commitGraph = true;
+      core.fsmonitor = true;
+      core.untrackedCache = true;
       credential.helper = "libsecret";
       diff.colorMoved = true;
       diff.colorMovedWS = "ignore-all-space";
+      feature.manyFiles = true;
+      fetch.writeCommitGraph = true;
       gpg.format = "ssh";
       help.autoCorrect = 10;
       init.defaultBranch = "main";
