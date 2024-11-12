@@ -52,3 +52,7 @@ key.del("t", "<C-l>")
 -- Remove j/k mapped to gj/gk (though leave it for arrow keys)
 key.del({ "n", "x" }, "j")
 key.del({ "n", "x" }, "k")
+
+key.set("n", "<Leader>cO", function()
+	vim.diagnostic.enable(false, { bufnr = vim.fn.bufnr() })
+end, { desc = "Turn off diagnostics for this buffer" })
