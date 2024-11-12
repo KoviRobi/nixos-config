@@ -54,5 +54,7 @@ key.del({ "n", "x" }, "j")
 key.del({ "n", "x" }, "k")
 
 key.set("n", "<Leader>cO", function()
-	vim.diagnostic.enable(false, { bufnr = vim.fn.bufnr() })
-end, { desc = "Turn off diagnostics for this buffer" })
+	local filter = { bufnr = vim.fn.bufnr() }
+	local enabled = vim.diagnostic.is_enabled(filter)
+	vim.diagnostic.enable(not enabled, filter)
+end, { desc = "Toggle diagnostics for this buffer" })
