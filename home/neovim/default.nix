@@ -148,11 +148,6 @@ in
           nvim-ts-context-commentstring
           todo-comments-nvim
 
-          # leap
-          vim-repeat
-          leap-nvim
-          flit-nvim
-
           # DAP
           nvim-dap
           nvim-dap-ui
@@ -221,7 +216,6 @@ in
             { import = "lazyvim.plugins.extras.dap.core" },
             { import = "lazyvim.plugins.extras.dap.nlua" },
             { import = "lazyvim.plugins.extras.editor.aerial" },
-            { import = "lazyvim.plugins.extras.editor.leap" },
             { import = "lazyvim.plugins.extras.editor.navic" },
             { import = "lazyvim.plugins.extras.lang.docker" },
             { import = "lazyvim.plugins.extras.lang.json" },
