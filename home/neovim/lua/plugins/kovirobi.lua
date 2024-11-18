@@ -168,4 +168,16 @@ return {
 			})
 		end,
 	},
+
+	{
+		"nvimdev/dashboard-nvim",
+		opts = function(_, opts)
+			opts.hide = {
+				statusline = false,
+				tabline = false,
+				winbar = false,
+			}
+			return opts
+		end,
+	},
 }
