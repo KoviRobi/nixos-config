@@ -55,24 +55,15 @@ in
       gpg.format = "ssh";
       help.autoCorrect = 10;
       init.defaultBranch = "main";
-      init.templateDir = "${pkgs.symlinkJoin {
-        name = "git-template";
-        paths = [
-          "${cfg.package}/share/git-core/templates"
-          (pkgs.writeTextFile rec {
+      init.templateDir =
+        let
+          pre-push-local = pkgs.writeShellApplication {
             name = "pre-push-hook";
-            executable = true;
-            destination = "/hooks/pre-push";
+            runtimeInputs = [
+              cfg.package
+              pkgs.coreutils
+            ];
             text = ''
-              #!${pkgs.runtimeShell}
-
-              export PATH="${
-                lib.makeBinPath [
-                  cfg.package
-                  pkgs.coreutils
-                ]
-              }"
-
               # This hook is called with the following parameters:
               #
               # $1 -- Name of the remote to which the push is being done
@@ -88,12 +79,12 @@ in
               # This prevents push of commits where the log message starts with
               # "local!".
 
-              remote="$1"
-              url="$2"
+              # remote="$1"
+              # url="$2"
 
-              zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')
+              zero=$(git hash-object --stdin </dev/null | tr '0-9a-f' '0')
 
-              while read local_ref local_oid remote_ref remote_oid
+              while read -r local_ref local_oid _remote_ref remote_oid
               do
                 if test "$local_oid" = "$zero"
                 then
@@ -121,14 +112,12 @@ in
 
               exit 0
             '';
-
-            checkPhase = ''
-              ${pkgs.stdenv.shellDryRun} "$target"
-            '';
-            meta.mainProgram = name;
-          })
-        ];
-      }}";
+          };
+        in
+        "${pkgs.runCommandLocal "git-template" { } ''
+          cp --no-preserve=mode --dereference -r "${cfg.package}/share/git-core/templates" "$out"
+          cp '${lib.getExe pre-push-local}' "$out/hooks/pre-push"
+        ''}";
       merge.tool = "nvimdiff";
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       pull.ff = "only";
