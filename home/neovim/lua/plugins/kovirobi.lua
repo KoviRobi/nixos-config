@@ -170,4 +170,6 @@ return {
 			return opts
 		end,
 	},
+
+	{ "pimalaya/himalaya-vim" },
 }

@@ -178,6 +178,7 @@ in
           vim-bindsplit
           maxmx03-solarized-nvim
           profile-nvim
+          himalaya-vim
         ]);
 
       extraLuaConfig = ''

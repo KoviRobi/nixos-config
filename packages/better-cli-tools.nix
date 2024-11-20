@@ -16,4 +16,5 @@ with pkgs;
   mimi
   fd
   rlwrap
+  himalaya
 ]
