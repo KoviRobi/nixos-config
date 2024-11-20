@@ -8,7 +8,27 @@ return {
 				ccls = {},
 				ocamllsp = { mason = false },
 				gopls = {},
-				rust_analyzer = {},
+				rust_analyzer = {
+					enabled = true,
+					settings = {
+						["rust-analyzer"] = {
+							imports = {
+								granularity = {
+									group = "module",
+								},
+								prefix = "self",
+							},
+							cargo = {
+								buildScripts = {
+									enable = true,
+								},
+							},
+							procMacro = {
+								enable = true,
+							},
+						},
+					},
+				},
 				pyright = {},
 				cmake = {},
 			},
@@ -19,9 +39,12 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
-				nix = { "nixfmt" },
-				python = { "isort", "black" },
-				["*"] = { "trim_whitespace", "trim_newlines" },
+				nix = { "nixfmt", "trim_whitespace", "trim_newlines" },
+				python = { "isort", "black", "trim_whitespace", "trim_newlines" },
+				rust = { "rustfmt", "trim_whitespace", "trim_newlines" },
+				diff = {},
+				patch = {},
+				["_"] = { "trim_whitespace", "trim_newlines" },
 			},
 		},
 		ft = "*",
