@@ -14,6 +14,7 @@ let
   nginx-port = 8080;
   git-appraise-rob-port = 8078;
   git-appraise-rob-listen = "${config.networking.hostName}:${toString git-appraise-rob-port}";
+  git-sshd-port = 29418;
   user = "git-appraise-rob";
   group = "git-appraise-rob";
 
@@ -216,7 +217,7 @@ in
           Banner none
 
           AddressFamily any
-          Port 29418
+          Port ${toString git-sshd-port}
           HostKey /etc/ssh/ssh_host_ed25519_key_git
           ForceCommand ${cmd}
         '';
@@ -232,5 +233,8 @@ in
     after = [ "network.target" ];
   };
 
-  networking.firewall.allowedTCPPorts = lib.optional publish nginx-port;
+  networking.firewall.allowedTCPPorts = lib.optionals publish [
+    nginx-port
+    git-sshd-port
+  ];
 }
