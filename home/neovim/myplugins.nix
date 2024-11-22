@@ -58,4 +58,16 @@ in
     };
     meta.homepage = "https://github.com/pimalaya/himalaya-vim";
   };
+
+  neotest-ctest = mkPlugin rec {
+    pname = "neotest-ctest";
+    version = "v0.1.0";
+    src = fetchFromGitHub {
+      owner = "orjangj";
+      repo = pname;
+      rev = version;
+      sha256 = "sha256-+560CBPJeKd2F9qboI1YiccffQYLFoHpaEIs0HsCGls=";
+    };
+    meta.homepage = "https://github.com/orjangj/neotest-ctest";
+  };
 }

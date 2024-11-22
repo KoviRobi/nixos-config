@@ -58,10 +58,14 @@ return {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
+			"orjangj/neotest-ctest",
 		},
-		opts = function()
+		config = function()
 			require("neotest").setup({
-				require("neotest-golang"), -- Registration
+				adapters = {
+					require("neotest-golang"),
+					require("neotest-ctest").setup({}),
+				},
 			})
 		end,
 	},

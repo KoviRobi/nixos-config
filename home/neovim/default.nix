@@ -179,6 +179,7 @@ in
           maxmx03-solarized-nvim
           profile-nvim
           himalaya-vim
+          neotest-ctest
         ]);
 
       extraLuaConfig = ''
