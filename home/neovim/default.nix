@@ -117,7 +117,7 @@ in
 
           # LSP
           nvim-lspconfig
-          rust-tools-nvim
+          rustaceanvim
           crates-nvim
           null-ls-nvim
           nvim-lightbulb # lightbulb for quick actions
