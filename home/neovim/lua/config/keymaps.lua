@@ -44,10 +44,7 @@ key.del("n", "<S-h>")
 key.del("n", "<S-l>")
 
 -- Remove terminal mode mappins which override C-k kill line, C-l clear screen
-key.del("t", "<C-j>")
-key.del("t", "<C-h>")
-key.del("t", "<C-k>")
-key.del("t", "<C-l>")
+key.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Normal mode" })
 
 -- Remove j/k mapped to gj/gk (though leave it for arrow keys)
 key.del({ "n", "x" }, "j")

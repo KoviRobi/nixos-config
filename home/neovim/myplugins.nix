@@ -5,14 +5,15 @@
 }:
 let
   mkPlugin =
-    conf:
-    if vimPlugins ? vim-bindsplit then
+    name: conf:
+    if vimPlugins ? name then
       throw "Plugin merged upstream, this can be removed"
     else
       buildVimPlugin conf;
+  mkPlugins = builtins.mapAttrs mkPlugin;
 in
-{
-  vim-bindsplit = mkPlugin {
+mkPlugins {
+  vim-bindsplit = {
     pname = "vim-bindsplit";
     version = "2022-01-29";
     src = fetchFromGitHub {
@@ -24,7 +25,7 @@ in
     meta.homepage = "https://github.com/KoviRobi/vim-bindsplit/";
   };
 
-  maxmx03-solarized-nvim = mkPlugin {
+  maxmx03-solarized-nvim = {
     pname = "solarized.nvim";
     version = "3.5.0";
     src = fetchFromGitHub {
@@ -35,7 +36,7 @@ in
     };
   };
 
-  profile-nvim = mkPlugin {
+  profile-nvim = {
     pname = "profile.nvim";
     version = "unstable-2024-11-09";
     src = fetchFromGitHub {
@@ -47,7 +48,7 @@ in
     meta.homepage = "https://github.com/stevearc/profile.nvim";
   };
 
-  himalaya-vim = mkPlugin {
+  himalaya-vim = {
     pname = "himalaya-vim";
     version = "unstable-2024-09-10";
     src = fetchFromGitHub {
@@ -59,7 +60,7 @@ in
     meta.homepage = "https://github.com/pimalaya/himalaya-vim";
   };
 
-  neotest-ctest = mkPlugin rec {
+  neotest-ctest = rec {
     pname = "neotest-ctest";
     version = "v0.1.0";
     src = fetchFromGitHub {

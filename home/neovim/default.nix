@@ -77,6 +77,7 @@ in
           # base distro
           LazyVim
           lazydev-nvim
+          snacks-nvim
           conform-nvim
           nvim-lint
           render-markdown-nvim
@@ -111,7 +112,7 @@ in
           persistence-nvim
 
           # smart typing
-          indent-blankline-nvim
+          indent-blankline-nvim-lua
           guess-indent-nvim
           vim-illuminate
 
