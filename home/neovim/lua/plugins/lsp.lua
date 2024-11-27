@@ -8,27 +8,6 @@ return {
 				ccls = {},
 				ocamllsp = { mason = false },
 				gopls = {},
-				rust_analyzer = {
-					enabled = true,
-					settings = {
-						["rust-analyzer"] = {
-							imports = {
-								granularity = {
-									group = "module",
-								},
-								prefix = "self",
-							},
-							cargo = {
-								buildScripts = {
-									enable = true,
-								},
-							},
-							procMacro = {
-								enable = true,
-							},
-						},
-					},
-				},
 				pyright = {},
 				cmake = {},
 			},
