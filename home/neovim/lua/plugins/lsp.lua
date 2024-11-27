@@ -100,4 +100,6 @@ return {
 			end
 		end,
 	},
+
+	{ "Civitasv/cmake-tools.nvim", config = {} },
 }

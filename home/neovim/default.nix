@@ -126,6 +126,7 @@ in
           # nvim-code-action-menu # code action menu
           neodev-nvim
           SchemaStore-nvim # load known formats for json and yaml
+          cmake-tools-nvim
 
           # snippets
           luasnip # snippet engine
