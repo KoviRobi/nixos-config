@@ -57,12 +57,13 @@ return {
 			"GUnlink",
 			"GBrowse",
 		},
-		key = {
+		keys = {
 			{
 				"<C-R><C-G>",
-				"<Cmd>fnameescape(fugitive#Object(@%))<CR>",
+				"fnameescape(fugitive#Object(@%))",
 				mode = "c",
 				desc = "Current fugitive object",
+				expr = true,
 			},
 			{ "y<C-G>", "<Cmd>call setreg(v:register, fugitive#Object(@%))<CR>", { silent = true } },
 		},
