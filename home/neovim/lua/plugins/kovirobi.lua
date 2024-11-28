@@ -172,4 +172,24 @@ return {
 	},
 
 	{ "pimalaya/himalaya-vim" },
+
+	{ "miversen33/netman.nvim" },
+
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		dependencies = {
+			"miversen33/netman.nvim",
+		},
+		opts = {
+			sources = {
+				"filesystem",
+				"buffers",
+				"git_status",
+				"netman.ui.neo-tree",
+			},
+			filesystem = {
+				hijack_netrw_behavior = "open_default",
+			},
+		},
+	},
 }

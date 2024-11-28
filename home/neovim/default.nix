@@ -102,6 +102,7 @@ in
           nvim-notify
           nvim-lsp-notify
           neo-tree-nvim
+          netman-nvim
           nvim-navic
           dressing-nvim
           aerial-nvim
