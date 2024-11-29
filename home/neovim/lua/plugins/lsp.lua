@@ -51,12 +51,12 @@ return {
 
 	{
 		"mfussenegger/nvim-dap",
-		setup = function()
+		config = function(_dap, _opts)
 			local dap = require("dap")
 			dap.adapters.gdb = {
 				type = "executable",
 				command = "gdb",
-				args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+				args = { "--quiet", "--interpreter=dap", "--eval-command", "set print pretty on" },
 			}
 			local c_like = { "c", "cpp" }
 			for _, language in ipairs(c_like) do
