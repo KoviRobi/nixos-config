@@ -193,4 +193,25 @@ return {
 			},
 		},
 	},
+
+	{
+		"folke/flash.nvim",
+		---@type Flash.Config
+		opts = {
+			modes = {
+				char = {
+					-- show jump labels
+					jump_labels = true,
+					-- Allow using f/t for fresh search
+					label = { exclude = "hjkliardcx" },
+					char_actions = function()
+						return {
+							[";"] = "next", -- set to `right` to always go right
+							[","] = "prev", -- set to `left` to always go left
+						}
+					end,
+				},
+			},
+		},
+	},
 }
