@@ -200,8 +200,13 @@ return {
 		opts = {
 			modes = {
 				char = {
-					-- show jump labels
-					jump_labels = true,
+					autohide = function(motion)
+						-- autohide flash when the operator is `y` or `d`
+						return vim.fn.mode(true):find("no") and (vim.v.operator == "y" or vim.v.operator == "d")
+					end,
+					jump_labels = function(motion)
+						return not (vim.fn.mode(true):find("no") and (vim.v.operator == "y" or vim.v.operator == "d"))
+					end,
 					-- Allow using f/t for fresh search
 					label = { exclude = "hjkliardcx" },
 					char_actions = function()
