@@ -55,3 +55,7 @@ key.set("n", "<Leader>cO", function()
 	local enabled = vim.diagnostic.is_enabled(filter)
 	vim.diagnostic.enable(not enabled, filter)
 end, { desc = "Toggle diagnostics for this buffer" })
+
+key.set("n", "<Leader>gca", "<Cmd>Git commit --amend<CR>")
+key.set("n", "<Leader>gcc", "<Cmd>Git commit<CR>")
+key.set("n", "<Leader>gc<Space>", ":<C-U>Git commit")
