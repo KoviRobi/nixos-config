@@ -13,13 +13,8 @@
     dejavu_fonts
     liberation_ttf
     lmodern
-    (nerdfonts.override {
-      fonts = [
-        "DejaVuSansMono"
-        "CascadiaCode"
-        "CascadiaMono"
-      ];
-    })
+    nerd-fonts.dejavu-sans-mono
+    nerd-fonts.caskaydia-cove
     inconsolata
   ];
 

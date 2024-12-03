@@ -29,10 +29,6 @@
   inputs.poetry2nix.url = "github:nix-community/poetry2nix";
   inputs.poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
 
-  inputs.himalaya.url = "github:KoviRobi/himalaya/rob";
-  inputs.himalaya.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.himalaya.inputs.flake-compat.follows = "flake-compat";
-
   outputs =
     {
       self,
@@ -45,7 +41,6 @@
       deploy-rs,
       nix-index-database,
       poetry2nix,
-      himalaya,
       ...
     }:
     {
@@ -83,21 +78,6 @@
         listToAttrs imported
         // {
           poetry2nix = poetry2nix.overlays.default;
-          himalaya = final: prev: {
-            himalaya = himalaya.packages.${final.system}.default.overrideAttrs (old: rec {
-              # Naersk two-phase build isn't useful with overriding
-              builtDependencies = [ ];
-
-              name = "himalaya-${version}";
-              version = "1.0.0pre-g${himalaya.shortRev}";
-              GIT_DESCRIBE = version;
-
-              cargo_build_options = old.cargo_build_options or [ ] ++ [
-                "-F"
-                "oauth2,keyring,pgp-commands,pgp-native"
-              ];
-            });
-          };
         };
 
       homeModules.simple = [
