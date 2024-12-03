@@ -197,7 +197,7 @@ return {
 	{
 		"folke/flash.nvim",
 		---@type Flash.Config
-		opts = {
+		config = {
 			modes = {
 				char = {
 					autohide = function(motion)
