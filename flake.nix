@@ -29,6 +29,15 @@
   inputs.poetry2nix.url = "github:nix-community/poetry2nix";
   inputs.poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
 
+  inputs.himalaya.url = "github:KoviRobi/himalaya";
+  inputs.himalaya.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.neverest.url = "github:KoviRobi/neverest";
+  inputs.neverest.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.neverest.inputs.fenix.follows = "himalaya/fenix";
+  inputs.mirador.url = "github:KoviRobi/mirador";
+  inputs.mirador.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.mirador.inputs.fenix.follows = "himalaya/fenix";
+
   outputs =
     {
       self,
@@ -41,6 +50,9 @@
       deploy-rs,
       nix-index-database,
       poetry2nix,
+      himalaya,
+      neverest,
+      mirador,
       ...
     }:
     {
@@ -78,6 +90,50 @@
         listToAttrs imported
         // {
           poetry2nix = poetry2nix.overlays.default;
+          pimalaya = final: prev: {
+            himalaya =
+              (himalaya.packages.${final.system}.default.override {
+                buildFeatures = [
+                  "notmuch"
+                  "oauth2"
+                ];
+              }).overrideAttrs
+                (old: rec {
+                  # Naersk two-phase build isn't useful with overriding
+                  builtDependencies = [ ];
+
+                  name = "himalaya-${version}";
+                  version = "1.0.0pre-g${himalaya.shortRev}";
+                  GIT_DESCRIBE = version;
+                });
+            neverest =
+              (neverest.packages.${final.system}.default.override {
+                buildFeatures = [
+                  "notmuch"
+                  "oauth2"
+                ];
+              }).overrideAttrs
+                (old: rec {
+                  # Naersk two-phase build isn't useful with overriding
+                  builtDependencies = [ ];
+
+                  name = "neverest-${version}";
+                  version = "1.0.0pre-g${neverest.shortRev}";
+                  GIT_DESCRIBE = version;
+                });
+            mirador =
+              (mirador.packages.${final.system}.default.override {
+                buildFeatures = [ "oauth2" ];
+              }).overrideAttrs
+                (old: rec {
+                  # Naersk two-phase build isn't useful with overriding
+                  builtDependencies = [ ];
+
+                  name = "mirador-${version}";
+                  version = "1.0.0pre-g${mirador.shortRev}";
+                  GIT_DESCRIBE = version;
+                });
+          };
         };
 
       homeModules.simple = [

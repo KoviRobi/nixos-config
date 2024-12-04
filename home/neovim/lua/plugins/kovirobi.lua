@@ -211,4 +211,9 @@ return {
 			},
 		},
 	},
+
+	{
+		"diefans/notmuch-vim",
+		cmd = { "NotMuch" },
+	},
 }

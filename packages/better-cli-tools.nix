@@ -16,5 +16,10 @@ with pkgs;
   mimi
   fd
   rlwrap
+  # Email
   himalaya
+  neverest
+  mirador
+  pizauth
+  notmuch
 ]
