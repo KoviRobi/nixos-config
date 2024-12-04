@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 local key = vim.keymap
+local gs = require("gitsigns")
 
 vim.o.wildcharm = string.byte(vim.keycode("<C-z>"))
 key.set("c", "<Up>", function()
@@ -59,3 +60,18 @@ end, { desc = "Toggle diagnostics for this buffer" })
 key.set("n", "<Leader>gca", "<Cmd>Git commit --amend<CR>")
 key.set("n", "<Leader>gcc", "<Cmd>Git commit<CR>")
 key.set("n", "<Leader>gc<Space>", ":<C-U>Git commit")
+
+key.set("n", "]H", function()
+	if vim.wo.diff then
+		vim.cmd.normal({ "]c", bang = true })
+	else
+		gs.nav_hunk("next", { target = "all" })
+	end
+end, { desc = "Next Hunk (staged or unstaged)" })
+key.set("n", "[H", function()
+	if vim.wo.diff then
+		vim.cmd.normal({ "[c", bang = true })
+	else
+		gs.nav_hunk("prev", { target = "all" })
+	end
+end, { desc = "Prev Hunk (staged or unstaged)" })
