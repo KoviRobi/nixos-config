@@ -71,6 +71,7 @@ with pkgs;
       numpy
       pandas
       ply
+      requests
     ]
   ))
   pyright
