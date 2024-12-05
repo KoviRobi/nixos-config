@@ -51,6 +51,7 @@ in
       credential.helper = "libsecret";
       diff.colorMoved = true;
       diff.colorMovedWS = "ignore-all-space";
+      diff.submodule = "log";
       feature.manyFiles = true;
       fetch.writeCommitGraph = true;
       gpg.format = "ssh";
@@ -124,6 +125,7 @@ in
       pull.ff = "only";
       rebase.autoSquash = true;
       rebase.autoStash = true;
+      status.submoduleSummary = true;
       user.signingKey = "~/.ssh/id_ed25519.pub";
     };
   };
