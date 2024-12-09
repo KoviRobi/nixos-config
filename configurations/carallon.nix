@@ -78,7 +78,7 @@
   };
 
   fileSystems = builtins.listToAttrs (
-    map
+    (map
       (remote-local: {
         name = remote-local.local;
         value = {
@@ -104,15 +104,64 @@
           local = "/carallon/scratch";
         }
       ]
+    )
+    ++ (map
+      (remote-local: {
+        name = remote-local.local;
+        value = {
+          device = "fpganas2.office.carallon.com:/${remote-local.remote}";
+          fsType = "nfs";
+          options = [
+            "defaults"
+            "noauto"
+            "sec=krb5p"
+            "vers=4.2"
+            "user"
+            "rsize=8192"
+            "wsize=8192"
+          ];
+        };
+      })
+      [
+        {
+          remote = "download_cache";
+          local = "/fpganas2/download_cache";
+        }
+        {
+          remote = "tools";
+          local = "/fpganas2/tools";
+        }
+        {
+          remote = "home";
+          local = "/fpganas2/home";
+        }
+      ]
+    )
   );
 
-  security.wrappers = {
-    "mount.cifs" = {
-      setuid = true;
-      owner = "root";
-      group = "root";
-      source = "${pkgs.cifs-utils}/bin/mount.cifs";
+  services.nfs.idmapd.settings = {
+    Translation = {
+      GSS-Methods = "static,nsswitch";
     };
+    Static = {
+      "robertkovacsics@OFFICE.CARALLON.COM" = "rmk";
+    };
+  };
+
+  security.wrappers."mount.nfs" = {
+    program = "mount.nfs";
+    source = "${lib.getBin pkgs.nfs-utils}/bin/mount.nfs";
+    owner = "root";
+    group = "root";
+    setuid = true;
+  };
+
+  security.wrappers."mount.nfs4" = {
+    program = "mount.nfs4";
+    source = "${lib.getBin pkgs.nfs-utils}/bin/mount.nfs4";
+    owner = "root";
+    group = "root";
+    setuid = true;
   };
 
   services.samba.enable = true;
