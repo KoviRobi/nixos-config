@@ -23,6 +23,7 @@ return {
 				rust = { "rustfmt" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
+				ocaml = { "ocamlformat", "trim_whitespace", "trim_newlines" },
 				["*"] = function(bufnr)
 					local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 					if ft == "diff" or ft == "patch" then
