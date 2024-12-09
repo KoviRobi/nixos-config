@@ -18,12 +18,22 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
-				nix = { "nixfmt", "trim_whitespace", "trim_newlines" },
-				python = { "isort", "black", "trim_whitespace", "trim_newlines" },
-				rust = { "rustfmt", "trim_whitespace", "trim_newlines" },
-				diff = {},
-				patch = {},
-				["_"] = { "trim_whitespace", "trim_newlines" },
+				nix = { "nixfmt" },
+				python = { "isort", "black" },
+				rust = { "rustfmt" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				["*"] = function(bufnr)
+					local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+					if ft == "diff" or ft == "patch" then
+						return {}
+					else
+						return { "trim_whitespace", "trim_newlines" }
+					end
+				end,
+			},
+			default_format_opts = {
+				lsp_format = "fallback",
 			},
 		},
 		ft = "*",
