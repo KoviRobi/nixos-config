@@ -7,7 +7,7 @@
 {
   imports = [
     ./direnv.nix
-    ./git.nix
+    ./git
     ./tmux.nix
     ./x11
     ./shell.nix

@@ -138,7 +138,7 @@
 
       homeModules.simple = [
         ./home/direnv.nix
-        ./home/git.nix
+        ./home/git
         ./home/shell.nix
         ./home/solarized.nix
         ./home/tmux.nix
