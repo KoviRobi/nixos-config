@@ -92,6 +92,8 @@ return {
 			vim.g.slime_no_mappings = 1
 			vim.g.slime_config_defaults = vim.empty_dict()
 			vim.g.slime_cell_delimiter = "```"
+			vim.g.slime_python_ipython = 0
+			vim.g.slime_bracketed_paste = 1
 		end,
 		cmd = {
 			"SlimeSend",
