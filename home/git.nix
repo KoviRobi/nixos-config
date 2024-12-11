@@ -116,9 +116,11 @@ in
             '';
           };
         in
-        "${pkgs.runCommandLocal "git-template" { } ''
+        "${pkgs.runCommandLocal "git-template" { dontFixup = true; } ''
           cp --no-preserve=mode --dereference -r "${cfg.package}/share/git-core/templates" "$out"
           cp '${lib.getExe pre-push-local}' "$out/hooks/pre-push"
+          find $out -type f -exec \
+            sed -i 's:#!/nix/store/[^/]\+/\(bin/.*\):/run/current-system/sw/\1:' {} \;
         ''}";
       merge.tool = "nvimdiff";
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
