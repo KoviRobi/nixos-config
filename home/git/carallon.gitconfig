@@ -1,3 +1,5 @@
 [user]
 	email = "robert.kovacsics@carallon.com"
 	name = "Robert Kovacsics"
+[gerrit]
+	createChangeId = true

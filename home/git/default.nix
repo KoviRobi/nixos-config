@@ -35,7 +35,7 @@ in
       }
       {
         path = ./carallon.gitconfig;
-        condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com/**";
+        condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com:29418/**";
       }
       {
         condition = "gitdir:~/dev/**";
@@ -55,6 +55,7 @@ in
       feature.manyFiles = true;
       fetch.writeCommitGraph = true;
       gpg.format = "ssh";
+      gerrit.createChangeId = false;
       help.autoCorrect = 10;
       init.defaultBranch = "main";
       init.templateDir = "${pkgs.runCommandLocal "git-template" { dontFixup = true; } ''
