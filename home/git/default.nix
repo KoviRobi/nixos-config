@@ -44,6 +44,7 @@ in
     ];
     extraConfig = {
       am.threeWay = true;
+      checkout.workers = 0;
       commit.verbose = true;
       core.commitGraph = true;
       core.fsmonitor = true;
