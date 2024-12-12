@@ -42,6 +42,8 @@ in
     pkgs.gtk2
     pkgs.cairo
     pkgs.glib
+    pkgs.ncurses5
+    pkgs.libxcrypt-legacy
   ];
 
   programs.nix-ld-32.enable = true;
@@ -51,6 +53,8 @@ in
     pkgs.pkgsi686Linux.gtk2
     pkgs.pkgsi686Linux.cairo
     pkgs.pkgsi686Linux.glib
+    pkgs.pkgsi686Linux.ncurses5
+    pkgs.pkgsi686Linux.libxcrypt-legacy
   ];
 
   programs.xonsh.enable = true;
