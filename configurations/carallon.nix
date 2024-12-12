@@ -112,13 +112,14 @@
           device = "fpganas2.office.carallon.com:/${remote-local.remote}";
           fsType = "nfs";
           options = [
-            "defaults"
+            "rw"
+            "exec"
             "noauto"
             "sec=krb5p"
             "vers=4.2"
             "user"
-            "rsize=8192"
-            "wsize=8192"
+            "rsize=32768"
+            "wsize=32768"
           ];
         };
       })
