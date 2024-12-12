@@ -97,11 +97,11 @@
       [
         {
           remote = "net_share";
-          local = "/carallon/net_share";
+          local = "/kermit/net_share";
         }
         {
           remote = "scratch";
-          local = "/carallon/scratch";
+          local = "/kermit/scratch";
         }
       ]
     )
