@@ -8,7 +8,7 @@
   programs.tmux = {
     enable = true;
     aggressiveResize = true;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     escapeTime = 0;
     keyMode = "vi";
     customPaneNavigationAndResize = true;
@@ -27,7 +27,7 @@
       set -g pane-border-indicators arrows
       set -g display-panes-time 2000
       set -g exit-empty off
-      set -sa terminal-overrides ",st-256color:Tc"
+      set -sa terminal-overrides ",*-256color:Tc"
 
       # See: https://github.com/christoomey/vim-tmux-navigator
       is_vim="${pkgs.procps}/bin/ps -o state= -o comm= -t '#{pane_tty}' \
