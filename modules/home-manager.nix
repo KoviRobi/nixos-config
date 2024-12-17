@@ -24,4 +24,5 @@
     {
       imports = [ ../home/shell.nix ];
     };
+  home-manager.backupFileExtension = "~";
 }
