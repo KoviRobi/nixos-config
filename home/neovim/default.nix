@@ -97,6 +97,7 @@ in
           which-key-nvim
           nvim-web-devicons
           mini-nvim
+          mini-ai
           noice-nvim
           nui-nvim
           nvim-notify
