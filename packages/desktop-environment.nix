@@ -62,7 +62,7 @@
 
       typst
       typst-live
-      typst-lsp
+      tinymist
       typstyle
       typst-fmt
       prettypst

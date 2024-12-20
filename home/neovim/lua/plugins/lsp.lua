@@ -10,6 +10,7 @@ return {
 				gopls = {},
 				pyright = {},
 				cmake = {},
+				tinymist = { mason = false },
 			},
 		},
 	},
