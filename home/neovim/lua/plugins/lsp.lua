@@ -10,7 +10,10 @@ return {
 				gopls = {},
 				pyright = {},
 				cmake = {},
-				tinymist = { mason = false },
+				tinymist = {
+					mason = false,
+					offset_encoding = "utf-8",
+				},
 			},
 		},
 	},
