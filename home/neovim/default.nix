@@ -173,6 +173,7 @@ in
           vim-fetch
           vim-plugin-AnsiEsc
           typst-vim
+          typst-preview-nvim
 
           lazy-nvim
           vim-startuptime

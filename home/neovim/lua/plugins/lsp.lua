@@ -19,6 +19,11 @@ return {
 	},
 
 	{
+		"chomosuke/typst-preview.nvim",
+		ft = "typst",
+	},
+
+	{
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
