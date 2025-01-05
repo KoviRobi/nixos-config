@@ -23,6 +23,7 @@ with pkgs;
   zip
   graphviz
   dos2unix
+  audit
 
   man-pages
 

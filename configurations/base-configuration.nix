@@ -110,6 +110,8 @@ in
 
   services.dbus.packages = with pkgs; [ gcr ];
   services.gnome.gnome-keyring.enable = true;
+  security.audit.enable = true;
+  security.auditd.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.sudo.enableGnomeKeyring = true;
   environment.etc."sudo.conf".text = ''
