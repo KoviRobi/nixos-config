@@ -66,6 +66,7 @@
     saleae-logic-2
     google-chrome
     mcuxpresso
+    (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
   ];
   services.udev.packages = with pkgs; [ saleae-logic-2 ];
 

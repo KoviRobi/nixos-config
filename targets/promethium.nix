@@ -24,27 +24,37 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/8c161921-0d90-404b-b86f-66e6584adc30";
-    fsType = "ext4";
-  };
-
-  boot.initrd.luks.devices."promethium-nix1".device = "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
+  boot.initrd.luks.devices."promethium-nix1".device =
+    "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
   boot.initrd.luks.devices."promethium-nix1".preLVM = false;
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/E266-D07D";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
+  fileSystems =
+    {
+      "/" = {
+        device = "/dev/disk/by-uuid/8c161921-0d90-404b-b86f-66e6584adc30";
+        fsType = "ext4";
+      };
 
-  fileSystems."/old" = {
-    device = "/dev/disk/by-uuid/0036ada6-a91b-4f6a-bc13-5eb84838a83f";
-    fsType = "ext4";
-  };
+      "/boot" = {
+        device = "/dev/disk/by-uuid/E266-D07D";
+        fsType = "vfat";
+        options = [
+          "fmask=0077"
+          "dmask=0077"
+        ];
+      };
+
+      "/old" = {
+        device = "/dev/disk/by-uuid/0036ada6-a91b-4f6a-bc13-5eb84838a83f";
+        fsType = "ext4";
+      };
+    }
+    // (lib.genAttrs [ "/bin" "/etc" "/lib" "/lib64" "/usr" "/var" ] (name: {
+      device = "/nixos${name}";
+      fsType = "none";
+      options = [ "bind" ];
+      neededForBoot = true;
+    }));
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/ac3f700c-2807-4765-8cb9-e5feadb8e307"; }
