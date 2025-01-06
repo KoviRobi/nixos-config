@@ -31,7 +31,18 @@ let
       fi
     fi
   '';
-  udhcpcArgs = toString ([ "-x hostname:${config.networking.hostName}" ] ++ cfg.udhcpcExtraArgs);
+  udhcpcArgs =
+    let
+      chars = lib.strings.stringToCharacters config.networking.hostName;
+      hexes = map (char: lib.toHexString (lib.strings.charToInt char)) chars;
+    in
+    toString (
+      [
+        "-x"
+        "hostname:${lib.concatStrings hexes}"
+      ]
+      ++ cfg.udhcpcExtraArgs
+    );
 in
 {
   options.initrd-ssh = with lib; {
