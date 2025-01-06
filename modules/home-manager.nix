@@ -22,7 +22,13 @@
   home-manager.users.root =
     { ... }:
     {
-      imports = [ ../home/shell.nix ];
+      imports = [ ../home ];
+      nixpkgs.overlays = config.nixpkgs.overlays;
+      nixos = {
+        services.xserver.dpi = config.services.xserver.dpi;
+        fileSystems = config.fileSystems;
+        users.users.default-user.uid = config.users.users.root.uid;
+      };
     };
   home-manager.backupFileExtension = "~";
 }
