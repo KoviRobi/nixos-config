@@ -13,5 +13,5 @@
     };
     file.".inputrc".target = "${config.xdg.configHome}/readline/inputrc";
   };
-  programs.bash.historyFile = "${config.xdg.configHome}/bash/history";
+  programs.bash.historyFile = "${config.xdg.stateHome}/bash/history";
 }
