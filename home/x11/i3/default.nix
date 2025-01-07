@@ -101,8 +101,8 @@ in
           };
         }
       ];
-      keybindings = lib.mkOptionDefault (
-        {
+      keybindings =
+        lib.mkOptionDefault {
           "${mod}+Shift+c" = "kill";
           "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
           "${mod}+Shift+Return" = "exec ${term}";
@@ -167,30 +167,12 @@ in
           "${mod}+Next" = "exec ${pkgs.dunst}/bin/dunstctl history-pop";
           "${mod}+period" = "exec ${pkgs.dunst}/bin/dunstctl context";
         }
-        // (builtins.listToAttrs (
-          (builtins.genList (
-            n:
-            let
-              m = if n == 0 then "10" else toString n;
-            in
-            {
-              name = "${mod}+${toString n}";
-              value = "workspace ${m}";
-            }
-          ) 10)
-          ++ (builtins.genList (
-            n:
-            let
-              m = if n == 0 then "10" else toString n;
-            in
-            {
-              name = "${mod}+Shift+${toString n}";
-              value = "move container to workspace ${m}";
-            }
-          ) 10)
-        ))
-      );
-      defaultWorkspace = "workspace 1";
+        // {
+          # Unset not used defaults
+          "${mod}+Shift+q" = lib.mkForce null;
+          "${mod}+v" = lib.mkForce null;
+          "${mod}+s" = lib.mkForce null;
+        };
     };
     extraConfig = ''
       popup_during_fullscreen leave_fullscreen
