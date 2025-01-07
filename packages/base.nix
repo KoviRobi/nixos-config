@@ -117,11 +117,10 @@ with pkgs;
   git
 ]
 ++ lib.optionals (pkgs.hostPlatform.isLinux) [
-  config.boot.kernelPackages.cpupower
   abcde
   linuxConsoleTools
   lm_sensors
   nfs-utils
   usbutils
   xfsprogs
-]
+] ++ lib.optional (config ? "boot") config.boot.kernelPackages.cpupower
