@@ -10,6 +10,7 @@ in
 {
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {
