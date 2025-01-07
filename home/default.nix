@@ -75,13 +75,13 @@
     controlPath = "~/.ssh/master-%r@%h:%p";
     controlPersist = "10m";
     extraConfig = ''
-      Host *.cl.cam.ac.uk ely orfina mawddach
-        GSSAPIAuthentication yes
-        GSSAPIDelegateCredentials yes
+      Host *
+        ControlMaster auto
+        ControlPath ~/.ssh/master-%r@%h:%p
+        ControlPersist 10m
+        VisualHostKey yes
 
-      Host nix-hydra
-        HostName caelum-vm-127.cl.cam.ac.uk.
-        User rmk35
+      Include config.d/*.conf
     '';
   };
 

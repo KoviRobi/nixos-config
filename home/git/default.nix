@@ -10,7 +10,11 @@ in
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitFull;
+    package =
+      if config.programs.ssh.enable then
+        pkgs.gitFull.override { openssh = config.programs.ssh.package; }
+      else
+        pkgs.gitFull;
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {

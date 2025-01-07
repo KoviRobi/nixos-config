@@ -107,7 +107,7 @@ with pkgs;
 ]
 ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   emacs
-  gitFull
+  (config.programs.git.package or gitFull)
   git-absorb
   git-review
   git-filter-repo
@@ -123,4 +123,5 @@ with pkgs;
   nfs-utils
   usbutils
   xfsprogs
-] ++ lib.optional (config ? "boot") config.boot.kernelPackages.cpupower
+]
+++ lib.optional (config ? "boot") config.boot.kernelPackages.cpupower
