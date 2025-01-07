@@ -14,7 +14,7 @@
     ../modules/ssh.nix
     ../modules/graphical.nix
     ../modules/initrd-ssh.nix
-    (import ../modules/git-appraise-rob.nix {
+    (import ../modules/gitea.nix {
       auth = true;
       publish = true;
     })

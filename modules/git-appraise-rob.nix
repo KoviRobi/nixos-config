@@ -17,6 +17,8 @@ let
   git-sshd-port = 29418;
   user = "git-appraise-rob";
   group = "git-appraise-rob";
+  uid = 999;
+  gid = 999;
 
   git-appraise-web-rob = pkgs.buildGoModule rec {
     pname = "git-appraise-rob";
@@ -152,9 +154,10 @@ in
 
   users.users.${user} = {
     isSystemUser = true;
+    inherit uid;
     inherit group;
   };
-  users.groups.${group} = { };
+  users.groups.${group} = { inherit gid; };
 
   systemd.services.git-appraise-rob = {
     description = "Git Appraise Rob Web";
