@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -33,7 +32,8 @@
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  boot.initrd.luks.devices."nixos-flash".device = "/dev/disk/by-uuid/4430fbb2-085c-4470-bd88-648a21d75415";
+  boot.initrd.luks.devices."nixos-flash".device =
+    "/dev/disk/by-uuid/4430fbb2-085c-4470-bd88-648a21d75415";
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/90e4f594-2747-4198-b915-1a212e997762";

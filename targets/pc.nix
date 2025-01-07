@@ -1,4 +1,3 @@
-{ config, pkgs, ... }:
 {
   imports = [
     (import ../modules/music.nix { music-fs-uuid = "7ccc6d89-f028-4ca5-85c8-1e4b3cf69517"; })
@@ -22,7 +21,8 @@
     fsType = "f2fs";
   };
 
-  boot.initrd.luks.devices."pc-nixos-a".device = "/dev/disk/by-uuid/928d2553-cc61-4764-b2d6-263e127a3018";
+  boot.initrd.luks.devices."pc-nixos-a".device =
+    "/dev/disk/by-uuid/928d2553-cc61-4764-b2d6-263e127a3018";
 
   fileSystems."/home" = {
     encrypted = {

@@ -1,5 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   services.xserver.libinput.enable = false;
   services.xserver.synaptics.enable = true;
@@ -31,7 +31,8 @@
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."hp-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
+  boot.initrd.luks.devices."hp-nixos-a".device =
+    "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/30C3-618E";

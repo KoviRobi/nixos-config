@@ -1,7 +1,6 @@
 # vim: set ts=2 sts=2 sw=2 et :
 {
   config,
-  lib,
   pkgs,
   ...
 }@args:
@@ -189,12 +188,15 @@
       ];
     }
   ];
-  environment.systemPackages = [
-    pkgs.nvtopPackages.amd
-    pkgs.docker-credential-helpers
-    pkgs.virt-manager
-    (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
-  ] ++ (import ../packages/pc.nix args) ++ (import ../packages/pc-unfree.nix args);
+  environment.systemPackages =
+    [
+      pkgs.nvtopPackages.amd
+      pkgs.docker-credential-helpers
+      pkgs.virt-manager
+      (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
+    ]
+    ++ (import ../packages/pc.nix args)
+    ++ (import ../packages/pc-unfree.nix args);
 
   users.extraUsers.alex = {
     isNormalUser = true;

@@ -5,8 +5,6 @@
   pkgs,
   ...
 }:
-
-with lib;
 {
   config = {
     system.build.diskImage = import <nixpkgs/nixos/lib/make-disk-image.nix> {

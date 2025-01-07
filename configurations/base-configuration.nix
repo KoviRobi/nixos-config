@@ -2,12 +2,8 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }@args:
-let
-  HOME = config.users.users.default-user.home;
-in
 {
   nix.gc = {
     automatic = true;

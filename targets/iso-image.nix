@@ -7,8 +7,7 @@
   ...
 }:
 let
-  mypkgs = import ./pkgs/all-packages.nix { nixpkgs = pkgs; };
-  inherit (lib) mkOverride mkDefault mkForce;
+  inherit (lib) mkDefault mkForce;
 in
 {
   imports = [
