@@ -174,8 +174,6 @@ return {
 		end,
 	},
 
-	{ "pimalaya/himalaya-vim" },
-
 	{ "miversen33/netman.nvim" },
 
 	{

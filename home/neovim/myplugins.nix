@@ -48,18 +48,6 @@ mkPlugins {
     meta.homepage = "https://github.com/stevearc/profile.nvim";
   };
 
-  himalaya-vim = {
-    pname = "himalaya-vim";
-    version = "unstable-2024-09-10";
-    src = fetchFromGitHub {
-      owner = "pimalaya";
-      repo = "himalaya-vim";
-      rev = "f25c003e8fe532348b4080bf8d738cfa1bbf1f5f";
-      sha256 = "sha256-oQtl3VmLpZf+cj1YGLKHbxmaE5GFLEeDi2Z7g3mvZjc=";
-    };
-    meta.homepage = "https://github.com/pimalaya/himalaya-vim";
-  };
-
   neotest-ctest = rec {
     pname = "neotest-ctest";
     version = "v0.1.0";
