@@ -14,3 +14,5 @@ opt.listchars = "tab:→ ,trail:·,nbsp:+,eol:⤸"
 opt.virtualedit = { "block" }
 
 opt.smartindent = false
+
+vim.g.snacks_animate = false
