@@ -37,6 +37,7 @@ with pkgs;
   nix-output-monitor
   nil
   nom-rebuild
+  devenv
 
   dconf
   xxd
