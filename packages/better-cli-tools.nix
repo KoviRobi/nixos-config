@@ -15,6 +15,13 @@ with pkgs;
   starship
   mimi
   fd
+  ripgrep
+  eza
+  dnsutils
+  bottom
+  manix
+  skim
+  tealdeer
   rlwrap
   # Email
   himalaya

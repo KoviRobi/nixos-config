@@ -30,6 +30,12 @@
   };
 
   home.shellAliases = {
+    # quick cd
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    "....." = "cd ../../../..";
+
     g = "git";
     ga = "git add";
     gap = "git add -p";
@@ -56,9 +62,13 @@
     gsud = "git submodule deinit";
 
     n = "nix";
+    np = "n profile";
+    ni = "np install";
+    nr = "np remove";
+    ns = "n search --no-update-lock-file";
     nb = "nom build";
+    nf = "n flake";
     nepl = "nix repl --expr 'builtins.getFlake \"nixos-config\"'";
-    nf = "nix flake";
 
     dea = "direnv allow";
     ded = "direnv edit";
@@ -72,6 +82,20 @@
 
     mnt = "udisksctl mount -b";
     unmnt = "udisksctl unmount -b";
+
+    # internet ip
+    myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
+
+    ctl = "systemctl";
+    stl = "sudo systemctl";
+    utl = "systemctl --user";
+    us = "systemctl --user status";
+    ut = "systemctl --user start";
+    un = "systemctl --user stop";
+    ss = "systemctl status";
+    up = "sudo systemctl start";
+    dn = "sudo systemctl stop";
+    jtl = "journalctl";
   };
 
   programs.bash.enable = true;

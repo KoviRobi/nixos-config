@@ -13,7 +13,6 @@
   imports = [
     (import ../modules/linux-console.nix { })
     ../modules/home-manager.nix
-    ../modules/shell.nix
     ../modules/nethogs.nix
     ../modules/clipboard.nix
 
