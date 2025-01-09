@@ -177,6 +177,13 @@ in
 
           lazy-nvim
           vim-startuptime
+
+          blink-cmp
+          # FixCursorHold-nvim # Fixed in https://github.com/neovim/neovim/pull/20198
+          fzf-lua
+          grug-far-nvim
+          mini-icons
+          one-small-step-for-vimkind
         ])
         ++ (with myplugins; [
           # kovirobi
