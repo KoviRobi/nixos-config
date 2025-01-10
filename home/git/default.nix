@@ -18,8 +18,8 @@ in
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {
-      g = "log --oneline --graph";
-      lg = "log --oneline";
+      g = "log --no-show-signature --format='%C(auto)%h %Cblue%G?%Creset %s' --graph";
+      lg = "log --no-show-signature --format='%C(auto)%h %Cblue%G?%Creset %s'";
       pcc = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=master";
       prich = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=richmond";
       pgl = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
@@ -50,6 +50,7 @@ in
     extraConfig = {
       am.threeWay = true;
       checkout.workers = 0;
+      commit.gpgSign = true;
       commit.verbose = true;
       core.commitGraph = true;
       core.fsmonitor = true;
@@ -60,8 +61,9 @@ in
       diff.submodule = "log";
       feature.manyFiles = true;
       fetch.writeCommitGraph = true;
-      gpg.format = "ssh";
       gerrit.createChangeId = false;
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.config/git/ssh-signers";
       help.autoCorrect = 10;
       init.defaultBranch = "main";
       init.templateDir = "${pkgs.runCommandLocal "git-template" { dontFixup = true; } ''
@@ -73,6 +75,7 @@ in
         find $out -type f -exec \
           sed -i 's:#!/nix/store/[^/]\+/\(bin/.*\):/run/current-system/sw/\1:' {} \;
       ''}";
+      log.showSignature = true;
       merge.tool = "nvimdiff";
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       pull.ff = "only";
