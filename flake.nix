@@ -90,6 +90,10 @@
         listToAttrs imported
         // {
           poetry2nix = poetry2nix.overlays.default;
+          pye-menu = final: prev: {
+            pen-pye-menu = pye-menu.packages.${final.system}.pen-menu;
+            inherit (pye-menu.packages.${final.system}) pye-menu;
+          };
           pimalaya = final: prev: {
             himalaya =
               (himalaya.packages.${final.system}.default.override {
@@ -144,6 +148,8 @@
         ./home/tmux.nix
       ];
 
+      homeModules.full = [ ./home ];
+
       legacyPackages = utils.lib.eachDefaultSystemMap (system: {
         nixpkgs = import nixpkgs {
           inherit system;
@@ -162,19 +168,29 @@
 
         inherit (self.legacyPackages.${system}.nixpkgs) st;
 
-        homeConfigurations.simple = home-manager.lib.homeManagerConfiguration {
-          modules = self.homeModules.simple ++ [
-            ./home/neovim
+        homeConfigurations =
+          builtins.mapAttrs
+            (
+              name: value:
+              home-manager.lib.homeManagerConfiguration {
+                modules = value ++ [
+                  ./home/neovim
 
+                  {
+                    kovirobi.neovim.enable = true;
+                    home = {
+                      username = "rmk";
+                      homeDirectory = "/home/rmk";
+                      stateVersion = "22.11";
+                    };
+                  }
+                ];
+                pkgs = self.legacyPackages.${system}.nixpkgs;
+              }
+            )
             {
-              kovirobi.neovim.enable = true;
-              home.username = "rmk";
-              home.homeDirectory = "/home/rmk";
-              home.stateVersion = "22.11";
-            }
-          ];
-          pkgs = self.legacyPackages.${system}.nixpkgs;
-        };
+              inherit (self.homeModules) simple full;
+            };
 
         netboot =
           let
@@ -299,9 +315,6 @@
                   environment.systemPackages = [ home-manager.defaultPackage.${system} ];
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
-                  home-manager.extraSpecialArgs = {
-                    inherit pye-menu;
-                  };
                 }
 
                 nix-index-database.nixosModules.nix-index

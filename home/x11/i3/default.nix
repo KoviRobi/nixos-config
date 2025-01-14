@@ -2,11 +2,10 @@
   pkgs,
   config,
   lib,
-  pye-menu,
   ...
 }@args:
 let
-  i3-helpers = import ./i3-helpers.nix { inherit pkgs pye-menu; };
+  i3-helpers = import ./i3-helpers.nix { inherit pkgs; };
   mod = "Mod4"; # Win key
 
   term = "${pkgs.st}/bin/st";

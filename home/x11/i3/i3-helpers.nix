@@ -1,4 +1,4 @@
-{ pkgs, pye-menu }:
+{ pkgs }:
 let
   sh = "${pkgs.bash}/bin/bash";
   rofi = "${pkgs.rofi}/bin/rofi";
@@ -126,5 +126,5 @@ in
       drv = pkgs.python3.pkgs.callPackage ./workspace-renumber { };
     in
     "${drv}/bin/workspace_renumber";
-  pen-pye-menu = pye-menu.packages."${pkgs.system}".pen-menu;
+  inherit (pkgs) pen-pye-menu;
 }
