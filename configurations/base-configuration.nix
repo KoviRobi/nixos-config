@@ -137,7 +137,7 @@
   nix.settings.secret-key-files = "/etc/secrets/nix/secret-key";
   systemd.services.generate-nix-secret-key = {
     script = ''
-      mkdir -p $(${pkgs.coreutils}/bin/dirname ${config.nix.settings.secret-key-files})
+      ${pkgs.coreutils}/bin/mkdir -p $(${pkgs.coreutils}/bin/dirname ${config.nix.settings.secret-key-files})
 
       ${pkgs.nix}/bin/nix-store --generate-binary-cache-key ${config.networking.hostName} ${config.nix.settings.secret-key-files} ${config.nix.settings.secret-key-files}.pub
 
