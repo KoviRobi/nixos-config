@@ -64,6 +64,11 @@
     "lxd"
   ];
 
+  environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
+    pkgs.unixODBCDrivers.sqlite
+    pkgs.unixODBCDrivers.psql
+  ];
+
   environment.systemPackages = with pkgs; [
     virt-manager
     virtiofsd
