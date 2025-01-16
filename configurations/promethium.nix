@@ -40,19 +40,28 @@
 
   services.xserver.dpi = 93;
 
-  virtualisation.podman.enable = true;
-  virtualisation.podman.dockerCompat = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
-  virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
-  virtualisation.libvirtd.qemu.swtpm = {
-    enable = true;
+  virtualisation = {
+    lxc.enable = true;
+    lxd.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+    libvirtd = {
+      enable = true;
+      qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
+      qemu.vhostUserPackages = [ pkgs.virtiofsd ];
+      qemu.swtpm = {
+        enable = true;
+      };
+    };
   };
   users.users.default-user.extraGroups = [
     "scanner"
     "lp"
     "docker"
     "libvirtd"
+    "lxd"
   ];
 
   environment.systemPackages = with pkgs; [
