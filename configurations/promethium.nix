@@ -49,6 +49,7 @@
     };
     libvirtd = {
       enable = true;
+      nss.enableGuest = true;
       qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
       qemu.vhostUserPackages = [ pkgs.virtiofsd ];
       qemu.swtpm = {
