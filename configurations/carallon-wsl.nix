@@ -19,7 +19,7 @@
   ];
 
   systemd.user.services.pulseaudio.enable = false;
-  hardware.pulseaudio.extraClientConf = ''
+  services.pulseaudio.extraClientConf = ''
     default-server = _gateway;
   '';
 
