@@ -10,7 +10,9 @@
   programs.firefox.enable = true;
   programs.firefox.nativeMessagingHosts.packages = [
     pkgs.ff2mpv
-    pkgs.passff-host
+    (pkgs.passff-host.override {
+      pass = (pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]));
+    })
   ];
 
   programs.noisetorch.enable = true;
