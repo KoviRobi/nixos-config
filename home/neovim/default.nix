@@ -174,6 +174,7 @@ in
           vim-plugin-AnsiEsc
           typst-vim
           typst-preview-nvim
+          vim-boxdraw
 
           lazy-nvim
           vim-startuptime

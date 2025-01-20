@@ -199,4 +199,55 @@ return {
 		"diefans/notmuch-vim",
 		cmd = { "NotMuch" },
 	},
+
+	{
+		"gyim/vim-boxdraw",
+		-- stylua: ignore
+		keys = {
+			-- Box drawing
+			{ "+o",   '<Cmd>call boxdraw#Draw("+o", [])<CR>',            mode = "v", desc = "Draw a rectangle, clear its contents with whitespace." },
+			{ "+O",   '<Cmd>call boxdraw#DrawWithLabel("+O", [])<CR>',   mode = "v", desc = "Draw a rectangle, fill it with a label (middle center)." },
+			{ "+[O",  '<Cmd>call boxdraw#DrawWithLabel("+[O", [])<CR>',  mode = "v", desc = "Draw a rectangle, fill it with a label (middle left)." },
+			{ "+]O",  '<Cmd>call boxdraw#DrawWithLabel("+]O", [])<CR>',  mode = "v", desc = "Draw a rectangle, fill it with a label (middle right)." },
+			{ "+{[O", '<Cmd>call boxdraw#DrawWithLabel("+{[O", [])<CR>', mode = "v", desc = "Draw a rectangle, fill it with a label (top left)." },
+			{ "+{]O", '<Cmd>call boxdraw#DrawWithLabel("+{]O", [])<CR>', mode = "v", desc = "Draw a rectangle, fill it with a label (top right)." },
+			{ "+}[O", '<Cmd>call boxdraw#DrawWithLabel("+}[O", [])<CR>', mode = "v", desc = "Draw a rectangle, fill it with a label (bottom left)." },
+			{ "+}]O", '<Cmd>call boxdraw#DrawWithLabel("+}]O", [])<CR>', mode = "v", desc = "Draw a rectangle, fill it with a label (bottom right)." },
+			{ "+{O",  '<Cmd>call boxdraw#DrawWithLabel("+{O", [])<CR>',  mode = "v", desc = "Draw a rectangle, fill it with a label (top center)." },
+			{ "+}O",  '<Cmd>call boxdraw#DrawWithLabel("+}O", [])<CR>',  mode = "v", desc = "Draw a rectangle, fill it with a label (bottom center)." },
+
+			-- Labeling
+			{ "+c",   '<Cmd>call boxdraw#DrawWithLabel("+c", [])<CR>',   mode = "v", desc = "Change label (middle center)." },
+			{ "+[c",  '<Cmd>call boxdraw#DrawWithLabel("+[c", [])<CR>',  mode = "v", desc = "Change label (middle left)." },
+			{ "+]c",  '<Cmd>call boxdraw#DrawWithLabel("+]c", [])<CR>',  mode = "v", desc = "Change label (middle right)." },
+			{ "+{[c", '<Cmd>call boxdraw#DrawWithLabel("+{[c", [])<CR>', mode = "v", desc = "Change label (top left)." },
+			{ "+{]c", '<Cmd>call boxdraw#DrawWithLabel("+{]c", [])<CR>', mode = "v", desc = "Change label (top right)." },
+			{ "+}[c", '<Cmd>call boxdraw#DrawWithLabel("+}[c", [])<CR>', mode = "v", desc = "Change label (bottom left)." },
+			{ "+}]c", '<Cmd>call boxdraw#DrawWithLabel("+}]c", [])<CR>', mode = "v", desc = "Change label (bottom right)." },
+			{ "+{c",  '<Cmd>call boxdraw#DrawWithLabel("+{c", [])<CR>',  mode = "v", desc = "Change label (top center)." },
+			{ "+}c",  '<Cmd>call boxdraw#DrawWithLabel("+}c", [])<CR>',  mode = "v", desc = "Change label (bottom center)." },
+			{ "+D",   "<Cmd>echo boxdraw#debug()<CR>",                   mode = "v", desc = "Box draw debug" },
+
+			-- Line drawing
+			{ "+>", '<Cmd>call boxdraw#Draw("+>", [])<CR>', mode = "v", desc = "Draw a line, right arrow head." },
+			{ "+<", '<Cmd>call boxdraw#Draw("+<", [])<CR>', mode = "v", desc = "Draw a line, left arrow head." },
+			{ "+v", '<Cmd>call boxdraw#Draw("+v", [])<CR>', mode = "v", desc = "Draw a line, down small arrow head." },
+			{ "+V", '<Cmd>call boxdraw#Draw("+v", [])<CR>', mode = "v", desc = "Draw a line, down large arrow head." },
+			{ "+^", '<Cmd>call boxdraw#Draw("+^", [])<CR>', mode = "v", desc = "Draw a line, up arrow head." },
+
+			{ "++>", '<Cmd>call boxdraw#Draw("++>", [])<CR>', mode = "v", desc = "Draw a line, double right arrow head." },
+			{ "++<", '<Cmd>call boxdraw#Draw("++<", [])<CR>', mode = "v", desc = "Draw a line, double left arrow head." },
+			{ "++v", '<Cmd>call boxdraw#Draw("++v", [])<CR>', mode = "v", desc = "Draw a line, double down small arrow head." },
+			{ "++V", '<Cmd>call boxdraw#Draw("++v", [])<CR>', mode = "v", desc = "Draw a line, double down large arrow head." },
+			{ "++^", '<Cmd>call boxdraw#Draw("++^", [])<CR>', mode = "v", desc = "Draw a line, double up arrow head." },
+
+			{ "+-",   '<Cmd>call boxdraw#Draw("+-", [])<CR>',   mode = "v", desc = "Draw a line." },
+			{ "+_",   '<Cmd>call boxdraw#Draw("+_", [])<CR>',   mode = "v", desc = "Draw a line." },
+			{ "+\\|", '<Cmd>call boxdraw#Draw("+\\|", [])<CR>', mode = "v", desc = "Draw a line." },
+
+			-- Selection
+			{ "ao", '<Cmd>call boxdraw#Select("ao")<CR>', mode = "v", desc = "Select box with border." },
+			{ "io", '<Cmd>call boxdraw#Select("io")<CR>', mode = "v", desc = "Select box without border." },
+		},
+	},
 }
