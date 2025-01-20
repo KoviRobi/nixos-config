@@ -6,34 +6,12 @@ local key = vim.keymap
 local gs = require("gitsigns")
 
 vim.o.wildcharm = string.byte(vim.keycode("<C-z>"))
-key.set("c", "<Up>", function()
-	if vim.fn.wildmenumode() ~= 0 then
-		return "<Left>"
-	else
-		return "<Up>"
-	end
-end, { expr = true })
-key.set("c", "<Down>", function()
-	if vim.fn.wildmenumode() ~= 0 then
-		return "<Right>"
-	else
-		return "<Down>"
-	end
-end, { expr = true })
-key.set("c", "<Left>", function()
-	if vim.fn.wildmenumode() ~= 0 then
-		return "<Up>"
-	else
-		return "<Left>"
-	end
-end, { expr = true })
-key.set("c", "<Right>", function()
-	if vim.fn.wildmenumode() ~= 0 then
-		return "<Down>"
-	else
-		return "<Right>"
-	end
-end, { expr = true })
+-- stylua: ignore start
+key.set("c", "<Up>",    function() if vim.fn.wildmenumode() ~= 0 then return "<Left>"  else return "<Up>"    end end, { expr = true })
+key.set("c", "<Down>",  function() if vim.fn.wildmenumode() ~= 0 then return "<Right>" else return "<Down>"  end end, { expr = true })
+key.set("c", "<Left>",  function() if vim.fn.wildmenumode() ~= 0 then return "<Up>"    else return "<Left>"  end end, { expr = true })
+key.set("c", "<Right>", function() if vim.fn.wildmenumode() ~= 0 then return "<Down>"  else return "<Right>" end end, { expr = true })
+-- stylua: ignore end
 key.set("c", "<A-BS>", "<C-w>", { desc = "Delete word" })
 key.set("!", "<C-o>", "<Down>", { desc = "Omnicomplete next" })
 
