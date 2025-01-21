@@ -18,8 +18,8 @@ in
     userName = "Kovacsics Robert";
     userEmail = lib.mkDefault "kovirobi@gmail.com";
     aliases = {
-      g = "log --no-show-signature --format='%C(auto)%h %Cblue%G?%Creset %s' --graph";
-      lg = "log --no-show-signature --format='%C(auto)%h %Cblue%G?%Creset %s'";
+      g = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s' --graph";
+      lg = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s'";
       pcc = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=master";
       prich = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=richmond";
       pgl = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
@@ -75,7 +75,6 @@ in
         find $out -type f -exec \
           sed -i 's:#!/nix/store/[^/]\+/\(bin/.*\):/run/current-system/sw/\1:' {} \;
       ''}";
-      log.showSignature = true;
       merge.tool = "nvimdiff";
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       pull.ff = "only";
