@@ -107,6 +107,7 @@ in
           "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
           "${mod}+Shift+Return" = "exec ${term}";
           "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
+          "${mod}+d" = "exec ${i3-helpers.dmenu-drun}";
           "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
           "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";
           "${mod}+Shift+m" = scratch-term "maxima" maxima;
@@ -133,7 +134,7 @@ in
           "${mod}+Shift+l" = "move right";
 
           "${mod}+w" = "focus parent";
-          "${mod}+d" = "focus child";
+          "${mod}+s" = "focus child";
           "${mod}+t" = "exec ${i3-helpers.dmenu-workspace} 'workspace'";
           "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
           "${mod}+Shift+r" = "reload";

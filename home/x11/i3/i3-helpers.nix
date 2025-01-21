@@ -109,6 +109,9 @@ in
   dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
     ${rofi} -show run
   '';
+  dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''
+    ${rofi} -show drun
+  '';
   dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
     RES=`${i3-msg} -t get_workspaces | \
         ${jq} --raw-output 'map(.name)|join("\n")' | \
