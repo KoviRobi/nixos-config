@@ -14,7 +14,7 @@
     ../modules/ssh.nix
     ../modules/graphical.nix
     ../modules/initrd-ssh.nix
-    (import ../modules/gitea.nix {
+    (import ../modules/forgejo.nix {
       auth = true;
       publish = true;
     })
