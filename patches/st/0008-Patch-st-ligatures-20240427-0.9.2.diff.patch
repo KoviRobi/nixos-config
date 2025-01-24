@@ -1,7 +1,7 @@
-From abf20f67cf2645800be52cae43a964f9a04808c2 Mon Sep 17 00:00:00 2001
+From c1fe1759862b0ec10b0950459c4edebd06db313c Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:26:31 +0100
-Subject: [PATCH 8/9] Patch st-ligatures-20240427-0.9.2.diff
+Subject: [PATCH 08/10] Patch st-ligatures-20240427-0.9.2.diff
 
 ---
  Makefile  |   5 +-
@@ -650,5 +650,5 @@ index f057aab..d7603fd 100644
  
  void
 -- 
-2.46.1
+2.47.0
 

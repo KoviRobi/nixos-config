@@ -1,14 +1,14 @@
-From 798c5db9d819fd98d88b49de86ed108be4b02b35 Mon Sep 17 00:00:00 2001
+From 8e4dd0549193b8a49e468519f6bbda6740384fb4 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:22:40 +0100
-Subject: [PATCH 2/9] Patch st-0.8.5-worddelimiters.patch
+Subject: [PATCH 02/10] Patch st-0.8.5-worddelimiters.patch
 
 ---
  config.def.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/config.def.h b/config.def.h
-index 046aa98..b152762 100644
+index 046aa98..f959d79 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -41,7 +41,7 @@ static float chscale = 1.0;
@@ -17,8 +17,9 @@ index 046aa98..b152762 100644
   */
 -wchar_t *worddelimiters = L" ";
 +wchar_t *worddelimiters = L" `'\"()[]{}<>┃│⤸·→";
-
+ 
  /* selection timeouts (in milliseconds) */
  static unsigned int doubleclicktimeout = 300;
---
-2.46.1
+-- 
+2.47.0
+

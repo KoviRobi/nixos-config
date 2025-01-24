@@ -9,6 +9,7 @@ return {
 				return {
 					NonText = { link = "Comment" },
 					Whitespace = { link = "Comment" },
+					SpellBad = { undercurl = true, strikethrough = false },
 				}
 			end,
 		},

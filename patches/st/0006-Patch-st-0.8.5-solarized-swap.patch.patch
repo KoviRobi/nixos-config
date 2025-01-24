@@ -1,7 +1,7 @@
-From 982b0bd2e07ad604d348219527bbc0f188d65947 Mon Sep 17 00:00:00 2001
+From e5144f2158445f388f477f1a532cfbfc56d862cd Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:52 +0100
-Subject: [PATCH 6/9] Patch st-0.8.5-solarized-swap.patch
+Subject: [PATCH 06/10] Patch st-0.8.5-solarized-swap.patch
 
 ---
  config.def.h | 74 ++++++++++++++++++++++++++++++----------------------
@@ -10,7 +10,7 @@ Subject: [PATCH 6/9] Patch st-0.8.5-solarized-swap.patch
  3 files changed, 66 insertions(+), 37 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index b152762..45ae0ba 100644
+index f959d79..2f68013 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -102,44 +102,55 @@ unsigned int tabspaces = 8;
@@ -214,5 +214,5 @@ index f1ce158..37d2859 100644
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
 -- 
-2.46.1
+2.47.0
 
