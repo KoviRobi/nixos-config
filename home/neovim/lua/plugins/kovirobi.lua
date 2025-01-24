@@ -158,10 +158,14 @@ return {
 		end,
 	},
 
-	{ "miversen33/netman.nvim" },
+	{
+		"miversen33/netman.nvim",
+		lazy = false,
+	},
 
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		lazy = false,
 		dependencies = {
 			"miversen33/netman.nvim",
 		},
