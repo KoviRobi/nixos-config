@@ -24,9 +24,5 @@ with pkgs;
   tealdeer
   rlwrap
   # Email
-  himalaya
-  neverest
-  mirador
   pizauth
-  notmuch
 ]

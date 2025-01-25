@@ -14,7 +14,6 @@
     ../modules/bluetooth.nix
     ../modules/graphical.nix
     (import ../modules/avahi.nix { publish = true; })
-    (import ../modules/git-appraise-rob.nix { auth = false; })
   ];
 
   networking.useDHCP = false;
@@ -197,14 +196,6 @@
     ]
     ++ (import ../packages/pc.nix args)
     ++ (import ../packages/pc-unfree.nix args);
-
-  users.extraUsers.alex = {
-    isNormalUser = true;
-    name = "alex";
-    group = "users";
-    createHome = true;
-    shell = pkgs.zsh;
-  };
 
   services.minidlna = {
     enable = true;
