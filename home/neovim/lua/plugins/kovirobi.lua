@@ -158,6 +158,13 @@ return {
 		end,
 	},
 
+	-- Overrides i_<C-Y>, plus just annoying (lack of `.` support, plus "```sh"
+	-- completes in markdown, visual spam for suggestions)
+	{
+		"saghen/blink.cmp",
+		enabled = false,
+	},
+
 	{
 		"miversen33/netman.nvim",
 		lazy = false,
