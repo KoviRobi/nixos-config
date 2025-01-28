@@ -76,4 +76,36 @@ in
       Before = [ "forgejo.service" ];
     };
   };
+
+  # Forgejo runner
+  services.gitea-actions-runner = {
+    package = pkgs.forgejo-runner;
+    instances.local-forgejo-runner = {
+      enable = true;
+      name = "local-runner";
+      tokenFile = "/etc/secrets/forgejo-runner-token";
+      url = "http://localhost/";
+      labels = [
+        "node-22:docker://node:22-bookworm"
+        "native:host"
+      ];
+      hostPackages = [
+        pkgs.bash
+        pkgs.coreutils
+        pkgs.curl
+        pkgs.gawk
+        pkgs.git-cliff
+        pkgs.gitMinimal
+        pkgs.gnused
+        pkgs.go
+        pkgs.jq
+        pkgs.nodejs
+        pkgs.wget
+      ];
+      settings = {
+        insecure = true; # localhost
+        container.valid_volumes = [ "**" ];
+      };
+    };
+  };
 }
