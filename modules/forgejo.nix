@@ -26,10 +26,6 @@ in
         http_port ${toString caddy-port}
       '';
       virtualHosts."http://" = {
-        listenAddresses = [
-          config.networking.hostName
-          "localhost"
-        ];
         extraConfig = ''
           reverse_proxy http://${forgejo-listen}
         '';
