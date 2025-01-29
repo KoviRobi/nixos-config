@@ -25,7 +25,7 @@ in
   ];
 
   services.network-manager-applet.enable = true;
-  services.parcellite.enable = true;
+  services.copyq.enable = true;
   services.pasystray.enable = true;
   services.udiskie.enable = true;
   services.dunst.enable = true;
