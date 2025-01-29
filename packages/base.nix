@@ -33,6 +33,7 @@ with pkgs;
   nixpkgs-fmt
   nixfmt-rfc-style
   nix-tree
+  nix-diff
   nix-du
   nix-output-monitor
   nil
