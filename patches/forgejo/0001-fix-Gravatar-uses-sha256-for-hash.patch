@@ -1,0 +1,82 @@
+From b84873bafb4b526904c5505b40ea8904d5861e7f Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Wed, 29 Jan 2025 21:25:29 +0000
+Subject: [PATCH] fix: Gravatar uses sha256 for hash
+
+Looking at the linked https://docs.gravatar.com/api/avatars/hash/
+(latest archive
+https://web.archive.org/web/20250114162108/https://docs.gravatar.com/api/avatars/hash/)
+---
+ models/avatars/avatar.go           | 6 +++---
+ models/avatars/avatar_test.go      | 6 +++---
+ modules/repository/commits_test.go | 2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/models/avatars/avatar.go b/models/avatars/avatar.go
+index 9eb34dcbcc..a1bf6e08a8 100644
+--- a/models/avatars/avatar.go
++++ b/models/avatars/avatar.go
+@@ -5,7 +5,7 @@ package avatars
+ 
+ import (
+ 	"context"
+-	"crypto/md5"
++	"crypto/sha256"
+ 	"encoding/hex"
+ 	"fmt"
+ 	"net/url"
+@@ -89,9 +89,9 @@ func DefaultAvatarLink() string {
+ 	return a.defaultAvatarLink
+ }
+ 
+-// HashEmail hashes email address to MD5 string. https://en.gravatar.com/site/implement/hash/
++// HashEmail hashes email address to SHA256 string. https://en.gravatar.com/site/implement/hash/
+ func HashEmail(email string) string {
+-	m := md5.New()
++	m := sha256.New()
+ 	_, _ = m.Write([]byte(strings.ToLower(strings.TrimSpace(email))))
+ 	return hex.EncodeToString(m.Sum(nil))
+ }
+diff --git a/models/avatars/avatar_test.go b/models/avatars/avatar_test.go
+index 85c40c3fa1..411d4dea1b 100644
+--- a/models/avatars/avatar_test.go
++++ b/models/avatars/avatar_test.go
+@@ -33,11 +33,11 @@ func enableGravatar(t *testing.T) {
+ 
+ func TestHashEmail(t *testing.T) {
+ 	assert.Equal(t,
+-		"d41d8cd98f00b204e9800998ecf8427e",
++		"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ 		avatars_model.HashEmail(""),
+ 	)
+ 	assert.Equal(t,
+-		"353cbad9b58e69c96154ad99f92bedc7",
++		"72af1071d72449afe29e816060e78e78fd85829ba6e2497aa1d4eedd3c9dc611",
+ 		avatars_model.HashEmail("gitea@example.com"),
+ 	)
+ }
+@@ -53,7 +53,7 @@ func TestSizedAvatarLink(t *testing.T) {
+ 	enableGravatar(t)
+ 	config.GetDynGetter().InvalidateCache()
+ 	assert.Equal(t,
+-		"https://secure.gravatar.com/avatar/353cbad9b58e69c96154ad99f92bedc7?d=identicon&s=100",
++		"https://secure.gravatar.com/avatar/72af1071d72449afe29e816060e78e78fd85829ba6e2497aa1d4eedd3c9dc611?d=identicon&s=100",
+ 		avatars_model.GenerateEmailAvatarFastLink(db.DefaultContext, "gitea@example.com", 100),
+ 	)
+ }
+diff --git a/modules/repository/commits_test.go b/modules/repository/commits_test.go
+index a22f3d07b8..062b0bc8f4 100644
+--- a/modules/repository/commits_test.go
++++ b/modules/repository/commits_test.go
+@@ -125,7 +125,7 @@ func TestPushCommits_AvatarLink(t *testing.T) {
+ 	}
+ 
+ 	assert.Equal(t,
+-		"/avatars/ab53a2911ddf9b4817ac01ddcd3d975f?size="+strconv.Itoa(28*setting.Avatar.RenderedSizeFactor),
++		"/avatars/2b3b2b9ce842ab8b6a6c614cb1f9604bb8a0d502d1af49c526b72b10894e95b5?size="+strconv.Itoa(28*setting.Avatar.RenderedSizeFactor),
+ 		pushCommits.AvatarLink(db.DefaultContext, "user2@example.com"))
+ 
+ 	assert.Equal(t,
+-- 
+2.47.1
+
