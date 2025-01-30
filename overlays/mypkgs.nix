@@ -88,10 +88,4 @@ final: prev: {
       ../patches/forgejo/0001-fix-Gravatar-uses-sha256-for-hash.patch
     ];
   });
-
-  forgejo-lts = prev.forgejo-lts.overrideAttrs (old: {
-    patches = old.patches or [ ] ++ [
-      ../patches/forgejo/0001-fix-Gravatar-uses-sha256-for-hash.patch
-    ];
-  });
 }

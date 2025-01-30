@@ -34,6 +34,7 @@ in
 
     forgejo = {
       enable = true;
+      package = pkgs.forgejo;
       database = {
         passwordFile = forgejo-db-secret;
         type = "postgres";
