@@ -160,11 +160,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1738073914,
-        "narHash": "sha256-kzHsJQZ0fHVl5yP9HNylBdMYTj1iYANydHXAcqg6H3M=",
+        "lastModified": 1738353254,
+        "narHash": "sha256-P5NiqJuPyRf+js/2269onY6buxFNvGixNYIM/dZIxo4=",
         "owner": "KoviRobi",
         "repo": "nixpkgs",
-        "rev": "e78ffcc28a08920ff259af483742dbaedf1a112f",
+        "rev": "29429153ec82e4ae6a81941e65b359640af4a7ad",
         "type": "github"
       },
       "original": {
