@@ -90,6 +90,11 @@
 
       bind-key -T copy-mode    MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
       bind-key -T copy-mode-vi MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
+
+      bind-key -T copy-mode    C-k "send-keys -X search-backward ❯"
+      bind-key -T copy-mode-vi C-k "send-keys -X search-backward ❯"
+      bind-key -T copy-mode    C-j "send-keys -X search-backward ❯"
+      bind-key -T copy-mode-vi C-j "send-keys -X search-backward ❯"
     '';
   };
 }
