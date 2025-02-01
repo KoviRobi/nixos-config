@@ -15,11 +15,22 @@
 
   environment.etc.hosts.enable = lib.mkForce false;
 
-  users.users.default-user.extraGroups = [
-    "docker"
-    "build"
-    "wireshark"
-  ];
+  users = {
+    users.default-user.extraGroups = [
+      "docker"
+      "build"
+      "wireshark"
+    ];
+
+    # Often docker images use a `build` user
+    users.build = {
+      isSystemUser = true;
+      isNormalUser = false;
+      group = "build";
+      shell = "${pkgs.coreutils}/bin/false";
+    };
+    groups.build = { };
+  };
   environment.systemPackages = with pkgs; [
     docker-credential-helpers
     amazon-ecr-credential-helper
@@ -36,15 +47,6 @@
       lfs.enable = true;
     };
   };
-
-  # Often docker images use a `build` user
-  users.users.build = {
-    isSystemUser = true;
-    isNormalUser = false;
-    group = "build";
-    shell = "${pkgs.coreutils}/bin/false";
-  };
-  users.groups.build = { };
 
   security.krb5 = {
     enable = true;

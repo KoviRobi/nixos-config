@@ -1,4 +1,4 @@
-{ ... }:
+_:
 let
   config = builtins.getEnv "NixOS_Configuration";
   target = builtins.getEnv "NixOS_Target";

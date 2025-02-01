@@ -41,20 +41,26 @@
 
   virtualisation.libvirtd.enable = true;
 
-  nixpkgs.config.allowUnfree = true; # For google chrome (for DRM :( )
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "ehci_pci"
-    "usbhid"
-    "sd_mod"
-    "sdhci_pci"
-  ];
-  boot.kernelModules = [ "kvm-amd" ];
+  nixpkgs.config.allowUnfree = true;
+  boot = {
+    # For google chrome (for DRM :( )
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "ehci_pci"
+      "usbhid"
+      "sd_mod"
+      "sdhci_pci"
+    ];
+    kernelModules = [ "kvm-amd" ];
+  };
 
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+    graphics.enable32Bit = true;
+  };
 
   networking.networkmanager.appendNameservers = [
     "127.0.0.53"
@@ -63,7 +69,6 @@
   ];
 
   services.xserver.dpi = 109;
-  hardware.graphics.enable32Bit = true;
 
   environment.systemPackages =
     [

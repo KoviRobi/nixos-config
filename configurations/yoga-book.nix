@@ -18,26 +18,66 @@
     (import ../modules/avahi.nix { publish = true; })
   ];
 
-  # For non-scrambled text
-  boot.initrd.availableKernelModules = [ "i915" ];
-  boot.kernelParams = [
-    "video=efifb"
-    "fbcon=rotate:1"
-  ]; # Rotate console
-  boot.initrd.kernelModules = [
-    "pinctrl_sunrisepoint" # For booting off SD card
-  ];
+  boot = {
+    # For non-scrambled text
+    initrd.availableKernelModules = [ "i915" ];
+    kernelParams = [
+      "video=efifb"
+      "fbcon=rotate:1"
+    ]; # Rotate console
+    initrd.kernelModules = [
+      "pinctrl_sunrisepoint" # For booting off SD card
+    ];
+  };
 
   environment.systemPackages = with pkgs; [ ntfs3g ];
 
-  services.blueman.enable = true;
-  services.clamav.daemon.enable = lib.mkForce false;
+  services = {
+    blueman.enable = true;
+    clamav.daemon.enable = lib.mkForce false;
+
+    logind.lidSwitch = "suspend-then-hibernate";
+    logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
+
+    printing = {
+      enable = true;
+      drivers = with pkgs; [ hplip ];
+    };
+
+    libinput.enable = true;
+
+    xserver = {
+      dpi = 200;
+      wacom.enable = true;
+      videoDrivers = [ "intel" ];
+      deviceSection = ''Option      "TearFree" "true"'';
+      monitorSection = ''Option      "Rotate" "right"'';
+      inputClassSections =
+        [
+          ''
+            Identifier "touchpad"
+            Driver "libinput"
+            MatchIsTouchpad "on"
+            Option "Tapping" "on"
+            Option "TappingButtonMap" "lmr"
+          ''
+        ]
+        ++ map
+          (type: ''
+            Identifier "touchscreen"
+            Driver "wacom"
+            MatchIs${type} "on"
+            Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
+          '')
+          [
+            "Touchscreen"
+            "Tablet"
+          ];
+    };
+  };
   home-manager.users.default-user.services.blueman-applet.enable = true;
 
   zramSwap.enable = true;
-
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
   environment.etc."systemd/sleep.conf".text = ''
     HibernateDelaySec=30m
   '';
@@ -45,39 +85,7 @@
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ hplip ];
-  };
-
   hardware.sensor.iio.enable = true;
-  services.libinput.enable = true;
-  services.xserver.dpi = 200;
-  services.xserver.wacom.enable = true;
-  services.xserver.videoDrivers = [ "intel" ];
-  services.xserver.deviceSection = ''Option      "TearFree" "true"'';
-  services.xserver.monitorSection = ''Option      "Rotate" "right"'';
-  services.xserver.inputClassSections =
-    [
-      ''
-        Identifier "touchpad"
-        Driver "libinput"
-        MatchIsTouchpad "on"
-        Option "Tapping" "on"
-        Option "TappingButtonMap" "lmr"
-      ''
-    ]
-    ++ map
-      (type: ''
-        Identifier "touchscreen"
-        Driver "wacom"
-        MatchIs${type} "on"
-        Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
-      '')
-      [
-        "Touchscreen"
-        "Tablet"
-      ];
   powerManagement.powertop.enable = true;
   # services.tlp.enable = true;
 }

@@ -20,10 +20,20 @@ in
     <nixpkgs/nixos/modules/installer/cd-dvd/sd-image.nix>
   ];
 
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  boot = {
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
 
-  boot.consoleLogLevel = lib.mkDefault 7;
+      # Use the systemd-boot EFI boot loader.
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    consoleLogLevel = lib.mkDefault 7;
+
+    extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
+  };
 
   sdImage = {
     populateFirmwareCommands = "";
@@ -32,12 +42,6 @@ in
       ${extlinux-conf-builder} -t 3 -c ${config.system.build.toplevel} -d ./files/boot
     '';
   };
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.extraModulePackages = [ mypkgs.linuxPackages.yogabook-c930-eink-driver ];
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];

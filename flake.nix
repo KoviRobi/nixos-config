@@ -1,33 +1,51 @@
 {
-  inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
 
-  inputs.utils.url = "github:numtide/flake-utils";
+    utils.url = "github:numtide/flake-utils";
 
-  inputs.home-manager.url = "github:nix-community/home-manager";
-  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-  inputs.pye-menu.url = "github:KoviRobi/Pye-Menu";
-  inputs.pye-menu.inputs.nixpkgs.follows = "nixpkgs";
+    pye-menu = {
+      url = "github:KoviRobi/Pye-Menu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-  inputs.flake-compat.url = "github:edolstra/flake-compat";
-  inputs.flake-compat.flake = false;
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
 
-  inputs.flake-registry.url = "github:NixOS/flake-registry";
-  inputs.flake-registry.flake = false;
+    flake-registry = {
+      url = "github:NixOS/flake-registry";
+      flake = false;
+    };
 
-  inputs.NixOS-WSL.url = "github:nix-community/NixOS-WSL";
-  inputs.NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.NixOS-WSL.inputs.flake-compat.follows = "flake-compat";
+    NixOS-WSL = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
-  inputs.deploy-rs.url = "github:serokell/deploy-rs";
-  inputs.deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.deploy-rs.inputs.flake-compat.follows = "flake-compat";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
-  inputs.nix-index-database.url = "github:nix-community/nix-index-database";
-  inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-  inputs.poetry2nix.url = "github:nix-community/poetry2nix";
-  inputs.poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
+    poetry2nix = {
+      url = "github:nix-community/poetry2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
   outputs =
     {
@@ -200,8 +218,7 @@
                 # of this flake.
                 # From https://www.tweag.io/blog/2020-07-31-nixos-flakes/
                 {
-                  system.configurationRevision =
-                    if self ? rev then self.rev else throw "Refusing to build from a dirty Git tree!";
+                  system.configurationRevision = self.rev or (throw "Refusing to build from a dirty Git tree!");
                 }
 
                 { nixpkgs.overlays = builtins.attrValues self.overlays; }
@@ -216,39 +233,41 @@
                 (
                   { config, pkgs, ... }:
                   {
-                    nix.settings.experimental-features = [
-                      "nix-command"
-                      "flakes"
-                    ];
-                    # Pin nixpkgs for e.g. nix search
-                    nix.registry.nixpkgs.flake = nixpkgs;
-                    nix.registry.nixos-config.flake = self;
+                    nix = {
+                      settings.experimental-features = [
+                        "nix-command"
+                        "flakes"
+                      ];
+                      # Pin nixpkgs for e.g. nix search
+                      registry.nixpkgs.flake = nixpkgs;
+                      registry.nixos-config.flake = self;
 
-                    # ~/.config/nix/registry.json, if you want to use a local
-                    # checkout:
-                    #
-                    #     {
-                    #       "flakes": [
-                    #         {
-                    #           "exact": true,
-                    #           "from": {
-                    #             "id": "nixpkgs",
-                    #             "type": "indirect"
-                    #           },
-                    #           "to": {
-                    #             "type": "git",
-                    #             "url": "file:///nix/pkgs"
-                    #           }
-                    #         }
-                    #       ],
-                    #       "version": 2
-                    #     }
+                      # ~/.config/nix/registry.json, if you want to use a local
+                      # checkout:
+                      #
+                      #     {
+                      #       "flakes": [
+                      #         {
+                      #           "exact": true,
+                      #           "from": {
+                      #             "id": "nixpkgs",
+                      #             "type": "indirect"
+                      #           },
+                      #           "to": {
+                      #             "type": "git",
+                      #             "url": "file:///nix/pkgs"
+                      #           }
+                      #         }
+                      #       ],
+                      #       "version": 2
+                      #     }
 
-                    nix.nixPath = [
-                      "nixpkgs=${nixpkgs}"
-                      "home-manager=${home-manager}"
-                      "${nixpkgs}"
-                    ];
+                      nixPath = [
+                        "nixpkgs=${nixpkgs}"
+                        "home-manager=${home-manager}"
+                        "${nixpkgs}"
+                      ];
+                    };
 
                     environment.shellAliases.nixrepl = "nix repl --expr 'builtins.getFlake \"${self}\"'";
                   }
@@ -315,7 +334,7 @@
             ];
           }
         // {
-          "netboot" = nixpkgs.lib.nixosSystem rec {
+          "netboot" = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               "${nixpkgs}/nixos/modules/installer/netboot/netboot.nix"
@@ -332,13 +351,19 @@
                   netboot.squashfsCompression = "zstd -Xcompression-level 6";
 
                   users.users.nixos.openssh.authorizedKeys.keys = builtins.attrValues (import ./pubkeys.nix);
-                  # To allow using custom substituters (e.g. netboot host)
-                  nix.settings.trusted-users = [ "nixos" ];
-                  nix.settings.flake-registry = "${flake-registry}/flake-registry.json";
-                  nix.settings.experimental-features = [
-                    "nix-command"
-                    "flakes"
-                  ];
+
+                  nix = {
+                    settings = {
+                      # To allow using custom substituters (e.g. netboot host)
+                      trusted-users = [ "nixos" ];
+                      flake-registry = "${flake-registry}/flake-registry.json";
+                      experimental-features = [
+                        "nix-command"
+                        "flakes"
+                      ];
+                    };
+                  };
+
                   environment.systemPackages = with pkgs; [
                     cryptsetup
                     gptfdisk

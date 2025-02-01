@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }@args:
@@ -19,7 +18,6 @@ let
     )
   }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
-  zsh = "${pkgs.zsh}/bin/zsh";
   emacs = "${pkgs.emacs}/bin/emacs";
   xsel = lib.getExe pkgs.xsel;
   rofi = "${pkgs.rofi}/bin/rofi";

@@ -61,16 +61,45 @@ in
   };
 
   config = {
-    boot.initrd.kernelModules = [ "af_packet" ];
-    boot.initrd.availableKernelModules = [
-      "e1000e"
-      "r8169"
-    ];
+    boot = {
+      initrd = {
+        kernelModules = [ "af_packet" ];
+        availableKernelModules = [
+          "e1000e"
+          "r8169"
+        ];
+        network = {
 
-    boot.initrd.network.enable = true;
-    boot.initrd.network.ssh.enable = true;
-    boot.initrd.network.ssh.authorizedKeys = builtins.attrValues (import ../pubkeys.nix);
-    boot.initrd.network.ssh.hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+          enable = true;
+          ssh = {
+            enable = true;
+            authorizedKeys = builtins.attrValues (import ../pubkeys.nix);
+            hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+          };
+        };
+
+        extraUtilsCommands = ''
+          copy_bin_and_libs ${pkgs.klibc}/lib/klibc/bin.static/ipconfig
+        '';
+
+        preLVMCommands = ''
+          # Bring up all interfaces.
+          echo "bringing up network interface ${cfg.interface}..."
+          ip link set "${cfg.interface}" up && ifaces="$ifaces ${cfg.interface}"
+
+          # Acquire DHCP leases.
+          echo "acquiring IP address via DHCP on ${cfg.interface}..."
+          udhcpc --background -i ${cfg.interface} -O staticroutes --script ${udhcpcScript} ${udhcpcArgs} &
+        '';
+
+        postMountCommands = ''
+          for iface in $ifaces; do
+            ip address flush "$iface"
+            ip link set "$iface" down
+          done
+        '';
+      };
+    };
     # Make sure ordinary users can't access initrd SSH host key
     fileSystems."/boot".options =
       if config.boot.loader.supportsInitrdSecrets then
@@ -80,26 +109,5 @@ in
           Not building as bootloader doesn't support initrd secrets, private host key
           would be visible in the nix store
         '';
-
-    boot.initrd.extraUtilsCommands = ''
-      copy_bin_and_libs ${pkgs.klibc}/lib/klibc/bin.static/ipconfig
-    '';
-
-    boot.initrd.preLVMCommands = ''
-      # Bring up all interfaces.
-      echo "bringing up network interface ${cfg.interface}..."
-      ip link set "${cfg.interface}" up && ifaces="$ifaces ${cfg.interface}"
-
-      # Acquire DHCP leases.
-      echo "acquiring IP address via DHCP on ${cfg.interface}..."
-      udhcpc --background -i ${cfg.interface} -O staticroutes --script ${udhcpcScript} ${udhcpcArgs} &
-    '';
-
-    boot.initrd.postMountCommands = ''
-      for iface in $ifaces; do
-        ip address flush "$iface"
-        ip link set "$iface" down
-      done
-    '';
   };
 }

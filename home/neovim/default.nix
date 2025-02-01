@@ -17,52 +17,54 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.sessionVariables = {
-      EDITOR = "nvim";
+    home = {
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+
+      shellAliases.man = "viman";
+
+      packages = [
+        (lib.hiPrio (
+          pkgs.writeShellApplication {
+            name = "viman";
+            text = ''
+              nvim "+set foldmethod=manual signcolumn=no statuscolumn= | hide Man $1"
+            '';
+          }
+        ))
+
+        pkgs.gcc # needed for nvim-treesitter
+
+        # LazyVim defaults
+        pkgs.stylua
+        pkgs.shfmt
+
+        # Markdown extra
+        pkgs.markdownlint-cli2
+        pkgs.marksman
+
+        # Docker extra
+        pkgs.nodePackages.dockerfile-language-server-nodejs
+        pkgs.hadolint
+        pkgs.docker-compose-language-service
+
+        # JSON and YAML extras
+        pkgs.nodePackages.vscode-json-languageserver
+        pkgs.nodePackages.yaml-language-server
+
+        # Custom
+        pkgs.editorconfig-checker
+        pkgs.shellcheck
+
+        pkgs.lua-language-server
+        pkgs.cmake-language-server
+
+        pkgs.statix
+
+        pkgs.taplo
+      ];
     };
-
-    home.shellAliases.man = "viman";
-
-    home.packages = [
-      (lib.hiPrio (
-        pkgs.writeShellApplication {
-          name = "viman";
-          text = ''
-            nvim "+set foldmethod=manual signcolumn=no statuscolumn= | hide Man $1"
-          '';
-        }
-      ))
-
-      pkgs.gcc # needed for nvim-treesitter
-
-      # LazyVim defaults
-      pkgs.stylua
-      pkgs.shfmt
-
-      # Markdown extra
-      pkgs.markdownlint-cli2
-      pkgs.marksman
-
-      # Docker extra
-      pkgs.nodePackages.dockerfile-language-server-nodejs
-      pkgs.hadolint
-      pkgs.docker-compose-language-service
-
-      # JSON and YAML extras
-      pkgs.nodePackages.vscode-json-languageserver
-      pkgs.nodePackages.yaml-language-server
-
-      # Custom
-      pkgs.editorconfig-checker
-      pkgs.shellcheck
-
-      pkgs.lua-language-server
-      pkgs.cmake-language-server
-
-      pkgs.statix
-
-      pkgs.taplo
-    ];
 
     programs.neovim = {
       enable = true;

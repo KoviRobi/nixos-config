@@ -13,21 +13,26 @@
     ../modules/ssh.nix
   ];
 
-  services.openssh.ports = [
-    22
-    2233
-  ];
+  services = {
+    openssh.ports = [
+      22
+      2233
+    ];
+
+    pulseaudio.extraClientConf = ''
+      default-server = _gateway;
+    '';
+
+    xserver = {
+      enable = lib.mkForce false;
+      displayManager.lightdm.enable = lib.mkForce false;
+      windowManager.i3.enable = lib.mkForce false;
+    };
+  };
 
   systemd.user.services.pulseaudio.enable = false;
-  services.pulseaudio.extraClientConf = ''
-    default-server = _gateway;
-  '';
 
   programs.atop.netatop.enable = lib.mkForce false;
-
-  services.xserver.enable = lib.mkForce false;
-  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-  services.xserver.windowManager.i3.enable = lib.mkForce false;
 
   virtualisation.podman.enable = true;
   virtualisation.podman.dockerCompat = true;

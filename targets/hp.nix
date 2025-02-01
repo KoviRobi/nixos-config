@@ -1,20 +1,28 @@
 # vim: set ts=2 sts=2 sw=2 et :
 { config, ... }:
 {
-  services.xserver.libinput.enable = false;
-  services.xserver.synaptics.enable = true;
-  services.xserver.synaptics.tapButtons = false;
-  services.xserver.synaptics.vertTwoFingerScroll = true;
-  services.xserver.synaptics.horizTwoFingerScroll = true;
-  services.xserver.synaptics.palmDetect = true;
-  services.xserver.synaptics.palmMinWidth = 7;
-  services.xserver.synaptics.palmMinZ = 25;
+  services.xserver = {
+    libinput.enable = false;
+    synaptics = {
+      enable = true;
+      tapButtons = false;
+      vertTwoFingerScroll = true;
+      horizTwoFingerScroll = true;
+      palmDetect = true;
+      palmMinWidth = 7;
+      palmMinZ = 25;
+    };
+  };
 
-  boot.kernelModules = [ "wl" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot = {
+    kernelModules = [ "wl" ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+
+    initrd.luks.devices."hp-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -30,9 +38,6 @@
     device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
     fsType = "xfs";
   };
-
-  boot.initrd.luks.devices."hp-nixos-a".device =
-    "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/30C3-618E";

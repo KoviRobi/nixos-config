@@ -1,8 +1,8 @@
 final: prev: {
-  nom-rebuild = final.nixos-rebuild.overrideAttrs (old: rec {
+  nom-rebuild = final.nixos-rebuild.overrideAttrs (old: {
     name = "nom-rebuild";
     src = final.substitute {
-      src = old.src;
+      inherit (old) src;
       substitutions = [
         "--replace"
         "nixos-rebuild"

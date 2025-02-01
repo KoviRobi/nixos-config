@@ -51,13 +51,17 @@ in
       checkout.workers = 0;
       commit.gpgSign = true;
       commit.verbose = true;
-      core.commitGraph = true;
-      core.fsmonitor = true;
-      core.untrackedCache = true;
+      core = {
+        commitGraph = true;
+        fsmonitor = true;
+        untrackedCache = true;
+      };
       credential.helper = "libsecret";
-      diff.colorMoved = true;
-      diff.colorMovedWS = "ignore-all-space";
-      diff.submodule = "log";
+      diff = {
+        colorMoved = true;
+        colorMovedWS = "ignore-all-space";
+        submodule = "log";
+      };
       feature.manyFiles = true;
       fetch.writeCommitGraph = true;
       gerrit.createChangeId = false;

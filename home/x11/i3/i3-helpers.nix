@@ -3,22 +3,17 @@ let
   sh = "${pkgs.bash}/bin/bash";
   rofi = "${pkgs.rofi}/bin/rofi";
   dmenu = "${rofi} -dmenu";
-  stest = "${pkgs.dmenu}/bin/stest";
   cat = "${pkgs.coreutils}/bin/cat";
-  dirname = "${pkgs.coreutils}/bin/dirname";
-  sort = "${pkgs.coreutils}/bin/sort";
   i3-msg = "${pkgs.i3}/bin/i3-msg";
   jq = "${pkgs.jq}/bin/jq";
   killall = "${pkgs.psmisc}/bin/killall";
   socat = "${pkgs.socat}/bin/socat";
   mpc = "${pkgs.mpc_cli}/bin/mpc";
   tmux = "${pkgs.tmux}/bin/tmux";
-  loginctl = "${pkgs.systemd}/bin/loginctl";
   amixer = "${pkgs.alsa-utils}/bin/amixer";
   xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
   dc = "${pkgs.bc}/bin/dc";
   rfkill = "${pkgs.util-linux}/bin/rfkill"; # Updated from pkgs.rfkill
-  mpd_pass = builtins.readFile ../../../mpd-password.secret;
   actions = rec {
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 .dunst-wrapped # pause

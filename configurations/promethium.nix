@@ -44,7 +44,35 @@
   ];
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
-  services.xserver.dpi = 93;
+  services = {
+    xserver.dpi = 93;
+    udev.packages = with pkgs; [ saleae-logic-2 ];
+
+    printing = {
+      enable = true;
+      drivers = [ pkgs.hplip ];
+      bindirCmds = ''
+        mkdir -p $out/lib/cups/backend
+        ln -sf ${pkgs.writeShellScript "smb-krb5" ''
+          export DEVICE_URI=smb://''${DEVICE_URI#smb_krb5://}
+          ${pkgs.sambaFull}/libexec/samba/smbspool_krb5_wrapper "$@"
+        ''} $out/lib/cups/backend/smb_krb5
+      '';
+    };
+
+    samba = {
+      settings = {
+        public = {
+          browseable = "yes";
+          comment = "Public samba share.";
+          "guest ok" = "yes";
+          path = "/srv/share";
+          "read only" = "yes";
+          "hosts allow" = "10.0.0.1/24 localhost";
+        };
+      };
+    };
+  };
 
   virtualisation = {
     lxc.enable = true;
@@ -56,10 +84,12 @@
     libvirtd = {
       enable = true;
       nss.enableGuest = true;
-      qemu.ovmf.packages = [ pkgs.OVMFFull.fd ];
-      qemu.vhostUserPackages = [ pkgs.virtiofsd ];
-      qemu.swtpm = {
-        enable = true;
+      qemu = {
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        vhostUserPackages = [ pkgs.virtiofsd ];
+        swtpm = {
+          enable = true;
+        };
       };
     };
   };
@@ -71,7 +101,7 @@
     "lxd"
   ];
 
-  environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
+  environment.unixODBCDrivers = [
     pkgs.unixODBCDrivers.sqlite
     pkgs.unixODBCDrivers.psql
   ];
@@ -88,32 +118,8 @@
     mcuxpresso
     (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
   ];
-  services.udev.packages = with pkgs; [ saleae-logic-2 ];
-
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
-  services.printing.bindirCmds = ''
-    mkdir -p $out/lib/cups/backend
-    ln -sf ${pkgs.writeShellScript "smb-krb5" ''
-      export DEVICE_URI=smb://''${DEVICE_URI#smb_krb5://}
-      ${pkgs.sambaFull}/libexec/samba/smbspool_krb5_wrapper "$@"
-    ''} $out/lib/cups/backend/smb_krb5
-  '';
 
   programs.systemtap.enable = true;
-
-  services.samba = {
-    settings = {
-      public = {
-        browseable = "yes";
-        comment = "Public samba share.";
-        "guest ok" = "yes";
-        path = "/srv/share";
-        "read only" = "yes";
-        "hosts allow" = "10.0.0.1/24 localhost";
-      };
-    };
-  };
 
   networking.firewall.interfaces.rnd-bridge.allowedUDPPorts = [
     67 # bootps

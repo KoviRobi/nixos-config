@@ -22,30 +22,50 @@ in
   # Since it is a brand-new build
   system.stateVersion = lib.versions.majorMinor lib.version;
 
-  environment.etc.nixos.source = self;
-  # Because the above is in the nix store, so immutable
-  environment.etc."nixos/configurations/default.nix".enable = false;
-  environment.etc."nixos/targets/default.nix".enable = false;
+  environment = {
+    etc = {
+      nixos.source = self;
+      # Because the above is in the nix store, so immutable
+      "nixos/configurations/default.nix".enable = false;
+      "nixos/targets/default.nix".enable = false;
+    };
 
-  # ISO naming.
-  isoImage.isoName = "${config.isoImage.isoBaseName}-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.iso";
+    # Tell the Nix evaluator to garbage collect more aggressively.
+    # This is desirable in memory-constrained environments that don't
+    # (yet) have swap set up.
+    variables.GC_INITIAL_HEAP_SIZE = "1M";
+  };
 
-  isoImage.volumeID = "NIXOS_ISO";
+  isoImage = {
+    # ISO naming.
+    isoName = "${config.isoImage.isoBaseName}-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.iso";
 
-  isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+    volumeID = "NIXOS_ISO";
 
-  # EFI booting
-  isoImage.makeEfiBootable = true;
+    squashfsCompression = "zstd -Xcompression-level 6";
 
-  # USB booting
-  isoImage.makeUsbBootable = true;
+    # EFI booting
+    makeEfiBootable = true;
 
-  # Add Memtest86+ to the CD.
-  boot.loader.grub.memtest86.enable = true;
+    # USB booting
+    makeUsbBootable = true;
+  };
 
-  boot.postBootCommands = ''
-    mkdir /mnt
-  '';
+  boot = {
+    # Add Memtest86+ to the CD.
+    loader.grub.memtest86.enable = true;
+
+    postBootCommands = ''
+      mkdir /mnt
+    '';
+
+    # Make the installer more likely to succeed in low memory
+    # environments.  The kernel's overcommit heustistics bite us
+    # fairly often, preventing processes such as nix-worker or
+    # download-using-manifests.pl from forking even if there is
+    # plenty of free memory.
+    kernel.sysctl."vm.overcommit_memory" = "1";
+  };
 
   # Enable in installer, even if the minimal profile disables it.
   documentation.enable = mkForce true;
@@ -61,18 +81,6 @@ in
   services.mingetty.autologinUser = config.users.users.default-user.name;
 
   services.xserver.dpi = 72;
-
-  # Tell the Nix evaluator to garbage collect more aggressively.
-  # This is desirable in memory-constrained environments that don't
-  # (yet) have swap set up.
-  environment.variables.GC_INITIAL_HEAP_SIZE = "1M";
-
-  # Make the installer more likely to succeed in low memory
-  # environments.  The kernel's overcommit heustistics bite us
-  # fairly often, preventing processes such as nix-worker or
-  # download-using-manifests.pl from forking even if there is
-  # plenty of free memory.
-  boot.kernel.sysctl."vm.overcommit_memory" = "1";
 
   # To speed up installation a little bit, include the complete
   # stdenv in the Nix store on the CD.

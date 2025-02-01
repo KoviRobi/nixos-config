@@ -30,130 +30,151 @@
     LC_TIME = "en_DK.UTF-8";
   };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableBashCompletion = true;
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableBashCompletion = true;
+    };
+
+    nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld-rs;
+      libraries = [
+        pkgs.gtk3
+        pkgs.gtk2
+        pkgs.cairo
+        pkgs.glib
+        pkgs.ncurses5
+        pkgs.libxcrypt-legacy
+      ];
+    };
+
+    nix-ld-32 = {
+      enable = true;
+      package = pkgs.pkgsi686Linux.nix-ld-rs;
+      libraries = [
+        pkgs.pkgsi686Linux.gtk3
+        pkgs.pkgsi686Linux.gtk2
+        pkgs.pkgsi686Linux.cairo
+        pkgs.pkgsi686Linux.glib
+        pkgs.pkgsi686Linux.ncurses5
+        pkgs.pkgsi686Linux.libxcrypt-legacy
+      ];
+    };
+
+    xonsh.enable = true;
+    bandwhich.enable = true;
+    atop = {
+      enable = true;
+      atopService.enable = true;
+      netatop.enable = true;
+      setuidWrapper.enable = true;
+    };
+
+    command-not-found.enable = false;
   };
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.package = pkgs.nix-ld-rs;
-  programs.nix-ld.libraries = [
-    pkgs.gtk3
-    pkgs.gtk2
-    pkgs.cairo
-    pkgs.glib
-    pkgs.ncurses5
-    pkgs.libxcrypt-legacy
-  ];
+  environment = {
+    homeBinInPath = true;
+    systemPackages =
+      (import ../packages/base.nix args) ++ (import ../packages/better-cli-tools.nix args);
+    etc."sudo.conf".text = ''
+      Path askpass ${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass
+    ''; # Using nix-index
 
-  programs.nix-ld-32.enable = true;
-  programs.nix-ld-32.package = pkgs.pkgsi686Linux.nix-ld-rs;
-  programs.nix-ld-32.libraries = [
-    pkgs.pkgsi686Linux.gtk3
-    pkgs.pkgsi686Linux.gtk2
-    pkgs.pkgsi686Linux.cairo
-    pkgs.pkgsi686Linux.glib
-    pkgs.pkgsi686Linux.ncurses5
-    pkgs.pkgsi686Linux.libxcrypt-legacy
-  ];
-
-  programs.xonsh.enable = true;
-  programs.bandwhich.enable = true;
-  programs.atop = {
-    enable = true;
-    atopService.enable = true;
-    netatop.enable = true;
-    setuidWrapper.enable = true;
+    extraOutputsToInstall = [ "terminfo" ];
   };
 
-  environment.homeBinInPath = true;
-  environment.systemPackages =
-    (import ../packages/base.nix args) ++ (import ../packages/better-cli-tools.nix args);
-
-  documentation.enable = true;
-  documentation.man.enable = true;
-  documentation.man.generateCaches = true;
-  documentation.info.enable = true;
-  documentation.dev.enable = true;
-  documentation.nixos.enable = true;
-
-  services.pipewire.enable = true;
-  hardware.bluetooth.enable = true;
-
-  boot.kernel.sysctl."kernel.sysrq" = 1;
-  boot.kernel.sysctl."kernel.dmesg_restrict" = 0;
-  boot.kernelParams = [ "boot.shell_on_fail" ];
+  documentation = {
+    enable = true;
+    man.enable = true;
+    man.generateCaches = true;
+    info.enable = true;
+    dev.enable = true;
+    nixos.enable = true;
+  };
 
   services = {
+    pipewire.enable = true;
+
     earlyoom.enable = true;
     clamav = {
       daemon.enable = true;
       updater.enable = true;
     };
+
+    dbus.packages = with pkgs; [ gcr ];
+    gnome.gnome-keyring.enable = true;
+
+    udev.extraRules = ''
+      SUBSYSTEM=="tty", ATTRS{manufacturer}=="KoviRobi", ATTRS{product}=="Custom steno", SYMLINK="KoviRobi-Steno"
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{manufacturer}=="Gabotronics", GROUP="plugdev", MODE="0664", SYMLINK+="XScope%n"
+    '';
+    udev.packages = with pkgs; [
+      openocd
+      picotool
+      libsigrok
+    ];
+
+    tailscale.enable = true;
+    resolved.enable = true;
+  };
+  hardware.bluetooth.enable = true;
+
+  boot = {
+    kernel = {
+      sysctl."kernel.sysrq" = 1;
+      sysctl."kernel.dmesg_restrict" = 0;
+    };
+    kernelParams = [ "boot.shell_on_fail" ];
   };
 
-  networking.firewall.allowedTCPPorts = [ ];
-  networking.firewall.allowedUDPPorts = [ ];
+  networking = {
+    networkmanager = {
+      enable = true;
+      enableStrongSwan = true;
+    };
 
-  networking.networkmanager = {
-    enable = true;
-    enableStrongSwan = true;
+    # To make tailscale work
+    firewall.checkReversePath = "loose";
   };
-  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = [
-    ""
-    "${pkgs.networkmanager}/bin/nm-online -q"
-  ];
+  systemd = {
+    services = {
+      NetworkManager-wait-online.serviceConfig.ExecStart = [
+        ""
+        "${pkgs.networkmanager}/bin/nm-online -q"
+      ];
 
-  systemd.services.systemd-udev-settle.enable = false;
-  systemd.services.ModemManager.enable = false;
-  systemd.coredump.enable = true;
+      systemd-udev-settle.enable = false;
+      ModemManager.enable = false;
+      generate-nix-secret-key = {
+        script = ''
+          ${pkgs.coreutils}/bin/mkdir -p $(${pkgs.coreutils}/bin/dirname ${config.nix.settings.secret-key-files})
 
-  services.dbus.packages = with pkgs; [ gcr ];
-  services.gnome.gnome-keyring.enable = true;
-  security.audit.enable = true;
-  security.auditd.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.sudo.enableGnomeKeyring = true;
-  environment.etc."sudo.conf".text = ''
-    Path askpass ${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass
-  '';
+          ${pkgs.nix}/bin/nix-store --generate-binary-cache-key ${config.networking.hostName} ${config.nix.settings.secret-key-files} ${config.nix.settings.secret-key-files}.pub
 
-  services.udev.extraRules = ''
-    SUBSYSTEM=="tty", ATTRS{manufacturer}=="KoviRobi", ATTRS{product}=="Custom steno", SYMLINK="KoviRobi-Steno"
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{manufacturer}=="Gabotronics", GROUP="plugdev", MODE="0664", SYMLINK+="XScope%n"
-  '';
-  services.udev.packages = with pkgs; [
-    openocd
-    picotool
-    libsigrok
-  ];
+          chmod 0600 ${config.nix.settings.secret-key-files}
+        '';
+        wantedBy = [ "nix-daemon.service" ];
+        unitConfig = {
+          Type = "oneshot";
+          ConditionPathExists = "!${config.nix.settings.secret-key-files}";
+          Before = [ "nix-daemon.service" ];
+        };
+      };
+    };
+    coredump.enable = true;
+  };
+
+  security = {
+    audit.enable = true;
+    auditd.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
+    pam.services.sudo.enableGnomeKeyring = true;
+  };
+
   users.groups.plugdev = { };
 
-  services.tailscale.enable = true;
-  services.resolved.enable = true;
-
-  # To make tailscale work
-  networking.firewall.checkReversePath = "loose";
-
-  programs.command-not-found.enable = false; # Using nix-index
-
-  environment.extraOutputsToInstall = [ "terminfo" ];
-
   nix.settings.secret-key-files = "/etc/secrets/nix/secret-key";
-  systemd.services.generate-nix-secret-key = {
-    script = ''
-      ${pkgs.coreutils}/bin/mkdir -p $(${pkgs.coreutils}/bin/dirname ${config.nix.settings.secret-key-files})
-
-      ${pkgs.nix}/bin/nix-store --generate-binary-cache-key ${config.networking.hostName} ${config.nix.settings.secret-key-files} ${config.nix.settings.secret-key-files}.pub
-
-      chmod 0600 ${config.nix.settings.secret-key-files}
-    '';
-    wantedBy = [ "nix-daemon.service" ];
-    unitConfig = {
-      Type = "oneshot";
-      ConditionPathExists = "!${config.nix.settings.secret-key-files}";
-      Before = [ "nix-daemon.service" ];
-    };
-  };
 }

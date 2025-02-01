@@ -20,7 +20,7 @@ let
   uid = 999;
   gid = 999;
 
-  git-appraise-web-rob = pkgs.buildGoModule rec {
+  git-appraise-web-rob = pkgs.buildGoModule {
     pname = "git-appraise-rob";
     version = "unstable-2024-09-08";
 
@@ -76,80 +76,82 @@ let
   git-appraise-web = if rob then git-appraise-web-rob else git-appraise-web-upstream;
 in
 {
-  services.nginx = {
-    enable = true;
-    additionalModules = [
-      pkgs.nginxModules.spnego-http-auth
-    ];
-    recommendedProxySettings = true;
-
-    gitweb.enable = true;
-    gitweb.group = group;
-
-    virtualHosts."_" = {
-      default = true;
-      listen = [
-        {
-          addr = config.networking.hostName;
-          port = nginx-port;
-        }
+  services = {
+    nginx = {
+      enable = true;
+      additionalModules = [
+        pkgs.nginxModules.spnego-http-auth
       ];
-      locations =
-        let
-          authConf = lib.optionalString auth ''
-            auth_gss on;
-            auth_gss_keytab /tmp/krb5_nginx;
-          '';
-        in
-        {
-          "/" = {
-            proxyPass = "http://${git-appraise-rob-listen}";
-          };
-          "~ ^(/git/.*)$" = {
-            priority = 900;
-            # This is where the repositories live on the server
-            root = "/srv";
+      recommendedProxySettings = true;
 
-            # Setup FastCGI for Git HTTP Backend
-            extraConfig =
-              authConf
-              + ''fastcgi_pass        ''
-              + config.services.fcgiwrap.instances.git-http-backend.socket.type
-              + ":"
-              + config.services.fcgiwrap.instances.git-http-backend.socket.address
-              + ''
-                ;
-                            include             ${config.services.nginx.package}/conf/fastcgi_params;
-              '';
+      gitweb.enable = true;
+      gitweb.group = group;
 
-            fastcgiParams = {
-              # All parameters below will be forwarded to fcgiwrap which then starts
-              # the git http proces with the the params as environment variables except
-              # for SCRIPT_FILENAME. See "man git-http-server" for more information on them.
-              SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
-              GIT_PROJECT_ROOT = "/srv";
-              # CAREFULL! only include this option if you want all the repos in $root to
-              # to be read.
-              GIT_HTTP_EXPORT_ALL = "";
-              # use the path from the regex in the location
-              PATH_INFO = "$1";
+      virtualHosts."_" = {
+        default = true;
+        listen = [
+          {
+            addr = config.networking.hostName;
+            port = nginx-port;
+          }
+        ];
+        locations =
+          let
+            authConf = lib.optionalString auth ''
+              auth_gss on;
+              auth_gss_keytab /tmp/krb5_nginx;
+            '';
+          in
+          {
+            "/" = {
+              proxyPass = "http://${git-appraise-rob-listen}";
+            };
+            "~ ^(/git/.*)$" = {
+              priority = 900;
+              # This is where the repositories live on the server
+              root = "/srv";
+
+              # Setup FastCGI for Git HTTP Backend
+              extraConfig =
+                authConf
+                + ''fastcgi_pass        ''
+                + config.services.fcgiwrap.instances.git-http-backend.socket.type
+                + ":"
+                + config.services.fcgiwrap.instances.git-http-backend.socket.address
+                + ''
+                  ;
+                              include             ${config.services.nginx.package}/conf/fastcgi_params;
+                '';
+
+              fastcgiParams = {
+                # All parameters below will be forwarded to fcgiwrap which then starts
+                # the git http proces with the the params as environment variables except
+                # for SCRIPT_FILENAME. See "man git-http-server" for more information on them.
+                SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
+                GIT_PROJECT_ROOT = "/srv";
+                # CAREFULL! only include this option if you want all the repos in $root to
+                # to be read.
+                GIT_HTTP_EXPORT_ALL = "";
+                # use the path from the regex in the location
+                PATH_INFO = "$1";
+              };
+            };
+            ${config.services.nginx.gitweb.location} = {
+              extraConfig = authConf;
             };
           };
-          ${config.services.nginx.gitweb.location} = {
-            extraConfig = authConf;
-          };
-        };
+      };
     };
-  };
 
-  services.gitweb.gitwebTheme = true;
-  services.gitweb.projectroot = "/srv/git";
+    gitweb.gitwebTheme = true;
+    gitweb.projectroot = "/srv/git";
 
-  services.fcgiwrap.instances.git-http-backend = {
-    process.user = user;
-    process.group = group;
-    socket.user = "nginx";
-    socket.group = "nginx";
+    fcgiwrap.instances.git-http-backend = {
+      process.user = user;
+      process.group = group;
+      socket.user = "nginx";
+      socket.group = "nginx";
+    };
   };
 
   users.users.${user} = {

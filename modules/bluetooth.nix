@@ -4,6 +4,6 @@
 {
   services.blueman.enable = true;
 }
-// ({
+// {
   home-manager.users.default-user.services.blueman-applet.enable = true;
-})
+}

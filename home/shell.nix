@@ -1,97 +1,98 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }:
 {
   imports = [ ./starship.nix ];
 
-  home.packages =
-    with pkgs;
-    [
-      thefuck
-      zoxide
-    ]
-    ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-      carapace
-    ];
+  home = {
+    packages =
+      with pkgs;
+      [
+        thefuck
+        zoxide
+      ]
+      ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+        carapace
+      ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    PAGER = "less";
-    LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
-    LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
-    GS_OPTIONS = "-sPAPERSIZE=a4";
-  };
+    sessionVariables = {
+      EDITOR = "nvim";
+      PAGER = "less";
+      LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
+      LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
+      GS_OPTIONS = "-sPAPERSIZE=a4";
+    };
 
-  home.shellAliases = {
-    # quick cd
-    ".." = "cd ..";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
-    "....." = "cd ../../../..";
+    shellAliases = {
+      # quick cd
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      "....." = "cd ../../../..";
 
-    g = "git";
-    ga = "git add";
-    gap = "git add -p";
-    gc = "git commit";
-    "gc!" = "git commit --amend";
-    gco = "git checkout";
-    gd = "git diff";
-    gds = "git diff --staged";
-    gig = "git update-index --assume-unchanged";
-    gp = "git push";
-    gpf = "git push --force-with-lease";
-    gr = "git remote";
-    gre = "git reset";
-    greh = "git reset --hard";
-    grp = "git reset -p";
-    grv = "git remote -v";
-    grb = "git rebase";
-    gcp = "git cherry-pick";
-    gs = "git status";
-    gsh = "git show";
-    gunig = "git update-index --no-assume-unchanged";
-    gsu = "git submodule";
-    gsui = "git submodule update --init";
-    gsud = "git submodule deinit";
+      g = "git";
+      ga = "git add";
+      gap = "git add -p";
+      gc = "git commit";
+      "gc!" = "git commit --amend";
+      gco = "git checkout";
+      gd = "git diff";
+      gds = "git diff --staged";
+      gig = "git update-index --assume-unchanged";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gr = "git remote";
+      gre = "git reset";
+      greh = "git reset --hard";
+      grp = "git reset -p";
+      grv = "git remote -v";
+      grb = "git rebase";
+      gcp = "git cherry-pick";
+      gs = "git status";
+      gsh = "git show";
+      gunig = "git update-index --no-assume-unchanged";
+      gsu = "git submodule";
+      gsui = "git submodule update --init";
+      gsud = "git submodule deinit";
 
-    n = "nix";
-    np = "n profile";
-    ni = "np install";
-    nr = "np remove";
-    ns = "n search --no-update-lock-file";
-    nb = "nom build";
-    nf = "n flake";
-    nepl = "nix repl --expr 'builtins.getFlake \"nixos-config\"'";
+      n = "nix";
+      np = "n profile";
+      ni = "np install";
+      nr = "np remove";
+      ns = "n search --no-update-lock-file";
+      nb = "nom build";
+      nf = "n flake";
+      nepl = "nix repl --expr 'builtins.getFlake \"nixos-config\"'";
 
-    dea = "direnv allow";
-    ded = "direnv edit";
-    der = "direnv reload";
+      dea = "direnv allow";
+      ded = "direnv edit";
+      der = "direnv reload";
 
-    termbin = "nc termbin.com 9999";
+      termbin = "nc termbin.com 9999";
 
-    ls = "${pkgs.eza}/bin/eza";
-    ll = "${pkgs.eza}/bin/eza -l";
-    la = "${pkgs.eza}/bin/eza -la";
+      ls = "${pkgs.eza}/bin/eza";
+      ll = "${pkgs.eza}/bin/eza -l";
+      la = "${pkgs.eza}/bin/eza -la";
 
-    mnt = "udisksctl mount -b";
-    unmnt = "udisksctl unmount -b";
+      mnt = "udisksctl mount -b";
+      unmnt = "udisksctl unmount -b";
 
-    # internet ip
-    myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
+      # internet ip
+      myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
 
-    ctl = "systemctl";
-    stl = "sudo systemctl";
-    utl = "systemctl --user";
-    us = "systemctl --user status";
-    ut = "systemctl --user start";
-    un = "systemctl --user stop";
-    ss = "systemctl status";
-    up = "sudo systemctl start";
-    dn = "sudo systemctl stop";
-    jtl = "journalctl";
+      ctl = "systemctl";
+      stl = "sudo systemctl";
+      utl = "systemctl --user";
+      us = "systemctl --user status";
+      ut = "systemctl --user start";
+      un = "systemctl --user stop";
+      ss = "systemctl status";
+      up = "sudo systemctl start";
+      dn = "sudo systemctl stop";
+      jtl = "journalctl";
+    };
   };
 
   programs = {

@@ -9,10 +9,6 @@
   lib,
   ...
 }:
-let
-  # Generate with e.g. "tr -dc '[:alnum:]' < /dev/urandom|head -c32"
-  mpd_pass = builtins.readFile ../mpd-password.secret;
-in
 {
   systemd.services.mpd-password = {
     script = ''

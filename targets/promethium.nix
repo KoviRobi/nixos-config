@@ -11,21 +11,31 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "nvme"
-    "usbhid"
-    "sd_mod"
-    "sr_mod"
-  ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "sd_mod"
+        "sr_mod"
+      ];
+      kernelModules = [ "dm-snapshot" ];
 
-  boot.initrd.luks.devices."promethium-nix1".device =
-    "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
-  boot.initrd.luks.devices."promethium-nix1".preLVM = false;
+      luks.devices."promethium-nix1".device = "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
+      luks.devices."promethium-nix1".preLVM = false;
+    };
+
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+
+    loader = {
+      # Use the systemd-boot EFI boot loader.
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   fileSystems =
     {
@@ -60,10 +70,6 @@
   ];
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -117,7 +117,7 @@ with pkgs;
   vim
   git
 ]
-++ lib.optionals (pkgs.hostPlatform.isLinux) [
+++ lib.optionals pkgs.hostPlatform.isLinux [
   abcde
   linuxConsoleTools
   lm_sensors

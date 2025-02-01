@@ -1,11 +1,9 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }:
 let
-  killall = "${pkgs.psmisc}/bin/killall";
   adwaita = {
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
@@ -24,48 +22,50 @@ in
     }/home-manager-service.nix"
   ];
 
-  services.network-manager-applet.enable = true;
-  services.copyq.enable = true;
-  services.pasystray.enable = true;
-  services.udiskie.enable = true;
-  services.dunst.enable = true;
-  services.dunst.settings = {
-    global = {
-      follow = "keyboard";
-      mouse_middle_click = "context";
-      dmenu = "${pkgs.dmenu}/bin/dmenu";
+  services = {
+    network-manager-applet.enable = true;
+    copyq.enable = true;
+    pasystray.enable = true;
+    udiskie.enable = true;
+    dunst.enable = true;
+    dunst.settings = {
+      global = {
+        follow = "keyboard";
+        mouse_middle_click = "context";
+        dmenu = "${pkgs.dmenu}/bin/dmenu";
+      };
     };
-  };
-  services.feh-random-background = {
-    enable = true;
-    imageDirectory = "%h/backgrounds/";
-    stateFile = "%h/.feh-random-background";
-    interval = "1h";
-    display = "max";
-  };
-  services.picom = {
-    enable = true;
-    menuOpacity = 1.0;
-    opacityRules = [
-      "100:class_i ?= 'i3lock'"
-      "0:_NET_WM_STATE@:32a = '_NET_WM_STATE_HIDDEN'"
-      "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'"
-      "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'"
-      "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
-      "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
-      "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
-      "87:class_i ?= 'scratchpad'"
-      "91:class_i ?= 'st-256color'"
-      "100:focused"
-    ];
-  };
-  services.xcape = {
-    enable = true;
-    mapExpression = {
-      Shift_L = "parenleft";
-      Shift_R = "parenright";
+    feh-random-background = {
+      enable = true;
+      imageDirectory = "%h/backgrounds/";
+      stateFile = "%h/.feh-random-background";
+      interval = "1h";
+      display = "max";
     };
-    timeout = 250;
+    picom = {
+      enable = true;
+      menuOpacity = 1.0;
+      opacityRules = [
+        "100:class_i ?= 'i3lock'"
+        "0:_NET_WM_STATE@:32a = '_NET_WM_STATE_HIDDEN'"
+        "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'"
+        "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'"
+        "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
+        "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
+        "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
+        "87:class_i ?= 'scratchpad'"
+        "91:class_i ?= 'st-256color'"
+        "100:focused"
+      ];
+    };
+    xcape = {
+      enable = true;
+      mapExpression = {
+        Shift_L = "parenleft";
+        Shift_R = "parenright";
+      };
+      timeout = 250;
+    };
   };
 
   xresources.properties = {

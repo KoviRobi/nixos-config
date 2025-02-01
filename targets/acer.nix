@@ -11,38 +11,50 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  services.libinput.enable = false;
-  services.xserver.synaptics.enable = true;
-  services.xserver.synaptics.tapButtons = false;
-  services.xserver.synaptics.vertTwoFingerScroll = true;
-  services.xserver.synaptics.horizTwoFingerScroll = true;
-  services.xserver.synaptics.palmDetect = true;
-  services.xserver.synaptics.palmMinWidth = 7;
-  services.xserver.synaptics.palmMinZ = 25;
+  services = {
+    libinput.enable = false;
+    xserver = {
+      synaptics = {
+        enable = true;
+        tapButtons = false;
+        vertTwoFingerScroll = true;
+        horizTwoFingerScroll = true;
+        palmDetect = true;
+        palmMinWidth = 7;
+        palmMinZ = 25;
+      };
+    };
+    auto-cpufreq.enable = true;
+  };
 
   powerManagement.enable = true;
-  services.auto-cpufreq.enable = true;
   powerManagement.powertop.enable = true;
 
   environment.systemPackages = [ pkgs.powertop ];
 
-  boot.initrd.availableKernelModules = [
-    "ehci_pci"
-    "ata_piix"
-    "xhci_pci"
-    "sd_mod"
-    "sr_mod"
-    "sdhci_pci"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "wl"
-  ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "ehci_pci"
+        "ata_piix"
+        "xhci_pci"
+        "sd_mod"
+        "sr_mod"
+        "sdhci_pci"
+      ];
+      kernelModules = [ ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/disk/by-id/ata-Samsung_SSD_840_EVO_1TB_S1D9NSAF319989A";
+      luks.devices."acer-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
+    };
+    kernelModules = [
+      "kvm-intel"
+      "wl"
+    ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+
+    loader.grub.enable = true;
+    loader.grub.device = "/dev/disk/by-id/ata-Samsung_SSD_840_EVO_1TB_S1D9NSAF319989A";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -58,8 +70,6 @@
     device = "/dev/disk/by-uuid/fcd1faed-c003-4472-a4ac-02dc2b8f8d61";
     fsType = "xfs";
   };
-
-  boot.initrd.luks.devices."acer-nixos-a".device = "/dev/disk/by-uuid/ed308956-0c94-4cd2-a8a5-9e6aa9ff22f8";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/30C3-618E";

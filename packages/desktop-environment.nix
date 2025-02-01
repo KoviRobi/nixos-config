@@ -4,18 +4,20 @@
   ...
 }:
 {
-  programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark-qt;
+  programs = {
+    wireshark.enable = true;
+    wireshark.package = pkgs.wireshark-qt;
 
-  programs.firefox.enable = true;
-  programs.firefox.nativeMessagingHosts.packages = [
-    pkgs.ff2mpv
-    (pkgs.passff-host.override {
-      pass = (pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]));
-    })
-  ];
+    firefox.enable = true;
+    firefox.nativeMessagingHosts.packages = [
+      pkgs.ff2mpv
+      (pkgs.passff-host.override {
+        pass = pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]);
+      })
+    ];
 
-  programs.noisetorch.enable = true;
+    noisetorch.enable = true;
+  };
 
   environment.systemPackages =
     with pkgs;
