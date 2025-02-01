@@ -100,6 +100,13 @@ in
             window_type = "popup_menu";
           };
         }
+        {
+          command = "border 1pixel";
+          criteria = {
+            class = "mpv";
+            floating = true;
+          };
+        }
       ];
       keybindings =
         lib.mkOptionDefault {
