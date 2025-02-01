@@ -35,6 +35,7 @@ in
         dmenu = "${pkgs.dmenu}/bin/dmenu";
       };
     };
+    darkman.enable = true;
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";
