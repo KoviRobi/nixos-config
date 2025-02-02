@@ -37,6 +37,11 @@
       enableBashCompletion = true;
     };
 
+    mosh = {
+      openFirewall = true;
+      enable = true;
+    };
+
     nix-ld = {
       enable = true;
       package = pkgs.nix-ld-rs;
