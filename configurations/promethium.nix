@@ -119,8 +119,6 @@
     (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
   ];
 
-  programs.systemtap.enable = true;
-
   networking.firewall.interfaces.rnd-bridge.allowedUDPPorts = [
     67 # bootps
   ];
