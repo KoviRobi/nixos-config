@@ -128,6 +128,14 @@
             XDG_CONFIG_HOME=${simple.config.home-files}/.config ${simple.pkgs.lib.getExe simple.config.programs.neovim.finalPackage} "$@"
           '';
 
+        vim-plugins =
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          nixpkgs.lib.callPackagesWith (
+            pkgs // { inherit (pkgs.vimUtils) buildVimPlugin; }
+          ) ./home/neovim/myplugins.nix { };
+
         inherit (self.legacyPackages.${system}.nixpkgs) st;
 
         homeConfigurations =
