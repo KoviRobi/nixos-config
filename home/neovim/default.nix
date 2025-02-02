@@ -196,6 +196,7 @@ in
             ln -s ${pkgs.notmuch.vim}/share/vim-plugins/notmuch $out
           '')
           neotest-ctest
+          darkman-nvim
         ]);
 
       extraLuaConfig = ''

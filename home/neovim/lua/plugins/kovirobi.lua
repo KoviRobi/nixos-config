@@ -22,6 +22,15 @@ return {
 	},
 
 	{
+		"KoviRobi/darkman.nvim",
+		event = "VimEnter",
+		build = "go build -o bin/darkman.nvim",
+		opts = {
+			-- configuration here
+		},
+	},
+
+	{
 		"LazyVim/LazyVim",
 		opts = {
 			colorscheme = "solarized",

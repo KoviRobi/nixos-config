@@ -1,5 +1,6 @@
 {
   vimPlugins,
+  buildGoModule,
   buildVimPlugin,
   fetchFromGitHub,
 }:
@@ -59,4 +60,30 @@ mkPlugins {
     };
     meta.homepage = "https://github.com/orjangj/neotest-ctest";
   };
+
+  darkman-nvim =
+    let
+      version = "unstable-2025-01-23";
+      src = fetchFromGitHub {
+        owner = "KoviRobi";
+        repo = "darkman.nvim";
+        rev = "acae507ebbcb18a177faa36ea912ea1b2ea5e1ed";
+        hash = "sha256-wGFqUA2M5uKp3Eof21knopUJoRlBmwjPe0SpZneqXNA=";
+      };
+
+      dbusProgram = buildGoModule {
+        pname = "darkman.nvim-portal";
+        inherit version src;
+
+        vendorHash = "sha256-HpyKzvKVN9hVRxxca4sdWRo91H32Ha9gxitr7Qg5MY8=";
+      };
+    in
+    {
+      pname = "darkman.nvim";
+      inherit version src;
+      postInstall = ''
+        mkdir -p $out
+        cp -r ${dbusProgram}/* $out
+      '';
+    };
 }
