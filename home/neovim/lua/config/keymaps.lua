@@ -35,9 +35,11 @@ key.set("n", "<Leader>cO", function()
 	vim.diagnostic.enable(not enabled, filter)
 end, { desc = "Toggle diagnostics for this buffer" })
 
-key.set("n", "<Leader>gca", "<Cmd>Git commit --amend<CR>")
-key.set("n", "<Leader>gcc", "<Cmd>Git commit<CR>")
-key.set("n", "<Leader>gc<Space>", ":<C-U>Git commit")
+key.set("n", "<Leader>gc<Space>", ":<C-U>Git commit", { desc = "Show commit prompt" })
+key.set("n", "<Leader>gca", "<Cmd>Git commit --amend<CR>", { desc = "Amend commit" })
+key.set("n", "<Leader>gcc", "<Cmd>Git commit<CR>", { desc = "Commit" })
+
+key.set("v", "<Leader>S", "<Cmd>'<,'>sort<CR>", { desc = "Sort selection" })
 
 key.set("n", "]H", function()
 	if vim.wo.diff then
