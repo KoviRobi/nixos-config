@@ -1,7 +1,7 @@
-From 8e4dd0549193b8a49e468519f6bbda6740384fb4 Mon Sep 17 00:00:00 2001
+From 62b87007555b65d653844681ab0c82ab3a27d9e1 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:22:40 +0100
-Subject: [PATCH 02/10] Patch st-0.8.5-worddelimiters.patch
+Subject: [PATCH 02/11] Patch st-0.8.5-worddelimiters.patch
 
 ---
  config.def.h | 2 +-
@@ -21,5 +21,5 @@ index 046aa98..f959d79 100644
  /* selection timeouts (in milliseconds) */
  static unsigned int doubleclicktimeout = 300;
 -- 
-2.47.0
+2.47.1
 

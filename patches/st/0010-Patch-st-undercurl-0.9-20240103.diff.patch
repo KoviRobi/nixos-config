@@ -1,15 +1,15 @@
-From 04743e9bc45f9c3de81f169ffdc61533e2cca4ff Mon Sep 17 00:00:00 2001
+From 925f2fa9f6297e257fb0b06f13af576ee8532e16 Mon Sep 17 00:00:00 2001
 From: Kovacsics Robert <kovirobi@gmail.com>
-Date: Fri, 24 Jan 2025 00:19:09 +0000
-Subject: [PATCH 10/10] Patch st-undercurl-0.9-20240103.diff
+Date: Thu, 23 Jan 2025 13:54:57 +0000
+Subject: [PATCH 10/11] Patch st-undercurl-0.9-20240103.diff
 
 ---
  config.def.h |  24 +++
  st.c         |  51 ++++++-
  st.h         |   3 +
- st.info      |   2 +
- x.c          | 414 ++++++++++++++++++++++++++++++++++++++++++++++++++-
- 5 files changed, 491 insertions(+), 3 deletions(-)
+ st.info      |   1 +
+ x.c          | 406 ++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 5 files changed, 482 insertions(+), 3 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
 index 012e3fa..e98b3c4 100644
@@ -176,7 +176,7 @@ index 1f41644..fc8fd05 100644
  
  typedef Glyph *Line;
 diff --git a/st.info b/st.info
-index 7c81d67..28484f1 100644
+index 7c81d67..e779780 100644
 --- a/st.info
 +++ b/st.info
 @@ -1,4 +1,5 @@
@@ -185,16 +185,8 @@ index 7c81d67..28484f1 100644
  	acsc=+C\,D-A.B0E``aaffgghFiGjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
  	am,
  	bce,
-@@ -177,6 +178,7 @@ st-mono| simpleterm monocolor,
- 	smkx=\E[?1h\E=,
- 	smso=\E[7m,
- 	smul=\E[4m,
-+	Smulx=\E[4:%p1%dm,
- 	tbc=\E[3g,
- 	tsl=\E]0;,
- 	xenl,
 diff --git a/x.c b/x.c
-index d7603fd..6b75292 100644
+index d7603fd..8e728c7 100644
 --- a/x.c
 +++ b/x.c
 @@ -46,6 +46,14 @@ typedef struct {
@@ -264,7 +256,7 @@ index d7603fd..6b75292 100644
  void
  xresetfontsettings(ushort mode, Font **font, int *frcflags)
  {
-@@ -1694,8 +1747,365 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+@@ -1694,8 +1747,357 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  
  	/* Render underline and strikethrough. */
  	if (base.mode & ATTR_UNDERLINE) {
@@ -310,18 +302,10 @@ index d7603fd..6b75292 100644
 +			&ugcv);
 +
 +		// Underline Style
-+		if (base.ustyle == 1) {
++		if (base.ustyle != 3) {
 +			//XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent + 1, width, 1);
 +			XFillRectangle(xw.dpy, XftDrawDrawable(xw.draw), ugc, winx,
 +				winy + dc.font.ascent + 1, width, wlw);
-+		} else if (base.ustyle == 2) {
-+			XFillRectangle(xw.dpy, XftDrawDrawable(xw.draw), ugc, winx,
-+				winy + dc.font.ascent + 1, width, wlw);
-+			XFillRectangle(xw.dpy, XftDrawDrawable(xw.draw), ugc, winx,
-+				winy + dc.font.ascent + 1 + 2 * wlw, width, wlw);
-+		} else if (base.ustyle != 3) {
-+			XFillRectangle(xw.dpy, XftDrawDrawable(xw.draw), ugc, winx,
-+				winy + dc.font.ascent + 1, width, 2 * wlw);
 +		} else if (base.ustyle == 3) {
 +			int ww = win.cw;//width;
 +			int wh = dc.font.descent - wlw/2 - 1;//r.height/7;
@@ -633,5 +617,5 @@ index d7603fd..6b75292 100644
  
  	if (base.mode & ATTR_STRUCK) {
 -- 
-2.47.0
+2.47.1
 

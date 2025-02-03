@@ -1,7 +1,7 @@
-From 4fd6e78dfcbd4ca682778448c1296c4069d0fe2a Mon Sep 17 00:00:00 2001
+From 3a373ced86a05b8580246334c8688b4d1ca22167 Mon Sep 17 00:00:00 2001
 From: Aleksandrs Stier <aleks.stier@icloud.com>
 Date: Sat, 4 Jun 2022 01:24:07 +0200
-Subject: [PATCH 03/10] Set _NET_WM_ICON with a png-image
+Subject: [PATCH 03/11] Set _NET_WM_ICON with a png-image
 
 ---
  config.mk |  4 ++--
@@ -97,5 +97,5 @@ index b251400..f1ce158 100644
  	XChangeProperty(xw.dpy, xw.win, xw.netwmpid, XA_CARDINAL, 32,
  			PropModeReplace, (uchar *)&thispid, 1);
 -- 
-2.47.0
+2.47.1
 

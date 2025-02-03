@@ -1,0 +1,79 @@
+From 2330ea07caa01aa6950f3f4f42773c6cb6edf13a Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Mon, 3 Feb 2025 13:32:11 +0000
+Subject: [PATCH 11/11] Read brightness state file if it exists
+
+---
+ x.c | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/x.c b/x.c
+index 8e728c7..29d9d38 100644
+--- a/x.c
++++ b/x.c
+@@ -233,6 +233,7 @@ static DC dc;
+ static XWindow xw;
+ static XSelection xsel;
+ static TermWindow win;
++static FILE * brightness;
+ 
+ /* Font Ring Cache */
+ enum {
+@@ -310,6 +311,7 @@ numlock(const Arg *dummy)
+ void
+ swapcolors(const Arg *dummy)
+ {
++	brightness = NULL;
+ 	usealtcolors = !usealtcolors;
+ 	xloadcols();
+ 	redraw();
+@@ -790,6 +792,20 @@ sixd_to_16bit(int x)
+ 	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
+ }
+ 
++void parse_brightness()
++{
++	if (brightness == NULL)
++		return;
++
++	char buf[10];
++	rewind(brightness);
++	size_t n = fread(buf, 1, sizeof(buf), brightness);
++	if (n >= 4 && strncmp(buf, "dark", 4))
++		usealtcolors = 0;
++	if (n >= 5 && strncmp(buf, "light", 5))
++		usealtcolors = 1;
++}
++
+ const char* getcolorname(int i)
+ {
+ 	return (usealtcolors) ?  altcolorname[i] : colorname[i];
+@@ -826,6 +842,8 @@ xloadcols(void)
+ 	static int loaded;
+ 	Color *cp;
+ 
++	parse_brightness();
++
+ 	if (loaded) {
+ 		for (cp = dc.col; cp < &dc.col[dc.collen]; ++cp)
+ 			XftColorFree(xw.dpy, xw.vis, xw.cmap, cp);
+@@ -1277,6 +1295,16 @@ xinit(int cols, int rows)
+ 	/* spare fonts */
+ 	xloadsparefonts();
+ 
++	char * home = getenv("HOME");
++	if (home == NULL) {
++		fprintf(stderr, "Failed to open brightness file!\n");
++	} else {
++		char buf[128];
++		snprintf(buf, sizeof(buf), "%s/brightness", home);
++		brightness = fopen(buf, "r");
++		parse_brightness();
++	}
++
+ 	/* colors */
+ 	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
+ 	xloadcols();
+-- 
+2.47.1
+

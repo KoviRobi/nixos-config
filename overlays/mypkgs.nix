@@ -16,6 +16,7 @@ final: prev: {
         ../patches/st/0008-Patch-st-ligatures-20240427-0.9.2.diff.patch
         ../patches/st/0009-Patch-st-shift-backspace.patch.patch
         ../patches/st/0010-Patch-st-undercurl-0.9-20240103.diff.patch
+        ../patches/st/0011-Read-brightness-state-file-if-it-exists.patch
       ];
     }).overrideAttrs
       (attrs: {

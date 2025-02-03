@@ -1,7 +1,7 @@
-From e5144f2158445f388f477f1a532cfbfc56d862cd Mon Sep 17 00:00:00 2001
+From 25f0b5d79a2c44739388e639523cb4df2e01e3e2 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:52 +0100
-Subject: [PATCH 06/10] Patch st-0.8.5-solarized-swap.patch
+Subject: [PATCH 06/11] Patch st-0.8.5-solarized-swap.patch
 
 ---
  config.def.h | 74 ++++++++++++++++++++++++++++++----------------------
@@ -214,5 +214,5 @@ index f1ce158..37d2859 100644
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
 -- 
-2.47.0
+2.47.1
 

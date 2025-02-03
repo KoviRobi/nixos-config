@@ -1,7 +1,7 @@
-From 27f44aaac7df840570aff2d675c9189194170332 Mon Sep 17 00:00:00 2001
+From 861c9181ff77d7e9f4df7607d8b29017abeb6a65 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:28:25 +0100
-Subject: [PATCH 09/10] Patch st-shift-backspace.patch
+Subject: [PATCH 09/11] Patch st-shift-backspace.patch
 
 ---
  config.def.h | 2 +-
@@ -22,5 +22,5 @@ index 2f68013..012e3fa 100644
  	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},
  	{ XK_Home,          XK_ANY_MOD,     "\033[H",        0,   -1},
 -- 
-2.47.0
+2.47.1
 

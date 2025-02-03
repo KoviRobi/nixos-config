@@ -1,7 +1,7 @@
-From 80013949d82f7b49a9045f2a6722bcb943acd719 Mon Sep 17 00:00:00 2001
+From 80db61953641dc4c0d609eeb273a7aeaaf3a0372 Mon Sep 17 00:00:00 2001
 From: aleks <aleks.stier@icloud.com>
 Date: Tue, 31 May 2022 00:33:38 +0200
-Subject: [PATCH 04/10] Create a desktop-entry for st
+Subject: [PATCH 04/11] Create a desktop-entry for st
 
 Enables to find st in a graphical menu and to display it with a nice
 icon.
@@ -64,5 +64,5 @@ index 0000000..2d2b76f
 +Comment=st is a simple terminal implementation for X
 +StartupWMClass=st-256color
 -- 
-2.47.0
+2.47.1
 

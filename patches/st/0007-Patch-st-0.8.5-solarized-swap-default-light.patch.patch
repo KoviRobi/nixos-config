@@ -1,7 +1,7 @@
-From 4b68259de03cdab7272d19dc5304fb0983a658fc Mon Sep 17 00:00:00 2001
+From 2a8b1c63fa8b2a31448f1794f6eb3da1d9172da0 Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:26:13 +0100
-Subject: [PATCH 07/10] Patch st-0.8.5-solarized-swap-default-light.patch
+Subject: [PATCH 07/11] Patch st-0.8.5-solarized-swap-default-light.patch
 
 ---
  x.c | 2 +-
@@ -21,5 +21,5 @@ index 37d2859..f057aab 100644
  void
  clipcopy(const Arg *dummy)
 -- 
-2.47.0
+2.47.1
 
