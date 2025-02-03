@@ -67,8 +67,8 @@ mkPlugins {
       src = fetchFromGitHub {
         owner = "KoviRobi";
         repo = "darkman.nvim";
-        rev = "acae507ebbcb18a177faa36ea912ea1b2ea5e1ed";
-        hash = "sha256-wGFqUA2M5uKp3Eof21knopUJoRlBmwjPe0SpZneqXNA=";
+        rev = "ccebe96f5d3835e983336d0d3d797ff06c015b94";
+        hash = "sha256-NuS0KEMYMm78XENNGxlzZ4EHFrAwDn6echdEWgDaIBU=";
       };
 
       dbusProgram = buildGoModule {

@@ -35,7 +35,11 @@ in
         dmenu = "${pkgs.dmenu}/bin/dmenu";
       };
     };
-    darkman.enable = true;
+    darkman = {
+      enable = true;
+      darkModeScripts.state-file = "echo 'dark' > ~/.local/state/brightness";
+      lightModeScripts.state-file = "echo 'light' > ~/.local/state/brightness";
+    };
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";

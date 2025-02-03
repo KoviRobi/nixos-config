@@ -15,19 +15,21 @@ return {
 		},
 		config = function(_, opts)
 			vim.o.termguicolors = true
-			vim.o.background = "light"
+
+			local brightness = "light"
+			local fpath = vim.fs.dirname(vim.fn.stdpath("state")) .. "/brightness"
+			local fp = io.open(fpath, "r")
+			if fp ~= nil then
+				local fread = fp:read():gsub("^%s+", ""):gsub("%s+$", "")
+				if fread == "light" or fread == "dark" then
+					brightness = fread
+				end
+			end
+			vim.o.background = brightness
+
 			require("solarized").setup(opts)
 			vim.cmd.colorscheme("solarized")
 		end,
-	},
-
-	{
-		"KoviRobi/darkman.nvim",
-		event = "VimEnter",
-		build = "go build -o bin/darkman.nvim",
-		opts = {
-			-- configuration here
-		},
 	},
 
 	{
