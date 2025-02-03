@@ -1,14 +1,36 @@
-From 2330ea07caa01aa6950f3f4f42773c6cb6edf13a Mon Sep 17 00:00:00 2001
+From 95920a9bc1f355094b1ed4a7e846ab3d68dae159 Mon Sep 17 00:00:00 2001
 From: Kovacsics Robert <kovirobi@gmail.com>
 Date: Mon, 3 Feb 2025 13:32:11 +0000
 Subject: [PATCH 11/11] Read brightness state file if it exists
 
 ---
- x.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ st.c |  3 +++
+ x.c  | 34 +++++++++++++++++++++++++++++++++-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
 
+diff --git a/st.c b/st.c
+index d701c37..c551a8b 100644
+--- a/st.c
++++ b/st.c
+@@ -825,6 +825,8 @@ ttyread(void)
+ 	static int buflen = 0;
+ 	int ret, written;
+ 
++	redraw();
++
+ 	/* append read bytes to unprocessed bytes */
+ 	ret = read(cmdfd, buf+buflen, LEN(buf)-buflen);
+ 
+@@ -2721,6 +2723,7 @@ draw(void)
+ void
+ redraw(void)
+ {
++	xloadcols();
+ 	tfulldirt();
+ 	draw();
+ }
 diff --git a/x.c b/x.c
-index 8e728c7..29d9d38 100644
+index 8e728c7..20129d2 100644
 --- a/x.c
 +++ b/x.c
 @@ -233,6 +233,7 @@ static DC dc;
@@ -19,19 +41,21 @@ index 8e728c7..29d9d38 100644
  
  /* Font Ring Cache */
  enum {
-@@ -310,6 +311,7 @@ numlock(const Arg *dummy)
+@@ -310,8 +311,8 @@ numlock(const Arg *dummy)
  void
  swapcolors(const Arg *dummy)
  {
 +	brightness = NULL;
  	usealtcolors = !usealtcolors;
- 	xloadcols();
+-	xloadcols();
  	redraw();
-@@ -790,6 +792,20 @@ sixd_to_16bit(int x)
+ }
+ 
+@@ -790,6 +791,33 @@ sixd_to_16bit(int x)
  	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
  }
  
-+void parse_brightness()
++void parse_brightness_file()
 +{
 +	if (brightness == NULL)
 +		return;
@@ -39,37 +63,42 @@ index 8e728c7..29d9d38 100644
 +	char buf[10];
 +	rewind(brightness);
 +	size_t n = fread(buf, 1, sizeof(buf), brightness);
-+	if (n >= 4 && strncmp(buf, "dark", 4))
++	if (n >= 4 && strncmp(buf, "dark", 4) == 0)
 +		usealtcolors = 0;
-+	if (n >= 5 && strncmp(buf, "light", 5))
++	if (n >= 5 && strncmp(buf, "light", 5) == 0)
 +		usealtcolors = 1;
++}
++
++void open_brightness_file()
++{
++	char * home = getenv("HOME");
++	if (home == NULL) {
++		fprintf(stderr, "Failed to open brightness file!\n");
++	} else if (brightness == NULL) {
++		char buf[128];
++		snprintf(buf, sizeof(buf), "%s/.local/state/brightness", home);
++		brightness = fopen(buf, "r");
++		parse_brightness_file();
++	}
 +}
 +
  const char* getcolorname(int i)
  {
  	return (usealtcolors) ?  altcolorname[i] : colorname[i];
-@@ -826,6 +842,8 @@ xloadcols(void)
+@@ -826,6 +854,8 @@ xloadcols(void)
  	static int loaded;
  	Color *cp;
  
-+	parse_brightness();
++	open_brightness_file();
 +
  	if (loaded) {
  		for (cp = dc.col; cp < &dc.col[dc.collen]; ++cp)
  			XftColorFree(xw.dpy, xw.vis, xw.cmap, cp);
-@@ -1277,6 +1295,16 @@ xinit(int cols, int rows)
+@@ -1277,6 +1307,8 @@ xinit(int cols, int rows)
  	/* spare fonts */
  	xloadsparefonts();
  
-+	char * home = getenv("HOME");
-+	if (home == NULL) {
-+		fprintf(stderr, "Failed to open brightness file!\n");
-+	} else {
-+		char buf[128];
-+		snprintf(buf, sizeof(buf), "%s/brightness", home);
-+		brightness = fopen(buf, "r");
-+		parse_brightness();
-+	}
++	open_brightness_file();
 +
  	/* colors */
  	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
