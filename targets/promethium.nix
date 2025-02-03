@@ -28,6 +28,7 @@
     };
 
     kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "pcie_aspm=off" ];
     extraModulePackages = [ ];
 
     loader = {
