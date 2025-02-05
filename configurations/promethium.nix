@@ -31,8 +31,6 @@
     initrd.network.flushBeforeStage2 = false;
     # For PCIe passhtrough
     kernelParams = [ "intel_iommu=on" ];
-    # For nixos-generators
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   initrd-ssh.interface = "enp0s31f6";
