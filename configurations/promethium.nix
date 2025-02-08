@@ -43,6 +43,7 @@
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
   services = {
+    lldpd.enable = true;
     xserver.dpi = 93;
     udev.packages = with pkgs; [ saleae-logic-2 ];
 
@@ -97,6 +98,7 @@
     "docker"
     "libvirtd"
     "lxd"
+    "_lldpd"
   ];
 
   environment.unixODBCDrivers = [
