@@ -117,11 +117,16 @@
     (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
   ];
 
-  networking.firewall.interfaces.rnd-bridge.allowedUDPPorts = [
-    67 # bootps
-  ];
-  networking.firewall.interfaces.rnd-bridge.allowedTCPPorts = [
-    139 # netbios-ssn
-    445 # microsoft-ds
-  ];
+  networking.firewall.interfaces = {
+    private-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
+    rnd-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
+    rnd-bridge.allowedTCPPorts = [
+      139 # netbios-ssn
+      445 # microsoft-ds
+    ];
+  };
 }
