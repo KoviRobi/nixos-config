@@ -59,8 +59,6 @@
 
       imagemagick
 
-      alass # subtitle sync
-
       xscopes-qt
 
       typst
