@@ -30,5 +30,6 @@
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
+    settings.X11Forwarding = true;
   };
 }
