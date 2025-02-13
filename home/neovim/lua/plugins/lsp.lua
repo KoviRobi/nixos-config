@@ -9,7 +9,7 @@ return {
 				ocamllsp = { mason = false },
 				gopls = {},
 				pyright = {},
-				cmake = {},
+				neocmake = {},
 				tinymist = {
 					mason = false,
 					offset_encoding = "utf-8",

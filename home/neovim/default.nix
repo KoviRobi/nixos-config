@@ -59,6 +59,8 @@ in
 
         pkgs.lua-language-server
         pkgs.cmake-language-server
+        pkgs.cmake-format
+        pkgs.neocmakelsp
 
         pkgs.statix
 
