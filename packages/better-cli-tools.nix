@@ -23,6 +23,6 @@ with pkgs;
   skim
   tealdeer
   rlwrap
-  # Email
   pizauth
+  dive
 ]
