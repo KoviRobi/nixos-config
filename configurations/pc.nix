@@ -135,7 +135,17 @@
     "libvirtd"
   ];
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    nss.enableGuest = true;
+    qemu = {
+      ovmf.packages = [ pkgs.OVMFFull.fd ];
+      vhostUserPackages = [ pkgs.virtiofsd ];
+      swtpm = {
+        enable = true;
+      };
+    };
+  };
 
   # For google chrome (for DRM :( )
   nixpkgs.config.allowUnfree = true;
