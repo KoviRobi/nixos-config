@@ -17,6 +17,7 @@ with pkgs;
   fd
   ripgrep
   eza
+  lsd
   dnsutils
   bottom
   manix
