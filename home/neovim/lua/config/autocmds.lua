@@ -46,3 +46,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.o.statuscolumn = ""
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufWinEnter" }, {
+	pattern = "*.overlay",
+	callback = function()
+		vim.o.filetype = "dts"
+	end,
+})
