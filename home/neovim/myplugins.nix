@@ -1,6 +1,5 @@
 {
   vimPlugins,
-  buildGoModule,
   buildVimPlugin,
   fetchFromGitHub,
 }:
@@ -58,6 +57,7 @@ mkPlugins {
       rev = version;
       sha256 = "sha256-+560CBPJeKd2F9qboI1YiccffQYLFoHpaEIs0HsCGls=";
     };
+    buildInputs = [ vimPlugins.neotest ];
     meta.homepage = "https://github.com/orjangj/neotest-ctest";
   };
 }
