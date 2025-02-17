@@ -50,7 +50,6 @@ with pkgs;
 
   plan9port
   acme-lsp
-  acre
 
   _9pfs
   ntfs3g
