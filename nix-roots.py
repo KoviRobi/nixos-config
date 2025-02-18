@@ -5,6 +5,7 @@ import os
 import re
 import sys
 import typing as t
+from argparse import ArgumentParser
 from pathlib import Path
 from subprocess import PIPE, run
 
@@ -125,7 +126,7 @@ def print_info(roots: Roots, closures: Du, uniques: Du):
 
     for fromPath, toPaths in roots.items():
         pad = alignTo - len(fromPath)
-        chunkSize = max(20, os.get_terminal_size().columns - alignTo - 3)
+        chunkSize = max(20, os.get_terminal_size().columns - alignTo - 4)
         shortTo = " ".join(
             f"{hash[:7]}...-{name}"
             for path in toPaths
@@ -137,10 +138,10 @@ def print_info(roots: Roots, closures: Du, uniques: Du):
             pad = alignTo
             shortTo = shortTo[chunkSize:]
 
-    print(f"{'Path':{alignTo}}{'Closure size':20}Unique size")
-    for fromPath, toPaths in roots.items():
+    print(f"{'Path':{alignTo}} {'Closure size':20} Unique size")
+    for fromPath, toPaths in sorted(uniques.items(), key=lambda k: k[1]):
         print(
-            f"{fromPath:{alignTo}}{hsize(closures[fromPath]):20}{hsize(uniques[fromPath])}",
+            f"{fromPath:{alignTo}} {hsize(closures[fromPath]):20} {hsize(uniques[fromPath])}",
         )
 
 
@@ -162,20 +163,36 @@ def hsize(size: float | int) -> str:
 
 
 def main():
-    log = sys.stderr
-    print("Getting roots", file=log)
-    roots = get_roots()
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--open",
+        action="store_true",
+        help="Don't compute, open previously computed jsons",
+    )
+    args = parser.parse_args()
 
-    with open("roots.json", "w") as fp:
-        json.dump(roots, fp)
+    if not args.open:
+        log = sys.stderr
+        print("Getting roots", file=log)
+        roots = get_roots()
 
-    print("Computing root sizes", file=log)
-    closures, uniques = compute_all_du(roots, progress=log)
+        with open("roots.json", "w") as fp:
+            json.dump(roots, fp)
 
-    with open("closures.json", "w") as fp:
-        json.dump(closures, fp)
-    with open("uniques.json", "w") as fp:
-        json.dump(uniques, fp)
+        print("Computing root sizes", file=log)
+        closures, uniques = compute_all_du(roots, progress=log)
+
+        with open("closures.json", "w") as fp:
+            json.dump(closures, fp)
+        with open("uniques.json", "w") as fp:
+            json.dump(uniques, fp)
+    else:
+        with open("roots.json") as fp:
+            roots = json.load(fp)
+        with open("closures.json") as fp:
+            closures = json.load(fp)
+        with open("uniques.json") as fp:
+            uniques = json.load(fp)
 
     print("=" * os.get_terminal_size().columns)
     print_info(roots, closures, uniques)
