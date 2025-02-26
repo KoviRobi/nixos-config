@@ -63,6 +63,9 @@ def compute_du(root: Path) -> None:
     key = get_key(root)
     if key in du:  # Already visited
         return
+    if not root.exists():
+        # Some multi-output derivations might not have all their outputs
+        return
     du[key] = root.lstat().st_size
     recurse_du(key, root)
     for dirpath, dirnames, filenames in root.walk(follow_symlinks=False):
