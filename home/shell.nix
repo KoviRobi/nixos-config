@@ -111,6 +111,10 @@
 
     zsh = {
       enable = true;
+      # Disable prezto fortune
+      loginExtra = ''
+        fortune() { :; }
+      '';
       profileExtra = builtins.concatStringsSep "" (
         builtins.attrValues (
           builtins.mapAttrs (name: value: ''
