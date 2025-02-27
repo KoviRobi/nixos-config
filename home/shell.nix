@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -19,6 +20,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      VISUAL = "nvim";
       PAGER = "less";
       LESS = "-iRq -j5 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
       LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
@@ -109,12 +111,37 @@
 
     zsh = {
       enable = true;
+      profileExtra = builtins.concatStringsSep "" (
+        builtins.attrValues (
+          builtins.mapAttrs (name: value: ''
+            export ${name}="${toString value}"
+          '') config.home.sessionVariables
+        )
+      );
+      prezto = {
+        enable = true;
+        autosuggestions.color = "fg=yellow";
+        editor.dotExpansion = true;
+        pmodules = [
+          "environment"
+          "terminal"
+          "editor"
+          "history"
+          "git"
+          "syntax-highlighting"
+          "autosuggestions"
+          "directory"
+          "spectrum"
+          "utility"
+          "history-substring-search"
+          "completion"
+        ];
+        caseSensitive = false;
+      };
       initExtra = ''
         unsetopt beep
 
-        export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=yellow
         export VERSION_CONTROL=numbered
-
 
         bindkey -e
         autoload edit-command-line
@@ -138,27 +165,12 @@
 
         # Often I do want to go back to underscores or hyphens
         WORDCHARS=""
-        eval $(${pkgs.thefuck}/bin/thefuck --alias fck)
 
 
-        # The following lines were added by compinstall
-        zstyle ':completion:*' completer _complete _ignored
-        zstyle ':completion:*' group-name ""
-        zstyle ':completion:*' insert-unambiguous true
-        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-        zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=** r:|=**'
-        zstyle ':completion:*' menu select
-        zstyle :compinstall filename '/home/rmk/.zsh.comp'
-
-        autoload -Uz compinit
-        compinit
-        # End of lines added by compinstall
         compdef _nixos-rebuild nom-rebuild
         compdef _man viman
         unsetopt flow_control
         setopt AUTO_PUSHD
-        source ${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/history-substring-search/history-substring-search.plugin.zsh
-        export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
         eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
 
