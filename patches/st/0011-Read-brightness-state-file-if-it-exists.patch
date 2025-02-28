@@ -78,8 +78,8 @@ index 8e728c7..20129d2 100644
 +		char buf[128];
 +		snprintf(buf, sizeof(buf), "%s/.local/state/brightness", home);
 +		brightness = fopen(buf, "r");
-+		parse_brightness_file();
 +	}
++	parse_brightness_file();
 +}
 +
  const char* getcolorname(int i)
