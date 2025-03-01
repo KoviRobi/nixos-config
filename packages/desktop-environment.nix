@@ -44,6 +44,7 @@
       st
       st.terminfo
       ffmpeg
+      rofi
 
       x11vnc
       tigervnc
