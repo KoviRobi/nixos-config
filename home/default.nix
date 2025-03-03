@@ -108,6 +108,4 @@
       '';
     };
   };
-  # htop overwrites symlink
-  xdg.configFile."htop/htoprc".force = true;
 }

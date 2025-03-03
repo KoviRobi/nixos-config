@@ -11,7 +11,6 @@
       { ... }:
       {
         imports = [ ../home ];
-        nixpkgs.overlays = config.nixpkgs.overlays;
         nixos = {
           services.xserver.dpi = config.services.xserver.dpi;
           inherit (config) fileSystems;
@@ -22,7 +21,6 @@
       { ... }:
       {
         imports = [ ../home ];
-        nixpkgs.overlays = config.nixpkgs.overlays;
         nixos = {
           services.xserver.dpi = config.services.xserver.dpi;
           inherit (config) fileSystems;
