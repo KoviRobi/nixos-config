@@ -126,6 +126,7 @@
         enable = true;
         autosuggestions.color = "fg=yellow";
         editor.dotExpansion = true;
+        utility.safeOps = false;
         pmodules = [
           "environment"
           "terminal"
