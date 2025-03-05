@@ -175,6 +175,7 @@
         compdef _nixos-rebuild nom-rebuild
         compdef _man viman
         unsetopt flow_control
+        unsetopt PATH_DIRS
         setopt AUTO_PUSHD
 
         eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
