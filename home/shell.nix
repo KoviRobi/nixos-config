@@ -186,11 +186,6 @@
           source "$HOME/.zshrc.local"
         fi
       '';
-
-      enableCompletion = true;
-      enableVteIntegration = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
     };
   };
 }
