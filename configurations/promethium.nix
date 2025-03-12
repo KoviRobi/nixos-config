@@ -13,6 +13,7 @@
     (import ../modules/default-user.nix { })
     ../modules/ssh.nix
     ../modules/graphical.nix
+    ../modules/bluetooth.nix
     ../modules/initrd-ssh.nix
     (import ../modules/forgejo.nix {
       auth = true;
