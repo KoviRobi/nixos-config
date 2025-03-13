@@ -174,6 +174,8 @@
 
         compdef _nixos-rebuild nom-rebuild
         compdef _man viman
+        # No man-page sections for viman
+        zstyle ':completion:*:manuals.*' insert-sections 0
         unsetopt flow_control
         unsetopt PATH_DIRS
         setopt AUTO_PUSHD
