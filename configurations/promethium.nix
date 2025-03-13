@@ -127,6 +127,10 @@
     rnd-bridge.allowedUDPPorts = [
       67 # bootps
     ];
+    manatee-bridge.allowedUDPPorts = [
+      67 # bootps
+      69 # tftp
+    ];
     rnd-bridge.allowedTCPPorts = [
       139 # netbios-ssn
       445 # microsoft-ds
