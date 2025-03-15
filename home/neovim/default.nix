@@ -179,6 +179,7 @@ in
           typst-vim
           typst-preview-nvim
           vim-boxdraw
+          iron-nvim
 
           lazy-nvim
           vim-startuptime

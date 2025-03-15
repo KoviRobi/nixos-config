@@ -273,4 +273,11 @@ return {
 			{ "io", '<Cmd>call boxdraw#Select("io")<CR>', mode = "v", desc = "Select box without border." },
 		},
 	},
+
+	{
+		"Vigemus/iron.nvim",
+		opts = {
+			scratch_repl = true,
+		},
+	},
 }
