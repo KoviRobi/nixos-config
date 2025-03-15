@@ -44,30 +44,31 @@
       enable = true;
     };
 
-    nix-ld = {
-      enable = true;
-      package = pkgs.nix-ld-rs;
-      libraries = [
-        pkgs.gtk3
-        pkgs.gtk2
-        pkgs.cairo
-        pkgs.glib
-        pkgs.ncurses5
-        pkgs.libxcrypt-legacy
-      ];
-    };
+    nix-ld.systems = {
+      x86_64-linux = {
+        package = pkgs.nix-ld-rs;
+        libraries = [
+          pkgs.gtk3
+          pkgs.gtk2
+          pkgs.cairo
+          pkgs.glib
+          pkgs.ncurses5
+          pkgs.libxcrypt-legacy
+        ];
+      };
 
-    nix-ld-32 = {
-      enable = true;
-      package = pkgs.pkgsi686Linux.nix-ld-rs;
-      libraries = [
-        pkgs.pkgsi686Linux.gtk3
-        pkgs.pkgsi686Linux.gtk2
-        pkgs.pkgsi686Linux.cairo
-        pkgs.pkgsi686Linux.glib
-        pkgs.pkgsi686Linux.ncurses5
-        pkgs.pkgsi686Linux.libxcrypt-legacy
-      ];
+      i686-linux = {
+        ldso = "ldso32";
+        package = pkgs.pkgsi686Linux.nix-ld-rs;
+        libraries = [
+          pkgs.pkgsi686Linux.gtk3
+          pkgs.pkgsi686Linux.gtk2
+          pkgs.pkgsi686Linux.cairo
+          pkgs.pkgsi686Linux.glib
+          pkgs.pkgsi686Linux.ncurses5
+          pkgs.pkgsi686Linux.libxcrypt-legacy
+        ];
+      };
     };
 
     xonsh.enable = true;
