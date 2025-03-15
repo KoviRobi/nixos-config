@@ -180,6 +180,7 @@ in
           typst-preview-nvim
           vim-boxdraw
           iron-nvim
+          copilot-vim
 
           lazy-nvim
           vim-startuptime
