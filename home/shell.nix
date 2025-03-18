@@ -177,6 +177,9 @@
         # No man-page sections for viman
         eval "$(zstyle -L '*' insert-sections | sed 's/^zstyle/& -d/')"
         zstyle ':completion:*:manuals*' insert-sections suffix
+        zle -C complete-file complete-word _generic
+        zstyle ':completion:complete-file::::' completer _file
+        bindkey '^X^F' complete-file
         unsetopt flow_control
         unsetopt PATH_DIRS
         setopt AUTO_PUSHD
