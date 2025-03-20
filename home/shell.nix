@@ -175,7 +175,8 @@
         compdef _nixos-rebuild nom-rebuild
         compdef _man viman
         # No man-page sections for viman
-        zstyle ':completion:*:manuals.*' insert-sections 0
+        eval "$(zstyle -L '*' insert-sections | sed 's/^zstyle/& -d/')"
+        zstyle ':completion:*:manuals*' insert-sections suffix
         unsetopt flow_control
         unsetopt PATH_DIRS
         setopt AUTO_PUSHD
