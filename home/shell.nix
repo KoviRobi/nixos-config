@@ -184,6 +184,17 @@
         unsetopt PATH_DIRS
         setopt AUTO_PUSHD
 
+        function _semprompt_cmd_start() {
+          builtin print -n '\e]133;C\e\\'
+        }
+        function _semprompt_cmd_end() {
+          builtin printf '\e]133;D;%d\e\\' "$?"
+        }
+
+        add-zsh-hook preexec _semprompt_cmd_start
+        # precmd is badly named -- it is in fact pre-prompt, post CMD
+        add-zsh-hook precmd  _semprompt_cmd_end
+
         eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
 
         ${pkgs.fortune}/bin/fortune ${pkgs.apf-cookie}/share/games/fortunes/apf-cookie

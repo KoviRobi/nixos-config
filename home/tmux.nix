@@ -89,10 +89,39 @@
       bind-key -T copy-mode    MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
       bind-key -T copy-mode-vi MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
 
-      bind-key -T copy-mode    C-k "send-keys -X search-backward ❯"
-      bind-key -T copy-mode-vi C-k "send-keys -X search-backward ❯"
-      bind-key -T copy-mode    C-j "send-keys -X search-backward ❯"
-      bind-key -T copy-mode-vi C-j "send-keys -X search-backward ❯"
+      bind-key -T copy-mode    C-k  "send-keys -X previous-prompt -o"
+      bind-key -T copy-mode-vi C-k  "send-keys -X previous-prompt -o"
+      bind-key -T copy-mode    C-Up "    \
+        send-keys -X previous-prompt -o; \
+        send-keys -X begin-selection;    \
+        send-keys -X next-prompt;        \
+        send-keys left;                  \
+        send-keys -X other-end"
+      bind-key -T copy-mode-vi C-Up "    \
+        send-keys -X previous-prompt -o; \
+        send-keys -X begin-selection;    \
+        send-keys -X next-prompt;        \
+        send-keys left;                  \
+        send-keys -X other-end"
+
+      bind-key -T copy-mode    C-j    "send-keys -X next-prompt -o"
+      bind-key -T copy-mode-vi C-j    "send-keys -X next-prompt -o"
+      bind-key -T copy-mode    C-Down "  \
+        send-keys left;                  \
+        send-keys -X next-prompt;        \
+        send-keys -X next-prompt;        \
+        send-keys left;                  \
+        send-keys -X begin-selection;    \
+        send-keys -X previous-prompt -o; \
+        send-keys -X other-end"
+      bind-key -T copy-mode-vi C-Down "  \
+        send-keys left;                  \
+        send-keys -X next-prompt;        \
+        send-keys -X next-prompt;        \
+        send-keys left;                  \
+        send-keys -X begin-selection;    \
+        send-keys -X previous-prompt -o; \
+        send-keys -X other-end"
     '';
   };
 }

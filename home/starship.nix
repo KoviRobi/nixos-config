@@ -13,7 +13,8 @@
       # Handled manually to replace `= {` with `= {||`
       enableNushellIntegration = false;
       settings = {
-        format = "$all$line_break$character";
+        format = builtins.fromJSON ''"\u001b\\]133;A\u001b\\\\$all$line_break$character\u001b\\]133;B\u001b\\\\"'';
+        add_newline = false;
         aws.disabled = true;
         directory.truncation_symbol = "…/";
         hostname = {
