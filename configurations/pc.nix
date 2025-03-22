@@ -72,8 +72,6 @@
     printing = {
       enable = true;
       drivers = [
-        pkgs.cups-zj-58
-        pkgs.hplipWithPlugin
         pkgs.cups-brother-hll2340dw
       ];
     };
@@ -187,7 +185,6 @@
       enable = true;
       extraBackends = [
         pkgs.sane-airscan
-        pkgs.hplipWithPlugin
       ];
     };
   };
