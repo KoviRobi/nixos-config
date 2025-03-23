@@ -17,6 +17,8 @@ key.set("!", "<C-o>", "<Down>", { desc = "Omnicomplete next" })
 
 key.set({ "n", "i" }, "<C-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
 key.set({ "n", "i" }, "<C-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+key.set({ "n", "i" }, "<C-S-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move Buffer Prev" })
+key.set({ "n", "i" }, "<C-S-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move Buffer Next" })
 
 -- Keep normal vim H/L for head/last line (along with M for mid)
 key.del("n", "<S-h>")
