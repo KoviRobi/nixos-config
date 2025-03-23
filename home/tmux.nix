@@ -122,6 +122,15 @@
         send-keys -X begin-selection;    \
         send-keys -X previous-prompt -o; \
         send-keys -X other-end"
+
+      # Easy way to select the previous prompt on standard keyboards
+      bind-key C-p "                     \
+        copy-mode;                       \
+        send-keys left;                  \
+        send-keys -X previous-prompt -o; \
+        send-keys -X begin-selection;    \
+        send-keys -X next-prompt;        \
+        send-keys left"
     '';
   };
 }
