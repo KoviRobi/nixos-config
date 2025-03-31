@@ -30,6 +30,14 @@ in
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
       font-family = "CaskaydiaCove NFM Light";
+      font-family-italic = "CaskaydiaCove NFM SemiLight";
+      font-family-bold = "CaskaydiaCove NFM";
+      font-family-bold-italic = "CaskaydiaCove NFM";
+      font-style = "Regular";
+      font-style-italic = "Italic";
+      font-style-bold = "Regular";
+      font-style-bold-italic = "Italic";
+      font-synthetic-style = false;
       font-size = 10.5;
       theme = "light:solarized-light,dark:solarized-dark";
       window-decoration = "server";
