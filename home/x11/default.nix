@@ -99,7 +99,7 @@ in
         # "ctrl+shift+enter=toggle_split_zoom"
         # "shift+home=scroll_to_top"
         # "super+ctrl+left_bracket=goto_split:previous"
-        # "ctrl+shift+i=inspector:toggle"
+        "ctrl+shift+i=inspector:toggle"
         # "alt+six=goto_tab:6"
         # "alt+seven=goto_tab:7"
       ];
