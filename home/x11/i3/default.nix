@@ -37,7 +37,9 @@ let
     exec --no-startup-id '${mk-scratch n p}' , \
     [instance="^scratch_${n}$"] scratchpad show
   '';
-  scratch-term = n: p: scratch n "${term} -n 'scratch_${n}' -t 'scratch_${n}' -e ${p}";
+  scratch-term =
+    n: p:
+    scratch n "${term} --name='scratch_${n}' --title='scratch_${n}' --x11-instance-name='scratch_${n}' -e ${p}";
 in
 {
   xsession.windowManager.i3 = {
