@@ -26,6 +26,9 @@ in
     enable = true;
     settings = {
       confirm-close-surface = false;
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
       font-family = "CaskaydiaCove NFM Light";
       font-size = 10.5;
       theme = "light:solarized-light,dark:solarized-dark";
