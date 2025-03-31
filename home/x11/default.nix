@@ -22,6 +22,72 @@ in
     }/home-manager-service.nix"
   ];
 
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      confirm-close-surface = false;
+      font-family = "CaskaydiaCove NFM Light";
+      font-size = 10.5;
+      theme = "light:solarized-light,dark:solarized-dark";
+      window-decoration = "server";
+    };
+    themes = {
+      solarized-dark = {
+        # defaultfg = 12;
+        # defaultbg = 8;
+        # defaultcs = 14;
+        # defaultrcs = 15;
+        background = "#002b36";
+        foreground = "#839496";
+        cursor-color = "#93a1a1";
+        cursor-text = "#fdf6e3";
+        palette = [
+          " 0=#073642" # 0:  black
+          " 1=#dc322f" # 1:  red
+          " 2=#859900" # 2:  green
+          " 3=#b58900" # 3:  yellow
+          " 4=#268bd2" # 4:  blue
+          " 5=#d33682" # 5:  magenta
+          " 6=#2aa198" # 6:  cyan
+          " 7=#eee8d5" # 7:  white
+          " 8=#002b36" # 8:  brblack
+          " 9=#cb4b16" # 9:  brred
+          "10=#586e75" # 10: brgreen
+          "11=#657b83" # 11: bryellow
+          "12=#839496" # 12: brblue
+          "13=#6c71c4" # 13: brmagenta
+          "14=#93a1a1" # 14: brcyan
+          "15=#fdf6e3" # 15: brwhite
+        ];
+      };
+
+      solarized-light = {
+        background = "#fdf6e3";
+        foreground = "#657b83";
+        cursor-color = "#586e75";
+        cursor-text = "#002b36";
+        palette = [
+          " 0=#eee8d5" # 0:  black
+          " 1=#dc322f" # 1:  red
+          " 2=#859900" # 2:  green
+          " 3=#b58900" # 3:  yellow
+          " 4=#268bd2" # 4:  blue
+          " 5=#d33682" # 5:  magenta
+          " 6=#2aa198" # 6:  cyan
+          " 7=#073642" # 7:  white
+          " 8=#fdf6e3" # 8:  brblack
+          " 9=#cb4b16" # 9:  brred
+          "10=#93a1a1" # 10: brgreen
+          "11=#839496" # 11: bryellow
+          "12=#657b83" # 12: brblue
+          "13=#6c71c4" # 13: brmagenta
+          "14=#586e75" # 14: brcyan
+          "15=#002b36" # 15: brwhite
+        ];
+      };
+    };
+  };
+
   services = {
     network-manager-applet.enable = true;
     copyq.enable = true;
@@ -60,6 +126,7 @@ in
         "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
         "87:class_i ?= 'scratchpad'"
         "91:class_i ?= 'st-256color'"
+        "91:class_i ?= 'ghostty'"
         "100:focused"
       ];
     };

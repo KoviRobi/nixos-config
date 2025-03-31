@@ -7,7 +7,7 @@ let
   i3-helpers = import ./i3-helpers.nix { inherit pkgs; };
   mod = "Mod4"; # Win key
 
-  term = "${pkgs.st}/bin/st";
+  term = "${pkgs.ghostty}/bin/ghostty";
   maxima = "${pkgs.maxima}/bin/rmaxima";
   python3 = "${
     pkgs.python3.withPackages (

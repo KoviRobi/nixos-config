@@ -27,7 +27,13 @@
 
     file = {
       ".terminfo" = {
-        source = "${pkgs.st.terminfo}/share/terminfo";
+        source = pkgs.symlinkJoin {
+          name = "home-terminfo";
+          paths = [
+            "${pkgs.st.terminfo}/share/terminfo"
+            "${pkgs.ghostty}/share/terminfo"
+          ];
+        };
         recursive = true;
       };
 
