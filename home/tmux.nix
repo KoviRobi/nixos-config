@@ -131,7 +131,7 @@
         send-keys -X begin-selection;    \
         send-keys -X next-prompt;        \
         send-keys left"
-      bind-key C-p "copy-mode; send-keys -X previous-prompt -o"
+      bind-key C-k "copy-mode; send-keys -X previous-prompt -o"
     '';
   };
 }
