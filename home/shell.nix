@@ -51,6 +51,7 @@
       grp = "git reset -p";
       grv = "git remote -v";
       grb = "git rebase";
+      gret = ''git -c core.editor="$EDITOR \"+vert slast\" \"$(git rev-parse --git-dir)/rebase-merge/done\"" rebase --edit-todo'';
       gcp = "git cherry-pick";
       gs = "git status";
       gsh = "git show";
