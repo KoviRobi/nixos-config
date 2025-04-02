@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 
@@ -119,6 +120,19 @@
     mcuxpresso
     (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
   ];
+
+  services.jenkins = {
+    enable = true;
+    port = 8132;
+    packages = [
+      pkgs.stdenv
+      pkgs.git
+      pkgs.jdk
+      config.programs.ssh.package
+      pkgs.nix
+      pkgs.busybox
+    ];
+  };
 
   networking.firewall.interfaces = {
     private-bridge.allowedUDPPorts = [
