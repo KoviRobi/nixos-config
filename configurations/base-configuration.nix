@@ -44,32 +44,51 @@
       enable = true;
     };
 
-    nix-ld.systems = {
-      x86_64-linux = {
-        package = pkgs.nix-ld-rs;
-        libraries = [
-          pkgs.gtk3
-          pkgs.gtk2
-          pkgs.cairo
-          pkgs.glib
-          pkgs.ncurses5
-          pkgs.libxcrypt-legacy
-        ];
-      };
-
-      i686-linux = {
-        ldso = "ldso32";
-        package = pkgs.pkgsi686Linux.nix-ld-rs;
-        libraries = [
-          pkgs.pkgsi686Linux.gtk3
-          pkgs.pkgsi686Linux.gtk2
-          pkgs.pkgsi686Linux.cairo
-          pkgs.pkgsi686Linux.glib
-          pkgs.pkgsi686Linux.ncurses5
-          pkgs.pkgsi686Linux.libxcrypt-legacy
-        ];
-      };
-    };
+    nix-ld.systems =
+      builtins.mapAttrs
+        (
+          name:
+          { pkgs, ... }@attrs:
+          {
+            package = pkgs.nix-ld-rs;
+            libraries = [
+              pkgs.acl
+              pkgs.attr
+              pkgs.bzip2
+              pkgs.cairo
+              pkgs.curl
+              pkgs.fontconfig
+              pkgs.freetype
+              pkgs.glib
+              pkgs.gtk2
+              pkgs.gtk3
+              pkgs.libsodium
+              pkgs.libssh
+              pkgs.libusb1
+              pkgs.libxcrypt-legacy
+              pkgs.libxml2
+              pkgs.ncurses5
+              pkgs.openssl
+              pkgs.stdenv.cc.cc
+              pkgs.systemd
+              pkgs.util-linux
+              pkgs.xorg.libX11
+              pkgs.xorg.libXext
+              pkgs.xorg.libXrender
+              pkgs.xz
+              pkgs.zlib
+              pkgs.zstd
+            ];
+          }
+          // attrs
+        )
+        {
+          x86_64-linux = { inherit pkgs; };
+          i686-linux = {
+            ldso = "ldso32";
+            pkgs = pkgs.pkgsi686Linux;
+          };
+        };
 
     xonsh.enable = true;
     bandwhich.enable = true;
@@ -97,7 +116,7 @@
   documentation = {
     enable = true;
     man.enable = true;
-    man.generateCaches = true;
+    man.generateCaches = false;
     info.enable = true;
     dev.enable = true;
     nixos.enable = true;
