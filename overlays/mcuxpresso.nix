@@ -1,13 +1,13 @@
 final: prev:
 let
-  name = "mcuxpressoide";
+  pname = "mcuxpressoide";
   version = "24.9.25";
   description = "MCUXpresso IDE";
-  filename = "${name}-${version}.x86_64.deb";
+  filename = "${pname}-${version}.x86_64.deb";
 
   src = final.stdenv.mkDerivation {
     inherit version description;
-    name = "${name}-src";
+    name = "${pname}-src";
     src = final.requireFile {
       url = "https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE";
       name = "${filename}.bin";
@@ -22,14 +22,14 @@ let
       tar xfvz data.tar.gz -C .
 
       mkdir -p ./final/eclipse
-      mv ./usr/local/${name}-${version}/ide/* ./usr/local/${name}-${version}/ide/.* final/eclipse
+      mv ./usr/local/${pname}-${version}/ide/* ./usr/local/${pname}-${version}/ide/.* final/eclipse
       mv final/eclipse/mcuxpressoide final/eclipse/eclipse
       mv final/eclipse/mcuxpressoide.ini final/eclipse/eclipse.ini
 
       # Create custom .eclipseproduct file
       rm final/eclipse/.eclipseproduct
-      echo "name=${name}
-      id=com.nxp.${name}
+      echo "name=${pname}
+      id=com.nxp.${pname}
       version=${version}
       " > final/eclipse/.eclipseproduct
 
@@ -38,7 +38,7 @@ let
       mv ./lib/udev/rules.d/56-pemicro.rules ./lib/udev/rules.d/85-mcuxpresso.rules final/lib/udev/rules.d/
 
       # Additional files
-      mv ./usr/local/${name}-${version}/mcu_data final/mcu_data
+      mv ./usr/local/${pname}-${version}/mcu_data final/mcu_data
 
       cd ./final
       tar -czf $out ./
@@ -46,13 +46,12 @@ let
   };
 
   mcuxpresso = final.pkgs.eclipses.buildEclipse {
-    name = "${name}-eclipse";
-    inherit description src;
+    inherit pname description src;
   };
 in
 {
   mcuxpresso = final.stdenv.mkDerivation {
-    inherit name version description;
+    inherit pname version description;
     dontUnpack = true;
     dontConfigure = true;
     dontBuild = true;
