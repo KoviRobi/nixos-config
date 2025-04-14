@@ -108,7 +108,6 @@ with pkgs;
   busybox # Has low priority by default :)
 ]
 ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
-  emacs
   (config.programs.git.package or gitFull)
   git-absorb
   git-review

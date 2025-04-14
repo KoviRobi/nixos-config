@@ -18,7 +18,6 @@ let
     )
   }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
-  emacs = "${pkgs.emacs}/bin/emacs";
   xsel = lib.getExe pkgs.xsel;
   rofi = "${pkgs.rofi}/bin/rofi";
   unipicker = "${pkgs.unipicker}/bin/unipicker";
@@ -123,7 +122,6 @@ in
           );
           "${mod}+Shift+g" = scratch-term "guile" guile;
           "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux new -t float";
-          "${mod}+Shift+e" = scratch "emacs" "${emacs} --name scratch_emacs";
 
           "${mod}+e" = "layout toggle split";
           "${mod}+Control+h" = "split v";
