@@ -138,6 +138,9 @@
     private-bridge.allowedUDPPorts = [
       67 # bootps
     ];
+    pi-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
     rnd-bridge.allowedUDPPorts = [
       67 # bootps
     ];
