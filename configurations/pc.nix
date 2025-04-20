@@ -20,17 +20,37 @@
     useDHCP = false;
     interfaces.enp34s0.wakeOnLan.enable = true;
 
-    firewall.allowedTCPPorts = [
-      8123
-      139
-      445
-      8200 # MiniDLNA
-    ];
-    firewall.allowedUDPPorts = [
-      137
-      138
-      1900 # MiniDLNA
-    ];
+    firewall = {
+      interfaces.enp38s0f1.allowedUDPPorts = [
+        67 # bootps
+        69 # tftp
+        111 # sunrpc (for NFS)
+        2049 # NFS
+        4000 # statd (for NFS, see below)
+        4001 # lockd (for NFS, see below)
+        4002 # mountd (for NFS, see below)
+      ];
+      interfaces.enp38s0f1.allowedTCPPorts = [
+        69 # tftp
+        111 # sunrpc (for NFS)
+        2049 # NFS
+        4000 # statd (for NFS, see below)
+        4001 # lockd (for NFS, see below)
+        4002 # mountd (for NFS, see below)
+      ];
+
+      allowedTCPPorts = [
+        8123
+        139
+        445
+        8200 # MiniDLNA
+      ];
+      allowedUDPPorts = [
+        137
+        138
+        1900 # MiniDLNA
+      ];
+    };
 
     networkmanager.appendNameservers = [
       "1.1.1.1"
@@ -43,6 +63,17 @@
 
   services = {
     resolved.enable = true;
+
+    nfs.server = {
+      enable = true;
+      statdPort = 4000;
+      lockdPort = 4001;
+      mountdPort = 4002;
+      exports = ''
+        /nfs *(rw,sync,no_subtree_check,no_root_squash)
+        /tftpboot *(rw,sync,no_subtree_check,no_root_squash)
+      '';
+    };
 
     xserver = {
       dpi = 109;
