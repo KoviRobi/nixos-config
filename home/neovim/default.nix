@@ -230,6 +230,7 @@ in
         vim.keymap.set("", "<f1>", toggle_profile)
 
         vim.g.mapleader = " "
+        vim.cmd.packadd("termdebug")
         require("lazy").setup({
           spec = {
             { "LazyVim/LazyVim", import = "lazyvim.plugins" },
