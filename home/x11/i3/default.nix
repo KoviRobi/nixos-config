@@ -133,6 +133,12 @@ in
           "${mod}+j" = "focus down";
           "${mod}+k" = "focus up";
           "${mod}+l" = "focus right";
+          "${mod}+Left" = "focus left";
+          "${mod}+Right" = "focus right";
+          "${mod}+Up" = "focus up";
+          "${mod}+Down" = "focus down";
+          "${mod}+Home" = "focus output left";
+          "${mod}+End" = "focus output right";
           "${mod}+Shift+h" = "move left";
           "${mod}+Shift+j" = "move down";
           "${mod}+Shift+k" = "move up";
