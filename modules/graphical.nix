@@ -19,6 +19,7 @@
 
   imports = [ ../packages/desktop-environment.nix ];
 
+  programs.i3lock.enable = true;
   services = {
     udisks2.enable = true;
 
