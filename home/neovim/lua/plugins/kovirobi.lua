@@ -83,7 +83,7 @@ return {
 	{
 		"jpalardy/vim-slime",
 		init = function()
-			vim.g.slime_target = "neovim"
+			vim.g.slime_target = "tmux"
 			vim.g.slime_no_mappings = 1
 			vim.g.slime_config_defaults = vim.empty_dict()
 			vim.g.slime_cell_delimiter = "```"
@@ -102,12 +102,14 @@ return {
 			{ "<C-c>v", "<Cmd>SlimeConfig<CR>", desc = "Configure vim-slime" },
 			{
 				"<C-c>r",
-				"<Cmd>call slime#targets#neovim#SlimeAddChannel(string(bufnr()))<CR>",
+				'<Cmd>let g:slime_target = "neovim"<CR>'
+					.. "<Cmd>call slime#targets#neovim#SlimeAddChannel(string(bufnr()))<CR>",
 				desc = "Add this buffer as a slime channel",
 			},
 			{
 				"<C-c>R",
-				"<Cmd>call slime#targets#neovim#SlimeClearChannel(string(bufnr()))<CR>",
+				"<Cmd>call slime#targets#neovim#SlimeClearChannel(string(bufnr()))<CR>"
+					.. '<Cmd>let g:slime_target = "tmux"<CR>',
 				desc = "Remove this buffer as a slime channel",
 			},
 		},
