@@ -12,6 +12,10 @@ let
     fiber = 6;
     netboot = 7;
   };
+  macs = {
+    carallon = "30:d0:42:ec:62:ef";
+    rnd = "00:0a:cd:3e:4b:6a";
+  };
   inherit (lib) genAttrs attrNames;
   vlanNames = attrNames vlans;
   default-uid = toString config.users.users.default-user.uid;
@@ -19,14 +23,27 @@ let
 in
 {
   networking = {
-    useDHCP = true;
+    useDHCP = false;
     useNetworkd = true;
+
     # Otherwise we get duplicate routes
     interfaces.${interface}.useDHCP = false;
+
     vlans = genAttrs vlanNames (name: {
       id = vlans.${name};
       inherit interface;
     });
+
+    bridges = genAttrs (map (name: "${name}-bridge") vlanNames) (
+      bridge-name:
+      let
+        name = builtins.elemAt (builtins.match "(.*)-bridge" bridge-name) 0;
+      in
+      {
+        interfaces = [ name ];
+      }
+    );
+
     # Override base-configuration.nix
     networkmanager.enable = lib.mkForce false;
 
@@ -51,38 +68,73 @@ in
   };
   systemd.network = {
     enable = true;
-    networks = genAttrs vlanNames (
-      name:
+
+    netdevs = genAttrs (map (name: "40-${name}-bridge") vlanNames) (
+      bridge-name:
       let
-        inherit (builtins) any;
-        activate = any (n: n == name) [
-          "pi"
-          "private"
-          "carallon"
-          "netboot"
-        ];
-        externalConfig = any (n: name == n) [
-          "carallon"
-          "rnd"
-        ];
+        name = builtins.elemAt (builtins.match "40-(.*)-bridge" bridge-name) 0;
       in
       {
-        inherit name;
-        matchConfig.Kind = "vlan";
-        linkConfig.ActivationPolicy = if activate then "up" else "manual";
-        networkConfig = {
-          Description = "Promethium ethernet split, ${name} vlan";
-          DHCP = externalConfig;
-          DHCPServer = !externalConfig;
-          LLDP = activate;
-          EmitLLDP = activate;
+        netdevConfig = {
+          Name = "${name}-bridge";
+          Kind = "bridge";
+          MACAddress = macs.${name} or "none";
         };
-        dhcpServerConfig = lib.optionalAttrs (!externalConfig && name != "netboot") {
-          ServerAddress = "10.${toString vlans.${name}}.0.1/24";
-        };
-        address = lib.optional (name == "netboot") "172.30.0.2";
       }
     );
+
+    networks =
+      genAttrs (map (name: "40-${name}") vlanNames) (
+        systemd-name:
+        let
+          name = builtins.elemAt (builtins.match "40-(.*)" systemd-name) 0;
+        in
+        {
+          inherit name;
+
+          matchConfig.Kind = "vlan";
+          networkConfig = {
+            Description = "Promethium ethernet split, ${name} vlan";
+            Bridge = "${name}-bridge";
+          };
+        }
+      )
+      // genAttrs (map (name: "40-${name}-bridge") vlanNames) (
+        bridge-name:
+        let
+          name = builtins.elemAt (builtins.match "40-(.*)-bridge" bridge-name) 0;
+          inherit (builtins) any;
+          activate = any (n: n == name) [
+            "pi"
+            "private"
+            "carallon"
+            "netboot"
+          ];
+          externalConfig = any (n: name == n) [
+            "carallon"
+            "rnd"
+          ];
+        in
+        {
+          matchConfig.Name = "${name}-bridge";
+          linkConfig = {
+            ActivationPolicy = if activate then "up" else "manual";
+          };
+          networkConfig = {
+            DHCP = externalConfig;
+            DHCPServer = !externalConfig;
+            LLDP = activate;
+            EmitLLDP = activate;
+          };
+          dhcpServerConfig = lib.optionalAttrs (!externalConfig && name != "netboot") {
+            ServerAddress = "10.${toString vlans.${name}}.0.1/24";
+          };
+          address = lib.optional (name == "netboot") "172.30.0.2/24";
+        }
+      )
+      // {
+        "40-${interface}".linkConfig.RequiredForOnline = "no";
+      };
   };
   services.dnsmasq = {
     enable = true;
