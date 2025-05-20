@@ -10,7 +10,6 @@
   imports = [
     ./base-configuration.nix
     ./carallon.nix
-    ./promethium/networking.nix
     ../modules/graphical.nix
     (import ../modules/default-user.nix { })
     ../modules/ssh.nix
@@ -132,6 +131,26 @@
       config.programs.ssh.package
       pkgs.nix
       pkgs.busybox
+    ];
+  };
+
+  networking.firewall.interfaces = {
+    private-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
+    pi-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
+    rnd-bridge.allowedUDPPorts = [
+      67 # bootps
+    ];
+    manatee-bridge.allowedUDPPorts = [
+      67 # bootps
+      69 # tftp
+    ];
+    rnd-bridge.allowedTCPPorts = [
+      139 # netbios-ssn
+      445 # microsoft-ds
     ];
   };
 }
