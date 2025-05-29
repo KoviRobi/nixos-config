@@ -4,7 +4,12 @@ return {
 		opts = {
 			inlay_hints = { enabled = false },
 			servers = {
-				nil_ls = { mason = false },
+				nil_ls = {
+					mason = false,
+					settings = {
+						["nil"] = { nix = { flake = { autoArchive = false } } },
+					},
+				},
 				lua_ls = { mason = false },
 				ccls = {},
 				ocamllsp = { mason = false },
