@@ -126,6 +126,30 @@
     port = 8132;
     packages = [
       pkgs.stdenv
+      (
+        let
+          cfg = config.virtualisation.podman;
+        in
+        pkgs.runCommand "${cfg.package.pname}-docker-compat-${cfg.package.version}"
+          {
+            outputs = [
+              "out"
+              "man"
+            ];
+            inherit (cfg.package) meta;
+            preferLocalBuild = true;
+          }
+          ''
+            mkdir -p $out/bin
+            ln -s ${cfg.package}/bin/podman $out/bin/docker
+
+            mkdir -p $man/share/man/man1
+            for f in ${cfg.package.man}/share/man/man1/*; do
+              basename=$(basename $f | sed s/podman/docker/g)
+              ln -s $f $man/share/man/man1/$basename
+            done
+          ''
+      )
       pkgs.git
       pkgs.jdk
       config.programs.ssh.package
