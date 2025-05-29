@@ -137,6 +137,7 @@
       config.programs.ssh.package
       pkgs.nix
       pkgs.busybox
+      pkgs.cmake
     ];
     extraJavaOptions = [
       "-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true"
