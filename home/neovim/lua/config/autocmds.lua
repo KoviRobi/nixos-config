@@ -53,3 +53,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufWinEnter" }, {
 		vim.o.filetype = "dts"
 	end,
 })
+
+-- Nix sw=2
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "nix" },
+	callback = function()
+		vim.o.shiftwidth = 2
+	end,
+})
