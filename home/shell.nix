@@ -144,7 +144,7 @@
         ];
         caseSensitive = false;
       };
-      initExtra = ''
+      initContent = ''
         unsetopt beep
 
         export VERSION_CONTROL=numbered

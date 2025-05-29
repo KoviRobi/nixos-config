@@ -43,7 +43,7 @@ in
         source-file ${pkgs.tmuxPlugins.tmux-colors-solarized}/share/tmux-plugins/tmuxcolors/tmuxcolors-dark.conf
       '';
 
-      zsh.initExtra =
+      zsh.initContent =
         let
           github-prefix = "https://raw.githubusercontent.com/seebi/dircolors-solarized/8c361017afb3cadc7cf36d6b94d01b90ae3bc59f";
           dircolors-file = builtins.fetchurl {
