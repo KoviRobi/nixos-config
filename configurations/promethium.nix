@@ -156,6 +156,9 @@
       pkgs.nix
       pkgs.busybox
     ];
+    extraJavaOptions = [
+      "-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true"
+    ];
   };
 
   networking.firewall.interfaces = {
