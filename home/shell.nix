@@ -11,7 +11,6 @@
     packages =
       with pkgs;
       [
-        thefuck
         zoxide
       ]
       ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
