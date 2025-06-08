@@ -128,7 +128,7 @@
       # fx2lafw logic analyser
       ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="608c", MODE="660", GROUP="plugdev", TAG+="uaccess"
 
-      KERNEL=="nvme0n1p6", SUBSYSTEM=="block", group="${config.users.users.default-user.group}"
+      KERNEL=="nvme0n1p6", SUBSYSTEM=="block", GROUP="${config.users.users.default-user.group}"
 
       # ICELINK
       ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="602b", MODE="660", TAG+="uaccess"
