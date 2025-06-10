@@ -17,6 +17,16 @@ with pkgs;
 
   zoxide
   delta
+  (pkgs.writeShellApplication {
+    name = "diff";
+    text = ''
+      if [ -t 1 ]; then
+        ${pkgs.diffutils}/bin/diff "$@" | delta
+      else
+        ${pkgs.diffutils}/bin/diff "$@"
+      fi
+    '';
+  })
   direnv
   starship
   mimi
