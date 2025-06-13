@@ -51,7 +51,10 @@
 
     printing = {
       enable = true;
-      drivers = [ pkgs.hplip ];
+      drivers = [
+        pkgs.hplip
+        pkgs.go-catprinter
+      ];
       bindirCmds = ''
         mkdir -p $out/lib/cups/backend
         ln -sf ${pkgs.writeShellScript "smb-krb5" ''

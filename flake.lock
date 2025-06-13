@@ -63,6 +63,23 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1749398372,
+        "narHash": "sha256-tYBdgS56eXYaWVW3fsnPQ/nFlgWi/Z2Ymhyu21zVM98=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9305fe4e5c2a6fcf5ba6a3ff155720fbe4076569",
+        "type": "github"
+      },
+      "original": {
+        "id": "flake-parts",
+        "type": "indirect"
+      }
+    },
     "flake-registry": {
       "flake": false,
       "locked": {
@@ -94,6 +111,27 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "go-catprinter": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749807725,
+        "narHash": "sha256-FpJenTTV0DEn8vVcdIu3T/ERWz7lX2hiS8K5dcUJuWI=",
+        "owner": "KoviRobi",
+        "repo": "go-catprinter",
+        "rev": "54361d8f3871ee06d9d0a6f01ad049f851925566",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KoviRobi",
+        "repo": "go-catprinter",
         "type": "github"
       }
     },
@@ -173,6 +211,21 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1748740939,
+        "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "656a64127e9d791a334452c6b6606d17539476e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -224,6 +277,7 @@
         "deploy-rs": "deploy-rs",
         "flake-compat": "flake-compat",
         "flake-registry": "flake-registry",
+        "go-catprinter": "go-catprinter",
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",

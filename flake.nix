@@ -45,6 +45,11 @@
       url = "github:nix-community/poetry2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    go-catprinter = {
+      url = "github:KoviRobi/go-catprinter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -59,6 +64,7 @@
       deploy-rs,
       nix-index-database,
       poetry2nix,
+      go-catprinter,
       ...
     }:
     {
@@ -99,6 +105,9 @@
           pye-menu = final: prev: {
             pen-pye-menu = pye-menu.packages.${final.system}.pen-menu;
             inherit (pye-menu.packages.${final.system}) pye-menu;
+          };
+          go-catprinter = final: prev: {
+            go-catprinter = go-catprinter.packages.${final.system}.default;
           };
         };
 
