@@ -23,13 +23,8 @@
   services = {
     udisks2.enable = true;
 
-    displayManager = {
-      defaultSession = "none+i3";
-      autoLogin = {
-        enable = true;
-        user = config.users.users.default-user.name;
-      };
-    };
+    displayManager.defaultSession = "none+i3";
+
     xserver = {
       enable = true;
       xkb.layout = "us";
