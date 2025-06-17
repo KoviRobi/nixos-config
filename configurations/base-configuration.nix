@@ -147,7 +147,6 @@
     tailscale.enable = true;
     resolved.enable = true;
   };
-  hardware.bluetooth.enable = true;
 
   boot = {
     kernel = {
