@@ -104,6 +104,7 @@
       enable = true;
       drivers = [
         pkgs.cups-brother-hll2340dw
+        pkgs.go-catprinter
       ];
     };
 
