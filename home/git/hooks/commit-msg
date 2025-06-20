@@ -76,8 +76,12 @@ else
     pattern=".*"
 fi
 
-if git interpret-trailers --parse <"$1" | grep -q "^$token: $pattern$"; then
+trailer_like=$(<"$1" grep -c "^$token: $pattern$")
+if test "$trailer_like" -eq 1; then
     exit 0
+elif test "$trailer_like" -gt 1; then
+    echo "too many $token trailers"
+    exit 1
 fi
 
 # There must be a Signed-off-by trailer for the code below to work. Insert a
