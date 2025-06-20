@@ -3,3 +3,4 @@
 	name = "Robert Kovacsics"
 [gerrit]
 	createChangeId = true
+	reviewUrl = "https://code.office.carallon.com"
