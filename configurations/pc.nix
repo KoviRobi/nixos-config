@@ -156,26 +156,29 @@
       ];
     };
   };
+  virtualisation = {
+    docker.enable = true;
+    podman.enable = true;
 
-  virtualisation.docker.enable = true;
+    libvirtd = {
+      enable = true;
+      nss.enableGuest = true;
+      qemu = {
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        vhostUserPackages = [ pkgs.virtiofsd ];
+        swtpm = {
+          enable = true;
+        };
+      };
+    };
+  };
+
   users.users.default-user.extraGroups = [
     "scanner"
     "lp"
     "docker"
     "libvirtd"
   ];
-
-  virtualisation.libvirtd = {
-    enable = true;
-    nss.enableGuest = true;
-    qemu = {
-      ovmf.packages = [ pkgs.OVMFFull.fd ];
-      vhostUserPackages = [ pkgs.virtiofsd ];
-      swtpm = {
-        enable = true;
-      };
-    };
-  };
 
   # For google chrome (for DRM :( )
   nixpkgs.config.allowUnfree = true;
