@@ -10,10 +10,6 @@ with pkgs;
   rm-improved
 
   taskwarrior3
-  # Sync taskwarrior to YouTrack/gerrit
-  # See https://github.com/GothenburgBitFactory/bugwarrior/issues/1030#issuecomment-2086146053
-  # See overlays/mypkgs.nix
-  bugwarrior
 
   zoxide
   delta
