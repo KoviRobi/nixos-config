@@ -87,7 +87,12 @@
     ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
       (mpv.override {
         scripts = with mpvScripts; [
-          autosubsync-mpv
+          ## TODO:
+          ##┃        … while evaluating attribute 'propagatedBuildInputs' of derivation 'ffsubsync-0.4.29'
+          ## ...
+          ##┃        error: future-1.0.0 not supported for interpreter python3.13
+          ## https://github.com/NixOS/nixpkgs/pull/418968
+          # autosubsync-mpv
           uosc
           mpris
         ];
