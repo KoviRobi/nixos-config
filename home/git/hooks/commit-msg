@@ -77,7 +77,8 @@ else
 fi
 
 trailer_like=$(<"$1" grep -c "^$token: $pattern$")
-if test "$trailer_like" -eq 1; then
+trailers=$(<"$1" git interpret-trailers --parse | grep -c "^$token: $pattern$")
+if test "$trailer_like" -eq 1 && test "$trailers" -eq 1; then
     exit 0
 elif test "$trailer_like" -gt 1; then
     echo "too many $token trailers"
