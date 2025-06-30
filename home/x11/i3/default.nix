@@ -187,6 +187,7 @@ in
     };
     extraConfig = ''
       popup_during_fullscreen leave_fullscreen
+      no_focus [window_role="pop-up"]
     '';
   };
 }
