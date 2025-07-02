@@ -2,6 +2,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }@args:
 {
@@ -88,12 +89,14 @@
           // attrs
         )
         {
-          x86_64-linux = { inherit pkgs; };
-          i686-linux = {
-            ldso = "ldso32";
-            pkgs = pkgs.pkgsi686Linux;
-          };
+          ${pkgs.system} = { inherit pkgs; };
+        }
+      // lib.optionalAttrs (pkgs.system == "x86_64-linux") {
+        i686-linux = {
+          ldso = "ldso32";
+          pkgs = pkgs.pkgsi686Linux;
         };
+      };
 
     xonsh.enable = true;
     bandwhich.enable = true;

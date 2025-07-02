@@ -291,11 +291,14 @@
                 )
 
                 home-manager.nixosModules.home-manager
-                {
-                  environment.systemPackages = [ home-manager.packages.${system}.home-manager ];
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                }
+                (
+                  { pkgs, ... }:
+                  {
+                    environment.systemPackages = [ home-manager.packages.${pkgs.system}.home-manager ];
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                  }
+                )
 
                 nix-index-database.nixosModules.nix-index
               ];
@@ -348,6 +351,12 @@
             "iso" = [
               ./configurations/cc.nix
               (import ./targets/iso-image.nix { inherit self nixpkgs; })
+            ];
+            "inspiron-wsl" = [
+              NixOS-WSL.nixosModules.wsl
+              ./configurations/inspiron-wsl.nix
+              ./targets/wsl.nix
+              { nixpkgs.system = "aarch64-linux"; }
             ];
           }
         // {
