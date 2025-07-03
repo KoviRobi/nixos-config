@@ -62,8 +62,6 @@
   initrd-ssh.udhcpcExtraArgs = [ "-b" ];
 
   services = {
-    resolved.enable = true;
-
     nfs.server = {
       enable = true;
       statdPort = 4000;

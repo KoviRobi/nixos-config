@@ -29,7 +29,7 @@
     dejavu_fonts
     liberation_ttf
     lmodern
-    terminus-nerdfont
+    nerd-fonts.terminess-ttf
   ];
 
   systemd.user = {
@@ -67,6 +67,7 @@
   ];
 
   services = {
+    resolved.enable = lib.mkForce false;
     xserver.dpi = 180;
     gnome.gnome-keyring.enable = true;
     openssh.settings.X11Forwarding = true;

@@ -73,7 +73,6 @@
     };
 
     openssh.settings.X11Forwarding = true;
-    resolved.enable = true;
   };
   home-manager.users.default-user.xsession.initExtra = ''
     xrandr --output DP-1 --set 'Broadcast RGB' Full
