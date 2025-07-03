@@ -41,8 +41,6 @@
 
       mupdf
       zathura
-      st
-      st.terminfo
       ffmpeg
       rofi
 
