@@ -26,14 +26,9 @@ sed -n -e '/^## Home-manager only/,/^#\{1,2\}/{/^\t/p}' < README.md
 
 Install home-manager
 
-	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-	nix-channel --update
+	nix shell home-manager
 
-	export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-
-Install Home Manager and create the first Home Manager generation:
-
-	nix-shell '<home-manager>' -A install
+    home-manager init
 
 Once finished, Home Manager should be active and available in your user
 environment.
@@ -43,26 +38,51 @@ you must source the
 
 	source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
-file in your shell configuration. Unfortunately, in this specific case we
+fill in your shell configuration. Unfortunately, in this specific case we
 currently only support POSIX.2-like shells such as Bash or Z shell.
 
 Get overlays working
 
 	ln -s ~/nixos/overlays/ ~/.config/nixpkgs/
 
-Modify the home-manager config (~/.config/nixpkgs/home.nix) to include
+Modify the home-manager config (~/.config/home-manager/flake.nix) to include
 
-```
-{ config, pkgs, lib, ... }:
-{
-  // ...
+```nix
+diff --git a/flake.nix b/flake.nix
+index b587eb5..6ae4a68 100644
+--- a/flake.nix
++++ b/flake.nix
+@@ -8,10 +8,14 @@
+       url = "github:nix-community/home-manager";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
++    nixos-config = {
++      url = "github:KoviRobi/nixos-config";
++      inputs.nixpkgs.follows = "nixpkgs";
++    };
+   };
 
-  imports = [ ~/nixos/home/home-manager-only.nix ];
+   outputs =
+-    { nixpkgs, home-manager, ... }:
++    { nixpkgs, home-manager, nixos-config, ... }:
+     let
+       system = "aarch64-linux";
+       pkgs = nixpkgs.legacyPackages.${system};
+@@ -22,7 +26,13 @@
 
-  nixos = {
-    users.users.default-user.uid = XXX;
-  };
-}
+         # Specify your home configuration modules here, for example,
+         # the path to your home.nix.
+-        modules = [ ./home.nix ];
++        modules = [
++          "${nixos-config}/home/home-manager-only.nix"
++          ./home.nix
++          {
++            nixpkgs.overlays = builtins.attrValues nixos-config.overlays;
++          }
++        ];
+
+         # Optionally use extraSpecialArgs
+         # to pass through arguments to home.nix
 ```
 
 then edit packages/base.nix (e.g. remove emacs; seems to require removing git).
