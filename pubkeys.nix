@@ -6,4 +6,5 @@
   "promethium-nixos-a" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPZ0IUFFBr4jQtm91e2YiAnQwZSTfpKFukeRN2oZH2J rmk@promethium-nixos-a";
   "c930" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDlCJVI7R2rTB0uVGHy+RRFM31wjYO0vIKwM0syi0rT rmk@c930";
   "roberty-pi" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMz0UH47Tx1LIC+5CG2S7ieSbCBCyusBMEJ697oDK9X rmk@roberty-pi";
+  "inspiron" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMBEHMlGQvQ5z9tR0k5S6BQmt43/RedrPpAslssSetY rmk@inspiron";
 }
