@@ -57,7 +57,7 @@
 
     sockets.ssh-agent.wantedBy = [ "default.target" ];
     sockets.ssh-agent.socketConfig = {
-      ListenStream = [ "%t/keyring/ssh" ];
+      ListenStream = [ "%t/gcr/ssh" ];
       Accept = true;
     };
   };
@@ -69,7 +69,7 @@
   services = {
     resolved.enable = lib.mkForce false;
     xserver.dpi = 180;
-    gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = lib.mkForce false;
     openssh.settings.X11Forwarding = true;
 
     udev.enable = true;
