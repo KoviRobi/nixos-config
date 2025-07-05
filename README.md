@@ -17,34 +17,23 @@ unstable nixpkgs, I could use `./make configurations/yoga-book.nix iso -I\
 nixpkgs=channel:nixos-unstable` (assuming I have a channel named
 nixos-unstable).
 
-
 ## Home-manager only
-
-To extract the commands from this section, just run
-```
-sed -n -e '/^## Home-manager only/,/^#\{1,2\}/{/^\t/p}' < README.md
-```
 
 Install home-manager
 
-	nix shell home-manager
-
-    home-manager init
+```bash
+nix shell home-manager
+home-manager init
+```
 
 Once finished, Home Manager should be active and available in your user
 environment.
 
-If you do not plan on having Home Manager manage your shell configuration then
-you must source the
-
-	source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-
-fill in your shell configuration. Unfortunately, in this specific case we
-currently only support POSIX.2-like shells such as Bash or Z shell.
-
 Get overlays working
 
-	ln -s ~/nixos/overlays/ ~/.config/nixpkgs/
+```bash
+ln -s ~/nixos/overlays/ ~/.config/nixpkgs/
+```
 
 Modify the home-manager config (~/.config/home-manager/flake.nix) to include
 
@@ -61,11 +50,15 @@ index b587eb5..6ae4a68 100644
 +      url = "github:KoviRobi/nixos-config";
 +      inputs.nixpkgs.follows = "nixpkgs";
 +    };
++    nixGL = {
++      url = "github:nix-community/nixGL";
++      inputs.nixpkgs.follows = "nixpkgs";
++    };
    };
 
    outputs =
 -    { nixpkgs, home-manager, ... }:
-+    { nixpkgs, home-manager, nixos-config, ... }:
++    { nixpkgs, home-manager, nixos-config, nixGL, ... }:
      let
        system = "aarch64-linux";
        pkgs = nixpkgs.legacyPackages.${system};
@@ -77,9 +70,19 @@ index b587eb5..6ae4a68 100644
 +        modules = [
 +          "${nixos-config}/home/home-manager-only.nix"
 +          ./home.nix
-+          {
-+            nixpkgs.overlays = builtins.attrValues nixos-config.overlays;
-+          }
++          (
++            { config, ... }:
++            {
++              nixGL.packages = nixGL.packages;
++              home.packages = [
++                (config.lib.nixGL.wrap pkgs.ghostty // { meta.priority = 1; })
++              ];
++              nixpkgs = {
++                overlays = builtins.attrValues nixos-config.overlays;
++                config.allowUnfree = true;
++              };
++            }
++          )
 +        ];
 
          # Optionally use extraSpecialArgs
@@ -89,6 +92,6 @@ index b587eb5..6ae4a68 100644
 then edit packages/base.nix (e.g. remove emacs; seems to require removing git).
 And e.g. edit home/default.nix to not require X11. Then
 
-```
+```bash
 home-manager switch
 ```

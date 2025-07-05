@@ -27,7 +27,7 @@ with pkgs;
 
   man-pages
   stdman
-  stdmanpages
+  (stdmanpages.overrideAttrs (old: { meta = old.meta // { priority = 9; }; }))
 
   nix-prefetch-git
   nix-prefetch-github
