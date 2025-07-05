@@ -1,4 +1,5 @@
 # My NixOS Configuration
+
 I tried to break it up to (1) 'modules', reused but sometimes parametric files;
 (2) 'configurations' or settings for a class of machine (e.g. netbook, work,
 home); (3) 'targets' which are the details of a specific install (e.g.  mount

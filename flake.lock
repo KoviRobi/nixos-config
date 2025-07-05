@@ -142,11 +142,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751383716,
-        "narHash": "sha256-xhIxIcwejcgGkjqIg56sGwOKr4g/zUtL9ueuCLj3E7U=",
+        "lastModified": 1751726857,
+        "narHash": "sha256-il8Zp2S+ZB0dlxzFNZ7NnkurtzpEY4Uf5UDhHAYH/Wc=",
         "owner": "KoviRobi",
         "repo": "home-manager",
-        "rev": "5b824c5c22fbda2ec7310e318facd2433f8a1e9d",
+        "rev": "ed5f597020ad7d99cf5d1fe63367d61d6df501b5",
         "type": "github"
       },
       "original": {
@@ -198,11 +198,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1750685581,
-        "narHash": "sha256-IRVBslXGWblKrYNN3nyNmhm1XGAV0dzBIkRgeXOxoig=",
+        "lastModified": 1751726799,
+        "narHash": "sha256-v2tQNj0e2+rKlHkri17qsfYj/ZdKM+6yQZ44ehnOzaI=",
         "owner": "KoviRobi",
         "repo": "nixpkgs",
-        "rev": "a84f3f71910cb4365c7bd52221dd27725c74bb19",
+        "rev": "8b377fae8baff2fa38edc49160c691578218dc40",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1649329238,
-        "narHash": "sha256-7HzQEYqQ5KEYrzFY48fvNDFxiHp9GTz16YfF1mlB0f4=",
+        "lastModified": 1751728274,
+        "narHash": "sha256-SuG5msG9aRP80qY3phXKq5GMC/CQNdwwuCwKdNpe0Qo=",
         "owner": "KoviRobi",
         "repo": "Pye-Menu",
-        "rev": "2fc386ba95a94d2151f5ac85fe0dbef8f5c417b0",
+        "rev": "c5398da860b089d9338a3874e944029bc134e74f",
         "type": "github"
       },
       "original": {

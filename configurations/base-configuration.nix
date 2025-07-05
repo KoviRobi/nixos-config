@@ -165,10 +165,7 @@
   };
 
   networking = {
-    networkmanager = {
-      enable = true;
-      enableStrongSwan = true;
-    };
+    networkmanager.enable = true;
 
     # To make tailscale work
     firewall.checkReversePath = "loose";
