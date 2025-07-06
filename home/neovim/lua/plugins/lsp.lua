@@ -52,13 +52,14 @@ return {
 		ft = "*",
 	},
 
+	{ "nvim-treesitter/nvim-treesitter", enabled = false },
+
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter",
 			{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
 			"orjangj/neotest-ctest",
 		},
