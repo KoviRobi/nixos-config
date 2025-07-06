@@ -68,10 +68,11 @@
 
   services = {
     resolved.enable = lib.mkForce false;
-    xserver.dpi = 180;
     gnome.gnome-keyring.enable = lib.mkForce false;
-    openssh.settings.X11Forwarding = true;
+    tailscale.enable = lib.mkForce false;
 
+    xserver.dpi = 180;
+    openssh.settings.X11Forwarding = true;
     udev.enable = true;
   };
 
