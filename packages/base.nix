@@ -26,6 +26,8 @@ with pkgs;
   audit
 
   man-pages
+  stdman
+  stdmanpages
 
   nix-prefetch-git
   nix-prefetch-github
