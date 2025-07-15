@@ -23,18 +23,13 @@
   services = {
     udisks2.enable = true;
 
-    displayManager.defaultSession = "none+i3";
+    displayManager = {
+      sddm.enable = true;
+    };
 
     xserver = {
       enable = true;
       xkb.layout = "us";
-      displayManager = {
-        lightdm = {
-          enable = true;
-          greeters.gtk.cursorTheme.package = pkgs.adwaita-icon-theme;
-          greeters.gtk.cursorTheme.name = "Adwaita";
-        };
-      };
       windowManager.i3.enable = true;
       exportConfiguration = true;
       inputClassSections = [
