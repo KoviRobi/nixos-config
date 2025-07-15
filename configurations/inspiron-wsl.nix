@@ -34,6 +34,7 @@
   programs = {
     atop.netatop.enable = lib.mkForce false;
   };
+  documentation.man.generateCaches = lib.mkForce true;
 
   systemd.user.services.pulseaudio.enable = false;
 
