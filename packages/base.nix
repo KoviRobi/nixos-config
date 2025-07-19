@@ -106,8 +106,6 @@ with pkgs;
   zsh-manydots-magic
 
   entr
-
-  busybox # Has low priority by default :)
 ]
 ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
   (config.programs.git.package or gitFull)
