@@ -358,6 +358,11 @@
               ./targets/wsl.nix
               { nixpkgs.system = "aarch64-linux"; }
             ];
+            "inspiron" = [
+              ./configurations/inspiron.nix
+              ./targets/inspiron.nix
+              { nixpkgs.system = "aarch64-linux"; }
+            ];
           }
         // {
           "netboot" = nixpkgs.lib.nixosSystem {
