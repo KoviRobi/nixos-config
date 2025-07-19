@@ -114,7 +114,11 @@
     systemPackages =
       (import ../packages/base.nix args)
       ++ (import ../packages/better-cli-tools.nix args)
-      ++ (import ../packages/lsp.nix args);
+      ++ (import ../packages/lsp.nix args)
+      ++ [
+        pkgs.busybox # Low priority by default
+      ];
+
     etc."sudo.conf".text = ''
       Path askpass ${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass
     ''; # Using nix-index
