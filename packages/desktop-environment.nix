@@ -22,6 +22,8 @@
   environment.systemPackages =
     with pkgs;
     [
+      st
+
       adwaita-icon-theme
       hicolor-icon-theme
 

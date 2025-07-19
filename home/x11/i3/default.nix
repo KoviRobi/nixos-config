@@ -7,7 +7,7 @@ let
   i3-helpers = import ./i3-helpers.nix { inherit pkgs; };
   mod = "Mod4"; # Win key
 
-  term = "${pkgs.ghostty}/bin/ghostty";
+  term = "${pkgs.st}/bin/st";
   maxima = "${pkgs.maxima}/bin/rmaxima";
   python3 = "${
     pkgs.python3.withPackages (
@@ -40,6 +40,9 @@ let
     n: p: scratch n "${term} --title='scratch_${n}' --x11-instance-name='scratch_${n}' -e ${p}";
 in
 {
+  wayland.windowManager.sway = {
+    enable = true;
+  };
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3;

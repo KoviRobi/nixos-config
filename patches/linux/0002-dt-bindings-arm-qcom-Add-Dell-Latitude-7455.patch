@@ -1,0 +1,31 @@
+From 4d383ff522f7a481fe39d80bc72057daaff3965a Mon Sep 17 00:00:00 2001
+From: Val Packett <val@packett.cool>
+Date: Tue, 15 Jul 2025 21:26:58 -0300
+Subject: [PATCH 2/4] dt-bindings: arm: qcom: Add Dell Latitude 7455
+
+Document the X1E80100-based Dell Latitude 7455 laptop, codename Thena
+(the codename is shared with the near-identical Inspiron 14 Plus 7441).
+
+Signed-off-by: Val Packett <val@packett.cool>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Reviewed-by: Laurentiu Tudor <laurentiu.tudor1@dell.com>
+Tested-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index ead8ca65a..a98f01cf4 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1141,6 +1141,7 @@ properties:
+               - asus,vivobook-s15
+               - asus,zenbook-a14-ux3407ra
+               - dell,inspiron-14-plus-7441
++              - dell,latitude-7455
+               - dell,xps13-9345
+               - hp,elitebook-ultra-g1q
+               - hp,omnibook-x14
+-- 
+2.48.1
+
