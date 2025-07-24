@@ -142,12 +142,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1753361937,
-        "narHash": "sha256-Ne1B5RowBYX/xn/+FiOQJbONwnsDzgE/z0pApmW/5GQ=",
-        "owner": "KoviRobi",
-        "repo": "home-manager",
-        "rev": "c08945e006773738f82bfda545fca585a778091d",
-        "type": "github"
+        "lastModified": 1753392878,
+        "narHash": "sha256-S6F6FD0/RJFLgapQcbH3ekf/oQX/MlFZY8ctOWWehS4=",
+        "ref": "refs/heads/rob-i3-keys-order",
+        "rev": "06671cfd488f719c1617fb0e5a6bd7cee43a69ec",
+        "revCount": 5129,
+        "type": "git",
+        "url": "file:///home/rmk/pdev/home-manager"
       },
       "original": {
         "owner": "nix-community",
