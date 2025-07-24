@@ -86,6 +86,8 @@
 
   swapDevices = [ ];
 
+  services.fprintd.enable = true;
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   # This option defines the first version of NixOS you have installed on this particular machine,
