@@ -22,11 +22,13 @@
   programs = {
     i3lock.enable = true;
     sway.enable = true;
+    hyprland.enable = true;
   };
   services = {
     udisks2.enable = true;
 
     displayManager.defaultSession = "none+i3";
+    desktopManager.gnome.enable = true;
 
     xserver = {
       enable = true;
