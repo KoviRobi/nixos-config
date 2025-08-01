@@ -47,17 +47,4 @@ mkPlugins {
     };
     meta.homepage = "https://github.com/stevearc/profile.nvim";
   };
-
-  neotest-ctest = rec {
-    pname = "neotest-ctest";
-    version = "v0.1.0";
-    src = fetchFromGitHub {
-      owner = "orjangj";
-      repo = pname;
-      rev = version;
-      sha256 = "sha256-+560CBPJeKd2F9qboI1YiccffQYLFoHpaEIs0HsCGls=";
-    };
-    buildInputs = [ vimPlugins.neotest ];
-    meta.homepage = "https://github.com/orjangj/neotest-ctest";
-  };
 }

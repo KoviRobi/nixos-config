@@ -161,11 +161,6 @@ in
           nvim-dap-ui
           nvim-dap-virtual-text
 
-          # neotest
-          neotest
-          neotest-rust
-          neotest-golang
-
           # kovirobi
           undotree
           vim-fugitive
@@ -199,7 +194,6 @@ in
           (pkgs.runCommand "notmuch-vim" { } ''
             ln -s ${pkgs.notmuch.vim}/share/vim-plugins/notmuch $out
           '')
-          neotest-ctest
         ]);
 
       extraLuaConfig = ''
