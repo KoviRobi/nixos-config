@@ -41,7 +41,7 @@
         text/: st -e tmux new vim
         application/pdf: zathura
         video/: mpv
-        image/: geeqie
+        image/: display
         audio/: mpv
         inode/directory: st -e tmux new -c
       '';
