@@ -1,5 +1,6 @@
 # vim: set ts=2 sts=2 sw=2 et :
 {
+  pkgs,
   lib,
   ...
 }:
@@ -7,9 +8,20 @@
 {
   imports = [
     ./base-configuration.nix
-    ../modules/graphical.nix
     (import ../modules/default-user.nix { })
     ../modules/ssh.nix
+    ../packages/desktop-environment.nix
+  ];
+
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [
+    noto-fonts
+    dejavu_fonts
+    liberation_ttf
+    lmodern
+    nerd-fonts.dejavu-sans-mono
+    nerd-fonts.caskaydia-cove
+    inconsolata
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -23,18 +35,11 @@
     pulseaudio.extraClientConf = ''
       default-server = _gateway;
     '';
-
-    xserver = {
-      enable = lib.mkForce false;
-      displayManager.lightdm.enable = lib.mkForce false;
-      windowManager.i3.enable = lib.mkForce false;
-    };
   };
 
   programs = {
     atop.netatop.enable = lib.mkForce false;
   };
-  documentation.man.generateCaches = lib.mkForce true;
 
   systemd.user.services.pulseaudio.enable = false;
 
