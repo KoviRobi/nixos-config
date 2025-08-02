@@ -124,7 +124,6 @@ in
 
           # LSP
           nvim-lspconfig
-          rustaceanvim
           crates-nvim
           null-ls-nvim
           nvim-lightbulb # lightbulb for quick actions
