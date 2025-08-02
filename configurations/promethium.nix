@@ -59,7 +59,7 @@
         mkdir -p $out/lib/cups/backend
         ln -sf ${pkgs.writeShellScript "smb-krb5" ''
           export DEVICE_URI=smb://''${DEVICE_URI#smb_krb5://}
-          ${pkgs.sambaFull}/libexec/samba/smbspool_krb5_wrapper "$@"
+          ${config.services.samba.package}/libexec/samba/smbspool_krb5_wrapper "$@"
         ''} $out/lib/cups/backend/smb_krb5
       '';
     };

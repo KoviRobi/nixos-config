@@ -177,7 +177,10 @@
 
     samba = {
       enable = true;
-      package = pkgs.sambaFull;
+      package = pkgs.samba.override {
+        enableLDAP = true;
+        enablePrinting = true;
+      };
       settings = {
         global = {
           workgroup = "OFFICE";
