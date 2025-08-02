@@ -153,8 +153,6 @@
         "/music/"
       ];
     };
-
-    syncthing.enable = true;
   };
 
   virtualisation = {
@@ -263,7 +261,6 @@
     pkgs.docker-credential-helpers
     pkgs.virt-manager
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
-    pkgs.syncthing
   ]
   ++ (import ../packages/pc.nix args)
   ++ (import ../packages/pc-unfree.nix args);

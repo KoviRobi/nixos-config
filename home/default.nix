@@ -62,7 +62,10 @@
     '';
   };
 
-  services.gnome-keyring.enable = true;
+  services = {
+    gnome-keyring.enable = true;
+    syncthing.enable = true;
+  };
 
   programs = {
     readline = {

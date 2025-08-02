@@ -167,8 +167,16 @@
   networking = {
     networkmanager.enable = true;
 
-    # To make tailscale work
-    firewall.checkReversePath = "loose";
+    firewall = {
+      # To make tailscale work
+      checkReversePath = "loose";
+      # For syncthing
+      allowedTCPPorts = [ 22000 ];
+      allowedUDPPorts = [
+        21027
+        22000
+      ];
+    };
   };
   systemd = {
     services = {
