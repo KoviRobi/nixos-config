@@ -89,11 +89,11 @@
     services.feh-random-background.enable = lib.mkForce false;
     systemd.user.services.setxkbmap.Install.WantedBy = lib.mkForce [ ];
     systemd.user.services.xplugd.Install.WantedBy = lib.mkForce [ ];
-    home.stateVersion = "18.09";
+    home.stateVersion = "24.11";
     programs.git.extraConfig.credential.helper =
       lib.mkForce "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe";
   };
 
   system.stateVersion = "22.05";
-  home-manager.users.root.home.stateVersion = "23.05";
+  home-manager.users.root.home.stateVersion = "24.11";
 }
