@@ -185,20 +185,19 @@
   nixpkgs.config.allowUnfree = true;
 
   boot = {
-    initrd.availableKernelModules =
-      [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "uas"
-        "sd_mod"
-        "sr_mod"
-      ]
-      ++ [
-        "r8169"
-        "igb"
-      ]; # NIC for initrd SSH
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "uas"
+      "sd_mod"
+      "sr_mod"
+    ]
+    ++ [
+      "r8169"
+      "igb"
+    ]; # NIC for initrd SSH
 
     kernelModules = [
       "kvm-amd"
@@ -259,14 +258,13 @@
       ];
     }
   ];
-  environment.systemPackages =
-    [
-      pkgs.nvtopPackages.amd
-      pkgs.docker-credential-helpers
-      pkgs.virt-manager
-      (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
-      pkgs.syncthing
-    ]
-    ++ (import ../packages/pc.nix args)
-    ++ (import ../packages/pc-unfree.nix args);
+  environment.systemPackages = [
+    pkgs.nvtopPackages.amd
+    pkgs.docker-credential-helpers
+    pkgs.virt-manager
+    (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
+    pkgs.syncthing
+  ]
+  ++ (import ../packages/pc.nix args)
+  ++ (import ../packages/pc-unfree.nix args);
 }
