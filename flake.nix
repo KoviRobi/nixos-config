@@ -305,7 +305,7 @@
             }
           )
           {
-            "pc-nixos-a" = [
+            "pc-nixos-b" = [
               ./configurations/pc.nix
               ./targets/pc.nix
             ];
