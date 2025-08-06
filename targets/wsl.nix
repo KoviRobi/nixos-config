@@ -66,6 +66,8 @@
     config.boot.kernelPackages.usbip
   ];
 
+  networking.networkmanager.enable = lib.mkForce false;
+
   services = {
     resolved.enable = lib.mkForce false;
     gnome.gnome-keyring.enable = lib.mkForce false;
