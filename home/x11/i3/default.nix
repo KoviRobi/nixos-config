@@ -138,10 +138,20 @@ in
           "${mod}+Down" = "focus down";
           "${mod}+Home" = "focus output left";
           "${mod}+End" = "focus output right";
+          "${mod}+Prior" = "focus output up";
+          "${mod}+Next" = "focus output down";
           "${mod}+Shift+h" = "move left";
           "${mod}+Shift+j" = "move down";
           "${mod}+Shift+k" = "move up";
           "${mod}+Shift+l" = "move right";
+          "${mod}+Shift+Left" = "move left";
+          "${mod}+Shift+Right" = "move right";
+          "${mod}+Shift+Up" = "move up";
+          "${mod}+Shift+Down" = "move down";
+          "${mod}+Shift+Home" = "move to output left";
+          "${mod}+Shift+End" = "move to output right";
+          "${mod}+Shift+Prior" = "move to output up";
+          "${mod}+Shift+Next" = "move to output down";
 
           "${mod}+w" = "focus parent";
           "${mod}+s" = "focus child";
@@ -174,9 +184,9 @@ in
           "XF86AudioPlay" = "exec ${i3-helpers.actions-dir}/toggle";
           "XF86Launch5" = "exec ${i3-helpers.actions-dir}/toggle";
           # Dunst
-          "${mod}+Prior" = "exec ${pkgs.dunst}/bin/dunstctl close";
-          "${mod}+Next" = "exec ${pkgs.dunst}/bin/dunstctl history-pop";
-          "${mod}+period" = "exec ${pkgs.dunst}/bin/dunstctl context";
+          "${mod}+comma" = "exec ${pkgs.dunst}/bin/dunstctl close";
+          "${mod}+period" = "exec ${pkgs.dunst}/bin/dunstctl history-pop";
+          "${mod}+slash" = "exec ${pkgs.dunst}/bin/dunstctl context";
         }
         // {
           # Unset not used defaults
