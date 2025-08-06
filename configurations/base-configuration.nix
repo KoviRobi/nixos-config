@@ -131,7 +131,11 @@
   };
 
   services = {
-    pipewire.enable = true;
+    pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true; # For bluetooth audio
+    };
 
     earlyoom.enable = true;
     clamav = {
