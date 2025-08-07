@@ -18,11 +18,7 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-
-      shellAliases.man = "viman";
+      shellAliases.man = mkIf config.programs.neovim.defaultEditor "viman";
 
       packages = [
         (lib.hiPrio (
@@ -70,7 +66,6 @@ in
 
     programs.neovim = {
       enable = true;
-      defaultEditor = true;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;

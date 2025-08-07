@@ -18,9 +18,9 @@
       ];
 
     sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      PAGER = "less";
+      EDITOR = "kak";
+      VISUAL = "kak";
+      PAGER = "kak";
       LESS = "-iRqw --use-color --color=W-k -j4 -z-4 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
       LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
       GS_OPTIONS = "-sPAPERSIZE=a4";
