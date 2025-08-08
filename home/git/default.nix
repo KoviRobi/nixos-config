@@ -8,6 +8,14 @@ let
   cfg = config.programs.git;
 in
 {
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "git-edit-index";
+      text = builtins.readFile ./scripts/edit-index;
+      runtimeInputs = [ cfg.package ];
+    })
+  ];
+
   programs.git = {
     enable = true;
     package =
