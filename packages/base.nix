@@ -99,6 +99,7 @@ with pkgs;
   wireguard-tools
 
   kakoune
+  kakoune-lsp
   helix
 
   inotify-tools
