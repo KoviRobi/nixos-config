@@ -89,6 +89,7 @@
     services.gnome-keyring.enable = true;
 
     services.feh-random-background.enable = lib.mkForce false;
+    services.udiskie.enable = lib.mkForce false;
     systemd.user.services.setxkbmap.Install.WantedBy = lib.mkForce [ ];
     systemd.user.services.xplugd.Install.WantedBy = lib.mkForce [ ];
     home.stateVersion = "24.11";
