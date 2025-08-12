@@ -117,7 +117,8 @@ final: prev: {
 
       add-highlighter global/ wrap -word -marker ⏎
       add-highlighter global/ show-matching
-      add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:Error
+      add-highlighter global/highlight-search dynregex '%reg{/}' 0:+i
+      add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,,red+u
 
       set-option global scrolloff 3,2
 
@@ -157,6 +158,8 @@ final: prev: {
 
       eval %sh{${final.lib.getExe final.kakoune-lsp}}
       lsp-enable
+
+      map global user f ': fzf-mode<ret>'
     '';
 
   kakoune = prev.kakoune.override (
