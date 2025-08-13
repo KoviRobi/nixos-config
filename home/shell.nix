@@ -60,6 +60,7 @@
       gsud = "git submodule deinit";
 
       man = "kakman";
+      e = "$EDITOR";
 
       n = "nix";
       np = "n profile";
