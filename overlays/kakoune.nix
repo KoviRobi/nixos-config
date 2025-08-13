@@ -109,6 +109,48 @@ final: prev: {
         map global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'
         map global insert <c-w> '<a-;>: erase_word_before_cursor<ret>'
       '';
+
+      # Use manpath; use MANWIDTH=width-1
+      man_improvements = ''
+        define-command -override -hidden -params ..3 man-impl %{ evaluate-commands %sh{
+            buffer_name="$1"
+            if [ -z "''${buffer_name}" ]; then
+                exit
+            fi
+            shift
+            manout=$(mktemp "''${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+            manerr=$(mktemp "''${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+            colout=$(mktemp "''${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+            env MANWIDTH=$(($kak_window_width - 1)) man "$@" > "$manout" 2> "$manerr"
+            retval=$?
+            if command -v col >/dev/null; then
+                col -b -x > ''${colout} < ''${manout}
+            else
+                sed 's/.//g' > ''${colout} < ''${manout}
+            fi
+            rm ''${manout}
+
+            if [ "''${retval}" -eq 0 ]; then
+                printf %s\\n "
+                        edit -scratch %{*$buffer_name ''${*}*}
+                        execute-keys '%|cat<space>''${colout}<ret>gk'
+                        nop %sh{ rm ''${colout}; rm ''${manerr} }
+                        set-option buffer filetype man
+                        set-option window manpage $buffer_name $*
+                "
+            else
+                printf '
+                    fail %%{%s}
+                    nop %%sh{ rm "%s"; rm "%s" }
+                ' "$(cat "$manerr")" "''${colout}" "''${manerr}"
+            fi
+        } }
+
+        # Improve man completion
+        complete-command man shell-script-candidates %{
+            find -L $(manpath | sed 's/:/ /g') -name '*.[1-8]*' |
+                sed 's,^.*/\(.*\)\.\([1-8][a-zA-Z]*\).*$,\1(\2),' }
+      '';
     in
     final.writeTextDir "share/kak/kakrc.local" ''
       colorscheme solarized-light
@@ -135,6 +177,7 @@ final: prev: {
       ${git-gutter}
       ${tmux-split}
       ${c_w_and_c_u}
+      ${man_improvements}
 
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
