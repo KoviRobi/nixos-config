@@ -226,4 +226,10 @@ final: prev: {
       ];
     }
   );
+  kakman = final.writeShellApplication {
+    name = "kakman";
+    text = ''
+      ${final.lib.getExe final.kakoune} -e "man $*"
+    '';
+  };
 }

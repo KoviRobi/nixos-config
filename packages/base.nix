@@ -100,6 +100,7 @@ with pkgs;
 
   kakoune
   kakoune-lsp
+  kakman
   helix
 
   inotify-tools

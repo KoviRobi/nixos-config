@@ -59,6 +59,8 @@
       gsui = "git submodule update --init";
       gsud = "git submodule deinit";
 
+      man = "kakman";
+
       n = "nix";
       np = "n profile";
       ni = "np install";
@@ -174,6 +176,7 @@
 
         compdef _nixos-rebuild nom-rebuild
         compdef _man viman
+        compdef _man kakman
         # No man-page sections for viman
         eval "$(zstyle -L '*' insert-sections | sed 's/^zstyle/& -d/')"
         zstyle ':completion:*:manuals*' insert-sections suffix
