@@ -88,6 +88,7 @@
   home-manager.users.default-user = {
     services.gnome-keyring.enable = true;
 
+    services.picom.enable = lib.mkForce false;
     services.feh-random-background.enable = lib.mkForce false;
     services.udiskie.enable = lib.mkForce false;
     systemd.user.services.setxkbmap.Install.WantedBy = lib.mkForce [ ];
