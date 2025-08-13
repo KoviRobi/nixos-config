@@ -182,7 +182,7 @@ final: prev: {
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
       # Shortcut to quickly exit the editor
-      define-command -docstring "save and quit" x "write-all; quit"
+      define-command -docstring "save and quit" x "write-all; kill"
 
       # Subject-verb
       alias global bd delete-buffer
