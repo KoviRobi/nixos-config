@@ -119,6 +119,8 @@ final: prev: {
       add-highlighter global/ show-matching
       add-highlighter global/highlight-search dynregex '%reg{/}' 0:+i
       add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,,red+u
+      add-highlighter global/show-inconsistent-tabs-1 regex '( +)(\t+)' 2:,,red+u
+      add-highlighter global/show-inconsistent-tabs-2 regex '(\t+)( +)' 1:,,red+u
 
       set-option global scrolloff 3,2
 
