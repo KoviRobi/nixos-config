@@ -205,6 +205,11 @@ final: prev: {
       lsp-enable
 
       map global user f ': fzf-mode<ret>'
+
+      map global insert <c-d> '<a-;><lt>'
+      map global insert <c-t> '<a-;><gt>'
+      map global insert <a-d> '<a-;><a-lt>'
+      map global insert <a-t> '<a-;><a-gt>'
     '';
 
   kakoune = prev.kakoune.override (
