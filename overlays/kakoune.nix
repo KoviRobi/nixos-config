@@ -210,6 +210,9 @@ final: prev: {
       map global insert <c-t> '<a-;><gt>'
       map global insert <a-d> '<a-;><a-lt>'
       map global insert <a-t> '<a-;><a-gt>'
+
+      # For active-window-kak
+      set-face global InactiveCursor rgba:80808040,rgba:80808040
     '';
 
   kakoune = prev.kakoune.override (

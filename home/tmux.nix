@@ -26,6 +26,7 @@
       set -g pane-border-indicators arrows
       set -g display-panes-time 2000
       set -g exit-empty off
+      set -g focus-events on
       set -sa terminal-overrides ",*-256color:Tc"
 
       # See: https://github.com/christoomey/vim-tmux-navigator
