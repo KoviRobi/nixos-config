@@ -213,6 +213,10 @@ final: prev: {
 
       # For active-window-kak
       set-face global InactiveCursor rgba:80808040,rgba:80808040
+
+      hook global WinSetOption filetype=nix %{
+        set-option window indentwidth 2
+      }
     '';
 
   kakoune = prev.kakoune.override (
