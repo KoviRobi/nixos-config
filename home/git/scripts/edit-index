@@ -8,22 +8,27 @@ if [ $# != 1 ]; then
   exit 1
 fi
 FILE="$(basename "$1")"
+REPO="$(git rev-parse --show-toplevel)"
+REPOFILE="$(realpath --relative-to="$REPO" "$1")"
 GITDIR="$(git rev-parse --git-dir)"
 TMPDIR="$GITDIR/edit-index"
 mkdir -p "$TMPDIR"
 TEMPFILE="$(mktemp --tmpdir="$TMPDIR" --suffix ".$FILE")"
-MODE=$(git ls-files --stage "$1" | cut -d' ' -f1)
-if [ -n "$MODE" ]; then
-  # Read existing staged file contents
-  git cat-file blob ":0:$1" >"$TEMPFILE" 2>/dev/null
+MODE=$(git ls-files --stage "$REPOFILE" | cut -d' ' -f1)
+if [ -t 0 ]; then
+  if [ -n "$MODE" ]; then
+    # Read existing staged file contents
+    git cat-file blob ":0:$REPOFILE" >"$TEMPFILE" 2>/dev/null
+  fi
+  if ! $EDITOR "$TEMPFILE"; then
+    echo "Keeping temporary file $TEMPFILE"
+    exit 1
+  fi
 else
-  # Sensible default for files, git doesn't track directories
-  MODE=100644
+  cat >"$TEMPFILE"
 fi
-if $EDITOR "$TEMPFILE"; then
-  HASH="$(git hash-object -w "$TEMPFILE")"
-  rm "$TEMPFILE"
-  git update-index --add --cacheinfo "$MODE,$HASH,$1"
-else
-  echo "Keeping temporary file $TEMPFILE"
-fi
+# Sensible default for files, git doesn't track directories
+MODE=${MODE:-100644}
+HASH="$(git hash-object -w "$TEMPFILE")"
+rm "$TEMPFILE"
+git update-index --add --cacheinfo "$MODE,$HASH,$REPOFILE"
