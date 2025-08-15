@@ -39,6 +39,8 @@
       playerctl
 
       mupdf
+      st
+      st.terminfo
       zathura
       ffmpeg
       rofi
