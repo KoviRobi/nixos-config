@@ -33,6 +33,8 @@
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
 
+      # Also consider prezto aliases at
+      #  https://github.com/sorin-ionescu/prezto/blob/master/modules/git/alias.zsh
       g = "git";
       ga = "git add";
       gap = "git add -p";
@@ -52,12 +54,17 @@
       grb = "git rebase";
       gret = ''git -c core.editor="$EDITOR \"+:wincmd r|0wincmd w|:0\" -O \"$(git rev-parse --git-dir)/rebase-merge/done\"" rebase --edit-todo'';
       gcp = "git cherry-pick";
+      gcpc = "git cherry-pick --continue";
+      gcpa = "git cherry-pick --abort";
       gs = "git status";
       gsh = "git show";
       gunig = "git update-index --no-assume-unchanged";
       gsu = "git submodule";
       gsui = "git submodule update --init";
+      gsuir = "git submodule update --init --recursive";
       gsud = "git submodule deinit";
+      gmc = "git merge --continue";
+      gma = "git merge --abort";
 
       man = "kakman";
       e = "$EDITOR";
