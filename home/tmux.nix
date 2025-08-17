@@ -14,6 +14,7 @@
     plugins = with pkgs.tmuxPlugins; [
       yank
       logging
+      pkgs.tmux-easymotion-multipane
     ];
 
     extraConfig = ''
@@ -64,10 +65,6 @@
 
       bind-key "'" last-window
 
-      bind-key s capture-pane -e -b screenshot_raw\;\
-          capture-pane -b screenshot_plain\;\
-          save-buffer -b screenshot_raw 'tmux_screenshot_raw'\;\
-          save-buffer -b screenshot_plain 'tmux_screenshot_plain'
       bind-key S capture-pane -e -S - -E - -b screenshot_raw\;\
           capture-pane -S - -E - -b screenshot_plain\;\
           save-buffer -b screenshot_raw 'tmux_screenshot_raw'\;\

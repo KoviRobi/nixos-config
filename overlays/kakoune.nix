@@ -234,6 +234,7 @@ final: prev: {
         p.kak-byline
         p.git-async
         p.explorer-kak
+        p.kakoune-easymotion
         final."kakrc.local"
       ];
     }
