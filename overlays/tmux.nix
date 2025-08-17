@@ -4,10 +4,10 @@ final: prev: {
     rtpFilePath = "easymotion.tmux";
     version = "unstable-2025-08-01";
     src = final.fetchFromGitHub {
-      owner = "ddzero2c";
+      owner = "KoviRobi";
       repo = "tmux-easymotion";
-      rev = "156ac9881c51b5605d57c47077c2d1dfbab5881c";
-      hash = "sha256-pYCwmUyqLtso0TtIJIIpZWRe8j5SJPg1tkdBiTUNDzU=";
+      rev = "07d61afe40e5b1d673e9774b04580c8bcd2afb43";
+      hash = "sha256-g6krd/D7LLxOjGMqBHxCXBcZpezTL9ukeqVdOeeTsKc=";
     };
   };
 
