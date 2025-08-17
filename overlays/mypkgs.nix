@@ -89,16 +89,4 @@ final: prev: {
       ../patches/forgejo/0001-fix-Gravatar-uses-sha256-for-hash.patch
     ];
   });
-
-  tmux-easymotion-multipane = final.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-easymotion-multipane";
-    rtpFilePath = "easymotion.tmux";
-    version = "unstable-2025-08-01";
-    src = final.fetchFromGitHub {
-      owner = "ddzero2c";
-      repo = "tmux-easymotion";
-      rev = "156ac9881c51b5605d57c47077c2d1dfbab5881c";
-      hash = "sha256-pYCwmUyqLtso0TtIJIIpZWRe8j5SJPg1tkdBiTUNDzU=";
-    };
-  };
 }
