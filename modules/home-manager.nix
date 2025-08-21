@@ -12,6 +12,7 @@
       {
         imports = [ ../home ];
         nixos = {
+          inherit (config.networking) hostName;
           services.xserver.dpi = config.services.xserver.dpi;
           inherit (config) fileSystems;
           users.users.default-user.uid = config.users.users.default-user.uid;
@@ -22,6 +23,7 @@
       {
         imports = [ ../home ];
         nixos = {
+          inherit (config.networking) hostName;
           services.xserver.dpi = config.services.xserver.dpi;
           inherit (config) fileSystems;
           users.users.default-user.uid = config.users.users.root.uid;
