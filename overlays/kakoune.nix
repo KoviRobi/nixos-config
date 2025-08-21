@@ -204,7 +204,7 @@ final: prev: {
       eval %sh{${final.lib.getExe final.kakoune-lsp}}
       lsp-enable
 
-      map global user f ': fzf-mode<ret>'
+      map global user f ': fzf-mode<ret>' -docstring "FZF mode"
 
       map global insert <c-d> '<a-;><lt>'
       map global insert <c-t> '<a-;><gt>'
