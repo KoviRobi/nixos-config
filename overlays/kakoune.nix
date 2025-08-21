@@ -191,6 +191,10 @@ final: prev: {
       alias global qa kill
       alias global qa! kill!
 
+      define-command -docstring "quit with status 1" "cq" "quit 1"
+      define-command -docstring "quit! with status 1" "cq-force" "quit! 1"
+      alias global cq! cq-force
+
       set-option global grepcmd "rg --vimgrep"
 
       require-module powerline
