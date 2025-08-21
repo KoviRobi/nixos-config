@@ -161,6 +161,12 @@ in
     };
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
+  };
+
   services = {
     network-manager-applet.enable = true;
     copyq.enable = true;
