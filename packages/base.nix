@@ -78,6 +78,7 @@ with pkgs;
       requests
     ]
   ))
+  pyc
   pyright
   black
   isort

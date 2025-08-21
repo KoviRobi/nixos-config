@@ -89,4 +89,27 @@ final: prev: {
       ../patches/forgejo/0001-fix-Gravatar-uses-sha256-for-hash.patch
     ];
   });
+
+  pyc = final.writeScriptBin "pyc" ''
+    #!${final.lib.getExe (final.pkgs.python3.withPackages (ps: []))}
+
+    import collections
+    import functools
+    import itertools
+    import os
+    import re
+    import sys
+    import traceback
+    from math import *
+    from pathlib import Path
+
+    try:
+        while line := input():
+            try:
+                print(eval(line))
+            except:
+                traceback.print_exc()
+    except EOFError:
+        pass
+  '';
 }
