@@ -57,7 +57,7 @@ final: prev: {
         }
       '';
 
-      tmux-split = ''
+      tmux = ''
         define-command -docstring "v [<commands>]: split tmux vertically" -params .. v %{
           tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"
         }
@@ -72,6 +72,13 @@ final: prev: {
           tmux-terminal-window kak -c %val{session} -e "%arg{@}"
         }
         complete-command tab command
+
+        define-command tmux-choose-repl %{
+          nop %sh{
+            tmux choose-tree -Z "run-shell 'echo set-option current tmux_repl_id \"%1\" | kak -p $kak_session'"
+          }
+        }
+        map global normal <a-ret> ": tmux-choose-repl<ret>"
       '';
 
       c_w_and_c_u = ''
@@ -175,7 +182,7 @@ final: prev: {
       hook global WinCreate .* %{ kakboard-enable }
 
       ${git-gutter}
-      ${tmux-split}
+      ${tmux}
       ${c_w_and_c_u}
       ${man_improvements}
 
