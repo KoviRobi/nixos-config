@@ -177,8 +177,6 @@ final: prev: {
       set-option global ui_options terminal_set_title=false terminal_status_on_top=true terminal_assistant=none terminal_enable_mouse=true terminal_change_colors=true    terminal_builtin_key_parser=false
 
       # Key mappings
-      map global normal / '/(?i)'
-
       hook global WinCreate .* %{ kakboard-enable }
 
       ${git-gutter}
