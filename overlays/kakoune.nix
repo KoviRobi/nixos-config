@@ -204,7 +204,6 @@ final: prev: {
 
       require-module powerline
       powerline-enable
-      powerline-theme-solarized-light
 
       require-module byline
       map global normal 'X' ": byline-drag-up<ret>"
