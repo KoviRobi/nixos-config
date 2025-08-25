@@ -39,7 +39,7 @@ in
       font-style-bold-italic = "Italic";
       font-synthetic-style = false;
       font-size = 10.5;
-      theme = "light:solarized-light,dark:solarized-dark";
+      theme = "solarized";
       window-decoration = "server";
       keybind = [
         "clear"
@@ -59,7 +59,7 @@ in
         # "ctrl+shift+q=quit"
         # "ctrl+shift+n=new_window"
         # "ctrl+shift+page_down=jump_to_prompt:1"
-        # "ctrl+shift+comma=reload_config"
+        "ctrl+shift+comma=reload_config"
         "ctrl+minus=decrease_font_size:1"
         # "shift+left=adjust_selection:left"
         # "super+ctrl+shift+up=resize_split:up,10"
@@ -182,9 +182,36 @@ in
     };
     darkman = {
       enable = true;
-      darkModeScripts.state-file = "echo 'dark' > ~/.local/state/brightness";
-      lightModeScripts.state-file = "echo 'light' > ~/.local/state/brightness";
-    };
+    }
+    // (
+      let
+        f = brightness: {
+          state-file = "echo '${brightness}' > ~/.local/state/brightness";
+          ghostty = ''
+            ${pkgs.coreutils}/bin/ln -srf                        \
+                ~/.config/ghostty/themes/solarized-${brightness} \
+                ~/.config/ghostty/themes/solarized
+          '';
+          kakoune = ''
+            ${pkgs.kakoune}/bin/kak -l | while read sid; do
+              echo "colorscheme solarized-${brightness}" | \
+                  ${pkgs.kakoune}/bin/kak -p $sid
+            done
+          '';
+        };
+      in
+      builtins.listToAttrs (
+        map
+          (name: {
+            name = "${name}ModeScripts";
+            value = f name;
+          })
+          [
+            "light"
+            "dark"
+          ]
+      )
+    );
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";

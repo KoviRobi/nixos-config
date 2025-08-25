@@ -160,7 +160,7 @@ final: prev: {
       '';
     in
     final.writeTextDir "share/kak/kakrc.local" ''
-      colorscheme solarized-light
+      colorscheme "solarized-%sh{cat ~/.local/state/brightness || echo light}"
 
       set-option global autoinfo command|onkey|normal
 
@@ -201,9 +201,6 @@ final: prev: {
       alias global cq! cq-force
 
       set-option global grepcmd "rg --vimgrep"
-
-      require-module powerline
-      powerline-enable
 
       require-module byline
       map global normal 'X' ": byline-drag-up<ret>"
