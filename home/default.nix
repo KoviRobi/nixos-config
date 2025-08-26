@@ -39,7 +39,7 @@
 
       ".config/mimi/mime.conf".text = ''
         text/html: firefox
-        text/: st -e tmux new vim
+        text/: ghostty -e tmux new kak
         application/pdf: zathura
         video/: mpv
         image/: display
