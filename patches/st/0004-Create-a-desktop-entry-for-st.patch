@@ -1,4 +1,4 @@
-From 80db61953641dc4c0d609eeb273a7aeaaf3a0372 Mon Sep 17 00:00:00 2001
+From 3907fbad59f374d15bd4a0a8c27b6991706eea80 Mon Sep 17 00:00:00 2001
 From: aleks <aleks.stier@icloud.com>
 Date: Tue, 31 May 2022 00:33:38 +0200
 Subject: [PATCH 04/11] Create a desktop-entry for st
@@ -34,10 +34,10 @@ index 15db421..4158da2 100644
  
  .PHONY: all clean dist install uninstall
 diff --git a/config.mk b/config.mk
-index a3cbae6..d6ec48b 100644
+index 92d8d67..48cd8a1 100644
 --- a/config.mk
 +++ b/config.mk
-@@ -5,6 +5,7 @@ VERSION = 0.9.2
+@@ -5,6 +5,7 @@ VERSION = 0.9.3
  
  # paths
  PREFIX = /usr/local
@@ -64,5 +64,5 @@ index 0000000..2d2b76f
 +Comment=st is a simple terminal implementation for X
 +StartupWMClass=st-256color
 -- 
-2.47.1
+2.50.1
 

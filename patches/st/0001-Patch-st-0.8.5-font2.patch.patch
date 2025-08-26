@@ -1,4 +1,4 @@
-From 93b1b4cca2530ced39c52db517dba0db22aeb21f Mon Sep 17 00:00:00 2001
+From 93207c72fe1d64bf8a770b866877ab72d7ae772c Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:22:07 +0100
 Subject: [PATCH 01/11] Patch st-0.8.5-font2.patch
@@ -29,7 +29,7 @@ index 2cd740a..046aa98 100644
  
  /*
 diff --git a/x.c b/x.c
-index bd23686..b251400 100644
+index d73152b..2f2180c 100644
 --- a/x.c
 +++ b/x.c
 @@ -157,6 +157,8 @@ static void xhints(void);
@@ -162,5 +162,5 @@ index bd23686..b251400 100644
  	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
  	xloadcols();
 -- 
-2.47.1
+2.50.1
 

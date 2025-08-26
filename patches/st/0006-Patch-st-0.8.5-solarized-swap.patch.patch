@@ -1,4 +1,4 @@
-From 25f0b5d79a2c44739388e639523cb4df2e01e3e2 Mon Sep 17 00:00:00 2001
+From 1f72ac350d1fae06e95f4f8ab8007f584cd67faa Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:52 +0100
 Subject: [PATCH 06/11] Patch st-0.8.5-solarized-swap.patch
@@ -121,7 +121,7 @@ index ba1d86e..2cd75fb 100644
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
 diff --git a/x.c b/x.c
-index f1ce158..37d2859 100644
+index 4194583..d33394d 100644
 --- a/x.c
 +++ b/x.c
 @@ -55,6 +55,7 @@ static void clipcopy(const Arg *);
@@ -188,7 +188,7 @@ index f1ce158..37d2859 100644
  			else
  				die("could not allocate color %d\n", i);
  		}
-@@ -1301,13 +1317,13 @@ xinit(int cols, int rows)
+@@ -1304,13 +1320,13 @@ xinit(int cols, int rows)
  	cursor = XCreateFontCursor(xw.dpy, mouseshape);
  	XDefineCursor(xw.dpy, xw.win, cursor);
  
@@ -204,7 +204,7 @@ index f1ce158..37d2859 100644
  		xmousebg.red   = 0x0000;
  		xmousebg.green = 0x0000;
  		xmousebg.blue  = 0x0000;
-@@ -1550,7 +1566,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+@@ -1553,7 +1569,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  
  	/* Change basic system colors [0-7] to bright system colors [8-15] */
  	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
@@ -214,5 +214,5 @@ index f1ce158..37d2859 100644
  	if (IS_SET(MODE_REVERSE)) {
  		if (fg == &dc.col[defaultfg]) {
 -- 
-2.47.1
+2.50.1
 

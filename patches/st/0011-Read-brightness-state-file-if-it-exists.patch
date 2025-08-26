@@ -1,4 +1,4 @@
-From 95920a9bc1f355094b1ed4a7e846ab3d68dae159 Mon Sep 17 00:00:00 2001
+From f249d1080d7aa2ddacf18de54b11242076b70d02 Mon Sep 17 00:00:00 2001
 From: Kovacsics Robert <kovirobi@gmail.com>
 Date: Mon, 3 Feb 2025 13:32:11 +0000
 Subject: [PATCH 11/11] Read brightness state file if it exists
@@ -9,7 +9,7 @@ Subject: [PATCH 11/11] Read brightness state file if it exists
  2 files changed, 36 insertions(+), 1 deletion(-)
 
 diff --git a/st.c b/st.c
-index d701c37..c551a8b 100644
+index 0737e6c..d50f8f9 100644
 --- a/st.c
 +++ b/st.c
 @@ -825,6 +825,8 @@ ttyread(void)
@@ -21,7 +21,7 @@ index d701c37..c551a8b 100644
  	/* append read bytes to unprocessed bytes */
  	ret = read(cmdfd, buf+buflen, LEN(buf)-buflen);
  
-@@ -2721,6 +2723,7 @@ draw(void)
+@@ -2741,6 +2743,7 @@ draw(void)
  void
  redraw(void)
  {
@@ -30,7 +30,7 @@ index d701c37..c551a8b 100644
  	draw();
  }
 diff --git a/x.c b/x.c
-index 8e728c7..20129d2 100644
+index c950c39..8f4899e 100644
 --- a/x.c
 +++ b/x.c
 @@ -233,6 +233,7 @@ static DC dc;
@@ -104,5 +104,5 @@ index 8e728c7..20129d2 100644
  	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
  	xloadcols();
 -- 
-2.47.1
+2.50.1
 

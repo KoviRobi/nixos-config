@@ -1,4 +1,4 @@
-From 2a8b1c63fa8b2a31448f1794f6eb3da1d9172da0 Mon Sep 17 00:00:00 2001
+From 1926d93d9fde87faa4fe2019041675f268c1c9ea Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:26:13 +0100
 Subject: [PATCH 07/11] Patch st-0.8.5-solarized-swap-default-light.patch
@@ -8,7 +8,7 @@ Subject: [PATCH 07/11] Patch st-0.8.5-solarized-swap-default-light.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/x.c b/x.c
-index 37d2859..f057aab 100644
+index d33394d..e66701a 100644
 --- a/x.c
 +++ b/x.c
 @@ -257,7 +257,7 @@ static char *opt_title = NULL;
@@ -21,5 +21,5 @@ index 37d2859..f057aab 100644
  void
  clipcopy(const Arg *dummy)
 -- 
-2.47.1
+2.50.1
 

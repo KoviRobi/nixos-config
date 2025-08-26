@@ -1,4 +1,4 @@
-From 3a373ced86a05b8580246334c8688b4d1ca22167 Mon Sep 17 00:00:00 2001
+From 1e3f5dae1582153eb10bbe3f3a00b8ff9ffc7548 Mon Sep 17 00:00:00 2001
 From: Aleksandrs Stier <aleks.stier@icloud.com>
 Date: Sat, 4 Jun 2022 01:24:07 +0200
 Subject: [PATCH 03/11] Set _NET_WM_ICON with a png-image
@@ -10,7 +10,7 @@ Subject: [PATCH 03/11] Set _NET_WM_ICON with a png-image
  3 files changed, 40 insertions(+), 3 deletions(-)
 
 diff --git a/config.mk b/config.mk
-index fdc29a7..a3cbae6 100644
+index 2fc854e..92d8d67 100644
 --- a/config.mk
 +++ b/config.mk
 @@ -16,12 +16,12 @@ PKG_CONFIG = pkg-config
@@ -42,7 +42,7 @@ index fd3b0d8..ba1d86e 100644
  #define MIN(a, b)		((a) < (b) ? (a) : (b))
  #define MAX(a, b)		((a) < (b) ? (b) : (a))
 diff --git a/x.c b/x.c
-index b251400..f1ce158 100644
+index 2f2180c..4194583 100644
 --- a/x.c
 +++ b/x.c
 @@ -93,7 +93,7 @@ typedef struct {
@@ -54,7 +54,7 @@ index b251400..f1ce158 100644
  	struct {
  		XIM xim;
  		XIC xic;
-@@ -1321,6 +1321,41 @@ xinit(int cols, int rows)
+@@ -1324,6 +1324,41 @@ xinit(int cols, int rows)
  	xw.netwmiconname = XInternAtom(xw.dpy, "_NET_WM_ICON_NAME", False);
  	XSetWMProtocols(xw.dpy, xw.win, &xw.wmdeletewin, 1);
  
@@ -97,5 +97,5 @@ index b251400..f1ce158 100644
  	XChangeProperty(xw.dpy, xw.win, xw.netwmpid, XA_CARDINAL, 32,
  			PropModeReplace, (uchar *)&thispid, 1);
 -- 
-2.47.1
+2.50.1
 

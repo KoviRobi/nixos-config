@@ -1,4 +1,4 @@
-From c708907827afed946afbb70d48a0d1d78dba45ec Mon Sep 17 00:00:00 2001
+From 5a061ef405f71d62d6484f40437e6b1fabbb431b Mon Sep 17 00:00:00 2001
 From: Robert Kovacsics <robert.kovacsics@carallon.com>
 Date: Fri, 25 Oct 2024 12:25:20 +0100
 Subject: [PATCH 05/11] Patch st-true-color.patch
@@ -9,7 +9,7 @@ Subject: [PATCH 05/11] Patch st-true-color.patch
  2 files changed, 2 insertions(+)
 
 diff --git a/st.c b/st.c
-index b9f66e7..85cc869 100644
+index 8e57991..291859e 100644
 --- a/st.c
 +++ b/st.c
 @@ -697,6 +697,7 @@ execsh(char *cmd, char **args)
@@ -33,5 +33,5 @@ index efab2cf..7c81d67 100644
  	Ms=\E]52;%p1%s;%p2%s\007,
  	Se=\E[2 q,
 -- 
-2.47.1
+2.50.1
 
