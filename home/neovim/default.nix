@@ -99,8 +99,6 @@ in
           mini-ai
           noice-nvim
           nui-nvim
-          nvim-notify
-          nvim-lsp-notify
           neo-tree-nvim
           netman-nvim
           nvim-navic
@@ -175,7 +173,6 @@ in
           vim-startuptime
 
           # FixCursorHold-nvim # Fixed in https://github.com/neovim/neovim/pull/20198
-          fzf-lua
           mini-icons
           one-small-step-for-vimkind
         ])
