@@ -103,6 +103,19 @@ with pkgs;
   kakoune-lsp
   kakman
   helix
+  ((nnn.override { withNerdIcons = true; }).overrideAttrs (old: {
+    postInstall = old.postInstall or "" + ''
+        BLK="02"    CHR="03"
+        DIR="04"    EXE="01"
+        REG="00"    LNK="06"
+        SYM="05"    MIS="01"
+        ORPHAN="09" FIFO="0D"
+        SOCK="0E"   OTHER="0F"
+        wrapProgram $out/bin/nnn \
+          --set-default NNN_COLORS 4562 \
+          --set-default NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$LNK$SYM$MIS$ORPHAN$FIFO$SOCK$OTHER"
+      '';
+    }))
 
   inotify-tools
 
