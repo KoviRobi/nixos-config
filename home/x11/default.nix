@@ -39,7 +39,7 @@ in
       font-style-bold-italic = "Italic";
       font-synthetic-style = false;
       font-size = 10.5;
-      theme = "solarized";
+      theme = "gruvbox";
       window-decoration = "server";
       keybind = [
         "clear"
@@ -105,57 +105,57 @@ in
       ];
     };
     themes = {
-      solarized-dark = {
-        # defaultfg = 12;
-        # defaultbg = 8;
-        # defaultcs = 14;
-        # defaultrcs = 15;
-        background = "#002b36";
-        foreground = "#839496";
-        cursor-color = "#93a1a1";
-        cursor-text = "#fdf6e3";
+      gruvbox-dark = {
+        background = "#282828";
+        foreground = "#ebdbb2";
+        cursor-color = "#ebdbb2";
+        cursor-text = "#282828";
+        selection-background = "#665c54";
+        selection-foreground = "#ebdbb2";
         palette = [
-          " 0=#073642" # 0:  black
-          " 1=#dc322f" # 1:  red
-          " 2=#859900" # 2:  green
-          " 3=#b58900" # 3:  yellow
-          " 4=#268bd2" # 4:  blue
-          " 5=#d33682" # 5:  magenta
-          " 6=#2aa198" # 6:  cyan
-          " 7=#eee8d5" # 7:  white
-          " 8=#002b36" # 8:  brblack
-          " 9=#cb4b16" # 9:  brred
-          "10=#586e75" # 10: brgreen
-          "11=#657b83" # 11: bryellow
-          "12=#839496" # 12: brblue
-          "13=#6c71c4" # 13: brmagenta
-          "14=#93a1a1" # 14: brcyan
-          "15=#fdf6e3" # 15: brwhite
+          " 0=#282828" # 0:  black
+          " 1=#cc241d" # 1:  red
+          " 2=#98971a" # 2:  green
+          " 3=#d79921" # 3:  yellow
+          " 4=#458588" # 4:  blue
+          " 5=#b16286" # 5:  magenta
+          " 6=#689d6a" # 6:  cyan
+          " 7=#a89984" # 7:  white
+          " 8=#928374" # 8:  brblack
+          " 9=#fb4934" # 9:  brred
+          "10=#b8bb26" # 10: brgreen
+          "11=#fabd2f" # 11: bryellow
+          "12=#83a598" # 12: brblue
+          "13=#d3869b" # 13: brmagenta
+          "14=#8ec07c" # 14: brcyan
+          "15=#ebdbb2" # 15: brwhite
         ];
       };
 
-      solarized-light = {
-        background = "#fdf6e3";
-        foreground = "#657b83";
-        cursor-color = "#586e75";
-        cursor-text = "#002b36";
+      gruvbox-light = {
+        background = "#fbf1c7";
+        foreground = "#282828";
+        cursor-color = "#282828";
+        cursor-text = "#fbf1c7";
+        selection-background = "#d5c4a1";
+        selection-foreground = "#665c54";
         palette = [
-          " 0=#eee8d5" # 0:  black
-          " 1=#dc322f" # 1:  red
-          " 2=#859900" # 2:  green
-          " 3=#b58900" # 3:  yellow
-          " 4=#268bd2" # 4:  blue
-          " 5=#d33682" # 5:  magenta
-          " 6=#2aa198" # 6:  cyan
-          " 7=#073642" # 7:  white
-          " 8=#fdf6e3" # 8:  brblack
-          " 9=#cb4b16" # 9:  brred
-          "10=#93a1a1" # 10: brgreen
-          "11=#839496" # 11: bryellow
-          "12=#657b83" # 12: brblue
-          "13=#6c71c4" # 13: brmagenta
-          "14=#586e75" # 14: brcyan
-          "15=#002b36" # 15: brwhite
+          " 0=#fbf1c7" # 0:  black
+          " 1=#9d0006" # 1:  red
+          " 2=#79740e" # 2:  green
+          " 3=#b57614" # 3:  yellow
+          " 4=#076678" # 4:  blue
+          " 5=#8f3f71" # 5:  magenta
+          " 6=#427b58" # 6:  cyan
+          " 7=#3c3836" # 7:  white
+          " 8=#9d8374" # 8:  brblack
+          " 9=#cc241d" # 9:  brred
+          "10=#98971a" # 10: brgreen
+          "11=#d79921" # 11: bryellow
+          "12=#458588" # 12: brblue
+          "13=#b16186" # 13: brmagenta
+          "14=#689d69" # 14: brcyan
+          "15=#7c6f64" # 15: brwhite
         ];
       };
     };
@@ -188,15 +188,20 @@ in
         f = brightness: {
           state-file = "echo '${brightness}' > ~/.local/state/brightness";
           ghostty = ''
-            ${pkgs.coreutils}/bin/ln -srf                        \
-                ~/.config/ghostty/themes/solarized-${brightness} \
-                ~/.config/ghostty/themes/solarized
+            ${pkgs.coreutils}/bin/ln -srf                      \
+                ~/.config/ghostty/themes/gruvbox-${brightness} \
+                ~/.config/ghostty/themes/gruvbox
           '';
           kakoune = ''
             ${pkgs.kakoune}/bin/kak -l | while read sid; do
-              echo "colorscheme solarized-${brightness}" | \
+              echo "colorscheme gruvbox-${brightness}" | \
                   ${pkgs.kakoune}/bin/kak -p $sid
             done
+          '';
+          tmux = ''
+          TMUX_TMPDIR=/run/user/$UID \
+          ${pkgs.tmux}/bin/tmux source-file \
+              ${pkgs.tmuxPlugins.gruvbox}/share/tmux-plugins/gruvbox/tmux-gruvbox-${brightness}.conf
           '';
         };
       in

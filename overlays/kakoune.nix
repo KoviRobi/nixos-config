@@ -209,7 +209,7 @@ final: prev: {
       '';
     in
     final.writeTextDir "share/kak/kakrc.local" ''
-      colorscheme "solarized-%sh{cat ~/.local/state/brightness || echo light}"
+      colorscheme "gruvbox-%sh{cat ~/.local/state/brightness || echo light}"
 
       set-option global autoinfo command|onkey|normal
 
