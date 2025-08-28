@@ -158,6 +158,55 @@ final: prev: {
             find -L $(manpath | sed 's/:/ /g') -name '*.[1-8]*' |
                 sed 's,^.*/\(.*\)\.\([1-8][a-zA-Z]*\).*$,\1(\2),' }
       '';
+      lsp = ''
+        eval %sh{${final.lib.getExe final.kakoune-lsp}}
+        map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
+        map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+        map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+        map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+        map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+        map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+        map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
+        map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+
+        hook global BufSetOption filetype=python %{
+          set-option buffer lsp_servers %{
+            [ruff]
+            root_globs = ["requirements.txt", "setup.py", ".git", ".hg"]
+            command = "ruff"
+            args = ["server"]
+            settings_section = "_"
+
+            [ruff.settings._.globalSettings]
+            organizeImports = true
+            fixAll = true
+
+            [pyright]
+            root_globs = ["requirements.txt", "setup.py", ".git", ".hg"]
+            command = "pyright-langserver"
+            args = ["--stdio"]
+          }
+        }
+
+        hook global BufSetOption filetype=markdown %{
+          set-option buffer lsp_servers %{
+            [marksman]
+            root_globs = ["*.md"]
+            [mpls]
+            root_globs = ["*.md"]
+          }
+        }
+
+        hook global BufSetOption filetype=cmake %{
+          set-option buffer lsp_servers %{
+            [neocmakelsp]
+            root_globs = ["CMakePresets.json", "CMakeLists.txt", ".git", ".hg"]
+            args = ["--stdio"]
+          }
+        }
+
+        lsp-enable
+      '';
     in
     final.writeTextDir "share/kak/kakrc.local" ''
       colorscheme "solarized-%sh{cat ~/.local/state/brightness || echo light}"
@@ -183,6 +232,7 @@ final: prev: {
       ${tmux}
       ${c_w_and_c_u}
       ${man_improvements}
+      ${lsp}
 
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
@@ -205,17 +255,6 @@ final: prev: {
       require-module byline
       map global normal 'X' ": byline-drag-up<ret>"
       map global normal 'x' ": byline-drag-down<ret>"
-
-      eval %sh{${final.lib.getExe final.kakoune-lsp}}
-      map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
-      map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
-      map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
-      map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
-      map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
-      map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
-      map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
-      map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
-      lsp-enable
 
       map global user f ': fzf-mode<ret>' -docstring "FZF mode"
 

@@ -62,9 +62,7 @@ with pkgs;
   radare2
   gnumake
   cmake
-  neocmakelsp
   ninja
-  ccls
 
   devenv
 
@@ -79,13 +77,11 @@ with pkgs;
     ]
   ))
   pyc
-  pyright
   black
   isort
   evcxr
   rustc
   go
-  gopls
   sccache
   mold
 

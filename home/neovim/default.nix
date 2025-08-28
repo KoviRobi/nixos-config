@@ -34,29 +34,18 @@ in
 
         # LazyVim defaults
         pkgs.stylua
-        pkgs.shfmt
 
         # Markdown extra
         pkgs.markdownlint-cli2
-        pkgs.marksman
 
         # Docker extra
         pkgs.nodePackages.dockerfile-language-server-nodejs
         pkgs.hadolint
         pkgs.docker-compose-language-service
 
-        # JSON and YAML extras
-        pkgs.nodePackages.vscode-json-languageserver
-        pkgs.nodePackages.yaml-language-server
-
-        # Custom
-        pkgs.editorconfig-checker
-        pkgs.shellcheck
-
         pkgs.lua-language-server
         pkgs.cmake-language-server
         pkgs.cmake-format
-        pkgs.neocmakelsp
 
         pkgs.statix
 
