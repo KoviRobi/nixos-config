@@ -223,7 +223,7 @@ final: prev: {
       set-option global scrolloff 3,2
 
       # UI options
-      set-option global ui_options terminal_set_title=false terminal_status_on_top=true terminal_assistant=none terminal_enable_mouse=true terminal_change_colors=true    terminal_builtin_key_parser=false
+      set-option global ui_options terminal_set_title=true terminal_status_on_top=true terminal_assistant=none terminal_enable_mouse=true terminal_change_colors=true    terminal_builtin_key_parser=false
 
       # Key mappings
       hook global WinCreate .* %{ kakboard-enable }
@@ -265,6 +265,10 @@ final: prev: {
 
       # For active-window-kak
       set-face global InactiveCursor rgba:80808040,rgba:80808040
+
+      hook global WinDisplay .* %{
+        set-option -add global ui_options "terminal_title=%val{buffile}"
+      }
 
       hook global WinSetOption filetype=nix %{
         set-option window indentwidth 2
