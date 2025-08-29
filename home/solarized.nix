@@ -40,7 +40,7 @@ in
 
       # Dark has a better statusline for both light/dark
       tmux.extraConfig = ''
-        source-file ${pkgs.tmuxPlugins.tmux-colors-solarized}/share/tmux-plugins/tmuxcolors/tmuxcolors-dark.conf
+        run-shell "tmux source-file ${pkgs.tmuxPlugins.gruvbox}/share/tmux-plugins/gruvbox/tmux-gruvbox-$(cat ~/.local/state/brightness || echo light).conf"
       '';
 
       zsh.initContent =
