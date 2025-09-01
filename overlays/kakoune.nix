@@ -233,6 +233,7 @@ final: prev: {
       ${c_w_and_c_u}
       ${man_improvements}
       ${lsp}
+      eval %sh{${final.kakoune-cr}/bin/kcr init kakoune}
 
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
