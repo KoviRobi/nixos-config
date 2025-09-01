@@ -86,18 +86,13 @@
     };
 
     ssh = {
-      controlMaster = "auto";
-      controlPath = "~/.ssh/master-%r@%h:%p";
-      controlPersist = "10m";
-      extraConfig = ''
-        Host *
-          ControlMaster auto
-          ControlPath ~/.ssh/master-%r@%h:%p
-          ControlPersist 10m
-          VisualHostKey yes
-
-        Include config.d/*.conf
-      '';
+      matchBlocks."*" = {
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%h:%p";
+        controlPersist = "10m";
+        visualHostKey = true;
+      };
+      includes = [ "config.d/*.conf" ];
     };
 
     htop = {
