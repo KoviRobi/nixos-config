@@ -11,14 +11,6 @@
       dumpcap.enable = true;
     };
 
-    firefox.enable = true;
-    firefox.nativeMessagingHosts.packages = [
-      pkgs.ff2mpv
-      (pkgs.passff-host.override {
-        pass = pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]);
-      })
-    ];
-
     noisetorch.enable = true;
   };
 

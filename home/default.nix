@@ -38,7 +38,7 @@
       };
 
       ".config/mimi/mime.conf".text = ''
-        text/html: firefox
+        text/html: librewolf
         text/: ghostty -e tmux new kak
         application/pdf: zathura
         video/: mpv
