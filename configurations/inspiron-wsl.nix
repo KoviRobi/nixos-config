@@ -37,10 +37,6 @@
     '';
   };
 
-  programs = {
-    atop.netatop.enable = lib.mkForce false;
-  };
-
   systemd.user.services.pulseaudio.enable = false;
 
   virtualisation.podman.enable = true;

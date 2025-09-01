@@ -103,7 +103,6 @@
     atop = {
       enable = true;
       atopService.enable = true;
-      netatop.enable = true;
       setuidWrapper.enable = true;
     };
 

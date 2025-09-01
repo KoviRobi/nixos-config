@@ -32,8 +32,6 @@
 
   systemd.user.services.pulseaudio.enable = false;
 
-  programs.atop.netatop.enable = lib.mkForce false;
-
   virtualisation.podman.enable = true;
   virtualisation.podman.dockerCompat = true;
 }
