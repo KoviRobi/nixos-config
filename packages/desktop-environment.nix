@@ -5,8 +5,11 @@
 }:
 {
   programs = {
-    wireshark.enable = true;
-    wireshark.package = pkgs.wireshark-qt;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark-qt;
+      dumpcap.enable = true;
+    };
 
     firefox.enable = true;
     firefox.nativeMessagingHosts.packages = [
