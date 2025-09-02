@@ -64,6 +64,7 @@
   environment.systemPackages = with pkgs; [
     xorg.xauth
     config.boot.kernelPackages.usbip
+    wl-clipboard
   ];
 
   networking.networkmanager.enable = lib.mkForce false;
