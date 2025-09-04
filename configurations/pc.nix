@@ -144,7 +144,7 @@
       ATTRS{product}=="*NXP ARM mbed*", MODE="660", TAG+="uaccess"
     '';
 
-    logind.extraConfig = "HandlePowerKey=suspend";
+    logind.powerKey = "suspend";
 
     minidlna = {
       enable = true;
