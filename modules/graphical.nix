@@ -29,7 +29,10 @@
 
     xserver = {
       enable = true;
-      xkb.layout = "us";
+      xkb = {
+        layout = "us";
+        options = "compose:ralt";
+      };
       windowManager.i3.enable = true;
       exportConfiguration = true;
       inputClassSections = [
