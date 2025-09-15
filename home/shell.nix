@@ -73,7 +73,6 @@
       gc    =  "git commit";
       gcam  =  ''git commit --all --message'';
       "gc!"    = "git commit --amend";
-      gcf   =  "git commit --amend --no-edit";
       gcf   =  ''git commit --amend --reuse-message HEAD'';
       gcfS  =  ''git commit --amend --reuse-message HEAD --gpg-sign'';
       gcm   =  ''git commit --message'';
