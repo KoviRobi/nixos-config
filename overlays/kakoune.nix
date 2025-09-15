@@ -161,7 +161,7 @@ final: prev: {
             } %{
             evaluate-commands %sh{
                 if [ $# -eq 0 ]; then
-                    tmux set-buffer -b kak_selection -- "''${kak_selection}"
+                    tmux set-buffer -b kak_selection -- "''${kak_selections}"
                 else
                     tmux set-buffer -b kak_selection -- "$1"
                 fi
