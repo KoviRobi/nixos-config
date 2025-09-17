@@ -252,7 +252,7 @@
       gtv   =  ''git verify-tag'';
 
       man = "kakman";
-      e = "$EDITOR";
+      e = "eval \"$EDITOR\"";
 
       n = "nix";
       np = "n profile";
