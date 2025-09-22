@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.solarized;
+  cfg = config.gruvbox;
 in
 {
-  options.solarized = with lib; {
+  options.gruvbox = with lib; {
     brightness = mkOption {
       type = types.enum [
         "dark"
@@ -17,7 +17,7 @@ in
       ];
       default = "dark";
       description = ''
-        Whether to use solarized dark or light by default.
+        Whether to use gruvbox dark or light by default.
       '';
     };
   };
