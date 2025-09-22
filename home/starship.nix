@@ -21,6 +21,7 @@
           ssh_only = false;
           ssh_symbol = builtins.fromJSON ''"\b\b\b🖧  "'';
           format = "[🖳  $ssh_symbol$hostname]($style) in ";
+          style = "bold green";
         };
         username.show_always = true;
         shell.disabled = false;
