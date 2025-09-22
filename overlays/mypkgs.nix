@@ -112,4 +112,16 @@ final: prev: {
     except EOFError:
         pass
   '';
+
+  tmux-gruvbox-v1 = final.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "gruvbox";
+    rtpFilePath = "gruvbox-tpm.tmux";
+    version = "unstable-2022-04-19";
+    src = final.fetchFromGitHub {
+      owner = "egel";
+      repo = "tmux-gruvbox";
+      rev = "3f9e38d7243179730b419b5bfafb4e22b0a969ad";
+      hash = "sha256-jvGCrV94vJroembKZLmvGO8NknV1Hbgz2IuNmc/BE9A=";
+    };
+  };
 }
