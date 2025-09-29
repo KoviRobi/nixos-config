@@ -306,14 +306,17 @@ final: prev: {
     final.writeTextDir "share/kak/kakrc.local" ''
       colorscheme "gruvbox-%sh{cat ~/.local/state/brightness || echo light}"
 
-      set-option global autoinfo command|onkey|normal
-
-      add-highlighter global/ wrap -word -marker ⏎
       add-highlighter global/ show-matching
-      add-highlighter global/highlight-search dynregex '%reg{/}' 0:,rgba:80800040+i
       add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,rgba:80000040,red+c
       add-highlighter global/show-inconsistent-tabs-1 regex '( +)(\t+)' 2:,rgba:80000040,red+c
       add-highlighter global/show-inconsistent-tabs-2 regex '(\t+)( +)' 1:,rgba:80000040,red+c
+
+      define-command wrap "add-highlighter global/wrap wrap -word -marker ⏎"
+      define-command nowrap "remove-highlighter global/wrap"
+      define-command hl "add-highlighter global/highlight-search dynregex '%reg{/}' 0:,rgba:80800040+i"
+      define-command nohl "remove-highlighter global/highlight-search"
+      wrap
+      hl
 
       set-option global scrolloff 3,2
 
