@@ -93,6 +93,13 @@ in
           };
         }
         {
+          command = "floating enable";
+          criteria = {
+            instance = "display"; # ImageMagick
+            class = "Display";
+          };
+        }
+        {
           command = "border none";
           criteria = {
             window_type = "popup_menu";
