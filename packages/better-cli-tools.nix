@@ -38,4 +38,5 @@ with pkgs;
   rlwrap
   pizauth
   dive
+  pipe-rename
 ]
