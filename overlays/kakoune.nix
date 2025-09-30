@@ -313,7 +313,7 @@ final: prev: {
 
       define-command wrap "add-highlighter global/wrap wrap -word -marker ⏎"
       define-command nowrap "remove-highlighter global/wrap"
-      define-command hl "add-highlighter global/highlight-search dynregex '%reg{/}' 0:,rgba:80800040+i"
+      define-command hl "add-highlighter global/highlight-search dynregex '%%reg{/}' 0:,rgba:80800040+i"
       define-command nohl "remove-highlighter global/highlight-search"
       wrap
       hl
