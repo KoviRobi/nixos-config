@@ -113,6 +113,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    obs-studio
     virt-manager
     virtiofsd
     spice-gtk # For USB redirection
