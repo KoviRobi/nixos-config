@@ -100,6 +100,20 @@ in
           };
         }
         {
+          command = "floating enable";
+          criteria = {
+            instance = "dragon-drop";
+            class = "Dragon-drop";
+          };
+        }
+        {
+          command = "border none";
+          criteria = {
+            instance = "dragon-drop";
+            class = "Dragon-drop";
+          };
+        }
+        {
           command = "border none";
           criteria = {
             window_type = "popup_menu";

@@ -40,6 +40,9 @@
       ffmpeg
       rofi
 
+      # Drag and drop helper for terminal users
+      dragon-drop
+
       x11vnc
       tigervnc
       (pkgs.writeShellScriptBin "shareX11" ''
