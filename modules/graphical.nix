@@ -19,20 +19,23 @@
 
   imports = [ ../packages/desktop-environment.nix ];
 
-  programs.i3lock.enable = true;
+  programs = {
+    regreet = {
+      enable = true;
+    };
+    i3lock.enable = true;
+  };
+
   services = {
     udisks2.enable = true;
-
-    displayManager = {
-      sddm.enable = true;
-    };
-
+    greetd.enable = true;
     xserver = {
       enable = true;
       xkb = {
         layout = "us";
         options = "compose:ralt";
       };
+      displayManager.startx.enable = true;
       windowManager.i3.enable = true;
       exportConfiguration = true;
       inputClassSections = [
