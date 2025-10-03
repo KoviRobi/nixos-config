@@ -261,7 +261,9 @@
       ns = "n search --no-update-lock-file";
       nb = "nom build";
       nf = "n flake";
-      nepl = ''nix repl --expr "let flake = builtins.getFlake \"nixos-config\"; in { inherit flake; } // flake.nixosConfigurations.${config.nixos.hostName}"'';
+      nepl =
+        ''nix repl --expr "let flake = builtins.getFlake \"nixos-config\"; in { inherit flake; }''
+        + lib.optionalString ("nixos" ? config) ''// flake.nixosConfigurations.${config.nixos.hostName}"'';
 
       dea = "direnv allow";
       ded = "direnv edit";

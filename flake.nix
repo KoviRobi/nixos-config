@@ -115,7 +115,7 @@
         ./home/direnv.nix
         ./home/git
         ./home/shell.nix
-        ./home/solarized.nix
+        ./home/gruvbox.nix
         ./home/tmux.nix
       ];
 
