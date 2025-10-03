@@ -60,6 +60,33 @@
           readline.parse_and_bind("set colored-stats off")
       except ImportError:
           print("Module readline not available.")
+
+      import os
+      import sys
+      import collections
+      import functools
+      import itertools
+      import re
+      import traceback
+      from math import *
+      from pathlib import Path
+
+      __old_displayhook = sys.displayhook
+      __old_excepthook = sys.excepthook
+
+      def semantic_displayhook(obj):
+          print("\x1b]133;C\x1b\\", end="", flush=True)
+          __old_displayhook(obj)
+          print("\x1b]133;D;0\x1b\\\x1b]133;A;aid=python;cl=v\x1b\\", end="", flush=True)
+
+      def semantic_excepthook(exc, val, tb):
+          print("\x1b]133;C\x1b\\", end="", flush=True, file=sys.stderr)
+          __old_excepthook(exc, val, tb)
+          print("\x1b]133;D;1\x1b\\\n\x1b]133;A;cl=v\x1b\\", end="", flush=True, file=sys.stderr)
+
+      sys.displayhook = semantic_displayhook
+      sys.excepthook = semantic_excepthook
+
     '';
   };
 
