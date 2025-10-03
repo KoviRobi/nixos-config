@@ -211,7 +211,7 @@ in
           tmux = ''
             TMUX_TMPDIR=/run/user/$UID \
             ${pkgs.tmux}/bin/tmux source-file \
-                ${pkgs.tmuxPlugins.gruvbox}/share/tmux-plugins/gruvbox/tmux-gruvbox-${brightness}.conf
+                ${pkgs.tmux-gruvbox-v1}/share/tmux-plugins/gruvbox/tmux-gruvbox-${brightness}.conf
           '';
         };
       in
