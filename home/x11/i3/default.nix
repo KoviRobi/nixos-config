@@ -133,6 +133,7 @@ in
           "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
           "${mod}+Shift+Return" = "exec ${term}";
           "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
+          "${mod}+g" = "exec ${i3-helpers.dmenu-window}";
           "${mod}+d" = "exec ${i3-helpers.dmenu-drun}";
           "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
           "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";

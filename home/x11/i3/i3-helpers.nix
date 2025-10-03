@@ -104,6 +104,9 @@ in
   dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
     ${rofi} -show run
   '';
+  dmenu-window = pkgs.writeShellScript "i3-dmenu-run" ''
+    ${rofi} -show window
+  '';
   dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''
     ${rofi} -show drun
   '';
