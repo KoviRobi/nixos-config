@@ -108,7 +108,7 @@ in
     ${rofi} -show window
   '';
   dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''
-    ${rofi} -show drun
+    ${rofi} -show-icons -show drun
   '';
   dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
     RES=`${i3-msg} -t get_workspaces | \
