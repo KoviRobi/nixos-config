@@ -22,6 +22,10 @@
   programs = {
     regreet = {
       enable = true;
+      cursorTheme = {
+        package = pkgs.capitaine-cursors-themed;
+        name = "Capitaine Cursors (Gruvbox)";
+      };
     };
     i3lock.enable = true;
   };

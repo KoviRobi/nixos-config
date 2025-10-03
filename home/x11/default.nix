@@ -3,12 +3,6 @@
   config,
   ...
 }:
-let
-  adwaita = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-  };
-in
 {
   imports = [
     ./i3
@@ -284,8 +278,11 @@ in
       ~/.fehbg || true &
     '';
   };
-  home.pointerCursor = adwaita // {
+  home.pointerCursor = {
     size = builtins.div config.nixos.services.xserver.dpi 5;
   };
-  gtk.theme = adwaita;
+  gtk.theme = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+  };
 }

@@ -34,6 +34,13 @@ in
       }/Xresources.${cfg.brightness}"
     '';
 
+    home.pointerCursor = {
+      package = pkgs.capitaine-cursors-themed;
+      name = "Capitaine Cursors (Gruvbox)";
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
     programs = {
       bat.config.theme = "Gruvbox (${cfg.brightness})";
       git.delta.options.syntax-theme = "Gruvbox (${cfg.brightness})";

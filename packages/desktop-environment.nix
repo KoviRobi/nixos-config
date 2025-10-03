@@ -14,11 +14,14 @@
     noisetorch.enable = true;
   };
 
+  xdg.icons.fallbackCursorThemes = [ "Capitaine Cursors (Gruvbox)" ];
+
   environment.systemPackages =
     with pkgs;
     [
       adwaita-icon-theme
       hicolor-icon-theme
+      capitaine-cursors-themed
 
       gparted
       seahorse
