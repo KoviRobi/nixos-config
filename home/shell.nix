@@ -263,7 +263,8 @@
       nf = "n flake";
       nepl =
         ''nix repl --expr "let flake = builtins.getFlake \"nixos-config\"; in { inherit flake; }''
-        + lib.optionalString ("nixos" ? config) ''// flake.nixosConfigurations.${config.nixos.hostName}"'';
+        + lib.optionalString ( config ? "nixos") ''// flake.nixosConfigurations.${config.nixos.hostName}''
+        + ''"'';
 
       dea = "direnv allow";
       ded = "direnv edit";
