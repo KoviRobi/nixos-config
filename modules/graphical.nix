@@ -1,6 +1,5 @@
 # vim: set ts=2 sts=2 sw=2 et :
 {
-  config,
   pkgs,
   ...
 }:
@@ -26,11 +25,40 @@
         package = pkgs.capitaine-cursors-themed;
         name = "Capitaine Cursors (Gruvbox)";
       };
+      cageArgs = [
+        "-s"
+        "-m"
+        "last"
+      ];
     };
     i3lock.enable = true;
   };
 
   services = {
+    displayManager.sessionPackages = [
+      (
+        pkgs.writeTextFile {
+          name = "startx-xsession";
+          destination = "/share/xsessions/startx.desktop";
+          # Desktop Entry Specification:
+          # - https://standards.freedesktop.org/desktop-entry-spec/latest/
+          # - https://standards.freedesktop.org/desktop-entry-spec/latest/ar01s06.html
+          text = ''
+            [Desktop Entry]
+            Version=1.0
+            Type=XSession
+            Name=startx
+            Exec=$HOME/.xsession
+            DesktopNames=startx
+            Comment=Plain startx
+          '';
+        }
+        // {
+          providedSessions = [ "startx" ];
+        }
+      )
+    ];
+
     udisks2.enable = true;
     greetd.enable = true;
     xserver = {
