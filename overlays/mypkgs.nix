@@ -91,7 +91,7 @@ final: prev: {
   });
 
   pyc = final.writeScriptBin "pyc" ''
-    #!${final.lib.getExe (final.pkgs.python3.withPackages (ps: []))}
+    #!${final.lib.getExe (final.pkgs.python3.withPackages (ps: [ ]))}
 
     import collections
     import functools
@@ -124,4 +124,8 @@ final: prev: {
       hash = "sha256-jvGCrV94vJroembKZLmvGO8NknV1Hbgz2IuNmc/BE9A=";
     };
   };
+
+  qcom-firmware-extract = final.runCommand "qcom-firmware-extract-dell-inspiron-plus-7441" { } ''
+    cp -r ${../qcom-firmware-extract} $out
+  '';
 }

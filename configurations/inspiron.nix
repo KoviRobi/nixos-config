@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./base-configuration.nix
@@ -8,4 +9,6 @@
   ];
 
   services.xserver.dpi = 109;
+
+  hardware.firmware = [ pkgs.qcom-firmware-extract ];
 }
