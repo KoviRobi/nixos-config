@@ -3,6 +3,7 @@ with pkgs;
 [
   bashInteractive
   tmux
+  dtach
   hunspell
   hunspellDicts.en-gb-ise
   hyphen
