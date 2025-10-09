@@ -8,6 +8,7 @@
     ./i3
     ./restart-on-failure.nix
     ./ghostty.nix
+    ./wezterm.nix
     "${
       fetchTarball {
         url = "https://github.com/KoviRobi/feh-random-background/archive/80bc3616bb8fc87225d1447431555230a4bf3b12.tar.gz";
