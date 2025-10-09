@@ -8,7 +8,10 @@
     (import ../modules/avahi.nix { publish = false; })
   ];
 
-  services.xserver.dpi = 109;
+  services = {
+    xserver.dpi = 109;
+    desktopManager.gnome.enable = true;
+  };
 
   hardware.firmware = [ pkgs.qcom-firmware-extract ];
 }
