@@ -34,6 +34,14 @@
         };
         git_commit.only_detached = false;
         git_commit.tag_disabled = false;
+        battery.display = [
+          { threshold = 100; style = "green"; }
+          { threshold = 50; style = "bold italic green"; }
+          { threshold = 40; style = "yellow"; }
+          { threshold = 30; style = "bold italic yellow"; }
+          { threshold = 20; style = "red"; }
+          { threshold = 10; style = "bold italic red"; }
+        ];
       };
     };
   };
