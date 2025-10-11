@@ -5,6 +5,7 @@
     (import ../modules/default-user.nix { })
     ../modules/ssh.nix
     ../modules/graphical.nix
+    ../modules/bluetooth.nix
     (import ../modules/avahi.nix { publish = false; })
   ];
 
