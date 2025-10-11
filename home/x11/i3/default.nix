@@ -139,7 +139,7 @@ in
           "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";
           "${mod}+Shift+m" = scratch-term "maxima" maxima;
           "${mod}+Shift+p" = scratch-term "python" (
-            pkgs.writeShellScript "scratchpy" "PYTHONSTARTUP=~/.pythonrc.scratch.py ${python3}"
+            pkgs.writeShellScript "scratchpy" "${python3}"
           );
           "${mod}+Shift+g" = scratch-term "guile" guile;
           "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux new -t float";
