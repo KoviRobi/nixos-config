@@ -25,7 +25,7 @@ pkgs.writeText "i3status-config" ''
   ${concatStringsSep "\n" (map (fs: ''order += "disk ${fs}"'') fileSystems)}
   order += "load"
   order += "memory"
-  order += "battery all"
+  order += "battery bat"
   order += "tztime local"
 
   ipv6 {
@@ -42,14 +42,14 @@ pkgs.writeText "i3status-config" ''
           format_down = ""
   }
 
-  battery all {
+  battery bat {
           format = "%status %percentage %remaining@%consumption"
           format_down = ""
           status_chr = "⚡"
           status_bat = "🔋"
           status_unk = "🔋?"
           status_full = "☻"
-          path = "/sys/class/power_supply/BAT%d/uevent"
+          path = "/sys/class/power_supply/qcom-battmgr-bat/uevent"
           low_threshold = 10
   }
 
@@ -78,6 +78,6 @@ pkgs.writeText "i3status-config" ''
 
   cpu_temperature package {
     format = "%degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon?/temp1_input"
+    path = "/sys/class/thermal/thermal_zone1/temp"
   }
 ''
