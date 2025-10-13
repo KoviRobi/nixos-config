@@ -36,8 +36,7 @@ let
     exec --no-startup-id '${mk-scratch n p}' , \
     [instance="^scratch_${n}$"] scratchpad show
   '';
-  scratch-term =
-    n: p: scratch n "${term} --title='scratch_${n}' --x11-instance-name='scratch_${n}' -e ${p}";
+  scratch-term = n: p: scratch n "${term} start --class='scratch_${n}' -e ${p}";
 in
 {
   xsession.windowManager.i3 = {
@@ -138,9 +137,7 @@ in
           "${mod}+a" = "exec ${i3-helpers.dmenu-action}";
           "${mod}+Delete" = "exec ${i3-helpers.actions-dir}/lock";
           "${mod}+Shift+m" = scratch-term "maxima" maxima;
-          "${mod}+Shift+p" = scratch-term "python" (
-            pkgs.writeShellScript "scratchpy" "${python3}"
-          );
+          "${mod}+Shift+p" = scratch-term "python" (pkgs.writeShellScript "scratchpy" "${python3}");
           "${mod}+Shift+g" = scratch-term "guile" guile;
           "${mod}+Shift+s" = scratch-term "shell" "${pkgs.tmux}/bin/tmux new -t float";
 
