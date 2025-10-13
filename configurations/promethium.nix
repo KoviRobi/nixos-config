@@ -90,7 +90,6 @@
       enable = true;
       nss.enableGuest = true;
       qemu = {
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
         vhostUserPackages = [ pkgs.virtiofsd ];
         swtpm = {
           enable = true;

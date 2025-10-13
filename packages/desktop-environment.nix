@@ -74,8 +74,6 @@
 
       imagemagick
 
-      xscopes-qt
-
       typst
       typst-live
       tinymist
