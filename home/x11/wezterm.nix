@@ -21,6 +21,7 @@
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
       config.use_cap_height_to_scale_fallback_fonts = true
+      config.freetype_load_target = "Light"
       config.font = wezterm.font_with_fallback {
           { family = 'CaskaydiaCove Nerd Font Mono' },
           'Noto Emoji',
