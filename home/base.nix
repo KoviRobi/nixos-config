@@ -70,22 +70,21 @@
       from math import *
       from pathlib import Path
 
-      __old_displayhook = sys.displayhook
-      __old_excepthook = sys.excepthook
+      def semantic_displayhook(obj, displayhook=sys.displayhook):
+          print("\x1b]133;C\x07", end="", flush=True)
+          displayhook(obj)
+          print("\x1b]133;D;0\x07\x1b]N;aid=python;cl=v\x07", end="", flush=True)
 
-      def semantic_displayhook(obj):
-          print("\x1b]133;C\x1b\\", end="", flush=True)
-          __old_displayhook(obj)
-          print("\x1b]133;D;0\x1b\\\x1b]133;A;aid=python;cl=v\x1b\\", end="", flush=True)
-
-      def semantic_excepthook(exc, val, tb):
-          print("\x1b]133;C\x1b\\", end="", flush=True, file=sys.stderr)
-          __old_excepthook(exc, val, tb)
-          print("\x1b]133;D;1\x1b\\\n\x1b]133;A;cl=v\x1b\\", end="", flush=True, file=sys.stderr)
+      def semantic_excepthook(exc, val, tb, excepthook=sys.excepthook):
+          print("\x1b]133;C\x07", end="", flush=True, file=sys.stderr)
+          excepthook(exc, val, tb)
+          print("\x1b]133;D;1\x07\x1b]N;aid=python;cl=v\x07", end="", flush=True, file=sys.stderr)
 
       sys.displayhook = semantic_displayhook
       sys.excepthook = semantic_excepthook
 
+      sys.ps1 = "\1\x1b]133;A;aid=python;cl=v\x07\2>>> \1\x1b]133;I\x07\2"
+      sys.ps2 = "\1\x1b]133;P;k=c\x07\2... \1\x1b]133;I\x07\2"
     '';
   };
 
