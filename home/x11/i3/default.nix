@@ -178,7 +178,7 @@ in
           "${mod}+Shift+t" = "exec ${i3-helpers.dmenu-workspace} 'move container to workspace'";
           "${mod}+Shift+r" = "reload";
           "${mod}+u" =
-            "exec ${unipicker} --copy-command '${xsel-both}' " + "--command '${rofi} -dmenu -matching regex'";
+            "exec ${unipicker} --copy-command '${xsel-both}' " + "--command '${rofi} -case-smart -sorting-method fzf -dmenu -matching regex'";
           "${mod}+Control+Shift+r" = "restart";
           "${mod}+bracketleft" = "focus output left";
           "${mod}+bracketright" = "focus output right";
