@@ -19,7 +19,7 @@
         directory.truncation_symbol = "…/";
         hostname = {
           ssh_only = false;
-          ssh_symbol = builtins.fromJSON ''"\b\b\b🖧 "'';
+          ssh_symbol = builtins.fromJSON ''"\b\b🖧 "'';
           format = "[🖳 $ssh_symbol$hostname]($style) in ";
           style = "bold green";
         };
