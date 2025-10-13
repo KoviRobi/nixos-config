@@ -11,7 +11,10 @@
       local config = wezterm.config_builder()
 
       -- This is where you actually apply your config choices.
-      config.color_scheme = 'GruvboxDark'
+      fp = io.open(os.getenv("HOME") .. "/.local/state/brightness", "r")
+      brightness = fp:read()
+      fp:close()
+      config.color_scheme = 'Gruvbox' .. brightness:gsub(".", string.upper, 1)
       config.prefer_egl = true
       config.window_decorations = 'RESIZE'
       config.window_padding = { left = 3, right = 3, top = 3, bottom = 3}
