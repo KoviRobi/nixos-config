@@ -113,6 +113,7 @@
         "87:class_i ?= 'scratchpad'"
         "91:class_i ?= 'st-256color'"
         "91:class_i ?= 'ghostty'"
+        "91:class_i ?= 'org.wezfurlong.wezterm'"
         "100:focused"
       ];
     };

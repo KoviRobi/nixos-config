@@ -14,6 +14,9 @@
       config.color_scheme = 'GruvboxDark'
       config.prefer_egl = true
       config.window_decorations = 'RESIZE'
+      config.window_padding = { left = 3, right = 3, top = 3, bottom = 3}
+      config.tab_bar_at_bottom = true
+      config.hide_tab_bar_if_only_one_tab = true
       config.use_cap_height_to_scale_fallback_fonts = true
       config.font = wezterm.font_with_fallback {
           { family = 'CaskaydiaCove Nerd Font Mono' },
@@ -21,7 +24,7 @@
           'Noto Sans Symbols',
           'Noto Sans Symbols 2',
       }
-      config.font_size = 12
+      config.font_size = 10
       config.font_rules = {
         {
           intensity = 'Half',
