@@ -18,14 +18,22 @@
     }/home-manager-service.nix"
   ];
 
-  programs.librewolf = {
-    enable = true;
-    nativeMessagingHosts = [
-      pkgs.ff2mpv
-      (pkgs.passff-host.override {
-        pass = pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]);
-      })
-    ];
+  programs = {
+    librewolf = {
+      enable = true;
+      nativeMessagingHosts = [
+        pkgs.ff2mpv
+        (pkgs.passff-host.override {
+          pass = pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]);
+        })
+      ];
+    };
+    autorandr = {
+      enable = true;
+      hooks.postswitch = {
+        "reload-background" = "$HOME/.cache/fehbg || true";
+      };
+    };
   };
 
   xdg.portal = {
