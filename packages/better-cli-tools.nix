@@ -39,4 +39,5 @@ with pkgs;
   pizauth
   dive
   pipe-rename
+  scc # Better SLOC measure
 ]
