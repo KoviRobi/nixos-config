@@ -20,6 +20,22 @@
       config.window_padding = { left = 3, right = 3, top = 3, bottom = 3}
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
+
+      config.keys = {
+        -- Turn off the default CMD-m Hide action, allowing CMD-m to
+        -- be potentially recognized and handled by the tab
+        {
+          key = 'PageUp',
+          mods = 'CTRL',
+          action = wezterm.action.DisableDefaultAssignment,
+        },
+        {
+          key = 'PageDown',
+          mods = 'CTRL',
+          action = wezterm.action.DisableDefaultAssignment,
+        },
+      }
+
       config.use_cap_height_to_scale_fallback_fonts = true
       config.freetype_load_target = "Light"
       config.font = wezterm.font_with_fallback {
