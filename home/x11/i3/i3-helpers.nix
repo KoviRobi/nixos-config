@@ -105,7 +105,7 @@ in
     ${rofi} -show run
   '';
   dmenu-window = pkgs.writeShellScript "i3-dmenu-run" ''
-    ${rofi} -show window
+    ${rofi} -window-thumbnail -theme fullscreen-preview -show window
   '';
   dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''
     ${rofi} -show-icons -show drun
