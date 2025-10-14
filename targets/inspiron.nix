@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   modulesPath,
@@ -19,6 +18,11 @@
       name = "qcom/x1e80100-dell-inspiron-14-plus-7441.dtb";
     };
   };
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+  environment.systemPackages = [ pkgs.powertop ];
   boot = {
     initrd.availableKernelModules = [
       "hid"
