@@ -159,6 +159,7 @@
     docker.enable = true;
     podman.enable = true;
 
+    spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
       nss.enableGuest = true;
