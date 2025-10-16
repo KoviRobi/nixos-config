@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./base-configuration.nix
@@ -22,6 +22,13 @@
           enable = true;
         };
       };
+    };
+  };
+
+  boot.binfmt = {
+    emulatedSystems = [ "x86_64-linux" ];
+    registrations.x86_64-linux = {
+      interpreter = lib.getExe pkgs.box64;
     };
   };
 
