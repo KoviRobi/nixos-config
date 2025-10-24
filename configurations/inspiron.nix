@@ -42,5 +42,20 @@
     desktopManager.gnome.enable = true;
   };
 
+  security.sudo.extraRules = [
+    {
+      groups = [ "wheel" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/bootctl set-oneshot *";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
+  ];
+
   hardware.firmware = [ pkgs.qcom-firmware-extract ];
 }
