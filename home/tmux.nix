@@ -12,7 +12,6 @@
     customPaneNavigationAndResize = true;
     clock24 = true;
     plugins = with pkgs.tmuxPlugins; [
-      yank
       logging
       pkgs.tmux-easymotion-multipane
     ];
