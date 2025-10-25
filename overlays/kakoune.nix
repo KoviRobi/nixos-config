@@ -304,7 +304,13 @@ final: prev: {
       '';
     in
     final.writeTextDir "share/kak/kakrc.local" ''
-      colorscheme "gruvbox-%sh{cat ~/.local/state/brightness || echo light}"
+      colorscheme %sh{
+        if [ "$(tput colors)" -eq 8 ]; then
+          echo plain
+        else
+          echo "gruvbox-$(cat ~/.local/state/brightness || echo light)";
+        fi
+      }
 
       add-highlighter global/ show-matching
       add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,rgba:80000040,red+c
