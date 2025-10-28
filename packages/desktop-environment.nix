@@ -14,6 +14,8 @@
     noisetorch.enable = true;
   };
 
+  users.users.default-user.extraGroups = [ "wireshark" ];
+
   xdg.icons.fallbackCursorThemes = [ "Capitaine Cursors (Gruvbox)" ];
 
   environment.systemPackages =
