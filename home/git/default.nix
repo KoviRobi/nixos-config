@@ -23,38 +23,18 @@ in
         pkgs.gitFull.override { openssh = config.programs.ssh.package; }
       else
         pkgs.gitFull;
-    userName = "Kovacsics Robert";
-    userEmail = lib.mkDefault "kovirobi@gmail.com";
-    aliases = {
-      g = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s' --graph";
-      lg = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s'";
-      pcc = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=master";
-      prich = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=richmond";
-      pgl = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
-    };
-    includes = [
-      {
-        path = ./personal.gitconfig;
-        condition = "hasconfig:remote.*.url:git@github.com:KoviRobi/**";
-      }
-      {
-        path = ./personal.gitconfig;
-        condition = "hasconfig:remote.*.url:https://github.com/KoviRobi/**";
-      }
-      {
-        condition = "gitdir:~/pdev/**";
-        path = ./personal.gitconfig;
-      }
-      {
-        path = ./carallon.gitconfig;
-        condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com:29418/**";
-      }
-      {
-        condition = "gitdir:~/dev/**";
-        path = ./carallon.gitconfig;
-      }
-    ];
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Kovacsics Robert";
+        email = lib.mkDefault "kovirobi@gmail.com";
+      };
+      alias = {
+        g = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s' --graph";
+        lg = "log --format='%C(auto)%h%d %C(cyan)%G?%Creset %s'";
+        pcc = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=master";
+        prich = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='robert.kovacsics' -o merge_request.target=richmond";
+        pgl = "push -o merge_request.create -o merge_request.remove_source_branch -o merge_request.assign='rmk' -o merge_request.target=master";
+      };
       am.threeWay = true;
       checkout.workers = 0;
       commit.gpgSign = true;
@@ -94,5 +74,27 @@ in
       status.submoduleSummary = true;
       user.signingKey = "~/.ssh/id_ed25519.pub";
     };
+    includes = [
+      {
+        path = ./personal.gitconfig;
+        condition = "hasconfig:remote.*.url:git@github.com:KoviRobi/**";
+      }
+      {
+        path = ./personal.gitconfig;
+        condition = "hasconfig:remote.*.url:https://github.com/KoviRobi/**";
+      }
+      {
+        condition = "gitdir:~/pdev/**";
+        path = ./personal.gitconfig;
+      }
+      {
+        path = ./carallon.gitconfig;
+        condition = "hasconfig:remote.*.url:ssh://*@code.office.carallon.com:29418/**";
+      }
+      {
+        condition = "gitdir:~/dev/**";
+        path = ./carallon.gitconfig;
+      }
+    ];
   };
 }

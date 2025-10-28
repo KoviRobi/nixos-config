@@ -7,14 +7,6 @@
 }:
 
 {
-  home-manager.users.default-user = {
-    programs.git = {
-      userName = lib.mkForce "Robert Kovacsics";
-      userEmail = lib.mkForce "robert.kovacsics@carallon.com";
-      lfs.enable = true;
-    };
-  };
-
   networking.domain = "office.carallon.com";
 
   nixpkgs.config = {

@@ -32,7 +32,7 @@ in
 
     programs = {
       bat.config.theme = "Gruvbox (${cfg.brightness})";
-      git.delta.options.syntax-theme = "Gruvbox (${cfg.brightness})";
+      delta.options.syntax-theme = "Gruvbox (${cfg.brightness})";
 
       # Dark has a better statusline for both light/dark
       tmux.extraConfig = ''
