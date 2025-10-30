@@ -103,6 +103,12 @@
         $else
           set colored-stats off
         $endif
+
+        # Emit OSC133 in 256color terminals
+        $if term=*256color
+        set show-mode-in-prompt on
+        set emacs-mode-string "\1\e]133;A\e\\\2"
+        $endif
       '';
     };
 
