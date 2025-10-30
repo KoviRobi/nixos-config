@@ -10,6 +10,7 @@
       GNUPGHOME = "${config.xdg.configHome}/gnupg";
       INPUTRC = "${config.xdg.configHome}/readline/inputrc";
       PASSWORD_STORE_DIR = "${config.xdg.configHome}/password-store";
+      RLWRAP_HOME = "${config.xdg.stateHome}/rlwrap";
     };
     file.".inputrc".target = "${config.xdg.configHome}/readline/inputrc";
   };
