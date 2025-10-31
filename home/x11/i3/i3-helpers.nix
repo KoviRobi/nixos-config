@@ -1,5 +1,25 @@
 { pkgs }:
 let
+  theme = {
+    bg = "282828";
+    red = "CC241D";
+    green = "98971A";
+    yellow = "D79921";
+    blue = "458588";
+    purple = "B16286";
+    aqua = "689D6A";
+    gray = "A89984";
+    alt = {
+      gray = "928374";
+      red = "FB4934";
+      green = "B8BB26";
+      yellow = "FABD2F";
+      blue = "83A598";
+      purple = "D3869B";
+      aqua = "8EC07C";
+    };
+    fg = "EBDBB2";
+  };
   sh = "${pkgs.bash}/bin/bash";
   rofi = "${pkgs.rofi}/bin/rofi";
   dmenu = "${rofi} -dmenu";
@@ -17,7 +37,21 @@ let
   actions = rec {
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 .dunst-wrapped # pause
-      ( ${pkgs.i3lock}/bin/i3lock -c 111111 -n; ${killall} -SIGUSR2 .dunst-wrapped ) &
+      (
+        ${pkgs.i3lock-color}/bin/i3lock-color \
+          --color=${theme.bg} \
+          --inside-color=${theme.bg} \
+          --ring-color=${theme.blue} \
+          --keyhl-color=${theme.green} \
+          --bshl-color=${theme.red} \
+          --clock \
+          --keylayout=0 \
+          --time-color=${theme.blue} \
+          --date-color=${theme.purple} \
+          --layout-color=${theme.green} \
+          --nofork;
+        ${killall} -SIGUSR2 .dunst-wrapped
+      ) &
     '';
     music = pkgs.writeShellScript "i3-action-music" ''
       export MPD_PORT=6612
