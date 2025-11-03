@@ -83,6 +83,8 @@
 
       bind-key -T copy-mode    MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
       bind-key -T copy-mode-vi MouseDragEnd1Pane  send-keys -X copy-pipe-no-clear
+      bind-key -T copy-mode    y  send-keys -X copy-pipe-no-clear
+      bind-key -T copy-mode-vi y  send-keys -X copy-pipe-no-clear
 
       bind-key -T copy-mode    C-k  "send-keys -X previous-prompt -o"
       bind-key -T copy-mode-vi C-k  "send-keys -X previous-prompt -o"
