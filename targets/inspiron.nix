@@ -43,11 +43,6 @@
       "boot.shell_on_fail"
     ];
     kernelPatches =
-      let
-        dir = ../patches/linux;
-        contents = builtins.readDir dir;
-        files = builtins.filter (name: contents.${name} == "regular") (builtins.attrNames contents);
-      in
       [
         {
           name = "dell-inspiron-7441-config";
@@ -62,11 +57,7 @@
             CLK_X1E80100_CAMCC y
           '';
         }
-      ]
-      ++ map (name: {
-        inherit name;
-        patch = /${dir}/${name};
-      }) files;
+      ];
     extraModulePackages = [ ];
     loader = {
       efi.efiSysMountPoint = "/boot/efi/";
