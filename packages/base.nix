@@ -121,17 +121,17 @@ with pkgs;
 
   entr
 ]
-++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+++ lib.optionals (pkgs.stdenv.buildPlatform == pkgs.stdenv.hostPlatform) [
   (config.programs.git.package or gitFull)
   git-absorb
   git-review
   git-filter-repo
 ]
-++ lib.optionals (pkgs.buildPlatform != pkgs.hostPlatform) [
+++ lib.optionals (pkgs.stdenv.buildPlatform != pkgs.stdenv.hostPlatform) [
   vim
   git
 ]
-++ lib.optionals pkgs.hostPlatform.isLinux [
+++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
   abcde
   linuxConsoleTools
   lm_sensors

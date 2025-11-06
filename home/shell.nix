@@ -13,7 +13,7 @@
       [
         zoxide
       ]
-      ++ lib.optionals (pkgs.buildPlatform == pkgs.hostPlatform) [
+      ++ lib.optionals (pkgs.stdenv.buildPlatform == pkgs.stdenv.hostPlatform) [
         carapace
       ];
 
