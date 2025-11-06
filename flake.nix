@@ -103,11 +103,11 @@
         // {
           poetry2nix = poetry2nix.overlays.default;
           pye-menu = final: prev: {
-            pen-pye-menu = pye-menu.packages.${final.system}.pen-menu;
-            inherit (pye-menu.packages.${final.system}) pye-menu;
+            pen-pye-menu = pye-menu.packages.${final.stdenv.hostPlatform.system}.pen-menu;
+            inherit (pye-menu.packages.${final.stdenv.hostPlatform.system}) pye-menu;
           };
           go-catprinter = final: prev: {
-            go-catprinter = go-catprinter.packages.${final.system}.default;
+            go-catprinter = go-catprinter.packages.${final.stdenv.hostPlatform.system}.default;
           };
         };
 
@@ -294,7 +294,9 @@
                 (
                   { pkgs, ... }:
                   {
-                    environment.systemPackages = [ home-manager.packages.${pkgs.system}.home-manager ];
+                    environment.systemPackages = [
+                      home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
+                    ];
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
                   }

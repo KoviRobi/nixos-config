@@ -51,7 +51,7 @@
           name:
           { pkgs, ... }@attrs:
           {
-            package = pkgs.nix-ld-rs;
+            package = pkgs.nix-ld;
             libraries = [
               pkgs.acl
               pkgs.attr
@@ -89,9 +89,9 @@
           // attrs
         )
         {
-          ${pkgs.system} = { inherit pkgs; };
+          ${pkgs.stdenv.hostPlatform.system} = { inherit pkgs; };
         }
-      // lib.optionalAttrs (pkgs.system == "x86_64-linux") {
+      // lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "x86_64-linux") {
         i686-linux = {
           ldso = "ldso32";
           pkgs = pkgs.pkgsi686Linux;

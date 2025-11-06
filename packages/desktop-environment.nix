@@ -80,7 +80,6 @@
       typst-live
       tinymist
       typstyle
-      typst-fmt
       prettypst
       pandoc
     ]

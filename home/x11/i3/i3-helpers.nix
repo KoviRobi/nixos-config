@@ -28,7 +28,7 @@ let
   jq = "${pkgs.jq}/bin/jq";
   killall = "${pkgs.psmisc}/bin/killall";
   socat = "${pkgs.socat}/bin/socat";
-  mpc = "${pkgs.mpc_cli}/bin/mpc";
+  mpc = "${pkgs.mpc}/bin/mpc";
   tmux = "${pkgs.tmux}/bin/tmux";
   amixer = "${pkgs.alsa-utils}/bin/amixer";
   xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";

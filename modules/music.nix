@@ -22,7 +22,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    mpc_cli
+    mpc
     vimpc
     pavucontrol
   ];
