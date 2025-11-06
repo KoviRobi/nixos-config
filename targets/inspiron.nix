@@ -65,6 +65,8 @@
     };
   };
 
+  systemd.tpm2.enable = false;
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/fa97187a-701c-4293-b9e9-8a429097864b";
     fsType = "ext4";
