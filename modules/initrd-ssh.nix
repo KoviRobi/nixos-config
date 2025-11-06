@@ -40,6 +40,8 @@ let
       [
         "-x"
         "hostname:${lib.concatStrings hexes}"
+        "-F"
+        config.networking.hostName
       ]
       ++ cfg.udhcpcExtraArgs
     );

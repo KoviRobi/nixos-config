@@ -36,6 +36,10 @@
       ip link set dev enp0s31f6.2 down
       ip link delete enp0s31f6.2
       '';
+      preLVMCommands = lib.mkAfter ''
+        # Prime the network
+        ( while true; do ping 172.20.16.250; sleep 1; done ) &
+      '';
     };
     # For PCIe passhtrough
     kernelParams = [ "intel_iommu=on" ];
