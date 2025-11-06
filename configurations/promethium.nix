@@ -30,18 +30,31 @@
     ];
 
   boot = {
-    initrd.network.flushBeforeStage2 = false;
+    initrd = {
+      kernelModules = [ "8021q" ];
+      postMountCommands = ''
+      ip link set dev enp0s31f6.2 down
+      ip link delete enp0s31f6.2
+      '';
+    };
     # For PCIe passhtrough
     kernelParams = [ "intel_iommu=on" ];
   };
 
-  initrd-ssh.interface = "enp0s31f6";
-  initrd-ssh.udhcpcExtraArgs = [
-    "-t 10"
-    "-b"
-    "-x"
-    "61:0130d042ec62ef"
-  ];
+  initrd-ssh = {
+    interface = "enp0s31f6.2";
+    extraInterfaceCommands = [
+      "ip link set dev enp0s31f6 up"
+      "ip link add link enp0s31f6 name enp0s31f6.2 type vlan id 2"
+      "ip link set dev enp0s31f6.2 up"
+    ];
+    udhcpcExtraArgs = [
+      "-t 10"
+      "-b"
+      "-x"
+      "61:0130d042ec62ef"
+    ];
+  };
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
   services = {

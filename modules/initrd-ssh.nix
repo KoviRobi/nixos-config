@@ -50,6 +50,10 @@ in
       type = types.str;
       example = "eth0";
     };
+    extraInterfaceCommands = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+    };
     udhcpcExtraArgs = mkOption {
       type = types.listOf types.str;
       example = [
@@ -86,6 +90,8 @@ in
           # Bring up all interfaces.
           echo "bringing up network interface ${cfg.interface}..."
           ip link set "${cfg.interface}" up && ifaces="$ifaces ${cfg.interface}"
+
+          ${builtins.concatStringsSep "\n" cfg.extraInterfaceCommands}
 
           # Acquire DHCP leases.
           echo "acquiring IP address via DHCP on ${cfg.interface}..."
