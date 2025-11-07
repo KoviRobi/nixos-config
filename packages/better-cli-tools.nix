@@ -40,4 +40,5 @@ with pkgs;
   dive
   pipe-rename
   scc # Better SLOC measure
+  diffoscopeMinimal
 ]
