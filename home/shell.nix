@@ -152,6 +152,8 @@
       ggi   =  ''git grep --ignore-case'';
       ggv   =  ''git grep --invert-match'';
       ggw   =  ''git grep --word-regexp'';
+      glu   =  ''git log @{u}..'';
+      ggu   =  ''git g @{u}..'';
       glS   =  ''git log --show-signature'';
       glg   =  ''git log --topo-order --graph --pretty=format:"$_git_log_oneline_format"'';
       glb   =  ''git log --topo-order --pretty=format:"$_git_log_brief_format"'';
