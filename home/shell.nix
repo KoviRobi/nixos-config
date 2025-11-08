@@ -20,7 +20,7 @@
     sessionVariables = {
       EDITOR = "kak";
       VISUAL = "kak";
-      PAGER = "kak";
+      PAGER = "less";
       LESS = "-iRqw --use-color --color=W-k -j4 -z-4 --mouse --wheel-lines=3 --redraw-on-quit --quit-if-one-screen";
       LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
       GS_OPTIONS = "-sPAPERSIZE=a4";
