@@ -298,6 +298,7 @@
   };
 
   programs = {
+    atuin.enable = true;
     bash = {
       enable = true;
       initExtra = ''
