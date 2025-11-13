@@ -110,6 +110,10 @@
   };
 
   environment = {
+    pathsToLink = [
+      "/share/applications"
+      "/share/xdg-desktop-portal"
+    ];
     homeBinInPath = true;
     systemPackages =
       (import ../packages/base.nix args)
