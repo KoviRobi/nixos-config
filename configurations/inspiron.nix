@@ -60,8 +60,7 @@
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
   ]
-  ++ (import ../packages/pc.nix args)
-  ++ (import ../packages/pc-unfree.nix args);
+  ++ (import ../packages/pc.nix args);
 
   hardware.firmware = [ pkgs.qcom-firmware-extract ];
 }
