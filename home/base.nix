@@ -104,10 +104,15 @@
           set colored-stats off
         $endif
 
-        # Emit OSC133 in 256color terminals
-        $if term=*256color
+        # Emit OSC133 in select terminals (readline doesn't support glob nor "||")
+        $if term!=tmux-256color
+        $else
+        $if term!=wezterm
+        $else
         set show-mode-in-prompt on
-        set emacs-mode-string "\1\e]133;A\e\\\2"
+        set emacs-mode-string "\1\e]133;N\e\\\2"
+        set vi-cmd-mode-string "\1\e]133;N\e\\\2"
+        set vi-ins-mode-string "\1\e]133;N\e\\\2"
         $endif
       '';
     };

@@ -10,6 +10,9 @@
       -- This will hold the configuration.
       local config = wezterm.config_builder()
 
+      -- I use undercurl
+      config.term = 'wezterm'
+
       -- This is where you actually apply your config choices.
       fp = io.open(os.getenv("HOME") .. "/.local/state/brightness", "r")
       brightness = fp:read()
