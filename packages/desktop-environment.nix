@@ -97,7 +97,6 @@
         ];
       })
       flameshot
-      signal-desktop
       v4l-utils
     ];
 }

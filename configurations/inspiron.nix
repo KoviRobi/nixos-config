@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, ... }@args:
 {
   imports = [
     ./base-configuration.nix
@@ -59,7 +59,9 @@
   ];
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
-  ];
+  ]
+  ++ (import ../packages/pc.nix args)
+  ++ (import ../packages/pc-unfree.nix args);
 
   hardware.firmware = [ pkgs.qcom-firmware-extract ];
 }
