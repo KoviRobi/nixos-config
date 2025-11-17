@@ -12,6 +12,20 @@
       with pkgs;
       [
         zoxide
+        (pkgs.stdenv.mkDerivation {
+          name = "e-wrapper";
+          version = "0.2";
+          propagatedBuildInputs = [ pkgs.perl ];
+          src = pkgs.fetchFromGitHub {
+            owner = "kilobyte";
+            repo = "e";
+            rev = "v0.2";
+            hash = "sha256-G7f+Ylz3PUMqq++cpmYhSU3RFSpCPw8hA+H/KORsMRk=";
+          };
+          installPhase = ''
+            install -m0755 -D e $out/bin/e
+          '';
+        })
       ]
       ++ lib.optionals (pkgs.stdenv.buildPlatform == pkgs.stdenv.hostPlatform) [
         carapace
@@ -254,7 +268,6 @@
       gtv   =  ''git verify-tag'';
 
       man = "kakman";
-      e = "eval \"$EDITOR\"";
 
       n = "nix";
       np = "n profile";
@@ -346,6 +359,8 @@
       };
       initContent = ''
         unsetopt beep
+
+        unalias e
 
         export VERSION_CONTROL=numbered
 
