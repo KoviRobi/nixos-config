@@ -32,6 +32,10 @@
 
       libreoffice
 
+      # Offline net
+      kiwix
+      kiwix-tools
+
       pamixer
       paprefs
       pavucontrol
