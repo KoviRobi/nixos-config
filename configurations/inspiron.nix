@@ -39,7 +39,6 @@
 
   services = {
     xserver.dpi = 109;
-    desktopManager.gnome.enable = true;
     printing = {
       enable = true;
       drivers = with pkgs; [ hplip ];
