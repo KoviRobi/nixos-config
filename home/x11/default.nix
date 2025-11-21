@@ -6,6 +6,7 @@
 {
   imports = [
     ./i3
+    ./picom.nix
     ./restart-on-failure.nix
     ./ghostty.nix
     ./wezterm.nix
@@ -98,24 +99,6 @@
       stateFile = "%h/.feh-random-background";
       interval = "1h";
       display = "max";
-    };
-    picom = {
-      enable = true;
-      menuOpacity = 1.0;
-      opacityRules = [
-        "100:class_i ?= 'i3lock'"
-        "0:_NET_WM_STATE@:32a = '_NET_WM_STATE_HIDDEN'"
-        "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'"
-        "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'"
-        "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'"
-        "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'"
-        "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
-        "87:class_i ?= 'scratchpad'"
-        "91:class_i ?= 'st-256color'"
-        "91:class_i ?= 'ghostty'"
-        "91:class_i ?= 'org.wezfurlong.wezterm'"
-        "100:focused"
-      ];
     };
     xcape = {
       enable = true;
