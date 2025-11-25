@@ -9,11 +9,17 @@ if [ $# != 1 ]; then
 fi
 FILE="$(basename "$1")"
 REPO="$(git rev-parse --show-toplevel)"
-REPOFILE="$(realpath --relative-to="$REPO" "$1")"
+if [ -e "$1" ]; then
+  REPOFILE="$(realpath --relative-to="$REPO" "$1")"
+else
+  REPOFILE="${1/.\//$(git rev-parse --show-prefix)}"
+fi
 GITDIR="$(git rev-parse --git-dir)"
 TMPDIR="$GITDIR/edit-index"
 mkdir -p "$TMPDIR"
 TEMPFILE="$(mktemp --tmpdir="$TMPDIR" --suffix ".$FILE")"
+# shellcheck disable=SC2064 # intentionally expanding TEMPFILE now
+trap "rm $TEMPFILE" EXIT
 MODE=$(git -C "$REPO" ls-files --stage "$REPOFILE" | cut -d' ' -f1)
 if [ -t 0 ]; then
   if [ -n "$MODE" ]; then
@@ -21,6 +27,7 @@ if [ -t 0 ]; then
     git -C "$REPO" cat-file blob ":0:$REPOFILE" >"$TEMPFILE" 2>/dev/null
   fi
   if ! $EDITOR "$TEMPFILE"; then
+    trap - EXIT
     echo "Keeping temporary file $TEMPFILE"
     exit 1
   fi
@@ -30,5 +37,4 @@ fi
 # Sensible default for files, git doesn't track directories
 MODE=${MODE:-100644}
 HASH="$(git -C "$REPO" hash-object -w "$TEMPFILE")"
-rm "$TEMPFILE"
 git -C "$REPO" update-index --add --cacheinfo "$MODE,$HASH,$REPOFILE"
