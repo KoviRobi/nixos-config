@@ -13,6 +13,7 @@
     ../modules/ssh.nix
     ../modules/bluetooth.nix
     ../modules/graphical.nix
+    ../modules/android.nix
     (import ../modules/avahi.nix { publish = true; })
   ];
 
