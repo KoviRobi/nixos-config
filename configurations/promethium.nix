@@ -16,10 +16,6 @@
     ../modules/graphical.nix
     ../modules/bluetooth.nix
     ../modules/initrd-ssh.nix
-    (import ../modules/forgejo.nix {
-      auth = true;
-      publish = true;
-    })
   ];
 
   nixpkgs.config.allowUnfreePredicate =

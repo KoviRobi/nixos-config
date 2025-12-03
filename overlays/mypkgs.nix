@@ -84,12 +84,6 @@ final: prev: {
     }
   );
 
-  forgejo = prev.forgejo.overrideAttrs (old: {
-    patches = old.patches or [ ] ++ [
-      ../patches/forgejo/0001-fix-Gravatar-uses-sha256-for-hash.patch
-    ];
-  });
-
   pyc = final.writeScriptBin "pyc" ''
     #!${final.lib.getExe (final.pkgs.python3.withPackages (ps: [ ]))}
 
