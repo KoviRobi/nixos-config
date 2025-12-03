@@ -1,8 +1,12 @@
 {
   pkgs,
+  modulesPath,
   ...
 }:
 {
+  imports = [
+    "${modulesPath}/programs/tmux.nix"
+  ];
   programs.tmux = {
     enable = true;
     aggressiveResize = true;

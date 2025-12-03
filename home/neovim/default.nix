@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  modulesPath,
   ...
 }:
 with lib;
@@ -9,6 +10,10 @@ let
   cfg = config.kovirobi.neovim;
 in
 {
+  imports = [
+    "${modulesPath}/programs/neovim.nix"
+  ];
+
   options.kovirobi.neovim = {
     enable = mkEnableOption "neovim";
   };

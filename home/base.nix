@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  modulesPath,
   ...
 }:
 {
@@ -14,6 +15,25 @@
     ./helix.nix
     ./neovim
     ./antidot.nix
+
+    "${modulesPath}/programs/bat.nix"
+    "${modulesPath}/programs/delta.nix"
+    "${modulesPath}/programs/diff-highlight.nix"
+    "${modulesPath}/programs/diff-so-fancy.nix"
+    "${modulesPath}/programs/difftastic.nix"
+    "${modulesPath}/programs/gpg.nix"
+    "${modulesPath}/programs/home-manager.nix"
+    "${modulesPath}/programs/htop.nix"
+    "${modulesPath}/programs/jujutsu.nix"
+    "${modulesPath}/programs/man.nix"
+    "${modulesPath}/programs/newsboat.nix"
+    "${modulesPath}/programs/patdiff.nix"
+    "${modulesPath}/programs/pay-respects.nix"
+    "${modulesPath}/programs/readline.nix"
+    "${modulesPath}/programs/riff.nix"
+    "${modulesPath}/programs/ssh.nix"
+    "${modulesPath}/programs/vim.nix"
+    "${modulesPath}/services/syncthing.nix"
   ];
 
   kovirobi.neovim.enable = true;

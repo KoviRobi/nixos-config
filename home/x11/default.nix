@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  modulesPath,
   ...
 }:
 {
@@ -17,6 +18,23 @@
         sha256 = "1hnwv33wmiaabkv7yqg6khc1aqrp01g2yv5l76bc47d80cj0amad";
       }
     }/home-manager-service.nix"
+
+    "${modulesPath}/misc/xdg-portal.nix"
+    "${modulesPath}/programs/autorandr.nix"
+    "${modulesPath}/programs/ghostty.nix"
+    "${modulesPath}/programs/librewolf.nix"
+    "${modulesPath}/programs/wezterm.nix"
+    "${modulesPath}/services/blueman-applet.nix"
+    "${modulesPath}/services/copyq.nix"
+    "${modulesPath}/services/darkman.nix"
+    "${modulesPath}/services/dunst.nix"
+    "${modulesPath}/services/gnome-keyring.nix"
+    "${modulesPath}/services/network-manager-applet.nix"
+    "${modulesPath}/services/pass-secret-service.nix"
+    "${modulesPath}/services/pasystray.nix"
+    "${modulesPath}/services/picom.nix"
+    "${modulesPath}/services/udiskie.nix"
+    "${modulesPath}/services/xcape.nix"
   ];
 
   programs = {

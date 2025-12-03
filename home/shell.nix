@@ -2,10 +2,15 @@
   config,
   pkgs,
   lib,
+  modulesPath,
   ...
 }:
 {
-  imports = [ ./starship.nix ];
+  imports = [
+    ./starship.nix
+    "${modulesPath}/programs/atuin.nix"
+    "${modulesPath}/programs/fish.nix"
+  ];
 
   home = {
     packages =

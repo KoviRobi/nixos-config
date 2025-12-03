@@ -1,9 +1,13 @@
 {
   pkgs,
   lib,
+  modulesPath,
   ...
 }:
 {
+  imports = [
+    "${modulesPath}/programs/starship.nix"
+  ];
 
   home.packages = with pkgs; [ starship ];
 

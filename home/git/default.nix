@@ -2,12 +2,16 @@
   pkgs,
   lib,
   config,
+  modulesPath,
   ...
 }:
 let
   cfg = config.programs.git;
 in
 {
+  imports = [
+    "${modulesPath}/programs/git.nix"
+  ];
   home.packages = [
     (pkgs.writeShellApplication {
       name = "git-edit-index";
