@@ -370,6 +370,8 @@ final: prev: {
       map global insert <a-d> '<a-;><a-lt>'
       map global insert <a-t> '<a-;><a-gt>'
 
+      set global make_error_pattern '^([^:\n]+):(\d+):(?:(\d+):)? (?i)(?:fatal )?(fail(ed|ure)|error|warn(ing)?|info|note):?([^\n]+)?'
+
       # For active-window-kak
       set-face global InactiveCursor rgba:80808040,rgba:80808040
 
