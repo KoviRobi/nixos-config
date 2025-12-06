@@ -296,7 +296,7 @@ final: prev: {
           set-option buffer lsp_servers %{
             [neocmakelsp]
             root_globs = ["CMakePresets.json", "CMakeLists.txt", ".git", ".hg"]
-            args = ["--stdio"]
+            args = ["stdio"]
           }
         }
 
