@@ -1,11 +1,4 @@
-{
-  modulesPath,
-  ...
-}:
-{
-  imports = [
-    "${modulesPath}/programs/direnv.nix"
-  ];
+_: {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

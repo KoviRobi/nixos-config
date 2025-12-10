@@ -7,7 +7,6 @@
 {
   home-manager = {
     useUserPackages = true;
-    minimal = true;
     users.default-user =
       { ... }:
       {

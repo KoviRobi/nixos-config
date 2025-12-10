@@ -227,7 +227,6 @@
           (
             name: value:
             nixpkgs.lib.nixosSystem rec {
-              baseModules = import ./used-module-list.nix "${nixpkgs}/nixos/modules";
               system = "x86_64-linux";
               modules = value ++ [
                 { networking.hostName = name; }
