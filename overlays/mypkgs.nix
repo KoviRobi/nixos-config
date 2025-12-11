@@ -122,4 +122,17 @@ final: prev: {
   qcom-firmware-extract = final.runCommand "qcom-firmware-extract-dell-inspiron-plus-7441" { } ''
     cp -r ${../qcom-firmware-extract} $out
   '';
+
+  open_dp100 =
+    import
+      (final.fetchFromGitHub {
+        owner = "KoviRobi";
+        repo = "open_dp100";
+        rev = "0be45eb4ac6664b027cfe70fe157cba38ffbbcc5";
+        hash = "sha256-k7GN4MCsdh8qDFC0RGMWMKPXmLlgi4ysEZ4NmGIRYRA=";
+      })
+      {
+        pkgs = final;
+        version = "unstable-2025-12-11";
+      };
 }

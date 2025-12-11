@@ -60,7 +60,7 @@
   services = {
     lldpd.enable = true;
     xserver.dpi = 93;
-    udev.packages = with pkgs; [ saleae-logic-2 ];
+    udev.packages = with pkgs; [ saleae-logic-2 open_dp100 ];
 
     printing = {
       enable = true;
@@ -133,6 +133,7 @@
     sigrok-cli
     pulseview
     saleae-logic-2
+    open_dp100
     google-chrome
     mcuxpresso
     (pkgs.writeShellScriptBin "resus" ''systemctl reboot --boot-loader-entry=opensuse.conf'')
