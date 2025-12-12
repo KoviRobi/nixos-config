@@ -300,6 +300,12 @@ final: prev: {
           }
         }
 
+        map global goto d "<esc>: lsp-definition<ret>" -docstring 'LSP definition'
+        map global goto r "<esc>: lsp-references<ret>" -docstring 'LSP references'
+        map global goto y "<esc>: lsp-type-definition<ret>" -docstring 'LSP type definition'
+
+        set-option global modelinefmt "%opt{lsp_modeline} %opt{modelinefmt}"
+
         lsp-enable
       '';
     in
