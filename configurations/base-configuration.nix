@@ -22,6 +22,7 @@
     ../modules/home-manager.nix
     ../modules/nethogs.nix
     ../modules/clipboard.nix
+    ../modules/nix-ld-gh326948.nix
 
     ../packages/network.nix
   ];
@@ -45,7 +46,7 @@
       enable = true;
     };
 
-    nix-ld.systems =
+    nix-ld-gh326948.systems =
       builtins.mapAttrs
         (
           name:
