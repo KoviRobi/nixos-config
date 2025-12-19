@@ -40,7 +40,6 @@ with pkgs;
   nix-du
   nix-output-monitor
   nil
-  nom-rebuild
   devenv
 
   dconf

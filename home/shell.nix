@@ -388,7 +388,6 @@
         WORDCHARS=""
 
 
-        compdef _nixos-rebuild nom-rebuild
         compdef _man viman
         compdef _man kakman
         # No man-page sections for viman

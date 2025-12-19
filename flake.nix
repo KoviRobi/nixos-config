@@ -241,13 +241,6 @@
                 { nixpkgs.overlays = builtins.attrValues self.overlays; }
 
                 (
-                  { pkgs, ... }:
-                  {
-                    system.build.nom-rebuild = pkgs.nom-rebuild;
-                  }
-                )
-
-                (
                   { config, pkgs, ... }:
                   {
                     nix = {
