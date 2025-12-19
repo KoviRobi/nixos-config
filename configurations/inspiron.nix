@@ -43,6 +43,7 @@
       enable = true;
       drivers = with pkgs; [ hplip ];
     };
+    nixseparatedebuginfod2.enable = true;
   };
 
   security.sudo.extraRules = [
