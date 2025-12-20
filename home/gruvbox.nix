@@ -31,10 +31,10 @@ in
     };
 
     programs = {
-      bat.config.theme = "Gruvbox (${cfg.brightness})";
-      delta.options.syntax-theme = "Gruvbox (${cfg.brightness})";
+      bat.config.theme-light = "gruvbox-light";
+      bat.config.theme-dark = "gruvbox-dark";
+      delta.options.syntax-theme = "gruvbox-dark"; # Sets both dark and light
 
-      # Dark has a better statusline for both light/dark
       tmux.extraConfig = ''
         run-shell "tmux source-file ${pkgs.tmux-gruvbox-v1}/share/tmux-plugins/gruvbox/tmux-gruvbox-$(cat ~/.local/state/brightness || echo light).conf"
       '';
