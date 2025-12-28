@@ -57,13 +57,13 @@
       }
     ];
 
-    extraConfig = ''
-      audio_output {
-        type            "pulse"
-        name            "PulseAudio"
-        server          "127.0.0.1"
+    settings.audio_output = [
+      {
+        type = "pulse";
+        name = "PulseAudio";
+        server = "127.0.0.1";
       }
-    '';
+    ];
   };
 
 }
