@@ -51,6 +51,7 @@
       config.font_rules = {
         {
           intensity = 'Half',
+          italic = false,
           font = wezterm.font_with_fallback {
               { family = 'CaskaydiaCove Nerd Font Mono', weight = 'ExtraLight' },
               'Noto Emoji',
@@ -60,6 +61,7 @@
         },
         {
           intensity = 'Normal',
+          italic = false,
           font = wezterm.font_with_fallback {
               { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Light' },
               'Noto Emoji',
@@ -69,6 +71,7 @@
         },
         {
           intensity = 'Bold',
+          italic = false,
           font = wezterm.font_with_fallback {
               { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Regular' },
               'Noto Emoji',
@@ -80,7 +83,7 @@
           intensity = 'Half',
           italic = true,
           font = wezterm.font_with_fallback {
-              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'ExtraLight', italic = true },
+              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'ExtraLight', style = "Italic" },
               'Noto Emoji',
               'Noto Sans Symbols',
               'Noto Sans Symbols 2',
@@ -90,7 +93,7 @@
           intensity = 'Normal',
           italic = true,
           font = wezterm.font_with_fallback {
-              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Light', italic = true },
+              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Light', style = "Italic" },
               'Noto Emoji',
               'Noto Sans Symbols',
               'Noto Sans Symbols 2',
@@ -100,7 +103,7 @@
           intensity = 'Bold',
           italic = true,
           font = wezterm.font_with_fallback {
-              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Regular', italic = true },
+              { family = 'CaskaydiaCove Nerd Font Mono', weight = 'Regular', style = "Italic" },
               'Noto Emoji',
               'Noto Sans Symbols',
               'Noto Sans Symbols 2',
