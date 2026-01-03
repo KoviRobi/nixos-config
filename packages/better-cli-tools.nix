@@ -41,4 +41,5 @@ with pkgs;
   pipe-rename
   scc # Better SLOC measure
   diffoscopeMinimal
+  binwalk
 ]
