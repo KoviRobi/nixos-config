@@ -122,6 +122,8 @@
       ++ (import ../packages/lsp.nix args)
       ++ [
         pkgs.busybox # Low priority by default
+        pkgs.alsa-ucm-conf
+        pkgs.alsa-utils
       ];
 
     etc."sudo.conf".text = ''
@@ -143,6 +145,10 @@
   services = {
     pipewire = {
       enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       audio.enable = true;
       pulse.enable = true; # For bluetooth audio
     };
