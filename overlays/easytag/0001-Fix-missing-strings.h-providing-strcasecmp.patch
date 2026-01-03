@@ -1,0 +1,102 @@
+From b17836eb2e3224f7dcbafe0fe9a08b4b8d3891c2 Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Sat, 3 Jan 2026 13:57:02 +0000
+Subject: [PATCH 1/2] Fix missing strings.h providing strcasecmp
+
+---
+ src/browser.c                  | 1 +
+ src/cddb_dialog.c              | 1 +
+ src/file.c                     | 1 +
+ src/file_description.c         | 1 +
+ src/scan_dialog.c              | 1 +
+ src/tags/id3_tag.c             | 1 +
+ src/tags/libapetag/apetaglib.c | 1 +
+ 7 files changed, 7 insertions(+)
+
+diff --git a/src/browser.c b/src/browser.c
+index 996183b..fa1bf48 100644
+--- a/src/browser.c
++++ b/src/browser.c
+@@ -32,6 +32,7 @@
+ #include <glib/gstdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ #include <errno.h>
+ 
+ #include "application_window.h"
+diff --git a/src/cddb_dialog.c b/src/cddb_dialog.c
+index 011554b..90b57ec 100644
+--- a/src/cddb_dialog.c
++++ b/src/cddb_dialog.c
+@@ -26,6 +26,7 @@
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <string.h>
++#include <strings.h>
+ #include <stdlib.h>
+ #include <sys/types.h>
+ #include "win32/win32dep.h"
+diff --git a/src/file.c b/src/file.c
+index 773847c..995cf3e 100644
+--- a/src/file.c
++++ b/src/file.c
+@@ -23,6 +23,7 @@
+ #include <glib/gi18n.h>
+ #include <glib/gstdio.h>
+ #include <string.h>
++#include <strings.h>
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <utime.h>
+diff --git a/src/file_description.c b/src/file_description.c
+index 146241d..941fad5 100644
+--- a/src/file_description.c
++++ b/src/file_description.c
+@@ -20,6 +20,7 @@
+ #include "file_description.h"
+ 
+ #include <string.h>
++#include <strings.h>
+ 
+ const ET_File_Description ETFileDescription[] =
+ {
+diff --git a/src/scan_dialog.c b/src/scan_dialog.c
+index e4b096b..2da85ab 100644
+--- a/src/scan_dialog.c
++++ b/src/scan_dialog.c
+@@ -22,6 +22,7 @@
+ #include "scan_dialog.h"
+ 
+ #include <string.h>
++#include <strings.h>
+ #include <stdlib.h>
+ #include <gdk/gdkkeysyms.h>
+ #include <glib/gi18n.h>
+diff --git a/src/tags/id3_tag.c b/src/tags/id3_tag.c
+index f40b791..0ce006e 100644
+--- a/src/tags/id3_tag.c
++++ b/src/tags/id3_tag.c
+@@ -21,6 +21,7 @@
+ 
+ #include <glib/gi18n.h>
+ #include <string.h>
++#include <strings.h>
+ #include <errno.h>
+ 
+ #include "id3_tag.h"
+diff --git a/src/tags/libapetag/apetaglib.c b/src/tags/libapetag/apetaglib.c
+index 8001a8b..c348140 100644
+--- a/src/tags/libapetag/apetaglib.c
++++ b/src/tags/libapetag/apetaglib.c
+@@ -23,6 +23,7 @@
+ #include <stddef.h>
+ #include <stdarg.h>
+ #include <string.h>
++#include <strings.h>
+ #include <limits.h>
+ #include <assert.h>
+ #include <math.h>
+-- 
+2.51.2
+

@@ -1,0 +1,25 @@
+From 1896cd046cb9caa2101ea72e7875f10d67257375 Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Sat, 3 Jan 2026 14:15:03 +0000
+Subject: [PATCH 2/2] Fix missing const qualifier
+
+---
+ src/scan.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/scan.c b/src/scan.c
+index 38e5d46..3692b04 100644
+--- a/src/scan.c
++++ b/src/scan.c
+@@ -94,7 +94,7 @@ Scan_Process_Fields_Remove_Space (gchar *string)
+ gchar *
+ Scan_Process_Fields_Insert_Space (const gchar *string)
+ {
+-    gchar *iter;
++    const gchar *iter;
+     gunichar c;
+     GString *string1;
+ 
+-- 
+2.51.2
+
