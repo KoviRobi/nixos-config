@@ -47,6 +47,7 @@
       "...." = "cd ../../..";
       "....." = "cd ../../../..";
 
+      ghignore = ''_ghignore() { ( URL="https://github.com/github/gitignore/raw/main/$1.gitignore"; shift; PS4="# From "; set -x; curl --silent --location "$URL" "$@" )}; _ghignore'';
       g     =  "git";
       ga    =  "git add";
       gia   =  ''git add'';
