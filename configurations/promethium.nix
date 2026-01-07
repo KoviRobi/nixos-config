@@ -29,8 +29,8 @@
     initrd = {
       kernelModules = [ "8021q" ];
       postMountCommands = ''
-      ip link set dev enp0s31f6.2 down
-      ip link delete enp0s31f6.2
+        ip link set dev enp0s31f6.2 down
+        ip link delete enp0s31f6.2
       '';
       preLVMCommands = lib.mkAfter ''
         # Prime the network
@@ -60,7 +60,10 @@
   services = {
     lldpd.enable = true;
     xserver.dpi = 93;
-    udev.packages = with pkgs; [ saleae-logic-2 open_dp100 ];
+    udev.packages = with pkgs; [
+      saleae-logic-2
+      open_dp100
+    ];
 
     printing = {
       enable = true;
