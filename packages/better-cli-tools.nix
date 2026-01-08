@@ -42,4 +42,8 @@ with pkgs;
   scc # Better SLOC measure
   diffoscopeMinimal
   binwalk
+
+  # Markdown
+  comrak
+  rumdl
 ]
