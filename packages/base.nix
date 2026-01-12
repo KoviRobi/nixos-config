@@ -34,7 +34,7 @@ with pkgs;
   nix-prefetch-github
   nix-prefetch
   nixpkgs-fmt
-  nixfmt-rfc-style
+  nixfmt
   nix-tree
   nix-diff
   nix-du
