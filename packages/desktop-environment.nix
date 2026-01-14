@@ -73,10 +73,12 @@
       xdotool
       xsel
       xorg.xev
+      xorg.xhost
       xorg.xkbprint
       xorg.xkbutils
       xorg.xmodmap
-      xorg.xhost
+      xorg.xprop
+      xorg.xwininfo
 
       imagemagick
 

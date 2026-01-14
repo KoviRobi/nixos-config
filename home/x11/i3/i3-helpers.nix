@@ -35,6 +35,17 @@ let
   dc = "${pkgs.bc}/bin/dc";
   rfkill = "${pkgs.util-linux}/bin/rfkill"; # Updated from pkgs.rfkill
   actions = rec {
+    invert = pkgs.writeShellScript "invert-window-colors" ''
+      PATH="${pkgs.xorg.xprop}/bin:${pkgs.xorg.xwininfo}/bin:${pkgs.gnused}/bin"
+      WID=$(xwininfo | sed -n 's/.*Window id: \(\w*\) .*/\1/p')
+      VAL=$(xprop -notype -id "$WID" 8i INVERT | sed -n 's/INVERT = //p')
+      if [ "$VAL" = 1 ]; then
+        xprop -id "$WID" -format INVERT 8i -set INVERT 0
+      else
+        # Including not found
+        xprop -id "$WID" -format INVERT 8i -set INVERT 1
+      fi
+    '';
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 .dunst-wrapped # pause
       (
