@@ -32,6 +32,7 @@
       "i2c_qcom_geni"
       "nvme"
       "nvmem_qcom_spmi_sdam"
+      "phy_qcom_qmp_pcie"
     ];
     initrd.kernelModules = [ ];
     kernelPackages = pkgs.linuxPackages_testing;
@@ -42,22 +43,6 @@
       "cma=128M"
       "boot.shell_on_fail"
     ];
-    kernelPatches =
-      [
-        {
-          name = "dell-inspiron-7441-config";
-          patch = null;
-          extraConfig = ''
-            TYPEC y
-            PHY_QCOM_QMP y
-            QCOM_CLK_RPM y
-            MFD_QCOM_RPM y
-            REGULATOR_QCOM_RPM y
-            PHY_QCOM_QMP_PCIE y
-            CLK_X1E80100_CAMCC y
-          '';
-        }
-      ];
     extraModulePackages = [ ];
     loader = {
       efi.efiSysMountPoint = "/boot/efi/";
