@@ -81,7 +81,10 @@
     ];
   };
 
-  services.upower.ignoreLid = true;
+  services = {
+    upower.ignoreLid = true;
+    logind.settings.Login.HandleLidSwitch = "ignore";
+  };
 
   swapDevices = [ ];
 
