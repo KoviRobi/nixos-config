@@ -25,6 +25,8 @@
       hicolor-icon-theme
       capitaine-cursors-themed
 
+      meld # diff tool
+
       gparted
       seahorse
       udiskie

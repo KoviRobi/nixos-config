@@ -66,6 +66,7 @@ in
         find $out -type f -exec \
           sed -i 's:#!/nix/store/[^/]\+/\(bin/.*\):#!/run/current-system/sw/\1:' {} \;
       ''}";
+      diff.guitool = "meld";
       merge.tool = "nvimdiff";
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       pull.ff = "only";
