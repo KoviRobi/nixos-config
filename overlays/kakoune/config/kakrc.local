@@ -1,0 +1,88 @@
+colorscheme %sh{
+  if [ "$(tput colors)" -eq 8 ]; then
+    echo plain
+  else
+    echo "gruvbox-$(cat ~/.local/state/brightness || echo light)";
+  fi
+}
+
+add-highlighter global/ show-matching
+add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,rgba:80000040,red+c
+add-highlighter global/show-inconsistent-tabs-1 regex '( +)(\t+)' 2:,rgba:80000040,red+c
+add-highlighter global/show-inconsistent-tabs-2 regex '(\t+)( +)' 1:,rgba:80000040,red+c
+
+define-command wrap "add-highlighter global/wrap wrap -word -marker ⏎"
+define-command nowrap "remove-highlighter global/wrap"
+define-command hl "add-highlighter global/highlight-search dynregex '%%reg{/}' 0:,rgba:80800040+i"
+define-command nohl "remove-highlighter global/highlight-search"
+wrap
+hl
+
+set-option global startup_info_version 20250603
+
+set-option global scrolloff 3,2
+
+# UI options
+set-option global ui_options terminal_set_title=true terminal_status_on_top=true terminal_assistant=none terminal_enable_mouse=true terminal_change_colors=true    terminal_builtin_key_parser=false
+
+# Key mappings
+hook global WinCreate .* %{ kakboard-enable }
+
+require-module x11
+set-option global termcmd 'wezterm -e sh -c'
+
+# tmux
+# tmux_repl
+require-module man-improved
+require-module git-gutter-async
+
+require-module c-w_and_c-u
+map global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'
+map global insert <c-w> '<a-;>: erase_word_before_cursor<ret>'
+
+require-module lsp
+
+eval %sh{@kakoune-cr@ init kakoune}
+
+define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+
+# Shortcut to quickly exit the editor
+define-command -docstring "save and quit" x "write; delete-buffer"
+define-command -docstring "save and quit" xa "write-all-quit"
+
+# Subject-verb
+alias global bd delete-buffer
+alias global bd! delete-buffer!
+
+alias global qa kill
+alias global qa! kill!
+
+define-command -docstring "quit with status 1" "cq" "quit 1"
+define-command -docstring "quit! with status 1" "cq-force" "quit! 1"
+alias global cq! cq-force
+
+set-option global grepcmd "rg --vimgrep"
+
+require-module byline
+map global normal 'X' ": byline-drag-up<ret>"
+map global normal 'x' ": byline-drag-down<ret>"
+
+map global user f ': fzf-mode<ret>' -docstring "FZF mode"
+
+map global insert <c-d> '<a-;><lt>'
+map global insert <c-t> '<a-;><gt>'
+map global insert <a-d> '<a-;><a-lt>'
+map global insert <a-t> '<a-;><a-gt>'
+
+set global make_error_pattern '^([^:\n]+):(\d+):(?:(\d+):)? (?i)(?:fatal )?(fail(ed|ure)|error|warn(ing)?|info|note):?([^\n]+)?'
+
+# For active-window-kak
+set-face global InactiveCursor rgba:80808040,rgba:80808040
+
+hook global WinDisplay .* %{
+  set-option -add global ui_options "terminal_title=%val{buffile}"
+}
+
+hook global WinSetOption filetype=nix %{
+  set-option window indentwidth 2
+}
