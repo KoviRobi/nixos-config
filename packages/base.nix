@@ -4,6 +4,7 @@ with pkgs;
   bashInteractive
   tmux
   dtach
+  abduco
   hunspell
   hunspellDicts.en-gb-ise
   hyphen

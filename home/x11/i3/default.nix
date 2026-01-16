@@ -4,7 +4,7 @@
   ...
 }@args:
 let
-  i3-helpers = import ./i3-helpers.nix { inherit pkgs; };
+  i3-helpers = import ./i3-helpers.nix args;
   mod = "Mod4"; # Win key
 
   term = lib.getExe pkgs.wezterm;
@@ -129,7 +129,7 @@ in
       keybindings =
         lib.mkOptionDefault {
           "${mod}+Shift+c" = "kill";
-          "${mod}+Return" = "exec ${term} -e ${i3-helpers.tmux-current-workspace}";
+          "${mod}+Return" = "exec ${term} -e ${i3-helpers.abduco-new-session} zsh";
           "${mod}+Shift+Return" = "exec ${term}";
           "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
           "${mod}+g" = "exec ${i3-helpers.dmenu-window}";

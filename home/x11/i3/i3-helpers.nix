@@ -1,4 +1,4 @@
-{ pkgs }:
+{ lib, pkgs, ... }:
 let
   theme = {
     bg = "282828";
@@ -20,20 +20,22 @@ let
     };
     fg = "EBDBB2";
   };
-  sh = "${pkgs.bash}/bin/bash";
-  rofi = "${pkgs.rofi}/bin/rofi";
+  sh = lib.getExe pkgs.bash;
+  rofi = lib.getExe pkgs.rofi;
   dmenu = "${rofi} -dmenu";
-  cat = "${pkgs.coreutils}/bin/cat";
-  i3-msg = "${pkgs.i3}/bin/i3-msg";
-  jq = "${pkgs.jq}/bin/jq";
-  killall = "${pkgs.psmisc}/bin/killall";
-  socat = "${pkgs.socat}/bin/socat";
-  mpc = "${pkgs.mpc}/bin/mpc";
-  tmux = "${pkgs.tmux}/bin/tmux";
-  amixer = "${pkgs.alsa-utils}/bin/amixer";
-  xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
-  dc = "${pkgs.bc}/bin/dc";
-  rfkill = "${pkgs.util-linux}/bin/rfkill"; # Updated from pkgs.rfkill
+  cat = lib.getExe' pkgs.coreutils "cat";
+  wc = lib.getExe' pkgs.coreutils "wc";
+  sed = lib.getExe pkgs.gnused;
+  i3-msg = lib.getExe' pkgs.i3 "i3-msg";
+  jq = lib.getExe pkgs.jq;
+  killall = lib.getExe' pkgs.psmisc "killall";
+  socat = lib.getExe pkgs.socat;
+  mpc = lib.getExe pkgs.mpc;
+  abduco = lib.getExe pkgs.abduco;
+  amixer = lib.getExe' pkgs.alsa-utils "amixer";
+  xbacklight = lib.getExe' pkgs.xorg.xbacklight "xbacklight";
+  dc = lib.getExe' pkgs.bc "dc";
+  rfkill = lib.getExe' pkgs.util-linux "rfkill"; # Updated from pkgs.rfkill
   actions = rec {
     invert = pkgs.writeShellScript "invert-window-colors" ''
       PATH="${pkgs.xorg.xprop}/bin:${pkgs.xorg.xwininfo}/bin:${pkgs.gnused}/bin"
@@ -161,11 +163,14 @@ in
         ${dmenu}`
     ${i3-msg} "$1 $RES"
   '';
-  tmux-current-workspace = pkgs.writeShellScript "i3-tmux-current-workspace" ''
-    #!/bin/sh
-    name=`${i3-msg} -t get_workspaces | \
-          ${jq} --raw-output '.[] | select(.focused) | .name'`
-    exec ${tmux} new-session -t "''${name#*:}"
+  abduco-new-session = pkgs.writeShellScript "abduco-new-session" ''
+    orphans=$(${abduco} -l | ${sed} -n '/^ .*\s/{s///p;q}')
+    new=$(${abduco} -l | ${wc} -l)
+    if [ -n "$orphans" ]; then
+      exec ${abduco} -A "$orphans" "$@"
+    else
+      exec ${abduco} -A "$new" "$@"
+    fi
   '';
   workspace-renumber =
     let
