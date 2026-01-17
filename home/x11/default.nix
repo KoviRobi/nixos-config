@@ -39,8 +39,13 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "gtk";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common = {
+      default = "gtk";
+      "org.freedesktop.impl.portal.Settings" = "darkman";
+    };
   };
 
   services = {
@@ -58,6 +63,10 @@
     };
     darkman = {
       enable = true;
+      settings = {
+        lat = 50.0;
+        lng = 0.0;
+      };
     }
     // (
       let
