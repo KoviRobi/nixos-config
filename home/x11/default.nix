@@ -10,6 +10,7 @@
     ./restart-on-failure.nix
     ./ghostty.nix
     ./wezterm.nix
+    ./ringboard.nix
     "${
       fetchTarball {
         url = "https://github.com/KoviRobi/feh-random-background/archive/80bc3616bb8fc87225d1447431555230a4bf3b12.tar.gz";
@@ -50,7 +51,6 @@
 
   services = {
     network-manager-applet.enable = true;
-    copyq.enable = true;
     pasystray.enable = true;
     udiskie.enable = true;
     dunst.enable = true;
@@ -64,7 +64,7 @@
     darkman = {
       enable = true;
       settings = {
-        lat = 50.0;
+        lat = 51.477;
         lng = 0.0;
       };
     }
