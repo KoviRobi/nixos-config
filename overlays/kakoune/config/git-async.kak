@@ -36,6 +36,7 @@ define-command -params 1.. \
 
         fifo=$(mktemp -u /tmp/kak-buffer-fifo-XXXXXX)
         mkfifo "$fifo"
+        trap "rm $fifo" EXIT
 
         eval_in_client 'exec -draft "%%<a-|>tee > '"$fifo"'<ret>"'
         # eval_in_client "eval -no-hooks write \"$fifo\""
@@ -47,8 +48,6 @@ define-command -params 1.. \
                 NR == 2 { print "+++ b/" buffile_relative }
                 NR > 2
             '
-
-        rm -f "$fifo"
     }
 
     diff_buffer_against_index_via_git() {
@@ -76,7 +75,7 @@ define-command -params 1.. \
     update_diff() {
         (
             cd_bufdir
-            diff_buffer_against_index${1} -U0 | perl -e '
+            diff_buffer_against_index${1} -U0 | @perl@ -e '
             use utf8;
             $flags = $ENV{"kak_timestamp"};
             $add_char = $ENV{"kak_opt_git_diff_add_char"};

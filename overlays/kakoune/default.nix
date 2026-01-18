@@ -13,6 +13,9 @@ let
     # "tmux-repl.kak" = { };
     "man-improved.kak" = { };
     "c-w_and_c-u.kak" = { };
+    "git-async.kak" = {
+      perl = getExe final.perl;
+    };
     "git-gutter-async.kak" = { };
     "lsp.kak" = {
       kakoune-lsp = getExe final.kakoune-lsp;
