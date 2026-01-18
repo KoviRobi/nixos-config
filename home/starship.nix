@@ -42,6 +42,15 @@
           { threshold = 20; style = "red"; }
           { threshold = 10; style = "bold italic red"; }
         ];
+        custom.kakoune = {
+          symbol = "🐈";
+          command = "kcr prompt";
+          when = "kcr prompt";
+          shell = [ "sh" ];
+          description = "The current Kakoune session and client";
+          style = "green";
+          format = "[$symbol$output]($style) ";
+        };
       };
     };
   };
