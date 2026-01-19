@@ -1,3 +1,5 @@
+# vi: filetype=kak
+
 colorscheme %sh{
   if [ "$(tput colors)" -eq 8 ]; then
     echo plain
@@ -5,6 +7,9 @@ colorscheme %sh{
     echo "gruvbox-$(cat ~/.local/state/brightness || echo light)";
   fi
 }
+
+# To parse lines like `# vi: filetype=kak
+hook global BufOpenFile .* %{ modeline-parse }
 
 add-highlighter global/ show-matching
 add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,rgba:80000040,red+c
