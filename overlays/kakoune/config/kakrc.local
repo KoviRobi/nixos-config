@@ -28,7 +28,13 @@ set-option global startup_info_version 20250603
 set-option global scrolloff 3,2
 
 # UI options
-set-option global ui_options terminal_set_title=true terminal_status_on_top=true terminal_assistant=none terminal_enable_mouse=true terminal_change_colors=true    terminal_builtin_key_parser=false
+set-option global ui_options \
+    terminal_set_title=true \
+    terminal_status_on_top=true \
+    terminal_assistant=none \
+    terminal_enable_mouse=true \
+    terminal_change_colors=true \
+    terminal_builtin_key_parser=false
 
 # Key mappings
 hook global WinCreate .* %{ kakboard-enable }
@@ -79,7 +85,8 @@ map global insert <c-t> '<a-;><gt>'
 map global insert <a-d> '<a-;><a-lt>'
 map global insert <a-t> '<a-;><a-gt>'
 
-set global make_error_pattern '^([^:\n]+):(\d+):(?:(\d+):)? (?i)(?:fatal )?(fail(ed|ure)|error|warn(ing)?|info|note):?([^\n]+)?'
+# TODO: Show details
+# set global make_error_pattern '^([^:\n]+):(\d+):(?:(\d+):)? (?i)(?:fatal )?(fail(ed|ure)|error|warn(ing)?|info|note):?([^\n]+)?'
 
 # For active-window-kak
 set-face global InactiveCursor rgba:80808040,rgba:80808040
