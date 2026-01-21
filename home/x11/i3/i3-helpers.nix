@@ -31,7 +31,7 @@ let
   killall = lib.getExe' pkgs.psmisc "killall";
   socat = lib.getExe pkgs.socat;
   mpc = lib.getExe pkgs.mpc;
-  abduco = lib.getExe pkgs.abduco;
+  dtach = lib.getExe pkgs.dtach;
   amixer = lib.getExe' pkgs.alsa-utils "amixer";
   xbacklight = lib.getExe' pkgs.xorg.xbacklight "xbacklight";
   dc = lib.getExe' pkgs.bc "dc";
@@ -163,14 +163,23 @@ in
         ${dmenu}`
     ${i3-msg} "$1 $RES"
   '';
-  abduco-new-session = pkgs.writeShellScript "abduco-new-session" ''
-    orphans=$(${abduco} -l | ${sed} -n '/^ .*\s/{s///p;q}')
-    new=$(${abduco} -l | ${wc} -l)
-    if [ -n "$orphans" ]; then
-      exec ${abduco} -A "$orphans" "$@"
-    else
-      exec ${abduco} -A "$new" "$@"
-    fi
+  dtach-new-session = pkgs.writeShellScript "dtach-new-session" ''
+    dtachdir="$XDG_RUNTIME_DIR/dtach"
+    mkdir -p "$dtachdir"
+    max=0
+    for f in "$dtachdir"/*; do
+        if [ -e "$f" ] && [ ! -x "$f" ]; then
+            export DTACH_SOCK="$f"
+            exec ${dtach} -A "$DTACH_SOCK" "$@"
+        fi
+        num="''${f##*/}"
+        if [ "$max" -lt "''$num" ]; then
+            max="$num"
+        fi
+    done
+    max=$(( max + 1 ))
+    export DTACH_SOCK="$dtachdir/$max"
+    exec ${dtach} -A "$DTACH_SOCK" "$@"
   '';
   workspace-renumber =
     let

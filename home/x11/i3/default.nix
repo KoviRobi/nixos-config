@@ -129,7 +129,7 @@ in
       keybindings =
         lib.mkOptionDefault {
           "${mod}+Shift+c" = "kill";
-          "${mod}+Return" = "exec ${term} -e ${i3-helpers.abduco-new-session} zsh";
+          "${mod}+Return" = "exec ${term} -e ${i3-helpers.dtach-new-session} zsh";
           "${mod}+Shift+Return" = "exec ${term}";
           "${mod}+p" = "exec ${i3-helpers.dmenu-run}";
           "${mod}+g" = "exec ${i3-helpers.dmenu-window}";
