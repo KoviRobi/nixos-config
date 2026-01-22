@@ -4,6 +4,8 @@ with pkgs;
   bashInteractive
   tmux
   dtach
+  dtach-new-session
+  dtach-ls-sessions
   abduco
   hunspell
   hunspellDicts.en-gb-ise

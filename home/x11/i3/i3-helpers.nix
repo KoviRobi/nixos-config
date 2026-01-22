@@ -24,14 +24,11 @@ let
   rofi = lib.getExe pkgs.rofi;
   dmenu = "${rofi} -dmenu";
   cat = lib.getExe' pkgs.coreutils "cat";
-  wc = lib.getExe' pkgs.coreutils "wc";
-  sed = lib.getExe pkgs.gnused;
   i3-msg = lib.getExe' pkgs.i3 "i3-msg";
   jq = lib.getExe pkgs.jq;
   killall = lib.getExe' pkgs.psmisc "killall";
   socat = lib.getExe pkgs.socat;
   mpc = lib.getExe pkgs.mpc;
-  dtach = lib.getExe pkgs.dtach;
   amixer = lib.getExe' pkgs.alsa-utils "amixer";
   xbacklight = lib.getExe' pkgs.xorg.xbacklight "xbacklight";
   dc = lib.getExe' pkgs.bc "dc";
@@ -162,24 +159,6 @@ in
         ${jq} --raw-output 'map(.name)|join("\n")' | \
         ${dmenu}`
     ${i3-msg} "$1 $RES"
-  '';
-  dtach-new-session = pkgs.writeShellScript "dtach-new-session" ''
-    dtachdir="$XDG_RUNTIME_DIR/dtach"
-    mkdir -p "$dtachdir"
-    max=0
-    for f in "$dtachdir"/*; do
-        if [ -e "$f" ] && [ ! -x "$f" ]; then
-            export DTACH_SOCK="$f"
-            exec ${dtach} -A "$DTACH_SOCK" "$@"
-        fi
-        num="''${f##*/}"
-        if [ "$max" -lt "''$num" ]; then
-            max="$num"
-        fi
-    done
-    max=$(( max + 1 ))
-    export DTACH_SOCK="$dtachdir/$max"
-    exec ${dtach} -A "$DTACH_SOCK" "$@"
   '';
   workspace-renumber =
     let
