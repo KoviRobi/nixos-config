@@ -43,8 +43,10 @@
 
   services.mpd = {
     enable = true;
-    musicDirectory = "/music";
-    network.port = 6612;
+    settings = {
+      music_directory = "/music";
+      port = 6612;
+    };
     credentials = [
       {
         passwordFile = "/etc/secrets/mpd-password.secret";
