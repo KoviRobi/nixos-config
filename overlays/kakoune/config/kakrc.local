@@ -39,8 +39,10 @@ set-option global ui_options \
 # Key mappings
 hook global WinCreate .* %{ kakboard-enable }
 
-require-module x11
-set-option global termcmd 'wezterm -e sh -c'
+try %{
+    require-module x11
+    set-option global termcmd 'wezterm -e sh -c'
+}
 
 # tmux
 # tmux_repl
@@ -53,7 +55,7 @@ map global insert <c-w> '<a-;>: erase_word_before_cursor<ret>'
 
 require-module lsp
 
-eval %sh{@kakoune-cr@ init kakoune}
+evaluate-commands %sh{@kakoune-cr@ init kakoune}
 
 define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
