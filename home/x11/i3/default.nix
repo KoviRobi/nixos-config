@@ -182,12 +182,12 @@ in
           "${mod}+Control+Shift+r" = "restart";
           "${mod}+bracketleft" = "focus output left";
           "${mod}+bracketright" = "focus output right";
-          "${mod}+parenleft" = "workspace prev_on_output";
-          "${mod}+parenright" = "workspace next_on_output";
+          "${mod}+backslash" = "workspace prev_on_output";
+          "${mod}+equal" = "workspace next_on_output";
           "${mod}+Shift+bracketleft" = "move to output left";
           "${mod}+Shift+bracketright" = "move to output right";
-          "${mod}+Shift+parenleft" = "move to workspace prev_on_output";
-          "${mod}+Shift+parenright" = "move to workspace next_on_output";
+          "${mod}+Shift+backslash" = "move to workspace prev_on_output";
+          "${mod}+Shift+equal" = "move to workspace next_on_output";
           "--whole-window ${mod}+button2" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
           "--release button2" = "exec ${i3-helpers.pen-pye-menu}/bin/pen_menu";
           "XF86AudioMute" = "exec ${i3-helpers.actions-dir}/mute";
