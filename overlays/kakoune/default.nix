@@ -82,7 +82,6 @@ in
         p.active-window-kak
         p.kakboard
         p.fzf-kak
-        p.powerline-kak
         p.kak-byline
         p.explorer-kak
         # p.kakoune-easymotion
