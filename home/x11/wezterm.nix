@@ -6,6 +6,7 @@
     extraConfig = ''
       -- Pull in the wezterm API
       local wezterm = require 'wezterm'
+      local act = wezterm.action
 
       -- This will hold the configuration.
       local config = wezterm.config_builder()
@@ -25,20 +26,28 @@
       config.hide_tab_bar_if_only_one_tab = true
 
       config.keys = {
-        -- Turn off the default CMD-m Hide action, allowing CMD-m to
-        -- be potentially recognized and handled by the tab
+        -- Turn off the default Alt+Enter full screen
         {
-          key = 'PageUp',
-          mods = 'CTRL',
-          action = wezterm.action.DisableDefaultAssignment,
+          key = 'Enter',
+          mods = 'ALT',
+          action = act.DisableDefaultAssignment,
+        },
+        -- Semantic prompt
+        { key = 'UpArrow', mods = 'SHIFT', action = act.ScrollToPrompt(-1) },
+        { key = 'DownArrow', mods = 'SHIFT', action = act.ScrollToPrompt(1) },
+      }
+      config.mouse_bindings = {
+        {
+          event = { Down = { streak = 4, button = 'Left' } },
+          action = act.SelectTextAtMouseCursor 'SemanticZone',
+          mods = 'NONE',
         },
         {
-          key = 'PageDown',
-          mods = 'CTRL',
-          action = wezterm.action.DisableDefaultAssignment,
+          event = { Down = { streak = 5, button = 'Left' } },
+          action = act.SelectTextAtMouseCursor 'Block',
+          mods = 'NONE',
         },
       }
-
       config.use_cap_height_to_scale_fallback_fonts = true
       config.freetype_load_target = "Light"
       config.font = wezterm.font_with_fallback {
