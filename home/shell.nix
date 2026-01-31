@@ -8,6 +8,7 @@
   imports = [ ./starship.nix ];
 
   home = {
+    sessionPath = [ "${config.xdg.dataHome}/bin" ];
     packages =
       with pkgs;
       [
