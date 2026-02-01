@@ -6,6 +6,9 @@ in
   dtach-new-session = final.writeShellScriptBin "dtach-new-session" ''
     dtachdir="$XDG_RUNTIME_DIR/dtach"
     mkdir -p "$dtachdir"
+    if [ $# -eq 0 ]; then
+        set -- "$SHELL"
+    fi
     max=0
     for f in "$dtachdir"/*; do
         if [ -e "$f" ] && [ ! -x "$f" ]; then
@@ -19,9 +22,6 @@ in
     done
     max=$(( max + 1 ))
     export DTACH_SOCK="$dtachdir/$max"
-    if [ $# -eq 0 ]; then
-        set -- "$SHELL"
-    fi
     exec ${dtach} -A "$DTACH_SOCK" "$@"
   '';
   dtach-ls-sessions = final.writeShellScriptBin "dtach-ls-sessions" ''
