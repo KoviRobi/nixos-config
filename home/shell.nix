@@ -420,8 +420,6 @@
 
         eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
 
-        ${pkgs.fortune}/bin/fortune ${pkgs.apf-cookie}/share/games/fortunes/apf-cookie
-
         if [ -e "$HOME/.zshrc.local" ]; then
           source "$HOME/.zshrc.local"
         fi
