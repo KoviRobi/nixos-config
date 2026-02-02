@@ -21,7 +21,7 @@ in
       vimdiffAlias = true;
       withNodeJs = true;
       plugins = [ pkgs.vimPlugins.gruvbox ];
-      extraLuaConfig = ''
+      initLua = ''
         local brightness = "light"
         local fpath = vim.fs.dirname(vim.fn.stdpath("state")) .. "/brightness"
         local fp = io.open(fpath, "r")
