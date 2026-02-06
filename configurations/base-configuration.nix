@@ -124,6 +124,7 @@
         pkgs.busybox # Low priority by default
         pkgs.alsa-ucm-conf
         pkgs.alsa-utils
+        pkgs.pw-viz
       ];
 
     etc."sudo.conf".text = ''
