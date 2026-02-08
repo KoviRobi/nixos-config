@@ -7,6 +7,7 @@ colorscheme %sh{
     echo "gruvbox-$(cat ~/.local/state/brightness || echo light)";
   fi
 }
+face global Information MenuBackground
 
 # To parse lines like `# vi: filetype=kak
 hook global BufOpenFile .* %{ modeline-parse }

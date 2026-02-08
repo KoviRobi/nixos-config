@@ -79,8 +79,10 @@
           '';
           kakoune = ''
             ${pkgs.kakoune}/bin/kak -l | while read sid; do
-              echo "colorscheme gruvbox-${brightness}" | \
-                  ${pkgs.kakoune}/bin/kak -p $sid
+              (
+                echo "colorscheme gruvbox-${brightness}"
+                echo 'face global Information MenuBackground'
+              ) | ${pkgs.kakoune}/bin/kak -p $sid
             done
           '';
           tmux = ''
