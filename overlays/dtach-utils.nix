@@ -13,7 +13,7 @@ in
     for f in "$dtachdir"/*; do
         if [ -e "$f" ] && [ ! -x "$f" ]; then
             export DTACH_SOCK="$f"
-            exec ${dtach} -A "$DTACH_SOCK" "$@"
+            exec ${dtach} -A "$DTACH_SOCK" -zE "$@"
         fi
         num="''${f##*/}"
         if [ "$max" -lt "''$num" ]; then
@@ -22,7 +22,7 @@ in
     done
     max=$(( max + 1 ))
     export DTACH_SOCK="$dtachdir/$max"
-    exec ${dtach} -A "$DTACH_SOCK" "$@"
+    exec ${dtach} -A "$DTACH_SOCK" -zE "$@"
   '';
   dtach-ls-sessions = final.writeShellScriptBin "dtach-ls-sessions" ''
     dtachdir="$XDG_RUNTIME_DIR/dtach"
