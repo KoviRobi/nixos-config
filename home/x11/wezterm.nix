@@ -1,4 +1,10 @@
+{ pkgs, ... }:
 {
+  systemd.user.services.wezterm-mux-server = {
+    Service.ExecStart = "${pkgs.wezterm}/bin/wezterm-mux-server";
+    Unit.Description = "Wezterm multiplexer";
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
   programs.wezterm = {
     enable = true;
     enableBashIntegration = true;
@@ -119,6 +125,13 @@
           },
         },
       }
+
+      config.unix_domains = {
+        {
+          name = 'unix',
+        },
+      }
+
       -- Finally, return the configuration to wezterm:
       return config
     '';

@@ -40,10 +40,7 @@ set-option global ui_options \
 # Key mappings
 hook global WinCreate .* %{ kakboard-enable }
 
-try %{
-    require-module x11
-    set-option global termcmd 'wezterm -e sh -c'
-}
+set-option global windowing_modules wezterm tmux
 
 # tmux
 # tmux_repl

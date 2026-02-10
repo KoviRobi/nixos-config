@@ -20,6 +20,9 @@ let
     "lsp.kak" = {
       kakoune-lsp = getExe final.kakoune-lsp;
     };
+    "wezterm-repl.kak" = {
+      wezterm = getExe final.wezterm;
+    };
   };
   kovirobi-kakoune-config = final.stdenv.mkDerivation {
     name = "kovirobi-kakoune-config";
