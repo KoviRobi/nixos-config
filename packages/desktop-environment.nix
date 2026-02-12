@@ -23,6 +23,7 @@
     [
       adwaita-icon-theme
       hicolor-icon-theme
+      gruvbox-dark-icons-gtk
       capitaine-cursors-themed
 
       meld # diff tool

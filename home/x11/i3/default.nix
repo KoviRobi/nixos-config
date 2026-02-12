@@ -1,9 +1,11 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }@args:
 let
+  xprop = name: config.xresources.properties."*.${name}";
   i3-helpers = import ./i3-helpers.nix args;
   term = lib.getExe pkgs.wezterm;
   maxima = "${pkgs.maxima}/bin/rmaxima";
@@ -56,32 +58,32 @@ in
       popup_during_fullscreen leave_fullscreen
       no_focus [window_role="pop-up"]
 
-      set_from_resource $gray   i3wm.gray   #928374
-      set_from_resource $red    i3wm.red    #9D0006
-      set_from_resource $green  i3wm.green  #79740E
-      set_from_resource $yellow i3wm.yellow #B57614
-      set_from_resource $blue   i3wm.blue   #876678
-      set_from_resource $purple i3wm.purple #8F3F71
-      set_from_resource $aqua   i3wm.aqua   #427B58
-      set_from_resource $orange i3wm.orange #AF3A03
-      set_from_resource $bg     i3wm.bg     #FBF1C7
-      set_from_resource $bg1    i3wm.bg1    #EBDBB2
-      set_from_resource $bg2    i3wm.bg2    #D5C4A1
-      set_from_resource $bg3    i3wm.bg3    #BDAE93
-      set_from_resource $bg4    i3wm.bg4    #A89984
-      set_from_resource $fg     i3wm.fg     #3C3836
-      set_from_resource $fg1    i3wm.fg1    #282828
-      set_from_resource $fg2    i3wm.fg2    #504945
-      set_from_resource $fg3    i3wm.fg3    #665C54
-      set_from_resource $fg4    i3wm.fg4    #7C6F64
+      set_from_resource $gray   i3wm.gray   ${xprop "gray"}
+      set_from_resource $red    i3wm.red    ${xprop "red"}
+      set_from_resource $green  i3wm.green  ${xprop "green"}#79740E
+      set_from_resource $yellow i3wm.yellow ${xprop "yellow"}#B57614
+      set_from_resource $blue   i3wm.blue   ${xprop "blue"}#876678
+      set_from_resource $purple i3wm.purple ${xprop "purple"}#8F3F71
+      set_from_resource $aqua   i3wm.aqua   ${xprop "aqua"}#427B58
+      set_from_resource $orange i3wm.orange ${xprop "orange"}#AF3A03
+      set_from_resource $bg0    i3wm.bg0    ${xprop "bg0"}#FBF1C7
+      set_from_resource $bg1    i3wm.bg1    ${xprop "bg1"}#EBDBB2
+      set_from_resource $bg2    i3wm.bg2    ${xprop "bg2"}#D5C4A1
+      set_from_resource $bg3    i3wm.bg3    ${xprop "bg3"}#BDAE93
+      set_from_resource $bg4    i3wm.bg4    ${xprop "bg4"}#A89984
+      set_from_resource $fg0    i3wm.fg0    ${xprop "fg0"}#3C3836
+      set_from_resource $fg1    i3wm.fg1    ${xprop "fg1"}#282828
+      set_from_resource $fg2    i3wm.fg2    ${xprop "fg2"}#504945
+      set_from_resource $fg3    i3wm.fg3    ${xprop "fg3"}#665C54
+      set_from_resource $fg4    i3wm.fg4    ${xprop "fg4"}#7C6F64
 
       # class                 border  backgr. text    indicator child_border
-      client.focused          $bg2    $bg2    $fg     $bg       $bg2
-      client.focused_inactive $bg1    $bg1    $fg2    $bg       $bg1
-      client.unfocused        $bg     $bg     $fg3    $bg       $bg
+      client.focused          $bg2    $bg2    $fg0    $bg0      $bg2
+      client.focused_inactive $bg1    $bg1    $fg2    $bg0      $bg1
+      client.unfocused        $bg0    $bg0    $fg3    $bg0      $bg0
       client.urgent           $fg1    $fg1    $bg1    $purple   $red
       client.placeholder      $fg2    $fg2    $bg2    $bg4      $fg2
-      client.background       $bg
+      client.background       $bg0
 
       bindsym Mod4+1 workspace number 1
       bindsym Mod4+2 workspace number 2
@@ -228,11 +230,11 @@ in
         strip_workspace_numbers no
         strip_workspace_name    no
         colors {
-            background $bg
+            background $bg0
             statusline $fg2
             separator  $bg4
 
-            focused_workspace  $fg  $fg  $bg
+            focused_workspace  $fg0 $fg0 $bg0
             active_workspace   $fg2 $fg2 $bg2
             inactive_workspace $bg2 $bg2 $fg2
             urgent_workspace   $purple $red $fg1

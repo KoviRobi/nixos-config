@@ -4,6 +4,9 @@
   config,
   ...
 }:
+let
+  xprop = name: config.xresources.properties."*.${name}";
+in
 {
   imports = [
     ./i3
@@ -71,6 +74,7 @@
     }
     // (
       let
+        invert = br: if br == "light" then "dark" else "light";
         f = brightness: {
           state-file = "echo '${brightness}' > ~/.local/state/brightness";
           ghostty = ''
@@ -90,6 +94,25 @@
             TMUX_TMPDIR=/run/user/$UID \
             ${pkgs.tmux}/bin/tmux source-file \
                 ${pkgs.tmux-gruvbox-v1}/share/tmux-plugins/gruvbox/tmux-gruvbox-${brightness}.conf
+          '';
+          x11 = ''
+            ${lib.getExe' pkgs.coreutils "cat"} <<EOF | ${lib.getExe pkgs.xrdb} -merge
+              *.bg0_hard: ${xprop "${brightness}0_hard"}
+              *.bg0:      ${xprop "${brightness}0"}
+              *.bg0_soft: ${xprop "${brightness}0_soft"}
+              *.bg1:      ${xprop "${brightness}1"}
+              *.bg2:      ${xprop "${brightness}2"}
+              *.bg3:      ${xprop "${brightness}3"}
+              *.bg4:      ${xprop "${brightness}4"}
+
+              *.fg0_hard: ${xprop "${invert brightness}0_hard"}
+              *.fg0:      ${xprop "${invert brightness}0"}
+              *.fg0_soft: ${xprop "${invert brightness}0_soft"}
+              *.fg1:      ${xprop "${invert brightness}1"}
+              *.fg2:      ${xprop "${invert brightness}2"}
+              *.fg3:      ${xprop "${invert brightness}3"}
+              *.fg4:      ${xprop "${invert brightness}4"}
+            EOF
           '';
         };
       in
@@ -154,7 +177,7 @@
     };
   };
   gtk.theme = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
+    name = "Gruvbox dark";
+    package = pkgs.gruvbox-dark-icons-gtk;
   };
 }
