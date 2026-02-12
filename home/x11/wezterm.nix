@@ -25,6 +25,7 @@
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
       config.quit_when_all_windows_are_closed = false
+      config.mux_enable_ssh_agent = false
 
       config.keys = {
         -- Turn off the default Alt+Enter full screen
