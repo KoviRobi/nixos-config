@@ -1,10 +1,4 @@
-{ pkgs, ... }:
 {
-  systemd.user.services.wezterm-mux-server = {
-    Service.ExecStart = "${pkgs.wezterm}/bin/wezterm-mux-server";
-    Unit.Description = "Wezterm multiplexer";
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
   programs.wezterm = {
     enable = true;
     enableBashIntegration = true;
@@ -30,6 +24,7 @@
       config.window_padding = { left = 3, right = 3, top = 3, bottom = 3}
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
+      config.quit_when_all_windows_are_closed = false
 
       config.keys = {
         -- Turn off the default Alt+Enter full screen
