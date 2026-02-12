@@ -148,7 +148,7 @@ in
   dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
     ${rofi} -show run
   '';
-  dmenu-window = pkgs.writeShellScript "i3-dmenu-run" ''
+  dmenu-window = pkgs.writeShellScript "i3-dmenu-window" ''
     ${rofi} -window-thumbnail -theme fullscreen-preview -show window
   '';
   dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''

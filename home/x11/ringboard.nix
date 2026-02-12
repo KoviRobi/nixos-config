@@ -48,18 +48,4 @@
   home.packages = [
     pkgs.ringboard
   ];
-
-  xsession.windowManager.i3.config = {
-    keybindings = lib.mkOptionDefault {
-      "Mod1+Mod4+h" = "exec --no-startup-id ${pkgs.ringboard}/bin/ringboard-egui toggle";
-    };
-    window.commands = [
-      {
-        command = "floating enable";
-        criteria = {
-          instance = "^ringboard-egui$";
-        };
-      }
-    ];
-  };
 }
