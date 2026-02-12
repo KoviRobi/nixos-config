@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }:
@@ -144,8 +145,13 @@
       ~/.fehbg || true &
     '';
   };
-  home.pointerCursor = {
-    size = builtins.div config.nixos.services.xserver.dpi 5;
+  home = {
+    sessionVariables = {
+      TERMINAL = lib.getExe pkgs.wezterm;
+    };
+    pointerCursor = {
+      size = builtins.div config.nixos.services.xserver.dpi 5;
+    };
   };
   gtk.theme = {
     name = "Adwaita";
