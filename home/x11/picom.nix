@@ -8,6 +8,8 @@
     vsync = true;
     transparent-clipping = true;
     rules = (
+      { match = "_NET_WM_BYPASS_COMPOSITOR > 0"; transparent-clipping = false; },
+
       { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'kiwix-desktop'"; invert-color = true;  },
       { match = "INVERT@ = 1";                                          invert-color = true;  },
       { match = "INVERT@ = 0";                                          invert-color = false; },
