@@ -14,8 +14,8 @@
       { match = "INVERT@ = 1";                                          invert-color = true;  },
       { match = "INVERT@ = 0";                                          invert-color = false; },
 
-      { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'ringboard-egui'";         opacity = 0.87; },
-      { match = "!_NET_WM_WINDOW_OPACITY && class_i %= 'scratch_*'";             opacity = 0.87; },
+      { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'ringboard-egui'";         opacity = 0.91; },
+      { match = "!_NET_WM_WINDOW_OPACITY && class_i %= 'scratch_*'";             opacity = 0.91; },
       { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'st-256color'";            opacity = 0.91; },
       { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'ghostty'";                opacity = 0.91; },
       { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'org.wezfurlong.wezterm'"; opacity = 0.91; },
