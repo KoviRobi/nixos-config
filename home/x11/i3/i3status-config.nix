@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+  xprop = name: config.xresources.properties."*.${name}";
   fileSystems = builtins.attrNames config.nixos.fileSystems;
   inherit (builtins) concatStringsSep;
   baseNameOf = s: if s == "/" then s else builtins.baseNameOf s;
@@ -15,6 +16,9 @@ pkgs.writeText "i3status-config" ''
 
   general {
           colors = true
+          color_good = "${xprop "green"}"
+          color_degraded = "${xprop "yellow"}"
+          color_bad = "${xprop "red"}"
           interval = 5
   }
 
