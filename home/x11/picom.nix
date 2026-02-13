@@ -21,6 +21,9 @@
       { match = "!_NET_WM_WINDOW_OPACITY && class_i = 'org.wezfurlong.wezterm'"; opacity = 0.91; },
       { match = "_NET_WM_STATE@[*] = '_NET_WM_STATE_HIDDEN'";                    opacity = 0;    },
 
+      # Bar opacity matching terminal one
+      { match = "class_g = 'i3bar'"; transparent-clipping = false; opacity = 0.91; },
+
       # Ensure it only shows the background (needs to have transparent-clipping set
       # explicitly for some reason)
       { match = "class_i = 'i3lock'"; transparent-clipping = true; opacity = 0.4;  },
