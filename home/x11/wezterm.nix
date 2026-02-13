@@ -24,7 +24,6 @@
       config.window_padding = { left = 3, right = 3, top = 3, bottom = 3}
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
-      config.quit_when_all_windows_are_closed = false
       config.mux_enable_ssh_agent = false
 
       config.keys = {
