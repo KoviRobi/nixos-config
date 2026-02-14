@@ -259,7 +259,6 @@
   environment.systemPackages = [
     pkgs.nvtopPackages.amd
     pkgs.docker-credential-helpers
-    pkgs.virt-manager
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
     pkgs.wineWowPackages.full
     pkgs.winetricks

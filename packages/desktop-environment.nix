@@ -45,6 +45,12 @@
 
       playerctl
 
+      # VM
+      virt-manager
+      virtiofsd
+      spice-gtk # For USB redirection
+      swtpm
+
       mupdf
       st
       st.terminfo

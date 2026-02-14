@@ -115,7 +115,6 @@
   environment.systemPackages =
     with pkgs;
     [
-      virt-manager
       saleae-logic-2
     ]
     ++ (import ../packages/cc.nix args);
