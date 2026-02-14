@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  programs.tcpdump.enable = true;
+  users.users.default-user.extraGroups = [ "pcap" ];
   environment.systemPackages = with pkgs; [
     wget
     netcat
