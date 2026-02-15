@@ -201,8 +201,6 @@
       gfr   =  ''git pull --rebase'';
       gfra  =  ''git pull --rebase --autostash'';
       gp    =  "git push";
-      gpa   =  ''git push --all'';
-      gpA   =  ''git push --all && git push --tags'';
       gpF   =  ''git push --force'';
       gpf   =  "git push --force-with-lease";
       gpc   =  ''git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'';
