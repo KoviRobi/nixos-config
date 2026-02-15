@@ -160,7 +160,7 @@ in
       bindsym Mod4+Shift+g ${scratch-term "guile" guile}
       bindsym Mod4+Shift+m ${scratch-term "maxima" maxima}
       bindsym Mod4+Shift+p ${scratch-term "python" (pkgs.writeShellScript "scratchpy" "${python3}")}
-      bindsym Mod4+Shift+s ${scratch-term "shell" "${lib.getExe pkgs.tmux} new -t float"}
+      bindsym Mod4+Shift+s ${scratch-term "shell" ""}
 
       bindsym Mod4+Shift+q kill
       bindsym Mod4+Shift+r reload
