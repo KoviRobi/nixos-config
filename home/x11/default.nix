@@ -113,6 +113,8 @@ in
               *.fg3:      ${xprop "${invert brightness}3"}
               *.fg4:      ${xprop "${invert brightness}4"}
             EOF
+            systemctl --user restart pasystray.service
+            ${pkgs.i3}/bin/i3-msg reload
           '';
         };
       in
