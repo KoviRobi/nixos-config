@@ -239,7 +239,7 @@ in
             active_workspace   $fg2 $fg2 $bg2
             inactive_workspace $bg2 $bg2 $fg2
             urgent_workspace   $purple $red $fg1
-            binding_mode       $bg4 $bg4 $bg4
+            binding_mode       $bg3 $bg3 $fg3
         }
       }
 
