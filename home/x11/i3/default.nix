@@ -6,6 +6,7 @@
 }@args:
 let
   xprop = name: config.xresources.properties."*.${name}";
+  border = config.xsession.windowManager.i3.config.window.border;
   i3-helpers = import ./i3-helpers.nix args;
   term = lib.getExe pkgs.wezterm;
   maxima = "${pkgs.maxima}/bin/rmaxima";
@@ -252,6 +253,7 @@ in
       for_window [class="Dragon-drop" instance="dragon-drop"] border none
       for_window [window_type="popup_menu"] border none
       for_window [class="mpv" floating] border 1pixel
+      for_window [class="librewolf"] border pixel ${toString border}
 
       exec_always --no-startup-id ${i3-helpers.workspace-renumber}
     '';
