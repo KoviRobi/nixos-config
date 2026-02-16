@@ -30,12 +30,12 @@ let
   socat = lib.getExe pkgs.socat;
   mpc = lib.getExe pkgs.mpc;
   amixer = lib.getExe' pkgs.alsa-utils "amixer";
-  xbacklight = lib.getExe' pkgs.xorg.xbacklight "xbacklight";
+  xbacklight = lib.getExe' pkgs.xbacklight "xbacklight";
   dc = lib.getExe' pkgs.bc "dc";
   rfkill = lib.getExe' pkgs.util-linux "rfkill"; # Updated from pkgs.rfkill
   actions = rec {
     invert = pkgs.writeShellScript "invert-window-colors" ''
-      PATH="${pkgs.xorg.xprop}/bin:${pkgs.xorg.xwininfo}/bin:${pkgs.gnused}/bin"
+      PATH="${pkgs.xprop}/bin:${pkgs.xwininfo}/bin:${pkgs.gnused}/bin"
       WID=$(xwininfo | sed -n 's/.*Window id: \(\w*\) .*/\1/p')
       VAL=$(xprop -notype -id "$WID" 8i INVERT | sed -n 's/INVERT = //p')
       if [ "$VAL" = 1 ]; then

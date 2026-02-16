@@ -74,14 +74,14 @@
               pkgs.stdenv.cc.cc
               pkgs.systemd
               pkgs.util-linux
-              pkgs.xorg.libICE
-              pkgs.xorg.libSM
-              pkgs.xorg.libX11
-              pkgs.xorg.libXcursor
-              pkgs.xorg.libXext
-              pkgs.xorg.libXfixes
-              pkgs.xorg.libXrandr
-              pkgs.xorg.libXrender
+              pkgs.libice
+              pkgs.libsm
+              pkgs.libx11
+              pkgs.libxcursor
+              pkgs.libxext
+              pkgs.libxfixes
+              pkgs.libxrandr
+              pkgs.libxrender
               pkgs.xz
               pkgs.zlib
               pkgs.zstd

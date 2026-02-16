@@ -81,13 +81,13 @@
       libnotify
       xdotool
       xsel
-      xorg.xev
-      xorg.xhost
-      xorg.xkbprint
-      xorg.xkbutils
-      xorg.xmodmap
-      xorg.xprop
-      xorg.xwininfo
+      xev
+      xhost
+      xkbprint
+      xkbutils
+      xmodmap
+      xprop
+      xwininfo
 
       imagemagick
 

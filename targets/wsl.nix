@@ -62,7 +62,7 @@
     };
   };
   environment.systemPackages = with pkgs; [
-    xorg.xauth
+    xauth
     config.boot.kernelPackages.usbip
     wl-clipboard
   ];
