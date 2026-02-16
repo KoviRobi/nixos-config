@@ -101,7 +101,6 @@ with pkgs;
   kakoune
   kakoune-lsp
   kakman
-  kakoune-cr
   helix
   ((nnn.override { withNerdIcons = true; }).overrideAttrs (old: {
     postInstall = old.postInstall or "" + ''

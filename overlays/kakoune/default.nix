@@ -33,8 +33,7 @@ let
       target=$out/share/kak/autoload/plugins/kovirobi-config
       mkdir -p "$target"
 
-      substitute "$src/kakrc.local" "$out/share/kak/kakrc.local" \
-          --replace-fail @kakoune-cr@ ${getExe' final.kakoune-cr "kcr"}
+      cp "$src/kakrc.local" "$out/share/kak/kakrc.local"
 
       ${concatMapStringsSep "\n" (
         file:

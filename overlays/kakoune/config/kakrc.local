@@ -53,8 +53,6 @@ map global insert <c-w> '<a-;>: erase_word_before_cursor<ret>'
 
 require-module lsp
 
-evaluate-commands %sh{@kakoune-cr@ init kakoune}
-
 define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
 # Shortcut to quickly exit the editor
