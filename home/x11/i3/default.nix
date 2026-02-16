@@ -172,7 +172,9 @@ in
       bindsym Mod4+Shift+space floating toggle
 
       bindsym Mod4+t exec ${i3-helpers.dmenu-workspace} 'workspace'
-      bindsym Mod4+Shift+t exec ${i3-helpers.dmenu-workspace} 'move container to workspace'
+      bindsym Mod4+Shift+t mark --add _sel ;\
+          exec ${i3-helpers.dmenu-workspace} '[con_mark="_sel"]' move container to workspace ;\
+          [con_mark="_sel"] unmark
       bindsym Mod4+a exec ${i3-helpers.dmenu-action}
       bindsym Mod4+p exec ${i3-helpers.dmenu-run}
       bindsym Mod4+d exec ${i3-helpers.dmenu-drun}
