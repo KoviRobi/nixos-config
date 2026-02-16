@@ -158,7 +158,8 @@ in
     RES=`${i3-msg} -t get_workspaces | \
         ${jq} --raw-output 'map(.name)|join("\n")' | \
         ${dmenu}`
-    ${i3-msg} "$@" "$RES"
+    ${i3-msg} -- "$@" "$RES"
+    ${i3-msg} -- unmark "_sel"
   '';
   workspace-renumber =
     let
