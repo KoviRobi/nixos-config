@@ -54,6 +54,7 @@
       "....." = "cd ../../../..";
 
       ghignore = ''_ghignore() { ( URL="https://github.com/github/gitignore/raw/main/$1.gitignore"; shift; PS4="# From "; set -x; curl --silent --location "$URL" "$@" )}; _ghignore'';
+      gpa   = "echo 'Alias removed, use `git push --all`'";
       g     =  "git";
       ga    =  "git add";
       gia   =  ''git add'';
