@@ -63,6 +63,14 @@ define-command -docstring "save and quit" xa "write-all-quit"
 alias global bd delete-buffer
 alias global bd! delete-buffer!
 
+# Use OSC 52, works through SSH also
+hook global NormalKey y|d|c %{
+    nop %sh{
+        encoded=$(printf %s "$kak_reg_dquote" | base64 | tr -d '\n')
+        printf "\e]52;;%s\e\\" "$encoded" >/dev/tty
+    }
+}
+
 alias global qa kill
 alias global qa! kill!
 
