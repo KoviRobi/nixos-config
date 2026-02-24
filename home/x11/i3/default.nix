@@ -256,7 +256,7 @@ in
       for_window [class="Dragon-drop" instance="dragon-drop"] border none
       for_window [window_type="popup_menu"] border none
       for_window [class="mpv"] border pixel 1
-      for_window [class="vncviewer"] border pixel 1
+      for_window [class="Vncviewer"] border pixel 1
       for_window [class="librewolf"] border pixel ${toString border}
 
       exec_always --no-startup-id ${i3-helpers.workspace-renumber}
