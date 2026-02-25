@@ -137,7 +137,7 @@
   documentation = {
     enable = true;
     man.enable = true;
-    man.generateCaches = false;
+    man.cache.enable = false;
     info.enable = true;
     dev.enable = true;
     nixos.enable = true;
