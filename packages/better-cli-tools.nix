@@ -46,4 +46,9 @@ with pkgs;
   # Markdown
   comrak
   rumdl
+
+  # Python coredump stacktrace
+  pystack
+  # strace profiling graph generation
+  straceprof
 ]

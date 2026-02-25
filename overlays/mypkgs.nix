@@ -47,30 +47,6 @@ final: prev: {
     }/manydots-magic $outdir/manydots-magic.zsh
   '';
 
-  pystack =
-    let
-      ppkgs = final.python3.pkgs;
-    in
-    ppkgs.buildPythonApplication rec {
-      pname = "pystack";
-      version = "1.4.1";
-      src = final.fetchFromGitHub {
-        owner = "bloomberg";
-        repo = "pystack";
-        rev = "v${version}";
-        hash = "sha256-j+M7GgPUqVtHKkekr5MZXWsseAJtoHTzyCx+yRJk0V8=";
-      };
-      buildInputs = [
-        final.libdwarf
-        final.elfutils
-      ];
-      nativeBuildInputs = [ final.pkg-config ];
-      propagatedBuildInputs = [
-        ppkgs.pkgconfig
-        ppkgs.cython
-      ];
-    };
-
   vimPlugins = prev.vimPlugins.extend (
     final': prev': {
       vim-localvimrc = prev'.vim-localvimrc.overrideAttrs {
@@ -147,4 +123,50 @@ final: prev: {
       })
     else
       throw "Can remove";
+
+  pystack =
+    let
+      ppkgs = final.python3.pkgs;
+    in
+    ppkgs.buildPythonApplication rec {
+      pname = "pystack";
+      version = "1.4.1";
+      pyproject = true;
+      build-system = [ ppkgs.setuptools ];
+      src = final.fetchFromGitHub {
+        owner = "bloomberg";
+        repo = "pystack";
+        rev = "v${version}";
+        hash = "sha256-j+M7GgPUqVtHKkekr5MZXWsseAJtoHTzyCx+yRJk0V8=";
+      };
+      buildInputs = [
+        final.libdwarf
+        final.elfutils
+      ];
+      nativeBuildInputs = [ final.pkg-config ];
+      propagatedBuildInputs = [
+        ppkgs.pkgconfig
+        ppkgs.cython
+      ];
+    };
+
+  straceprof =
+    let
+      ppkgs = final.python3.pkgs;
+    in
+    ppkgs.buildPythonApplication rec {
+      pname = "straceprof";
+      version = "unstable-2025-05-12";
+      pyproject = true;
+      build-system = [ ppkgs.hatchling ];
+      src = "${final.fetchFromGitHub {
+        owner = "akawashiro";
+        repo = "straceprof";
+        rev = "fe5f4f88c01df169ce1cc73792781b6ad03759ce";
+        hash = "sha256-36Bhz0prjLrOAoQ/s0/LRBRXmFkmZH96NyCKav+zG2w=";
+      }}/straceprof-python";
+      propagatedBuildInputs = [
+        ppkgs.matplotlib
+      ];
+    };
 }
