@@ -130,7 +130,6 @@
   environment.systemPackages = with pkgs; [
     obs-studio
     sigrok-cli
-    pulseview
     saleae-logic-2
     open_dp100
     google-chrome
