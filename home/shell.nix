@@ -35,7 +35,7 @@
     sessionVariables = {
       EDITOR = "kak";
       VISUAL = "kak";
-      PAGER = "less";
+      PAGER = "${lib.getExe pkgs.less}";
       LESS =
         "-iRqw "
         + "--QUIET --no-vbell "
