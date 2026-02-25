@@ -8,7 +8,7 @@
   imports = [ ./starship.nix ];
 
   home = {
-    sessionPath = [ "${config.xdg.dataHome}/bin" ];
+    sessionPath = [ "$HOME/.local/bin" "$HOME/go/bin" ];
     packages =
       with pkgs;
       [
