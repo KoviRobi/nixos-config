@@ -21,6 +21,8 @@ with pkgs;
   shfmt
   shellcheck
 
+  lua-language-server
+
   # JSON/YAML
   vscode-json-languageserver
   yaml-language-server

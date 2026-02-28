@@ -88,6 +88,13 @@ with pkgs;
   sccache
   mold
 
+  # Frequently used misc languages
+  lua
+  tcl
+  tk
+  # Plus unbuffer on its own is just useful (e.g. coloured pipes)
+  expect
+
   atop
 
   qrencode
