@@ -363,66 +363,71 @@
         ];
         caseSensitive = false;
       };
-      initContent = ''
-        unsetopt beep
+      initContent = lib.mkMerge [
+        (lib.mkBefore ''
+          autoload -Uz ${./zsh}/_xxd
+        '')
+        ''
+          unsetopt beep
 
-        unalias e
+          unalias e
 
-        export VERSION_CONTROL=numbered
+          export VERSION_CONTROL=numbered
 
-        bindkey -e
-        autoload edit-command-line
-        zle -N edit-command-line
-        bindkey "^X^E" edit-command-line
-        bindkey "^P" up-history
-        bindkey "^N" down-history
-        bindkey "^W" kill-region
-        bindkey "^[u" up-case-word
-        bindkey "^[l" down-case-word
-        bindkey "^Q" push-line
-        bindkey "^Z" undo
+          bindkey -e
+          autoload edit-command-line
+          zle -N edit-command-line
+          bindkey "^X^E" edit-command-line
+          bindkey "^P" up-history
+          bindkey "^N" down-history
+          bindkey "^W" kill-region
+          bindkey "^[u" up-case-word
+          bindkey "^[l" down-case-word
+          bindkey "^Q" push-line
+          bindkey "^Z" undo
 
-        [ -z "''${terminfo[kcbt]}" ]  || bindkey "''${terminfo[kcbt]}"  reverse-menu-complete
-        [ -z "''${terminfo[kdch1]}" ] || bindkey "''${terminfo[kdch1]}" delete-char
-        [ -z "''${terminfo[kich1]}" ] || bindkey "''${terminfo[kich1]}" overwrite-mode
-        [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
-        [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
-        bindkey "^[[1;5C" forward-word
-        bindkey "^[[1;5D" backward-word
+          [ -z "''${terminfo[kcbt]}" ]  || bindkey "''${terminfo[kcbt]}"  reverse-menu-complete
+          [ -z "''${terminfo[kdch1]}" ] || bindkey "''${terminfo[kdch1]}" delete-char
+          [ -z "''${terminfo[kich1]}" ] || bindkey "''${terminfo[kich1]}" overwrite-mode
+          [ -z "''${terminfo[khome]}" ] || bindkey "''${terminfo[khome]}" beginning-of-line
+          [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
+          bindkey "^[[1;5C" forward-word
+          bindkey "^[[1;5D" backward-word
 
-        # Often I do want to go back to underscores or hyphens
-        WORDCHARS=""
+          # Often I do want to go back to underscores or hyphens
+          WORDCHARS=""
 
 
-        compdef _man viman
-        compdef _man kakman
-        # No man-page sections for viman
-        eval "$(zstyle -L '*' insert-sections | sed 's/^zstyle/& -d/')"
-        zstyle ':completion:*:manuals*' insert-sections suffix
-        zle -C complete-file complete-word _generic
-        zstyle ':completion:complete-file::::' completer _file
-        bindkey '^X^F' complete-file
-        unsetopt flow_control
-        unsetopt PATH_DIRS
-        setopt AUTO_PUSHD
+          compdef _man viman
+          compdef _man kakman
+          # No man-page sections for viman
+          eval "$(zstyle -L '*' insert-sections | sed 's/^zstyle/& -d/')"
+          zstyle ':completion:*:manuals*' insert-sections suffix
+          zle -C complete-file complete-word _generic
+          zstyle ':completion:complete-file::::' completer _file
+          bindkey '^X^F' complete-file
+          unsetopt flow_control
+          unsetopt PATH_DIRS
+          setopt AUTO_PUSHD
 
-        function _semprompt_cmd_start() {
-          builtin print -n '\e]133;C\e\\'
-        }
-        function _semprompt_cmd_end() {
-          builtin printf '\e]133;D;%d\e\\' "$?"
-        }
+          function _semprompt_cmd_start() {
+            builtin print -n '\e]133;C\e\\'
+          }
+          function _semprompt_cmd_end() {
+            builtin printf '\e]133;D;%d\e\\' "$?"
+          }
 
-        add-zsh-hook preexec _semprompt_cmd_start
-        # precmd is badly named -- it is in fact pre-prompt, post CMD
-        add-zsh-hook precmd  _semprompt_cmd_end
+          add-zsh-hook preexec _semprompt_cmd_start
+          # precmd is badly named -- it is in fact pre-prompt, post CMD
+          add-zsh-hook precmd  _semprompt_cmd_end
 
-        eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
+          eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
 
-        if [ -e "$HOME/.zshrc.local" ]; then
-          source "$HOME/.zshrc.local"
-        fi
-      '';
+          if [ -e "$HOME/.zshrc.local" ]; then
+            source "$HOME/.zshrc.local"
+          fi
+        ''
+      ];
     };
   };
 }
