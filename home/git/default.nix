@@ -37,8 +37,11 @@ in
       };
       am.threeWay = true;
       checkout.workers = 0;
-      commit.gpgSign = true;
-      commit.verbose = true;
+      commit = {
+        gpgSign = true;
+        verbose = true;
+        cleanup = "scissors";
+      };
       core = {
         commitGraph = true;
         fsmonitor = true;
