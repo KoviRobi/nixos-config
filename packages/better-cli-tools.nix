@@ -6,7 +6,6 @@ with pkgs;
   dust
   duf
   hyperfine
-  neofetch
   rm-improved
 
   taskwarrior3
