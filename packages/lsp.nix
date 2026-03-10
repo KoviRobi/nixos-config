@@ -21,6 +21,7 @@ with pkgs;
   # Shell
   shfmt
   shellcheck
+  bash-language-server
 
   lua-language-server
 
