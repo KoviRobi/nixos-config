@@ -4,6 +4,7 @@ with pkgs;
   # C/C++
   clang-tools
   ccls
+  bear
 
   gopls
 
