@@ -17,4 +17,4 @@ python = "^3.10"
 titlecase = "^2.4.1"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.3.0"
+black = "^26.3.1"
