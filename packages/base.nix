@@ -98,6 +98,7 @@ with pkgs;
   atop
 
   qrencode
+  zbar
 
   unipicker
   fzf
