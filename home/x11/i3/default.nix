@@ -166,8 +166,8 @@ in
       bindsym Mod4+Shift+q kill
       bindsym Mod4+Shift+r reload
 
-      bindsym Mod4+comma exec ${lib.getExe' pkgs.dunst "dunstctl"} close
-      bindsym Mod4+period exec ${lib.getExe' pkgs.dunst "dunstctl"} history-pop
+      bindsym Mod4+comma exec ${lib.getExe' pkgs.dunst "dunstctl"} history-pop
+      bindsym Mod4+period exec ${lib.getExe' pkgs.dunst "dunstctl"} close
       bindsym Mod4+slash exec ${lib.getExe' pkgs.dunst "dunstctl"} context
 
       bindsym Mod4+Shift+space floating toggle
