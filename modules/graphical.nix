@@ -1,6 +1,7 @@
 # vim: set ts=2 sts=2 sw=2 et :
 {
   pkgs,
+  lib,
   ...
 }:
 
@@ -44,7 +45,32 @@
         "last"
       ];
     };
-    i3lock.enable = true;
+    sway.enable = true;
+    foot = {
+      enable = true;
+      theme = "gruvbox";
+      settings = {
+        main = {
+          font = "CaskaydiaCove Nerd Font Mono:size=10";
+        };
+      };
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr = {
+      enable = true;
+      settings = {
+        screencast = {
+          max_fps = 30;
+          exec_before = "${lib.getExe' pkgs.dunst "dunstctl"} set-paused true";
+          exec_after = "${lib.getExe' pkgs.dunst "dunstctl"} set-paused false";
+          chooser_type = "simple";
+          chooser_cmd = "${lib.getExe pkgs.slurp} -f 'Monitor: %o' -or";
+        };
+      };
+    };
   };
 
   services = {

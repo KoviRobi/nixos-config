@@ -13,7 +13,7 @@
     Install.WantedBy = [ "default.target" ];
     Service = {
       Type = "notify";
-      ExecStart = "${pkgs.ringboard}/bin/ringboard-server";
+      ExecStart = "${pkgs.ringboard-wayland}/bin/ringboard-server";
       Environment = "RUST_LOG=trace";
       Restart = "on-failure";
       Slice = "session-ringboard.slice";
@@ -34,7 +34,7 @@
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
       Type = "exec";
-      ExecStart = "${pkgs.ringboard}/bin/ringboard-x11";
+      ExecStart = "${pkgs.ringboard-wayland}/bin/ringboard-wayland";
       Environment = "RUST_LOG=trace";
       Restart = "on-failure";
       Slice = "session-ringboard.slice";
@@ -46,6 +46,6 @@
   };
 
   home.packages = [
-    pkgs.ringboard
+    pkgs.ringboard-wayland
   ];
 }

@@ -24,7 +24,7 @@ let
   rofi = lib.getExe pkgs.rofi;
   dmenu = "${rofi} -dmenu";
   cat = lib.getExe' pkgs.coreutils "cat";
-  i3-msg = lib.getExe' pkgs.i3 "i3-msg";
+  swaymsg = lib.getExe' pkgs.sway "swaymsg";
   jq = lib.getExe pkgs.jq;
   killall = lib.getExe' pkgs.psmisc "killall";
   socat = lib.getExe pkgs.socat;
@@ -48,18 +48,10 @@ let
     lock = pkgs.writeShellScript "lock-screen-dunst-i3lock" ''
       ${killall} -SIGUSR1 .dunst-wrapped # pause
       (
-        ${pkgs.i3lock-color}/bin/i3lock-color \
+        ${lib.getExe pkgs.swaylock} \
           --color=${theme.bg} \
           --inside-color=${theme.bg} \
-          --ring-color=${theme.blue} \
-          --keyhl-color=${theme.green} \
-          --bshl-color=${theme.red} \
-          --clock \
-          --keylayout=0 \
-          --time-color=${theme.blue} \
-          --date-color=${theme.purple} \
-          --layout-color=${theme.green} \
-          --nofork;
+          --ring-color=${theme.blue}
         ${killall} -SIGUSR2 .dunst-wrapped
       ) &
     '';
@@ -115,7 +107,7 @@ let
         fi
       fi
     '';
-    quit = pkgs.writeShellScript "i3-action-quit" "${i3-msg} exit";
+    quit = pkgs.writeShellScript "i3-action-quit" "${swaymsg} exit";
     single = music;
     seek = music;
     stop = music;
@@ -155,11 +147,10 @@ in
     ${rofi} -show-icons -show drun
   '';
   dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
-    RES=`${i3-msg} -t get_workspaces | \
+    RES=`${swaymsg} -t get_workspaces | \
         ${jq} --raw-output 'map(.name)|join("\n")' | \
         ${dmenu}`
-    ${i3-msg} -- "$@" "$RES"
-    ${i3-msg} -- unmark "_sel"
+    ${swaymsg} -- "$@" "$RES"
   '';
   workspace-renumber =
     let

@@ -39,6 +39,13 @@
       kiwix
       kiwix-tools
 
+      # Wayland helpers
+      slurp
+      grim
+      foot
+      foot.themes
+      waybar
+
       pamixer
       paprefs
       pavucontrol

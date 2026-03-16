@@ -5,10 +5,9 @@
   ...
 }@args:
 let
-  xprop = name: config.xresources.properties."*.${name}";
-  border = config.xsession.windowManager.i3.config.window.border;
+  border = config.wayland.windowManager.sway.config.window.border;
   i3-helpers = import ./i3-helpers.nix args;
-  term = lib.getExe pkgs.wezterm;
+  term = lib.getExe pkgs.foot;
   maxima = "${pkgs.maxima}/bin/rmaxima";
   python3 = "${
     pkgs.python3.withPackages (
@@ -33,18 +32,29 @@ let
       ${pgrep} -f scratch_${n} > /dev/null || exec ${p}
     '';
   scratch = n: p: ''
-    exec --no-startup-id '${mk-scratch n p}' , \
-    [instance="^scratch_${n}$"] scratchpad show
+    exec --no-startup-id '${mk-scratch n p}' ; \
+    [app_id="^scratch_${n}$"] scratchpad show
   '';
-  scratch-term = n: p: scratch n "${term} start --class='scratch_${n}' -e ${p}";
+  scratch-term = n: p: scratch n "${term} --app-id='scratch_${n}' -- ${p}";
 in
 {
-  xsession.windowManager.i3 = {
+  xdg.configFile = lib.genAttrs' [ "light" "dark" ] (
+    brightness:
+    let
+      cfg = config.gruvbox.colours.${brightness};
+    in
+    {
+      name = "sway/${brightness}.conf";
+      value.text = lib.concatMapStrings (name: ''
+        set ''$${name} ${cfg.${name}}E5
+      '') (builtins.attrNames cfg);
+    }
+  );
+  wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.i3;
     config = {
-      keybindings = {};
-      modes = {};
+      keybindings = { };
+      modes = { };
       fonts = {
         names = [ "CaskaydiaMono NF" ];
         style = "Regular";
@@ -52,32 +62,24 @@ in
       };
       window.border = 4;
       floating.border = 4;
-      bars = [];
+      bars = [ ];
       modifier = "Mod4";
-      colors = lib.mkForce {};
+      colors = lib.mkForce { };
     };
+    checkConfig = false;
     extraConfig = ''
       popup_during_fullscreen leave_fullscreen
       no_focus [window_role="pop-up"]
 
-      set_from_resource $gray   i3wm.gray   ${xprop "gray"}
-      set_from_resource $red    i3wm.red    ${xprop "red"}
-      set_from_resource $green  i3wm.green  ${xprop "green"}#79740E
-      set_from_resource $yellow i3wm.yellow ${xprop "yellow"}#B57614
-      set_from_resource $blue   i3wm.blue   ${xprop "blue"}#876678
-      set_from_resource $purple i3wm.purple ${xprop "purple"}#8F3F71
-      set_from_resource $aqua   i3wm.aqua   ${xprop "aqua"}#427B58
-      set_from_resource $orange i3wm.orange ${xprop "orange"}#AF3A03
-      set_from_resource $bg0    i3wm.bg0    ${xprop "bg0"}#FBF1C7
-      set_from_resource $bg1    i3wm.bg1    ${xprop "bg1"}#EBDBB2
-      set_from_resource $bg2    i3wm.bg2    ${xprop "bg2"}#D5C4A1
-      set_from_resource $bg3    i3wm.bg3    ${xprop "bg3"}#BDAE93
-      set_from_resource $bg4    i3wm.bg4    ${xprop "bg4"}#A89984
-      set_from_resource $fg0    i3wm.fg0    ${xprop "fg0"}#3C3836
-      set_from_resource $fg1    i3wm.fg1    ${xprop "fg1"}#282828
-      set_from_resource $fg2    i3wm.fg2    ${xprop "fg2"}#504945
-      set_from_resource $fg3    i3wm.fg3    ${xprop "fg3"}#665C54
-      set_from_resource $fg4    i3wm.fg4    ${xprop "fg4"}#7C6F64
+      ${
+        let
+          cfg = config.gruvbox.colours.general;
+        in
+        lib.concatMapStrings (name: ''
+          set ''$${name} ${cfg.${name}}
+        '') (builtins.attrNames cfg)
+      }
+      include brightness.conf
 
       # class                 border  backgr. text    indicator child_border
       client.focused          $bg2    $bg2    $fg0    $bg0      $bg2
@@ -154,7 +156,7 @@ in
       bindsym Mod4+Shift+bracketleft move to output left
       bindsym Mod4+Shift+bracketright move to output right
       bindsym Mod4+Shift+c kill
-      bindsym Mod4+Shift+e exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'
+      bindsym Mod4+Shift+e exec sway-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'
       bindsym Mod4+Shift+equal move to workspace next_on_output
 
       bindsym Mod4+Shift+minus move scratchpad
@@ -172,10 +174,8 @@ in
 
       bindsym Mod4+Shift+space floating toggle
 
-      bindsym Mod4+t exec mark --add "_sel";\
-          exec ${i3-helpers.dmenu-workspace} workspace
-      bindsym Mod4+Shift+t mark --add "_sel";\
-          exec ${i3-helpers.dmenu-workspace} '[con_mark="_sel"]' move container to workspace
+      bindsym Mod4+t exec ${i3-helpers.dmenu-workspace} workspace
+      bindsym Mod4+Shift+t exec ${i3-helpers.dmenu-workspace} move container to workspace
       bindsym Mod4+a exec ${i3-helpers.dmenu-action}
       bindsym Mod4+p exec ${i3-helpers.dmenu-run}
       bindsym Mod4+d exec ${i3-helpers.dmenu-drun}
@@ -229,10 +229,10 @@ in
       bar {
         font pango:CaskaydiaMono NF Regular 10.0
         status_command ${lib.getExe pkgs.i3status} -c ${import ./i3status-config.nix args}
-        i3bar_command ${lib.getExe' pkgs.i3 "i3bar"}
-        separator_symbol "┃"
+        swaybar_command ${lib.getExe pkgs.waybar}
         strip_workspace_numbers no
         strip_workspace_name    no
+        icon_theme "oomox-gruvbox-dark"
         colors {
             background $bg0
             statusline $fg2
@@ -247,19 +247,28 @@ in
       }
 
       for_window [instance="^ringboard-egui$"] floating enable
-      for_window [instance="^scratch_.*$"] move scratchpad
-      for_window [instance="^scratch_.*$"] scratchpad show
+      for_window [app_id="^scratch_.*$"] move scratchpad
+      for_window [app_id="^scratch_.*$"] scratchpad show
       for_window [title="Ediff"] floating enable
       for_window [window_type="popup_menu"] floating enable
       for_window [class="Display" instance="display"] floating enable
-      for_window [class="Dragon-drop" instance="dragon-drop"] floating enable
-      for_window [class="Dragon-drop" instance="dragon-drop"] border none
+      for_window [class="Dragon-drop" app_id="dragon-drop"] floating enable
+      for_window [class="Dragon-drop" app_id="dragon-drop"] border none
       for_window [window_type="popup_menu"] border none
-      for_window [class="mpv"] border pixel 1
       for_window [class="Vncviewer"] border pixel 1
-      for_window [class="librewolf"] border pixel ${toString border}
+      for_window [app_id="mpv"] border pixel 1
+      for_window [app_id="librewolf"] border pixel ${toString border}
+      for_window [app_id="foot"] border pixel ${toString border}
+      for_window [app_id="^scratch_.*$"] border pixel ${toString border}
 
-      exec_always --no-startup-id ${i3-helpers.workspace-renumber}
+      input type:touchpad tap_button_map lrm
+      input type:touchpad tap enabled
+
+      seat * xcursor_theme "Capitaine Cursors (Gruvbox)" 20
+
+      exec_always --no-startup-id ~/.local/share/feh-random-background/current
+
+      # TODO: exec_always --no-startup-id ${i3-helpers.workspace-renumber}
     '';
   };
 }

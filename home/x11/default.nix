@@ -10,7 +10,6 @@ in
 {
   imports = [
     ./i3
-    ./picom.nix
     ./restart-on-failure.nix
     ./ghostty.nix
     ./wezterm.nix
@@ -38,7 +37,7 @@ in
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
     ];
     config.common = {
       default = "gtk";
@@ -48,7 +47,6 @@ in
 
   services = {
     network-manager-applet.enable = true;
-    pasystray.enable = true;
     udiskie.enable = true;
     dunst.enable = true;
     dunst.settings = {
@@ -67,13 +65,11 @@ in
     }
     // (
       let
-        invert = br: if br == "light" then "dark" else "light";
         f = brightness: {
           state-file = "echo '${brightness}' > ~/.local/state/brightness";
-          ghostty = ''
-            ${pkgs.coreutils}/bin/ln -srf                      \
-                ~/.config/ghostty/themes/gruvbox-${brightness} \
-                ~/.config/ghostty/themes/gruvbox
+          foot = ''
+            echo 'initial-color-theme=${brightness}' > ~/.config/foot/brightness.ini
+            ${pkgs.procps}/bin/pkill ${if brightness == "dark" then "-USR1" else "-USR2"} foot
           '';
           kakoune = ''
             ${pkgs.kakoune}/bin/kak -l | while read sid; do
@@ -88,26 +84,10 @@ in
             ${pkgs.tmux}/bin/tmux source-file \
                 ${pkgs.tmux-gruvbox-v1}/share/tmux-plugins/gruvbox/tmux-gruvbox-${brightness}.conf
           '';
-          x11 = ''
-            ${lib.getExe' pkgs.coreutils "cat"} <<EOF | ${lib.getExe pkgs.xrdb} -merge
-              *.bg0_hard: ${xprop "${brightness}0_hard"}
-              *.bg0:      ${xprop "${brightness}0"}
-              *.bg0_soft: ${xprop "${brightness}0_soft"}
-              *.bg1:      ${xprop "${brightness}1"}
-              *.bg2:      ${xprop "${brightness}2"}
-              *.bg3:      ${xprop "${brightness}3"}
-              *.bg4:      ${xprop "${brightness}4"}
-
-              *.fg0_hard: ${xprop "${invert brightness}0_hard"}
-              *.fg0:      ${xprop "${invert brightness}0"}
-              *.fg0_soft: ${xprop "${invert brightness}0_soft"}
-              *.fg1:      ${xprop "${invert brightness}1"}
-              *.fg2:      ${xprop "${invert brightness}2"}
-              *.fg3:      ${xprop "${invert brightness}3"}
-              *.fg4:      ${xprop "${invert brightness}4"}
-            EOF
-            systemctl --user restart pasystray.service
-            ${pkgs.i3}/bin/i3-msg reload
+          sway = ''
+            cd ~/.config/sway
+            ${pkgs.coreutils}/bin/ln -sf ${brightness}.conf brightness.conf
+            ${pkgs.sway}/bin/swaymsg reload
           '';
         };
       in
@@ -126,9 +106,12 @@ in
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";
-      stateFile = "%h/.feh-random-background";
+      stateFile = "%D/feh-random-background";
       interval = "1h";
-      display = "max";
+      command = [
+        (lib.getExe' pkgs.sway "swaymsg")
+        "\"output '*' bg \'$(printf '%%q' \"$BGFILE\")\' fit\""
+      ];
     };
     xcape = {
       enable = true;

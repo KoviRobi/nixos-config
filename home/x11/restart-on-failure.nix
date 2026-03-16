@@ -5,7 +5,5 @@
     parcellite.Service.RestartSec = "10s";
     network-manager-applet.Service.Restart = "on-failure";
     network-manager-applet.Service.RestartSec = "10s";
-    pasystray.Service.Restart = "on-failure";
-    pasystray.Service.RestartSec = "10s";
   };
 }
