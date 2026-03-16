@@ -147,5 +147,7 @@
         article-sort-order date
       '';
     };
+
+    pay-respects.enable = true;
   };
 }
