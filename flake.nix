@@ -50,6 +50,11 @@
       url = "github:KoviRobi/go-catprinter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    feh-random-background = {
+      url = "github:KoviRobi/feh-random-background";
+      flake = false;
+    };
   };
 
   outputs =
@@ -66,7 +71,7 @@
       poetry2nix,
       go-catprinter,
       ...
-    }:
+    }@inputs:
     {
 
       overlays =
@@ -297,6 +302,7 @@
 
                 nix-index-database.nixosModules.nix-index
               ];
+              specialArgs = { inherit inputs; };
             }
           )
           {

@@ -47,6 +47,22 @@
         "type": "github"
       }
     },
+    "feh-random-background": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729880937,
+        "narHash": "sha256-TVUFJAOoHcKWObRsL14AN2MVGJzmYX/2XErFysfY3MI=",
+        "owner": "KoviRobi",
+        "repo": "feh-random-background",
+        "rev": "80bc3616bb8fc87225d1447431555230a4bf3b12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KoviRobi",
+        "repo": "feh-random-background",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -275,6 +291,7 @@
       "inputs": {
         "NixOS-WSL": "NixOS-WSL",
         "deploy-rs": "deploy-rs",
+        "feh-random-background": "feh-random-background",
         "flake-compat": "flake-compat",
         "flake-registry": "flake-registry",
         "go-catprinter": "go-catprinter",

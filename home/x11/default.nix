@@ -15,13 +15,6 @@ in
     ./ghostty.nix
     ./wezterm.nix
     ./ringboard.nix
-    "${
-      fetchTarball {
-        url = "https://github.com/KoviRobi/feh-random-background/archive/80bc3616bb8fc87225d1447431555230a4bf3b12.tar.gz";
-        name = "feh-random-background";
-        sha256 = "1hnwv33wmiaabkv7yqg6khc1aqrp01g2yv5l76bc47d80cj0amad";
-      }
-    }/home-manager-service.nix"
   ];
 
   programs = {
