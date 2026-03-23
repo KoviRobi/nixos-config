@@ -212,6 +212,7 @@
       gri   =  ''git rebase --interactive'';
       grs   =  ''git rebase --skip'';
       gr    =  "git remote";
+      grd   =  "git range-diff";
       gR    =  ''git remote'';
       gRa   =  ''git remote add'';
       gRp   =  ''git remote prune'';
