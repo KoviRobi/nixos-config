@@ -112,18 +112,6 @@ final: prev: {
         version = "unstable-2025-12-11";
       };
 
-  less =
-    if prev.less.version == "691" then
-      prev.less.overrideAttrs (old: {
-        version = "692";
-        src = final.fetchurl {
-          url = "https://www.greenwoodsoftware.com/less/less-692.tar.gz";
-          hash = "sha256-YTAPYDeY7PHXeGVweJ8P8/WhrPB1pvufdWg30WbjfRQ=";
-        };
-      })
-    else
-      throw "Can remove";
-
   pystack =
     let
       ppkgs = final.python3.pkgs;

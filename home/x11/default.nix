@@ -128,7 +128,6 @@ in
       imageDirectory = "%h/backgrounds/";
       stateFile = "%h/.feh-random-background";
       interval = "1h";
-      display = "max";
     };
     xcape = {
       enable = true;

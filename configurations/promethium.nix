@@ -123,8 +123,8 @@
   ];
 
   environment.unixODBCDrivers = [
-    pkgs.unixODBCDrivers.sqlite
-    pkgs.unixODBCDrivers.psql
+    pkgs.unixodbcDrivers.sqlite
+    pkgs.unixodbcDrivers.psql
   ];
 
   environment.systemPackages = with pkgs; [
