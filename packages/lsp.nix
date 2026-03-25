@@ -8,6 +8,8 @@ with pkgs;
 
   gopls
 
+  nixd
+
   # Markdown
   marksman
   mpls

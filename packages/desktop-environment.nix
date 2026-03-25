@@ -35,6 +35,11 @@
 
       libreoffice
 
+      # Work AI trial
+      copilot-language-server
+      vscode-fhs
+      zed-editor-fhs
+
       # Offline net
       kiwix
       kiwix-tools

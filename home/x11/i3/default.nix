@@ -76,7 +76,7 @@ in
           cfg = config.gruvbox.colours.general;
         in
         lib.concatMapStrings (name: ''
-          set ''$${name} ${cfg.${name}}
+          set ''$${name} ${cfg.${name}}E5
         '') (builtins.attrNames cfg)
       }
       include brightness.conf
@@ -118,7 +118,7 @@ in
       bindsym Mod4+Control+s layout stacking
       bindsym Mod4+Control+t layout tabbed
       bindsym Mod4+Control+v split h
-      bindsym Mod4+e layout toggle split
+      bindsym Mod4+e layout toggle all
 
       bindsym Mod4+Left focus left
       bindsym Mod4+Down focus down
