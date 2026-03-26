@@ -1,12 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 with pkgs;
 [
   bashInteractive
   tmux
-  dtach
-  dtach-new-session
-  dtach-ls-sessions
-  abduco
+  inputs.zmx.packages.${pkgs.system}.zmx
   hunspell
   hunspellDicts.en-gb-ise
   hyphen
