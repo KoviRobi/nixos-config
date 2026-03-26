@@ -12,7 +12,6 @@ in
     ./i3
     ./restart-on-failure.nix
     ./ghostty.nix
-    ./wezterm.nix
     ./ringboard.nix
   ];
 
@@ -148,7 +147,7 @@ in
   };
   home = {
     sessionVariables = {
-      TERMINAL = lib.getExe pkgs.wezterm;
+      TERMINAL = lib.getExe pkgs.foot;
     };
     pointerCursor = {
       size = builtins.div config.nixos.services.xserver.dpi 5;

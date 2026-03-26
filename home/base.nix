@@ -107,7 +107,7 @@
         # Emit OSC133 in select terminals (readline doesn't support glob nor "||")
         $if term!=tmux-256color
         $else
-        $if term!=wezterm
+        $if term!=foot
         $else
         set show-mode-in-prompt on
         set emacs-mode-string "\1\e]133;N\e\\\2"
