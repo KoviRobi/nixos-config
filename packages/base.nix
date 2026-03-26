@@ -54,7 +54,6 @@ with pkgs;
   wally-cli # for flashing ergodox firmware
 
   plan9port
-  acme-lsp
 
   _9pfs
   ntfs3g
