@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='i3-workspace-renumber',
-      version='1.0',
+      version='1.1',
       description='Renumber i3 workspaces',
       author='Robert Kovacsics',
       author_email='kovirobi@gmail.com',

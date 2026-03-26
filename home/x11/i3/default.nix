@@ -268,7 +268,7 @@ in
 
       exec_always --no-startup-id ~/.local/share/feh-random-background/current
 
-      # TODO: exec_always --no-startup-id ${i3-helpers.workspace-renumber}
+      exec_always --no-startup-id ${i3-helpers.workspace-renumber}
     '';
   };
 }

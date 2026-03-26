@@ -6,7 +6,7 @@
 }:
 buildPythonApplication {
   pname = "workspace-renumber";
-  version = "1.0";
+  version = "1.1";
   src = ./src;
   pyproject = true;
   build-system = [ setuptools ];
@@ -15,7 +15,7 @@ buildPythonApplication {
   strictDeps = false;
 
   meta = with lib; {
-    description = "Renumber i3 workspaces";
+    description = "Renumber i3/sway workspaces";
     license = licenses.mit;
     maintainers = with maintainers; [ kovirobi ];
   };
