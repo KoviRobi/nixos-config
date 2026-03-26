@@ -300,7 +300,8 @@
         "nixpkgs": "nixpkgs",
         "poetry2nix": "poetry2nix",
         "pye-menu": "pye-menu",
-        "utils": "utils_3"
+        "utils": "utils_3",
+        "zmx": "zmx"
       }
     },
     "systems": {
@@ -450,6 +451,47 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zig2nix": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764678235,
+        "narHash": "sha256-NNQWR3DAufaH7fs6ZplfAv1xPHEc0Ne3Z0v4MNHCqSw=",
+        "owner": "Cloudef",
+        "repo": "zig2nix",
+        "rev": "8b6ec85bccdf6b91ded19e9ef671205937e271e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Cloudef",
+        "repo": "zig2nix",
+        "type": "github"
+      }
+    },
+    "zmx": {
+      "inputs": {
+        "zig2nix": "zig2nix"
+      },
+      "locked": {
+        "lastModified": 1774321438,
+        "narHash": "sha256-/nn7gg2y4mJ3kumQ1N/s/O85g1Ova1+HzAnjDMue/0U=",
+        "owner": "neurosnap",
+        "repo": "zmx",
+        "rev": "98fa966c842394a2f7a8343888c049b11176b776",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neurosnap",
+        "repo": "zmx",
         "type": "github"
       }
     }

@@ -55,6 +55,14 @@
       url = "github:KoviRobi/feh-random-background";
       flake = false;
     };
+
+    zmx = {
+      url = "github:neurosnap/zmx";
+      inputs.zig2nix.inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
+      };
+    };
   };
 
   outputs =
