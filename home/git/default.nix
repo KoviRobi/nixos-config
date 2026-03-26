@@ -17,6 +17,7 @@ in
   ];
 
   programs.git = {
+    signing.format = "ssh";
     enable = true;
     package =
       if config.programs.ssh.enable then
@@ -56,7 +57,6 @@ in
       feature.manyFiles = true;
       fetch.writeCommitGraph = true;
       gerrit.createChangeId = false;
-      gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.config/git/ssh-signers";
       help.autoCorrect = 10;
       init.defaultBranch = "main";

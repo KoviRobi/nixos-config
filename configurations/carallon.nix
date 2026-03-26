@@ -126,7 +126,7 @@
       (remote-local: {
         name = remote-local.local;
         value = {
-          device = "fpganas2.office.carallon.com:/${remote-local.remote}";
+          device = "cachingserver.office.carallon.com:/${remote-local.remote}";
           fsType = "nfs";
           options = [
             "rw"
