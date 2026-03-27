@@ -18,12 +18,7 @@ let
     )
   }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
-  xsel = lib.getExe pkgs.xsel;
-  rofi = "${pkgs.rofi}/bin/rofi";
-  xsel-both = pkgs.writeShellScript "xsel-both" ''
-    ${xsel} -i
-    ${xsel} | ${xsel} -i -b
-  '';
+  rofi = "${pkgs.wofi}/bin/rofi";
   pgrep = "${pkgs.procps}/bin/pgrep";
 
   mk-scratch =
@@ -181,7 +176,7 @@ in
       bindsym Mod4+d exec ${i3-helpers.dmenu-drun}
       bindsym Mod4+g exec ${i3-helpers.dmenu-window}
       bindsym Mod4+u exec ${lib.getExe pkgs.unipicker} \
-                            --copy-command '${xsel-both}' \
+                            --copy-command '${pkgs.ringboard-wayland}/bin/ringboard copy -' \
                             --command '${rofi} -case-smart -sorting-method fzf -dmenu -matching regex'
 
       bindsym Mod4+backslash workspace prev_on_output

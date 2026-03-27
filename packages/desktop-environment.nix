@@ -101,6 +101,11 @@
       xprop
       xwininfo
 
+      wlr-randr
+      wlprop
+      wl-clipboard
+      wofi
+
       imagemagick
 
       typst
