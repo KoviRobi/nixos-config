@@ -30,7 +30,7 @@ in
     autorandr = {
       enable = true;
       hooks.postswitch = {
-        "reload-background" = "$HOME/.cache/fehbg || true";
+        "reload-background" = "$HOME/.local/share/feh-random-background/current || true";
       };
     };
   };
@@ -126,8 +126,8 @@ in
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";
-      stateFile = "%h/.feh-random-background";
       interval = "1h";
+      command = [ (lib.getExe pkgs.feh) "--no-fehbg" "--bg-max" "\"$BGFILE\"" ];
     };
     xcape = {
       enable = true;
