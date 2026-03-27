@@ -28,7 +28,7 @@ in
     autorandr = {
       enable = true;
       hooks.postswitch = {
-        "reload-background" = "$HOME/.cache/fehbg || true";
+        "reload-background" = "$HOME/.local/share/feh-random-background/current || true";
       };
     };
   };
@@ -105,7 +105,6 @@ in
     feh-random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds/";
-      stateFile = "%D/feh-random-background";
       interval = "1h";
       command = [
         (lib.getExe' pkgs.sway "swaymsg")
