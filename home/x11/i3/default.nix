@@ -33,18 +33,6 @@ let
   scratch-term = n: p: scratch n "${term} --app-id='scratch_${n}' -- ${p}";
 in
 {
-  xdg.configFile = lib.genAttrs' [ "light" "dark" ] (
-    brightness:
-    let
-      cfg = config.gruvbox.colours.${brightness};
-    in
-    {
-      name = "sway/${brightness}.conf";
-      value.text = lib.concatMapStrings (name: ''
-        set ''$${name} ${cfg.${name}}E5
-      '') (builtins.attrNames cfg);
-    }
-  );
   wayland.windowManager.sway = {
     enable = true;
     config = {
@@ -66,14 +54,7 @@ in
       popup_during_fullscreen leave_fullscreen
       no_focus [window_role="pop-up"]
 
-      ${
-        let
-          cfg = config.gruvbox.colours.general;
-        in
-        lib.concatMapStrings (name: ''
-          set ''$${name} ${cfg.${name}}E5
-        '') (builtins.attrNames cfg)
-      }
+      include general.conf
       include brightness.conf
 
       # class                 border  backgr. text    indicator child_border

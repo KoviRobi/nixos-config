@@ -70,6 +70,9 @@ in
             echo 'initial-color-theme=${brightness}' > ~/.config/foot/brightness.ini
             ${pkgs.procps}/bin/pkill ${if brightness == "dark" then "-USR1" else "-USR2"} foot
           '';
+          waybar = ''
+            echo '@import url("${brightness}.css");' > ~/.config/waybar/brightness.css
+          '';
           kakoune = ''
             ${pkgs.kakoune}/bin/kak -l | while read sid; do
               (

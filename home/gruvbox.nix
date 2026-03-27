@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 
@@ -131,6 +132,22 @@ in
   };
 
   config = {
+    xdg.configFile =
+      let
+        genColourFile =
+          mkName: mkValue:
+          lib.genAttrs' [ "light" "dark" "general" ] (type: {
+            name = mkName type;
+            value.text =
+              let
+                colours = config.gruvbox.colours.${type};
+              in
+              lib.concatMapStrings (name: mkValue name colours.${name} + "\n") (builtins.attrNames colours);
+          });
+      in
+      genColourFile (n: "sway/${n}.conf") (n: v: "set \$${n} ${v}E5")
+      // genColourFile (n: "waybar/${n}.css") (n: v: "@define-color ${n} ${v};");
+
     xresources.properties = builtins.listToAttrs (
       map (n: {
         name = "*.${n}";
