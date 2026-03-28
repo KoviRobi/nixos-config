@@ -63,8 +63,8 @@ in
     darkman = {
       enable = true;
       settings = {
-        lat = 51.477;
-        lng = 0.0;
+        lat = 51.006;
+        lng = -0.142;
       };
     }
     // (
