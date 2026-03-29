@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }:
 
@@ -56,69 +55,50 @@ let
     purple = neutral_purple;
     aqua = neutral_aqua;
     orange = neutral_orange;
+  };
 
+  brightnesses = with colours; {
+    general = colours;
+
+    light = {
+      bg0_hard = light0_hard;
+      bg0 = light0;
+      bg0_soft = light0_soft;
+      bg1 = light1;
+      bg2 = light2;
+      bg3 = light3;
+      bg4 = light4;
+
+      fg0_hard = dark0_hard;
+      fg0 = dark0;
+      fg0_soft = dark0_soft;
+      fg1 = dark1;
+      fg2 = dark2;
+      fg3 = dark3;
+      fg4 = dark4;
+    };
+
+    dark = {
+      bg0_hard = dark0_hard;
+      bg0 = dark0;
+      bg0_soft = dark0_soft;
+      bg1 = dark1;
+      bg2 = dark2;
+      bg3 = dark3;
+      bg4 = dark4;
+
+      fg0_hard = light0_hard;
+      fg0 = light0;
+      fg0_soft = light0_soft;
+      fg1 = light1;
+      fg2 = light2;
+      fg3 = light3;
+      fg4 = light4;
+    };
   };
 in
 {
   options.gruvbox = with lib; {
-    colours = {
-      general = mkOption {
-        readOnly = true;
-        type = types.attrsOf types.str;
-        description = ''
-          Gruvbox brightness independent colours
-        '';
-        default = colours;
-      };
-      light = mkOption {
-        readOnly = true;
-        type = types.attrsOf types.str;
-        description = ''
-          Gruvbox light-mode bg/fg colours
-        '';
-        default = with colours; {
-          bg0_hard = light0_hard;
-          bg0 = light0;
-          bg0_soft = light0_soft;
-          bg1 = light1;
-          bg2 = light2;
-          bg3 = light3;
-          bg4 = light4;
-
-          fg0_hard = dark0_hard;
-          fg0 = dark0;
-          fg0_soft = dark0_soft;
-          fg1 = dark1;
-          fg2 = dark2;
-          fg3 = dark3;
-          fg4 = dark4;
-        };
-      };
-      dark = mkOption {
-        readOnly = true;
-        type = types.attrsOf types.str;
-        description = ''
-          Gruvbox light-mode bg/fg colours
-        '';
-        default = with colours; {
-          bg0_hard = dark0_hard;
-          bg0 = dark0;
-          bg0_soft = dark0_soft;
-          bg1 = dark1;
-          bg2 = dark2;
-          bg3 = dark3;
-          bg4 = dark4;
-
-          fg0_hard = light0_hard;
-          fg0 = light0;
-          fg0_soft = light0_soft;
-          fg1 = light1;
-          fg2 = light2;
-          fg3 = light3;
-          fg4 = light4;
-        };
-      };
-    };
     brightness = mkOption {
       type = types.enum [
         "dark"
@@ -140,7 +120,7 @@ in
             name = mkName type;
             value.text =
               let
-                colours = config.gruvbox.colours.${type};
+                colours = brightnesses.${type};
               in
               lib.concatMapStrings (name: mkValue name colours.${name} + "\n") (builtins.attrNames colours);
           });
