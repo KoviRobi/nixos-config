@@ -5,48 +5,61 @@
 }:
 
 let
+  rgb =
+    r: g: b:
+    "#${lib.toHexString r}, ${lib.toHexString g}, ${lib.toHexString b}";
+  rgba =
+    r: g: b: a:
+    "#${lib.toHexString r}${lib.toHexString g}${lib.toHexString b}${lib.toHexString a}";
+  tup3 =
+    r: g: b:
+    "${toString r}, ${toString g}, ${toString b}";
+  tup4 =
+    r: g: b: a:
+    "${toString r}, ${toString g}, ${toString b}, ${toString (builtins.div a 256.0)}";
+
   colours = rec {
-    dark0_hard = "#1D2021";
-    dark0 = "#282828";
-    dark0_soft = "#32302F";
-    dark1 = "#3C3836";
-    dark2 = "#504945";
-    dark3 = "#665C54";
-    dark4 = "#7C6F64";
+    dark0_hard = f: f 29 32 33;
+    dark0 = f: f 40 40 40;
+    dark0_soft = f: f 50 48 47;
+    dark1 = f: f 60 56 54;
+    dark2 = f: f 80 73 69;
+    dark3 = f: f 102 92 84;
+    dark4 = f: f 124 111 100;
 
-    gray = "#928374";
+    gray = f: f 146 131 116;
 
-    light0_hard = "#F9F5D7";
-    light0 = "#FBF1C7";
-    light0_soft = "#F2E5BC";
-    light1 = "#EBDBB2";
-    light2 = "#D5C4A1";
-    light3 = "#BDAE93";
-    light4 = "#A89984";
+    light0_hard = f: f 249 245 215;
+    light0 = f: f 251 241 199;
+    light0_soft = f: f 242 229 188;
+    light1 = f: f 235 219 178;
+    light2 = f: f 213 196 161;
+    light3 = f: f 189 174 147;
+    light4 = f: f 168 153 132;
 
-    bright_red = "#FB4934";
-    bright_green = "#B8BB26";
-    bright_yellow = "#FABD2F";
-    bright_blue = "#83A598";
-    bright_purple = "#D3869B";
-    bright_aqua = "#8EC07C";
-    bright_orange = "#FE8019";
+    bright_red = f: f 251 73 52;
+    bright_green = f: f 184 187 38;
+    bright_yellow = f: f 250 189 47;
+    bright_blue = f: f 131 165 152;
+    bright_purple = f: f 211 134 155;
+    bright_aqua = f: f 142 192 124;
+    bright_orange = f: f 254 128 25;
 
-    neutral_red = "#CC241D";
-    neutral_green = "#98971A";
-    neutral_yellow = "#D79921";
-    neutral_blue = "#458588";
-    neutral_purple = "#B16286";
-    neutral_aqua = "#689D6A";
-    neutral_orange = "#D65D0E";
+    neutral_red = f: f 204 36 29;
+    neutral_green = f: f 152 151 26;
+    neutral_yellow = f: f 215 153 33;
+    neutral_blue = f: f 69 133 136;
+    neutral_purple = f: f 177 98 134;
+    neutral_aqua = f: f 104 157 106;
+    neutral_orange = f: f 214 93 14;
 
-    faded_red = "#9D0006";
-    faded_green = "#79740E";
-    faded_yellow = "#B57614";
-    faded_blue = "#076678";
-    faded_purple = "#8F3F71";
-    faded_aqua = "#427B58";
-    faded_orange = "#AF3A03";
+    faded_red = f: f 157 0 6;
+    faded_green = f: f 121 116 14;
+    faded_yellow = f: f 181 118 20;
+    faded_blue = f: f 7 102 120;
+    faded_purple = f: f 143 63 113;
+    faded_aqua = f: f 66 123 88;
+    faded_orange = f: f 175 58 3;
 
     red = neutral_red;
     green = neutral_green;
@@ -125,13 +138,13 @@ in
               lib.concatMapStrings (name: mkValue name colours.${name} + "\n") (builtins.attrNames colours);
           });
       in
-      genColourFile (n: "sway/${n}.conf") (n: v: "set \$${n} ${v}E5")
-      // genColourFile (n: "waybar/${n}.css") (n: v: "@define-color ${n} ${v};");
+      genColourFile (n: "sway/${n}.conf") (n: col: "set \$${n} ${col rgba 229}")
+      // genColourFile (n: "waybar/${n}.css") (n: col: "@define-color ${n} rgba(${col tup4 229});");
 
     xresources.properties = builtins.listToAttrs (
       map (n: {
         name = "*.${n}";
-        value = colours.${n};
+        value = colours.${n} rgb;
       }) (builtins.attrNames colours)
     );
 
