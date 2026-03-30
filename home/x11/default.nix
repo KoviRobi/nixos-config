@@ -50,6 +50,7 @@ in
   };
 
   services = {
+    kanshi.enable = true;
     network-manager-applet.enable = true;
     udiskie.enable = true;
     dunst.enable = true;
