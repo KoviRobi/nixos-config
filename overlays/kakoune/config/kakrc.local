@@ -12,10 +12,10 @@ face global Information MenuBackground
 # To parse lines like `# vi: filetype=kak
 hook global BufOpenFile .* %{ modeline-parse }
 
-add-highlighter global/ show-matching
+add-highlighter global/pairs show-matching
 add-highlighter global/show-trailing-whitespaces regex '\h+$' 0:,rgba:80000040,red+c
-add-highlighter global/show-inconsistent-tabs-1 regex '( +)(\t+)' 2:,rgba:80000040,red+c
-add-highlighter global/show-inconsistent-tabs-2 regex '(\t+)( +)' 1:,rgba:80000040,red+c
+add-highlighter global/show-inconsistent-space-tab regex '( +)(\t+)' 2:,rgba:80000040,red+c
+add-highlighter global/show-inconsistent-tab-space regex '(\t+)( +)' 1:,rgba:80000040,red+c
 
 define-command wrap "add-highlighter global/wrap wrap -word -marker ⏎"
 define-command nowrap "remove-highlighter global/wrap"
@@ -99,6 +99,14 @@ set-face global InactiveCursor rgba:80808040,rgba:80808040
 
 hook global WinDisplay .* %{
   set-option -add global ui_options "terminal_title=%val{buffile}"
+}
+
+hook global WinSetOption filetype=git-commit %{
+    spell
+    set buffer autowrap_column 72
+    autowrap-enable
+    add-highlighter buffer/git-subject column 50 default,rgba:80000020
+    add-highlighter buffer/git-body column 72 default,rgba:80000020
 }
 
 hook global WinSetOption filetype=nix %{
