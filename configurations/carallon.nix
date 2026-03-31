@@ -272,10 +272,5 @@
       ldap_uri = ldap://pdc.office.carallon.com,ldap://bdc.office.carallon.com
       ldap_use_tokengroups = true
     '';
-
-    udev.extraRules = ''
-      # FocalTechSystemsLtd programmer
-      ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="81b9", MODE="660", OWNER="${config.users.users.default-user.name}", GROUP="plugdev", TAG+="uaccess"
-    '';
   };
 }
