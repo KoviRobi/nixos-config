@@ -236,6 +236,7 @@ in
       for_window [app_id="librewolf"] border pixel ${toString border}
       for_window [app_id="foot"] border pixel ${toString border}
       for_window [app_id="^scratch_.*$"] border pixel ${toString border}
+      for_window [app_id="^termfilechooser$"] floating enable
 
       input type:touchpad tap_button_map lrm
       input type:touchpad tap enabled
