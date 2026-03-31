@@ -44,6 +44,11 @@
       drivers = with pkgs; [ hplip ];
     };
     nixseparatedebuginfod2.enable = true;
+    udev.extraRules = ''
+      # For RPi compute module (rpiboot)
+      # 0a5c:2712 Broadcom Corp. BCM2712D0 Boot
+      ATTRS{idVendor}=="0a5c", ATTRS{idProduct}=="2712", MODE="660", GROUP="plugdev", TAG+="uaccess"
+    '';
   };
 
   security.sudo.extraRules = [
@@ -59,7 +64,8 @@
   ];
   environment.systemPackages = [
     pkgs.ungoogled-chromium # Librewolf crashes
-    (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
+    (pkgs.writeShellScriptBin "rewin" "sudo bootctl set-oneshot auto-windows; reboot")
+    pkgs.rpiboot
   ]
   ++ (import ../packages/pc.nix args);
 
