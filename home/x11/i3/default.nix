@@ -94,7 +94,8 @@ in
       bindsym Mod4+Control+s layout stacking
       bindsym Mod4+Control+t layout tabbed
       bindsym Mod4+Control+v split h
-      bindsym Mod4+e layout toggle all
+      bindsym Mod4+e layout toggle splith splitv tabbed stacking
+      bindsym Mod4+Shift+e layout toggle stacking tabbed splitv splith
 
       bindsym Mod4+Left focus left
       bindsym Mod4+Down focus down
@@ -131,8 +132,6 @@ in
       bindsym Mod4+Shift+backslash move to workspace prev_on_output
       bindsym Mod4+Shift+bracketleft move to output left
       bindsym Mod4+Shift+bracketright move to output right
-      bindsym Mod4+Shift+c kill
-      bindsym Mod4+Shift+e exec sway-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'
       bindsym Mod4+Shift+equal move to workspace next_on_output
 
       bindsym Mod4+Shift+minus move scratchpad
@@ -141,7 +140,8 @@ in
       bindsym Mod4+Shift+p ${scratch-term "python" (pkgs.writeShellScript "scratchpy" "${python3}")}
       bindsym Mod4+Shift+s ${scratch-term "shell" ""}
 
-      bindsym Mod4+Shift+q kill
+      bindsym Mod4+Shift+c kill
+      bindsym Mod4+Shift+q exec sway-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'
       bindsym Mod4+Shift+r reload
 
       bindsym Mod4+comma exec ${lib.getExe' pkgs.dunst "dunstctl"} history-pop
