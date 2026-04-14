@@ -68,6 +68,7 @@ with pkgs;
   pciutils
   unzip
   zip
+  p7zip
   graphviz
   dos2unix
   audit
