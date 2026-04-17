@@ -157,5 +157,4 @@ in
       drv = pkgs.python3.pkgs.callPackage ./workspace-renumber { };
     in
     "${drv}/bin/workspace_renumber";
-  inherit (pkgs) pen-pye-menu;
 }

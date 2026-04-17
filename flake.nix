@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pye-menu = {
-      url = "github:KoviRobi/Pye-Menu";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -76,7 +71,6 @@
       nixpkgs,
       utils,
       home-manager,
-      pye-menu,
       flake-registry,
       NixOS-WSL,
       deploy-rs,
@@ -120,10 +114,6 @@
         listToAttrs imported
         // {
           poetry2nix = poetry2nix.overlays.default;
-          pye-menu = final: prev: {
-            pen-pye-menu = pye-menu.packages.${final.stdenv.hostPlatform.system}.pen-menu;
-            inherit (pye-menu.packages.${final.stdenv.hostPlatform.system}) pye-menu;
-          };
           go-catprinter = final: prev: {
             go-catprinter = go-catprinter.packages.${final.stdenv.hostPlatform.system}.default;
           };

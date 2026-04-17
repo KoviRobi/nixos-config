@@ -189,10 +189,6 @@ in
       bindsym XF86MonBrightnessDown exec ${i3-helpers.actions-dir}/bldec
       bindsym XF86MonBrightnessUp exec ${i3-helpers.actions-dir}/blinc
 
-      bindsym XF86Search exec ${i3-helpers.pen-pye-menu}/bin/pen_menu
-      bindsym --release button2 exec ${i3-helpers.pen-pye-menu}/bin/pen_menu
-      bindsym --whole-window Mod4+button2 exec ${i3-helpers.pen-pye-menu}/bin/pen_menu
-
       mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Escape mode default
