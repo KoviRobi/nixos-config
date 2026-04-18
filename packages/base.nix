@@ -105,6 +105,7 @@ with pkgs;
   gcc
   binutils
   gdb
+  dtc
   radare2
   gnumake
   cmake
