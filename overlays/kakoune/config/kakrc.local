@@ -40,10 +40,6 @@ set-option global ui_options \
 # Key mappings
 hook global WinCreate .* %{ kakboard-enable }
 
-set-option global windowing_modules tmux
-
-# tmux
-# tmux_repl
 require-module man-improved
 require-module git-gutter-async
 
