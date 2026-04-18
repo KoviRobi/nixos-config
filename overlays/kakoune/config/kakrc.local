@@ -41,7 +41,6 @@ set-option global ui_options \
 hook global WinCreate .* %{ kakboard-enable }
 
 require-module man-improved
-require-module git-gutter-async
 
 require-module c-w_and_c-u
 map global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'

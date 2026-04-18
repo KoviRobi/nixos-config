@@ -1,4 +1,5 @@
 # From https://github.com/evnoj/git-async.kak
+declare-option -docstring "Always leave space for the git gutter in the line flags columns if the git diff highlighter is active" bool git_gutter_leave_space false
 
 define-command -params 1.. \
     -docstring %{
@@ -21,10 +22,7 @@ define-command -params 1.. \
     }
 
     cd_bufdir() {
-        dirname_buffer=$(dirname "$kak_buffile")
-        if [ "$dirname_buffer" = . ]; then
-            exit # Ignore scratch buffers.
-        fi
+        dirname_buffer="${kak_buffile%/*}"
         cd "${dirname_buffer}" 2>/dev/null || {
             printf 'fail Unable to change the current working directory to: %s\n' "${dirname_buffer}"
             exit 1
@@ -36,10 +34,15 @@ define-command -params 1.. \
 
         fifo=$(mktemp -u /tmp/kak-buffer-fifo-XXXXXX)
         mkfifo "$fifo"
-        trap "rm $fifo" EXIT
+        trap "rm -f \"$fifo\"" EXIT INT TERM HUP
 
         eval_in_client 'exec -draft "%%<a-|>tee > '"$fifo"'<ret>"'
         # eval_in_client "eval -no-hooks write \"$fifo\""
+        # if the eval_in_client doesn't run because kak closed,
+        # the fifo isn't written to and the diff will wait forever
+        # implement a 5 second timeout that closes the fifo
+        ( sleep 5; : <>"$fifo"; rm -f "$fifo" ) >/dev/null &
+        fifo_unblock=$!
 
         git show ":${buffile_relative}" |
             diff - "$fifo" "$@" |
@@ -48,6 +51,9 @@ define-command -params 1.. \
                 NR == 2 { print "+++ b/" buffile_relative }
                 NR > 2
             '
+
+        kill "$fifo_unblock" 2>/dev/null
+        rm -f "$fifo"
     }
 
     diff_buffer_against_index_via_git() {
@@ -57,9 +63,13 @@ define-command -params 1.. \
         mkfifo "$fifo_buffer"
         fifo_git=$(mktemp -u /tmp/kak-diff-fifo-XXXXXX)
         mkfifo "$fifo_git"
+        trap "rm -f \"$fifo_buffer\" \"$fifo_git\"" EXIT INT TERM HUP
 
         eval_in_client 'exec -draft "%%<a-|>tee > '"$fifo_buffer"'<ret>"'
         git show "$rev:${buffile_relative}" > "$fifo_git" &
+
+        ( sleep 5; : <>"$fifo_buffer" ) >/dev/null &
+        fifo_unblock=$!
 
         git diff --no-index "$@" -- "$fifo_git" "$fifo_buffer" |
             awk -v buffile_relative="$buffile_relative" '
@@ -68,6 +78,7 @@ define-command -params 1.. \
                 NR > 2
             '
 
+        kill "$fifo_unblock" 2>/dev/null
         rm -f "$fifo_buffer"
         rm -f "$fifo_git"
     }
@@ -82,12 +93,14 @@ define-command -params 1.. \
             $del_char = $ENV{"kak_opt_git_diff_del_char"};
             $top_char = $ENV{"kak_opt_git_diff_top_char"};
             $mod_char = $ENV{"kak_opt_git_diff_mod_char"};
+            $diff_exists = 0;
             foreach $line (<STDIN>) {
                 if ($line =~ /@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))?/) {
                     $from_line = $1;
                     $from_count = ($2 eq "" ? 1 : $2);
                     $to_line = $3;
                     $to_count = ($4 eq "" ? 1 : $4);
+                    $diff_exists = 1;
 
                     if ($from_count == 0 and $to_count > 0) {
                         for $i (0..$to_count - 1) {
@@ -127,6 +140,10 @@ define-command -params 1.. \
                         $flags .= " $last|\{blue+u\}$mod_char";
                     }
                 }
+            }
+
+            if ($diff_exists or $ENV{kak_opt_git_gutter_leave_space} eq "true") {
+                $flags .= " \"0| \"";
             }
             print "set-option buffer git_diff_flags $flags\n"
         ' )
