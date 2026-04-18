@@ -3,7 +3,6 @@ let
   inherit (final.lib)
     attrNames
     concatMapStringsSep
-    getExe'
     getExe
     ;
   inherit (final.lib.strings) escapeShellArg;
