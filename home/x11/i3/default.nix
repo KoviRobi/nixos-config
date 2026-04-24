@@ -18,7 +18,7 @@ let
     )
   }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
-  rofi = "${pkgs.wofi}/bin/rofi";
+  rofi = "${pkgs.rofi}/bin/rofi";
   pgrep = "${pkgs.procps}/bin/pgrep";
 
   mk-scratch =
