@@ -133,6 +133,7 @@ with pkgs;
   git-absorb
   git-review
   git-filter-repo
+  git-lfs
 ]
 ++ lib.optionals (pkgs.stdenv.buildPlatform != pkgs.stdenv.hostPlatform) [
   vim
