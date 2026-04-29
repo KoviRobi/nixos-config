@@ -229,7 +229,7 @@
         };
       };
     };
-    coredump.enable = true;
+    coredump.enable = false;
   };
 
   security = {
