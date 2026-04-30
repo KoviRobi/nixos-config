@@ -40,7 +40,6 @@
     kernelParams = [
       "clk_ignore_unused"
       "pd_ignore_unused"
-      "cma=128M"
       "boot.shell_on_fail"
     ];
     extraModulePackages = [ ];
