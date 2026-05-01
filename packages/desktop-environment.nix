@@ -66,6 +66,7 @@
       mupdf
       st
       st.terminfo
+      sioyek
       zathura
       ffmpeg
       rofi
