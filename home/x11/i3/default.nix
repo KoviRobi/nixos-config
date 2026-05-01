@@ -34,6 +34,9 @@ let
 in
 {
   wayland.windowManager.sway = {
+    systemd.variables = lib.mkOptionDefault [
+      "XDG_SESSION_ID"
+    ];
     enable = true;
     config = {
       keybindings = { };

@@ -237,6 +237,9 @@
   security = {
     audit.enable = true;
     auditd.enable = true;
+    run0.enableSudoAlias = true;
+    soteria.enable = true;
+    sudo.enable = false;
     pam.services.login.enableGnomeKeyring = true;
     pam.services.sudo.enableGnomeKeyring = true;
   };
