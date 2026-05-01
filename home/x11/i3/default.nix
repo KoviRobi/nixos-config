@@ -94,8 +94,8 @@ in
       bindsym Mod4+Control+s layout stacking
       bindsym Mod4+Control+t layout tabbed
       bindsym Mod4+Control+v split h
-      bindsym Mod4+e layout toggle splith splitv tabbed stacking
-      bindsym Mod4+Shift+e layout toggle stacking tabbed splitv splith
+      bindsym Mod4+e layout toggle splith splitv stacking tabbed
+      bindsym Mod4+Shift+e layout toggle tabbed stacking splitv splith
 
       bindsym Mod4+Left focus left
       bindsym Mod4+Down focus down
