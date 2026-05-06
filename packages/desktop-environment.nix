@@ -73,22 +73,8 @@
       # Drag and drop helper for terminal users
       dragon-drop
 
-      x11vnc
-      tigervnc
-      (pkgs.writeShellScriptBin "shareX11" ''
-        cat <<EOF
-        Note, this is not secure (e.g. password visible in /proc, as well as
-        stdout here). Don't use it with an open port, use it over e.g. SSH
-
-        EOF
-        PASSWD=$(</dev/random tr -dc '[:print:]' | head -c8)
-        echo "$PASSWD"
-        ARGS=("''${@}")
-        if [ ''${#ARGS} -eq 0 ]; then
-          ARGS=(-q -xinerama -clip xinerama0)
-        fi
-        DISPLAY=:0 x11vnc -passwd "''$PASSWD" "''${ARGS[@]}"
-      '')
+      wayvnc
+      wlvncc
 
       libnotify
       xdotool
