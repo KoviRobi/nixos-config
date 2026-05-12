@@ -74,6 +74,7 @@
   };
 
   services = {
+    accounts-daemon.enable = true; # For regreet
     displayManager.sessionPackages = [
       (
         pkgs.writeTextFile {
