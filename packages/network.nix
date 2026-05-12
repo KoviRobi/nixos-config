@@ -25,6 +25,5 @@
     dhcpcd
 
     upterm
-    yt-dlp
   ];
 }

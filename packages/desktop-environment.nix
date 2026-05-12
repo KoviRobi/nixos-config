@@ -103,13 +103,6 @@
       pandoc
     ]
     ++ lib.optionals (pkgs.stdenv.buildPlatform == pkgs.stdenv.hostPlatform) [
-      (mpv.override {
-        scripts = with mpvScripts; [
-          autosubsync-mpv
-          uosc
-          mpris
-        ];
-      })
       flameshot
       v4l-utils
     ];
