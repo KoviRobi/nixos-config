@@ -35,7 +35,6 @@
       "phy_qcom_qmp_pcie"
     ];
     initrd.kernelModules = [ ];
-    kernelPackages = pkgs.linuxPackages_testing;
     kernelModules = [ ];
     kernelParams = [
       "clk_ignore_unused"
