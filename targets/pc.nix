@@ -8,6 +8,7 @@
     loader.efi.canTouchEfiVariables = true;
 
     initrd.luks.devices."pc-nixos-b".device = "/dev/disk/by-uuid/928d2553-cc61-4764-b2d6-263e127a3018";
+    initrd.luks.devices."pc-nixos-b2".device = "/dev/disk/by-uuid/501b7607-3ee4-4fa9-b1ad-5d5cb7c44b35";
   };
 
   # This value determines the NixOS release from which the default
