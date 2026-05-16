@@ -260,7 +260,7 @@
     pkgs.nvtopPackages.amd
     pkgs.docker-credential-helpers
     (pkgs.writeShellScriptBin "rewin" ''sudo bootctl set-oneshot auto-windows; reboot'')
-    pkgs.wineWowPackages.full
+    pkgs.wineWow64Packages.full
     pkgs.winetricks
     pkgs.obs-studio
   ]
