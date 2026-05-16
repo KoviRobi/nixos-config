@@ -19,6 +19,7 @@ in
     librewolf = {
       enable = true;
       nativeMessagingHosts = [
+        pkgs.ff2mpv
         (pkgs.passff-host.override {
           pass = pkgs.pass.withExtensions (exts: with exts; [ pass-otp ]);
         })
