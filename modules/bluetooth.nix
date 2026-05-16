@@ -3,7 +3,8 @@
 
 {
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  environment.systemPackages = [ pkgs.blueman ];
+  services.dbus.packages = [ pkgs.blueman ];
 }
 // {
   home-manager.users.default-user.services.blueman-applet.enable = true;
