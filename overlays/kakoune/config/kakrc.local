@@ -66,6 +66,8 @@ hook global NormalKey y|d|c %{
     }
 }
 
+hook global WinCreate ^[^*]+$ %{editorconfig-load}
+
 alias global qa kill
 alias global qa! kill!
 

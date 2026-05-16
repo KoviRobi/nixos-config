@@ -105,6 +105,7 @@ with pkgs;
   wireguard-tools
 
   kakoune
+  editorconfig-core-c
   kakoune-lsp
   kakman
   helix
