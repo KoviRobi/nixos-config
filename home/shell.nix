@@ -346,7 +346,6 @@
       prezto = {
         enable = true;
         autosuggestions.color = "fg=yellow";
-        editor.dotExpansion = true;
         utility.safeOps = false;
         pmodules = [
           "environment"
@@ -371,6 +370,14 @@
         ''
           unsetopt beep
 
+          # Remove ypcat bit which triggers command-not-found which ends up swallowing characters
+          zstyle -e ':completion:*:hosts' hosts 'reply=(
+            ''${=''${=''${=''${''${(f)"$(cat {/etc/ssh/ssh_,~/.ssh/}known_hosts(|2)(N) 2> /dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
+            ''${=''${(f)"$(cat /etc/hosts(|)(N))"}%%(\#''${_etc_host_ignores:+|''${(j:|:)~_etc_host_ignores}})*}
+            ''${=''${''${''${''${(@M)''${(f)"$(cat ~/.ssh/config 2> /dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+          )'
+
+          # Remove zprezto utility alias, using e-wrapper
           unalias e
 
           export VERSION_CONTROL=numbered
