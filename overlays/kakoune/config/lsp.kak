@@ -31,22 +31,6 @@ provide-module lsp %{
     }
   }
 
-  hook global BufSetOption filetype=markdown %{
-    set-option buffer lsp_servers %exp{
-      [marksman]
-      root_globs = ["*.md"]
-      [mpls]
-      root_globs = ["*.md"]
-      %sh{
-        if [ "$(cat ~/.local/state/brightness || echo light)" = "dark" ]; then
-          echo 'args = ["--code-style=gruvbox", "--dark-mode"]'
-        else
-          echo 'args = ["--code-style=gruvbox"]'
-        fi
-      }
-    }
-  }
-
   hook global BufSetOption filetype=cmake %{
     set-option buffer lsp_servers %{
       [neocmakelsp]

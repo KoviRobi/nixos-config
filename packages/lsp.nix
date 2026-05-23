@@ -10,10 +10,6 @@ with pkgs;
 
   nixd
 
-  # Markdown
-  marksman
-  mpls
-
   # Python
   ruff
   pyright
