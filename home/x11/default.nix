@@ -52,6 +52,10 @@ in
   services = {
     kanshi.enable = true;
     network-manager-applet.enable = true;
+    tailscale-systray = {
+      enable = true;
+      theme = "dark:nobg";
+    };
     udiskie.enable = true;
     dunst.enable = true;
     dunst.settings = {
