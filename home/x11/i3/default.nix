@@ -8,7 +8,7 @@ let
   border = config.wayland.windowManager.sway.config.window.border;
   i3-helpers = import ./i3-helpers.nix args;
   term = lib.getExe pkgs.foot;
-  maxima = "${pkgs.maxima}/bin/rmaxima";
+  numbat = lib.getExe pkgs.numbat;
   python3 = "${
     pkgs.python3.withPackages (
       p: with p; [
@@ -139,7 +139,7 @@ in
 
       bindsym Mod4+Shift+minus move scratchpad
       bindsym Mod4+Shift+g ${scratch-term "guile" guile}
-      bindsym Mod4+Shift+m ${scratch-term "maxima" maxima}
+      bindsym Mod4+Shift+n ${scratch-term "numbat" numbat}
       bindsym Mod4+Shift+p ${scratch-term "python" (pkgs.writeShellScript "scratchpy" "${python3}")}
       bindsym Mod4+Shift+s ${scratch-term "shell" ""}
 

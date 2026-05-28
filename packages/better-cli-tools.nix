@@ -46,6 +46,8 @@ with pkgs;
   comrak
   rumdl
 
+  numbat # Nice calculator with units
+
   # Python coredump stacktrace
   pystack
   # strace profiling graph generation
