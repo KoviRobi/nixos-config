@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#   post-commit
+#     This hook is invoked by git-commit(1). It takes no parameters,
+#     and is invoked after a commit is made.
+#
+#     This hook is meant primarily for notification, and cannot affect
+#     the outcome of git commit.
+
+if [ "$(git config --bool --get lfs.disable)" != true ]; then
+    command -v git-lfs >/dev/null 2>&1 || { printf >&2 "\n%s\n\n" "This repository is configured for Git LFS but 'git-lfs' was not found on your path. If you no longer wish to use Git LFS, remove this hook by deleting the 'post-commit' file in the hooks directory (set by 'core.hookspath'; usually '.git/hooks')."; exit 2; }
+    git lfs post-commit "$@"
+fi
+
