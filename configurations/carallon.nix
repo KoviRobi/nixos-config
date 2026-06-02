@@ -131,10 +131,8 @@
           options = [
             "rw"
             "exec"
-            "noauto"
             "sec=krb5p"
             "vers=4.2"
-            "user"
             "rsize=32768"
             "wsize=32768"
           ];
@@ -143,15 +141,11 @@
       [
         {
           remote = "download_cache";
-          local = "/fpganas2/download_cache";
+          local = "/cachingserver/download_cache";
         }
         {
           remote = "tools";
-          local = "/fpganas2/tools";
-        }
-        {
-          remote = "home";
-          local = "/fpganas2/home";
+          local = "/cachingserver/tools";
         }
       ]
     )
