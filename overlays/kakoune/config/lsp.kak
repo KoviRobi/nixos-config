@@ -31,6 +31,25 @@ provide-module lsp %{
     }
   }
 
+  hook global BufSetOption filetype=markdown %{
+    set-option buffer lsp_servers %exp{
+      [rumdl]
+      root_globs = ["*.md"]
+      command = "rumdl"
+      args = ["server", "--config=MD013.reflow=true"]
+
+      [mpls]
+      root_globs = ["*.md"]
+      %sh{
+        if [ "$(cat ~/.local/state/brightness || echo light)" = "dark" ]; then
+          echo 'args = ["--no-auto", "--code-style=gruvbox", "--dark-mode"]'
+        else
+          echo 'args = ["--no-auto", "--code-style=gruvbox"]'
+        fi
+      }
+    }
+  }
+
   hook global BufSetOption filetype=cmake %{
     set-option buffer lsp_servers %{
       [neocmakelsp]
