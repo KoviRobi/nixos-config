@@ -26,6 +26,7 @@ with pkgs;
   graphviz
   dos2unix
   audit
+  parted
 
   man-pages
   stdman
