@@ -70,7 +70,26 @@ in
           sed -i 's:#!/nix/store/[^/]\+/\(bin/.*\):#!/run/current-system/sw/\1:' {} \;
       ''}";
       diff.guitool = "meld";
-      merge.tool = "nvimdiff";
+      merge.tool = "kakdiff";
+      merge.conflictStyle = "zdiff3";
+      mergetool.kakdiff = {
+        trustExitCode = true;
+        cmd =
+          let
+            kakdiff = pkgs.writeShellApplication {
+              name = "kakdiff";
+              text = ''
+                FILE=$1
+                exec kak \
+                    -e "fifo -name local.diff git diff ':1:$FILE' ':2:$FILE'; \
+                        fifo -name remote.diff git diff ':1:$FILE' ':3:$FILE'; \
+                        e '$FILE'; \
+                        set-register slash '^[<|=>]{7}[^\n]*$'"
+              '';
+            };
+          in
+          "${lib.getExe kakdiff} $MERGED";
+      };
       mergetool.nvimdiff.layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE";
       pull.ff = "only";
       rebase.autoSquash = true;
