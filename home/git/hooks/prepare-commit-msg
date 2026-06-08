@@ -40,18 +40,3 @@ perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$
 # then
 #   perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
 # fi
-
-
-################################
-# Carallon AI usage trailer
-################################
-
-ai_usage_trailer="${CARALLON_AI_USAGE:-github-copilot-trial}"
-
-# add trailer to temp file
-if ! git -c trailer.ifexists=doNothing interpret-trailers \
-      --trailer "ai-usage:${ai_usage_trailer}" \
-      --in-place "$1" ; then
-  echo "cannot insert ai-usage line in $1"
-  exit 1
-fi
