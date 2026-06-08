@@ -54,7 +54,6 @@ with pkgs;
 
   plan9port
 
-  _9pfs
   ntfs3g
 
   gcc
