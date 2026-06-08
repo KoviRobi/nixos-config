@@ -128,6 +128,24 @@
         pkgs.alsa-ucm-conf
         pkgs.alsa-utils
         pkgs.pw-viz
+        (pkgs.makeDesktopItem {
+          name = "nixpkgs-manual";
+          desktopName = "Nixpkgs Manual";
+          genericName = "System Manual";
+          comment = "View Nixpkgs documentation in a web browser";
+          icon = "nix-snowflake";
+          exec = "xdg-open ${pkgs.nixpkgs-manual}/share/doc/nixpkgs/index.html";
+          categories = [ "System" ];
+        })
+        (pkgs.makeDesktopItem {
+          name = "nix-manual";
+          desktopName = "Nix Manual";
+          genericName = "System Manual";
+          comment = "View Nix documentation in a web browser";
+          icon = "nix-snowflake";
+          exec = "xdg-open ${pkgs.nix.doc}/share/doc/nix/manual/index.html";
+          categories = [ "System" ];
+        })
       ];
 
     etc."sudo.conf".text = ''
