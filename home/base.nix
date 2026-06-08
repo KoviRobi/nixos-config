@@ -38,12 +38,13 @@
 
       ".config/mimi/mime.conf".text = ''
         text/html: librewolf
-        text/: ghostty -e tmux new kak
+        application/xhtml+xml: librewolf
+        text/: $TERM kak
         application/pdf: zathura
         video/: mpv
         image/: display
         audio/: mpv
-        inode/directory: st -e tmux new -c
+        inode/directory: $TERM --working-directory
       '';
       ".config/gnupg/gpg-agent.conf".text = ''
         pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
