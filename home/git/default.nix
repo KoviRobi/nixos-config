@@ -17,6 +17,7 @@ in
   ];
 
   programs.git = {
+    lfs.enable = true;
     signing.format = "ssh";
     enable = true;
     package =
