@@ -85,7 +85,7 @@ in
                     -e "fifo -name local.diff git diff ':1:$FILE' ':2:$FILE'; \
                         fifo -name remote.diff git diff ':1:$FILE' ':3:$FILE'; \
                         e '$FILE'; \
-                        set-register slash '^[<|=>]{7}[^\n]*$'"
+                        set-register slash '^[<|=>]{7}[^\n]*$\n?'"
               '';
             };
           in
