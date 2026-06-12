@@ -401,6 +401,12 @@
           [ -z "''${terminfo[kend]}" ]  || bindkey "''${terminfo[kend]}"  end-of-line
           bindkey "^[[1;5C" forward-word
           bindkey "^[[1;5D" backward-word
+          # Remove Ctrl/Shift/Alt+Enter doing anything
+          function _noop() { : }
+          zle -N _noop
+          for i in `seq 2 8`; do
+            bindkey "\e[27;$i;13~" _noop
+          done
 
           # Often I do want to go back to underscores or hyphens
           WORDCHARS=""
