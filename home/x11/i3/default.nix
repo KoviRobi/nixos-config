@@ -243,6 +243,8 @@ in
       input type:touchpad tap_button_map lrm
       input type:touchpad tap enabled
 
+      output "Nreal Air 2 Pro 0x88888800" scale 1.5
+
       seat * xcursor_theme "Capitaine Cursors (Gruvbox)" 20
 
       exec_always --no-startup-id ~/.local/share/feh-random-background/current
