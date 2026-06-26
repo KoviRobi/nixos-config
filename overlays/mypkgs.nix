@@ -132,4 +132,10 @@ final: prev: {
         ppkgs.matplotlib
       ];
     };
+
+  foot = prev.foot.overrideAttrs (old: {
+    patches = old.patches or [] ++ [
+      ./0001-osc7-Keep-a-hold-of-last-OSC7-command-pass-it-to-ter.patch
+    ];
+  });
 }

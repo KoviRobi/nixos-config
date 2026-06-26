@@ -1,0 +1,117 @@
+From 07ddf75383df26500c440e71e0f9c34f9cc5043f Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Fri, 26 Jun 2026 18:39:11 +0100
+Subject: [PATCH] osc7: Keep a hold of last OSC7 command; pass it to
+ term_spawn_new
+
+The idea is that I will change main.shell to a script which can handle
+spawning in directories on other hosts (using an allowlist of hosts).
+
+For example, the following proof of concept works nicely:
+
+> `~/.config/foot/foot.ini`
+> ```ini
+> [main]
+> shell=/home/rmk/.local/bin/osc7-spawn
+> ```
+
+and the shell program is just
+
+> `/home/rmk/.local/bin/osc7-spawn`
+> ```sh
+> #!/bin/sh
+>
+> if [ -n "${OSC7}" ]; then
+>     echo "OSC7: ${OSC7}"
+>     for host in work robk@work home site; do
+>         if [ -z "${OSC7##file://"$host"/*}" ]; then
+>             echo "${OSC7#file://"$host"}"
+>             exec ssh -t "$host" \
+>                 "cd '${OSC7#file://"$host"}'; \
+>                  exec \"\$SHELL\" --login -c 'exec zms'"
+>         fi
+>     done
+> fi
+>
+> exec zms
+> ```
+
+where `zms` in my calse is
+https://github.com/neurosnap/zmx#session-picker but you can use
+dtach/tmux/etc to your liking.
+
+This gives foot something like the wezterm SSH multiplexing
+functionality, in a more modular way. I think it's pretty neat!
+---
+ osc.c      | 9 ++++++++-
+ terminal.c | 6 ++++++
+ terminal.h | 2 ++
+ 3 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/osc.c b/osc.c
+index 05281d0e..d11afe91 100644
+--- a/osc.c
++++ b/osc.c
+@@ -458,8 +458,15 @@ osc_set_pwd(struct terminal *term, char *string)
+ {
+     LOG_DBG("PWD: URI: %s", string);
+ 
++    size_t len = strlen(string);
++    if (term->osc7) {
++        free(term->osc7);
++    }
++    term->osc7 = malloc(len + 1);
++    strncpy(term->osc7, string, len + 1);
++
+     char *scheme, *host, *path;
+-    if (!uri_parse(string, strlen(string), &scheme, NULL, NULL, &host, NULL, &path, NULL, NULL)) {
++    if (!uri_parse(string, len, &scheme, NULL, NULL, &host, NULL, &path, NULL, NULL)) {
+         LOG_ERR("OSC7: invalid URI: %s", string);
+         return;
+     }
+diff --git a/terminal.c b/terminal.c
+index 374d4371..a93da171 100644
+--- a/terminal.c
++++ b/terminal.c
+@@ -1949,6 +1949,9 @@ term_destroy(struct terminal *term)
+     free(term->interactive_resizing.grid);
+ 
+     free(term->foot_exe);
++    if (term->osc7) {
++        free(term->osc7);
++    }
+     free(term->cwd);
+     free(term->mouse_user_cursor);
+     free(term->color_stack.stack);
+@@ -3814,6 +3817,9 @@ term_spawn_new(const struct terminal *term)
+         argv[argc++] = term->conf->conf_path;
+     }
+     argv[argc] = NULL;
++    if (term->osc7) {
++        setenv("OSC7", term->osc7, 1);
++    }
+ 
+     return spawn(
+         term->reaper, term->cwd, argv,
+diff --git a/terminal.h b/terminal.h
+index 7e95697e..c842870a 100644
+--- a/terminal.h
++++ b/terminal.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ 
++#include <stdlib.h>
+ #include <stdint.h>
+ #include <stdbool.h>
+ #include <stddef.h>
+@@ -829,6 +830,7 @@ struct terminal {
+     struct notification_icon notification_icons[32];
+ 
+     char *foot_exe;
++    char *osc7;
+     char *cwd;
+ 
+     bool grapheme_shaping;
+-- 
+2.54.0
+
