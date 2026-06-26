@@ -45,18 +45,6 @@ let
 in
 {
   kakounePlugins = prev.kakounePlugins or { } // {
-    kak-byline = prev.kakouneUtils.buildKakounePluginFrom2Nix {
-      pname = "kak-byline";
-      version = "2025-03-31";
-      src = final.fetchgit {
-        url = "https://git.sr.ht/~ficd/kak-byline";
-        rev = "e6f95597c20fb161edd6e6d33354676e3d4714aa";
-        hash = "sha256-7FqMZexQ0Q8djlOjSn6ak8J0ydi7ir704GJAgzqiAwU=";
-      };
-      meta.homepage = "https://git.sr.ht/~ficd/kak-byline";
-    };
-    byline-kak = final.kak-byline;
-
     explorer-kak = prev.kakouneUtils.buildKakounePluginFrom2Nix {
       pname = "explorer-kak";
       version = "2019-03-20";

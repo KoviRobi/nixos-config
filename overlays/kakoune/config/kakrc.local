@@ -77,10 +77,6 @@ alias global cq! cq-force
 
 set-option global grepcmd "rg --vimgrep"
 
-require-module byline
-map global normal 'X' ": byline-drag-up<ret>"
-map global normal 'x' ": byline-drag-down<ret>"
-
 map global user f ': fzf-mode<ret>' -docstring "FZF mode"
 
 map global insert <c-d> '<a-;><lt>'
