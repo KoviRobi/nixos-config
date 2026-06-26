@@ -19,6 +19,12 @@
           ''$all$line_break$character'' +
           ''\u001b\\]133;B\u001b\\\\"''
         );
+        env_var.ZMX_SESSION = {
+          symbol = "";
+          format = "[$symbol$env_value]($style) ";
+          description = "zmx session name";
+          style = "bold magenta";
+        };
         add_newline = false;
         aws.disabled = true;
         directory.truncation_symbol = "…/";
