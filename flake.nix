@@ -51,17 +51,9 @@
       flake = false;
     };
 
-    zig2nix = {
-      url = "github:Cloudef/zig2nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "utils";
-      };
-    };
-
     zmx = {
       url = "github:neurosnap/zmx";
-      inputs.zig2nix.follows = "zig2nix";
+      # Use the pinned nixpkgs
     };
   };
 

@@ -130,6 +130,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "go-catprinter": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -242,6 +260,21 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1782531150,
+        "narHash": "sha256-TUHir+x0N1T3hiNB+hEmfly6JcKk4gdUunfk71Gndhg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e9c199dc9b30a67d8c52dee8b85987b3ee67929a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -279,7 +312,6 @@
         "nixpkgs": "nixpkgs",
         "poetry2nix": "poetry2nix",
         "utils": "utils_2",
-        "zig2nix": "zig2nix",
         "zmx": "zmx"
       }
     },
@@ -329,6 +361,21 @@
       }
     },
     "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -402,19 +449,15 @@
     },
     "zig2nix": {
       "inputs": {
-        "flake-utils": [
-          "utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1782446727,
-        "narHash": "sha256-8d1lotFh6apCBMFOueMeMc3Q3YkFeKFhvYLQnP7hMBQ=",
+        "lastModified": 1782531873,
+        "narHash": "sha256-EOr3YG/w0GJ79EFscCbLYcSgdyDGIHiNk9pSk+Hvdfs=",
         "owner": "Cloudef",
         "repo": "zig2nix",
-        "rev": "7b1600d8942ce438ee2591329d027665efb57c94",
+        "rev": "da5abe5df326d2479190846ce8f94345560c05f7",
         "type": "github"
       },
       "original": {
@@ -425,9 +468,7 @@
     },
     "zmx": {
       "inputs": {
-        "zig2nix": [
-          "zig2nix"
-        ]
+        "zig2nix": "zig2nix"
       },
       "locked": {
         "lastModified": 1781925726,
