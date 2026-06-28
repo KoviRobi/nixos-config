@@ -4,12 +4,12 @@ with pkgs;
   bashInteractive
   tmux
 
-  inputs.zmx.packages.${pkgs.system}.zmx
+  zmx
   (pkgs.writeShellApplication {
     name = "zms";
     runtimeInputs = [
       pkgs.fzf
-      inputs.zmx.packages.${pkgs.system}.zmx
+      pkgs.zmx
     ];
     text = builtins.readFile ./zms.sh;
   })

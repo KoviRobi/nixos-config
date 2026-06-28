@@ -1,4 +1,9 @@
+{ inputs }:
 final: prev: {
+  inherit (inputs.zmx.packages.${final.system}) zmx;
+  inherit (inputs.poetry2nix.overlays.${final.system}) poetry2nix;
+  go-catprinter = inputs.go-catprinter.packages.${final.system}.default;
+
   dhcp-helper = final.stdenv.mkDerivation rec {
     pname = "dhcp-helper";
     version = "1.2";

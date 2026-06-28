@@ -100,7 +100,12 @@
           nix_or_dirs = filter (attrs: attrs.base != null || attrs.type == "directory") contents;
           imported = map (attrs: {
             name = if attrs.type == "directory" then attrs.name else attrs.base;
-            value = import (./overlays + ("/" + attrs.name));
+            value =
+              let
+                overlay = import (./overlays + ("/" + attrs.name));
+                args = builtins.functionArgs overlay;
+              in
+              if args ? "inputs" then overlay { inherit inputs; } else overlay;
           }) nix_or_dirs;
         in
         listToAttrs imported
