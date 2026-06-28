@@ -262,6 +262,10 @@
     pam.services.login.enableGnomeKeyring = true;
     pam.services.sudo.enableGnomeKeyring = true;
   };
+  # Ensures soteria re-registers
+  systemd.user.services.polkit-soteria.unitConfig.ReloadPropagatedFrom = [ "dbus-broker.service" ];
+  systemd.user.services.polkit-soteria.requires = [ "dbus-broker.service" ];
+  systemd.user.services.polkit-soteria.after = [ "dbus-broker.service" ];
 
   users.groups.plugdev = { };
 
