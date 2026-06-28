@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-osc7() {
-  # shellcheck disable=SC1003 # ASNI ST escape
-  LC_ALL=C printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${PWD}"
-}
-
 OSC7=${OSC7:-$(osc7)}
 
 # Local OSC7 handled by foot already

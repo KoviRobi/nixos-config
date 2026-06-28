@@ -5,6 +5,7 @@ with pkgs;
   tmux
 
   zmx
+  osc7
   osc7-spawn
   zms
 
