@@ -145,4 +145,17 @@ final: prev: {
       ./0001-osc7-Keep-a-hold-of-last-OSC7-command-pass-it-to-ter.patch
     ];
   });
+
+  zms = final.writeShellApplication {
+    name = "zms";
+    runtimeInputs = [
+      final.fzf
+      inputs.zmx.packages.${final.system}.zmx
+    ];
+    text = builtins.readFile ./zms.sh;
+  };
+  osc7-spawn = final.writeShellApplication {
+    name = "osc7-spawn";
+    text = builtins.readFile ./osc7-spawn.sh;
+  };
 }

@@ -5,18 +5,8 @@ with pkgs;
   tmux
 
   zmx
-  (pkgs.writeShellApplication {
-    name = "zms";
-    runtimeInputs = [
-      pkgs.fzf
-      pkgs.zmx
-    ];
-    text = builtins.readFile ./zms.sh;
-  })
-  (pkgs.writeShellApplication {
-    name = "osc7-spawn";
-    text = builtins.readFile ./osc7-spawn.sh;
-  })
+  osc7-spawn
+  zms
 
   hunspell
   hunspellDicts.en-gb-ise
