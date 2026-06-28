@@ -122,19 +122,21 @@ final: prev: {
       version = "unstable-2025-05-12";
       pyproject = true;
       build-system = [ ppkgs.hatchling ];
-      src = "${final.fetchFromGitHub {
-        owner = "akawashiro";
-        repo = "straceprof";
-        rev = "fe5f4f88c01df169ce1cc73792781b6ad03759ce";
-        hash = "sha256-36Bhz0prjLrOAoQ/s0/LRBRXmFkmZH96NyCKav+zG2w=";
-      }}/straceprof-python";
+      src = "${
+        final.fetchFromGitHub {
+          owner = "akawashiro";
+          repo = "straceprof";
+          rev = "fe5f4f88c01df169ce1cc73792781b6ad03759ce";
+          hash = "sha256-36Bhz0prjLrOAoQ/s0/LRBRXmFkmZH96NyCKav+zG2w=";
+        }
+      }/straceprof-python";
       propagatedBuildInputs = [
         ppkgs.matplotlib
       ];
     };
 
   foot = prev.foot.overrideAttrs (old: {
-    patches = old.patches or [] ++ [
+    patches = old.patches or [ ] ++ [
       ./0001-osc7-Keep-a-hold-of-last-OSC7-command-pass-it-to-ter.patch
     ];
   });
