@@ -9,9 +9,9 @@ zmx-select() {
     name=${name#*name=}
     pid=${pid#pid=}
     clients=${clients#clients=}
-    dir=${dir#started_in=}
+    dir=${dir#start_dir=}
     printf "%s\tpid:%s\tclients:%s\t%s\n" "$name" "$pid" "$clients" "$dir"
-  done | sort -t$'\t' -k3.9n,4 -k1,1)
+  done | sort -t$'\t' -k3.9n,4 -k1,1 | column -ts$'\t' -o$' | ')
 
   local output query key name rc
   # shellcheck disable=SC2016 # Expanded in fzf
@@ -20,12 +20,11 @@ zmx-select() {
   { [[ -n "$display" ]] && echo "$display"; } | fzf \
     --print-query \
     --expect=ctrl-d \
-    --bind $'tab:transform-query:echo "${${FZF_CURRENT_ITEM}/\t*/}"' \
-    --bind 'load:transform:column -t' \
+    --bind $'tab:transform-query:echo "${${FZF_CURRENT_ITEM}%%[ |]*}"' \
     --reverse \
     --prompt="zmx> " \
     --header="Enter: accept | Tab: complete | Ctrl-D: z and create new" \
-    --preview=$'zmx history "${${FZF_CURRENT_ITEM}/\t*/}"' \
+    --preview=$'zmx history "${${FZF_CURRENT_ITEM}%%[ |]*}"' \
     --preview-window=down:75%:follow
   )
   rc=$?
