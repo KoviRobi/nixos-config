@@ -42,9 +42,13 @@ zmx-select() {
     ${ZMX_EXEC:+exec} zmx attach "$name"
   elif [[ -n "$query" ]]; then
     name="$query"
+    osc7
     ${ZMX_EXEC:+exec} zmx attach "$name"
   elif [[ $rc -eq 0 ]]; then
-    name=${selected/	*/}
+    name=${selected%%[ |]*}
+    dir=${selected##*[ |]}
+    cd "$dir"
+    osc7
     ${ZMX_EXEC:+exec} zmx attach "$name"
   else
     return 130
