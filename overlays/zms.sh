@@ -24,7 +24,7 @@ zmx-select() {
     --prompt="zmx> " \
     --header="Enter: accept | Tab: complete | Ctrl-D: z and create new" \
     --preview=$'zmx history "${${FZF_CURRENT_ITEM}/\t*/}"' \
-    --preview-window=right:60%:follow || true
+    --preview-window=down:75%:follow || true
   )
   local rc=$?
 
