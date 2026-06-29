@@ -13,9 +13,11 @@ zmx-select() {
     printf "%s\tpid:%s\tclients:%s\t%s\n" "$name" "$pid" "$clients" "$dir"
   done | sort -t$'\t' -k3.9n,4 -k1,1)
 
-  local output query key name
+  local output query key name rc
   # shellcheck disable=SC2016 # Expanded in fzf
-  output=$({ [[ -n "$display" ]] && echo "$display"; } | fzf \
+  set +e
+  output=$(
+  { [[ -n "$display" ]] && echo "$display"; } | fzf \
     --print-query \
     --expect=ctrl-d \
     --bind $'tab:transform-query:echo "${${FZF_CURRENT_ITEM}/\t*/}"' \
@@ -24,9 +26,10 @@ zmx-select() {
     --prompt="zmx> " \
     --header="Enter: accept | Tab: complete | Ctrl-D: z and create new" \
     --preview=$'zmx history "${${FZF_CURRENT_ITEM}/\t*/}"' \
-    --preview-window=down:75%:follow || true
+    --preview-window=down:75%:follow
   )
-  local rc=$?
+  rc=$?
+  set -e
 
   query=$(echo "$output" | sed -n '1p')
   key=$(echo "$output" | sed -n '2p')
