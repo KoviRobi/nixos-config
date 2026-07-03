@@ -256,7 +256,10 @@
   security = {
     audit.enable = true;
     auditd.enable = true;
-    run0.enableSudoAlias = true;
+    run0 = {
+      enable = true;
+      enableSudoAlias = true;
+    };
     soteria.enable = true;
     sudo.enable = false;
     pam.services.login.enableGnomeKeyring = true;
