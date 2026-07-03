@@ -158,8 +158,12 @@
 
   documentation = {
     enable = true;
-    man.enable = true;
-    man.cache.enable = false;
+    man = {
+      man-db.enable = false;
+      mandoc.enable = true;
+      enable = true;
+      cache.enable = false;
+    };
     info.enable = true;
     dev.enable = true;
     nixos.enable = true;
