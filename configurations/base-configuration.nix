@@ -36,6 +36,7 @@
   boot.initrd.systemd.enable = false; # TODDO: Migrate (mainly custom initrd-ssh)
 
   programs = {
+    fuse.enable = true;
     systemtap.enable = true;
 
     zsh = {
