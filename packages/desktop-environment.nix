@@ -52,6 +52,9 @@
 
       playerctl
 
+      # Small games
+      pysolfc
+
       # VM
       virt-manager
       virtiofsd
