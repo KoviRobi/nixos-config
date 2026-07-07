@@ -177,20 +177,20 @@ in
       bindsym Mod4+w focus parent
 
       bindsym Mod4+Delete exec ${i3-helpers.actions-dir}/lock
-      bindsym XF86AudioPlay exec ${i3-helpers.actions-dir}/toggle
-      bindsym XF86AudioPrev exec ${i3-helpers.actions-dir}/prev
-      bindsym XF86AudioNext exec ${i3-helpers.actions-dir}/next
-      bindsym Shift+XF86AudioPrev exec ${i3-helpers.actions-dir}/back
-      bindsym Shift+XF86AudioNext exec ${i3-helpers.actions-dir}/forward
+      bindsym --locked XF86AudioPlay exec ${i3-helpers.actions-dir}/toggle
+      bindsym --locked XF86AudioPrev exec ${i3-helpers.actions-dir}/prev
+      bindsym --locked XF86AudioNext exec ${i3-helpers.actions-dir}/next
+      bindsym --locked Shift+XF86AudioPrev exec ${i3-helpers.actions-dir}/back
+      bindsym --locked Shift+XF86AudioNext exec ${i3-helpers.actions-dir}/forward
 
-      bindsym XF86AudioMute exec ${i3-helpers.actions-dir}/mute
-      bindsym XF86AudioLowerVolume exec ${i3-helpers.actions-dir}/voldn
-      bindsym XF86AudioRaiseVolume exec ${i3-helpers.actions-dir}/volup
+      bindsym --locked XF86AudioMute exec ${i3-helpers.actions-dir}/mute
+      bindsym --locked XF86AudioLowerVolume exec ${i3-helpers.actions-dir}/voldn
+      bindsym --locked XF86AudioRaiseVolume exec ${i3-helpers.actions-dir}/volup
 
-      bindsym XF86Launch5 exec ${i3-helpers.actions-dir}/toggle
+      bindsym --locked XF86Launch5 exec ${i3-helpers.actions-dir}/toggle
 
-      bindsym XF86MonBrightnessDown exec ${i3-helpers.actions-dir}/bldec
-      bindsym XF86MonBrightnessUp exec ${i3-helpers.actions-dir}/blinc
+      bindsym --locked XF86MonBrightnessDown exec ${i3-helpers.actions-dir}/bldec
+      bindsym --locked XF86MonBrightnessUp exec ${i3-helpers.actions-dir}/blinc
 
       mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
