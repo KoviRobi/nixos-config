@@ -10,6 +10,7 @@ let
     # "abduco.kak" = { };
     # "tmux.kak" = { };
     # "tmux-repl.kak" = { };
+    "zmx-repl.kak" = { };
     "man-improved.kak" = { };
     "c-w_and_c-u.kak" = { };
     "git-async.kak" = {

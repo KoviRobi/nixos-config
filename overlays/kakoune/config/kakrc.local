@@ -48,6 +48,8 @@ map global insert <c-w> '<a-;>: erase_word_before_cursor<ret>'
 
 require-module lsp
 
+require-module zmx-repl
+
 define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
 # Shortcut to quickly exit the editor
