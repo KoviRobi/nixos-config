@@ -63,6 +63,7 @@ with pkgs;
 
   gcc
   binutils
+  patchelf
   gdb
   dtc
   radare2
