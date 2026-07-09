@@ -37,9 +37,6 @@ set-option global ui_options \
     terminal_change_colors=true \
     terminal_builtin_key_parser=false
 
-# Key mappings
-hook global WinCreate .* %{ kakboard-enable }
-
 require-module man-improved
 
 require-module c-w_and_c-u

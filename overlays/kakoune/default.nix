@@ -7,9 +7,6 @@ let
     ;
   inherit (final.lib.strings) escapeShellArg;
   config-files = {
-    # "abduco.kak" = { };
-    # "tmux.kak" = { };
-    # "tmux-repl.kak" = { };
     "zmx-repl.kak" = { };
     "man-improved.kak" = { };
     "c-w_and_c-u.kak" = { };
@@ -73,7 +70,6 @@ in
       plugins = old.plugins or [ ] ++ [
         p.kak-ansi
         p.active-window-kak
-        p.kakboard
         p.fzf-kak
         p.kak-byline
         p.explorer-kak
