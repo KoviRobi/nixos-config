@@ -8,7 +8,9 @@ let
   inherit (final.lib.strings) escapeShellArg;
   config-files = {
     "zmx-repl.kak" = { };
-    "man-improved.kak" = { };
+    "man-improved.kak" = {
+      mandoc = getExe final.mandoc;
+    };
     "c-w_and_c-u.kak" = { };
     "git-async.kak" = {
       perl = getExe final.perl;
