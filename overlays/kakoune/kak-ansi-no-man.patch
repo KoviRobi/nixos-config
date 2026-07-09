@@ -1,0 +1,38 @@
+diff --git a/rc/ansi.kak b/rc/ansi.kak
+index 4d5c5fd..af9f7cf 100644
+--- a/rc/ansi.kak
++++ b/rc/ansi.kak
+@@ -72,33 +72,3 @@ define-command \
+     }
+ 
+ hook -group ansi global BufCreate '\*stdin(?:-\d+)?\*' ansi-enable
+-
+-hook -once -group ansi global KakBegin '.*' %{
+-    define-command -override -hidden -params ..3 man-impl %{ evaluate-commands %sh{
+-        buffer_name="$1"
+-        if [ -z "${buffer_name}" ]; then
+-            exit
+-        fi
+-        shift
+-        manout=$(mktemp "${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+-        manerr=$(mktemp "${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+-        env MAN_KEEP_FORMATTING=1 MANWIDTH=${kak_window_range##* } man "$@" > "$manout" 2> "$manerr"
+-        retval=$?
+-
+-        if [ "${retval}" -eq 0 ]; then
+-            printf %s\\n "
+-                    edit -scratch %{*$buffer_name ${*}*}
+-                    execute-keys '%|cat<space>${manout}<ret>gk'
+-                    ansi-enable
+-                    nop %sh{ rm ${manout} ${manerr} }
+-                    set-option buffer filetype man
+-                    set-option window manpage $buffer_name $*
+-            "
+-        else
+-            printf '
+-                fail %%{%s}
+-                nop %%sh{ rm "%s" "%s" }
+-            ' "$(cat "$manerr")" "${manout}" "${manerr}"
+-        fi
+-    } }
+-}

@@ -56,6 +56,12 @@ in
       };
       meta.homepage = "https://github.com/Delapouite/explore.kak";
     };
+
+    kak-ansi = prev.kakounePlugins.kak-ansi.overrideAttrs (old: {
+      patches = old.patches or [ ] ++ [
+          ./kak-ansi-no-man.patch
+      ];
+    });
   };
 
   kakoune = prev.kakoune.override (
