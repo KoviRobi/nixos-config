@@ -167,6 +167,8 @@ final: prev: {
       final.osc7
       final.osc7-spawn
       final.zmx
+      final.sway
+      final.jq
     ];
     text = builtins.readFile ./zms.sh;
   };

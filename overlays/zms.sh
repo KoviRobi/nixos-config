@@ -13,12 +13,16 @@ zmx-select() {
     printf "%s\tpid:%s\tclients:%s\t%s\n" "$name" "$pid" "$clients" "$dir"
   done | sort -t$'\t' -k3.9n,4 -k1,1 | column -ts$'\t' -o$' | ')
 
-  local output query key name rc
+  local workspace output query key name rc
+  workspace=$(swaymsg -t get_workspaces |
+    jq -r '.[] | select(.focused) | .name' || true)
+  workspace=${workspace#*:}
   # shellcheck disable=SC2016 # Expanded in fzf
   set +e
   output=$(
   { [[ -n "$display" ]] && echo "$display"; } | fzf \
     --print-query \
+    --query "${workspace}" \
     --expect=ctrl-d \
     --bind $'tab:transform-query:echo "${${FZF_CURRENT_ITEM}%%[ |]*}"' \
     --reverse \
@@ -37,22 +41,32 @@ zmx-select() {
   if [[ "$key" == "ctrl-d" && -n "$query" ]]; then
     # zoxide and spawn
     name="$query"
-    cd "$(zoxide query "$name")" || true
-    osc7
-    ${ZMX_EXEC:+exec} zmx attach "$name"
+    dir="${query%.*}"
+    cd "$(zoxide query "$dir")" || true
   elif [[ -n "$query" ]]; then
     name="$query"
-    osc7
-    ${ZMX_EXEC:+exec} zmx attach "$name"
   elif [[ $rc -eq 0 ]]; then
     name=${selected%%[ |]*}
     dir=${selected##*[ |]}
     cd "$dir"
-    osc7
-    ${ZMX_EXEC:+exec} zmx attach "$name"
   else
     return 130
   fi
+
+  # No number suffix
+  if [ "${name%.*}" = "${name}" ]; then
+    display=$(zmx list --short | grep "^$name" || true)
+    num=$(echo "$display" | wc -l)
+    for n in $(seq $((num + 1))); do
+      if ! echo "$display" | grep -q "$name.$n"; then
+        name=$name.$n
+        break
+      fi
+    done
+  fi
+
+  osc7
+  ${ZMX_EXEC:+exec} zmx attach "$name"
 }
 
 zmx-select "$@"
