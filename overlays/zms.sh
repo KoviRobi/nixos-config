@@ -24,11 +24,11 @@ zmx-select() {
     --print-query \
     --query "${workspace}" \
     --expect=ctrl-d \
-    --bind $'tab:transform-query:echo "${${FZF_CURRENT_ITEM}%%[ |]*}"' \
+    --bind $'tab:transform-query:echo "${FZF_CURRENT_ITEM}" | sed "s/ *|.*$//"' \
     --reverse \
     --prompt="zmx> " \
     --header="Enter: accept | Tab: complete | Ctrl-D: z and create new" \
-    --preview=$'zmx history "${${FZF_CURRENT_ITEM}%%[ |]*}"' \
+    --preview=$'zmx history "$(echo "${FZF_CURRENT_ITEM}" | sed "s/ *|.*//")"' \
     --preview-window=down:75%:follow
   )
   rc=$?
@@ -42,7 +42,10 @@ zmx-select() {
     # zoxide and spawn
     name="$query"
     dir="${query%.*}"
-    cd "$(zoxide query "$dir")" || true
+    # We want word splitting but not globs, see
+    # https://www.shellcheck.net/wiki/SC2086
+    # shellcheck disable=SC2086
+    cd "$( ( set -f; zoxide query $dir || true ) )" || true
   elif [[ -n "$query" ]]; then
     name="$query"
   elif [[ $rc -eq 0 ]]; then
