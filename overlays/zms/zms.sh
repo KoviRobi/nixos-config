@@ -14,8 +14,7 @@ zmx-select() {
   done | sort -t$'\t' -k3.9n,4 -k1,1 | column -ts$'\t' -o$' | ')
 
   local workspace output query key name rc
-  workspace=$(swaymsg -t get_workspaces |
-    jq -r '.[] | select(.focused) | .name' || true)
+  workspace=$(workspaces | head -n1)
   workspace=${workspace#*:}
   # shellcheck disable=SC2016 # Expanded in fzf
   set +e

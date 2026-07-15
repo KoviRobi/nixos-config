@@ -2,6 +2,15 @@
 final: prev: {
   inherit (inputs.zmx.packages.${final.system}) zmx;
 
+  workspaces = final.writeShellApplication {
+    name = "workspaces";
+    runtimeInputs = [
+      final.sway
+      final.jq
+    ];
+    text = builtins.readFile ./workspaces.sh;
+  };
+
   osc7 = final.writeShellApplication {
     name = "osc7";
     text = builtins.readFile ./osc7.sh;
@@ -26,8 +35,7 @@ final: prev: {
       final.osc7
       final.osc7-spawn
       final.zmx
-      final.sway
-      final.jq
+      final.workspaces
     ];
     text = builtins.readFile ./zms.sh;
   };
