@@ -1,6 +1,5 @@
 { inputs }:
 final: prev: {
-  inherit (inputs.zmx.packages.${final.system}) zmx;
   inherit (inputs.poetry2nix.overlays.${final.system}) poetry2nix;
   go-catprinter = inputs.go-catprinter.packages.${final.system}.default;
 
@@ -145,31 +144,4 @@ final: prev: {
       ./0001-osc7-Keep-a-hold-of-last-OSC7-command-pass-it-to-ter.patch
     ];
   });
-
-  osc7 = final.writeShellApplication {
-    name = "osc7";
-    text = builtins.readFile ./osc7.sh;
-  };
-  osc7-spawn = final.writeShellApplication {
-    runtimeInputs = [
-      final.coreutils
-      final.osc7
-    ];
-    name = "osc7-spawn";
-    text = builtins.readFile ./osc7-spawn.sh;
-  };
-  zms = final.writeShellApplication {
-    name = "zms";
-    runtimeInputs = [
-      final.coreutils
-      final.fzf
-      final.gnused
-      final.osc7
-      final.osc7-spawn
-      final.zmx
-      final.sway
-      final.jq
-    ];
-    text = builtins.readFile ./zms.sh;
-  };
 }
