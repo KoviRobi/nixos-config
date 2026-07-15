@@ -8,6 +8,8 @@ with pkgs;
   osc7
   osc7-spawn
   zms
+  zmssh
+  zmshosts
 
   hunspell
   hunspellDicts.en-gb-ise

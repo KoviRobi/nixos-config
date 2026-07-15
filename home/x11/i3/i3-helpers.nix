@@ -21,7 +21,7 @@ let
     fg = "EBDBB2";
   };
   sh = lib.getExe pkgs.bash;
-  rofi = lib.getExe pkgs.rofi;
+  rofi = lib.getExe pkgs.rofi + " -modes zmssh:" + lib.getExe pkgs.zmssh;
   dmenu = "${rofi} -dmenu";
   cat = lib.getExe' pkgs.coreutils "cat";
   swaymsg = lib.getExe' pkgs.sway "swaymsg";

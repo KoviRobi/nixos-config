@@ -11,6 +11,7 @@ final: prev: {
     runtimeInputs = [
       final.coreutils
       final.osc7
+      final.zmshosts
     ];
     name = "osc7-spawn";
     text = builtins.readFile ./osc7-spawn.sh;
@@ -29,5 +30,23 @@ final: prev: {
       final.jq
     ];
     text = builtins.readFile ./zms.sh;
+  };
+
+  zmshosts = final.writeShellApplication {
+    name = "zmshosts";
+    runtimeInputs = [ ];
+    text = builtins.readFile ./zmshosts.sh;
+  };
+
+  zmssh = final.writeShellApplication {
+    name = "zmssh";
+    runtimeInputs = [
+      final.coreutils
+      final.fzf
+      final.gnused
+      final.openssh
+      final.zmshosts
+    ];
+    text = builtins.readFile ./zmssh.sh;
   };
 }
