@@ -6,7 +6,7 @@
 }@args:
 let
   border = config.wayland.windowManager.sway.config.window.border;
-  i3-helpers = import ./i3-helpers.nix args;
+  inherit (import ./i3-helpers.nix args) actions-dir rofi workspace-renumber;
   term = lib.getExe pkgs.foot;
   numbat = lib.getExe pkgs.numbat;
   python3 = "${
@@ -18,7 +18,6 @@ let
     )
   }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
-  rofi = "${pkgs.rofi}/bin/rofi";
   pgrep = "${pkgs.procps}/bin/pgrep";
 
   mk-scratch =
@@ -153,15 +152,19 @@ in
 
       bindsym Mod4+Shift+space floating toggle
 
-      bindsym Mod4+t exec ${i3-helpers.dmenu-workspace} workspace
-      bindsym Mod4+Shift+t exec ${i3-helpers.dmenu-workspace} move container to workspace
-      bindsym Mod4+a exec ${i3-helpers.dmenu-action}
-      bindsym Mod4+p exec ${i3-helpers.dmenu-run}
-      bindsym Mod4+d exec ${i3-helpers.dmenu-drun}
-      bindsym Mod4+g exec ${i3-helpers.dmenu-window}
-      bindsym Mod4+u exec ${lib.getExe pkgs.unipicker} \
-                            --copy-command '${pkgs.ringboard-wayland}/bin/ringboard copy -' \
-                            --command '${rofi} -case-smart -sorting-method fzf -dmenu -matching regex'
+      bindsym Mod4+t exec \
+          ACCEPT='swaymsg -q workspace "$@"' \
+          ${rofi} -show workspace
+      bindsym Mod4+Shift+t exec \
+          ACCEPT='swaymsg -q move container to workspace "$@"' \
+          ${rofi} -show workspace
+      bindsym Mod4+a exec ACCEPT='${actions-dir}/$@' ${rofi} -show action
+      bindsym Mod4+p exec ${rofi} -show run
+      bindsym Mod4+d exec ${rofi} -show-icons -show drun
+      bindsym Mod4+g exec ${rofi} -window-thumbnail -theme fullscreen-preview -show window
+      bindsym Mod4+u exec \
+          ACCEPT='echo "$@" | cut -c1 | wl-copy' \
+          ${rofi} -show unipicker
 
       bindsym Mod4+backslash workspace prev_on_output
       bindsym Mod4+bracketleft focus output left
@@ -176,21 +179,21 @@ in
       bindsym Mod4+v split v
       bindsym Mod4+w focus parent
 
-      bindsym Mod4+Delete exec ${i3-helpers.actions-dir}/lock
-      bindsym --locked XF86AudioPlay exec ${i3-helpers.actions-dir}/toggle
-      bindsym --locked XF86AudioPrev exec ${i3-helpers.actions-dir}/prev
-      bindsym --locked XF86AudioNext exec ${i3-helpers.actions-dir}/next
-      bindsym --locked Shift+XF86AudioPrev exec ${i3-helpers.actions-dir}/back
-      bindsym --locked Shift+XF86AudioNext exec ${i3-helpers.actions-dir}/forward
+      bindsym Mod4+Delete exec ${actions-dir}/lock
+      bindsym --locked XF86AudioPlay exec ${actions-dir}/toggle
+      bindsym --locked XF86AudioPrev exec ${actions-dir}/prev
+      bindsym --locked XF86AudioNext exec ${actions-dir}/next
+      bindsym --locked Shift+XF86AudioPrev exec ${actions-dir}/back
+      bindsym --locked Shift+XF86AudioNext exec ${actions-dir}/forward
 
-      bindsym --locked XF86AudioMute exec ${i3-helpers.actions-dir}/mute
-      bindsym --locked XF86AudioLowerVolume exec ${i3-helpers.actions-dir}/voldn
-      bindsym --locked XF86AudioRaiseVolume exec ${i3-helpers.actions-dir}/volup
+      bindsym --locked XF86AudioMute exec ${actions-dir}/mute
+      bindsym --locked XF86AudioLowerVolume exec ${actions-dir}/voldn
+      bindsym --locked XF86AudioRaiseVolume exec ${actions-dir}/volup
 
-      bindsym --locked XF86Launch5 exec ${i3-helpers.actions-dir}/toggle
+      bindsym --locked XF86Launch5 exec ${actions-dir}/toggle
 
-      bindsym --locked XF86MonBrightnessDown exec ${i3-helpers.actions-dir}/bldec
-      bindsym --locked XF86MonBrightnessUp exec ${i3-helpers.actions-dir}/blinc
+      bindsym --locked XF86MonBrightnessDown exec ${actions-dir}/bldec
+      bindsym --locked XF86MonBrightnessUp exec ${actions-dir}/blinc
 
       mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
@@ -249,7 +252,7 @@ in
 
       exec_always --no-startup-id ~/.local/share/feh-random-background/current
 
-      exec_always --no-startup-id ${i3-helpers.workspace-renumber}
+      exec_always --no-startup-id ${workspace-renumber}
 
       exec_always --no-startup-id kanshictl reload
     '';

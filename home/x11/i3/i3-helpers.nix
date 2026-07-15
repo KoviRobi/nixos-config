@@ -21,11 +21,36 @@ let
     fg = "EBDBB2";
   };
   sh = lib.getExe pkgs.bash;
-  rofi = lib.getExe pkgs.rofi + " -modes zmssh:" + lib.getExe pkgs.zmssh;
+  shellAppBin = args: lib.getExe (pkgs.writeShellApplication args);
+  # Accept the given arguments (env var $ACCEPT) or use the argument to
+  # generate lists
+  rofi-script-1arg =
+    noarg:
+    shellAppBin {
+      name = "rofi-script-1arg-" + builtins.elemAt (builtins.match "([^ ]*/)?([^ /]*).*" noarg) 1;
+      text = ''
+        if [ $# -gt 0 ]; then
+          eval "$ACCEPT"
+          exit 0
+        fi
+
+        ${noarg}
+      '';
+    };
+  rofi = shellAppBin {
+    name = "sway-rofi";
+    text =
+      lib.getExe pkgs.rofi
+      + " -modes run,workspace:${rofi-script-1arg (lib.getExe pkgs.workspaces)},"
+      + "zmssh:${lib.getExe pkgs.zmssh},"
+      + "unipicker:${rofi-script-1arg "${lib.getExe pkgs.unipicker} --list"},"
+      + "drun,window,"
+      + "action:${rofi-script-1arg "ls -1 ${actions-dir}"}"
+      + " \"$@\"";
+  };
   dmenu = "${rofi} -dmenu";
   cat = lib.getExe' pkgs.coreutils "cat";
   swaymsg = lib.getExe' pkgs.sway "swaymsg";
-  jq = lib.getExe pkgs.jq;
   killall = lib.getExe' pkgs.psmisc "killall";
   socat = lib.getExe pkgs.socat;
   mpc = lib.getExe pkgs.mpc;
@@ -116,10 +141,10 @@ let
     pause = music;
     play = music;
     prev = music;
-    airplane = pkgs.writeShellScript "rfkill" ''${rfkill} block all'';
-    mute = pkgs.writeShellScript "mute" ''${amixer} sset Master toggle'';
-    voldn = pkgs.writeShellScript "voldn" ''${amixer} sset Master 5%-'';
-    volup = pkgs.writeShellScript "volup" ''${amixer} sset Master 5%+'';
+    airplane = pkgs.writeShellScript "rfkill" "${rfkill} block all";
+    mute = pkgs.writeShellScript "mute" "${amixer} sset Master toggle";
+    voldn = pkgs.writeShellScript "voldn" "${amixer} sset Master 5%-";
+    volup = pkgs.writeShellScript "volup" "${amixer} sset Master 5%+";
     bldec = pkgs.writeShellScript "bldec" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 / p")'';
     blinc = pkgs.writeShellScript "blinc" ''${xbacklight} -set $(${dc} --expression="$(${xbacklight} -get) 2 * p")'';
   };
@@ -131,26 +156,11 @@ let
   );
 in
 {
-  inherit actions-dir;
+  inherit actions-dir rofi;
   dmenu-action = pkgs.writeShellScript "i3-dmenu-action" ''
     ${dmenu} <<EOF | sed "s|^|${actions-dir}/|" | ${sh} &
     ${builtins.concatStringsSep "\n" (builtins.attrNames actions)}
     EOF
-  '';
-  dmenu-run = pkgs.writeShellScript "i3-dmenu-run" ''
-    ${rofi} -show run
-  '';
-  dmenu-window = pkgs.writeShellScript "i3-dmenu-window" ''
-    ${rofi} -window-thumbnail -theme fullscreen-preview -show window
-  '';
-  dmenu-drun = pkgs.writeShellScript "i3-dmenu-drun" ''
-    ${rofi} -show-icons -show drun
-  '';
-  dmenu-workspace = pkgs.writeShellScript "i3-dmenu-workspace" ''
-    RES=`${swaymsg} -t get_workspaces | \
-        ${jq} --raw-output 'map(.name)|join("\n")' | \
-        ${dmenu}`
-    ${swaymsg} -- "$@" "$RES"
   '';
   workspace-renumber =
     let
