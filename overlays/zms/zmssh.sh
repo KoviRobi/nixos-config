@@ -35,11 +35,14 @@ fi
 
 PREFIX=$2
 
-SESSIONS=$(ssh "$REMOTE" zmx list --short | grep "^$PREFIX")
-if [ -n "${2:-}" ]; then
-        SESSIONS=$(echo "$SESSIONS" | grep "$2")
-fi
+if SESSIONS=$(ssh "$REMOTE" zmx list --short | grep "^$PREFIX"); then
+    if [ -n "${2:-}" ]; then
+            SESSIONS=$(echo "$SESSIONS" | grep "$2")
+    fi
+    for session in $SESSIONS; do
+            nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$session" >/dev/null &
+    done
 
-for session in $SESSIONS; do
-        nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$session" >/dev/null &
-done
+else
+    nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$PREFIX.1" >/dev/null &
+fi
