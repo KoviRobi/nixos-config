@@ -104,8 +104,10 @@
       (mpv.override {
         scripts = with mpvScripts; [
           autosubsync-mpv
-          uosc
           mpris
+          thumbfast
+          uosc
+          visualizer
         ];
       })
       flameshot
