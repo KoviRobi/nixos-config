@@ -41,5 +41,5 @@ if [ -n "${2:-}" ]; then
 fi
 
 for session in $SESSIONS; do
-        nohup rofi-sensible-terminal ssh "$REMOTE" zmx attach "$session" >/dev/null &
+        nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$session" >/dev/null &
 done
