@@ -15,6 +15,7 @@ if [ -n "${OSC7##file://"${HOSTNAME}"/*}" ]; then
       echo "${OSC7#file://"${host}"}"
       exec ssh -t "${host}" \
         "cd '${OSC7#file://"${host}"}'; \
+        DEFAULT_WORKSPACE='$(workspaces | head -n1 || true)' \
          exec \"\$SHELL\" --login -c 'exec zms'"
     fi
   done
