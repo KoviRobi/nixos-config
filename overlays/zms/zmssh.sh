@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-if [ -n "$ROFI_RETV" ]; then
+usage() {
+        test -z "${ROFI_RETV:-}" || return
+        cat <<EOF >&2
+$0 [host] [session]
+
+Join all the remote sessions on the given host.
+EOF
+}
+
+if [ -n "${ROFI_RETV:-}" ]; then
     set -f
     # shellcheck disable=SC2086
     set -- ${ROFI_DATA:-} "$@"
     set +f
 else
-    usage() {
-            test -z "${ROFI_RETV:-}" || return
-            cat <<EOF >&2
-$0 [host] [session]
-
-Join all the remote sessions on the given host.
-EOF
-    }
-
     trap 'usage; exit 1' ERR
 fi
 
@@ -28,7 +28,7 @@ fi
 
 REMOTE=$1
 
-if [ -n "$ROFI_RETV" ]; then
+if [ -n "${ROFI_RETV:-}" ]; then
     printf '\x00data\x1f%s\n' "$REMOTE"
 fi
 
