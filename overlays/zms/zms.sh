@@ -14,7 +14,7 @@ zmx-select() {
   done | sort -t$'\t' -k3.9n,4 -k1,1 | column -ts$'\t' -o$' | ')
 
   local workspace output query key name rc
-  workspace=$(workspaces | head -n1)
+  workspace=${DEFAULT_WORKSPACE:-$(workspaces | head -n1 || true)}
   workspace=${workspace#*:}
   # shellcheck disable=SC2016 # Expanded in fzf
   set +e
