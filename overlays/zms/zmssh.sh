@@ -30,10 +30,18 @@ REMOTE=$1
 
 if [ -n "${ROFI_RETV:-}" ]; then
         printf '\x00data\x1f%s\n' "$REMOTE"
+        printf '\x00prompt\x1f%s\n' "zmssh $REMOTE"
 fi
 
 if [ $# -lt 2 ]; then
-        ssh "$REMOTE" zmx list --short | sed 's/\..*$//' | sort | uniq
+        ssh "$REMOTE" zmx list --short | sed 's/\..*$//' | sort | uniq | awk '
+            { print $0; }
+            END {
+                if (NR == 0) {
+                    print "\x00nonselectable\x1f\nNo sessions";
+                }
+            }
+        '
         exit 1
 fi
 
