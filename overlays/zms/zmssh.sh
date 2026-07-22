@@ -10,12 +10,12 @@ EOF
 }
 
 if [ -n "${ROFI_RETV:-}" ]; then
-    set -f
-    # shellcheck disable=SC2086
-    set -- ${ROFI_DATA:-} "$@"
-    set +f
+        set -f
+        # shellcheck disable=SC2086
+        set -- ${ROFI_DATA:-} "$@"
+        set +f
 else
-    trap 'usage; exit 1' ERR
+        trap 'usage; exit 1' ERR
 fi
 
 set -euo pipefail
@@ -29,7 +29,7 @@ fi
 REMOTE=$1
 
 if [ -n "${ROFI_RETV:-}" ]; then
-    printf '\x00data\x1f%s\n' "$REMOTE"
+        printf '\x00data\x1f%s\n' "$REMOTE"
 fi
 
 if [ $# -lt 2 ]; then
@@ -40,13 +40,13 @@ fi
 PREFIX=$2
 
 if SESSIONS=$(ssh "$REMOTE" zmx list --short | grep "^$PREFIX"); then
-    if [ -n "${2:-}" ]; then
-            SESSIONS=$(echo "$SESSIONS" | grep "$2")
-    fi
-    for session in $SESSIONS; do
-            nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$session" >/dev/null &
-    done
+        if [ -n "${2:-}" ]; then
+                SESSIONS=$(echo "$SESSIONS" | grep "$2")
+        fi
+        for session in $SESSIONS; do
+                nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$session" >/dev/null &
+        done
 
 else
-    nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$PREFIX.1" >/dev/null &
+        nohup rofi-sensible-terminal ssh -t "$REMOTE" zmx attach "$PREFIX.1" >/dev/null &
 fi
