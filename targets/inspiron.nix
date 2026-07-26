@@ -12,6 +12,7 @@
 
   nixpkgs.config.allowUnfree = true;
   hardware = {
+    enableRedistributableFirmware = true;
     enableAllFirmware = true;
     deviceTree = {
       enable = true;
