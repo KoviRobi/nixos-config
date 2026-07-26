@@ -144,4 +144,10 @@ final: prev: {
       ./0001-osc7-Keep-a-hold-of-last-OSC7-command-pass-it-to-ter.patch
     ];
   });
+
+  mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
+    buildInputs = old.buildInputs or [ ] ++ [
+      final.libsixel
+    ];
+  });
 }
