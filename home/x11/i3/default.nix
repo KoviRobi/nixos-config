@@ -9,14 +9,6 @@ let
   inherit (import ./i3-helpers.nix args) actions-dir rofi workspace-renumber;
   term = lib.getExe pkgs.foot;
   numbat = lib.getExe pkgs.numbat;
-  python3 = "${
-    pkgs.python3.withPackages (
-      p: with p; [
-        matplotlib
-        numpy
-      ]
-    )
-  }/bin/python3";
   guile = "${pkgs.guile}/bin/guile";
   pgrep = "${pkgs.procps}/bin/pgrep";
 
@@ -139,7 +131,7 @@ in
       bindsym Mod4+Shift+minus move scratchpad
       bindsym Mod4+Shift+g ${scratch-term "guile" guile}
       bindsym Mod4+Shift+n ${scratch-term "numbat" numbat}
-      bindsym Mod4+Shift+p ${scratch-term "python" (pkgs.writeShellScript "scratchpy" "${python3}")}
+      bindsym Mod4+Shift+p ${scratch-term "python" "python"}
       bindsym Mod4+Shift+s ${scratch-term "shell" ""}
 
       bindsym Mod4+Shift+c kill
