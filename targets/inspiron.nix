@@ -14,6 +14,13 @@
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;
+    firmware = [
+      pkgs.Qualcomm.Adreno-X1-85-Graphics
+      pkgs.Qualcomm.Audio
+      pkgs.Qualcomm.Chipset
+      pkgs.Qualcomm.FastConnect-7800-Wi-Fi-and-Bluetooth
+      pkgs.Qualcomm.MIPI-Camera
+    ];
     deviceTree = {
       enable = true;
       name = "qcom/x1e80100-dell-inspiron-14-plus-7441.dtb";
