@@ -58,6 +58,15 @@ provide-module lsp %{
     }
   }
 
+  hook global BufSetOption filetype=gleam %{
+    set-option buffer indentwidth 2
+    set-option buffer lsp_servers %{
+      [gleam]
+      root_globs = ["gleam.toml"]
+      args = ["lsp"]
+    }
+  }
+
   map global goto d "<esc>: lsp-definition<ret>" -docstring 'LSP definition'
   map global goto r "<esc>: lsp-references<ret>" -docstring 'LSP references'
   map global goto y "<esc>: lsp-type-definition<ret>" -docstring 'LSP type definition'
