@@ -50,11 +50,6 @@
       url = "github:KoviRobi/feh-random-background";
       flake = false;
     };
-
-    zmx = {
-      url = "github:neurosnap/zmx";
-      # Use the pinned nixpkgs
-    };
   };
 
   outputs =

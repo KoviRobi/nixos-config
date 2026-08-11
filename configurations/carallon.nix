@@ -13,7 +13,7 @@
     allowUnfree = true;
     # Sigh, QT4 for SEGGER tools -- but I only use the cli tools anyway
     permittedInsecurePackages = [
-      "segger-jlink-qt4-874"
+      "segger-jlink-qt4-952"
     ];
     segger-jlink.acceptLicense = true;
   };
@@ -217,7 +217,7 @@
     };
 
     openssh = {
-      package = pkgs.opensshWithKerberos;
+      package = pkgs.openssh_gssapi;
       settings = {
         GSSAPIAuthentication = true;
         GSSAPICleanupCredentials = true;

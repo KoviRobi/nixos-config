@@ -1,7 +1,5 @@
 { inputs }:
 final: prev: {
-  inherit (inputs.zmx.packages.${final.system}) zmx;
-
   workspaces = final.writeShellApplication {
     name = "workspaces";
     runtimeInputs = [
