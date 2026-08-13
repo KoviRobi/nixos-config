@@ -3,8 +3,9 @@
 set -euo pipefail
 
 zmx-select() {
+  local prefix=$1
   local display
-  display=$( ( zmx list 2>/dev/null || true ) | \
+  display=$( ( zmx list 2>/dev/null || true ) | ( grep -- "$prefix" 2>/dev/null || true ) | \
       while IFS=$'\t' read -r name pid clients _created dir; do
     name=${name#*name=}
     pid=${pid#pid=}
@@ -67,8 +68,26 @@ zmx-select() {
     done
   fi
 
+  if [ -n "$prefix" ] && [ "${name#"${prefix}"}" = "${name}" ]; then
+    echo "Missing prefix $prefix"
+    exit 1;
+  fi
+
   osc7
   ${ZMX_EXEC:+exec} zmx attach "$name"
 }
 
-zmx-select "$@"
+prefix=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -p)
+      shift
+      [ $# -gt 0 ] || { echo "Missing prefix after -p"; exit 1; }
+      prefix=$1 ;;
+  esac
+  shift
+  :
+done
+
+zmx-select "$prefix" "$@"
