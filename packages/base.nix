@@ -10,6 +10,7 @@ with pkgs;
   zms
   zmssh
   zmshosts
+  workspaces
 
   hunspell
   hunspellDicts.en-gb-ise
