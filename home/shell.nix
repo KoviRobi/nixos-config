@@ -430,7 +430,8 @@
           }
 
           add-zsh-hook preexec _semprompt_cmd_start
-          # precmd is badly named -- it is in fact pre-prompt, post CMD
+          # precmd is badly named -- it is in fact pre-prompt, so post
+          # previous command
           add-zsh-hook precmd  _semprompt_cmd_end
 
           eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"

@@ -8,6 +8,33 @@
   home.packages = with pkgs; [ starship ];
 
   programs = {
+    zsh.initContent = lib.mkAfter ''
+      if [[ $TERM != "dumb" ]]; then
+            # Undo starship's default
+            setopt NO_PROMPT_SUBST
+            function set_win_title(){
+                # Cache starship prompt
+                PS1=$(/etc/profiles/per-user/rmk/bin/starship \
+                    prompt \
+                    --terminal-width="$COLUMNS" \
+                    --keymap="''${KEYMAP:-}" \
+                    --status="''${STARSHIP_CMD_STATUS:-}" \
+                    --pipestatus="''${STARSHIP_PIPE_STATUS[*]:-}" \
+                    --cmd-duration="''${STARSHIP_DURATION:-}" \
+                    --jobs="$STARSHIP_JOBS_COUNT")
+
+                printf '\x1b]0;%s\x07' \
+                    "''${ZMX_SESSION+" $ZMX_SESSION "}$(echo $PS1 | sed -E \
+                    -e ': 1 s/.\x08//; t 1' \
+                    -e 's/%\{([^%]|%%)*%}//g' \
+                    -e 's/%%/%/g' \
+                    -e q)"
+            }
+
+            add-zsh-hook precmd set_win_title
+      fi
+    '';
+
     starship = {
       enable = true;
       # Handled manually to replace `= {` with `= {||`
