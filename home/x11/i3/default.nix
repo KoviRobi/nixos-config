@@ -122,7 +122,7 @@ in
       bindsym Mod4+Shift+End move to output right
 
       bindsym Mod4+Return exec ${term}
-      bindsym Mod4+Shift+Return exec ${term}
+      bindsym Mod4+Shift+Return exec ${term} sh -c 'exec "$(getent passwd "$USER" | cut -d: -f7)"'
       bindsym Mod4+Shift+backslash move to workspace prev_on_output
       bindsym Mod4+Shift+bracketleft move to output left
       bindsym Mod4+Shift+bracketright move to output right
