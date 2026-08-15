@@ -433,6 +433,7 @@
           # precmd is badly named -- it is in fact pre-prompt, so post
           # previous command
           add-zsh-hook precmd  _semprompt_cmd_end
+          add-zsh-hook precmd =osc7
 
           eval "$(${pkgs.zoxide}/bin/zoxide init zsh | ${pkgs.gnused}/bin/sed -e 's|\\command zoxide|\\command ${pkgs.zoxide}/bin/zoxide|g' -e '/compdef/d')"
 
