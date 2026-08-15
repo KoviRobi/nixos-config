@@ -106,6 +106,26 @@ hook global WinSetOption filetype=git-commit %{
     add-highlighter buffer/git-body column 72 default,rgba:80000020
 }
 
+define-command -hidden git-rebase-alternative-file %{
+    evaluate-commands %sh{
+        file="${kak_buffile##*/}"
+        dir=$(dirname "$kak_buffile")
+        case "$file" in
+        done)            echo "edit %{$dir/git-rebase-todo}" ;;
+        git-rebase-todo) echo "edit %{$dir/done}"            ;;
+        *)               echo "fail 'no alternative file'" ;;
+        esac
+    }
+}
+
+hook global WinSetOption filetype=git-rebase %{
+    map buffer goto "'" '<esc>: git-rebase-alternative-file<ret>' -docstring 'Git rebase todo/done'
+}
+
+hook global BufCreate .*/rebase-merge/done %{
+    set-option buffer filetype git-rebase
+}
+
 hook global WinSetOption filetype=nix %{
   set-option window indentwidth 2
 }
