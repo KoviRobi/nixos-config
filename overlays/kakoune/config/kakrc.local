@@ -118,8 +118,17 @@ define-command -hidden git-rebase-alternative-file %{
     }
 }
 
+# Run `git show <hash>` on git rebase lines (e.g. `pick <hash>`)
+define-command -hidden git-show-rebase-hash %{
+    evaluate-commands -save-regs h %{
+        execute-keys -draft %{ghwe: set-register h %reg{.}<ret>}
+        git show %reg{h}
+    }
+}
+
 hook global WinSetOption filetype=git-rebase %{
     map buffer goto "'" '<esc>: git-rebase-alternative-file<ret>' -docstring 'Git rebase todo/done'
+    map buffer normal <ret> '<esc>: git-show-rebase-hash<ret>' -docstring 'Jump to hash under the cursor'
 }
 
 hook global BufCreate .*/rebase-merge/done %{
