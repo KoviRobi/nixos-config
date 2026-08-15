@@ -9,8 +9,8 @@ provide-module lsp %{
   map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
   map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
 
-  hook global BufSetOption filetype=c   %{ map global goto "'" '<esc>: c-alternative-file<ret>'   -docstring 'C alternative file' }
-  hook global BufSetOption filetype=cpp %{ map global goto "'" '<esc>: cpp-alternative-file<ret>' -docstring 'C++ alternative file' }
+  hook global WinSetOption filetype=c   %{ map buffer goto "'" '<esc>: c-alternative-file<ret>'   -docstring 'C alternative file' }
+  hook global WinSetOption filetype=cpp %{ map buffer goto "'" '<esc>: cpp-alternative-file<ret>' -docstring 'C++ alternative file' }
 
   hook global BufSetOption filetype=python %{
     set-option buffer lsp_servers %{
