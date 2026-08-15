@@ -18,7 +18,7 @@ let
       ${pgrep} -f scratch_${n} > /dev/null || exec ${p}
     '';
   scratch = n: p: ''
-    exec --no-startup-id '${mk-scratch n p}' ; \
+    exec --no-startup-id DEFAULT_WORKSPACE=float '${mk-scratch n p}' ; \
     [app_id="^scratch_${n}$"] scratchpad show
   '';
   scratch-term = n: p: scratch n "${term} --app-id='scratch_${n}' -- ${p}";
