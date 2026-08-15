@@ -8,9 +8,10 @@ provide-module man-improved %{
             mkfifo ${output}
             (
                 shift # Pop `man`
+                # width-4 for: gutter, newline select, plus minor margin
                 @mandoc@ \
                     -T utf8 \
-                    -O "width=$(($kak_window_width - 2))" \
+                    -O "width=$(($kak_window_width - 4))" \
                     "$@" | col -b -x \
                     > ${output} 2>&1 &
             ) > /dev/null 2>&1 < /dev/null
