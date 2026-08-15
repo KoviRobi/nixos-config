@@ -187,6 +187,11 @@ in
       bindsym --locked XF86MonBrightnessDown exec ${actions-dir}/bldec
       bindsym --locked XF86MonBrightnessUp exec ${actions-dir}/blinc
 
+      bindsym --inhibited --border Mod4+BTN_MIDDLE shortcuts_inhibitor enable
+      bindsym --inhibited --border Mod4+BTN_RIGHT shortcuts_inhibitor disable
+      bindsym --whole-window --border Mod4+Shift+BTN_MIDDLE sticky enable
+      bindsym --whole-window --border Mod4+Shift+BTN_RIGHT sticky disable
+
       mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Escape mode default
