@@ -63,7 +63,8 @@
     }
   ];
   environment.systemPackages = [
-    pkgs.ungoogled-chromium # Librewolf crashes
+    # For widevine
+    (pkgs.ungoogled-chromium.override { enableWideVine = true; })
     (pkgs.writeShellScriptBin "rewin" "sudo bootctl set-oneshot auto-windows; reboot")
     pkgs.rpiboot
   ]
