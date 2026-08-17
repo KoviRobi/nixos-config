@@ -76,6 +76,9 @@ with pkgs;
 
   devenv
 
+  proton-vpn
+  proton-vpn-cli
+
   (python3.withPackages (
     p: with p; [
       matplotlib
