@@ -8,7 +8,7 @@ OSC7=${OSC7:-$(osc7)}
 if [ -n "${OSC7##file://"${HOSTNAME}"/*}" ]; then
   #
   # shellcheck disable=SC1003 # ASNI ST escape
-  LC_ALL=C printf '\e]7;%s\e\\' "${OSC7}"
+  LC_ALL=C printf '\x1b]7;%s\x1b\\' "${OSC7}"
   # Trusted hosts
   for host in $(zmshosts); do
     if [ -z "${OSC7##file://"${host}"/*}" ]; then
