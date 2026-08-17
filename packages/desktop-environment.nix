@@ -98,6 +98,8 @@
       wofi
 
       imagemagick
+      inkscape
+      gimp
 
       typst
       typst-live
