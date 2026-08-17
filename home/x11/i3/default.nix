@@ -24,6 +24,9 @@ let
   scratch-term = n: p: scratch n "${term} --app-id='scratch_${n}' -- ${p}";
 in
 {
+  imports = [
+    ./waybar.nix
+  ];
   wayland.windowManager.sway = {
     systemd.variables = lib.mkOptionDefault [
       "XDG_SESSION_ID"
@@ -195,26 +198,6 @@ in
         bindsym Return mode default
         bindsym Right resize grow width 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
-      }
-
-      bar {
-        font "CaskaydiaCove Nerd Font:weight=light" 9.75
-        status_command ${lib.getExe pkgs.i3status} -c ${import ./i3status-config.nix args}
-        swaybar_command ${lib.getExe pkgs.waybar}
-        strip_workspace_numbers no
-        strip_workspace_name    no
-        icon_theme "oomox-gruvbox-dark"
-        colors {
-            background $bg0
-            statusline $fg2
-            separator  $bg4
-
-            focused_workspace  $fg0 $fg0 $bg0
-            active_workspace   $fg2 $fg2 $bg2
-            inactive_workspace $bg2 $bg2 $fg2
-            urgent_workspace   $purple $red $fg1
-            binding_mode       $bg3 $bg3 $fg3
-        }
       }
 
       for_window [instance="^ringboard-egui$"] floating enable
