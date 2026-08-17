@@ -61,6 +61,12 @@
       spice-gtk # For USB redirection
       swtpm
 
+      # Docker tools
+      dive
+      docker
+      docker-credential-helpers
+      skopeo
+
       mupdf
       st
       st.terminfo

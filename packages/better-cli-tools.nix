@@ -36,7 +36,6 @@ with pkgs;
   tealdeer
   rlwrap
   pizauth
-  dive
   pipe-rename
   scc # Better SLOC measure
   diffoscopeMinimal
