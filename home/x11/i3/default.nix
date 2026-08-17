@@ -32,11 +32,6 @@ in
     config = {
       keybindings = { };
       modes = { };
-      fonts = {
-        names = [ "CaskaydiaMono NF" ];
-        style = "Regular";
-        size = 10.0;
-      };
       window.border = 4;
       floating.border = 4;
       bars = [ ];
@@ -45,6 +40,7 @@ in
     };
     checkConfig = false;
     extraConfig = ''
+      font "CaskaydiaCove Nerd Font:weight=light" 9.75
       popup_during_fullscreen leave_fullscreen
       no_focus [window_role="pop-up"]
 
@@ -202,7 +198,7 @@ in
       }
 
       bar {
-        font pango:CaskaydiaMono NF Regular 10.0
+        font "CaskaydiaCove Nerd Font:weight=light" 9.75
         status_command ${lib.getExe pkgs.i3status} -c ${import ./i3status-config.nix args}
         swaybar_command ${lib.getExe pkgs.waybar}
         strip_workspace_numbers no
