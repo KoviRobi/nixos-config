@@ -1,6 +1,12 @@
 {
   programs.waybar = {
     enable = true;
+    systemd = {
+      enable = true;
+      target = [
+        "sway-session.target"
+      ];
+    };
     settings.bar-0 = {
       reload_style_on_change = true;
       layer = "top";
