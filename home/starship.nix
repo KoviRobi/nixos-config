@@ -24,11 +24,11 @@
                     --jobs="$STARSHIP_JOBS_COUNT")
 
                 printf '\x1b]0;%s\x07' \
-                    "''${ZMX_SESSION+" $ZMX_SESSION "}$(echo $PS1 | sed -E \
-                    -e ': 1 s/.\x08//; t 1' \
-                    -e 's/%\{([^%]|%%)*%}//g' \
-                    -e 's/%%/%/g' \
-                    -e q)"
+                    "''$(echo $PS1 | sed -E \
+                      -e ': 1 s/.\x08//; t 1' \
+                      -e 's/%\{([^%]|%%)*%}//g' \
+                      -e 's/%%/%/g' \
+                      -e q)"
             }
 
             add-zsh-hook precmd set_win_title
@@ -41,10 +41,10 @@
       enableNushellIntegration = false;
       settings = {
         format = builtins.fromJSON (
-          ''"\u001b\\]133;A\u001b\\\\'' +
+          ''"\u001b\\]133;A\u001b\\\\\u001b\\[m'' +
           ''''${env_var.ZMX_SESSION}'' +
           ''$all$line_break$character'' +
-          ''\u001b\\]133;B\u001b\\\\"''
+          ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
         );
         env_var.ZMX_SESSION = {
           symbol = " ";
