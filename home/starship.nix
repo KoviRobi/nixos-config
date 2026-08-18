@@ -41,10 +41,10 @@
       enableNushellIntegration = false;
       settings = {
         format = builtins.fromJSON (
-          ''"\u001b\\]133;A\u001b\\\\\u001b\\[m'' +
-          ''''${env_var.ZMX_SESSION}'' +
-          ''$all$line_break$character'' +
-          ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
+          ''"\u001b\\]133;A\u001b\\\\\u001b\\[m''
+          + "\${env_var.ZMX_SESSION}"
+          + "$all$line_break$character"
+          + ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
         );
         env_var.ZMX_SESSION = {
           symbol = " ";
@@ -73,12 +73,30 @@
         git_commit.only_detached = false;
         git_commit.tag_disabled = false;
         battery.display = [
-          { threshold = 100; style = "green"; }
-          { threshold = 50; style = "bold italic green"; }
-          { threshold = 40; style = "yellow"; }
-          { threshold = 30; style = "bold italic yellow"; }
-          { threshold = 20; style = "red"; }
-          { threshold = 10; style = "bold italic red"; }
+          {
+            threshold = 100;
+            style = "green";
+          }
+          {
+            threshold = 50;
+            style = "bold italic green";
+          }
+          {
+            threshold = 40;
+            style = "yellow";
+          }
+          {
+            threshold = 30;
+            style = "bold italic yellow";
+          }
+          {
+            threshold = 20;
+            style = "red";
+          }
+          {
+            threshold = 10;
+            style = "bold italic red";
+          }
         ];
         nix_shell = {
           symbol = "❄ ";
