@@ -58,6 +58,17 @@ define-command \
     -params .. \
     -shell-completion run %{ echo -debug %sh{ ${@} } }
 
+alias global g git
+define-command gg -params 0.. -docstring "git log --oneline --graph" %{ git log --oneline %arg{@} }
+define-command gs -params 0.. -docstring "git status" %{ git status %arg{@} }
+define-command gd -params 0.. -docstring "git diff" %{ git diff %arg{@} }
+define-command gds -params 0.. -docstring "git diff --staged" %{ git diff --staged %arg{@} }
+define-command gc -params 0.. -docstring "git commit" %{ git commit %arg{@} }
+define-command gcF -params 0.. -docstring "git commit --amend" %{ git commit --amend %arg{@} }
+alias global gc! gcF
+define-command gcf -params 0.. -docstring "git commit --amend --no-edit" %{ git commit --amend --reuse-message HEAD %arg{@} }
+define-command gsh -params 0.. -docstring "git show" %{ git show %arg{@} }
+define-command gre -params 0.. -docstring "git reset" %{ git reset %arg{@} }
 
 # Use OSC 52, works through SSH also
 hook global NormalKey y|d|c %{
