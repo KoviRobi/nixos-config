@@ -47,7 +47,7 @@
           ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
         );
         env_var.ZMX_SESSION = {
-          symbol = " ";
+          symbol = " ";
           format = "[$symbol$env_value]($style) ";
           description = "zmx session name";
           style = "bold magenta";
@@ -58,7 +58,7 @@
         hostname = {
           ssh_only = false;
           ssh_symbol = builtins.fromJSON ''"\b\b🖧 "'';
-          format = "[🖳 $ssh_symbol$hostname]($style) in ";
+          format = "[🖳 $ssh_symbol$hostname]($style) in ";
           style = "bold green";
         };
         username.show_always = true;
@@ -80,6 +80,11 @@
           { threshold = 20; style = "red"; }
           { threshold = 10; style = "bold italic red"; }
         ];
+        nix_shell = {
+          symbol = "❄ ";
+          impure_msg = "󰕤";
+          pure_msg = "󰕕";
+        };
       };
     };
   };
