@@ -32,6 +32,7 @@
   };
   environment.systemPackages = [ pkgs.powertop ];
   boot = {
+    crashDump.enable = true;
     initrd.availableKernelModules = [
       "hid"
       "hid_generic"
