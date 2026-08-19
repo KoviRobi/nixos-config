@@ -57,4 +57,28 @@ provide-module my-git %{
     define-command gra -params 0.. -docstring "git rebase --abort" %{ grb --abort %arg{@} }
     define-command gred -params 0.. -docstring "git rebase --edit" %{ grb --edit %arg{@} }
     define-command grec -params 0.. -docstring "git rebase --edit; --continue" %{ grb --edit %arg{@}; grc }
+
+    define-command -override git-hunk-object %{
+        evaluate-commands -save-regs caret %sh{
+            if [ "$kak_select_mode" = "extend" ]; then
+                echo "execute-keys -save-regs '' 'Z'"
+            fi
+            case "$kak_object_flags" in
+                to_begin) # [/{
+                    echo "git prev-hunk"
+                    ;;
+                to_end) # ]/}
+                    echo "git next-hunk"
+                    ;;
+                to_begin|to_end) # <a-a>
+                    ;;
+                to_begin|to_end|inner) # <a-i>
+                    ;;
+            esac
+            if [ "$kak_select_mode" = "extend" ]; then
+                echo "execute-keys -save-regs '' '<a-z>a'"
+            fi
+        }
+    }
+    map global object h '<a-;> git-hunk-object<ret>'
 }
