@@ -19,6 +19,7 @@ let
     "lsp.kak" = {
       kakoune-lsp = getExe final.kakoune-lsp;
     };
+    "my-git.kak" = { };
   };
   kovirobi-kakoune-config = final.stdenv.mkDerivation {
     name = "kovirobi-kakoune-config";
