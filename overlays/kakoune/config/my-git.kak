@@ -1,7 +1,7 @@
 provide-module my-git %{
     alias global g git
     define-command git-merge-markers %{ set-register slash '^[<|=>]{7}[^\n]*$\n?' }
-    define-command gg -params 0.. -docstring "git log --oneline --graph" %{ git log --oneline %arg{@} }
+    define-command gg -params 0.. -docstring "git log --oneline" %{ git log --oneline %arg{@} }
     define-command ga -params 0.. -docstring "git add" %{ git add %arg{@} }
     define-command gs -params 0.. -docstring "git status" %{ git status %arg{@} }
     define-command gd -params 0.. -docstring "git diff" %{ git diff %arg{@} }

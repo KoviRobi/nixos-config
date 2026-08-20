@@ -169,12 +169,7 @@
       gFsr  =  ''git flow support rebase'';
       gFss  =  ''git flow support start'';
       gFst  =  ''git flow support track'';
-      gg    =  ''git grep'';
-      ggl   =  ''git grep --files-with-matches'';
-      ggL   =  ''git grep --files-without-matches'';
-      ggi   =  ''git grep --ignore-case'';
-      ggv   =  ''git grep --invert-match'';
-      ggw   =  ''git grep --word-regexp'';
+      gg    =  ''git log --oneline'';
       glu   =  ''git log @{u}..'';
       ggu   =  ''git g @{u}..'';
       glS   =  ''git log --show-signature'';
