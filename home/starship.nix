@@ -43,6 +43,7 @@
         format = builtins.fromJSON (
           ''"\u001b\\]133;A\u001b\\\\\u001b\\[m''
           + "\${env_var.ZMX_SESSION}"
+          + "\${env_var.SYSTEMD_EXEC_PID}"
           + "$all$line_break$character"
           + ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
         );
@@ -50,7 +51,13 @@
           symbol = " ";
           format = "[$symbol$env_value]($style) ";
           description = "zmx session name";
-          style = "bold magenta";
+          style = "";
+        };
+        env_var.SYSTEMD_EXEC_PID = {
+          symbol = "󰱛 ";
+          format = "[$symbol$env_value]($style) ";
+          description = "systemd-run or similar ($SYSTEMD_EXEC_PID)";
+          style = "bold purple";
         };
         add_newline = false;
         aws.disabled = true;
