@@ -62,7 +62,6 @@ provide-module my-git %{
     define-command grc -params 0.. -docstring "git rebase --continue" %{ grb --continue %arg{@} }
     define-command gra -params 0.. -docstring "git rebase --abort" %{ grb --abort %arg{@} }
     define-command gred -params 0.. -docstring "git rebase --edit" %{ grb --edit %arg{@} }
-    define-command grec -params 0.. -docstring "git rebase --edit; --continue" %{ grb --edit %arg{@}; grc }
 
     define-command -override git-hunk-object %{
         evaluate-commands -save-regs caret %sh{
