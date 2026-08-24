@@ -29,8 +29,14 @@ provide-module my-git %{
                     "${fifo_dir}" "${kak_session}" "${kak_client}")"
                 failed=false
                 if err="$(git rebase "$@" 2>&1)"; then
+                    gitdir="$(git rev-parse --git-dir)"
+                    if [ -d "$gitdir/rebase-merge" ]; then
+                        msg="$(cat "$gitdir/rebase-merge/msgnum" || echo '?')/$(cat "$gitdir/rebase-merge/end" || echo '?')"
+                    else
+                        msg="succeeded"
+                    fi
                     cmd="eval -try-client ${kak_client} %{
-                        echo -markup '{Information}Rebase succeeded'
+                        echo -markup '{Information}Rebase $msg'
                     }"
                 elif [ -f "${fifo_dir}/cancelled" ]; then
                     cmd="eval -try-client ${kak_client} %{
