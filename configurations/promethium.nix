@@ -58,6 +58,7 @@
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
   services = {
+    nixseparatedebuginfod2.enable = true;
     lldpd.enable = true;
     xserver.dpi = 93;
     udev.packages = with pkgs; [
