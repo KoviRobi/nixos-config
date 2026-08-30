@@ -423,6 +423,7 @@
           function _semprompt_cmd_end() {
             builtin printf '\e]133;D;%d\e\\' "$?"
           }
+          source ${pkgs.tio}/share/bash-completion/completions/tio
 
           add-zsh-hook preexec _semprompt_cmd_start
           # precmd is badly named -- it is in fact pre-prompt, so post
