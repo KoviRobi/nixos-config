@@ -7,11 +7,11 @@
 }:
 stdenv.mkDerivation {
   pname = "Qualcomm FastConnect 7800 Wi-Fi and Bluetooth Driver";
-  version = "1.0.4392.1500_A10";
+  version = "1.0.4610.7600_A13";
   src = requireFile {
-    url = "https://dl.dell.com/FOLDER13711958M/3/Qualcomm-FastConnect-7800-Wi-Fi-and-Bluetooth-Driver_R84JF_WINARM64_1.0.4392.1500_A10.EXE";
-    name = "Qualcomm-FastConnect-7800-Wi-Fi-and-Bluetooth-Driver_R84JF_WINARM64_1.0.4392.1500_A10.EXE";
-    sha256 = "d9d0afb6d25e231e37668b2593445aa7083367956a50af91a8b2a86f1b09f5ba";
+    url = "https://www.dell.com/support/product-details/en-uk/product/inspiron-14-7441-laptop/drivers";
+    name = "Qualcomm-FastConnect-7800-Wi-Fi-and-Bluetooth-Driver_D68GC_WINARM64_1.0.4610.7600_A13.EXE";
+    sha256 = "702983640d6ea30cdb4b4a2fde616486050a76edd95a371b66a12ae56df0fe75";
   };
   nativeBuildInputs = [
     binwalk

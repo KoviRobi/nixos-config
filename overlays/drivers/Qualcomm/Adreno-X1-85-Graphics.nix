@@ -7,11 +7,11 @@
 }:
 stdenv.mkDerivation {
   pname = "Qualcomm Adreno X1-85 Graphics Driver";
-  version = "31.0.121.0_A10";
+  version = "31.0.160.0_A13";
   src = requireFile {
-    url = "https://dl.dell.com/FOLDER13623365M/2/Qualcomm-Adreno-X1-85-Graphics-Driver_RT0DF_WINARM64_31.0.121.0_A10.EXE";
-    name = "Qualcomm-Adreno-X1-85-Graphics-Driver_RT0DF_WINARM64_31.0.121.0_A10.EXE";
-    sha256 = "45a4001614d8d40944e68fef93a8a0227d741eba09ca4f7baca62abe144aadb3";
+    url = "https://www.dell.com/support/product-details/en-uk/product/inspiron-14-7441-laptop/drivers";
+    name = "Qualcomm-Adreno-X1-85-Graphics-Driver_3HD62_WINARM64_31.0.160.0_A13.EXE";
+    sha256 = "866a16460c46c27d45c1be92d3e7e3796c5c0a4e1e3f4e050f9cd1bf5b71ccde";
   };
   nativeBuildInputs = [
     binwalk

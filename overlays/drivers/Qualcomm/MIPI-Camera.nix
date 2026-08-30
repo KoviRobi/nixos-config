@@ -7,11 +7,11 @@
 }:
 stdenv.mkDerivation {
   pname = "Qualcomm MIPI Camera Driver";
-  version = "1.1.0.60_A11";
+  version = "1.1.0.63_A13";
   src = requireFile {
-    url = "https://dl.dell.com/FOLDER13639308M/1/Qualcomm-MIPI-Camera-Driver_YY0GD_WINARM64_1.1.0.60_A11.EXE";
-    name = "Qualcomm-MIPI-Camera-Driver_YY0GD_WINARM64_1.1.0.60_A11.EXE";
-    sha256 = "48895953bd5fb95f2f66333acb96e717749e7a1e41cde76ee3510d20658b91d4";
+    url = "https://www.dell.com/support/product-details/en-uk/product/inspiron-14-7441-laptop/drivers";
+    name = "Qualcomm-MIPI-Camera-Driver_1Y8F9_WINARM64_1.1.0.63_A13.EXE";
+    sha256 = "98a11d93b42a41a52aa51eac8d249ae2a34fa0955e861f24b5289028941ff732";
   };
   nativeBuildInputs = [
     binwalk

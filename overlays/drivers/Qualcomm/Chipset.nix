@@ -7,11 +7,11 @@
 }:
 stdenv.mkDerivation {
   pname = "Qualcomm Chipset Driver";
-  version = "2.1.0.35_A17";
+  version = "2.1.0.36_A18";
   src = requireFile {
-    url = "https://dl.dell.com/FOLDER13654064M/4/Qualcomm-Chipset-Driver_4RYYV_WINARM64_2.1.0.35_A17.EXE";
-    name = "Qualcomm-Chipset-Driver_4RYYV_WINARM64_2.1.0.35_A17.EXE";
-    sha256 = "094724765a4f0565bf6a7312e56d65558e3370d0e72c46cc52adbe61cc746ff6";
+    url = "https://www.dell.com/support/product-details/en-uk/product/inspiron-14-7441-laptop/drivers";
+    name = "Qualcomm-Chipset-Driver_Y9XHN_WINARM64_2.1.0.36_A18.EXE";
+    sha256 = "7a36e95c382b59710398f20f8679e2b25fcbf1b0efbdd3e23a8ad980f3d78a14";
   };
   nativeBuildInputs = [
     binwalk
