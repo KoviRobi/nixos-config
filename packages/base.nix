@@ -57,6 +57,7 @@ with pkgs;
   rclone
   (pass.withExtensions (exts: with exts; [ pass-otp ]))
   picocom
+  tio
   stm32flash
   wally-cli # for flashing ergodox firmware
 
