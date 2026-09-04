@@ -40,6 +40,7 @@ with pkgs;
   scc # Better SLOC measure
   diffoscopeMinimal
   binwalk
+  prek
 
   # Markdown
   comrak
