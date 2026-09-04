@@ -69,7 +69,6 @@
     printing = {
       enable = true;
       drivers = [
-        pkgs.hplip
         pkgs.go-catprinter
       ];
       bindirCmds = ''

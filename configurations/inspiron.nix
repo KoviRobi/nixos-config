@@ -41,7 +41,6 @@
     xserver.dpi = 109;
     printing = {
       enable = true;
-      drivers = with pkgs; [ hplip ];
     };
     nixseparatedebuginfod2.enable = true;
     udev.extraRules = ''

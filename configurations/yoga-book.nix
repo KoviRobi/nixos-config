@@ -41,7 +41,6 @@
 
     printing = {
       enable = true;
-      drivers = with pkgs; [ hplip ];
     };
 
     libinput.enable = true;
