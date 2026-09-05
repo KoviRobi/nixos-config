@@ -1,0 +1,95 @@
+From 95d2f523f1759902674d16b46cf3615113f98242 Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Sat, 5 Sep 2026 20:44:46 +0100
+Subject: [PATCH] Deprecated 'trace' => 'trace_add'
+
+---
+ pysollib/tile/selectcardset.py     | 2 +-
+ pysollib/tile/selectgame.py        | 2 +-
+ pysollib/tile/selecttile.py        | 2 +-
+ pysollib/tile/tkwidget.py          | 2 +-
+ pysollib/tk/solverdialog.py        | 2 +-
+ pysollib/ui/tktile/solverdialog.py | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/pysollib/tile/selectcardset.py b/pysollib/tile/selectcardset.py
+index fe880b6..bc343ea 100644
+--- a/pysollib/tile/selectcardset.py
++++ b/pysollib/tile/selectcardset.py
+@@ -280,7 +280,7 @@ class SelectCardsetDialogWithPreview(MfxDialog):
+ 
+         self.list_searchtext.pack(side="top", fill='both',
+                                   padx=padx, pady=pady, ipadx=1)
+-        searchText.trace('w', self.basicSearch)
++        searchText.trace_add('write', self.basicSearch)
+ 
+         searchbox.pack(side="top", fill="both")
+ 
+diff --git a/pysollib/tile/selectgame.py b/pysollib/tile/selectgame.py
+index f595cf6..6179c1d 100644
+--- a/pysollib/tile/selectgame.py
++++ b/pysollib/tile/selectgame.py
+@@ -425,7 +425,7 @@ class SelectGameDialogWithPreview(SelectGameDialog):
+ 
+         self.list_searchtext.pack(side="top", fill='both',
+                                   padx=padx, pady=pady, ipadx=1)
+-        searchText.trace('w', self.basicSearch)
++        searchText.trace_add('write', self.basicSearch)
+ 
+         searchbox.pack(side="top", fill="both")
+ 
+diff --git a/pysollib/tile/selecttile.py b/pysollib/tile/selecttile.py
+index cf7827a..1bf2fac 100644
+--- a/pysollib/tile/selecttile.py
++++ b/pysollib/tile/selecttile.py
+@@ -201,7 +201,7 @@ class SelectTileDialogWithPreview(MfxDialog):
+ 
+         self.list_searchtext.pack(side="top", fill='both',
+                                   padx=padx, pady=pady, ipadx=1)
+-        searchText.trace('w', self.basicSearch)
++        searchText.trace_add('write', self.basicSearch)
+ 
+         searchbox.pack(side="top", fill="both")
+ 
+diff --git a/pysollib/tile/tkwidget.py b/pysollib/tile/tkwidget.py
+index 29634f8..b3fbd7f 100644
+--- a/pysollib/tile/tkwidget.py
++++ b/pysollib/tile/tkwidget.py
+@@ -824,7 +824,7 @@ class MyPysolScale:
+         self.scale.bind("<FocusIn>", self._scale_focus)
+ 
+         if self.variable:
+-            self.variable.trace('w', self._trace_var)
++            self.variable.trace_add('write', self._trace_var)
+         if value is not None:
+             self._set_text(self._round(value))
+             if self.variable:
+diff --git a/pysollib/tk/solverdialog.py b/pysollib/tk/solverdialog.py
+index 8fcd2e9..9387ed2 100644
+--- a/pysollib/tk/solverdialog.py
++++ b/pysollib/tk/solverdialog.py
+@@ -53,7 +53,7 @@ class SolverDialog(BaseSolverDialog, BaseTkMfxDialog):
+         var.set('none')
+         om = tkinter.OptionMenu(frame, var, *(self.presets))
+         om.grid(row=row, column=1, sticky='ew', padx=2, pady=2)
+-        var.trace('w', self._OnAssignToPreset)
++        var.trace_add('write', self._OnAssignToPreset)
+         return var
+ 
+     def _createShowProgressButton(self, frame):
+diff --git a/pysollib/ui/tktile/solverdialog.py b/pysollib/ui/tktile/solverdialog.py
+index 092e80e..1de2719 100644
+--- a/pysollib/ui/tktile/solverdialog.py
++++ b/pysollib/ui/tktile/solverdialog.py
+@@ -74,7 +74,7 @@ class BaseSolverDialog:
+         spin = PysolSpinbox(frame, from_=1000, to=10e6,
+                             increment=1000, textvariable=self.max_iters_var,
+                             fieldname=_('Max iterations:'))
+-        self.max_iters_var.trace('w', self._OnAssignToMaxIters)
++        self.max_iters_var.trace_add('write', self._OnAssignToMaxIters)
+         spin.grid(row=row, column=1, sticky='w', padx=2, pady=2)
+ 
+         #
+-- 
+2.55.0
+

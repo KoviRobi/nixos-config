@@ -1,0 +1,29 @@
+From a0d59909d9dbcc006e87bf62abd7145cbe88c3d0 Mon Sep 17 00:00:00 2001
+From: Kovacsics Robert <kovirobi@gmail.com>
+Date: Sat, 5 Sep 2026 19:48:10 +0100
+Subject: [PATCH] issue-537
+
+---
+ pysollib/ui/tktile/tkcanvas.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pysollib/ui/tktile/tkcanvas.py b/pysollib/ui/tktile/tkcanvas.py
+index edf7c93..0f2c30f 100644
+--- a/pysollib/ui/tktile/tkcanvas.py
++++ b/pysollib/ui/tktile/tkcanvas.py
+@@ -200,10 +200,10 @@ class MfxCanvas(tkinter.Canvas):
+     def _geometry(self):
+         w = self.winfo_width()
+         if w == 1:
+-            w = int(self.cget('width'))
++            w = int(self.winfo_fpixels(self.cget('width')))
+         h = self.winfo_height()
+         if h == 1:
+-            h = int(self.cget('height'))
++            h = int(self.winfo_fpixels(self.cget('height')))
+         scrollregion = self.cget('scrollregion')
+         if not scrollregion:
+             return w, h
+-- 
+2.55.0
+

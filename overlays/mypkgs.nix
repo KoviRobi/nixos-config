@@ -150,4 +150,11 @@ final: prev: {
       final.libsixel
     ];
   });
+
+  pysolfc = prev.pysolfc.overrideAttrs (old: {
+    patches = old.patches or [ ] ++ [
+      ./pysolfc-issue-537.patch
+      ./pysolfc-deprecate-trace.patch
+    ];
+  });
 }
