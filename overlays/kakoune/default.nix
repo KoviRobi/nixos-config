@@ -84,7 +84,17 @@ in
   kakman = final.writeShellApplication {
     name = "kakman";
     text = ''
-      ${getExe final.kakoune} -e "man $*"
+      args=""
+      for arg in "$@"; do
+        section=''${arg##*.}
+        page=''${arg%.*}
+        if [ "$section" != "$arg" ]; then
+          args="$args''${args:+;}man $page($section)"
+        else
+          args="$args''${args:+;}man $arg"
+        fi
+      done
+      ${getExe final.kakoune} -e "$args"
     '';
   };
   inherit kovirobi-kakoune-config;

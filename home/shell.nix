@@ -372,6 +372,10 @@
             ''${=''${(f)"$(cat /etc/hosts(|)(N))"}%%(\#''${_etc_host_ignores:+|''${(j:|:)~_etc_host_ignores}})*}
             ''${=''${''${''${''${(@M)''${(f)"$(cat ~/.ssh/config 2> /dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
           )'
+          zstyle ':completion:*:manuals.(^1*)' insert-sections suffix
+          # Speed up man completion
+          typeset -gHA _manpath_cache
+          _manpath_cache[$MANPATH]="$MANPATH"
 
           # Remove zprezto utility alias, using e-wrapper
           unalias e
