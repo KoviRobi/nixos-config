@@ -83,8 +83,8 @@ final: prev: {
       (final.fetchFromGitHub {
         owner = "KoviRobi";
         repo = "open_dp100";
-        rev = "0be45eb4ac6664b027cfe70fe157cba38ffbbcc5";
-        hash = "sha256-k7GN4MCsdh8qDFC0RGMWMKPXmLlgi4ysEZ4NmGIRYRA=";
+        rev = "35bacc1ace9105bb8c7dc0d13586ddb99a5e7cca";
+        hash = "sha256-oXIAjPN7K726k8U2PvUt1oinSLwtLw24NVmNkcKfTVM=";
       })
       {
         pkgs = final;
