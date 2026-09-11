@@ -44,7 +44,7 @@
           ''"\u001b\\]133;A\u001b\\\\\u001b\\[m''
           + "\${env_var.ZMX_SESSION}"
           + "\${env_var.SYSTEMD_EXEC_PID}"
-          + "$all$line_break$character"
+          + "$all$jobs$line_break$character"
           + ''\u001b\\]133;B\u001b\\\\\u001b\\[m"''
         );
         env_var.ZMX_SESSION = {
@@ -59,6 +59,7 @@
           description = "systemd-run or similar ($SYSTEMD_EXEC_PID)";
           style = "bold purple";
         };
+        jobs.symbol = "&";
         add_newline = false;
         aws.disabled = true;
         directory.truncation_symbol = "…/";
