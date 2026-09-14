@@ -3,7 +3,7 @@
     enable = true;
     systemd = {
       enable = true;
-      target = [
+      targets = [
         "sway-session.target"
       ];
     };
