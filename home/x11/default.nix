@@ -163,6 +163,7 @@ in
       TERMINAL = lib.getExe pkgs.foot;
     };
     pointerCursor = {
+      enable = true;
       size = builtins.div config.nixos.services.xserver.dpi 5;
     };
     file.".config/xdg-desktop-portal-termfilechooser/config".text = ''
