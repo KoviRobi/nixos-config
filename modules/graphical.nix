@@ -20,31 +20,6 @@
   imports = [ ../packages/desktop-environment.nix ];
 
   programs = {
-    regreet = {
-      enable = true;
-      theme = {
-        package = pkgs.gruvbox-dark-gtk;
-        name = "gruvbox-dark";
-      };
-      iconTheme = {
-        package = pkgs.gruvbox-dark-icons-gtk;
-        name = "oomox-gruvbox-dark";
-      };
-      cursorTheme = {
-        package = pkgs.capitaine-cursors-themed;
-        name = "Capitaine Cursors (Gruvbox)";
-      };
-      settings = {
-        GTK = {
-          application_prefer_dark_theme = true;
-        };
-      };
-      cageArgs = [
-        "-s"
-        "-m"
-        "last"
-      ];
-    };
     sway.enable = true;
     foot = {
       enable = true;
@@ -77,6 +52,29 @@
     accounts-daemon.enable = true; # For regreet
     udisks2.enable = true;
     greetd.enable = true;
+    displayManager.regreet = {
+      enable = true;
+      theme = {
+        package = pkgs.gruvbox-dark-gtk;
+        name = "gruvbox-dark";
+      };
+      iconTheme = {
+        package = pkgs.gruvbox-dark-icons-gtk;
+        name = "oomox-gruvbox-dark";
+      };
+      cursorTheme = {
+        package = pkgs.capitaine-cursors-themed;
+        name = "Capitaine Cursors (Gruvbox)";
+      };
+      settings = {
+        GTK = {
+          application_prefer_dark_theme = true;
+        };
+      };
+      cageArgs = [
+        "-s"
+        "-m"
+        "last"
       ];
     };
   };
