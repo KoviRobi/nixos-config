@@ -186,7 +186,7 @@
       updater.enable = true;
     };
 
-    dbus.packages = with pkgs; [ gcr ];
+    dbus.packages = with pkgs; [ gcr_4 ];
     gnome.gnome-keyring.enable = true;
 
     udev.extraRules = ''
