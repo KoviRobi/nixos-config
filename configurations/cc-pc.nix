@@ -7,7 +7,6 @@
 {
   imports = [
     ./cc.nix
-    ../modules/initrd-ssh.nix
     ../modules/graphical.nix
     (import ../modules/music.nix {
       music-fs-uuid = "a4147f68-801e-4675-ada7-6931abc22442";
@@ -105,12 +104,6 @@
   systemd.network.networks."40-eno1".networkConfig.DNSSECNegativeTrustAnchors = ''
     uk.cambridgeconsultants.com
   '';
-
-  initrd-ssh.interface = "eno1";
-  initrd-ssh.udhcpcExtraArgs = [
-    "-t 10"
-    "-b"
-  ];
 
   environment.systemPackages =
     with pkgs;

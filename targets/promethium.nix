@@ -24,7 +24,6 @@
       kernelModules = [ "dm-snapshot" ];
 
       luks.devices."promethium-nix1".device = "/dev/disk/by-uuid/f8495eba-455f-48ff-80cc-d036041a5879";
-      luks.devices."promethium-nix1".preLVM = false;
     };
 
     kernelModules = [ "kvm-intel" ];

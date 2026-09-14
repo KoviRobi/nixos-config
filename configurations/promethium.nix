@@ -15,7 +15,6 @@
     ../modules/ssh.nix
     ../modules/graphical.nix
     ../modules/bluetooth.nix
-    ../modules/initrd-ssh.nix
   ];
 
   nixpkgs.config.allowUnfreePredicate =
@@ -28,33 +27,11 @@
   boot = {
     initrd = {
       kernelModules = [ "8021q" ];
-      postMountCommands = ''
-        ip link set dev enp0s31f6.2 down
-        ip link delete enp0s31f6.2
-      '';
-      preLVMCommands = lib.mkAfter ''
-        # Prime the network
-        ( while true; do ping 172.20.16.250; sleep 1; done ) &
-      '';
     };
     # For PCIe passhtrough
     kernelParams = [ "intel_iommu=on" ];
   };
 
-  initrd-ssh = {
-    interface = "enp0s31f6.2";
-    extraInterfaceCommands = [
-      "ip link set dev enp0s31f6 up"
-      "ip link add link enp0s31f6 name enp0s31f6.2 type vlan id 2"
-      "ip link set dev enp0s31f6.2 up"
-    ];
-    udhcpcExtraArgs = [
-      "-t 10"
-      "-b"
-      "-x"
-      "61:0130d042ec62ef"
-    ];
-  };
   systemd.targets.emergency.wants = [ "sshd.service" ];
 
   services = {

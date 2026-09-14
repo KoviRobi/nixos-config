@@ -33,8 +33,6 @@
     LC_TIME = "en_DK.UTF-8";
   };
 
-  boot.initrd.systemd.enable = false; # TODDO: Migrate (mainly custom initrd-ssh)
-
   programs = {
     fuse.enable = true;
     systemtap.enable = true;

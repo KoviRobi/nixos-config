@@ -9,7 +9,6 @@
   imports = [
     ./base-configuration.nix
     (import ../modules/default-user.nix { })
-    ../modules/initrd-ssh.nix
     ../modules/ssh.nix
     ../modules/bluetooth.nix
     ../modules/graphical.nix
@@ -57,9 +56,6 @@
       "1.1.0.0"
     ];
   };
-
-  initrd-ssh.interface = "enp34s0";
-  initrd-ssh.udhcpcExtraArgs = [ "-b" ];
 
   services = {
     nfs.server = {

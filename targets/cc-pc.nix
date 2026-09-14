@@ -13,7 +13,6 @@
 
   boot.initrd.luks.devices.sda1enc = {
     device = "/dev/disk/by-uuid/0bd5501e-74f1-45f8-91af-6bc816d2a5fb";
-    preLVM = true;
   };
 
   fileSystems = {
