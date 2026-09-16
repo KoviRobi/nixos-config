@@ -143,18 +143,13 @@ in
 
       bindsym Mod4+Shift+space floating toggle
 
-      bindsym Mod4+t exec \
-          ACCEPT='swaymsg -q workspace "$@"' \
-          ${rofi} -show workspace
-      bindsym Mod4+Shift+t exec \
-          ACCEPT='swaymsg -q move container to workspace "$@"' \
-          ${rofi} -show workspace
-      bindsym Mod4+a exec ACCEPT='${actions-dir}/$@' ${rofi} -show action
+      bindsym Mod4+t exec ${rofi} -show workspace-show
+      bindsym Mod4+Shift+t exec ${rofi} -show workspace-move
+      bindsym Mod4+a exec ${rofi} -show action
       bindsym Mod4+p exec ${rofi} -show run
       bindsym Mod4+d exec ${rofi} -show-icons -show drun
       bindsym Mod4+g exec ${rofi} -window-thumbnail -theme fullscreen-preview -show window
       bindsym Mod4+u exec \
-          ACCEPT='echo "$@" | cut -c1 | wl-copy' \
           ${rofi} -show unipicker
 
       bindsym Mod4+backslash workspace prev_on_output

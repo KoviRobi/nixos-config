@@ -25,12 +25,12 @@ let
   # Accept the given arguments (env var $ACCEPT) or use the argument to
   # generate lists
   rofi-script-1arg =
-    noarg:
+    noarg: accept:
     shellAppBin {
       name = "rofi-script-1arg-" + builtins.elemAt (builtins.match "([^ ]*/)?([^ /]*).*" noarg) 1;
       text = ''
         if [ $# -gt 0 ]; then
-          eval "$ACCEPT"
+          ${accept}
           exit 0
         fi
 
@@ -41,11 +41,20 @@ let
     name = "sway-rofi";
     text =
       lib.getExe pkgs.rofi
-      + " -modes run,workspace:${rofi-script-1arg (lib.getExe pkgs.workspaces)},"
+      + " -modes run,"
+      + "workspace-show:${rofi-script-1arg (lib.getExe pkgs.workspaces) "swaymsg -q workspace \"$@\""},"
+      + "workspace-move:${rofi-script-1arg (lib.getExe pkgs.workspaces) "swaymsg -q move container to workspace \"$@\""},"
       + "zmssh:${lib.getExe pkgs.zmssh},"
-      + "unipicker:${rofi-script-1arg "${lib.getExe pkgs.unipicker} --list"},"
+      + "unipicker:${rofi-script-1arg "${lib.getExe pkgs.unipicker} --list" ''
+        sel=$1
+        ${pkgs.wl-clipboard}/bin/wl-copy --trim-newline -- "''${sel:0:1}"
+      ''},"
       + "drun,window,"
-      + "action:${rofi-script-1arg "ls -1 ${actions-dir}"}"
+      + "action:${rofi-script-1arg "ls -1 ${actions-dir}" ''
+        sel=$1
+        shift
+        "${actions-dir}/$sel" "$@"
+      ''}"
       + " \"$@\"";
   };
   dmenu = "${rofi} -dmenu";
