@@ -67,6 +67,7 @@
       ...
     }@inputs:
     {
+      inherit inputs;
 
       overlays =
         let
