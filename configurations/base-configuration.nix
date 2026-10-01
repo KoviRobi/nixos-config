@@ -43,11 +43,6 @@
       enableBashCompletion = true;
     };
 
-    mosh = {
-      openFirewall = true;
-      enable = true;
-    };
-
     nix-ld-gh326948.systems =
       builtins.mapAttrs
         (
