@@ -33,17 +33,20 @@
   environment.systemPackages = [ pkgs.powertop ];
   boot = {
     crashDump.enable = true;
-    initrd.availableKernelModules = [
-      "hid"
-      "hid_generic"
-      "hid_multitouch"
-      "i2c_hid_of"
-      "i2c_qcom_geni"
-      "nvme"
-      "nvmem_qcom_spmi_sdam"
-      "phy_qcom_qmp_pcie"
-    ];
-    initrd.kernelModules = [ ];
+    initrd = {
+      availableKernelModules = [
+        "hid"
+        "hid_generic"
+        "hid_multitouch"
+        "i2c_hid_of"
+        "i2c_qcom_geni"
+        "nvme"
+        "nvmem_qcom_spmi_sdam"
+        "phy_qcom_qmp_pcie"
+      ];
+      kernelModules = [ ];
+      systemd.tpm2.enable = false;
+    };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ ];
     kernelParams = [
