@@ -13,7 +13,7 @@
     allowUnfree = true;
     # Sigh, QT4 for SEGGER tools -- but I only use the cli tools anyway
     permittedInsecurePackages = [
-      "segger-jlink-qt4-952"
+      "segger-jlink-qt4-970"
     ];
     segger-jlink.acceptLicense = true;
   };
