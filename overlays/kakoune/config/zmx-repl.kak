@@ -28,11 +28,21 @@ define-command -hidden zmx-send-text -params 0.. -docstring %{
             end='\x1b[201~'
         fi
         if [ $# -eq 0 ]; then
-            printf "$start%s$end$kak_opt_zmx_enter" "${kak_selections}" |
+            printf "$start%s$end" "${kak_selections}" |
+                zmx send $kak_opt_zmx_repl_session ||
+                echo 'fail zmx-send-text: failed, see *debug* buffer for details'
+            # Send enter separately to work around e.g.
+            # https://github.com/python/cpython/pull/157270
+            printf "$kak_opt_zmx_enter" |
                 zmx send $kak_opt_zmx_repl_session ||
                 echo 'fail zmx-send-text: failed, see *debug* buffer for details'
         else
-            printf "$start%s$end$kak_opt_zmx_enter" "$@" |
+            printf "$start%s$end" "$@" |
+                zmx send $kak_opt_zmx_repl_session ||
+                echo 'fail zmx-send-text: failed, see *debug* buffer for details'
+            # Send enter separately to work around e.g.
+            # https://github.com/python/cpython/pull/157270
+            printf "$kak_opt_zmx_enter" |
                 zmx send $kak_opt_zmx_repl_session ||
                 echo 'fail zmx-send-text: failed, see *debug* buffer for details'
         fi
