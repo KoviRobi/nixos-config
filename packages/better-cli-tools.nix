@@ -51,4 +51,9 @@ with pkgs;
   pystack
   # strace profiling graph generation
   straceprof
+
+  vale
+  vale-ls
+  valeStyles.alex
+  valeStyles.proselint
 ]

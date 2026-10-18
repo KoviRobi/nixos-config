@@ -13,7 +13,7 @@ provide-module lsp %{
   hook global WinSetOption filetype=cpp %{ map buffer goto "'" '<esc>: cpp-alternative-file<ret>' -docstring 'C++ alternative file' }
 
   hook global BufSetOption filetype=python %{
-    set-option buffer lsp_servers %{
+    set-option -add buffer lsp_servers %{
       [ruff]
       root_globs = ["requirements.txt", "setup.py", ".git", ".hg"]
       command = "ruff"
@@ -32,7 +32,7 @@ provide-module lsp %{
   }
 
   hook global BufSetOption filetype=markdown %{
-    set-option buffer lsp_servers %exp{
+    set-option -add buffer lsp_servers %exp{
       [rumdl]
       root_globs = ["*.md"]
       command = "rumdl"
@@ -51,7 +51,7 @@ provide-module lsp %{
   }
 
   hook global BufSetOption filetype=cmake %{
-    set-option buffer lsp_servers %{
+    set-option -add buffer lsp_servers %{
       [neocmakelsp]
       root_globs = ["CMakePresets.json", "CMakeLists.txt", ".git", ".hg"]
       args = ["stdio"]
@@ -60,7 +60,7 @@ provide-module lsp %{
 
   hook global BufSetOption filetype=gleam %{
     set-option buffer indentwidth 2
-    set-option buffer lsp_servers %{
+    set-option -add buffer lsp_servers %{
       [gleam]
       root_globs = ["gleam.toml"]
       args = ["lsp"]
@@ -74,4 +74,14 @@ provide-module lsp %{
   set-option global modelinefmt "%opt{lsp_modeline} %opt{modelinefmt}"
 
   lsp-enable
+
+  hook global BufSetOption filetype=(.*) %{
+      # I want vale to be a global transparent LSP so trigger the default
+      # configs before, and add vale after
+      lsp-if-no-servers trigger-user-hook "LSPDefaultConfig=%opt{filetype}"
+      set-option -add buffer lsp_servers %{
+          [vale-ls]
+          root_globs = [".vale.ini"]
+      }
+  }
 }

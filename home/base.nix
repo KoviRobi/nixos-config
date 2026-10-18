@@ -34,8 +34,14 @@
         pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
       '';
     };
+    dataFile = {
+      "vale/styles/alex".source = "${pkgs.valeStyles.alex}/share/vale/styles/alex";
+    };
   };
-
+  systemd.user.tmpfiles.rules = [
+    #Type  Path                       Mode  User  Group  Age  Argument
+    ''f    %h/.config/vale/.vale.ini  -     -     -      -    MinAlertLevel = suggestion\n\n[*.c]\nBasedOnStyles = Vale\n''
+  ];
   home = {
     packages = [
       pkgs.fortune
