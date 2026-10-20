@@ -27,6 +27,34 @@
   boot = {
     initrd = {
       kernelModules = [ "8021q" ];
+      network.ssh = {
+        enable = true;
+        authorizedKeys = builtins.attrValues (import ../pubkeys.nix);
+        hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+      };
+      systemd.network = {
+        enable = true;
+        netdevs = {
+          "carallon-vlan" = {
+            netdevConfig = {
+              Kind = "vlan";
+              Name = "carallon-vlan";
+            };
+            vlanConfig.Id = 2;
+          };
+        };
+        networks = {
+          "carallon-phy" = {
+            matchConfig.Name = "enp0s31f6";
+            networkConfig.VLAN = "carallon-vlan";
+          };
+          "carallon-dhcp" = {
+            matchConfig.Name = "carallon-vlan";
+            networkConfig.DHCP = "yes";
+            dhcpV4Config.ClientIdentifier = "mac";
+          };
+        };
+      };
     };
     # For PCIe passhtrough
     kernelParams = [ "intel_iommu=on" ];
