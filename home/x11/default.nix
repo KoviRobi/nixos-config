@@ -125,14 +125,6 @@ in
         "\"output '*' bg \'$(printf '%%q' \"$BGFILE\")\' fit\""
       ];
     };
-    xcape = {
-      enable = true;
-      mapExpression = {
-        Shift_L = "parenleft";
-        Shift_R = "parenright";
-      };
-      timeout = 250;
-    };
   };
 
   xresources.properties = {
