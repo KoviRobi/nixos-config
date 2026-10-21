@@ -9,19 +9,6 @@
 {
   networking.domain = "office.carallon.com";
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    # Sigh, QT4 for SEGGER tools -- but I only use the cli tools anyway
-    permittedInsecurePackages = [
-      "segger-jlink-qt4-970"
-    ];
-    segger-jlink.acceptLicense = true;
-  };
-
-  environment.systemPackages = [
-    pkgs.segger-jlink
-  ];
-
   security = {
     pam = {
       krb5.enable = false;

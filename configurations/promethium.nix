@@ -132,6 +132,7 @@
     pkgs.unixodbcDrivers.psql
   ];
 
+  nixpkgs.config.allowUnfree = true; # For chrome
   environment.systemPackages = with pkgs; [
     obs-studio
     sigrok-cli
