@@ -19,4 +19,5 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJU+5tlDf7zyFTr1Hjptm/j0OZD0NrJRDO0OzM9zOBVj rmk@inspiron";
   "rmk-pix9a" =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBQr9Ug3wG/KgLvOiRP9O5dhU/bR8Qf08+cjn7hopfU6 rmk-pix9a";
+    "rmk-pix9a-termux" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+oJNvOTr/H6LUPfUX8iXRjx+nuCc5d8buJ159AkHQl u0_a257@localhost";
 }
