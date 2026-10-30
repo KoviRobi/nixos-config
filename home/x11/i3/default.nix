@@ -28,10 +28,12 @@ in
     ./waybar.nix
   ];
   wayland.windowManager.sway = {
-    systemd.variables = lib.mkOptionDefault [
-      "XDG_SESSION_ID"
-    ];
     enable = true;
+    systemd = {
+      enable = true;
+      # Matches `config.services.dbus.implementation`
+      dbusImplementation = "broker";
+    };
     config = {
       keybindings = { };
       modes = { };
