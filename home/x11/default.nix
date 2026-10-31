@@ -33,19 +33,27 @@ in
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-termfilechooser
-    ];
-    config.common = {
-      default = "gtk";
-      "org.freedesktop.impl.portal.Settings" = "darkman";
-      "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
-      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-      "org.freedesktop.impl.portal.Screenshot" = "wlr";
-
+  xdg = {
+    configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+      [filechooser]
+      cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+      env=TERMCMD=foot --app-id=termfilechooser
+          EDITOR=kak
+          PATH=/run/current-system/sw/bin
+    '';
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-wlr
+        pkgs.xdg-desktop-portal-termfilechooser
+      ];
+      config.common = {
+        default = "gtk";
+        "org.freedesktop.impl.portal.Settings" = "darkman";
+        "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+      };
     };
   };
 
@@ -158,13 +166,6 @@ in
       enable = true;
       size = builtins.div config.nixos.services.xserver.dpi 5;
     };
-    file.".config/xdg-desktop-portal-termfilechooser/config".text = ''
-      [filechooser]
-      cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
-      env=TERMCMD=foot --app-id=termfilechooser
-          EDITOR=kak
-          PATH=/run/current-system/sw/bin
-    '';
   };
   gtk.theme = {
     name = "Gruvbox dark";

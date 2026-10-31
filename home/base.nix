@@ -18,6 +18,24 @@
 
   kovirobi.neovim.enable = true;
 
+  xdg = {
+    configFile = {
+      "mimi/mime.conf".text = ''
+        text/html: librewolf
+        application/xhtml+xml: librewolf
+        text/: $TERM kak
+        application/pdf: zathura
+        video/: mpv
+        image/: display
+        audio/: mpv
+        inode/directory: $TERM --working-directory
+      '';
+      "gnupg/gpg-agent.conf".text = ''
+        pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
+      '';
+    };
+  };
+
   home = {
     packages = [
       pkgs.fortune
@@ -35,20 +53,6 @@
         };
         recursive = true;
       };
-
-      ".config/mimi/mime.conf".text = ''
-        text/html: librewolf
-        application/xhtml+xml: librewolf
-        text/: $TERM kak
-        application/pdf: zathura
-        video/: mpv
-        image/: display
-        audio/: mpv
-        inode/directory: $TERM --working-directory
-      '';
-      ".config/gnupg/gpg-agent.conf".text = ''
-        pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
-      '';
     };
     sessionVariables.SSH_AUTH_SOCK = "/run/user/${toString config.nixos.users.users.default-user.uid}/gcr/ssh";
 
