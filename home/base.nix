@@ -34,13 +34,31 @@
         pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
       '';
     };
-    dataFile = {
-      "vale/styles/alex".source = "${pkgs.valeStyles.alex}/share/vale/styles/alex";
-    };
+    dataFile = builtins.listToAttrs (
+      map
+        (name: {
+          name = "vale/styles/${name}";
+          value = {
+            source = "${pkgs.valeStyles.${name}}/share/vale/styles/${name}";
+          };
+        })
+        [
+          "alex"
+          "proselint"
+          "write-good"
+        ]
+    );
   };
   systemd.user.tmpfiles.rules = [
     #Type  Path                       Mode  User  Group  Age  Argument
-    ''f    %h/.config/vale/.vale.ini  -     -     -      -    MinAlertLevel = suggestion\n\n[*.c]\nBasedOnStyles = Vale\n''
+    "f    %h/.config/vale/.vale.ini  -     -     -      -    ${
+      builtins.replaceStrings [ "\n" ] [ "\\n" ] ''
+        MinAlertLevel = suggestion
+
+        [*.{c,cpp}]
+        BasedOnStyles = Vale,alex,proselint,write-good
+      ''
+    }"
   ];
   home = {
     packages = [
