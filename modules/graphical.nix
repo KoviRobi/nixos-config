@@ -10,6 +10,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     dejavu_fonts
+    eb-garamond
     liberation_ttf
     lmodern
     nerd-fonts.dejavu-sans-mono
