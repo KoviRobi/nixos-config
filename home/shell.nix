@@ -206,6 +206,7 @@
       gra   =  ''git rebase --abort'';
       grc   =  ''git rebase --continue'';
       gri   =  ''git rebase --interactive'';
+      grir   =  ''git rebase --interactive --root'';
       grs   =  ''git rebase --skip'';
       gr    =  "git remote";
       grd   =  "git range-diff";
