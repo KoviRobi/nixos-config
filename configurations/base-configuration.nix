@@ -59,7 +59,6 @@
               pkgs.fontconfig
               pkgs.freetype
               pkgs.glib
-              pkgs.gtk2
               pkgs.gtk3
               pkgs.libsodium
               pkgs.libssh

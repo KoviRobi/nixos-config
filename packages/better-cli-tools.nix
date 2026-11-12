@@ -7,8 +7,6 @@ with pkgs;
   hyperfine
   rm-improved
 
-  taskwarrior3
-
   zoxide
   delta
   (pkgs.writeShellApplication {
