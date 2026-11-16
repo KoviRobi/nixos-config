@@ -212,6 +212,7 @@ in
       for_window [app_id="foot"] border pixel ${toString border}
       for_window [app_id="^scratch_.*$"] border pixel ${toString border}
       for_window [app_id="^termfilechooser$"] floating enable
+      for_window [title="^flameshot$"] floating enable
 
       for_window [app_id="^wlvncc$"] shortcuts_inhibitor enable
       for_window [app_id="^.virt-manager-wrapped$"] shortcuts_inhibitor enable
