@@ -37,6 +37,8 @@
         "custom/power"
       ];
 
+      mpd.format-disconnected = "";
+
       "sway/workspaces" = {
         disable-scroll-wraparound = true;
       };
